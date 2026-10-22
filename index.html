@@ -174,7 +174,7 @@ section[id],.orden{scroll-margin-top:128px}
 .hero{--glow-a:var(--glow-orange)}
 .view-head{--glow-a:color-mix(in srgb,var(--c,var(--accent)) 50%,transparent)}
 .hl{background:linear-gradient(90deg,var(--hl-1),var(--hl-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero .wrap{padding-block:64px 72px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:end}
+.hero .wrap{padding-block:64px 72px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:48px;align-items:center}
 .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--on-board-2)}
 .hero h1{font-size:clamp(36px,5.6vw,64px);font-weight:800;font-stretch:120%;line-height:1;letter-spacing:-.015em;margin-top:14px}
 .lead{font-size:18px;color:var(--on-board-2);max-width:56ch;margin-top:18px}
@@ -190,7 +190,8 @@ section[id],.orden{scroll-margin-top:128px}
 .head-note a{color:var(--on-board);font-weight:650;text-underline-offset:3px}
 .head-cta{display:flex;justify-content:flex-end}
 .status{background:var(--glass);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid var(--board-line);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:18px;min-width:0}
-.status-head{display:flex;align-items:center;gap:10px;font-weight:650;font-size:17px}
+.status-head{display:flex;align-items:center;gap:10px;font-weight:650;font-size:16.5px;white-space:nowrap}
+@media (max-width:380px){.status-head{white-space:normal}}
 .dot{width:10px;height:10px;border-radius:50%;background:var(--closed);flex:none}
 .dot.on{background:var(--live);box-shadow:0 0 0 4px var(--board-line)}
 .status dl{margin:0;display:grid;gap:12px}
@@ -643,7 +644,7 @@ textarea.input{min-height:96px;resize:vertical}
           <div>
             <p class="eyebrow">Tienda y servicio técnico</p>
             <h1 id="h-inicio" tabindex="-1">Vendemos, reparamos e instalamos <span class="hl">tecnología</span></h1>
-            <p class="lead">Celulares, computadores, componentes, periféricos gamer, consolas, televisores, tablets, relojes, audífonos y accesorios. Reparamos celulares y computadores, e instalamos cámaras de seguridad en casas y negocios.</p>
+            <p class="lead">Celulares, computadores, gaming y accesorios con entrega a domicilio. Además, reparamos tus equipos e instalamos cámaras de seguridad.</p>
             <div class="hero-cta">
               <a class="btn btn-accent" href="#celulares">Ver celulares</a>
               <a class="btn btn-ghost" href="#computadores">Ver computadores</a>
@@ -3485,11 +3486,12 @@ function estadoLocal(ahora) {
   const d = ahora.getDay();
   const m = ahora.getHours() * 60 + ahora.getMinutes();
   const hoy = turno(d);
-  if (hoy && m >= minutos(hoy.abre) && m < minutos(hoy.cierra)) return { abierto: true, texto: `Atendiendo ahora · hasta ${art(hoy.cierra)}` };
-  if (hoy && m < minutos(hoy.abre)) return { abierto: false, texto: `Fuera de horario · atendemos desde ${art(hoy.abre)}` };
+  // Textos cortos para que el estado quepa en un solo renglón
+  if (hoy && m >= minutos(hoy.abre) && m < minutos(hoy.cierra)) return { abierto: true, texto: `Abierto ahora · hasta ${hora(hoy.cierra)}` };
+  if (hoy && m < minutos(hoy.abre)) return { abierto: false, texto: `Cerrado · abre hoy ${hora(hoy.abre)}` };
   for (let i = 1; i <= 7; i++) {
     const t = turno((d + i) % 7);
-    if (t) return { abierto: false, texto: `Fuera de horario · volvemos ${i === 1 ? "mañana" : "el " + DIAS[(d + i) % 7]} ${aLas(t.abre)}` };
+    if (t) return { abierto: false, texto: `Cerrado · abre ${i === 1 ? "mañana" : "el " + DIAS[(d + i) % 7]} ${hora(t.abre)}` };
   }
   return { abierto: false, texto: "Sin atención" };
 }
