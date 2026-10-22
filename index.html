@@ -283,6 +283,20 @@ section[id],.orden{scroll-margin-top:128px}
   .door-meta{padding-top:8px}
 }
 
+/* Carrusel de portada con lo más vendido en Colombia: tarjetas de producto en fila que se desliza sola */
+.carr-ctrl{display:flex;gap:8px}
+.carr-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;transition:border-color .15s,background-color .15s}
+.carr-btn:hover{border-color:var(--ink-2);background:var(--tint)}
+.carr-btn svg{width:20px;height:20px}
+.carrusel{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 48px) / 4);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;padding:4px 2px 14px;scrollbar-width:thin}
+.carrusel > .card{scroll-snap-align:start}
+.carrusel .card-img::after{content:"Top ventas";position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:3px;background:var(--accent);color:var(--on-accent)}
+.carr-nota{font-size:13px;color:var(--ink-2);margin-top:6px;max-width:80ch}
+@media (max-width:1040px){.carrusel{grid-auto-columns:calc((100% - 32px) / 3)}}
+@media (max-width:760px){.carrusel{grid-auto-columns:calc((100% - 16px) / 2)}}
+@media (max-width:600px){.carrusel{grid-auto-columns:78%;gap:12px}.carr-ctrl{display:none}}
+@media (prefers-reduced-motion:reduce){.carrusel{scroll-behavior:auto}}
+
 /* Tarjetas de artículos del blog */
 .posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .post{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:border-color .18s,transform .18s,box-shadow .18s;min-width:0}
@@ -648,6 +662,20 @@ textarea.input{min-height:96px;resize:vertical}
           </aside>
         </div>
       </div>
+
+      <section class="band" aria-labelledby="t-vendidos">
+        <div class="wrap">
+          <div class="sec-head">
+            <div><p class="kicker">Lo más vendido en Colombia</p><h2 id="t-vendidos">Los favoritos del país</h2></div>
+            <div class="carr-ctrl">
+              <button type="button" class="carr-btn" data-carr="-1" aria-label="Ver productos anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+              <button type="button" class="carr-btn" data-carr="1" aria-label="Ver productos siguientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+            </div>
+          </div>
+          <div class="carrusel" id="vendidos" tabindex="0" aria-label="Productos más vendidos en Colombia"></div>
+          <p class="carr-nota">Los modelos y familias que más se venden en Colombia según reportes de mercado 2025–2026: celulares Samsung Galaxy A, Redmi y Motorola, consolas, audífonos inalámbricos y relojes inteligentes.</p>
+        </div>
+      </section>
 
       <div class="band">
         <div class="wrap">
@@ -3196,6 +3224,32 @@ function pintarDestacados() {
   $("#destacados").innerHTML = PRODUCTOS.filter(p => p.destacado).slice(0, 4).map(tarjeta).join("");
 }
 
+/* Carrusel "Lo más vendido en Colombia": productos de la tienda de las familias que lideran ventas en el país
+   (Counterpoint 2025–2026: Galaxy A, Redmi, Moto G; además consolas, audífonos inalámbricos y relojes). Cambia la lista para cambiar el carrusel. */
+const MAS_VENDIDOS = ["sa07", "xr15c", "p45631", "sa17", "ap4", "mg06", "switch2", "sa56", "jblflip7", "xrn15", "rw5active", "ip16", "tvs43u", "rbuds6p", "p52404"];
+function pintarVendidos() {
+  const el = $("#vendidos");
+  if (el) el.innerHTML = MAS_VENDIDOS.map(id => porId[id]).filter(Boolean).map(tarjeta).join("");
+}
+// Flechas y avance automático cada 5 segundos; se detiene mientras la persona lo usa y no se mueve si prefiere menos movimiento
+function iniciarCarrusel() {
+  const el = $("#vendidos");
+  if (!el) return;
+  const paso = dir => {
+    const c = $(".card", el);
+    const ancho = c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(el).columnGap || 16) : el.clientWidth;
+    if (dir > 0 && el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) el.scrollTo({ left: 0 });
+    else if (dir < 0 && el.scrollLeft <= 4) el.scrollTo({ left: el.scrollWidth });
+    else el.scrollBy({ left: dir * ancho });
+  };
+  $$("[data-carr]").forEach(b => b.addEventListener("click", () => paso(Number(b.dataset.carr))));
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  let pausa = false;
+  ["mouseenter", "focusin", "touchstart"].forEach(ev => el.addEventListener(ev, () => { pausa = true; }, { passive: true }));
+  ["mouseleave", "focusout"].forEach(ev => el.addEventListener(ev, () => { pausa = false; }));
+  setInterval(() => { if (!pausa && !document.hidden && el.offsetParent) paso(1); }, 5000);
+}
+
 /* Actualiza precio, botón y cantidad de un producto en todas las tarjetas donde aparece */
 function refrescarTarjetas(id) {
   const p = porId[id];
@@ -3621,6 +3675,8 @@ function iniciar() {
   pintarFiltros();
   [...TIENDAS_CAT, "cel"].forEach(pintarTienda);
   pintarDestacados();
+  pintarVendidos();
+  iniciarCarrusel();
   pintarServicios();
   actualizarServicio();
   pintarBlog();
