@@ -652,6 +652,15 @@ textarea.input{min-height:96px;resize:vertical}
 .preview summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--primary-ink)}
 .preview pre{margin:10px 0 0;padding:12px;background:var(--surface-2);border-radius:4px;font-family:var(--mono);font-size:12.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
 .dr-foot{border-top:1px solid var(--line);padding:16px 20px 20px;display:grid;gap:12px}
+/* Productos, envío y cuánto falta para el envío gratis */
+.sumas{display:grid;gap:4px;font-size:14.5px;color:var(--ink-2)}
+.sumas .fila{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums}
+.sumas .gratis{color:var(--primary-ink);font-weight:650}
+.falta{display:grid;gap:6px;margin-top:6px;font-size:13.5px;color:var(--ink)}
+.falta .barra{height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden}
+.falta .barra span{display:block;height:100%;width:0;background:var(--primary);border-radius:3px;transition:width .3s}
+.falta.listo{color:var(--primary-ink);font-weight:650}
+.falta.listo .barra{display:none}
 .total{display:flex;justify-content:space-between;align-items:baseline}
 .total strong{font-family:var(--display);font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
 .fine{font-size:13px;color:var(--ink-2);text-align:center}
@@ -910,7 +919,7 @@ textarea.input{min-height:96px;resize:vertical}
             <ol class="steps">
               <li><span class="n">1</span><div><strong>Arma tu carrito</strong><p>Elige la versión de cada equipo y agrégalo. Puedes cambiar las cantidades antes de enviar.</p></div></li>
               <li><span class="n">2</span><div><strong>Envía el pedido por WhatsApp</strong><p>El mensaje sale escrito con los productos, el total y la forma de entrega.</p></div></li>
-              <li><span class="n">3</span><div><strong>Confirmamos y entregamos</strong><p>Te confirmamos disponibilidad y pago. En Bogotá y alrededores te lo llevamos el mismo día y puedes pagar contra entrega; al resto de Colombia lo enviamos con pago anticipado.</p></div></li>
+              <li><span class="n">3</span><div><strong>Confirmamos y entregamos</strong><p>Te confirmamos disponibilidad y pago. En Bogotá y alrededores te lo llevamos el mismo día y puedes pagar contra entrega; al resto de Colombia lo enviamos con pago anticipado. <span data-envio-gratis></span></p></div></li>
             </ol>
           </div>
         </div>
@@ -1899,6 +1908,11 @@ textarea.input{min-height:96px;resize:vertical}
     </details>
   </div>
   <footer class="dr-foot" id="dr-foot">
+    <div class="sumas">
+      <div class="fila"><span>Productos</span><span id="pedido-subtotal"></span></div>
+      <div class="fila"><span id="pedido-envio-label">Envío</span><span id="pedido-envio"></span></div>
+      <div class="falta" id="pedido-falta"><p></p><div class="barra" aria-hidden="true"><span></span></div></div>
+    </div>
     <div class="total"><span>Total</span><strong id="pedido-total"></strong></div>
     <p class="err" id="pedido-err" hidden></p>
     <button type="button" class="btn btn-accent btn-block" id="pedido-bold" hidden>
@@ -1932,8 +1946,13 @@ const CONFIG = {
     bogota: ["Efectivo contra entrega", "Tarjeta débito o crédito contra entrega", "Bre-B (transferencia inmediata desde cualquier banco)", "Daviplata", "Transferencia bancaria"],
     nacional: ["Bre-B (transferencia inmediata desde cualquier banco)", "Daviplata", "Transferencia bancaria", "Tarjeta débito o crédito (te enviamos un link de pago)"]
   },
-  domicilio: "Entrega el mismo día en Bogotá y alrededores. El valor del domicilio depende del barrio; te lo confirmamos por WhatsApp.",
-  envio: "Enviamos a todo Colombia con pago anticipado. Te confirmamos el valor y el tiempo de envío por WhatsApp.",
+  domicilio: "Entrega el mismo día en Bogotá y alrededores.",
+  envio: "Enviamos a todo Colombia con pago anticipado. Te confirmamos el tiempo de entrega por WhatsApp.",
+  // Costo del envío según la entrega; es gratis cuando los productos suman el monto de gratisDesde
+  envios: {
+    bogota: { costo: 15000, gratisDesde: 400000 },
+    nacional: { costo: 40000, gratisDesde: 1500000 }
+  },
   // Pasarela de pagos Bold. llave: tu "llave de identidad" de Bold (es pública). Sin llave, el botón "Pagar en línea" no aparece.
   // firmaUrl (opcional): dirección del servicio que genera el hash de integridad (ver bold-firma-worker.js); con ella el total
   // llega ya escrito a Bold. Sin ella, el cliente escribe el total en Bold (se le muestra en la descripción del pago).
@@ -3451,8 +3470,8 @@ function pintarProducto(p) {
       </div>
       <button type="button" class="link prod-share" data-compartir="${p.id}">Compartir este producto</button>
       <ul class="prod-ventajas">
-        <li>Entrega el mismo día en Bogotá y alrededores</li>
-        <li>Envíos a todo Colombia</li>
+        <li>Entrega el mismo día en Bogotá y alrededores, gratis desde ${dinero(CONFIG.envios.bogota.gratisDesde)}</li>
+        <li>Envíos a todo Colombia, gratis desde ${dinero(CONFIG.envios.nacional.gratisDesde)}</li>
         <li>Paga con tarjeta, Bre-B, Daviplata, transferencia o efectivo</li>
       </ul>
     </div>`;
@@ -3661,8 +3680,29 @@ function pintarCarrito() {
         <button type="button" class="remove" data-act="quitar" data-k="${k}">Quitar</button>
       </div>
     </li>`).join("");
-  $("#pedido-total").textContent = dinero(totalCarrito());
   actualizarPedido();
+}
+
+/* Envío: se cobra según la entrega y es gratis desde el monto de CONFIG.envios */
+const zonaEntrega = () => $('input[name="entrega"]:checked').value;
+function envioDe(zona, subtotal) { const e = CONFIG.envios[zona]; return subtotal >= e.gratisDesde ? 0 : e.costo; }
+const totalPedido = () => { const s = totalCarrito(); return s + envioDe(zonaEntrega(), s); };
+const reglaEnvio = zona => { const e = CONFIG.envios[zona]; return `Envío de ${dinero(e.costo)}, gratis en compras desde ${dinero(e.gratisDesde)}.`; };
+
+function pintarTotales() {
+  const zona = zonaEntrega(), s = totalCarrito(), envio = envioDe(zona, s), meta = CONFIG.envios[zona].gratisDesde;
+  $("#pedido-subtotal").textContent = dinero(s);
+  $("#pedido-envio-label").textContent = zona === "bogota" ? "Envío en Bogotá" : "Envío a otra ciudad";
+  const e = $("#pedido-envio");
+  e.textContent = envio ? dinero(envio) : "Gratis";
+  e.classList.toggle("gratis", !envio);
+  const falta = $("#pedido-falta");
+  falta.classList.toggle("listo", !envio);
+  $("p", falta).textContent = envio
+    ? `Te faltan ${dinero(meta - s)} para el envío gratis ${zona === "bogota" ? "en Bogotá" : "a otra ciudad"}.`
+    : "¡Tu pedido tiene envío gratis!";
+  $(".barra span", falta).style.width = `${Math.min(100, Math.round(s / meta * 100))}%`;
+  $("#pedido-total").textContent = dinero(s + envio);
 }
 
 function datosPedido() {
@@ -3680,7 +3720,8 @@ function mensajePedido(pagoEnLinea) {
   const d = datosPedido();
   const l = [`Hola ${CONFIG.nombre}, quiero hacer este pedido:`, ""];
   for (const { p, o, q } of itemsCarrito()) l.push(`• ${q} × ${nombreItem(p, o)}: ${dinero(o.precio * q)}`);
-  l.push("", `Total: ${dinero(totalCarrito())}`, "", `Nombre: ${d.nombre || "(sin escribir)"}`);
+  const s = totalCarrito(), envio = envioDe(d.entrega, s);
+  l.push("", `Productos: ${dinero(s)}`, `Envío: ${envio ? dinero(envio) : "gratis"}`, `Total: ${dinero(s + envio)}`, "", `Nombre: ${d.nombre || "(sin escribir)"}`);
   l.push(`Entrega: ${d.entrega === "bogota" ? "Domicilio en Bogotá y alrededores" : "Envío a otra ciudad"}`);
   l.push(`Dirección: ${d.dir || "(sin escribir)"}`);
   l.push(`Pago: ${pagoEnLinea || d.pago}`);
@@ -3693,7 +3734,7 @@ function ajustarEntrega() {
   const nacional = datosPedido().entrega === "nacional";
   $("#ped-dir-label").textContent = nacional ? "Ciudad, dirección y barrio" : "Dirección y barrio";
   $("#ped-dir").placeholder = nacional ? "Ej.: Medellín, calle 10 # 43-20, El Poblado" : "Calle, número y barrio";
-  $("#domicilio-nota").textContent = nacional ? CONFIG.envio : CONFIG.domicilio;
+  $("#domicilio-nota").textContent = `${nacional ? CONFIG.envio : CONFIG.domicilio} ${reglaEnvio(nacional ? "nacional" : "bogota")}`;
   const sel = $("#ped-pago");
   const zona = nacional ? "nacional" : "bogota";
   if (sel.dataset.zona !== zona) {
@@ -3705,6 +3746,7 @@ function ajustarEntrega() {
 
 function actualizarPedido() {
   ajustarEntrega();
+  pintarTotales();
   const msg = mensajePedido();
   $("#pedido-preview").textContent = msg;
   $("#pedido-enviar").href = waLink(msg);
@@ -3728,7 +3770,7 @@ function cargarBold() {
 async function pagarConBold() {
   if (!itemsCarrito().length || !validarPedido()) { const f = $("#pedido .invalid .input"); if (f) f.focus(); return; }
   const ref = "RF" + Date.now().toString(36).toUpperCase();
-  const total = totalCarrito();
+  const total = totalPedido();
   // El pedido queda guardado para enviarlo por WhatsApp cuando Bold devuelva al cliente a la tienda
   try { localStorage.setItem("rf-pago-" + ref, mensajePedido(`Pagado en línea con Bold · referencia ${ref}`)); } catch {}
   const venta = {
@@ -4129,6 +4171,7 @@ function iniciar() {
   $$("[data-nombre]").forEach(el => el.textContent = CONFIG.nombre);
   $$("[data-num]").forEach(el => el.textContent = CONFIG.whatsappVisible);
   $$("[data-atencion]").forEach(el => el.textContent = CONFIG.atencion);
+  $$("[data-envio-gratis]").forEach(el => el.textContent = `Envío gratis en Bogotá desde ${dinero(CONFIG.envios.bogota.gratisDesde)} y al resto del país desde ${dinero(CONFIG.envios.nacional.gratisDesde)}.`);
   const saludo = waLink(`Hola ${CONFIG.nombre}, tengo una pregunta.`);
   $$("[data-wa]").forEach(a => a.href = saludo);
   $$("[data-wa-msg]").forEach(a => a.href = waLink(a.dataset.waMsg.replace("{nombre}", CONFIG.nombre)));
