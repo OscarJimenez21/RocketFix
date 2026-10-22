@@ -593,6 +593,12 @@ textarea.input{min-height:96px;resize:vertical}
 .total{display:flex;justify-content:space-between;align-items:baseline}
 .total strong{font-family:var(--display);font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
 .fine{font-size:13px;color:var(--ink-2);text-align:center}
+/* Separador "o" entre Pagar en línea y WhatsApp, y aviso al volver de Bold */
+.o-sep{display:flex;align-items:center;gap:10px;margin:2px 0;color:var(--ink-2);font-size:13px}
+.o-sep::before,.o-sep::after{content:"";flex:1;border-top:1px solid var(--line)}
+.aviso-pago{background:var(--tint);font-family:var(--body);font-size:15px;border-bottom:1px solid var(--line)}
+.aviso-pago .wrap{padding-block:12px}
+.aviso-pago strong{color:var(--primary-ink)}
 .empty{text-align:center;padding:40px 8px;display:grid;gap:14px;justify-items:center;color:var(--ink-2)}
 .empty strong{color:var(--ink);font-size:17px}
 
@@ -836,7 +842,7 @@ textarea.input{min-height:96px;resize:vertical}
             <ol class="steps">
               <li><span class="n">1</span><div><strong>Arma tu carrito</strong><p>Elige la versión de cada equipo y agrégalo. Puedes cambiar las cantidades antes de enviar.</p></div></li>
               <li><span class="n">2</span><div><strong>Envía el pedido por WhatsApp</strong><p>El mensaje sale escrito con los productos, el total y la forma de entrega.</p></div></li>
-              <li><span class="n">3</span><div><strong>Confirmamos y entregamos</strong><p>Te confirmamos disponibilidad y pago, y te lo llevamos a domicilio o acordamos un punto de entrega.</p></div></li>
+              <li><span class="n">3</span><div><strong>Confirmamos y entregamos</strong><p>Te confirmamos disponibilidad y pago. En Bogotá y alrededores te lo llevamos el mismo día y puedes pagar contra entrega; al resto de Colombia lo enviamos con pago anticipado.</p></div></li>
             </ol>
           </div>
         </div>
@@ -1761,12 +1767,12 @@ textarea.input{min-height:96px;resize:vertical}
       <fieldset class="field">
         <legend>Entrega</legend>
         <div class="seg">
-          <label><input type="radio" name="entrega" id="ent-dom" value="domicilio" checked> Envío a domicilio</label>
-          <label><input type="radio" name="entrega" id="ent-punto" value="punto"> Acordar punto de entrega</label>
+          <label><input type="radio" name="entrega" id="ent-bog" value="bogota" checked> Bogotá y alrededores</label>
+          <label><input type="radio" name="entrega" id="ent-nal" value="nacional"> Otra ciudad</label>
         </div>
       </fieldset>
-      <div class="field" id="campo-dir" hidden>
-        <label for="ped-dir">Dirección de entrega</label>
+      <div class="field" id="campo-dir">
+        <label for="ped-dir" id="ped-dir-label">Dirección y barrio</label>
         <input class="input" id="ped-dir" autocomplete="street-address" placeholder="Calle, número y barrio">
         <p class="hint" id="domicilio-nota"></p>
       </div>
@@ -1781,11 +1787,16 @@ textarea.input{min-height:96px;resize:vertical}
   <footer class="dr-foot" id="dr-foot">
     <div class="total"><span>Total</span><strong id="pedido-total"></strong></div>
     <p class="err" id="pedido-err" hidden></p>
+    <button type="button" class="btn btn-accent btn-block" id="pedido-bold" hidden>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+      Pagar en línea con Bold
+    </button>
+    <p class="o-sep" id="pedido-o" hidden><span>o</span></p>
     <a class="btn btn-wa btn-block" id="pedido-enviar" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>
       Enviar pedido por WhatsApp
     </a>
-    <p class="fine">Se abre WhatsApp con el pedido escrito. Lo revisas y lo envías tú.</p>
+    <p class="fine" id="pedido-fine">Se abre WhatsApp con el pedido escrito. Lo revisas y lo envías tú.</p>
   </footer>
 </aside>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1799,11 +1810,20 @@ const CONFIG = {
   nombre: "Rocket Fix",
   whatsapp: "573223262404",            // código de país + número, sin "+", espacios ni guiones
   whatsappVisible: "+57 322 326 2404", // cómo se muestra el número en la página
-  atencion: "Por WhatsApp, con entregas a domicilio",
+  atencion: "Por WhatsApp · domicilios en Bogotá y envíos a todo Colombia",
   moneda: "COP",
   idioma: "es-CO",
-  pagos: ["Efectivo contra entrega", "Transferencia bancaria"],
-  domicilio: "El valor del domicilio depende del barrio. Te lo confirmamos por WhatsApp.",
+  // Medios de pago según la entrega: el pago contra entrega es solo en Bogotá y alrededores
+  pagos: {
+    bogota: ["Efectivo contra entrega", "Tarjeta débito o crédito contra entrega", "Transferencia bancaria"],
+    nacional: ["Transferencia bancaria", "Tarjeta débito o crédito (te enviamos un link de pago)"]
+  },
+  domicilio: "Entrega el mismo día en Bogotá y alrededores. El valor del domicilio depende del barrio; te lo confirmamos por WhatsApp.",
+  envio: "Enviamos a todo Colombia con pago anticipado. Te confirmamos el valor y el tiempo de envío por WhatsApp.",
+  // Pasarela de pagos Bold. llave: tu "llave de identidad" de Bold (es pública). Sin llave, el botón "Pagar en línea" no aparece.
+  // firmaUrl (opcional): dirección del servicio que genera el hash de integridad (ver bold-firma-worker.js); con ella el total
+  // llega ya escrito a Bold. Sin ella, el cliente escribe el total en Bold (se le muestra en la descripción del pago).
+  bold: { llave: "H8Gvn9Zwsy3vw2ev7PEZLytXgYfVcmd9UgRzTV9SbW8", firmaUrl: "" },
   redes: { instagram: "", facebook: "", tiktok: "" }, // pega el enlace completo, ej.: https://instagram.com/rocketfix
   horario: [
     { etiqueta: "Lunes a sábado",     dias: [1, 2, 3, 4, 5, 6], abre: "08:00", cierra: "20:00" },
@@ -3326,23 +3346,103 @@ function datosPedido() {
   };
 }
 
-function mensajePedido() {
+// pagoEnLinea: texto que reemplaza el medio de pago cuando el cliente paga con Bold (incluye la referencia)
+function mensajePedido(pagoEnLinea) {
   const d = datosPedido();
   const l = [`Hola ${CONFIG.nombre}, quiero hacer este pedido:`, ""];
   for (const { p, o, q } of itemsCarrito()) l.push(`• ${q} × ${nombreItem(p, o)}: ${dinero(o.precio * q)}`);
   l.push("", `Total: ${dinero(totalCarrito())}`, "", `Nombre: ${d.nombre || "(sin escribir)"}`);
-  l.push(`Entrega: ${d.entrega === "domicilio" ? "Envío a domicilio" : "Acordar punto de entrega"}`);
-  if (d.entrega === "domicilio") l.push(`Dirección: ${d.dir || "(sin escribir)"}`);
-  l.push(`Pago: ${d.pago}`);
+  l.push(`Entrega: ${d.entrega === "bogota" ? "Domicilio en Bogotá y alrededores" : "Envío a otra ciudad"}`);
+  l.push(`Dirección: ${d.dir || "(sin escribir)"}`);
+  l.push(`Pago: ${pagoEnLinea || d.pago}`);
   if (d.nota) l.push(`Nota: ${d.nota}`);
   return l.join("\n");
 }
 
+// Ajusta dirección, aviso y medios de pago según la entrega (contra entrega solo en Bogotá)
+function ajustarEntrega() {
+  const nacional = datosPedido().entrega === "nacional";
+  $("#ped-dir-label").textContent = nacional ? "Ciudad, dirección y barrio" : "Dirección y barrio";
+  $("#ped-dir").placeholder = nacional ? "Ej.: Medellín, calle 10 # 43-20, El Poblado" : "Calle, número y barrio";
+  $("#domicilio-nota").textContent = nacional ? CONFIG.envio : CONFIG.domicilio;
+  const sel = $("#ped-pago");
+  const zona = nacional ? "nacional" : "bogota";
+  if (sel.dataset.zona !== zona) {
+    const antes = sel.value;
+    sel.innerHTML = CONFIG.pagos[zona].map(p => `<option${p === antes ? " selected" : ""}>${esc(p)}</option>`).join("");
+    sel.dataset.zona = zona;
+  }
+}
+
 function actualizarPedido() {
-  $("#campo-dir").hidden = datosPedido().entrega !== "domicilio";
+  ajustarEntrega();
   const msg = mensajePedido();
   $("#pedido-preview").textContent = msg;
   $("#pedido-enviar").href = waLink(msg);
+}
+
+/* ---------- Pago en línea con Bold ---------- */
+const BOLD_JS = "https://checkout.bold.co/library/boldPaymentButton.js";
+function prepararBold() {
+  const activo = Boolean(CONFIG.bold.llave);
+  $("#pedido-bold").hidden = $("#pedido-o").hidden = !activo;
+  if (activo) $("#pedido-fine").textContent = "Paga en línea con tarjeta, PSE y más a través de Bold, o envía el pedido por WhatsApp y pagas como prefieras.";
+}
+function cargarBold() {
+  if (window.BoldCheckout) return Promise.resolve();
+  return new Promise((listo, fallo) => {
+    const s = document.createElement("script");
+    s.src = BOLD_JS; s.onload = listo; s.onerror = fallo;
+    document.head.appendChild(s);
+  });
+}
+async function pagarConBold() {
+  if (!itemsCarrito().length || !validarPedido()) { const f = $("#pedido .invalid .input"); if (f) f.focus(); return; }
+  const ref = "RF" + Date.now().toString(36).toUpperCase();
+  const total = totalCarrito();
+  // El pedido queda guardado para enviarlo por WhatsApp cuando Bold devuelva al cliente a la tienda
+  try { localStorage.setItem("rf-pago-" + ref, mensajePedido(`Pagado en línea con Bold · referencia ${ref}`)); } catch {}
+  const venta = {
+    currency: "COP",
+    apiKey: CONFIG.bold.llave,
+    description: `Pedido ${ref} · Total ${dinero(total)}`
+  };
+  // Bold solo acepta direcciones de regreso con https (la página publicada); en pruebas locales se omite
+  if (location.protocol === "https:") venta.redirectionUrl = location.origin + location.pathname + "?pedido=" + ref;
+  try {
+    await cargarBold();
+    if (CONFIG.bold.firmaUrl) {
+      // Con el servicio de firma el total llega ya escrito y protegido con el hash de integridad
+      const r = await fetch(CONFIG.bold.firmaUrl, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orderId: ref, amount: String(total), currency: "COP" }) });
+      const { hash } = await r.json();
+      Object.assign(venta, { orderId: ref, amount: String(total), integritySignature: hash });
+    } else {
+      // Sin servicio de firma Bold pide el valor al cliente: se copia el total para que solo lo pegue
+      try { await navigator.clipboard.writeText(String(total)); } catch {}
+      toast(`En Bold escribe el total: ${dinero(total)}. Ya lo copiamos para que lo pegues.`);
+    }
+    new BoldCheckout(venta).open();
+  } catch {
+    toast(`No se pudo abrir el pago en línea. Envíanos el pedido por WhatsApp al ${CONFIG.whatsappVisible}.`);
+  }
+}
+// Cuando Bold devuelve al cliente a la tienda (?pedido=…&bold-tx-status=…) se le muestra el resultado
+function revisarRegresoBold() {
+  const q = new URLSearchParams(location.search);
+  const ref = q.get("pedido"), est = q.get("bold-tx-status");
+  if (!ref || !est) return;
+  history.replaceState(null, "", location.pathname + location.hash);
+  let msg = "";
+  try { msg = localStorage.getItem("rf-pago-" + ref) || ""; } catch {}
+  const aprobado = est === "approved";
+  if (aprobado) { estado.carrito = {}; guardarCarrito(); pintarCarrito(); }
+  const titulo = aprobado ? "¡Pago recibido!" : est === "pending" ? "Tu pago está en proceso." : "El pago no se completó.";
+  const texto = aprobado ? "Envíanos el pedido por WhatsApp para coordinar la entrega." : est === "pending" ? "Te avisamos por WhatsApp cuando Bold lo confirme." : "Puedes intentarlo de nuevo desde el carrito o enviarnos el pedido por WhatsApp.";
+  const caja = document.createElement("div");
+  caja.className = "aviso aviso-pago";
+  caja.setAttribute("role", "status");
+  caja.innerHTML = `<div class="wrap"><strong>${titulo}</strong> ${texto} Referencia ${esc(ref)}.${msg ? ` <a class="link" href="${waLink(msg)}" target="_blank" rel="noopener">Enviar el pedido por WhatsApp</a>` : ""}</div>`;
+  $("#pagina").prepend(caja);
 }
 
 function mostrarError(err, faltan, accion) {
@@ -3355,7 +3455,7 @@ function validarPedido() {
   const faltan = [];
   const marcar = (sel, malo) => { $(sel).classList.toggle("invalid", malo); return malo; };
   if (marcar("#campo-nombre", !d.nombre)) faltan.push("tu nombre");
-  if (marcar("#campo-dir", d.entrega === "domicilio" && !d.dir)) faltan.push("la dirección de entrega");
+  if (marcar("#campo-dir", !d.dir)) faltan.push(d.entrega === "nacional" ? "la ciudad y la dirección" : "la dirección de entrega");
   mostrarError($("#pedido-err"), faltan, "enviar el pedido");
   return faltan.length === 0;
 }
@@ -3609,6 +3709,8 @@ document.addEventListener("click", e => {
     abrirCarrito();
   } else if (ds.cerrar === "carrito") {
     cerrarCarrito();
+  } else if (t.id === "pedido-bold") {
+    pagarConBold();
   } else if (t.id === "pedido-enviar") {
     if (!itemsCarrito().length || !validarPedido()) { e.preventDefault(); const f = $("#pedido .invalid .input"); if (f) f.focus(); return; }
     actualizarPedido();
@@ -3666,8 +3768,9 @@ function iniciar() {
     const n = deTienda(el.dataset.cuenta).length;
     el.textContent = `${n} ${n === 1 ? "producto" : "productos"}`;
   });
-  $("#ped-pago").innerHTML = CONFIG.pagos.map(p => `<option>${esc(p)}</option>`).join("");
-  $("#domicilio-nota").textContent = CONFIG.domicilio;
+  ajustarEntrega();
+  prepararBold();
+  revisarRegresoBold();
   const NOMBRES_REDES = { instagram: "Instagram", facebook: "Facebook", tiktok: "TikTok" };
   const redes = Object.entries(CONFIG.redes).filter(([, url]) => url);
   $("#c-redes").innerHTML = redes.map(([red, url]) => `<a class="link" href="${esc(url)}" target="_blank" rel="noopener">${NOMBRES_REDES[red] || esc(red)}</a>`).join("");
