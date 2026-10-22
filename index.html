@@ -73,6 +73,8 @@
   --body:"Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono:"JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
   --r:10px;
+  /* Escenarios de las puertas de la portada */
+  --stage:#FFFFFF; --stage-hl:rgba(255,255,255,.6); --stage-ring:rgba(255,255,255,.6); --obj-shadow:rgba(15,31,24,.32);
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -94,6 +96,7 @@
     --c-mov:#34D399; --t-mov:#0E2A20; --k-mov:#6EE7B7; --c-tv:#818CF8; --t-tv:#1E1E44; --k-tv:#A5B4FC;
     --screen:#1E3A2E; --danger:#F07A66; --rec:#FF5B4F;
     --scrim:rgba(0,0,0,.6); --shadow:0 10px 30px rgba(0,0,0,.45); --shadow-card:0 14px 30px rgba(0,0,0,.4);
+    --stage:#07110D; --stage-hl:rgba(255,255,255,.1); --stage-ring:rgba(255,255,255,.24); --obj-shadow:rgba(0,0,0,.6);
     color-scheme:dark;
   }
 }
@@ -116,6 +119,7 @@
   --c-mov:#34D399; --t-mov:#0E2A20; --k-mov:#6EE7B7; --c-tv:#818CF8; --t-tv:#1E1E44; --k-tv:#A5B4FC;
   --screen:#1E3A2E; --danger:#F07A66; --rec:#FF5B4F;
   --scrim:rgba(0,0,0,.6); --shadow:0 10px 30px rgba(0,0,0,.45); --shadow-card:0 14px 30px rgba(0,0,0,.4);
+  --stage:#07110D; --stage-hl:rgba(255,255,255,.1); --stage-ring:rgba(255,255,255,.24); --obj-shadow:rgba(0,0,0,.6);
   color-scheme:dark;
 }
 
@@ -233,8 +237,31 @@ section[id],.orden{scroll-margin-top:128px}
 .doors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
 .door{display:flex;flex-direction:column;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;text-decoration:none;color:inherit;transition:border-color .18s,transform .18s,box-shadow .18s;min-width:0}
 .door:hover{border-color:var(--c,var(--primary));transform:translateY(-3px);box-shadow:var(--shadow-card)}
-.door-art{aspect-ratio:16/8;max-width:100%;border-radius:6px;background-color:var(--t,var(--surface-2));background-image:radial-gradient(var(--dot,var(--line)) 1px,transparent 1.4px);background-size:14px 14px;display:flex;align-items:center;justify-content:center;gap:4px}
-.door-art .ill{width:30%}
+/* Escenario de cada puerta: degradado del color de la sección, anillos que laten, destellos y
+   productos recortados que flotan; al pasar el mouse se acercan y cruza un brillo */
+.door-art{position:relative;overflow:hidden;isolation:isolate;aspect-ratio:16/10;max-width:100%;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:4px;
+  --st-1:color-mix(in srgb,var(--c,var(--primary)) 14%,var(--stage));
+  --st-2:color-mix(in srgb,var(--c,var(--primary)) 62%,var(--stage));
+  background:radial-gradient(75% 50% at 50% 104%,color-mix(in srgb,var(--c,var(--primary)) 60%,transparent),transparent 72%),radial-gradient(60% 65% at 16% 10%,var(--stage-hl),transparent 62%),linear-gradient(155deg,var(--st-1),var(--st-2))}
+.door-art::before{content:"";position:absolute;z-index:-1;left:50%;top:48%;width:74%;aspect-ratio:1;border-radius:50%;translate:-50% -50%;border:1.5px solid var(--stage-ring);box-shadow:0 0 0 16px color-mix(in srgb,var(--stage-ring) 28%,transparent),0 0 0 38px color-mix(in srgb,var(--stage-ring) 12%,transparent);animation:latido 7s ease-in-out infinite}
+.door-art::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.4) 50%,transparent 65%);translate:-120% 0}
+.door:hover .door-art::after{transition:translate .9s ease;translate:120% 0}
+.chispas{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(var(--stage-ring) 1px,transparent 1.6px) 0 0/16px 16px;-webkit-mask-image:radial-gradient(circle at 50% 55%,transparent 38%,#000 85%);mask-image:radial-gradient(circle at 50% 55%,transparent 38%,#000 85%)}
+.chispas::before,.chispas::after{content:"";position:absolute;width:13px;aspect-ratio:1;background:#fff;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);animation:centelleo 3.4s ease-in-out infinite}
+.chispas::before{left:9%;top:14%}
+.chispas::after{right:8%;top:26%;width:9px;animation-delay:-1.7s}
+.door-art .obj{position:absolute;left:var(--x);bottom:var(--y);width:var(--w);height:var(--h);object-fit:contain;object-position:50% 100%;rotate:var(--giro,0deg);filter:drop-shadow(0 10px 9px var(--obj-shadow));animation:flotar 5.6s ease-in-out var(--retraso,0s) infinite;transition:scale .4s cubic-bezier(.2,.8,.3,1.25)}
+.door:hover .door-art .obj{scale:1.06}
+.door:hover .door-art .obj:last-child{scale:1.12}
+.door-art .ill{width:30%;position:relative;animation:flotar 5.6s ease-in-out infinite}
+.door-art .ill + .ill{animation-delay:-2.8s}
+@keyframes flotar{0%,100%{translate:0 0}50%{translate:0 -5%}}
+@keyframes latido{0%,100%{scale:.94;opacity:.7}50%{scale:1.05;opacity:1}}
+@keyframes centelleo{0%,100%{scale:.3;opacity:0}50%{scale:1;opacity:1}}
+@media (prefers-reduced-motion:reduce){
+  .door-art::before,.door-art .obj,.door-art .ill,.chispas::before,.chispas::after{animation:none}
+  .door:hover .door-art::after{transition:none;translate:-120% 0}
+}
 .door-text{display:flex;flex-direction:column;gap:10px;flex:1;min-width:0}
 .door h3{font-size:21px;font-weight:800;font-stretch:112%}
 .door-text > p:not(.door-meta){color:var(--ink-2);font-size:15px}
@@ -627,7 +654,7 @@ textarea.input{min-height:96px;resize:vertical}
           <div class="sec-head"><div><p class="kicker">Tienda</p><h2>¿Qué estás buscando?</h2></div></div>
           <div class="doors">
             <a class="door t-pc" href="#computadores">
-              <div class="door-art"><span data-ilus="portatil"></span><span data-ilus="escritorio"></span></div>
+              <div class="door-art" data-escena="pc"><span data-ilus="portatil"></span><span data-ilus="escritorio"></span></div>
               <div class="door-text">
                 <h3>Computadores</h3>
                 <p>Portátiles, PC de oficina y PC gamer listos para usar. También MacBook.</p>
@@ -635,7 +662,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door t-comp" href="#componentes">
-              <div class="door-art"><span data-ilus="cpu"></span><span data-ilus="gpu"></span></div>
+              <div class="door-art" data-escena="comp"><span data-ilus="cpu"></span><span data-ilus="gpu"></span></div>
               <div class="door-text">
                 <h3>Componentes</h3>
                 <p>Procesadores, RAM, SSD, tarjetas de video, tarjetas madre y fuentes.</p>
@@ -643,7 +670,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door t-per" href="#perifericos">
-              <div class="door-art"><span data-ilus="monitor"></span><span data-ilus="teclado"></span></div>
+              <div class="door-art" data-escena="per"><span data-ilus="monitor"></span><span data-ilus="teclado"></span></div>
               <div class="door-text">
                 <h3>Periféricos</h3>
                 <p>Monitores, teclados, mouse, diademas, sillas gamer, redes y cables.</p>
@@ -651,7 +678,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door t-con" href="#consolas">
-              <div class="door-art"><span data-ilus="consola"></span><span data-ilus="control"></span></div>
+              <div class="door-art" data-escena="con"><span data-ilus="consola"></span><span data-ilus="control"></span></div>
               <div class="door-text">
                 <h3>Consolas</h3>
                 <p>PlayStation 5, Nintendo Switch 2, ROG Xbox Ally, controles, realidad virtual y timones.</p>
@@ -659,7 +686,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door t-tv" href="#televisores">
-              <div class="door-art"><span data-ilus="tv"></span><span data-ilus="aspiradora"></span></div>
+              <div class="door-art" data-escena="tv"><span data-ilus="tv"></span><span data-ilus="aspiradora"></span></div>
               <div class="door-text">
                 <h3>TV y hogar</h3>
                 <p>Smart TV Samsung, Xiaomi, Fly y Corn, y aspiradoras.</p>
@@ -667,7 +694,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door t-cel" href="#celulares">
-              <div class="door-art"><span data-ilus="celular"></span><span data-ilus="celular"></span></div>
+              <div class="door-art" data-escena="cel"><span data-ilus="celular"></span><span data-ilus="celular"></span></div>
               <div class="door-text">
                 <h3>Celulares</h3>
                 <p>iPhone, Samsung, Xiaomi, Motorola, Honor y más. Eliges capacidad y versión.</p>
@@ -675,7 +702,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door t-tab" href="#tablets">
-              <div class="door-art"><span data-ilus="tablet"></span><span data-ilus="pencil"></span></div>
+              <div class="door-art" data-escena="tab"><span data-ilus="tablet"></span><span data-ilus="pencil"></span></div>
               <div class="door-text">
                 <h3>Tablets</h3>
                 <p>iPad, Samsung Galaxy Tab, Redmi Pad y Tecno.</p>
@@ -683,7 +710,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door t-rel" href="#relojes">
-              <div class="door-art"><span data-ilus="reloj"></span><span data-ilus="reloj"></span></div>
+              <div class="door-art" data-escena="rel"><span data-ilus="reloj"></span><span data-ilus="reloj"></span></div>
               <div class="door-text">
                 <h3>Relojes</h3>
                 <p>Apple Watch, Galaxy Watch, Huawei y Xiaomi. Relojes y manillas inteligentes.</p>
@@ -691,7 +718,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door t-aud" href="#audifonos">
-              <div class="door-art"><span data-ilus="buds"></span><span data-ilus="diadema"></span></div>
+              <div class="door-art" data-escena="aud"><span data-ilus="buds"></span><span data-ilus="diadema"></span></div>
               <div class="door-text">
                 <h3>Audífonos</h3>
                 <p>AirPods, Galaxy Buds, Redmi Buds, Huawei FreeBuds y audífonos con cable.</p>
@@ -699,7 +726,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door t-par" href="#parlantes">
-              <div class="door-art"><span data-ilus="parlante"></span><span data-ilus="parlante"></span></div>
+              <div class="door-art" data-escena="par"><span data-ilus="parlante"></span><span data-ilus="parlante"></span></div>
               <div class="door-text">
                 <h3>Parlantes</h3>
                 <p>JBL Boombox, Charge y Flip, parlantes Xiaomi y parlantes para computador.</p>
@@ -707,7 +734,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door t-acc" href="#accesorios">
-              <div class="door-art"><span data-ilus="cargador"></span><span data-ilus="cable"></span></div>
+              <div class="door-art" data-escena="acc"><span data-ilus="cargador"></span><span data-ilus="cable"></span></div>
               <div class="door-text">
                 <h3>Accesorios</h3>
                 <p>Cargadores originales, cables, power banks, Apple Pencil y teclados para iPad.</p>
@@ -715,7 +742,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door t-mov" href="#patinetas">
-              <div class="door-art"><span data-ilus="patineta"></span></div>
+              <div class="door-art" data-escena="mov"><span data-ilus="patineta"></span></div>
               <div class="door-text">
                 <h3>Patinetas</h3>
                 <p>Patinetas eléctricas Xiaomi para moverte por la ciudad.</p>
@@ -723,7 +750,7 @@ textarea.input{min-height:96px;resize:vertical}
               </div>
             </a>
             <a class="door wide t-svc" href="#servicios">
-              <div class="door-art"><span data-ilus="domo"></span><span data-ilus="celular"></span></div>
+              <div class="door-art" data-escena="svc"><span data-ilus="domo"></span><span data-ilus="celular"></span></div>
               <div class="door-text">
                 <h3>Servicio técnico</h3>
                 <p>Reparación de celulares y computadores, mantenimiento e instalación de cámaras de seguridad.</p>
@@ -1884,7 +1911,7 @@ const PRODUCTOS = [
   { id: "sa37",    tienda: "cel", marca: "Samsung", nombre: "Samsung Galaxy A37", opciones: [["128 GB", 980000], ["256 GB", 1150000]], imagen: "fotos/sa37.jpg" },
   { id: "sa57",    tienda: "cel", marca: "Samsung", nombre: "Samsung Galaxy A57", specs: ["128 GB"], precio: 1350000, imagen: "fotos/sa57.jpg" },
   { id: "ss25fe",  tienda: "cel", marca: "Samsung", nombre: "Samsung Galaxy S25 FE", opciones: [["256 GB", 2200000], ["512 GB", 2350000]], imagen: "fotos/ss25fe.jpg" },
-  { id: "ss25u",   tienda: "cel", marca: "Samsung", nombre: "Samsung Galaxy S25 Ultra", opciones: [["256 GB", 3100000], ["512 GB", 3300000], ["1 TB", 3650000]] },
+  { id: "ss25u",   tienda: "cel", marca: "Samsung", nombre: "Samsung Galaxy S25 Ultra", opciones: [["256 GB", 3100000], ["512 GB", 3300000], ["1 TB", 3650000]], imagen: "fotos/ss25u.jpg" },
   { id: "ss26fe",  tienda: "cel", marca: "Samsung", nombre: "Samsung Galaxy S26 FE", specs: ["256 GB"], precio: 2700000, imagen: "fotos/ss26fe.jpg" },
   { id: "ss26u",   tienda: "cel", marca: "Samsung", nombre: "Samsung Galaxy S26 Ultra", opciones: [["256 GB", 3550000], ["512 GB", 4000000]], destacado: true, imagen: "fotos/ss26u.jpg" },
   { id: "szflip8", tienda: "cel", marca: "Samsung", nombre: "Samsung Galaxy Z Flip 8", specs: ["512 GB", "Plegable"], precio: 4100000, imagen: "fotos/szflip8.jpg" },
@@ -1898,7 +1925,7 @@ const PRODUCTOS = [
   { id: "xr15",       tienda: "cel", marca: "Xiaomi", nombre: "Redmi 15", specs: ["256 GB"], precio: 710000, imagen: "fotos/xr15.jpg" },
   { id: "xr17",       tienda: "cel", marca: "Xiaomi", nombre: "Redmi 17", opciones: [["128 GB", 630000], ["256 GB · 4 + 4 GB RAM", 690000], ["256 GB · 6 + 6 GB RAM", 780000], ["256 GB · 4 + 4 GB RAM · 5G", 830000]], imagen: "fotos/xr17.jpg" },
   { id: "xrn15",      tienda: "cel", marca: "Xiaomi", nombre: "Redmi Note 15", specs: ["256 GB", "4G"], precio: 840000, imagen: "fotos/xrn15.jpg" },
-  { id: "xrn15pro", tienda: "cel", marca: "Xiaomi", nombre: "Redmi Note 15 Pro", specs: ["256 GB", "4G"], precio: 1050000 },
+  { id: "xrn15pro", tienda: "cel", marca: "Xiaomi", nombre: "Redmi Note 15 Pro", specs: ["256 GB", "4G"], precio: 1050000, imagen: "fotos/xrn15pro.jpg" },
   { id: "xrn17",      tienda: "cel", marca: "Xiaomi", nombre: "Redmi Note 17", opciones: [["128 GB", 740000], ["256 GB · 6 + 6 GB RAM", 860000], ["256 GB · 8 + 8 GB RAM", 900000], ["128 GB · 6 + 6 GB RAM", 760000], ["128 GB · 6 + 6 GB RAM · 5G", 860000], ["256 GB · 4 + 4 GB RAM", 810000]], imagen: "fotos/xrn17.jpg" },
   { id: "xrn14pp",    tienda: "cel", marca: "Xiaomi", nombre: "Redmi Note 14 Pro+ 5G", specs: ["5G"], opciones: [["256 GB", 1050000], ["512 GB", 1350000]], imagen: "fotos/xrn14pp.jpg" },
   { id: "xrn17pro",   tienda: "cel", marca: "Xiaomi", nombre: "Redmi Note 17 Pro 5G", specs: ["5G"], opciones: [["256 GB", 1200000], ["512 GB", 1400000], ["128 GB · 6 GB RAM", 1050000]], imagen: "fotos/xrn17pro.jpg" },
@@ -1916,10 +1943,10 @@ const PRODUCTOS = [
   { id: "medge60",   tienda: "cel", marca: "Motorola", nombre: "Motorola Edge 60", specs: ["512 GB"], precio: 1500000 },
   { id: "medge60f",  tienda: "cel", marca: "Motorola", nombre: "Motorola Edge 60 Fusion", specs: ["256 GB"], precio: 1150000, imagen: "fotos/medge60f.jpg" },
   { id: "medge50f",  tienda: "cel", marca: "Motorola", nombre: "Motorola Edge 50 Fusion", opciones: [["256 GB", 910000], ["512 GB", 1100000]] },
-  { id: "mg67",      tienda: "cel", marca: "Motorola", nombre: "Moto G67", specs: ["256 GB"], precio: 820000 },
+  { id: "mg67",      tienda: "cel", marca: "Motorola", nombre: "Moto G67", specs: ["256 GB"], precio: 820000, imagen: "fotos/mg67.jpg" },
   { id: "mg06",      tienda: "cel", marca: "Motorola", nombre: "Moto G06", opciones: [["256 GB", 520000], ["128 GB", 460000]], imagen: "fotos/mg06.jpg" },
   { id: "mg5g", tienda: "cel", marca: "Motorola", nombre: "Moto G 5G", specs: ["64 GB", "4 GB RAM", "5G"], precio: 430000 },
-  { id: "mg17p", tienda: "cel", marca: "Motorola", nombre: "Moto G17 Power", specs: ["256 GB", "4 GB RAM"], precio: 690000 },
+  { id: "mg17p", tienda: "cel", marca: "Motorola", nombre: "Moto G17 Power", specs: ["256 GB", "4 GB RAM"], precio: 690000, imagen: "fotos/mg17p.jpg" },
 
   /* ---------- Celulares: Honor ---------- */
   { id: "hmagic8l",  tienda: "cel", marca: "Honor", nombre: "Honor Magic 8 Lite", opciones: [["256 GB", 1200000], ["512 GB", 1400000]], imagen: "fotos/hmagic8l.jpg" },
@@ -1932,60 +1959,60 @@ const PRODUCTOS = [
   { id: "hchoice10t", tienda: "cel", marca: "Honor", nombre: "Honor Choice 10T", opciones: [["32 GB · 3 GB RAM", 310000], ["64 GB · 4 + 3 GB RAM", 390000]] },
 
   /* ---------- Celulares: Tecno ---------- */
-  { id: "tcamon50p", tienda: "cel", marca: "Tecno", nombre: "Tecno Camon 50 Pro 5G", specs: ["256 GB", "5G"], precio: 1400000, nota: "Obsequio: audífonos" },
-  { id: "tpovaslim", tienda: "cel", marca: "Tecno", nombre: "Tecno Pova Slim", specs: ["256 GB"], precio: 1100000 },
-  { id: "tpovac2",   tienda: "cel", marca: "Tecno", nombre: "Tecno Pova Curve 2 5G", specs: ["256 GB", "5G"], precio: 1100000 },
+  { id: "tcamon50p", tienda: "cel", marca: "Tecno", nombre: "Tecno Camon 50 Pro 5G", specs: ["256 GB", "5G"], precio: 1400000, nota: "Obsequio: audífonos", imagen: "fotos/tcamon50p.jpg" },
+  { id: "tpovaslim", tienda: "cel", marca: "Tecno", nombre: "Tecno Pova Slim", specs: ["256 GB"], precio: 1100000, imagen: "fotos/tpovaslim.jpg" },
+  { id: "tpovac2",   tienda: "cel", marca: "Tecno", nombre: "Tecno Pova Curve 2 5G", specs: ["256 GB", "5G"], precio: 1100000, imagen: "fotos/tpovac2.jpg" },
   { id: "tspark50",  tienda: "cel", marca: "Tecno", nombre: "Tecno Spark 50", specs: ["256 GB"], opciones: [["4G", 760000], ["5G", 990000]], imagen: "fotos/tspark50.jpg" },
-  { id: "tsparkgo3", tienda: "cel", marca: "Tecno", nombre: "Tecno Spark Go 3", opciones: [["64 GB", 430000], ["128 GB", 480000]] },
-  { id: "tpova6", tienda: "cel", marca: "Tecno", nombre: "Tecno Pova 6 5G", specs: ["256 GB", "16 GB RAM", "5G"], precio: 670000 },
-  { id: "tcamon50p4g", tienda: "cel", marca: "Tecno", nombre: "Tecno Camon 50 Pro 4G", specs: ["256 GB", "16 GB RAM", "4G"], precio: 1350000, nota: "Obsequio: diadema" },
-  { id: "itela50", tienda: "cel", marca: "itel", nombre: "itel A50cs", specs: ["64 GB"], precio: 320000 },
-  { id: "itela100", tienda: "cel", marca: "itel", nombre: "itel A100", specs: ["128 GB"], opciones: [["A100c", 350000], ["A100cs", 370000]] },
-  { id: "itela200", tienda: "cel", marca: "itel", nombre: "itel A200", opciones: [["64 GB · 3 + 5 GB RAM", 360000], ["128 GB · 8 GB RAM", 400000]] },
+  { id: "tsparkgo3", tienda: "cel", marca: "Tecno", nombre: "Tecno Spark Go 3", opciones: [["64 GB", 430000], ["128 GB", 480000]], imagen: "fotos/tsparkgo3.jpg" },
+  { id: "tpova6", tienda: "cel", marca: "Tecno", nombre: "Tecno Pova 6 5G", specs: ["256 GB", "16 GB RAM", "5G"], precio: 670000, imagen: "fotos/tpova6.jpg" },
+  { id: "tcamon50p4g", tienda: "cel", marca: "Tecno", nombre: "Tecno Camon 50 Pro 4G", specs: ["256 GB", "16 GB RAM", "4G"], precio: 1350000, nota: "Obsequio: diadema", imagen: "fotos/tcamon50p4g.jpg" },
+  { id: "itela50", tienda: "cel", marca: "itel", nombre: "itel A50cs", specs: ["64 GB"], precio: 320000, imagen: "fotos/itela50.jpg" },
+  { id: "itela100", tienda: "cel", marca: "itel", nombre: "itel A100", specs: ["128 GB"], opciones: [["A100c", 350000], ["A100cs", 370000]], imagen: "fotos/itela100.jpg" },
+  { id: "itela200", tienda: "cel", marca: "itel", nombre: "itel A200", opciones: [["64 GB · 3 + 5 GB RAM", 360000], ["128 GB · 8 GB RAM", 400000]], imagen: "fotos/itela200.jpg" },
 
   /* ---------- Celulares: Vivo ---------- */
-  { id: "vv60lite",  tienda: "cel", marca: "Vivo", nombre: "Vivo V60 Lite 5G", specs: ["256 GB", "5G"], precio: 2100000, nota: "Obsequio: reloj" },
+  { id: "vv60lite",  tienda: "cel", marca: "Vivo", nombre: "Vivo V60 Lite 5G", specs: ["256 GB", "5G"], precio: 2100000, nota: "Obsequio: reloj", imagen: "fotos/vv60lite.jpg" },
   { id: "vy31",      tienda: "cel", marca: "Vivo", nombre: "Vivo Y31 5G", specs: ["256 GB", "5G"], precio: 1200000 },
-  { id: "vy21d",     tienda: "cel", marca: "Vivo", nombre: "Vivo Y21 D", specs: ["256 GB"], precio: 1050000 },
+  { id: "vy21d",     tienda: "cel", marca: "Vivo", nombre: "Vivo Y21 D", specs: ["256 GB"], precio: 1050000, imagen: "fotos/vy21d.jpg" },
 
   /* ---------- Celulares: Oppo ---------- */
-  { id: "oreno11",   tienda: "cel", marca: "Oppo", nombre: "Oppo Reno 11 5G", specs: ["5G"], precio: 1100000 },
+  { id: "oreno11",   tienda: "cel", marca: "Oppo", nombre: "Oppo Reno 11 5G", specs: ["5G"], precio: 1100000, imagen: "fotos/oreno11.jpg" },
   { id: "oa6",       tienda: "cel", marca: "Oppo", nombre: "Oppo A6 5G", specs: ["256 GB", "5G"], precio: 1300000, imagen: "fotos/oa6.jpg" },
   { id: "oa5",       tienda: "cel", marca: "Oppo", nombre: "Oppo A5 5G", specs: ["256 GB", "5G"], precio: 1050000, imagen: "fotos/oa5.jpg" },
   { id: "oa6c",      tienda: "cel", marca: "Oppo", nombre: "Oppo A6 C", specs: ["64 GB"], precio: 810000, imagen: "fotos/oa6c.jpg" },
 
   /* ---------- Celulares: Infinix ---------- */
-  { id: "inote60p",  tienda: "cel", marca: "Infinix", nombre: "Infinix Note 60 Pro", specs: ["256 GB"], opciones: [["Estándar", 1550000], ["Edición Pininfarina", 1750000]] },
-  { id: "inote60e",  tienda: "cel", marca: "Infinix", nombre: "Infinix Note 60 Edge 5G", specs: ["256 GB", "5G"], precio: 1100000 },
-  { id: "ihot70",    tienda: "cel", marca: "Infinix", nombre: "Infinix Hot 70", opciones: [["256 GB", 700000], ["128 GB", 710000]] },
-  { id: "ismart20", tienda: "cel", marca: "Infinix", nombre: "Infinix Smart 20", specs: ["128 GB", "4 GB RAM"], precio: 570000 },
-  { id: "ihot70p", tienda: "cel", marca: "Infinix", nombre: "Infinix Hot 70 Pro 5G", specs: ["256 GB", "6 + 6 GB RAM", "5G"], precio: 1100000 },
+  { id: "inote60p",  tienda: "cel", marca: "Infinix", nombre: "Infinix Note 60 Pro", specs: ["256 GB"], opciones: [["Estándar", 1550000], ["Edición Pininfarina", 1750000]], imagen: "fotos/inote60p.jpg" },
+  { id: "inote60e",  tienda: "cel", marca: "Infinix", nombre: "Infinix Note 60 Edge 5G", specs: ["256 GB", "5G"], precio: 1100000, imagen: "fotos/inote60e.jpg" },
+  { id: "ihot70",    tienda: "cel", marca: "Infinix", nombre: "Infinix Hot 70", opciones: [["256 GB", 700000], ["128 GB", 710000]], imagen: "fotos/ihot70.jpg" },
+  { id: "ismart20", tienda: "cel", marca: "Infinix", nombre: "Infinix Smart 20", specs: ["128 GB", "4 GB RAM"], precio: 570000, imagen: "fotos/ismart20.jpg" },
+  { id: "ihot70p", tienda: "cel", marca: "Infinix", nombre: "Infinix Hot 70 Pro 5G", specs: ["256 GB", "6 + 6 GB RAM", "5G"], precio: 1100000, imagen: "fotos/ihot70p.jpg" },
 
   /* ---------- Celulares: ZTE y Nokia ---------- */
   { id: "zta56pro",  tienda: "cel", marca: "ZTE", nombre: "ZTE A56 Pro", precio: 430000 },
-  { id: "zta35e",    tienda: "cel", marca: "ZTE", nombre: "ZTE A35 E", precio: 340000 },
-  { id: "zta56", tienda: "cel", marca: "ZTE", nombre: "ZTE A56", specs: ["128 GB", "12 GB RAM"], precio: 420000 },
+  { id: "zta35e",    tienda: "cel", marca: "ZTE", nombre: "ZTE A35 E", precio: 340000, imagen: "fotos/zta35e.jpg" },
+  { id: "zta56", tienda: "cel", marca: "ZTE", nombre: "ZTE A56", specs: ["128 GB", "12 GB RAM"], precio: 420000, imagen: "fotos/zta56.jpg" },
   { id: "zta57pro", tienda: "cel", marca: "ZTE", nombre: "ZTE A57 Pro", specs: ["128 GB", "12 GB RAM"], precio: 480000 },
-  { id: "ztev80max", tienda: "cel", marca: "ZTE", nombre: "ZTE V80 Max", specs: ["256 GB", "20 GB RAM"], precio: 570000 },
+  { id: "ztev80max", tienda: "cel", marca: "ZTE", nombre: "ZTE V80 Max", specs: ["256 GB", "20 GB RAM"], precio: 570000, imagen: "fotos/ztev80max.jpg" },
   { id: "ztev80pro", tienda: "cel", marca: "ZTE", nombre: "ZTE V80 Pro", specs: ["256 GB", "20 GB RAM"], precio: 730000 },
-  { id: "nmusic2", tienda: "cel", marca: "ZTE", nombre: "Nubia Music 2", specs: ["256 GB", "4 + 10 GB RAM"], precio: 450000 },
-  { id: "nfocus2", tienda: "cel", marca: "ZTE", nombre: "Nubia Focus 2 5G", specs: ["256 GB", "8 + 12 GB RAM", "5G"], precio: 540000 },
-  { id: "nairslim", tienda: "cel", marca: "ZTE", nombre: "Nubia Air Slim 5G", specs: ["256 GB", "5G"], precio: 910000 },
-  { id: "nfocus2u", tienda: "cel", marca: "ZTE", nombre: "Nubia Focus 2 Ultra 5G", specs: ["256 GB", "20 GB RAM", "5G"], precio: 980000 },
-  { id: "nneo5", tienda: "cel", marca: "ZTE", nombre: "Nubia Neo 5 5G", specs: ["256 GB", "20 GB RAM", "5G"], precio: 980000 },
-  { id: "nneo5gt", tienda: "cel", marca: "ZTE", nombre: "Nubia Neo 5 GT 5G", specs: ["512 GB", "24 GB RAM", "5G"], precio: 1400000 },
-  { id: "nk110",     tienda: "cel", marca: "Nokia", nombre: "Nokia 110", specs: ["Versión 3"], precio: 150000 },
-  { id: "nk105",     tienda: "cel", marca: "Nokia", nombre: "Nokia 105", precio: 140000 },
+  { id: "nmusic2", tienda: "cel", marca: "ZTE", nombre: "Nubia Music 2", specs: ["256 GB", "4 + 10 GB RAM"], precio: 450000, imagen: "fotos/nmusic2.jpg" },
+  { id: "nfocus2", tienda: "cel", marca: "ZTE", nombre: "Nubia Focus 2 5G", specs: ["256 GB", "8 + 12 GB RAM", "5G"], precio: 540000, imagen: "fotos/nfocus2.jpg" },
+  { id: "nairslim", tienda: "cel", marca: "ZTE", nombre: "Nubia Air Slim 5G", specs: ["256 GB", "5G"], precio: 910000, imagen: "fotos/nairslim.jpg" },
+  { id: "nfocus2u", tienda: "cel", marca: "ZTE", nombre: "Nubia Focus 2 Ultra 5G", specs: ["256 GB", "20 GB RAM", "5G"], precio: 980000, imagen: "fotos/nfocus2u.jpg" },
+  { id: "nneo5", tienda: "cel", marca: "ZTE", nombre: "Nubia Neo 5 5G", specs: ["256 GB", "20 GB RAM", "5G"], precio: 980000, imagen: "fotos/nneo5.jpg" },
+  { id: "nneo5gt", tienda: "cel", marca: "ZTE", nombre: "Nubia Neo 5 GT 5G", specs: ["512 GB", "24 GB RAM", "5G"], precio: 1400000, imagen: "fotos/nneo5gt.jpg" },
+  { id: "nk110",     tienda: "cel", marca: "Nokia", nombre: "Nokia 110", specs: ["Versión 3"], precio: 150000, imagen: "fotos/nk110.jpg" },
+  { id: "nk105",     tienda: "cel", marca: "Nokia", nombre: "Nokia 105", precio: 140000, imagen: "fotos/nk105.jpg" },
 
   /* ---------- Celulares: Realme, Kalley, TCL y celulares básicos ---------- */
-  { id: "rmnote80",tienda: "cel", marca: "Realme", nombre: "Realme Note 80", specs: ["128 GB", "4 + 4 GB RAM"], precio: 600000 },
-  { id: "rmnote70", tienda: "cel", marca: "Realme", nombre: "Realme Note 70", specs: ["256 GB", "8 + 4 GB RAM"], precio: 680000 },
-  { id: "rmc100i", tienda: "cel", marca: "Realme", nombre: "Realme C100i", specs: ["128 GB", "4 + 4 GB RAM"], precio: 710000 },
+  { id: "rmnote80",tienda: "cel", marca: "Realme", nombre: "Realme Note 80", specs: ["128 GB", "4 + 4 GB RAM"], precio: 600000, imagen: "fotos/rmnote80.jpg" },
+  { id: "rmnote70", tienda: "cel", marca: "Realme", nombre: "Realme Note 70", specs: ["256 GB", "8 + 4 GB RAM"], precio: 680000, imagen: "fotos/rmnote70.jpg" },
+  { id: "rmc100i", tienda: "cel", marca: "Realme", nombre: "Realme C100i", specs: ["128 GB", "4 + 4 GB RAM"], precio: 710000, imagen: "fotos/rmc100i.jpg" },
   { id: "rmc71", tienda: "cel", marca: "Realme", nombre: "Realme C71", specs: ["256 GB", "16 + 8 GB RAM"], precio: 740000, imagen: "fotos/rmc71.jpg" },
-  { id: "rmc100", tienda: "cel", marca: "Realme", nombre: "Realme C100", specs: ["256 GB", "8 GB RAM"], precio: 1050000 },
-  { id: "kblackz2", tienda: "cel", marca: "Kalley", nombre: "Kalley Black Z2", specs: ["256 GB", "8 GB RAM"], precio: 550000 },
-  { id: "tcl605", tienda: "cel", marca: "TCL", nombre: "TCL 605", specs: ["128 GB", "8 + 4 GB RAM"], precio: 460000 },
-  { id: "alc1041", tienda: "cel", marca: "Alcatel", nombre: "Alcatel 1041 4G", specs: ["4G LTE", "Celular básico"], precio: 120000, ilustracion: "basico" },
+  { id: "rmc100", tienda: "cel", marca: "Realme", nombre: "Realme C100", specs: ["256 GB", "8 GB RAM"], precio: 1050000, imagen: "fotos/rmc100.jpg" },
+  { id: "kblackz2", tienda: "cel", marca: "Kalley", nombre: "Kalley Black Z2", specs: ["256 GB", "8 GB RAM"], precio: 550000, imagen: "fotos/kblackz2.jpg" },
+  { id: "tcl605", tienda: "cel", marca: "TCL", nombre: "TCL 605", specs: ["128 GB", "8 + 4 GB RAM"], precio: 460000, imagen: "fotos/tcl605.jpg" },
+  { id: "alc1041", tienda: "cel", marca: "Alcatel", nombre: "Alcatel 1041 4G", specs: ["4G LTE", "Celular básico"], precio: 120000, ilustracion: "basico", imagen: "fotos/alc1041.jpg" },
   { id: "flyfy200", tienda: "cel", marca: "Fly", nombre: "Fly FY200 4G", specs: ["4G", "Celular básico"], precio: 85000, ilustracion: "basico" },
   { id: "corngt22", tienda: "cel", marca: "Corn", nombre: "Corn GT 22", specs: ["Celular básico"], precio: 65000, ilustracion: "basico" },
   { id: "corngt32", tienda: "cel", marca: "Corn", nombre: "Corn GT 32", specs: ["Celular básico"], precio: 65000, ilustracion: "basico" },
@@ -2108,47 +2135,47 @@ const PRODUCTOS = [
 
   /* ---------- Computadores (lista del proveedor) ---------- */
   { id: "p51283", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 5 5600GT", specs: ["16GB DDR4 RGB", "SSD NVMe 512GB", "Board B550M WiFi", "Fuente 650W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (1 ms-144 Hz)", "Teclado y mouse EVC MK102R", "Caja Cougar Airface Pure"], precio: 2800000, imagen: "fotos/p51283.jpg" },
-  { id: "p51293", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 5 8500G", specs: ["16GB DDR5", "SSD NVMe 500GB", "Board B840M", "Fuente 750W 80 Plus Bronze", "Monitor LG 24″ IPS FHD (1 ms-120 Hz)", "Teclado y mouse X-Trike", "Caja Compumax Halcon Series Prisma"], precio: 2900000 },
-  { id: "p51287", tienda: "pc", categoria: "escritorio", nombre: "PC Core i5 12400", specs: ["16GB DDR4", "SSD NVMe 512GB", "Board B760M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Disipador A400C ARGB", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 3150000 },
-  { id: "p51254", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 7 5700G", specs: ["16GB DDR4 RGB", "SSD NVMe 512GB", "Board A520M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 24\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-X18"], precio: 3200000 },
-  { id: "p51261", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 7 5700G", specs: ["16GB DDR4 RGB", "SSD NVMe 512GB", "Board B550 WiFi", "Fuente 650W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (0,5 ms-200 Hz)", "Teclado y mouse EVC MK102R", "Caja Cougar Airface"], precio: 3250000 },
-  { id: "p51288", tienda: "pc", categoria: "escritorio", nombre: "PC Core i5 14400", specs: ["16GB DDR4", "SSD NVMe 512GB", "Board B760M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Disipador A400C ARGB", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 3350000 },
+  { id: "p51293", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 5 8500G", specs: ["16GB DDR5", "SSD NVMe 500GB", "Board B840M", "Fuente 750W 80 Plus Bronze", "Monitor LG 24″ IPS FHD (1 ms-120 Hz)", "Teclado y mouse X-Trike", "Caja Compumax Halcon Series Prisma"], precio: 2900000, imagen: "fotos/p51293.jpg" },
+  { id: "p51287", tienda: "pc", categoria: "escritorio", nombre: "PC Core i5 12400", specs: ["16GB DDR4", "SSD NVMe 512GB", "Board B760M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Disipador A400C ARGB", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 3150000, imagen: "fotos/p51287.jpg" },
+  { id: "p51254", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 7 5700G", specs: ["16GB DDR4 RGB", "SSD NVMe 512GB", "Board A520M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 24\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-X18"], precio: 3200000, imagen: "fotos/p51254.jpg" },
+  { id: "p51261", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 7 5700G", specs: ["16GB DDR4 RGB", "SSD NVMe 512GB", "Board B550 WiFi", "Fuente 650W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (0,5 ms-200 Hz)", "Teclado y mouse EVC MK102R", "Caja Cougar Airface"], precio: 3250000, imagen: "fotos/p51261.jpg" },
+  { id: "p51288", tienda: "pc", categoria: "escritorio", nombre: "PC Core i5 14400", specs: ["16GB DDR4", "SSD NVMe 512GB", "Board B760M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Disipador A400C ARGB", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 3350000, imagen: "fotos/p51288.jpg" },
   { id: "p51268", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 5 8600G", specs: ["16GB DDR5", "SSD NVMe 512GB", "Board B650EM-A WiFi", "Fuente 650W 80 Plus Bronze", "Monitor Gigabyte 24\" SS IPS FHD (1 ms-144 Hz)", "Teclado y mouse EVC MK102R", "Caja Cougar MX110"], precio: 3450000, imagen: "fotos/p51268.jpg" },
   { id: "p51291", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 5 8600G", specs: ["16GB DDR5", "SSD NVMe 512GB", "Board B840M WiFi", "Fuente 750W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (1 ms-144 Hz)", "Teclado y mouse EVC MK102R", "Caja Cougar FV150"], precio: 3550000, imagen: "fotos/p51291.jpg" },
   { id: "p51292", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 7 8700G", specs: ["16GB DDR5", "SSD NVMe 500GB", "Board B840M WiFi", "Fuente 650W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (1 ms-144 Hz)", "Teclado y mouse EVC MK102R", "Caja Cougar Airface Pure"], precio: 3650000, imagen: "fotos/p51292.jpg" },
-  { id: "p51266", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 5 9600X", specs: ["16GB DDR5 RGB", "SSD NVMe 512GB", "Board B650M WiFi", "Fuente 750W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (1 ms-144 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-L48"], precio: 3750000 },
+  { id: "p51266", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 5 9600X", specs: ["16GB DDR5 RGB", "SSD NVMe 512GB", "Board B650M WiFi", "Fuente 750W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (1 ms-144 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-L48"], precio: 3750000, imagen: "fotos/p51266.jpg" },
   { id: "p51265", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 5 9600X", specs: ["16GB DDR5", "SSD NVMe 512GB", "Board B650EM-A", "Fuente 750W", "Monitor Gigabyte 24.5\" SS IPS FHD (1 ms-144 Hz)", "Disipador AA13", "Teclado y mouse EVC MK102R", "Caja Cougar FV150"], precio: 4200000, imagen: "fotos/p51265.jpg" },
-  { id: "p51286", tienda: "pc", categoria: "escritorio", nombre: "PC Core i7 14700", specs: ["16GB DDR4", "SSD NVMe 512GB", "Board B760M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Disipador A400C ARGB", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 4300000 },
+  { id: "p51286", tienda: "pc", categoria: "escritorio", nombre: "PC Core i7 14700", specs: ["16GB DDR4", "SSD NVMe 512GB", "Board B760M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Disipador A400C ARGB", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 4300000, imagen: "fotos/p51286.jpg" },
   { id: "p51285", tienda: "pc", categoria: "escritorio", nombre: "PC Core i7 14700", specs: ["16GB DDR5", "SSD NVMe 512GB", "Board B760GP WiFi", "Fuente 750W 80 Plus Bronze", "Monitor Gigabyte 24\" SS IPS FHD (1 ms-144 Hz)", "Teclado y mouse EVC MK102R", "Caja Cougar Airface Pure"], precio: 4450000, imagen: "fotos/p51285.jpg" },
   { id: "p51282", tienda: "pc", categoria: "escritorio", nombre: "PC Ryzen 7 9700X", specs: ["16GB DDR5", "SSD NVMe 512GB", "Board B650EM WiFi", "Fuente 650W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (1 ms-144 Hz)", "Disipador AA13", "Teclado y mouse EVC MK102R", "Caja Cougar Airface Pure"], precio: 4550000, imagen: "fotos/p51282.jpg" },
-  { id: "p51281", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 5 5600XT + RTX 3050", specs: ["16GB DDR4", "SSD NVMe 512GB", "RTX 3050 6GB", "Board B550 WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 4200000 },
-  { id: "p51280", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 5 5600XT + RTX 5050", specs: ["16GB DDR4", "SSD NVMe 512GB", "RTX 5050 8GB", "Board B550 WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 4650000 },
+  { id: "p51281", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 5 5600XT + RTX 3050", specs: ["16GB DDR4", "SSD NVMe 512GB", "RTX 3050 6GB", "Board B550 WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 4200000, imagen: "fotos/p51281.jpg" },
+  { id: "p51280", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 5 5600XT + RTX 5050", specs: ["16GB DDR4", "SSD NVMe 512GB", "RTX 5050 8GB", "Board B550 WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 4650000, imagen: "fotos/p51280.jpg" },
   { id: "p51269", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 5700X + RTX 5050", specs: ["16GB DDR4", "SSD NVMe 512GB", "RTX 5050 8GB", "Board B550M WiFi", "Fuente 750W", "Monitor Gigabyte 24\"IPS FHD (1 ms-144 Hz)", "Teclado y mouse EVC MK102R", "Caja Cougar Airface Pure"], precio: 4750000, imagen: "fotos/p51269.jpg" },
-  { id: "p51250", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 8700F + RTX 3050", specs: ["16GB DDR5 RGB", "SSD NVMe 512GB", "RTX 3050 6GB", "Board B650M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 24\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CLW82"], precio: 4800000 },
-  { id: "p51270", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 5700X + RTX 5050", specs: ["16GB DDR4 RGB", "SSD NVMe 512GB", "RTX 5050 8GB", "Board B550M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 4850000 },
+  { id: "p51250", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 8700F + RTX 3050", specs: ["16GB DDR5 RGB", "SSD NVMe 512GB", "RTX 3050 6GB", "Board B650M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 24\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CLW82"], precio: 4800000, imagen: "fotos/p51250.jpg" },
+  { id: "p51270", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 5700X + RTX 5050", specs: ["16GB DDR4 RGB", "SSD NVMe 512GB", "RTX 5050 8GB", "Board B550M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 4850000, imagen: "fotos/p51270.jpg" },
   { id: "p51272", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 5 5600XT + RTX 5060", specs: ["16GB RGB", "SSD NVMe 512GB", "RTX 5060 8GB", "Board B550M WiFi", "Fuente 650W", "Monitor Gigabyte 24\" SS IPS FHD (1 ms-144 Hz)", "Teclado y mouse EVC MK102R", "Caja Cougar MX110"], precio: 4950000, imagen: "fotos/p51272.jpg" },
   { id: "p51294", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 5 5600X + RTX 5060", specs: ["16GB DDR4", "SSD NVMe 500GB", "RTX 5060 8GB", "Board B550M WiFi", "Monitor Gigabyte 24.5\" SS IPS FHD (1 ms-144 Hz)", "Teclado y mouse EVC GMK301", "Caja Cougar FV150"], precio: 5050000, imagen: "fotos/p51294.jpg" },
-  { id: "p51289", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 5 5600XT + RTX 5060", specs: ["16GB DDR4", "SSD NVMe 1TB", "RTX 5060 8GB", "Board B550M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 5050000 },
+  { id: "p51289", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 5 5600XT + RTX 5060", specs: ["16GB DDR4", "SSD NVMe 1TB", "RTX 5060 8GB", "Board B550M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 27\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 5050000, imagen: "fotos/p51289.jpg" },
   { id: "p51252", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 5700X + RTX 5060", specs: ["16GB", "SSD NVMe 480GB", "RTX 5060 8GB", "Board B550M WiFi", "Fuente 650W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (1 ms-144 Hz)", "Teclado y mouse EVC MK102R", "Caja Cougar MX110"], precio: 5200000, imagen: "fotos/p51252.jpg" },
-  { id: "p51274", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 8700F + RTX 5050", specs: ["16GB DDR5", "SSD NVMe 512GB", "RTX 5050 8GB", "Board B650M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 24\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 5200000 },
+  { id: "p51274", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 8700F + RTX 5050", specs: ["16GB DDR5", "SSD NVMe 512GB", "RTX 5050 8GB", "Board B650M WiFi", "Fuente 600W 80 Plus Bronze", "Monitor ASUS 24\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse 801 RGB", "Caja Power CL-W78"], precio: 5200000, imagen: "fotos/p51274.jpg" },
   { id: "p51279", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 5700X + RTX 5060", specs: ["16GB", "SSD NVMe 512GB", "RTX 5060 8GB", "Board B550M", "Fuente 750W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (1 ms-144 Hz)", "Teclado y mouse Force GK100 RGB", "Caja MSI PAG Pano M110A"], precio: 5250000, imagen: "fotos/p51279.jpg" },
-  { id: "p51290", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 8700F + RTX 5060", specs: ["16GB DDR5", "SSD NVMe 512GB", "RTX 5060 8GB", "Board B650M-F", "Fuente 750W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (1 ms-144 Hz)", "Teclado y mouse KM-170", "Caja Power CL-W28"], precio: 5500000 },
-  { id: "p51284", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 8700F + RTX 5060", specs: ["16GB DDR5", "SSD NVMe 512GB", "RTX 5060 8GB", "Board B650M-F", "Fuente 750W 80 Plus Bronze", "Monitor ASUS 24\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse Genius KM-170", "Caja Power CL-W28"], precio: 5500000 },
-  { id: "p52404", tienda: "pc", categoria: "portatiles", marca: "ASUS", nombre: "Portátil ASUS Vivobook X1504VA-BQ4419", specs: ["Core 3 100U", "16GB DDR5", "SSD NVMe 512GB", "Pantalla 15,6\" FHD Terra Cotta"], precio: 2200000 },
-  { id: "p52383", tienda: "pc", categoria: "portatiles", marca: "ASUS", nombre: "Portátil ASUS X1504VA-BQ4555", specs: ["Core 5 1334U", "12GB DDR5", "SSD NVMe 512GB", "Pantalla 15,6\" FHD Huella", "Incluye morral", "Incluye mouse"], precio: 2550000 },
-  { id: "p52401", tienda: "pc", categoria: "portatiles", marca: "ASUS", nombre: "Portátil ASUS Vivobook X1504VA-BQ5561", specs: ["Core 5 120U", "16GB", "SSD NVMe 512GB", "Pantalla 15,6\" FHD Huella Azul"], precio: 2550000 },
-  { id: "p52351", tienda: "pc", categoria: "portatiles", marca: "ASUS", nombre: "Portátil ASUS Vivobook M3607HA-RP111", specs: ["Ryzen 9 270", "16GB DDR5", "SSD NVMe 512GB", "Pantalla 16\" WAXGA"], precio: 3400000 },
-  { id: "p52402", tienda: "pc", categoria: "portatiles", marca: "ASUS", nombre: "Portátil ASUS Zenbook UX3405CA-QL059W", specs: ["Core Ultra 9 285H", "16GB DDR5", "SSD NVMe 1TB", "Pantalla 14\" OLED WUXGA", "Windows 11 Home"], precio: 6150000 },
+  { id: "p51290", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 8700F + RTX 5060", specs: ["16GB DDR5", "SSD NVMe 512GB", "RTX 5060 8GB", "Board B650M-F", "Fuente 750W 80 Plus Bronze", "Monitor MSI 24\" IPS FHD (1 ms-144 Hz)", "Teclado y mouse KM-170", "Caja Power CL-W28"], precio: 5500000, imagen: "fotos/p51290.jpg" },
+  { id: "p51284", tienda: "pc", categoria: "escritorio-gamer", nombre: "PC Ryzen 7 8700F + RTX 5060", specs: ["16GB DDR5", "SSD NVMe 512GB", "RTX 5060 8GB", "Board B650M-F", "Fuente 750W 80 Plus Bronze", "Monitor ASUS 24\" IPS FHD (1 ms-146 Hz)", "Teclado y mouse Genius KM-170", "Caja Power CL-W28"], precio: 5500000, imagen: "fotos/p51284.jpg" },
+  { id: "p52404", tienda: "pc", categoria: "portatiles", marca: "ASUS", nombre: "Portátil ASUS Vivobook X1504VA-BQ4419", specs: ["Core 3 100U", "16GB DDR5", "SSD NVMe 512GB", "Pantalla 15,6\" FHD Terra Cotta"], precio: 2200000, imagen: "fotos/p52404.jpg" },
+  { id: "p52383", tienda: "pc", categoria: "portatiles", marca: "ASUS", nombre: "Portátil ASUS X1504VA-BQ4555", specs: ["Core 5 1334U", "12GB DDR5", "SSD NVMe 512GB", "Pantalla 15,6\" FHD Huella", "Incluye morral", "Incluye mouse"], precio: 2550000, imagen: "fotos/p52383.jpg" },
+  { id: "p52401", tienda: "pc", categoria: "portatiles", marca: "ASUS", nombre: "Portátil ASUS Vivobook X1504VA-BQ5561", specs: ["Core 5 120U", "16GB", "SSD NVMe 512GB", "Pantalla 15,6\" FHD Huella Azul"], precio: 2550000, imagen: "fotos/p52401.jpg" },
+  { id: "p52351", tienda: "pc", categoria: "portatiles", marca: "ASUS", nombre: "Portátil ASUS Vivobook M3607HA-RP111", specs: ["Ryzen 9 270", "16GB DDR5", "SSD NVMe 512GB", "Pantalla 16\" WAXGA"], precio: 3400000, imagen: "fotos/p52351.jpg" },
+  { id: "p52402", tienda: "pc", categoria: "portatiles", marca: "ASUS", nombre: "Portátil ASUS Zenbook UX3405CA-QL059W", specs: ["Core Ultra 9 285H", "16GB DDR5", "SSD NVMe 1TB", "Pantalla 14\" OLED WUXGA", "Windows 11 Home"], precio: 6150000, imagen: "fotos/p52402.jpg" },
   { id: "p52264", tienda: "pc", categoria: "portatiles", marca: "Lenovo", nombre: "Portátil Lenovo V14 G4 AMN", specs: ["Ryzen 5 7520U", "16GB DDR5", "SSD NVMe 512GB", "Pantalla 14\" FHD Gris"], precio: 2200000, imagen: "fotos/p52264.jpg" },
   { id: "p52395", tienda: "pc", categoria: "portatiles", marca: "Lenovo", nombre: "Portátil Lenovo IdeaPad Slim 3 15AMN8", specs: ["Ryzen 5 7520U", "16GB DDR5", "SSD NVMe 512GB", "Pantalla 15,6\" Azul"], precio: 2300000, imagen: "fotos/p52395.jpg" },
   { id: "p52390", tienda: "pc", categoria: "portatiles", marca: "Lenovo", nombre: "Portátil Lenovo V15 G5 IRL", specs: ["Core i5 13420H", "16GB", "SSD NVMe 512GB", "Pantalla 15,6\" FHD Gris"], precio: 2400000, imagen: "fotos/p52390.jpg" },
   { id: "p52398", tienda: "pc", categoria: "portatiles-gamer", marca: "ASUS", nombre: "Portátil ASUS TUF Gaming A15 FA506NCG-HN204", specs: ["Ryzen 7 7445HS", "16GB DDR5", "SSD NVMe 512GB", "RTX 3050 4GB", "Pantalla 15,6\" FHD Gris"], precio: 3500000, imagen: "fotos/p52398.jpg" },
   { id: "p52396", tienda: "pc", categoria: "portatiles-gamer", marca: "ASUS", nombre: "Portátil ASUS TUF Gaming A16 FA608UH-RV01", specs: ["Ryzen 7 260", "16GB DDR5", "SSD NVMe 1TB", "RTX 5050 8GB", "Pantalla 16\" WUXGA Gris"], precio: 6000000, imagen: "fotos/p52396.jpg" },
-  { id: "p52397", tienda: "pc", categoria: "portatiles-gamer", marca: "ASUS", nombre: "Portátil ASUS Gaming V3607VH-RP010", specs: ["Core 7 240H", "16GB DDR5", "SSD NVMe 1TB", "RTX 5050 8GB", "Pantalla 16\" WUXGA Negro"], precio: 6000000 },
-  { id: "p52384", tienda: "pc", categoria: "portatiles-gamer", marca: "ASUS", nombre: "Portátil ASUS Gaming V3607VM-RP011", specs: ["Core 7 240H", "16GB DDR5", "SSD NVMe 1TB", "RTX 5060 8GB", "Pantalla 16\" WUXGA Negro Mate"], precio: 6900000 },
+  { id: "p52397", tienda: "pc", categoria: "portatiles-gamer", marca: "ASUS", nombre: "Portátil ASUS Gaming V3607VH-RP010", specs: ["Core 7 240H", "16GB DDR5", "SSD NVMe 1TB", "RTX 5050 8GB", "Pantalla 16\" WUXGA Negro"], precio: 6000000, imagen: "fotos/p52397.jpg" },
+  { id: "p52384", tienda: "pc", categoria: "portatiles-gamer", marca: "ASUS", nombre: "Portátil ASUS Gaming V3607VM-RP011", specs: ["Core 7 240H", "16GB DDR5", "SSD NVMe 1TB", "RTX 5060 8GB", "Pantalla 16\" WUXGA Negro Mate"], precio: 6900000, imagen: "fotos/p52384.jpg" },
   { id: "p52399", tienda: "pc", categoria: "portatiles-gamer", marca: "ASUS", nombre: "Portátil ASUS TUF Gaming A16 FA608PM-TU134", specs: ["Ryzen 9 8940HX", "16GB DDR5", "SSD NVMe 512GB", "RTX 5060 8GB", "Pantalla 16\" WUXGA Gris"], precio: 7250000, imagen: "fotos/p52399.jpg" },
-  { id: "p52403", tienda: "pc", categoria: "portatiles-gamer", marca: "ASUS", nombre: "Portátil ASUS V3607VP-TK079", specs: ["Core 7 240H", "16GB DDR5", "SSD NVMe 1TB", "RTX 5070 8GB", "Pantalla 16\" WUXGA Negro"], precio: 8900000 },
-  { id: "p52400", tienda: "pc", categoria: "portatiles-gamer", marca: "ASUS", nombre: "Portátil ASUS ROG Zephyrus Duo 16 GX651AX-SR134W", specs: ["Core Ultra 386H", "64GB DDR5", "SSD NVMe 2TB", "RTX 5090 24GB", "Pantalla 16\" OLED 3K", "Windows 11 Home"], precio: 31400000 },
+  { id: "p52403", tienda: "pc", categoria: "portatiles-gamer", marca: "ASUS", nombre: "Portátil ASUS V3607VP-TK079", specs: ["Core 7 240H", "16GB DDR5", "SSD NVMe 1TB", "RTX 5070 8GB", "Pantalla 16\" WUXGA Negro"], precio: 8900000, imagen: "fotos/p52403.jpg" },
+  { id: "p52400", tienda: "pc", categoria: "portatiles-gamer", marca: "ASUS", nombre: "Portátil ASUS ROG Zephyrus Duo 16 GX651AX-SR134W", specs: ["Core Ultra 386H", "64GB DDR5", "SSD NVMe 2TB", "RTX 5090 24GB", "Pantalla 16\" OLED 3K", "Windows 11 Home"], precio: 31400000, imagen: "fotos/p52400.jpg" },
   { id: "pporttilgig", tienda: "pc", categoria: "portatiles-gamer", marca: "Gigabyte", nombre: "Portátil Gigabyte A16", specs: ["Core i7 13620H", "16GB DDR5", "SSD NVMe 1TB", "RTX 5070 8GB", "Pantalla 16\" WUXGA FHD 165 Hz RGB", "Windows 11 Home"], precio: 8650000, nota: "Sobre pedido", imagen: "fotos/pporttilgig.jpg" },
   { id: "p52387", tienda: "pc", categoria: "portatiles-gamer", marca: "Lenovo", nombre: "Portátil Lenovo LOQ 15IRX9", specs: ["Core i7 13645HX", "16GB DDR5", "SSD NVMe 512GB", "RTX 4050 6GB", "Pantalla 15,6\" IPS FHD 144 Hz Gris"], precio: 5150000, imagen: "fotos/p52387.jpg" },
   { id: "p52367", tienda: "pc", categoria: "portatiles-gamer", marca: "Lenovo", nombre: "Portátil Lenovo Legion 5 15AHP10", specs: ["Ryzen 7 260", "16GB DDR5", "SSD NVMe 1TB", "RTX 5060 8GB", "Pantalla 15,1\" WQXGA OLED Negro"], precio: 6850000, imagen: "fotos/p52367.jpg" },
@@ -2158,10 +2185,10 @@ const PRODUCTOS = [
   { id: "p52394", tienda: "pc", categoria: "portatiles-gamer", marca: "MSI", nombre: "Portátil MSI Katana 15 HX B14WFK-1037XCO", specs: ["Core i7 14650HX", "16GB DDR5", "SSD NVMe 512GB", "RTX 5060 8GB", "Pantalla 15,6\" 2K QHD 165 Hz", "Incluye morral", "Garantía de 2 años"], precio: 7050000, imagen: "fotos/p52394.jpg" },
 
   /* ---------- Componentes ---------- */
-  { id: "p2110", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 5 5500", specs: ["Socket AM4", "6 núcleos", "4,2 GHz", "Sin gráficos integrados"], precio: 580000 },
-  { id: "p2095", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 5 5600GT", specs: ["Socket AM4", "6 núcleos", "3,6 GHz"], precio: 920000 },
-  { id: "p2073", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 5700X", specs: ["Socket AM4", "8 núcleos", "3,4 GHz", "Sin disipador"], precio: 1150000 },
-  { id: "p2069", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 5700G", specs: ["Socket AM4", "8 núcleos", "3,8 GHz"], precio: 1150000 },
+  { id: "p2110", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 5 5500", specs: ["Socket AM4", "6 núcleos", "4,2 GHz", "Sin gráficos integrados"], precio: 580000, imagen: "fotos/p2110.jpg" },
+  { id: "p2095", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 5 5600GT", specs: ["Socket AM4", "6 núcleos", "3,6 GHz"], precio: 920000, imagen: "fotos/p2095.jpg" },
+  { id: "p2073", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 5700X", specs: ["Socket AM4", "8 núcleos", "3,4 GHz", "Sin disipador"], precio: 1150000, imagen: "fotos/p2073.jpg" },
+  { id: "p2069", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 5700G", specs: ["Socket AM4", "8 núcleos", "3,8 GHz"], precio: 1150000, imagen: "fotos/p2069.jpg" },
   { id: "p2083", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 5800X3D", specs: ["Socket AM4", "8 núcleos", "3,4 GHz", "Sin disipador"], precio: 1850000, imagen: "fotos/p2083.jpg" },
   { id: "p2079", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 5 7600X", specs: ["Socket AM5", "6 núcleos", "4,7 GHz", "Sin disipador"], precio: 1000000, imagen: "fotos/p2079.jpg" },
   { id: "p2109", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 5 7600X3D", specs: ["Socket AM5", "6 núcleos", "4,7 GHz", "Sin disipador"], precio: 1300000, imagen: "fotos/p2109.jpg" },
@@ -2171,11 +2198,11 @@ const PRODUCTOS = [
   { id: "p2094", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 5 8500G", specs: ["Socket AM5", "6 núcleos", "3,5 GHz"], precio: 850000, imagen: "fotos/p2094.jpg" },
   { id: "p2092", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 5 8600G", specs: ["Socket AM5", "6 núcleos", "4,3 GHz"], precio: 1100000, imagen: "fotos/p2092.jpg" },
   { id: "p2093", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 8700G", specs: ["Socket AM5", "8 núcleos", "4,2 GHz"], precio: 1350000, imagen: "fotos/p2093.jpg" },
-  { id: "p2104", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 8700F", specs: ["Socket AM5", "8 núcleos", "4,1 GHz", "Sin gráficos integrados"], precio: 1400000 },
+  { id: "p2104", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 8700F", specs: ["Socket AM5", "8 núcleos", "4,1 GHz", "Sin gráficos integrados"], precio: 1400000, imagen: "fotos/p2104.jpg" },
   { id: "p2096", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 5 9600X", specs: ["Socket AM5", "6 núcleos", "5,4 GHz", "Sin disipador"], precio: 1300000, imagen: "fotos/p2096.jpg" },
   { id: "p2097", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 9700X", specs: ["Socket AM5", "8 núcleos", "5,5 GHz", "Sin disipador"], precio: 1700000, imagen: "fotos/p2097.jpg" },
-  { id: "p2101", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 9800X3D", specs: ["Socket AM5", "8 núcleos", "5,2 GHz", "Sin disipador"], precio: 2500000 },
-  { id: "p2107", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 9850X3D", specs: ["Socket AM5", "8 núcleos", "4,7 GHz", "Sin disipador"], precio: 2650000 },
+  { id: "p2101", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 9800X3D", specs: ["Socket AM5", "8 núcleos", "5,2 GHz", "Sin disipador"], precio: 2500000, imagen: "fotos/p2101.jpg" },
+  { id: "p2107", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 7 9850X3D", specs: ["Socket AM5", "8 núcleos", "4,7 GHz", "Sin disipador"], precio: 2650000, imagen: "fotos/p2107.jpg" },
   { id: "p2103", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 9 9900X3D", specs: ["Socket AM5", "12 núcleos", "5,5 GHz", "Sin disipador"], precio: 3350000 },
   { id: "p2100", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 9 9950X", specs: ["Socket AM5", "16 núcleos", "5,7 GHz", "Sin disipador"], precio: 3050000, imagen: "fotos/p2100.jpg" },
   { id: "p2102", tienda: "comp", categoria: "procesadores", marca: "AMD", nombre: "AMD Ryzen 9 9950X3D", specs: ["Socket AM5", "16 núcleos", "5,7 GHz", "Sin disipador"], precio: 3400000 },
@@ -2194,7 +2221,7 @@ const PRODUCTOS = [
   { id: "p34313", tienda: "comp", categoria: "madre", marca: "ASUS", nombre: "ASUS Prime B840M-A", specs: ["Socket AM5", "4 ranuras DDR5", "PCIe 4.0", "Micro-ATX"], precio: 850000, imagen: "fotos/p34313.jpg" },
   { id: "p34288", tienda: "comp", categoria: "madre", marca: "ASUS", nombre: "ASUS Prime B840M-A WiFi", specs: ["Socket AM5", "4 ranuras DDR5", "PCIe 5.0", "Micro-ATX"], precio: 870000, imagen: "fotos/p34288.jpg" },
   { id: "p34291", tienda: "comp", categoria: "madre", marca: "ASUS", nombre: "ASUS B840-Plus WiFi", specs: ["Socket AM5", "4 ranuras DDR5", "PCIe 4.0", "ATX"], precio: 1050000, imagen: "fotos/p34291.jpg" },
-  { id: "p34319", tienda: "comp", categoria: "madre", marca: "ASUS", nombre: "ASUS Prime B850M-K", specs: ["Socket AM5", "2 ranuras DDR5", "PCIe 5.0", "Micro-ATX"], precio: 860000 },
+  { id: "p34319", tienda: "comp", categoria: "madre", marca: "ASUS", nombre: "ASUS Prime B850M-K", specs: ["Socket AM5", "2 ranuras DDR5", "PCIe 5.0", "Micro-ATX"], precio: 860000, imagen: "fotos/p34319.jpg" },
   { id: "p34318", tienda: "comp", categoria: "madre", marca: "ASUS", nombre: "ASUS B850M-AYW WiFi", specs: ["Socket AM5", "2 ranuras DDR5", "PCIe 5.0", "Micro-ATX"], precio: 880000, imagen: "fotos/p34318.jpg" },
   { id: "p34320", tienda: "comp", categoria: "madre", marca: "ASUS", nombre: "ASUS Prime B850M-A", specs: ["Socket AM5", "4 ranuras DDR5", "PCIe 5.0", "Micro-ATX"], precio: 910000, imagen: "fotos/p34320.jpg" },
   { id: "p34307", tienda: "comp", categoria: "madre", marca: "ASUS", nombre: "ASUS ROG Strix B850-A Gaming WiFi", specs: ["Socket AM5", "4 ranuras DDR5", "ATX"], precio: 1700000, imagen: "fotos/p34307.jpg" },
@@ -2294,11 +2321,11 @@ const PRODUCTOS = [
   { id: "p14279", tienda: "comp", categoria: "fuentes", marca: "Antec", nombre: "Fuente Antec Mega 850W PCIE 5.1 80 Plus Gold Full Modular", precio: 550000 },
   { id: "p14280", tienda: "comp", categoria: "fuentes", marca: "Antec", nombre: "Fuente Antec Mega 1000W PCIE 5.1 80 Plus Gold Full Modular", precio: 620000 },
   { id: "p14262", tienda: "comp", categoria: "fuentes", marca: "Antec", nombre: "Fuente Antec NE1000G M NeoECO 80 Plus Gold Full Modular", precio: 780000, imagen: "fotos/p14262.jpg" },
-  { id: "p14263", tienda: "comp", categoria: "fuentes", marca: "Antec", nombre: "Fuente Antec NE1300G M NeoECO 80 Plus Gold Full Modular", precio: 1150000 },
+  { id: "p14263", tienda: "comp", categoria: "fuentes", marca: "Antec", nombre: "Fuente Antec NE1300G M NeoECO 80 Plus Gold Full Modular", precio: 1150000, imagen: "fotos/p14263.jpg" },
   { id: "p14264", tienda: "comp", categoria: "fuentes", marca: "Antec", nombre: "Fuente Antec HCG Pro 1000W 80 Plus Platinum", precio: 1000000 },
   { id: "p14265", tienda: "comp", categoria: "fuentes", marca: "Antec", nombre: "Fuente Antec HCG Pro 1200W 80 Plus Platinum", precio: 1250000 },
-  { id: "p14275", tienda: "comp", categoria: "fuentes", marca: "ASUS", nombre: "Fuente ASUS Prime 650W Plus Bronze", precio: 410000 },
-  { id: "p14274", tienda: "comp", categoria: "fuentes", marca: "ASUS", nombre: "Fuente ASUS Prime 750W Plus Bronze", etiqueta: "Color", opciones: [["Estándar", 450000], ["Blanca", 530000]] },
+  { id: "p14275", tienda: "comp", categoria: "fuentes", marca: "ASUS", nombre: "Fuente ASUS Prime 650W Plus Bronze", precio: 410000, imagen: "fotos/p14275.jpg" },
+  { id: "p14274", tienda: "comp", categoria: "fuentes", marca: "ASUS", nombre: "Fuente ASUS Prime 750W Plus Bronze", etiqueta: "Color", opciones: [["Estándar", 450000], ["Blanca", 530000]], imagen: "fotos/p14274.jpg" },
   { id: "p14245", tienda: "comp", categoria: "fuentes", marca: "Corsair", nombre: "Fuente Corsair 650W 80 Plus CX650 Bronze", precio: 280000, imagen: "fotos/p14245.jpg" },
   { id: "p14241", tienda: "comp", categoria: "fuentes", marca: "Corsair", nombre: "Fuente Corsair 750W CX750 80 Plus Bronze", precio: 330000, imagen: "fotos/p14241.jpg" },
   { id: "p14247", tienda: "comp", categoria: "fuentes", marca: "Corsair", nombre: "Fuente Corsair 850W RM850E 80 Plus Gold PCI 5.1 Modular", precio: 570000, imagen: "fotos/p14247.jpg" },
@@ -2306,41 +2333,41 @@ const PRODUCTOS = [
   { id: "p14278", tienda: "comp", categoria: "fuentes", marca: "Corsair", nombre: "Fuente Corsair RM1200E 80 Plus Gold Full Modular", precio: 1000000, imagen: "fotos/p14278.jpg" },
   { id: "p14266", tienda: "comp", categoria: "fuentes", marca: "Corsair", nombre: "Fuente Corsair HX1500I 80 Plus Platinum PCI 5.1 Modular", precio: 1600000, imagen: "fotos/p14266.jpg" },
   { id: "p14202", tienda: "comp", categoria: "fuentes", marca: "Cougar", nombre: "Fuente Cougar Atlas 650W 80 Plus Bronze", precio: 250000, imagen: "fotos/p14202.jpg" },
-  { id: "p14239", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 600W Probe 80 Plus Bronze", precio: 230000 },
-  { id: "p14240", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 700W Probe 80 Plus Bronze", precio: 280000 },
-  { id: "p14268", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 750W Pylon II 80 Plus Bronze", precio: 310000 },
-  { id: "p14281", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 850W Kyber II 80 Plus Gold", precio: 440000 },
-  { id: "p14252", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 850W Core Reactor II 80 Plus Gold", precio: 520000 },
-  { id: "p14254", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 1000W Core Reactor II 80 Plus Gold Modular", precio: 730000 },
-  { id: "p14271", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 1200W Core Reactor II 80 Plus Gold", precio: 870000 },
-  { id: "p14206", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 1600W Fusion 80 Plus Titanium", precio: 2300000 },
+  { id: "p14239", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 600W Probe 80 Plus Bronze", precio: 230000, imagen: "fotos/p14239.jpg" },
+  { id: "p14240", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 700W Probe 80 Plus Bronze", precio: 280000, imagen: "fotos/p14240.jpg" },
+  { id: "p14268", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 750W Pylon II 80 Plus Bronze", precio: 310000, imagen: "fotos/p14268.jpg" },
+  { id: "p14281", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 850W Kyber II 80 Plus Gold", precio: 440000, imagen: "fotos/p14281.jpg" },
+  { id: "p14252", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 850W Core Reactor II 80 Plus Gold", precio: 520000, imagen: "fotos/p14252.jpg" },
+  { id: "p14254", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 1000W Core Reactor II 80 Plus Gold Modular", precio: 730000, imagen: "fotos/p14254.jpg" },
+  { id: "p14271", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 1200W Core Reactor II 80 Plus Gold", precio: 870000, imagen: "fotos/p14271.jpg" },
+  { id: "p14206", tienda: "comp", categoria: "fuentes", marca: "XPG", nombre: "Fuente XPG 1600W Fusion 80 Plus Titanium", precio: 2300000, imagen: "fotos/p14206.jpg" },
   { id: "p16576", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec AX20 Extreme Vidrio Templado + 5 RGB Fijo", precio: 240000, imagen: "fotos/p16576.jpg" },
-  { id: "p16614", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec AX27 Elite Vidrio Templado + 4 RGB Fijo", precio: 240000 },
+  { id: "p16614", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec AX27 Elite Vidrio Templado + 4 RGB Fijo", precio: 240000, imagen: "fotos/p16614.jpg" },
   { id: "p16611", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec VCX100M Elite Vidrio Templado + 5 RGB Fijo", precio: 250000 },
   { id: "p16635", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec VCX100M Vidrio Templado + 5 ARGB", precio: 260000 },
   { id: "p16577", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec AX65 Vidrio Templado + 4 ARGB", precio: 280000, imagen: "fotos/p16577.jpg" },
   { id: "p16607", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec AX67 Vidrio Templado + 4 ARGB", precio: 280000, imagen: "fotos/p16607.jpg" },
   { id: "p16480", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec AX61 Elite Vidrio Templado + 4 Fan ARGB", precio: 290000, imagen: "fotos/p16480.jpg" },
-  { id: "p16513", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX200M Elite Vidrio Templado + 5 RGB Fijo", etiqueta: "Color", opciones: [["Negro", 310000], ["Blanco", 320000]] },
+  { id: "p16513", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX200M Elite Vidrio Templado + 5 RGB Fijo", etiqueta: "Color", opciones: [["Negro", 310000], ["Blanco", 320000]], imagen: "fotos/p16513.jpg" },
   { id: "p16579", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX300 Vidrio Templado + 3 ARGB Blanco", precio: 370000, imagen: "fotos/p16579.jpg" },
   { id: "p16559", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec AX85 Vidrio Templado + 4 Fan ARGB", precio: 330000, imagen: "fotos/p16559.jpg" },
   { id: "p16633", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX705 Vidrio Templado + 5 ARGB", precio: 400000, imagen: "fotos/p16633.jpg" },
-  { id: "p16632", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX Espejo Vidrio Templado + 7 ARGB Blanco", precio: 520000 },
-  { id: "p16616", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec AX1000 Elite Vidrio Templado +4 ARGB 120 mm", precio: 450000 },
-  { id: "p16615", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec AX1000 Vidrio Templado +4 ARGB 140 mm", precio: 470000 },
+  { id: "p16632", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX Espejo Vidrio Templado + 7 ARGB Blanco", precio: 520000, imagen: "fotos/p16632.jpg" },
+  { id: "p16616", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec AX1000 Elite Vidrio Templado +4 ARGB 120 mm", precio: 450000, imagen: "fotos/p16616.jpg" },
+  { id: "p16615", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec AX1000 Vidrio Templado +4 ARGB 140 mm", precio: 470000, imagen: "fotos/p16615.jpg" },
   { id: "p16553", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX500M Vidrio Templado + 3 ARGB Blanca", precio: 470000, imagen: "fotos/p16553.jpg" },
   { id: "p16542", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX600M Trio Vidrio Templado + 3 ARGB", etiqueta: "Color", opciones: [["Negro", 490000], ["Blanco", 510000]], imagen: "fotos/p16542.jpg" },
   { id: "p16560", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX600M Vidrio Templado + 3 ARGB", precio: 490000 },
-  { id: "p16544", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX600M Wood Madera Vidrio Templado + 3ARGB Negra", precio: 510000 },
-  { id: "p16490", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec DF700 Flux Vidrio Templado Blanca 3ARGB+2 NO RGB", precio: 520000 },
+  { id: "p16544", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX600M Wood Madera Vidrio Templado + 3ARGB Negra", precio: 510000, imagen: "fotos/p16544.jpg" },
+  { id: "p16490", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec DF700 Flux Vidrio Templado Blanca 3ARGB+2 NO RGB", precio: 520000, imagen: "fotos/p16490.jpg" },
   { id: "p16546", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX800 Wood Madera Vidrio Templado + 4 ARGB Negro", precio: 520000, imagen: "fotos/p16546.jpg" },
   { id: "p16515", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec C3 Vidrio Templado + 4 ARGB Blanco", precio: 560000, imagen: "fotos/p16515.jpg" },
   { id: "p16554", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec CX700 Vidrio Templado + 3ARGB Blanca", precio: 560000 },
-  { id: "p16547", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec C8 Curvo Wood Vidrio Templado Negra", precio: 860000 },
+  { id: "p16547", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec C8 Curvo Wood Vidrio Templado Negra", precio: 860000, imagen: "fotos/p16547.jpg" },
   { id: "p16550", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec C8 Wood Madera Vidrio Templado Negra", precio: 860000, imagen: "fotos/p16550.jpg" },
   { id: "p16505", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec C8 Vidrio Templado + 2 ARGB 160M + 1 ARGB 140M Blanco", precio: 860000, imagen: "fotos/p16505.jpg" },
   { id: "p16492", tienda: "comp", categoria: "cajas", marca: "Antec", nombre: "Caja Antec Torque BE Explosive Vidrio Templado", etiqueta: "Color", opciones: [["Negra blanca", 1850000], ["Negra roja", 1850000]], imagen: "fotos/p16492.jpg" },
-  { id: "p16595", tienda: "comp", categoria: "cajas", marca: "ASUS", nombre: "Caja ASUS ProArt PA401 Wood ED Beige Vidrio Templado +3 Fan NO RGB", precio: 570000 },
+  { id: "p16595", tienda: "comp", categoria: "cajas", marca: "ASUS", nombre: "Caja ASUS ProArt PA401 Wood ED Beige Vidrio Templado +3 Fan NO RGB", precio: 570000, imagen: "fotos/p16595.jpg" },
   { id: "p16596", tienda: "comp", categoria: "cajas", marca: "ASUS", nombre: "Caja ASUS ProArt PA401 Wood ED Black TG Vidrio Templado +3 Fan NO RGB", precio: 610000, imagen: "fotos/p16596.jpg" },
   { id: "p16597", tienda: "comp", categoria: "cajas", marca: "ASUS", nombre: "Caja ASUS ProArt PA602 Wood ED Black Vidrio Templado +3 Fan NO RGB", precio: 1350000, imagen: "fotos/p16597.jpg" },
   { id: "p16623", tienda: "comp", categoria: "cajas", marca: "ASUS", nombre: "Caja ASUS ROG Strix Helios II GX601S Vidrio Templado +4 Fan 140M", etiqueta: "Color", opciones: [["Negra", 1550000], ["Blanca", 1550000]] },
@@ -2351,7 +2378,7 @@ const PRODUCTOS = [
   { id: "p16561", tienda: "comp", categoria: "cajas", marca: "Corsair", nombre: "Caja Corsair 4000D Frame RS Vidrio Templado + 3 ARGB Negra", precio: 530000, imagen: "fotos/p16561.jpg" },
   { id: "p16605", tienda: "comp", categoria: "cajas", marca: "Corsair", nombre: "Caja Corsair Air 5400 Vidrio Templado + 3 RS120R ARGB Negra", precio: 1050000, imagen: "fotos/p16605.jpg" },
   { id: "p16621", tienda: "comp", categoria: "cajas", marca: "Corsair", nombre: "Caja Corsair Frame 4000D LCD RS Vidrio Templado +4 ARGB Premium", etiqueta: "Color", opciones: [["Blanco", 1750000], ["Negro", 1750000]] },
-  { id: "p16640", tienda: "comp", categoria: "cajas", marca: "Corsair", nombre: "Caja Corsair 9000D Airflow Vidrio Templado Blanco NO Fan", precio: 1850000 },
+  { id: "p16640", tienda: "comp", categoria: "cajas", marca: "Corsair", nombre: "Caja Corsair 9000D Airflow Vidrio Templado Blanco NO Fan", precio: 1850000, imagen: "fotos/p16640.jpg" },
   { id: "p16287", tienda: "comp", categoria: "cajas", marca: "Cooler Master", nombre: "Caja Cooler Master MasterBox MB311L ARGB", precio: 270000 },
   { id: "p16641", tienda: "comp", categoria: "cajas", marca: "Cougar", nombre: "Caja Cougar MX110 Vidrio Templado + 4 RGB Fijo", precio: 220000, imagen: "fotos/p16641.jpg" },
   { id: "p16565", tienda: "comp", categoria: "cajas", marca: "Cougar", nombre: "Caja Cougar Airface Pure Vidrio Templado + 4 RGB Fijo Negra Open Box", precio: 190000, estado: "Open box", imagen: "fotos/p16565.jpg" },
@@ -2368,26 +2395,26 @@ const PRODUCTOS = [
   { id: "p16520", tienda: "comp", categoria: "cajas", marca: "Cougar", nombre: "Caja Cougar FV270 Vidrio Templado + 4 ARGB Base Luminosa", etiqueta: "Color", opciones: [["Blanco", 910000], ["Negro", 910000]], imagen: "fotos/p16520.jpg" },
   { id: "p16601", tienda: "comp", categoria: "cajas", marca: "Cougar", nombre: "Caja Cougar CFV235 Vision Vidrio Templado + 3 ARGB Blanco", precio: 820000 },
   { id: "p16613", tienda: "comp", categoria: "cajas", marca: "Cougar", nombre: "Caja Cougar CFV235 Mesh Vision Vidrio Templado +2ARGB 160M + 1ARGB 120M BL", precio: 1050000 },
-  { id: "p16571", tienda: "comp", categoria: "cajas", marca: "XPG", nombre: "Caja XPG Valor Air Plus Vidrio Templado + 4 ARGB", etiqueta: "Color", opciones: [["Negro", 250000], ["Blanco", 270000]] },
+  { id: "p16571", tienda: "comp", categoria: "cajas", marca: "XPG", nombre: "Caja XPG Valor Air Plus Vidrio Templado + 4 ARGB", etiqueta: "Color", opciones: [["Negro", 250000], ["Blanco", 270000]], imagen: "fotos/p16571.jpg" },
   { id: "p16205", tienda: "comp", categoria: "cajas", marca: "XPG", nombre: "Caja XPG Invader Vidrio Templado + 2 ARGB Negro", precio: 250000 },
-  { id: "p16568", tienda: "comp", categoria: "cajas", marca: "XPG", nombre: "Caja XPG Invader X Mini Vidrio Templado + 5 ARGB", etiqueta: "Color", opciones: [["Negro", 290000], ["Blanco", 290000]] },
-  { id: "p16588", tienda: "comp", categoria: "cajas", marca: "XPG", nombre: "Caja XPG Valor Air Pro Vidrio Templado + 4 ARGB Negro", precio: 350000 },
-  { id: "p16569", tienda: "comp", categoria: "cajas", marca: "XPG", nombre: "Caja XPG Starker Air BTF Vidrio Templado + 4 ARGB", etiqueta: "Color", opciones: [["Blanco", 400000], ["Negro", 400000]] },
-  { id: "p16502", tienda: "comp", categoria: "cajas", marca: "XPG", nombre: "Caja XPG Invader X Negra Vidrio Templado + 5 ARGB", precio: 460000 },
+  { id: "p16568", tienda: "comp", categoria: "cajas", marca: "XPG", nombre: "Caja XPG Invader X Mini Vidrio Templado + 5 ARGB", etiqueta: "Color", opciones: [["Negro", 290000], ["Blanco", 290000]], imagen: "fotos/p16568.jpg" },
+  { id: "p16588", tienda: "comp", categoria: "cajas", marca: "XPG", nombre: "Caja XPG Valor Air Pro Vidrio Templado + 4 ARGB Negro", precio: 350000, imagen: "fotos/p16588.jpg" },
+  { id: "p16569", tienda: "comp", categoria: "cajas", marca: "XPG", nombre: "Caja XPG Starker Air BTF Vidrio Templado + 4 ARGB", etiqueta: "Color", opciones: [["Blanco", 400000], ["Negro", 400000]], imagen: "fotos/p16569.jpg" },
+  { id: "p16502", tienda: "comp", categoria: "cajas", marca: "XPG", nombre: "Caja XPG Invader X Negra Vidrio Templado + 5 ARGB", precio: 460000, imagen: "fotos/p16502.jpg" },
   { id: "p17077", tienda: "comp", categoria: "cajas", marca: "Cougar", nombre: "Combo Caja Cougar FV150 Vidrio Templado + 4 ARGB Negro + Fuente 750W Atlas", precio: 610000, imagen: "fotos/p17077.jpg" },
-  { id: "p26140", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Ventilador Antec Infinity Matrix 120 ARGB", precio: 85000 },
+  { id: "p26140", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Ventilador Antec Infinity Matrix 120 ARGB", precio: 85000, imagen: "fotos/p26140.jpg" },
   { id: "p26092", tienda: "comp", categoria: "refrigeracion", marca: "Cooler Master", nombre: "Ventilador Cooler Master SickleFlow 120 ARGB Blanco", precio: 46000 },
   { id: "p26141", tienda: "comp", categoria: "refrigeracion", marca: "Cougar", nombre: "Ventilador X3 Cougar Unity 360 ARGB Negra", precio: 150000 },
-  { id: "p26060", tienda: "comp", categoria: "refrigeracion", marca: "XPG", nombre: "Ventilador XPG Vento 120 NO RGB Negro", precio: 35000 },
-  { id: "p26123", tienda: "comp", categoria: "refrigeracion", marca: "XPG", nombre: "Ventilador XPG Vento R 120 ARGB Inverso PWM", etiqueta: "Color", opciones: [["Negro", 59000], ["Blanco", 64000]] },
+  { id: "p26060", tienda: "comp", categoria: "refrigeracion", marca: "XPG", nombre: "Ventilador XPG Vento 120 NO RGB Negro", precio: 35000, imagen: "fotos/p26060.jpg" },
+  { id: "p26123", tienda: "comp", categoria: "refrigeracion", marca: "XPG", nombre: "Ventilador XPG Vento R 120 ARGB Inverso PWM", etiqueta: "Color", opciones: [["Negro", 59000], ["Blanco", 64000]], imagen: "fotos/p26123.jpg" },
   { id: "p26124", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Kit X3 Ventilador X3 Antec Connect 120 ARGB Negro", precio: 130000, imagen: "fotos/p26124.jpg" },
-  { id: "p26131", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Kit X3 Ventiladores Antec Connect 120 ARGB Blanco", precio: 140000 },
-  { id: "p26132", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Kit X3 Ventiladores Antec Connect 120 Inverso ARGB Blanco", precio: 150000 },
-  { id: "p26138", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Ventiladores 3 en 1 Antec Infinity Matrix 360 ARGB", etiqueta: "Color", opciones: [["Blanco", 180000], ["Negro", 180000]] },
+  { id: "p26131", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Kit X3 Ventiladores Antec Connect 120 ARGB Blanco", precio: 140000, imagen: "fotos/p26131.jpg" },
+  { id: "p26132", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Kit X3 Ventiladores Antec Connect 120 Inverso ARGB Blanco", precio: 150000, imagen: "fotos/p26132.jpg" },
+  { id: "p26138", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Ventiladores 3 en 1 Antec Infinity Matrix 360 ARGB", etiqueta: "Color", opciones: [["Blanco", 180000], ["Negro", 180000]], imagen: "fotos/p26138.jpg" },
   { id: "p26137", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Kit X3 Ventiladores Antec Vision 120 ARGB", precio: 250000, imagen: "fotos/p26137.jpg" },
   { id: "p26136", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Kit X3 Ventiladores Antec Orbit 120 ARGB", precio: 270000, imagen: "fotos/p26136.jpg" },
   { id: "p26122", tienda: "comp", categoria: "refrigeracion", marca: "Cougar", nombre: "Kit X3 Ventiladores Cougar 120 Apolar ARGB Inverso Magnéticos Blancos", precio: 330000, imagen: "fotos/p26122.jpg" },
-  { id: "p26129", tienda: "comp", categoria: "refrigeracion", marca: "XPG", nombre: "Kit X4 Ventiladores XPG Hurricane Magnéticos 120 ARGB PWM", etiqueta: "Color", opciones: [["Negro", 410000], ["Blanco", 410000]] },
+  { id: "p26129", tienda: "comp", categoria: "refrigeracion", marca: "XPG", nombre: "Kit X4 Ventiladores XPG Hurricane Magnéticos 120 ARGB PWM", etiqueta: "Color", opciones: [["Negro", 410000], ["Blanco", 410000]], imagen: "fotos/p26129.jpg" },
   { id: "p10109", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Disipador Antec A450 RGB Fijo", precio: 85000 },
   { id: "p10081", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Disipador Antec A30 Neo ARGB", precio: 150000, imagen: "fotos/p10081.jpg" },
   { id: "p10110", tienda: "comp", categoria: "refrigeracion", marca: "Arctic", nombre: "Disipador Arctic Freezer 36-S", etiqueta: "Color", opciones: [["Estándar", 140000], ["Negro", 150000]] },
@@ -2396,12 +2423,12 @@ const PRODUCTOS = [
   { id: "p10103", tienda: "comp", categoria: "refrigeracion", marca: "Arctic", nombre: "Disipador Arctic Freezer 36 CO 24/7", precio: 210000 },
   { id: "p10097", tienda: "comp", categoria: "refrigeracion", marca: "Arctic", nombre: "Disipador Arctic Freezer 36 ARGB", etiqueta: "Color", opciones: [["Negro", 210000], ["Blanco", 220000]] },
   { id: "p10079", tienda: "comp", categoria: "refrigeracion", marca: "Cougar", nombre: "Disipador Cougar Forza 50 ARGB", precio: 230000, imagen: "fotos/p10079.jpg" },
-  { id: "p10104", tienda: "comp", categoria: "refrigeracion", marca: "XPG", nombre: "Disipador XPG Maestro Plus 42SA ARGB Pantalla LED", precio: 160000 },
-  { id: "p10106", tienda: "comp", categoria: "refrigeracion", marca: "XPG", nombre: "Disipador XPG Maestro Plus 62DA ARGB", precio: 250000 },
-  { id: "p11194", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Refrigeración Antec Skeleton 360 ARGB", etiqueta: "Color", opciones: [["Blanca", 410000], ["Negra", 440000]] },
+  { id: "p10104", tienda: "comp", categoria: "refrigeracion", marca: "XPG", nombre: "Disipador XPG Maestro Plus 42SA ARGB Pantalla LED", precio: 160000, imagen: "fotos/p10104.jpg" },
+  { id: "p10106", tienda: "comp", categoria: "refrigeracion", marca: "XPG", nombre: "Disipador XPG Maestro Plus 62DA ARGB", precio: 250000, imagen: "fotos/p10106.jpg" },
+  { id: "p11194", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Refrigeración Antec Skeleton 360 ARGB", etiqueta: "Color", opciones: [["Blanca", 410000], ["Negra", 440000]], imagen: "fotos/p11194.jpg" },
   { id: "p11136", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Refrigeración Antec Symphony 360 ARGB Blanca", precio: 470000, imagen: "fotos/p11136.jpg" },
-  { id: "p11168", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Refrigeración Antec Vortex Lum 360 ARGB Blanca", precio: 520000 },
-  { id: "p11157", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Refrigeración Antec Vortex 360 ARGB Blanca", precio: 520000 },
+  { id: "p11168", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Refrigeración Antec Vortex Lum 360 ARGB Blanca", precio: 520000, imagen: "fotos/p11168.jpg" },
+  { id: "p11157", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Refrigeración Antec Vortex 360 ARGB Blanca", precio: 520000, imagen: "fotos/p11157.jpg" },
   { id: "p11201", tienda: "comp", categoria: "refrigeracion", marca: "Antec", nombre: "Refrigeración Antec Vortex View 360 ARGB Pantalla 5\" Negro", precio: 1300000, imagen: "fotos/p11201.jpg" },
   { id: "p11174", tienda: "comp", categoria: "refrigeracion", marca: "ASUS", nombre: "Refrigeración ASUS ROG Strix LC III 360 ARGB Negra", precio: 1200000, imagen: "fotos/p11174.jpg" },
   { id: "p11172", tienda: "comp", categoria: "refrigeracion", marca: "ASUS", nombre: "Refrigeración ASUS ROG Strix LC III 360 ARGB LCD", precio: 1300000, imagen: "fotos/p11172.jpg" },
@@ -2455,7 +2482,7 @@ const PRODUCTOS = [
   { id: "p3789", tienda: "comp", categoria: "video", marca: "Gigabyte", nombre: "Gigabyte GeForce RTX 5080 Aorus Xtreme Waterforce 16GB", specs: ["16 GB de memoria"], precio: 8700000, imagen: "fotos/p3789.jpg" },
   { id: "p3704", tienda: "comp", categoria: "video", marca: "ASUS", nombre: "ASUS TUF Gaming GeForce RTX 5080 OC 16GB", specs: ["16 GB de memoria"], precio: 8800000, imagen: "fotos/p3704.jpg" },
   { id: "p3771", tienda: "comp", categoria: "video", marca: "ASUS", nombre: "ASUS TUF Gaming GeForce RTX 5090 OC 32GB", specs: ["32 GB de memoria"], precio: 24150000, imagen: "fotos/p3771.jpg" },
-  { id: "p3708", tienda: "comp", categoria: "video", marca: "ASUS", nombre: "ASUS ROG Astral GeForce RTX 5090 OC 32GB", specs: ["32 GB de memoria"], precio: 25400000 },
+  { id: "p3708", tienda: "comp", categoria: "video", marca: "ASUS", nombre: "ASUS ROG Astral GeForce RTX 5090 OC 32GB", specs: ["32 GB de memoria"], precio: 25400000, imagen: "fotos/p3708.jpg" },
 
   /* ---------- Periféricos y gaming ---------- */
   { id: "p45631", tienda: "con", categoria: "consolas", marca: "Sony", nombre: "Consola Sony PS5 825 GB Control ED Digital 4K", precio: 3150000, imagen: "fotos/p45631.jpg" },
@@ -2954,6 +2981,24 @@ const ILUS = {
   kit:        '<rect x="14" y="52" width="92" height="24" rx="3"/><circle class="r" cx="25" cy="64" r="2.5"/><path class="n" d="M34 64h22M86 60v8M92 60v8"/><rect x="14" y="14" width="34" height="14" rx="5"/><circle class="k" cx="44" cy="21" r="3"/><path class="n" d="M26 28v10h10"/><rect x="72" y="14" width="34" height="14" rx="5"/><circle class="k" cx="76" cy="21" r="3"/><path class="n" d="M94 28v10H84"/>'
 };
 
+/* Escenas de las puertas de la portada: recortes de productos de la tienda (carpeta fotos/puertas).
+   Cada producto: [foto, distancia desde la izquierda, distancia desde abajo, ancho, alto (en % del escenario), giro en grados].
+   El último de cada lista queda adelante. */
+const ESCENAS = {
+  pc:   [["fotos/puertas/pc-2.png", 46, 30, 48, 44, 4], ["fotos/puertas/pc-1.png", 2, 4, 66, 74, -3]],
+  comp: [["fotos/puertas/comp-1.png", 8, 14, 42, 76, -4], ["fotos/puertas/comp-3.png", 56, 62, 38, 22, 6], ["fotos/puertas/comp-2.png", 34, 6, 62, 46]],
+  per:  [["fotos/puertas/per-1.png", 6, 16, 56, 76], ["fotos/puertas/per-2.png", 60, 12, 34, 72, 6], ["fotos/puertas/per-3.png", 20, 4, 52, 24]],
+  con:  [["fotos/puertas/con-1.png", 8, 8, 22, 84, -4], ["fotos/puertas/con-2.png", 32, 36, 46, 40, 3], ["fotos/puertas/con-3.png", 42, 5, 52, 50, -6]],
+  tv:   [["fotos/puertas/tv-1.png", 5, 18, 68, 66], ["fotos/puertas/tv-2.png", 54, 6, 42, 42, 3]],
+  cel:  [["fotos/puertas/cel-1.png", 14, 8, 28, 80, -10], ["fotos/puertas/cel-2.png", 58, 8, 28, 80, 10], ["fotos/puertas/cel-3.png", 34, 4, 32, 88]],
+  tab:  [["fotos/puertas/tab-1.png", 6, 10, 50, 82, -5], ["fotos/puertas/tab-2.png", 46, 6, 48, 66, 5]],
+  rel:  [["fotos/puertas/rel-1.png", 6, 12, 32, 74, -8], ["fotos/puertas/rel-2.png", 62, 12, 32, 74, 8], ["fotos/puertas/rel-3.png", 32, 5, 36, 86]],
+  aud:  [["fotos/puertas/aud-1.png", 6, 10, 56, 80, -4], ["fotos/puertas/aud-2.png", 56, 6, 38, 50, 6]],
+  par:  [["fotos/puertas/par-1.png", 4, 26, 60, 50, -3], ["fotos/puertas/par-2.png", 68, 8, 20, 82, 4], ["fotos/puertas/par-3.png", 22, 4, 50, 34]],
+  acc:  [["fotos/puertas/acc-1.png", 10, 10, 40, 76, -5], ["fotos/puertas/acc-2.png", 48, 8, 44, 52, 4]],
+  mov:  [["fotos/puertas/mov-1.png", 8, 4, 56, 92], ["fotos/puertas/mov-2.png", 64, 4, 24, 88, 3]]
+};
+
 /* ==========================================================================
    Funcionamiento de la página (no necesitas cambiar nada de aquí hacia abajo)
    ========================================================================== */
@@ -3046,6 +3091,15 @@ function cargarCarrito() {
 function guardarCarrito() { try { localStorage.setItem(CLAVE, JSON.stringify(estado.carrito)); } catch {} }
 
 function ilus(nombre) { return `<svg class="ill" viewBox="0 0 120 90" aria-hidden="true" focusable="false">${ILUS[nombre] || ILUS.celular}</svg>`; }
+// Arma el escenario de cada puerta de la portada; la de servicio técnico conserva sus dibujos
+function pintarEscenas() {
+  $$(".door-art[data-escena]").forEach(art => {
+    const objetos = ESCENAS[art.dataset.escena];
+    if (objetos) art.innerHTML = objetos.map(([foto, x, y, w, h, giro = 0], i) =>
+      `<img class="obj" src="${foto}" alt="" loading="lazy" decoding="async" onerror="this.remove()" style="--x:${x}%;--y:${y}%;--w:${w}%;--h:${h}%;--giro:${giro}deg;--retraso:${(-i * 1.9).toFixed(1)}s">`).join("");
+    art.insertAdjacentHTML("afterbegin", '<span class="chispas" aria-hidden="true"></span>');
+  });
+}
 function foto(p, alt) { return p.imagen ? `<img src="${esc(p.imagen)}" alt="${alt ? esc(p.nombre) : ""}" loading="lazy">` : ilus(p.ilustracion); }
 
 /* ---------- Tiendas ---------- */
@@ -3550,6 +3604,7 @@ function iniciar() {
   const saludo = waLink(`Hola ${CONFIG.nombre}, tengo una pregunta.`);
   $$("[data-wa]").forEach(a => a.href = saludo);
   $$("[data-wa-msg]").forEach(a => a.href = waLink(a.dataset.waMsg.replace("{nombre}", CONFIG.nombre)));
+  pintarEscenas();
   $$("[data-ilus]").forEach(el => el.outerHTML = ilus(el.dataset.ilus));
   $$("[data-cuenta]").forEach(el => {
     const n = deTienda(el.dataset.cuenta).length;
