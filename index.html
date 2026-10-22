@@ -284,6 +284,9 @@ section[id],.orden{scroll-margin-top:128px}
 }
 
 /* Carrusel de portada con lo más vendido en Colombia: tarjetas de producto en fila que se desliza sola */
+.llama{width:.82em;height:.82em;vertical-align:-.06em;fill:var(--accent);transform-origin:50% 90%;animation:llama 1.6s ease-in-out infinite}
+@keyframes llama{0%,100%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.1) rotate(3deg)}}
+@media (prefers-reduced-motion:reduce){.llama{animation:none}}
 .carr-ctrl{display:flex;gap:8px}
 .carr-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;transition:border-color .15s,background-color .15s}
 .carr-btn:hover{border-color:var(--ink-2);background:var(--tint)}
@@ -665,7 +668,7 @@ textarea.input{min-height:96px;resize:vertical}
       <section class="band" aria-labelledby="t-vendidos">
         <div class="wrap">
           <div class="sec-head">
-            <div><p class="kicker">Lo más vendido en Colombia</p><h2 id="t-vendidos">Los favoritos del país</h2></div>
+            <div><p class="kicker">Lo más vendido</p><h2 id="t-vendidos">Los que todos quieren <svg class="llama" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 3.5-1.5 5-1.5 7.5 0 1.4 1 2.5 2.3 2.5 1.6 0 2.4-1.3 2.2-3.2C17.6 10.6 19 13 19 15.5 19 19.1 15.9 22 12 22s-7-2.9-7-6.5C5 10.6 9.8 7.6 12 2z"/></svg></h2></div>
             <div class="carr-ctrl">
               <button type="button" class="carr-btn" data-carr="-1" aria-label="Ver productos anteriores"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
               <button type="button" class="carr-btn" data-carr="1" aria-label="Ver productos siguientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
