@@ -3,6 +3,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rocket Fix</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Rocket Fix: venta de celulares, computadores, consolas, tablets, relojes, audífonos, parlantes y accesorios. Reparación de celulares y computadores e instalación de cámaras de seguridad.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -386,6 +389,35 @@ section[id],.orden{scroll-margin-top:128px}
   .card-img .ill{width:92%}
   .badge{font-size:9.5px;top:8px;left:8px;padding:2px 5px}
   .card-body{padding:14px}
+}
+/* La foto y el nombre de cada tarjeta llevan a la página del producto */
+a.card-img{text-decoration:none;color:inherit}
+.card h3 a{color:inherit;text-decoration:none}
+.card h3 a:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* Página de un producto: foto grande a la izquierda, versiones y compra a la derecha */
+.prod{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px 48px;align-items:start}
+.prod-img{position:relative;aspect-ratio:1;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background-color:var(--t,var(--surface-2));background-image:radial-gradient(var(--dot,var(--line)) 1px,transparent 1.4px);background-size:14px 14px;display:grid;place-items:center}
+.prod-img.con-foto{background:#fff}
+.prod-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:4%}
+.prod-img .ill{width:70%}
+.prod-info{display:grid;gap:16px;align-content:start;min-width:0}
+.vers{display:flex;flex-wrap:wrap;gap:8px}
+.vers-label{flex-basis:100%;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2)}
+.ver{display:grid;gap:2px;text-align:left;padding:10px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);color:var(--ink);cursor:pointer;font-size:14px}
+.ver b{font-family:var(--display);font-weight:800;font-size:15px;font-variant-numeric:tabular-nums}
+.ver:hover{border-color:var(--ink-2)}
+.ver[aria-pressed="true"]{border-color:var(--c,var(--primary));box-shadow:inset 0 0 0 1px var(--c,var(--primary));background:var(--t,var(--surface-2))}
+.prod-buy{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;padding:18px 0;border-block:1px dashed var(--line)}
+.prod-buy .price{font-size:34px;flex-basis:100%}
+.prod-share{justify-self:start;background:none;border:0;padding:0;cursor:pointer;font-size:15px}
+.prod-ventajas{list-style:none;margin:0;padding:0;display:grid;gap:8px;color:var(--ink-2);font-size:15px}
+.prod-ventajas li{display:flex;gap:10px;align-items:baseline}
+.prod-ventajas li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--primary));flex:none;transform:translateY(-1px)}
+.rel-title{font-size:24px;font-weight:800;font-stretch:108%;margin:56px 0 20px}
+@media (max-width:860px){
+  .prod{grid-template-columns:1fr}
+  .prod-img{aspect-ratio:4/3}
 }
 
 /* Ilustraciones */
@@ -844,6 +876,28 @@ textarea.input{min-height:96px;resize:vertical}
               <li><span class="n">2</span><div><strong>Envía el pedido por WhatsApp</strong><p>El mensaje sale escrito con los productos, el total y la forma de entrega.</p></div></li>
               <li><span class="n">3</span><div><strong>Confirmamos y entregamos</strong><p>Te confirmamos disponibilidad y pago. En Bogotá y alrededores te lo llevamos el mismo día y puedes pagar contra entrega; al resto de Colombia lo enviamos con pago anticipado.</p></div></li>
             </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================= PÁGINA DE UN PRODUCTO ========================= -->
+    <!-- Se abre con #p/<id> y se llena desde la lista PRODUCTOS -->
+    <section data-view="producto" aria-labelledby="h-prod" hidden>
+      <div class="view-head">
+        <div class="wrap">
+          <div>
+            <nav class="crumbs" aria-label="Ruta" id="prod-crumbs"></nav>
+            <h1 id="h-prod" tabindex="-1"></h1>
+          </div>
+        </div>
+      </div>
+      <div class="band">
+        <div class="wrap">
+          <div class="prod" id="prod"></div>
+          <div id="prod-rel-box">
+            <h2 class="rel-title">También te puede interesar</h2>
+            <div class="grid" id="prod-rel"></div>
           </div>
         </div>
       </div>
@@ -3187,30 +3241,38 @@ function marcarChips(tienda) {
 
 const etiquetaDe = p => [p.tienda === "cel" ? null : nombreCat[p.categoria], p.marca].filter(Boolean).join(" · ");
 
+// Regalo, garantía y unidades disponibles (tarjeta y página del producto)
+function metaDe(p) {
+  return [
+    p.nota ? `<span class="regalo">${esc(p.nota)}</span>` : "",
+    p.garantia ? `<span>Garantía ${esc(p.garantia)}</span>` : "",
+    p.stock != null ? `<span class="${p.stock <= 2 ? "low" : ""}">${p.stock === 1 ? "Última unidad" : p.stock <= 2 ? `Quedan ${p.stock}` : "Disponible"}</span>` : ""
+  ].join("");
+}
+const insignia = p => p.ejemplo ? '<span class="badge b-ejemplo">Ejemplo</span>' : p.estado !== "Nuevo" ? `<span class="badge">${esc(p.estado)}</span>` : "";
+const specsDe = p => p.specs.length ? `<ul class="specs">${p.specs.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : "";
+const textoAgregar = (q, tope) => tope ? "No hay más unidades" : q ? "Agregar otra" : "Agregar";
+
 function tarjeta(p) {
   const i = estado.sel[p.id] || 0;
   const o = p.opciones[i];
   const q = estado.carrito[clave(p.id, i)] || 0;
   const tope = p.stock != null && q >= p.stock;
-  const meta = [
-    p.nota ? `<span class="regalo">${esc(p.nota)}</span>` : "",
-    p.garantia ? `<span>Garantía ${esc(p.garantia)}</span>` : "",
-    p.stock != null ? `<span class="${p.stock <= 2 ? "low" : ""}">${p.stock === 1 ? "Última unidad" : p.stock <= 2 ? `Quedan ${p.stock}` : "Disponible"}</span>` : ""
-  ].join("");
+  const meta = metaDe(p);
   const selector = p.opciones.length > 1
     ? `<label class="opcion"><span>${esc(p.etiqueta || "Versión")}</span><select data-opcion="${p.id}">${p.opciones.map((op, j) => `<option value="${j}"${j === i ? " selected" : ""}>${esc(op.nombre)} · ${dinero(op.precio)}</option>`).join("")}</select></label>`
     : "";
   return `<article class="card t-${p.tienda}" data-id="${p.id}">
-    <div class="card-img${p.imagen ? " con-foto" : ""}">${foto(p, true)}${p.ejemplo ? '<span class="badge b-ejemplo">Ejemplo</span>' : p.estado !== "Nuevo" ? `<span class="badge">${esc(p.estado)}</span>` : ""}</div>
+    <a class="card-img${p.imagen ? " con-foto" : ""}" href="#p/${p.id}" tabindex="-1" aria-hidden="true">${foto(p, true)}${insignia(p)}</a>
     <div class="card-body">
       <p class="card-cat">${esc(etiquetaDe(p))}</p>
-      <h3>${esc(p.nombre)}</h3>
-      ${p.specs.length ? `<ul class="specs">${p.specs.map(s => `<li>${esc(s)}</li>`).join("")}</ul>` : ""}
+      <h3><a href="#p/${p.id}">${esc(p.nombre)}</a></h3>
+      ${specsDe(p)}
       ${meta ? `<p class="meta">${meta}</p>` : ""}
       ${selector}
       <div class="card-foot">
         <span class="price">${dinero(o.precio)}</span>
-        <button type="button" class="btn btn-accent btn-sm" data-add="${p.id}"${tope ? " disabled" : ""}>${tope ? "No hay más unidades" : q ? "Agregar otra" : "Agregar"}</button>
+        <button type="button" class="btn btn-accent btn-sm" data-add="${p.id}"${tope ? " disabled" : ""}>${textoAgregar(q, tope)}</button>
         <span class="incart"${q ? "" : " hidden"}>${q} en el carrito</span>
       </div>
     </div>
@@ -3271,23 +3333,81 @@ function iniciarCarrusel() {
   setInterval(() => { if (!pausa && !document.hidden && el.offsetParent) paso(1); }, 5000);
 }
 
-/* Actualiza precio, botón y cantidad de un producto en todas las tarjetas donde aparece */
+/* Actualiza precio, botón y cantidad de un producto en todas las tarjetas donde aparece y en su página */
 function refrescarTarjetas(id) {
   const p = porId[id];
   const i = estado.sel[id] || 0;
   const q = estado.carrito[clave(id, i)] || 0;
   const tope = p.stock != null && q >= p.stock;
-  $$(`.card[data-id="${id}"]`).forEach(el => {
+  $$(`.card[data-id="${id}"], .prod[data-id="${id}"]`).forEach(el => {
     $(".price", el).textContent = dinero(p.opciones[i].precio);
     const b = $("[data-add]", el);
     b.disabled = tope;
-    b.textContent = tope ? "No hay más unidades" : q ? "Agregar otra" : "Agregar";
+    b.textContent = textoAgregar(q, tope);
     const c = $(".incart", el);
     c.hidden = !q;
     c.textContent = `${q} en el carrito`;
     const s = $("[data-opcion]", el);
     if (s && s.value !== String(i)) s.value = String(i);
+    $$("[data-ver]", el).forEach(v => v.setAttribute("aria-pressed", String(v.dataset.ver === `${id}|${i}`)));
+    const wa = $("[data-wa-prod]", el);
+    if (wa) wa.href = waProducto(p, p.opciones[i]);
   });
+}
+
+/* ---------- Página de un producto (#p/<id>) ---------- */
+const TIENDA_VISTA = { pc: "computadores", comp: "componentes", per: "perifericos", con: "consolas", tv: "televisores", cel: "celulares", tab: "tablets", rel: "relojes", aud: "audifonos", par: "parlantes", acc: "accesorios", mov: "patinetas" };
+const waProducto = (p, o) => waLink(`Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, o)} (${dinero(o.precio)}). ¿Está disponible?`);
+let prodActual = null;
+
+function pintarProducto(p) {
+  prodActual = p.id;
+  const i = estado.sel[p.id] || 0;
+  const o = p.opciones[i];
+  const q = estado.carrito[clave(p.id, i)] || 0;
+  const tope = p.stock != null && q >= p.stock;
+  const tv = TIENDA_VISTA[p.tienda];
+  const cat = p.tienda !== "cel" && nombreCat[p.categoria];
+  const meta = metaDe(p);
+  const etiqueta = esc(p.etiqueta || "Versión");
+  $('[data-view="producto"]').className = `t-${p.tienda}`;
+  $("#prod-crumbs").innerHTML = `<a href="#inicio">Inicio</a><span>/</span><a href="#${tv}">${esc(VISTAS[tv])}</a>${cat ? `<span>/</span><span>${esc(cat)}</span>` : ""}`;
+  $("#h-prod").textContent = p.nombre;
+  const caja = $("#prod");
+  caja.dataset.id = p.id;
+  caja.innerHTML = `
+    <div class="prod-img${p.imagen ? " con-foto" : ""}">${foto(p, true)}${insignia(p)}</div>
+    <div class="prod-info">
+      <p class="card-cat">${esc(etiquetaDe(p))}</p>
+      ${specsDe(p)}
+      ${meta ? `<p class="meta">${meta}</p>` : ""}
+      ${p.opciones.length > 1 ? `<div class="vers" role="group" aria-label="${etiqueta}"><span class="vers-label">${etiqueta}</span>${p.opciones.map((op, j) =>
+        `<button type="button" class="ver" data-ver="${p.id}|${j}" aria-pressed="${j === i}"><span>${esc(op.nombre)}</span><b>${dinero(op.precio)}</b></button>`).join("")}</div>` : ""}
+      <div class="prod-buy">
+        <span class="price">${dinero(o.precio)}</span>
+        <button type="button" class="btn btn-accent" data-add="${p.id}"${tope ? " disabled" : ""}>${textoAgregar(q, tope)}</button>
+        <a class="btn btn-wa" data-wa-prod href="${waProducto(p, o)}" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+        <span class="incart"${q ? "" : " hidden"}>${q} en el carrito</span>
+      </div>
+      <button type="button" class="link prod-share" data-compartir="${p.id}">Compartir este producto</button>
+      <ul class="prod-ventajas">
+        <li>Entrega el mismo día en Bogotá y alrededores</li>
+        <li>Envíos a todo Colombia</li>
+        <li>Paga con tarjeta, transferencia o efectivo</li>
+      </ul>
+    </div>`;
+  // Primero los de la misma categoría y marca, luego el resto de la categoría y de la tienda
+  const puntos = r => (r.categoria === p.categoria ? 2 : 0) + (r.marca && r.marca === p.marca ? 1 : 0);
+  const otros = deTienda(p.tienda).filter(r => r.id !== p.id).sort((a, b) => puntos(b) - puntos(a)).slice(0, 4);
+  $("#prod-rel").innerHTML = otros.map(tarjeta).join("");
+  $("#prod-rel-box").hidden = otros.length === 0;
+}
+
+function compartirProducto(id) {
+  const p = porId[id];
+  const url = `${location.href.split("#")[0]}#p/${id}`;
+  if (navigator.share) { navigator.share({ title: p.nombre, text: `${p.nombre} en ${CONFIG.nombre}`, url }).catch(() => {}); return; }
+  try { navigator.clipboard.writeText(url).then(() => toast("Enlace del producto copiado"), () => toast(url)); } catch { toast(url); }
 }
 
 /* ---------- Carrito ---------- */
@@ -3609,21 +3729,34 @@ function pintarHorario() {
 
 /* ---------- Secciones (navegación) ---------- */
 let vista = null;
-function activar(v) {
+function activar(v, seccion = v.startsWith("blog") ? "blog" : v) {
   vista = v;
   $$("[data-view]").forEach(s => s.hidden = s.dataset.view !== v);
-  const seccion = v.startsWith("blog") ? "blog" : v;
   $$(".nav a[data-nav]").forEach(a => a.dataset.nav === seccion ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
   document.title = v === "inicio" ? CONFIG.nombre : `${VISTAS[v]} · ${CONFIG.nombre}`;
 }
 function arriba() { window.scrollTo({ top: 0, behavior: "instant" }); }
+function verProducto(id, navegando) {
+  const p = porId[id];
+  if (vista && vista !== "producto") posiciones[vista] = scrollY;
+  pintarProducto(p);
+  activar("producto", TIENDA_VISTA[p.tienda]);
+  document.title = `${p.nombre} · ${CONFIG.nombre}`;
+  arriba();
+  if (navegando) $("#h-prod").focus({ preventScroll: true });
+}
+// Al volver de un producto a su tienda, la lista queda donde estaba
+const posiciones = {};
 function mostrarVista(navegando) {
   const h = location.hash.slice(1);
+  const anterior = vista;
+  if (h.startsWith("p/") && porId[h.slice(2)]) { verProducto(h.slice(2), navegando); return; }
   if (h && !VISTAS[h] && document.getElementById(h)) { if (!vista) activar("inicio"); return; }
   const v = VISTAS[h] ? h : "inicio";
   activar(v);
-  arriba();
-  if (navegando) { const t = $(`[data-view="${v}"] h1`); if (t) t.focus({ preventScroll: true }); }
+  if (anterior === "producto" && posiciones[v] != null) window.scrollTo({ top: posiciones[v], behavior: "instant" });
+  else arriba();
+  if (navegando && anterior !== "producto") { const t = $(`[data-view="${v}"] h1`); if (t) t.focus({ preventScroll: true }); }
 }
 window.addEventListener("hashchange", () => mostrarVista(true));
 
@@ -3662,8 +3795,18 @@ document.addEventListener("click", e => {
     const v = href.slice(1);
     setTimeout(() => { if (vista !== v) activar(v); arriba(); }, 0);
   }
+  if (href.startsWith("#p/") && porId[href.slice(3)]) {
+    const id = href.slice(3);
+    setTimeout(() => { if (vista !== "producto" || prodActual !== id) verProducto(id, true); }, 0);
+  }
 
-  if (ds.filtro) {
+  if (ds.ver) {
+    const [id, j] = ds.ver.split("|");
+    estado.sel[id] = Number(j);
+    refrescarTarjetas(id);
+  } else if (ds.compartir) {
+    compartirProducto(ds.compartir);
+  } else if (ds.filtro) {
     const [tf, cat] = ds.filtro.split("|");
     const hay = deTienda(tf).some(p => p.categoria === cat);
     estado[tf].cat = hay ? cat : "todos";
