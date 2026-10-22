@@ -1869,8 +1869,8 @@ const CONFIG = {
   idioma: "es-CO",
   // Medios de pago según la entrega: el pago contra entrega es solo en Bogotá y alrededores
   pagos: {
-    bogota: ["Efectivo contra entrega", "Tarjeta débito o crédito contra entrega", "Transferencia bancaria"],
-    nacional: ["Transferencia bancaria", "Tarjeta débito o crédito (te enviamos un link de pago)"]
+    bogota: ["Efectivo contra entrega", "Tarjeta débito o crédito contra entrega", "Bre-B (transferencia inmediata desde cualquier banco)", "Daviplata", "Transferencia bancaria"],
+    nacional: ["Bre-B (transferencia inmediata desde cualquier banco)", "Daviplata", "Transferencia bancaria", "Tarjeta débito o crédito (te enviamos un link de pago)"]
   },
   domicilio: "Entrega el mismo día en Bogotá y alrededores. El valor del domicilio depende del barrio; te lo confirmamos por WhatsApp.",
   envio: "Enviamos a todo Colombia con pago anticipado. Te confirmamos el valor y el tiempo de envío por WhatsApp.",
@@ -3393,7 +3393,7 @@ function pintarProducto(p) {
       <ul class="prod-ventajas">
         <li>Entrega el mismo día en Bogotá y alrededores</li>
         <li>Envíos a todo Colombia</li>
-        <li>Paga con tarjeta, transferencia o efectivo</li>
+        <li>Paga con tarjeta, Bre-B, Daviplata, transferencia o efectivo</li>
       </ul>
     </div>`;
   // Primero los de la misma categoría y marca, luego el resto de la categoría y de la tienda
