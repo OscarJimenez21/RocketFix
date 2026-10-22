@@ -291,7 +291,6 @@ section[id],.orden{scroll-margin-top:128px}
 .carrusel{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 48px) / 4);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;padding:4px 2px 14px;scrollbar-width:thin}
 .carrusel > .card{scroll-snap-align:start}
 .carrusel .card-img::after{content:"Top ventas";position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 7px;border-radius:3px;background:var(--accent);color:var(--on-accent)}
-.carr-nota{font-size:13px;color:var(--ink-2);margin-top:6px;max-width:80ch}
 @media (max-width:1040px){.carrusel{grid-auto-columns:calc((100% - 32px) / 3)}}
 @media (max-width:760px){.carrusel{grid-auto-columns:calc((100% - 16px) / 2)}}
 @media (max-width:600px){.carrusel{grid-auto-columns:78%;gap:12px}.carr-ctrl{display:none}}
@@ -672,9 +671,7 @@ textarea.input{min-height:96px;resize:vertical}
               <button type="button" class="carr-btn" data-carr="1" aria-label="Ver productos siguientes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
             </div>
           </div>
-          <div class="carrusel" id="vendidos" tabindex="0" aria-label="Productos más vendidos en Colombia"></div>
-          <p class="carr-nota">Los modelos y familias que más se venden en Colombia según reportes de mercado 2025–2026: celulares Samsung Galaxy A, Redmi y Motorola, consolas, audífonos inalámbricos y relojes inteligentes.</p>
-        </div>
+          <div class="carrusel" id="vendidos" tabindex="0" aria-label="Productos más vendidos en Colombia"></div>        </div>
       </section>
 
       <div class="band">
