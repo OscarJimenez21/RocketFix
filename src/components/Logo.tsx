@@ -12,10 +12,10 @@ export function Cohete({ className = "" }: { className?: string }) {
 
 export function Logo({ claro = false }: { claro?: boolean }) {
   return (
-    // Un poco más pequeño en celulares angostos (360 px) para que quepan el menú, WhatsApp y el carrito
+    // Más pequeño en pantallas angostas (menos de 640 px, y aún más bajo 360 px) para que la cabecera quepa en una fila
     <span className="inline-flex items-center gap-1.5 sm:gap-2">
-      <Cohete className={`h-7 w-7 sm:h-8 sm:w-8 ${claro ? "text-marca-menta" : "text-marca"}`} />
-      <span className={`ancho-122 font-display text-[17px] font-[850] uppercase leading-none tracking-tight sm:text-[19px] ${claro ? "text-white" : "text-tinta"}`}>
+      <Cohete className={`h-7 w-7 max-[359px]:h-6 max-[359px]:w-6 sm:h-8 sm:w-8 ${claro ? "text-marca-menta" : "text-marca"}`} />
+      <span className={`ancho-122 font-display text-[17px] font-[850] uppercase leading-none tracking-tight max-[359px]:text-[15px] sm:text-[19px] ${claro ? "text-white" : "text-tinta"}`}>
         Rocket <span className={claro ? "text-marca-menta" : "text-marca"}>Fix</span>
       </span>
     </span>
