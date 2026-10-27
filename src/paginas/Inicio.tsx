@@ -1,42 +1,119 @@
 import { useEffect, useMemo, useState } from "react";
-import { CONFIG, MAS_VENDIDOS, PRODUCTOS, SERVICIOS, deTienda, porId } from "../data/catalogo";
+import { CONFIG, MAS_VENDIDOS, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
 import { camposServicio } from "../data/formularios";
 import { TIENDAS } from "../data/tiendas";
-import { BotonCopiar, PuntoEstado, useAtencion } from "../components/Contacto";
+import { PuntoEstado, useAtencion } from "../components/Contacto";
 import { FilaProductos } from "../components/FilaProductos";
 import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
 import { FotoProducto } from "../components/FotoProducto";
-import { IconoCamion, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
+import { IconoCamion, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { Ilustracion } from "../components/Ilustracion";
 import { TarjetaProducto } from "../components/TarjetaProducto";
 import { dinero } from "../lib/formato";
+import { hrefProducto } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
+import type { Producto } from "../types";
+
+/** Productos que pasan en la vitrina de la portada, en este orden */
+const VITRINA = ["ip18pm", "ss26u", "p45631", "mbairm5", "switch2", "appro3"];
+const ESPERA_VITRINA = 4500;
+
+/** Vitrina de la portada: cambia sola de producto (se detiene con el mouse encima, al usar el teclado
+    o si la persona pidió menos movimiento); los puntos de abajo eligen uno */
+function Vitrina() {
+  const productos = useMemo(() => VITRINA.map(id => porId[id]).filter((p): p is Producto => Boolean(p)), []);
+  const [i, setI] = useState(0);
+  const [quieta, setQuieta] = useState(false);
+  const [reducir] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  useEffect(() => {
+    if (quieta || reducir || productos.length < 2) return;
+    const t = window.setTimeout(() => setI(x => (x + 1) % productos.length), ESPERA_VITRINA);
+    return () => window.clearTimeout(t);
+  }, [i, quieta, reducir, productos.length]);
+
+  const p = productos[i];
+  if (!p) return null;
+  return (
+    <div role="region" aria-roledescription="carrusel" aria-label="Productos estrella" className="relative mx-auto w-full max-w-[440px]"
+      onMouseEnter={() => setQuieta(true)} onMouseLeave={() => setQuieta(false)} onFocus={() => setQuieta(true)} onBlur={() => setQuieta(false)}>
+      {/* Luz suave detrás de la vitrina */}
+      <div aria-hidden="true" className="pointer-events-none absolute -inset-12 bg-[radial-gradient(closest-side,rgba(61,213,152,0.3),transparent)]" />
+      <div className="relative overflow-hidden rounded-lg bg-white text-tinta shadow-flota">
+        <div className="relative aspect-[5/4] sm:aspect-square">
+          {productos.map((x, j) => (
+            <a key={x.id} href={hrefProducto(x.id)} tabIndex={j === i ? 0 : -1} aria-hidden={j !== i}
+              className={`absolute inset-0 p-8 transition-all duration-700 ease-out sm:p-10 ${j === i ? "scale-100 opacity-100" : "pointer-events-none scale-90 opacity-0"}`}>
+              <span className="animar-flotar block h-full w-full"><FotoProducto producto={x} alt={x.nombre} prioridad={j === 0} /></span>
+            </a>
+          ))}
+          <span className="absolute left-4 top-4 rounded-sm bg-tinta px-2 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide text-white">{etiquetaDe(p)}</span>
+        </div>
+        <div className="flex items-center justify-between gap-3 border-t border-linea px-5 py-4" aria-live={quieta ? "polite" : "off"}>
+          <div className="min-w-0">
+            <p className="truncate font-display text-lg font-bold">{p.nombre}</p>
+            <p className="text-sm text-tinta-2">{p.opciones.length > 1 && "Desde "}<b className="font-display text-base text-tinta">{dinero(desde(p))}</b></p>
+          </div>
+          <a href={hrefProducto(p.id)} className="btn btn-sm btn-primario shrink-0">Ver producto</a>
+        </div>
+        {/* Barra que avanza hasta el siguiente producto */}
+        {!reducir && !quieta && (
+          <span key={i} aria-hidden="true" className="animar-avance absolute inset-x-0 bottom-0 block h-1 origin-left bg-acento" style={{ animationDuration: `${ESPERA_VITRINA}ms` }} />
+        )}
+      </div>
+      <div className="mt-5 flex justify-center gap-2">
+        {productos.map((x, j) => (
+          <button key={x.id} type="button" onClick={() => setI(j)} aria-label={`Ver ${x.nombre}`} aria-current={j === i || undefined}
+            className={`h-2.5 rounded-full transition-all ${j === i ? "w-7 bg-brillo" : "w-2.5 bg-white/35 hover:bg-white/60"}`} />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 function Portada() {
   const atencion = useAtencion();
   return (
-    <section className="bg-marca-oscuro text-white">
-      <div className="contenedor grid gap-8 py-10 md:grid-cols-[1fr_340px] md:items-center md:py-14">
+    <section className="relative overflow-hidden bg-marca-oscuro text-white">
+      <div aria-hidden="true" className="fondo-puntos absolute inset-0" />
+      <div className="contenedor relative grid items-center gap-10 py-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] md:gap-12 md:py-20 lg:py-24">
         <div>
-          <p className="etiqueta-mono text-marca-menta">Tienda y servicio técnico · Bogotá</p>
-          <h1 tabIndex={-1} className="mt-3 max-w-2xl text-[34px] font-extrabold leading-[1.05] text-white sm:text-[44px]">
+          <p className="etiqueta-mono flex items-center gap-2.5 text-marca-menta"><span aria-hidden="true" className="h-px w-8 bg-marca-menta" />Tienda y servicio técnico · Bogotá</p>
+          <h1 tabIndex={-1} className="ancho-122 mt-4 text-[40px] font-extrabold leading-[1.02] text-white sm:text-[54px] lg:text-[66px]">
             Vendemos, reparamos e instalamos <span className="text-brillo">tecnología</span>
           </h1>
-          <p className="mt-4 max-w-xl text-[16.5px] text-white/80">Celulares, computadores, gaming y accesorios con entrega a domicilio. Además, reparamos tus equipos e instalamos cámaras de seguridad.</p>
-          <div className="mt-6 flex flex-wrap gap-2.5">
-            <a href="#celulares" className="btn btn-primario">Ver celulares</a>
-            <a href="#computadores" className="btn btn-claro">Ver computadores</a>
-            <a href="#servicios" className="btn btn-claro">Servicio técnico</a>
+          <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-white/80 sm:text-lg">Celulares, computadores, gaming y accesorios con entrega a domicilio. Además, reparamos tus equipos e instalamos cámaras de seguridad.</p>
+          <div className="mt-7 flex flex-wrap gap-2.5 sm:mt-8 sm:gap-3">
+            <a href="#celulares" className="btn btn-primario sm:px-6 sm:text-base">Ver celulares</a>
+            <a href="#computadores" className="btn btn-claro sm:px-6 sm:text-base">Ver computadores</a>
+            <a href="#servicios" className="btn btn-claro sm:px-6 sm:text-base">Servicio técnico</a>
+          </div>
+          <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2.5 border-t border-white/15 pt-5 text-sm sm:mt-8 sm:pt-6">
+            <p className="flex items-center gap-2 font-semibold"><PuntoEstado abierto={atencion.abierto} />{atencion.texto}</p>
+            <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-semibold text-white hover:text-marca-menta">
+              <IconoWhatsApp className="h-5 w-5 text-wa-vivo" />{CONFIG.whatsappVisible}
+            </a>
+            <p className="text-white/70"><b className="font-display text-base text-white">{PRODUCTOS.length}</b> productos en {TIENDAS.length} categorías</p>
           </div>
         </div>
-        <aside aria-label="Horario de atención" className="rounded-md bg-white p-5 text-tinta">
-          <p className="flex items-center gap-2 text-sm font-semibold"><PuntoEstado abierto={atencion.abierto} />{atencion.texto}</p>
-          <dl className="mt-4 grid gap-3 text-sm">
-            <div><dt className="etiqueta-mono">Atención</dt><dd className="mt-0.5 text-tinta-2">{CONFIG.atencion}</dd></div>
-            <div><dt className="etiqueta-mono">WhatsApp</dt><dd className="mt-0.5 flex items-center justify-between gap-2"><span className="font-display text-lg font-bold">{CONFIG.whatsappVisible}</span><BotonCopiar texto={CONFIG.whatsappVisible} /></dd></div>
-          </dl>
-          <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="btn btn-wa mt-4 w-full"><IconoWhatsApp />Escribir por WhatsApp</a>
-        </aside>
+        <Vitrina />
+      </div>
+    </section>
+  );
+}
+
+function MasVendidos({ productos }: { productos: Producto[] }) {
+  return (
+    <section aria-labelledby="t-vendidos" className="border-b border-linea bg-acento-suave">
+      <div className="contenedor py-10 sm:py-12">
+        <FilaProductos productos={productos} etiqueta="Productos más vendidos" cinta="Top ventas" encabezado={
+          <>
+            <p className="etiqueta-mono">Lo más vendido</p>
+            <h2 id="t-vendidos" className="mt-1 text-2xl font-extrabold sm:text-[30px]">
+              Los que todos quieren <IconoLlama className="animar-llama inline-block h-7 w-7 align-[-5px] text-acento sm:h-8 sm:w-8" />
+            </h2>
+          </>
+        } />
       </div>
     </section>
   );
@@ -171,11 +248,8 @@ export function Inicio({ ancla }: { ancla?: string }) {
     <>
       <Portada />
       <Ventajas />
+      <MasVendidos productos={vendidos} />
       <Categorias />
-      <section aria-labelledby="t-vendidos" className="contenedor pb-12">
-        <div className="mb-5"><p className="etiqueta-mono">Lo más vendido</p><h2 id="t-vendidos" className="mt-1 text-2xl font-extrabold">Los que todos quieren</h2></div>
-        <FilaProductos productos={vendidos} etiqueta="Productos más vendidos" />
-      </section>
       <Servicios />
       <div className="contenedor py-12">
         <section aria-labelledby="t-destacados">

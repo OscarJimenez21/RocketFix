@@ -18,9 +18,12 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
         <a href="#inicio" className="shrink-0" aria-label="Rocket Fix, ir al inicio"><Logo /></a>
         <div className="order-3 w-full md:order-none md:w-auto md:flex-1 md:max-w-xl"><Buscador inicial={q} /></div>
         <div className="ml-auto flex items-center gap-1.5 sm:gap-2">
-          <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener"
-            className="hidden items-center gap-2 rounded px-3 py-2 text-sm font-semibold text-tinta-2 hover:bg-fondo hover:text-tinta lg:inline-flex">
-            <IconoWhatsApp className="h-[18px] w-[18px] text-wa" />{CONFIG.whatsappVisible}
+          {/* Botón de WhatsApp: en celular solo el ícono, en pantallas grandes con texto */}
+          <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"
+            className="inline-flex h-11 min-w-[44px] items-center justify-center gap-2 rounded bg-wa px-3 text-sm font-semibold text-white transition-colors hover:bg-wa-hover sm:px-3.5">
+            <IconoWhatsApp className="h-5 w-5" />
+            <span className="hidden sm:inline xl:hidden">WhatsApp</span>
+            <span className="hidden xl:inline">Escríbenos por WhatsApp</span>
           </a>
           <button type="button" onClick={abrirCarrito}
             aria-label={`Abrir carrito, ${unidades} ${unidades === 1 ? "producto" : "productos"}`}

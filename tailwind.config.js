@@ -20,7 +20,8 @@ export default {
         tinta: { DEFAULT: "#0F1F18", 2: "#4A5D53", 3: "#7A8C82" },
         fondo: "#F4F8F6",
         linea: { DEFAULT: "#DCE6E0", fuerte: "#C5D3CA" },
-        wa: { DEFAULT: "#1FA855", hover: "#178C46" }
+        // Verde WhatsApp un poco más oscuro para que el texto blanco se lea bien (contraste 4,7:1)
+        wa: { DEFAULT: "#168540", hover: "#116B33", vivo: "#25D366" }
       },
       fontFamily: {
         display: ['"Archivo"', "system-ui", "sans-serif"],

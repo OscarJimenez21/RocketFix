@@ -8,8 +8,18 @@ export const IconoBuscar = ({ className = "h-5 w-5" }: P) => (
 export const IconoBolsa = ({ className = "h-5 w-5" }: P) => (
   <svg viewBox="0 0 24 24" className={className} {...base}><path d="M5 8h14l-1.2 12H6.2z" /><path d="M9 8V6a3 3 0 0 1 6 0v2" /></svg>
 );
+/** Globo con auricular, como el ícono de WhatsApp (el auricular es el ícono "call" de Material, licencia Apache 2.0) */
 export const IconoWhatsApp = ({ className = "h-5 w-5" }: P) => (
-  <svg viewBox="0 0 24 24" className={className} {...base}><path d="M4 5h16v11H9l-5 4z" /></svg>
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+    <path d="M12 3.4a8.6 8.6 0 0 0-7.43 12.93L3.4 20.6l4.38-1.15A8.6 8.6 0 1 0 12 3.4z" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinejoin="round" />
+    <path transform="translate(7.25 7.25) scale(.4)" fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+  </svg>
+);
+/** Llama de "Lo más vendido" (la misma de la tienda anterior) */
+export const IconoLlama = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" fill="currentColor">
+    <path d="M12 2c1 3.5-1.5 5-1.5 7.5 0 1.4 1 2.5 2.3 2.5 1.6 0 2.4-1.3 2.2-3.2C17.6 10.6 19 13 19 15.5 19 19.1 15.9 22 12 22s-7-2.9-7-6.5C5 10.6 9.8 7.6 12 2z" />
+  </svg>
 );
 export const IconoCerrar = ({ className = "h-5 w-5" }: P) => (
   <svg viewBox="0 0 24 24" className={className} {...base}><path d="M6 6l12 12M18 6L6 18" /></svg>

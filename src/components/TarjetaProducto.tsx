@@ -15,7 +15,8 @@ export function TextoAgregar({ cantidad, tope }: { cantidad: number; tope: boole
   return <>{tope ? "Sin más unidades" : cantidad ? "Agregar otra" : "Agregar"}</>;
 }
 
-export function TarjetaProducto({ producto: p, prioridad = false }: { producto: Producto; prioridad?: boolean }) {
+/** `cinta`: etiqueta opcional arriba a la derecha de la foto (ej.: "Top ventas") */
+export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { producto: Producto; prioridad?: boolean; cinta?: string }) {
   const { version, elegirVersion, cantidadDe, agregar, avisar } = useTienda();
   const i = Math.min(version(p.id), p.opciones.length - 1);
   const o = p.opciones[i] ?? p.opciones[0]!;
@@ -31,6 +32,7 @@ export function TarjetaProducto({ producto: p, prioridad = false }: { producto: 
       <a href={hrefProducto(p.id)} tabIndex={-1} aria-hidden="true" className="relative block aspect-square bg-white p-4">
         <FotoProducto producto={p} alt="" prioridad={prioridad} className="transition-transform duration-300 group-hover:scale-[1.02]" />
         <Insignia producto={p} />
+        {cinta && <span className="absolute right-2 top-2 rounded-sm bg-acento px-1.5 py-0.5 font-mono text-[10.5px] font-semibold uppercase tracking-wide text-tinta">{cinta}</span>}
       </a>
       <div className="flex flex-1 flex-col gap-1.5 border-t border-linea/70 p-3.5 sm:p-4">
         <p className="etiqueta-mono truncate">{etiquetaDe(p) || " "}</p>

@@ -11,7 +11,7 @@
   ::selection { background: theme("colors.marca.suave"); }
   [hidden] { display: none !important; }
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   }
 }
 
@@ -92,4 +92,14 @@
   .sin-barra::-webkit-scrollbar { display: none; }
   .ancho-108 { font-stretch: 108%; }
   .ancho-122 { font-stretch: 122%; }
+
+  /* Portada: fondo de puntos, como una placa de circuito */
+  .fondo-puntos { background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1.5px); background-size: 22px 22px; }
+  .animar-flotar { animation: flotar 6s ease-in-out infinite; }
+  .animar-llama { transform-origin: 50% 90%; animation: llama 1.6s ease-in-out infinite; }
+  .animar-avance { animation: avance linear forwards; }
 }
+
+@keyframes flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes llama { 0%, 100% { transform: scale(1) rotate(-4deg); } 50% { transform: scale(1.14) rotate(4deg); } }
+@keyframes avance { from { transform: scaleX(0); } to { transform: scaleX(1); } }
