@@ -93,7 +93,7 @@ Todas se ejecutaron el 27 de octubre de 2026 en este equipo (Node 22.11, Chrome 
 | `npm install` | Correcto |
 | `npm run typecheck` / `tsc -b` | Sin errores |
 | `npm run build` | Correcto |
-| `npm run verificar` | 963 de 963 productos en el mismo orden, con los mismos nombres, precios, versiones, fotos, marcas y categorías. Galerías y descripciones idénticas, todas las fotos existen, sin hojas de cálculo ni llaves secretas. |
+| `npm run verificar -- --estricto` | 963 de 963 productos en el mismo orden, con los mismos nombres, precios, versiones, fotos, marcas y categorías. Galerías y descripciones idénticas, todas las fotos existen, sin hojas de cálculo ni llaves secretas. |
 | Prueba en negativo de `verificar` (copia con un precio alterado y sin fotos) | Detectó las diferencias y terminó con error, como debe |
 | `npm run auditoria` | 0 ids repetidos, 0 fotos faltantes o rotas, 0 galerías rotas, 0 categorías inválidas, 0 precios inválidos |
 
@@ -157,7 +157,7 @@ Todas se ejecutaron el 27 de octubre de 2026 en este equipo (Node 22.11, Chrome 
 | Lo que descarga el inicio | 162 KB comprimidos | ~125 KB comprimidos |
 | Descripciones de productos | Siempre, en el archivo único | Solo al abrir un producto (55 KB comprimidos) |
 | Organización | Datos, estilos y código en un solo archivo | Datos en JSON, 15 componentes, 7 páginas, lógica separada y tipos |
-| Comprobación del catálogo | Manual | `npm run verificar` (también antes de cada publicación) |
+| Comprobación del catálogo | Manual | `npm run verificar` antes de cada publicación: bloquea fotos faltantes, precios inválidos o datos privados, e informa lo que cambió respecto a la tienda anterior |
 | Publicación | Automática al subir a `main` | Automática al subir a `main`, solo si pasa la verificación del catálogo |
 
 ## 8. Archivos

@@ -23,9 +23,9 @@ npm run dev          # abre la tienda en http://localhost:5173/RocketFix/ y se a
 | `npm run build` | Revisa los tipos y compila la versión para publicar en `dist/` |
 | `npm run preview` | Sirve `dist/` en http://localhost:4173/RocketFix/ para probarla tal como quedará publicada |
 | `npm run typecheck` | Solo revisa los tipos de TypeScript |
-| `npm run verificar` | Comprueba que el catálogo sea el mismo de la tienda original (productos, precios, fotos) y que no haya datos privados |
+| `npm run verificar` | Revisa el catálogo antes de publicar: ids únicos, precios válidos, fotos que existen y nada privado. También lista lo que cambió respecto a la tienda anterior (solo informativo; con `-- --estricto` cuenta como error) |
 | `npm run auditoria` | Regenera `docs/auditoria-catalogo.md` |
-| `npm run catalogo` | Vuelve a extraer los datos de `legacy/index.html` a `src/data/` |
+| `npm run catalogo` | Solo se usó para la migración: vuelve a extraer los datos de `legacy/index.html` y **sobrescribe `src/data/`**, borrando los cambios hechos después. No lo uses para el trabajo diario |
 
 ## Estructura
 
