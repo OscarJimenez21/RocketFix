@@ -30,3 +30,15 @@ export const TIENDAS: InfoTienda[] = [
 ];
 
 export const tiendaPorVista = (vista: string) => TIENDAS.find(t => t.vista === vista);
+export const tiendaPorId = (id: TiendaId) => TIENDAS.find(t => t.id === id);
+
+/** Secciones con más ventas y más productos: van a la vista en el menú y en la portada */
+export const PRINCIPALES: TiendaId[] = ["cel", "pc", "comp", "per", "con", "acc"];
+
+/** Grupos del menú "Todas las categorías" (cada sección aparece en un solo grupo) */
+export const GRUPOS: { titulo: string; tiendas: TiendaId[] }[] = [
+  { titulo: "Celulares y tablets", tiendas: ["cel", "tab", "rel"] },
+  { titulo: "Computación", tiendas: ["pc", "comp", "per"] },
+  { titulo: "Gaming y entretenimiento", tiendas: ["con", "tv", "aud", "par"] },
+  { titulo: "Accesorios y movilidad", tiendas: ["acc", "mov"] }
+];

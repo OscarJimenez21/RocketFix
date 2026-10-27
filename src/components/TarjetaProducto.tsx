@@ -35,7 +35,7 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
         {cinta && <span className="absolute right-2 top-2 rounded-sm bg-acento px-1.5 py-0.5 font-mono text-[10.5px] font-semibold uppercase tracking-wide text-tinta">{cinta}</span>}
       </a>
       <div className="flex flex-1 flex-col gap-1.5 border-t border-linea/70 p-3.5 sm:p-4">
-        <p className="etiqueta-mono truncate">{etiquetaDe(p) || " "}</p>
+        <p className="etiqueta truncate">{etiquetaDe(p) || " "}</p>
         <h3 className="font-sans text-[15px] font-semibold leading-snug tracking-normal">
           <a href={hrefProducto(p.id)} className="line-clamp-2 hover:text-marca">{p.nombre}</a>
         </h3>

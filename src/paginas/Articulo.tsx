@@ -78,7 +78,7 @@ export function Articulo({ id }: { id: string }) {
             <button type="button" onClick={irAlFormulario} className="btn btn-sm btn-borde mt-3 w-full">Llenar la solicitud</button>
           </div>
           <nav aria-label="Otros artículos" className="mt-6">
-            <p className="etiqueta-mono mb-2">Otros artículos</p>
+            <p className="etiqueta mb-2">Otros artículos</p>
             <ul className="grid gap-2 text-sm">{ARTICULOS.filter(x => x.id !== id).map(x => <li key={x.id}><a href={`#${x.id}`} className="enlace font-medium">{x.titulo}</a></li>)}</ul>
           </nav>
         </aside>
@@ -86,7 +86,7 @@ export function Articulo({ id }: { id: string }) {
       <section id="form-articulo" aria-labelledby="t-form" className="border-t border-linea bg-fondo">
         <div className="contenedor grid grid-cols-1 gap-6 py-10 md:grid-cols-[300px_minmax(0,1fr)]">
           <div>
-            <p className="etiqueta-mono">Escríbenos</p>
+            <p className="etiqueta">Escríbenos</p>
             <h2 id="t-form" className="mt-1 text-2xl font-extrabold">{form.titulo}</h2>
             <p className="mt-2 text-sm text-tinta-2">{form.texto}</p>
           </div>

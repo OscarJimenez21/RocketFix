@@ -14,8 +14,9 @@ export function useAtencion() {
   return estado;
 }
 
-export function PuntoEstado({ abierto }: { abierto: boolean }) {
-  return <span aria-hidden="true" className={`inline-block h-2 w-2 rounded-full ${abierto ? "bg-marca-claro" : "bg-tinta-3"}`} />;
+/** Punto verde (abierto) o gris (cerrado). `claro`: sobre fondo oscuro */
+export function PuntoEstado({ abierto, claro = false }: { abierto: boolean; claro?: boolean }) {
+  return <span aria-hidden="true" className={`inline-block h-2 w-2 shrink-0 rounded-full ${abierto ? "bg-marca-claro" : claro ? "bg-white/50" : "bg-tinta-3"}`} />;
 }
 
 export function BotonCopiar({ texto, className = "" }: { texto: string; className?: string }) {
@@ -33,7 +34,7 @@ export function Contacto() {
     <section id="contacto" aria-labelledby="t-contacto" className="border-t border-linea bg-fondo">
       <div className="contenedor grid gap-8 py-12 md:grid-cols-3">
         <div>
-          <p className="etiqueta-mono">Contacto</p>
+          <p className="etiqueta">Contacto</p>
           <h2 id="t-contacto" className="mt-1 text-2xl font-extrabold">Escríbenos por WhatsApp</h2>
           <p className="mt-3 text-[15px] text-tinta-2">Tienda en línea con atención por WhatsApp. Te enviamos tus compras a domicilio, coordinamos contigo cómo recibir los equipos que vas a reparar y vamos a tu casa o negocio para instalar cámaras.</p>
         </div>

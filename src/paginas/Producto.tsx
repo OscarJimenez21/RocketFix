@@ -56,7 +56,7 @@ export default function Producto({ id }: { id: string }) {
         <Galeria producto={p} />
 
         <div className="min-w-0">
-          <p className="etiqueta-mono">{etiquetaDe(p)}</p>
+          <p className="etiqueta">{etiquetaDe(p)}</p>
           {p.specs.length > 0 && (
             <ul className="mt-3 flex flex-wrap gap-1.5">{p.specs.map(s => <li key={s} className="rounded-sm bg-fondo px-2 py-1 text-[13px] text-tinta-2">{s}</li>)}</ul>
           )}
@@ -64,7 +64,7 @@ export default function Producto({ id }: { id: string }) {
 
           {p.opciones.length > 1 && (
             <fieldset className="mt-6">
-              <legend className="etiqueta-mono mb-2">{p.etiqueta || "Versión"}</legend>
+              <legend className="etiqueta mb-2">{p.etiqueta || "Versión"}</legend>
               <div className="grid gap-2 sm:grid-cols-2">
                 {p.opciones.map((op, j) => (
                   <button key={j} type="button" aria-pressed={j === i} onClick={() => elegirVersion(p.id, j)}
@@ -98,7 +98,7 @@ export default function Producto({ id }: { id: string }) {
           <section aria-labelledby="h-desc" className="mt-8 border-t border-linea pt-6">
             <h2 id="h-desc" className="text-xl font-extrabold">Descripción</h2>
             <p className="mt-3 leading-relaxed text-tinta-2">{d.resumen}</p>
-            <h3 className="etiqueta-mono mt-6">Características</h3>
+            <h3 className="etiqueta mt-6">Características</h3>
             <dl className="mt-2 overflow-hidden rounded-md border border-linea text-sm">
               {d.filas.map(([k, v], n) => (
                 <div key={`${k}-${n}`} className={`grid grid-cols-[minmax(110px,36%)_1fr] gap-3 px-4 py-2.5 ${n ? "border-t border-linea" : ""} ${n % 2 ? "bg-fondo" : ""}`}>
@@ -106,7 +106,7 @@ export default function Producto({ id }: { id: string }) {
                 </div>
               ))}
             </dl>
-            <h3 className="etiqueta-mono mt-6">Qué incluye la caja</h3>
+            <h3 className="etiqueta mt-6">Qué incluye la caja</h3>
             <p className="mt-2 text-tinta-2">{d.incluye}</p>
             <p className="mt-3 text-[13px] text-tinta-3">El contenido puede variar según el fabricante. Si necesitas algo puntual, pregúntanos antes de comprar.</p>
           </section>

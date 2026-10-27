@@ -31,7 +31,7 @@ export function Buscar({ q }: { q: string }) {
           <div className="rounded-md border border-dashed border-linea-fuerte px-6 py-10 text-center">
             <p className="text-tinta-2">Pregúntanos por WhatsApp: puede que lo consigamos por pedido.</p>
             <a href={waLink(q.trim() ? `Hola, estoy buscando: ${q.trim()}` : undefined)} target="_blank" rel="noopener" className="enlace mt-2 inline-block">Preguntar por WhatsApp</a>
-            <p className="etiqueta-mono mt-8">Búsquedas populares</p>
+            <p className="etiqueta mt-8">Búsquedas populares</p>
             <div className="mt-3 flex flex-wrap justify-center gap-2">
               {BUSQUEDAS_POPULARES.map(b => <a key={b} href={hrefBusqueda(b)} className="rounded-full border border-linea px-3 py-1 text-sm hover:border-linea-fuerte">{b}</a>)}
             </div>

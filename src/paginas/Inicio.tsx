@@ -1,25 +1,24 @@
 import { useEffect, useMemo, useState } from "react";
-import { CONFIG, MAS_VENDIDOS, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
+import { CONFIG, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
 import { camposServicio } from "../data/formularios";
-import { TIENDAS } from "../data/tiendas";
+import { PRINCIPALES, TIENDAS, tiendaPorId } from "../data/tiendas";
 import { PuntoEstado, useAtencion } from "../components/Contacto";
 import { FilaProductos } from "../components/FilaProductos";
 import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
 import { FotoProducto } from "../components/FotoProducto";
-import { IconoCamion, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
+import { IconoCamion, IconoCheck, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { Ilustracion } from "../components/Ilustracion";
-import { TarjetaProducto } from "../components/TarjetaProducto";
 import { dinero } from "../lib/formato";
 import { hrefProducto } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
-import type { Producto } from "../types";
+import type { Producto, Servicio } from "../types";
 
-/** Productos que pasan en la vitrina de la portada, en este orden */
+/** Productos de la vitrina de la portada, en este orden */
 const VITRINA = ["ip18pm", "ss26u", "p45631", "mbairm5", "switch2", "appro3"];
-const ESPERA_VITRINA = 4500;
+const ESPERA_VITRINA = 6000;
 
-/** Vitrina de la portada: cambia sola de producto (se detiene con el mouse encima, al usar el teclado
-    o si la persona pidió menos movimiento); los puntos de abajo eligen uno */
+/** Vitrina: un producto grande y los demás en miniatura. Cambia sola con un fundido (se detiene con el mouse encima,
+    al usar el teclado o si la persona pidió menos movimiento). */
 function Vitrina() {
   const productos = useMemo(() => VITRINA.map(id => porId[id]).filter((p): p is Producto => Boolean(p)), []);
   const [i, setI] = useState(0);
@@ -35,36 +34,30 @@ function Vitrina() {
   const p = productos[i];
   if (!p) return null;
   return (
-    <div role="region" aria-roledescription="carrusel" aria-label="Productos estrella" className="relative mx-auto w-full max-w-[440px]"
+    <div role="region" aria-roledescription="carrusel" aria-label="Productos destacados" className="tarjeta w-full overflow-hidden border-0 text-tinta"
       onMouseEnter={() => setQuieta(true)} onMouseLeave={() => setQuieta(false)} onFocus={() => setQuieta(true)} onBlur={() => setQuieta(false)}>
-      {/* Luz suave detrás de la vitrina */}
-      <div aria-hidden="true" className="pointer-events-none absolute -inset-12 bg-[radial-gradient(closest-side,rgba(61,213,152,0.3),transparent)]" />
-      <div className="relative overflow-hidden rounded-lg bg-white text-tinta shadow-flota">
-        <div className="relative aspect-[5/4] sm:aspect-square">
-          {productos.map((x, j) => (
-            <a key={x.id} href={hrefProducto(x.id)} tabIndex={j === i ? 0 : -1} aria-hidden={j !== i}
-              className={`absolute inset-0 p-8 transition-all duration-700 ease-out sm:p-10 ${j === i ? "scale-100 opacity-100" : "pointer-events-none scale-90 opacity-0"}`}>
-              <span className="animar-flotar block h-full w-full"><FotoProducto producto={x} alt={x.nombre} prioridad={j === 0} /></span>
-            </a>
-          ))}
-          <span className="absolute left-4 top-4 rounded-sm bg-tinta px-2 py-1 font-mono text-[11px] font-semibold uppercase tracking-wide text-white">{etiquetaDe(p)}</span>
-        </div>
-        <div className="flex items-center justify-between gap-3 border-t border-linea px-5 py-4" aria-live={quieta ? "polite" : "off"}>
-          <div className="min-w-0">
-            <p className="truncate font-display text-lg font-bold">{p.nombre}</p>
-            <p className="text-sm text-tinta-2">{p.opciones.length > 1 && "Desde "}<b className="font-display text-base text-tinta">{dinero(desde(p))}</b></p>
-          </div>
-          <a href={hrefProducto(p.id)} className="btn btn-sm btn-primario shrink-0">Ver producto</a>
-        </div>
-        {/* Barra que avanza hasta el siguiente producto */}
-        {!reducir && !quieta && (
-          <span key={i} aria-hidden="true" className="animar-avance absolute inset-x-0 bottom-0 block h-1 origin-left bg-acento" style={{ animationDuration: `${ESPERA_VITRINA}ms` }} />
-        )}
+      <div className="relative aspect-[4/3]">
+        {productos.map((x, j) => (
+          <a key={x.id} href={hrefProducto(x.id)} tabIndex={j === i ? 0 : -1} aria-hidden={j !== i}
+            className={`absolute inset-0 p-6 transition-opacity duration-500 sm:p-8 ${j === i ? "opacity-100" : "pointer-events-none opacity-0"}`}>
+            <FotoProducto producto={x} alt={x.nombre} prioridad={j === 0} />
+          </a>
+        ))}
+        <span className="absolute left-3 top-3 rounded-sm bg-fondo px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-tinta-2">{etiquetaDe(p)}</span>
       </div>
-      <div className="mt-5 flex justify-center gap-2">
+      <div className="flex items-center justify-between gap-3 border-t border-linea px-4 py-3.5 sm:px-5" aria-live={quieta ? "polite" : "off"}>
+        <div className="min-w-0">
+          <p className="truncate font-display text-[17px] font-bold">{p.nombre}</p>
+          <p className="text-sm text-tinta-2">{p.opciones.length > 1 && "Desde "}<b className="font-display text-[15px] tabular-nums text-tinta">{dinero(desde(p))}</b></p>
+        </div>
+        <a href={hrefProducto(p.id)} className="btn btn-sm btn-marca shrink-0">Ver producto</a>
+      </div>
+      <div className="grid grid-cols-6 gap-1.5 border-t border-linea bg-fondo p-2 sm:gap-2 sm:p-2.5">
         {productos.map((x, j) => (
           <button key={x.id} type="button" onClick={() => setI(j)} aria-label={`Ver ${x.nombre}`} aria-current={j === i || undefined}
-            className={`h-2.5 rounded-full transition-all ${j === i ? "w-7 bg-brillo" : "w-2.5 bg-white/35 hover:bg-white/60"}`} />
+            className={`aspect-square rounded border bg-white p-1 transition-colors ${j === i ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
+            <FotoProducto producto={x} alt="" />
+          </button>
         ))}
       </div>
     </div>
@@ -74,46 +67,28 @@ function Vitrina() {
 function Portada() {
   const atencion = useAtencion();
   return (
-    <section className="relative overflow-hidden bg-marca-oscuro text-white">
-      <div aria-hidden="true" className="fondo-puntos absolute inset-0" />
-      <div className="contenedor relative grid items-center gap-10 py-10 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] md:gap-12 md:py-20 lg:py-24">
+    <section className="bg-marca-oscuro text-white">
+      <div className="contenedor grid items-center gap-8 py-9 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)] lg:gap-14 lg:py-14">
         <div>
-          <p className="etiqueta-mono flex items-center gap-2.5 text-marca-menta"><span aria-hidden="true" className="h-px w-8 bg-marca-menta" />Tienda y servicio técnico · Bogotá</p>
-          <h1 tabIndex={-1} className="ancho-122 mt-4 text-[40px] font-extrabold leading-[1.02] text-white sm:text-[54px] lg:text-[66px]">
-            Vendemos, reparamos e instalamos <span className="text-brillo">tecnología</span>
+          <p className="etiqueta text-marca-menta">Tienda de tecnología y servicio técnico · Bogotá</p>
+          <h1 tabIndex={-1} className="mt-3 text-[31px] font-extrabold leading-[1.1] text-white sm:text-[40px] lg:text-[46px]">
+            Tecnología para tu día a día. <span className="text-marca-menta">Soluciones cuando las necesitas.</span>
           </h1>
-          <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-white/80 sm:text-lg">Celulares, computadores, gaming y accesorios con entrega a domicilio. Además, reparamos tus equipos e instalamos cámaras de seguridad.</p>
-          <div className="mt-7 flex flex-wrap gap-2.5 sm:mt-8 sm:gap-3">
-            <a href="#celulares" className="btn btn-primario sm:px-6 sm:text-base">Ver celulares</a>
-            <a href="#computadores" className="btn btn-claro sm:px-6 sm:text-base">Ver computadores</a>
-            <a href="#servicios" className="btn btn-claro sm:px-6 sm:text-base">Servicio técnico</a>
+          <p className="mt-4 max-w-xl text-[16.5px] leading-relaxed text-white/80">
+            Celulares, computadores, gaming y accesorios con entrega a domicilio. Compra con asesoría por WhatsApp y solicita servicio técnico para tu hogar o negocio.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a href="#categorias" className="btn btn-primario">Comprar tecnología</a>
+            <a href="#servicios" className="btn btn-claro">Solicitar servicio técnico</a>
           </div>
-          <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2.5 border-t border-white/15 pt-5 text-sm sm:mt-8 sm:pt-6">
-            <p className="flex items-center gap-2 font-semibold"><PuntoEstado abierto={atencion.abierto} />{atencion.texto}</p>
-            <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-semibold text-white hover:text-marca-menta">
-              <IconoWhatsApp className="h-5 w-5 text-wa-vivo" />{CONFIG.whatsappVisible}
+          <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/80">
+            <p className="flex items-center gap-2"><PuntoEstado abierto={atencion.abierto} claro />{atencion.texto}</p>
+            <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-semibold text-white hover:underline">
+              <IconoWhatsApp className="h-[18px] w-[18px] text-wa-vivo" />{CONFIG.whatsappVisible}
             </a>
-            <p className="text-white/70"><b className="font-display text-base text-white">{PRODUCTOS.length}</b> productos en {TIENDAS.length} categorías</p>
           </div>
         </div>
         <Vitrina />
-      </div>
-    </section>
-  );
-}
-
-function MasVendidos({ productos }: { productos: Producto[] }) {
-  return (
-    <section aria-labelledby="t-vendidos" className="border-b border-linea bg-acento-suave">
-      <div className="contenedor py-10 sm:py-12">
-        <FilaProductos productos={productos} etiqueta="Productos más vendidos" cinta="Top ventas" encabezado={
-          <>
-            <p className="etiqueta-mono">Lo más vendido</p>
-            <h2 id="t-vendidos" className="mt-1 text-2xl font-extrabold sm:text-[30px]">
-              Los que todos quieren <IconoLlama className="animar-llama inline-block h-7 w-7 align-[-5px] text-acento sm:h-8 sm:w-8" />
-            </h2>
-          </>
-        } />
       </div>
     </section>
   );
@@ -139,25 +114,87 @@ function Ventajas() {
   );
 }
 
-function Categorias() {
+function MasVendidos({ productos }: { productos: Producto[] }) {
   return (
-    <section aria-labelledby="t-categorias" className="contenedor py-12">
-      <h2 id="t-categorias" className="text-2xl font-extrabold">Compra por categoría</h2>
-      <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-        {TIENDAS.map(t => {
+    <section aria-labelledby="t-vendidos" className="border-b border-linea bg-fondo">
+      <div className="contenedor py-10 sm:py-12">
+        <FilaProductos productos={productos} etiqueta="Productos más vendidos" cinta="Top ventas" encabezado={
+          <>
+            <p className="etiqueta flex items-center gap-1.5"><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</p>
+            <h2 id="t-vendidos" className="titulo-seccion mt-1">Los que todos quieren</h2>
+          </>
+        } />
+      </div>
+    </section>
+  );
+}
+
+/** Las seis secciones principales con foto; las demás como accesos rápidos, para que la portada no sea un directorio */
+function Categorias() {
+  const principales = PRINCIPALES.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t));
+  const otras = TIENDAS.filter(t => !PRINCIPALES.includes(t.id));
+  return (
+    <section id="categorias" aria-labelledby="t-categorias" className="contenedor py-12">
+      <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
+        <h2 id="t-categorias" className="titulo-seccion">Compra por categoría</h2>
+        <p className="text-sm text-tinta-2">{PRODUCTOS.length} productos en {TIENDAS.length} categorías</p>
+      </div>
+      <ul className="mt-6 grid grid-cols-3 gap-2.5 sm:gap-3 lg:grid-cols-6">
+        {principales.map(t => {
           const p = porId[t.foto] ?? deTienda(t.id).find(x => x.imagen);
           return (
             <li key={t.id}>
-              <a href={`#${t.vista}`} className="group flex h-full flex-col rounded-md border border-linea bg-white p-3 transition-colors hover:border-marca">
-                <span className="block aspect-[4/3] p-2">{p && <FotoProducto producto={p} alt="" className="transition-transform duration-300 group-hover:scale-[1.04]" />}</span>
-                <span className="mt-2 font-semibold">{t.titulo}</span>
-                <span className="text-xs text-tinta-3">{deTienda(t.id).length} productos</span>
+              <a href={`#${t.vista}`} className="tarjeta flex h-full flex-col items-center p-2.5 text-center transition-colors hover:border-marca sm:p-3">
+                <span className="block aspect-square w-full p-1 sm:p-2">{p && <FotoProducto producto={p} alt="" />}</span>
+                <span className="mt-1.5 text-[13.5px] font-semibold leading-tight sm:text-[15px]">{t.menu}</span>
+                <span className="mt-0.5 text-xs text-tinta-3">{deTienda(t.id).length} productos</span>
               </a>
             </li>
           );
         })}
       </ul>
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <span className="mr-1 text-sm text-tinta-2">También:</span>
+        {otras.map(t => (
+          <a key={t.id} href={`#${t.vista}`} className="chip">{t.menu}<span className="text-xs tabular-nums text-tinta-3">{deTienda(t.id).length}</span></a>
+        ))}
+      </div>
     </section>
+  );
+}
+
+/** Instalación de cámaras: línea de negocio propia, con sus paquetes de referencia (los mismos del artículo) */
+function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => void }) {
+  return (
+    <article aria-labelledby="t-camaras" className="mt-4 overflow-hidden rounded-md bg-marca-oscuro text-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
+      <div className="p-6 sm:p-8">
+        <p className="etiqueta text-marca-menta">Para casas, apartamentos y negocios</p>
+        <h3 id="t-camaras" className="mt-1 text-[22px] font-extrabold text-white sm:text-2xl">Instalación de cámaras de seguridad</h3>
+        <p className="mt-2 text-white/80">{servicio.texto}</p>
+        <ul className="mt-4 grid gap-2 text-sm text-white/90">
+          {servicio.trabajos.map(t => <li key={t} className="flex gap-2"><IconoCheck className="mt-0.5 h-4 w-4 shrink-0 text-marca-menta" />{t}</li>)}
+        </ul>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <button type="button" onClick={cotizar} className="btn btn-primario">Cotizar instalación</button>
+          <a href="#blog-camaras" className="btn btn-claro">Paquetes y preguntas frecuentes</a>
+        </div>
+      </div>
+      <div className="border-t border-white/10 bg-marca-noche/40 p-6 sm:p-8 lg:border-l lg:border-t-0">
+        <p className="etiqueta text-white/70">Paquetes de referencia</p>
+        <ul className="mt-2 divide-y divide-white/10">
+          {PAQUETES.map(pk => (
+            <li key={pk.nombre} className="flex items-center justify-between gap-4 py-3.5">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="flex h-11 w-12 shrink-0 items-center justify-center rounded bg-white"><Ilustracion nombre={pk.ilustracion} className="h-8 w-10 text-marca-medio" /></span>
+                <div className="min-w-0"><p className="font-semibold">{pk.nombre}</p><p className="text-xs text-white/70">{pk.specs.join(" · ")}</p></div>
+              </div>
+              <p className="shrink-0 text-right"><span className="block text-xs text-white/60">Desde</span><b className="font-display tabular-nums">{dinero(pk.desde)}</b></p>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 text-xs leading-relaxed text-white/70">Valores de referencia con instalación incluida. El precio final depende de la distancia del cableado y de la altura de los puntos; te lo confirmamos en la visita técnica.</p>
+      </div>
+    </article>
   );
 }
 
@@ -168,41 +205,45 @@ function Servicios() {
   const campos = useMemo(() => camposServicio(servicio, titulos), [servicio]); // eslint-disable-line react-hooks/exhaustive-deps
   const solicitar = (titulo: string) => {
     setElegido(titulo);
-    document.getElementById("orden")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const caja = document.getElementById("orden");
+    caja?.scrollIntoView({ behavior: "smooth", block: "start" });
+    caja?.querySelector<HTMLElement>("input")?.focus({ preventScroll: true });
   };
+  const reparacion = SERVICIOS.filter(s => !s.camaras);
+  const camaras = SERVICIOS.find(s => s.camaras);
   return (
     <section id="servicios" aria-labelledby="t-servicios" className="border-y border-linea bg-fondo">
-      <div className="contenedor py-12">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="etiqueta-mono">Servicio técnico</p>
-            <h2 id="t-servicios" className="mt-1 text-2xl font-extrabold">Reparamos e instalamos</h2>
-          </div>
-          <p className="max-w-md text-sm text-tinta-2">Coordinamos contigo por WhatsApp cómo recibir tu equipo, y vamos a tu casa o negocio para instalar cámaras.</p>
+      <div className="contenedor py-12 sm:py-14">
+        <div className="max-w-2xl">
+          <p className="etiqueta">Servicio técnico</p>
+          <h2 id="t-servicios" className="titulo-seccion mt-1">Reparamos tus equipos e instalamos cámaras de seguridad</h2>
+          <p className="mt-2 text-tinta-2">Te decimos el valor antes de reparar. Coordinamos por WhatsApp cómo recibir tu equipo y vamos a tu casa o negocio para instalar cámaras.</p>
         </div>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {SERVICIOS.map(s => (
-            <article key={s.id} className="flex flex-col rounded-md border border-linea bg-white p-5">
-              <Ilustracion nombre={s.ilustracion} className="h-14 w-[72px] text-marca-medio" />
-              <h3 className="mt-3 text-lg font-bold">{s.titulo}</h3>
-              <p className="mt-1 text-sm text-tinta-2">{s.texto}</p>
-              <ul className="mt-3 grid gap-1.5 text-sm">
-                {s.trabajos.map(t => <li key={t} className="flex gap-2"><span aria-hidden="true" className="mt-2 h-1 w-1 shrink-0 rounded-full bg-marca" />{t}</li>)}
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {reparacion.map(s => (
+            <article key={s.id} className="tarjeta flex flex-col p-5 sm:p-6">
+              <div className="flex items-start gap-4">
+                <span className="flex h-14 w-16 shrink-0 items-center justify-center rounded bg-marca-suave"><Ilustracion nombre={s.ilustracion} className="h-11 w-14 text-marca-medio" /></span>
+                <div><h3 className="text-lg font-bold">{s.titulo}</h3><p className="mt-0.5 text-sm text-tinta-2">{s.texto}</p></div>
+              </div>
+              <ul className="mt-4 grid gap-x-4 gap-y-1.5 text-sm sm:grid-cols-2">
+                {s.trabajos.map(t => <li key={t} className="flex gap-2"><IconoCheck className="mt-0.5 h-4 w-4 shrink-0 text-marca" />{t}</li>)}
               </ul>
-              <div className="mt-auto flex flex-wrap items-center gap-4 pt-5">
-                <button type="button" onClick={() => solicitar(s.titulo)} className="btn btn-sm btn-borde">Solicitar este servicio</button>
-                <a href={`#${s.articulo}`} className="enlace text-sm">Leer el artículo</a>
+              <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-5">
+                <button type="button" onClick={() => solicitar(s.titulo)} className="btn btn-sm btn-marca">Solicitar cotización</button>
+                <a href={`#${s.articulo}`} className="enlace text-sm">Ver detalles y tiempos</a>
               </div>
             </article>
           ))}
         </div>
-        <div id="orden" className="mt-8 grid gap-6 rounded-md border border-linea bg-white p-5 md:grid-cols-[280px_1fr] md:p-7">
+        {camaras && <Camaras servicio={camaras} cotizar={() => solicitar(camaras.titulo)} />}
+        <div id="orden" className="tarjeta mt-8 grid gap-6 p-5 sm:p-7 md:grid-cols-[260px_minmax(0,1fr)] md:gap-10">
           <div>
             <h3 className="text-xl font-bold">Solicita un servicio</h3>
-            <p className="mt-2 text-sm text-tinta-2">Cuéntanos qué necesitas. Con estos datos te respondemos por WhatsApp con un valor aproximado o la fecha de la visita.</p>
-            <ol className="mt-4 grid gap-2 text-sm text-tinta-2">
-              {["Llenas este formulario.", "Se abre WhatsApp con tu solicitud escrita y la envías.", "Te respondemos con el diagnóstico inicial o agendamos la visita."].map((t, i) => (
-                <li key={t} className="flex gap-2.5"><span className="font-mono text-xs font-semibold text-marca">{i + 1}</span>{t}</li>
+            <p className="mt-2 text-sm text-tinta-2">Cuéntanos qué necesitas. Te respondemos por WhatsApp con un valor aproximado o la fecha de la visita.</p>
+            <ol className="mt-4 grid gap-2.5 text-sm text-tinta-2">
+              {["Llenas este formulario.", "Se abre WhatsApp con tu solicitud escrita. Envía ese mensaje para completar la solicitud.", "Te respondemos con el diagnóstico inicial o agendamos la visita."].map((t, n) => (
+                <li key={t} className="flex gap-2.5"><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-marca-suave text-[11px] font-bold text-marca-oscuro">{n + 1}</span>{t}</li>
               ))}
             </ol>
           </div>
@@ -217,17 +258,17 @@ function Servicios() {
 function ComoComprar() {
   const pasos = [
     ["Arma tu carrito", "Elige la versión de cada equipo y agrégalo. Puedes cambiar las cantidades antes de enviar."],
-    ["Envía el pedido por WhatsApp", "El mensaje sale escrito con los productos, el total y la forma de entrega."],
+    ["Envía el pedido por WhatsApp", "El mensaje sale escrito con los productos, el total y la forma de entrega. Enviarlo no es un pago."],
     ["Confirmamos y entregamos", `Te confirmamos disponibilidad y pago. En Bogotá y alrededores te lo llevamos el mismo día y puedes pagar contra entrega; al resto de Colombia lo enviamos con pago anticipado. Envío gratis en Bogotá desde ${dinero(CONFIG.envios.bogota.gratisDesde)} y al resto del país desde ${dinero(CONFIG.envios.nacional.gratisDesde)}.`]
   ];
   return (
-    <section aria-labelledby="t-como" className="mt-12 border-t border-linea pt-10">
-      <h2 id="t-como" className="text-xl font-extrabold">Cómo comprar</h2>
-      <ol className="mt-5 grid gap-6 md:grid-cols-3">
+    <section aria-labelledby="t-como" className="contenedor py-12">
+      <h2 id="t-como" className="titulo-seccion">Cómo comprar</h2>
+      <ol className="mt-6 grid gap-6 md:grid-cols-3 md:gap-8">
         {pasos.map(([t, d], i) => (
           <li key={t} className="flex gap-3">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-marca-suave font-mono text-sm font-semibold text-marca">{i + 1}</span>
-            <div><p className="font-semibold">{t}</p><p className="mt-1 text-sm text-tinta-2">{d}</p></div>
+            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-marca-suave text-sm font-bold text-marca-oscuro">{i + 1}</span>
+            <div><p className="font-semibold">{t}</p><p className="mt-1 text-sm leading-relaxed text-tinta-2">{d}</p></div>
           </li>
         ))}
       </ol>
@@ -236,10 +277,9 @@ function ComoComprar() {
 }
 
 export function Inicio({ ancla }: { ancla?: string }) {
-  const vendidos = MAS_VENDIDOS.map(id => porId[id]).filter((p): p is NonNullable<typeof p> => Boolean(p));
-  const destacados = PRODUCTOS.filter(p => p.destacado).slice(0, 4);
+  const vendidos = MAS_VENDIDOS.map(id => porId[id]).filter((p): p is Producto => Boolean(p));
 
-  // #servicios, #contacto y #orden llevan a su sección de la portada
+  // #categorias, #servicios, #contacto y #orden llevan a su sección de la portada
   useEffect(() => {
     if (ancla) requestAnimationFrame(() => document.getElementById(ancla)?.scrollIntoView({ block: "start" }));
   }, [ancla]);
@@ -251,15 +291,7 @@ export function Inicio({ ancla }: { ancla?: string }) {
       <MasVendidos productos={vendidos} />
       <Categorias />
       <Servicios />
-      <div className="contenedor py-12">
-        <section aria-labelledby="t-destacados">
-          <h2 id="t-destacados" className="text-2xl font-extrabold">Productos destacados</h2>
-          <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {destacados.map(p => <li key={p.id}><TarjetaProducto producto={p} /></li>)}
-          </ul>
-        </section>
-        <ComoComprar />
-      </div>
+      <ComoComprar />
     </>
   );
 }

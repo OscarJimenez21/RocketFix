@@ -79,7 +79,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
           className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[70vh] overflow-y-auto rounded-md border border-linea bg-white p-2 shadow-flota">
           {!palabras.length && (
             <>
-              <p className="etiqueta-mono px-2.5 pb-1.5 pt-1">Búsquedas populares</p>
+              <p className="etiqueta px-2.5 pb-1.5 pt-1">Búsquedas populares</p>
               <div className="flex flex-wrap gap-1.5 px-1.5 pb-1.5">
                 {BUSQUEDAS_POPULARES.map((b, i) => (
                   <a key={b} id={idOpcion(i)} role="option" aria-selected={i === activo} href={hrefBusqueda(b)}
@@ -92,7 +92,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
             n++;
             return (
               <a key={t.vista} id={idOpcion(n)} role="option" aria-selected={n === activo} href={`#${t.vista}`} className={claseOpcion(n)}>
-                <span className="etiqueta-mono">Sección</span>
+                <span className="etiqueta">Sección</span>
                 <span className="font-semibold">{VISTAS[TIENDA_VISTA[t.id]]}</span>
                 <span className="ml-auto text-sm text-tinta-3">{deTienda(t.id).length}</span>
               </a>

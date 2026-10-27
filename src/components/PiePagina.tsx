@@ -19,26 +19,26 @@ export function PiePagina() {
           )}
         </div>
         <nav aria-label="Tienda">
-          <p className="etiqueta-mono mb-3 text-white/50">Tienda</p>
+          <p className="etiqueta mb-3 text-white/50">Tienda</p>
           <ul className="grid gap-2 text-sm">{TIENDAS.slice(0, 6).map(t => <li key={t.id}><a href={`#${t.vista}`} className="hover:text-white">{t.titulo}</a></li>)}</ul>
         </nav>
         <nav aria-label="Más secciones">
-          <p className="etiqueta-mono mb-3 text-white/50">&nbsp;</p>
+          <p className="etiqueta mb-3 text-white/50">&nbsp;</p>
           <ul className="grid gap-2 text-sm">{TIENDAS.slice(6).map(t => <li key={t.id}><a href={`#${t.vista}`} className="hover:text-white">{t.titulo}</a></li>)}</ul>
         </nav>
         <div>
-          <p className="etiqueta-mono mb-3 text-white/50">Servicio técnico</p>
+          <p className="etiqueta mb-3 text-white/50">Servicio técnico</p>
           <ul className="grid gap-2 text-sm">
             {ARTICULOS.map(a => <li key={a.id}><a href={`#${a.id}`} className="hover:text-white">{a.titulo}</a></li>)}
             <li><a href="#contacto" className="hover:text-white">Contacto</a></li>
           </ul>
-          <p className="etiqueta-mono mb-2 mt-6 text-white/50">Horario</p>
+          <p className="etiqueta mb-2 mt-6 text-white/50">Horario</p>
           <ul className="grid gap-1 text-sm">{filasHorario().map(([d, h]) => <li key={d}>{d}: {h}</li>)}</ul>
         </div>
       </div>
       <section aria-labelledby="t-pagos" className="border-t border-white/10">
         <div className="contenedor py-8">
-          <h2 id="t-pagos" className="etiqueta-mono mb-4 text-white/50">Formas de pago</h2>
+          <h2 id="t-pagos" className="etiqueta mb-4 text-white/50">Formas de pago</h2>
           <ul className="flex flex-wrap gap-2">
             {PAGOS.lista.map(f => (
               <li key={f.nombre} className="flex h-11 items-center gap-2 rounded bg-white px-3 text-[13px] font-semibold text-tinta">

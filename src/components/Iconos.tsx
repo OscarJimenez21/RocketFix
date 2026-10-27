@@ -36,6 +36,18 @@ export const IconoCamion = ({ className = "h-5 w-5" }: P) => (
 export const IconoTarjeta = ({ className = "h-5 w-5" }: P) => (
   <svg viewBox="0 0 24 24" className={className} {...base}><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 10h18M7 15h4" /></svg>
 );
+export const IconoMenu = ({ className = "h-6 w-6" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+);
+export const IconoCuadricula = ({ className = "h-[18px] w-[18px]" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><rect x="4" y="4" width="6.5" height="6.5" rx="1" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="1" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="1" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1" /></svg>
+);
+export const IconoAbajo = ({ className = "h-4 w-4" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><path d="M6 9l6 6 6-6" /></svg>
+);
+export const IconoCheck = ({ className = "h-4 w-4" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base} strokeWidth={2.2}><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+);
 export const IconoMoto = ({ className = "h-5 w-5" }: P) => (
   <svg viewBox="0 0 24 24" className={className} {...base}><circle cx="5.5" cy="17" r="3" /><circle cx="18.5" cy="17" r="3" /><path d="M8.5 17h6.5l2-7h2.5M15 5h3l1.5 5M5.5 17l3-6h6" /></svg>
 );
