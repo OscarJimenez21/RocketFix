@@ -1,0 +1,165 @@
+{
+ "inicio": {
+  "titulo": "Vendemos, reparamos e instalamos tecnología",
+  "lead": "Celulares, computadores, gaming y accesorios con entrega a domicilio. Además, reparamos tus equipos e instalamos cámaras de seguridad.",
+  "nota": null
+ },
+ "computadores": {
+  "titulo": "Computadores",
+  "lead": "Portátiles y PC de escritorio listos para usar. Si buscas piezas sueltas, mira la sección de componentes.",
+  "nota": {
+   "titulo": "¿No sabes cuál elegir?",
+   "texto": "Cuéntanos para qué lo vas a usar y cuánto quieres invertir. Te recomendamos opciones.",
+   "enlace": "Pedir asesoría por WhatsApp →",
+   "href": null,
+   "whatsapp": "Hola {nombre}, estoy buscando un computador. Lo voy a usar para: "
+  }
+ },
+ "componentes": {
+  "titulo": "Componentes de computador",
+  "lead": "Procesadores, memoria RAM, discos SSD, tarjetas de video, tarjetas madre y fuentes de poder para armar o mejorar tu PC.",
+  "nota": {
+   "titulo": "¿Vas a armar o mejorar tu PC?",
+   "texto": "Dinos qué equipo tienes y qué quieres lograr. Te recomendamos piezas compatibles con tu presupuesto.",
+   "enlace": "Pedir asesoría por WhatsApp →",
+   "href": null,
+   "whatsapp": "Hola {nombre}, quiero armar o mejorar mi PC. ¿Me pueden asesorar?"
+  }
+ },
+ "perifericos": {
+  "titulo": "Periféricos y gaming",
+  "lead": "Monitores, teclados, mouse, diademas, sillas gamer, cámaras web, streaming, redes, energía y cables para tu setup. Las consolas, los controles y los timones están en Consolas.",
+  "nota": {
+   "titulo": "¿Armando tu setup?",
+   "texto": "Dinos qué usas y cuánto quieres invertir. Te ayudamos a combinar monitor, teclado, mouse y diadema.",
+   "enlace": "Pedir asesoría por WhatsApp →",
+   "href": null,
+   "whatsapp": "Hola {nombre}, quiero armar mi setup. Estoy buscando: "
+  }
+ },
+ "consolas": {
+  "titulo": "Consolas y videojuegos",
+  "lead": "PlayStation 5, Nintendo Switch 2 y ROG Xbox Ally, con controles, gafas de realidad virtual y timones con pedales.",
+  "nota": {
+   "titulo": "¿Buscas una consola o un juego que no ves?",
+   "texto": "Escríbenos con la referencia y te decimos si lo podemos conseguir y cuánto vale.",
+   "enlace": "Preguntar por WhatsApp →",
+   "href": null,
+   "whatsapp": "Hola {nombre}, estoy buscando esta consola o juego: "
+  }
+ },
+ "televisores": {
+  "titulo": "Televisores y hogar",
+  "lead": "Smart TV Samsung, Xiaomi, Fly y Corn de 32 a 43 pulgadas, y aspiradoras para tu casa.",
+  "nota": {
+   "titulo": "¿De qué tamaño lo necesitas?",
+   "texto": "Dinos en qué espacio va y a qué distancia lo vas a ver. Te recomendamos el tamaño indicado.",
+   "enlace": "Pedir asesoría por WhatsApp →",
+   "href": null,
+   "whatsapp": "Hola {nombre}, estoy buscando un televisor de este tamaño: "
+  }
+ },
+ "celulares": {
+  "titulo": "Celulares",
+  "lead": "iPhone, Samsung, Xiaomi, Motorola, Honor y más marcas. En cada equipo eliges la capacidad y la versión antes de agregarlo. Los marcados como CPO son reacondicionados certificados.",
+  "nota": {
+   "titulo": "¿Tu celular está dañado?",
+   "texto": "Cambiamos pantallas, baterías y puertos de carga, y revisamos celulares mojados.",
+   "enlace": "Ver reparación de celulares →",
+   "href": "blog-celulares",
+   "whatsapp": null
+  }
+ },
+ "tablets": {
+  "titulo": "Tablets",
+  "lead": "iPad, Samsung Galaxy Tab, Redmi Pad y Tecno. El Apple Pencil y los teclados para iPad están en Accesorios.",
+  "nota": {
+   "titulo": "¿Para estudiar, trabajar o dibujar?",
+   "texto": "Cuéntanos para qué la vas a usar y te recomendamos la tablet indicada para tu presupuesto.",
+   "enlace": "Pedir asesoría por WhatsApp →",
+   "href": null,
+   "whatsapp": "Hola {nombre}, estoy buscando una tablet. La voy a usar para: "
+  }
+ },
+ "relojes": {
+  "titulo": "Relojes inteligentes",
+  "lead": "Apple Watch, Samsung Galaxy Watch, Huawei y Xiaomi. Relojes y manillas para medir tu actividad y tu sueño y recibir notificaciones.",
+  "nota": {
+   "titulo": "¿Con qué celular lo vas a usar?",
+   "texto": "Dinos qué celular tienes y te decimos qué relojes son compatibles con él.",
+   "enlace": "Pedir asesoría por WhatsApp →",
+   "href": null,
+   "whatsapp": "Hola {nombre}, estoy buscando un reloj inteligente. Mi celular es: "
+  }
+ },
+ "audifonos": {
+  "titulo": "Audífonos",
+  "lead": "AirPods, Samsung Galaxy Buds, Redmi Buds, Huawei FreeBuds y audífonos con cable. Las diademas gamer están en Periféricos.",
+  "nota": {
+   "titulo": "¿No sabes cuáles elegir?",
+   "texto": "Dinos qué celular tienes y cuánto quieres invertir. Te recomendamos los que mejor funcionan con tu equipo.",
+   "enlace": "Pedir asesoría por WhatsApp →",
+   "href": null,
+   "whatsapp": "Hola {nombre}, estoy buscando audífonos. Mi celular es: "
+  }
+ },
+ "parlantes": {
+  "titulo": "Parlantes",
+  "lead": "Parlantes Bluetooth JBL y Xiaomi para llevar a todas partes, y parlantes y barras de sonido para tu computador.",
+  "nota": {
+   "titulo": "¿Para una fiesta o para tu escritorio?",
+   "texto": "Cuéntanos dónde lo vas a usar y te recomendamos el tamaño y la potencia que necesitas.",
+   "enlace": "Pedir asesoría por WhatsApp →",
+   "href": null,
+   "whatsapp": "Hola {nombre}, estoy buscando un parlante para: "
+  }
+ },
+ "accesorios": {
+  "titulo": "Accesorios",
+  "lead": "Cargadores originales, cables, power banks, Apple Pencil, teclados para iPad y AirTag.",
+  "nota": {
+   "titulo": "¿No encuentras un accesorio?",
+   "texto": "Pregúntanos por WhatsApp. Si no lo tenemos, te decimos si lo podemos conseguir.",
+   "enlace": "Preguntar por WhatsApp →",
+   "href": null,
+   "whatsapp": "Hola {nombre}, estoy buscando este accesorio: "
+  }
+ },
+ "patinetas": {
+  "titulo": "Patinetas eléctricas",
+  "lead": "Patinetas eléctricas Xiaomi para moverte por la ciudad.",
+  "nota": {
+   "titulo": "¿Tienes dudas antes de comprar?",
+   "texto": "Te contamos cuántos kilómetros rinde cada una con una carga, cuánto peso soporta y cómo es la garantía.",
+   "enlace": "Preguntar por WhatsApp →",
+   "href": null,
+   "whatsapp": "Hola {nombre}, quiero información sobre las patinetas eléctricas."
+  }
+ },
+ "blog": {
+  "titulo": "Blog y servicio técnico",
+  "lead": "Te explicamos cómo trabajamos en cada servicio, cuánto tarda y qué incluye. Al final de cada artículo puedes escribirnos.",
+  "nota": {
+   "titulo": "¿Tienes una pregunta rápida?",
+   "texto": "Escríbenos al Copiar",
+   "enlace": "Abrir chat de WhatsApp →",
+   "href": null,
+   "whatsapp": ""
+  }
+ },
+ "blog-camaras": {
+  "titulo": "Instalación de cámaras de seguridad",
+  "lead": "Cómo elegir entre cámaras WiFi y un kit con grabador, qué resolución necesitas y cómo es la instalación de principio a fin.",
+  "nota": null
+ },
+ "blog-celulares": {
+  "titulo": "Reparación de celulares",
+  "lead": "Qué daños reparamos, cuánto tarda cada arreglo y qué hacer mientras tanto si tu celular se mojó o dejó de cargar.",
+  "nota": null
+ },
+ "blog-computadores": {
+  "titulo": "Mantenimiento y reparación de computadores",
+  "lead": "Cada cuánto hacerle mantenimiento a tu equipo, qué incluye, y las reparaciones y mejoras que más le alargan la vida.",
+  "nota": null
+ }
+}

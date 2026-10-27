@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base: letras de la marca, fondo y foco visible para teclado */
+@layer base {
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 8rem; }
+  body { @apply bg-white font-sans text-tinta antialiased; font-size: 16px; line-height: 1.5; }
+  h1, h2, h3 { @apply font-display text-tinta; font-stretch: 108%; letter-spacing: -0.01em; }
+  :focus-visible { outline: 2px solid theme("colors.marca.DEFAULT"); outline-offset: 2px; }
+  ::selection { background: theme("colors.marca.suave"); }
+  [hidden] { display: none !important; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+}
+
+@layer components {
+  .contenedor { @apply mx-auto w-full max-w-pagina px-4 sm:px-6; }
+  .etiqueta-mono { @apply font-mono text-[11px] font-semibold uppercase tracking-[0.08em] text-tinta-2; }
+
+  .btn { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded px-4 text-[15px] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-sm { @apply min-h-[38px] px-3 text-sm; }
+  .btn-primario { @apply bg-acento text-white hover:bg-acento-hover; }
+  .btn-marca { @apply bg-marca text-white hover:bg-marca-hover; }
+  .btn-wa { @apply bg-wa text-white hover:bg-wa-hover; }
+  .btn-borde { @apply border border-linea-fuerte bg-white text-tinta hover:border-tinta-2; }
+  .btn-claro { @apply border border-white/30 bg-transparent text-white hover:bg-white/10; }
+  .enlace { @apply font-semibold text-marca underline-offset-4 hover:underline; }
+
+  .campo { @apply block w-full rounded border border-linea-fuerte bg-white px-3 py-2.5 text-[15px] text-tinta placeholder:text-tinta-3 focus:border-marca focus:outline-none focus:ring-2 focus:ring-marca/20; }
+  .campo-invalido { @apply border-red-600 focus:border-red-600 focus:ring-red-600/20; }
+  .rotulo { @apply mb-1.5 block text-sm font-semibold text-tinta; }
+  .opcional { @apply font-normal text-tinta-3; }
+
+  /* Dibujos de producto (se usan para servicios y cuando falta una foto) */
+  .ilus { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+  .ilus * { fill: theme("colors.white"); }
+  .ilus .a { fill: theme("colors.marca.suave"); }
+  .ilus .n { fill: none; }
+  .ilus .k { fill: currentColor; stroke: none; }
+  .ilus .r { fill: theme("colors.acento.DEFAULT"); stroke: none; }
+
+  /* Texto de los artículos del blog (viene como HTML de la tienda original) */
+  .prosa { @apply text-[16.5px] leading-relaxed text-tinta; }
+  .prosa > * + *, .prosa > div > * + * { @apply mt-4; }
+  .prosa h2 { @apply mt-10 text-2xl font-extrabold first:mt-0; }
+  .prosa h3 { @apply mt-6 text-lg font-bold; }
+  .prosa p { @apply text-tinta-2; }
+  .prosa strong { @apply text-tinta; }
+  .prosa ul { @apply list-disc space-y-1.5 pl-5 text-tinta-2; }
+  .prosa .table-wrap { @apply overflow-x-auto rounded-md border border-linea; }
+  .prosa table { @apply w-full min-w-[520px] border-collapse text-[15px]; }
+  .prosa th, .prosa td { @apply border-t border-linea px-4 py-3 text-left align-top; }
+  .prosa thead th { @apply border-t-0 bg-fondo font-semibold; }
+  .prosa tbody th { @apply font-semibold text-tinta; }
+  .prosa td { @apply text-tinta-2; }
+  .prosa .cmp.narrow { @apply min-w-0; }
+  .prosa td.t { @apply whitespace-nowrap font-mono text-[13.5px] tabular-nums; }
+  .prosa .list li::marker { color: theme("colors.acento.hover"); }
+  .prosa .checks { @apply list-none space-y-2.5 pl-0; }
+  .prosa .checks li { @apply relative pl-8; }
+  .prosa .checks li::before { content: ""; @apply absolute left-1 top-[9px] h-1.5 w-[11px] -rotate-45 border-b-[2.5px] border-l-[2.5px] border-marca; }
+  .prosa .callout { @apply rounded-md bg-acento-suave px-5 py-4; }
+  .prosa .fix { @apply flex min-w-0 flex-col gap-1.5 rounded-md border border-linea p-4; }
+  .prosa .fix p { @apply text-[15px] leading-normal; }
+  .prosa .link { @apply font-semibold text-marca underline-offset-[3px] hover:underline; }
+  .prosa .fix .link { @apply mt-auto pt-1 text-[14.5px]; }
+  .prosa .res { @apply grid gap-3 sm:grid-cols-3; }
+  .prosa .res > div { @apply rounded-md border border-linea p-4; }
+  .prosa .res b { @apply block font-display text-xl; }
+  .prosa .res span { @apply etiqueta-mono; }
+  .prosa .res p { @apply mt-2 text-[15px]; }
+  .prosa ol.process { @apply list-none space-y-0 border-l-2 border-linea pl-0; counter-reset: paso; }
+  .prosa ol.process li { @apply relative py-3 pl-10; counter-increment: paso; }
+  .prosa ol.process li::before { content: counter(paso); @apply absolute left-[-15px] top-3 flex h-7 w-7 items-center justify-center rounded-full bg-marca font-mono text-xs font-semibold text-white; }
+  .prosa ol.process strong { @apply block; }
+  .prosa ol.process p { @apply mt-1; }
+  .prosa .note { @apply text-sm text-tinta-3; }
+  .prosa .faq { @apply divide-y divide-linea rounded-md border border-linea; }
+  .prosa details summary { @apply cursor-pointer list-none px-4 py-3.5 font-semibold text-tinta; }
+  .prosa details summary::-webkit-details-marker { display: none; }
+  .prosa details summary::after { content: "+"; @apply float-right font-mono text-tinta-3; }
+  .prosa details[open] summary::after { content: "–"; }
+  .prosa details p { @apply px-4 pb-4; }
+  .prosa .fixes, .prosa .grid-2 { @apply grid gap-3 sm:grid-cols-2; }
+}
+
+@layer utilities {
+  /* relative: así la fila recorta también lo que tiene posición absoluta adentro (si no, Chrome en celular aleja la página) */
+  .sin-barra { scrollbar-width: none; position: relative; }
+  .sin-barra::-webkit-scrollbar { display: none; }
+  .ancho-108 { font-stretch: 108%; }
+  .ancho-122 { font-stretch: 122%; }
+}

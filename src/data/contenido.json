@@ -1,0 +1,321 @@
+{
+ "paquetes": [
+  {
+   "nombre": "2 cámaras WiFi",
+   "ilustracion": "domo",
+   "specs": [
+    "1080p",
+    "Grabación en microSD",
+    "Para apartamentos"
+   ],
+   "desde": 450000
+  },
+  {
+   "nombre": "Kit 4 cámaras + DVR",
+   "ilustracion": "kit",
+   "specs": [
+    "1080p",
+    "Disco 1 TB",
+    "Visión nocturna"
+   ],
+   "desde": 1600000
+  },
+  {
+   "nombre": "Kit 8 cámaras + DVR",
+   "ilustracion": "kit",
+   "specs": [
+    "2K",
+    "Disco 2 TB",
+    "Visión nocturna a color"
+   ],
+   "desde": 2800000
+  }
+ ],
+ "articulos": [
+  {
+   "id": "blog-camaras",
+   "etiqueta": "Instalación",
+   "titulo": "Instalación de cámaras de seguridad",
+   "resumen": "Cámaras WiFi o kit con grabador, qué resolución elegir y cómo es la instalación de principio a fin.",
+   "ilustracion": "domo",
+   "minutos": 4,
+   "tono": "svc"
+  },
+  {
+   "id": "blog-celulares",
+   "etiqueta": "Reparación",
+   "titulo": "Reparación de celulares",
+   "resumen": "Qué daños reparamos, cuánto tarda cada arreglo y qué hacer si tu celular se mojó.",
+   "ilustracion": "celular",
+   "minutos": 3,
+   "tono": "cel"
+  },
+  {
+   "id": "blog-computadores",
+   "etiqueta": "Mantenimiento",
+   "titulo": "Mantenimiento y reparación de computadores",
+   "resumen": "Cada cuánto hacer mantenimiento, qué incluye y las mejoras que más le alargan la vida a tu equipo.",
+   "ilustracion": "portatil",
+   "minutos": 4,
+   "tono": "pc"
+  }
+ ],
+ "servicios": [
+  {
+   "id": "pc",
+   "titulo": "Reparación de computadores",
+   "ilustracion": "portatil",
+   "articulo": "blog-computadores",
+   "tono": "pc",
+   "texto": "Portátiles y computadores de escritorio de todas las marcas.",
+   "trabajos": [
+    "Diagnóstico y revisión",
+    "Formateo e instalación de Windows y programas",
+    "Limpieza interna y cambio de pasta térmica",
+    "Cambio de pantalla, teclado o batería",
+    "Mejora a disco SSD y más memoria RAM",
+    "Recuperación de archivos"
+   ],
+   "equipo": "Ej.: HP Pavilion 15, PC de escritorio",
+   "detalle": "Ej.: no enciende, está muy lento, se le dañó la pantalla…"
+  },
+  {
+   "id": "cel",
+   "titulo": "Reparación de celulares",
+   "ilustracion": "celular",
+   "articulo": "blog-celulares",
+   "tono": "cel",
+   "texto": "Android y iPhone. Te decimos el valor antes de reparar.",
+   "trabajos": [
+    "Cambio de pantalla y vidrio",
+    "Cambio de batería",
+    "Puerto de carga, micrófono y altavoz",
+    "Celulares mojados o que no encienden",
+    "Copia de seguridad de fotos y contactos"
+   ],
+   "equipo": "Ej.: Samsung Galaxy A54, iPhone 11",
+   "detalle": "Ej.: pantalla rota, no carga, se mojó…"
+  },
+  {
+   "id": "cam",
+   "titulo": "Instalación de cámaras",
+   "ilustracion": "domo",
+   "articulo": "blog-camaras",
+   "tono": "svc",
+   "camaras": true,
+   "texto": "Para casas, apartamentos y negocios. Ves tus cámaras desde el celular.",
+   "trabajos": [
+    "Visita técnica para medir y cotizar",
+    "Kits de 2 a 16 cámaras con grabador",
+    "Cámaras WiFi de interior y exterior",
+    "Configuración de la app en tu celular",
+    "Mantenimiento y reubicación de cámaras"
+   ],
+   "detalle": "Ej.: quiero vigilar la entrada y el parqueadero, ya tengo internet WiFi…"
+  }
+ ],
+ "incluye": {
+  "cel": "El celular con su cable de carga y la herramienta para sacar la SIM. Varias marcas ya no traen el cargador de pared en la caja: te confirmamos si este modelo lo incluye.",
+  "ipad": "El iPad y su cable de carga. El lápiz, el teclado y el cargador de pared se venden por separado.",
+  "tablets": "La tablet y su cable de carga; según el modelo, también el cargador de pared.",
+  "relojes": "El reloj y su cable o base de carga.",
+  "manillas": "La manilla y su cable de carga.",
+  "audio": "Los audífonos, su estuche de carga y el cable; algunos modelos traen almohadillas de repuesto.",
+  "audio-diadema": "La diadema y su cable de carga o de audio.",
+  "audio-cable": "Los audífonos con su cable.",
+  "parlantes": "El parlante y su cable de carga.",
+  "parlantes-pc": "Los parlantes con sus cables de conexión y de corriente.",
+  "cargadores": "El cargador; si el nombre lo indica, también el cable.",
+  "cables-carga": "El cable.",
+  "powerbank": "La power bank y su cable de carga.",
+  "lapices": "El accesorio en su empaque original.",
+  "portatiles": "El portátil y su cargador original.",
+  "portatiles-gamer": "El portátil y su cargador original.",
+  "escritorio": "La torre armada y probada con los componentes de las características. Monitor, teclado y mouse van incluidos solo si aparecen en la lista.",
+  "escritorio-gamer": "La torre armada y probada con los componentes de las características. Monitor, teclado y mouse van incluidos solo si aparecen en la lista.",
+  "procesadores": "El procesador en su caja original. No todos los modelos traen disipador: te confirmamos si este lo incluye.",
+  "madre": "La tarjeta madre en su caja, con el manual y los accesorios de fábrica (tornillos, cables o antenas WiFi, según el modelo).",
+  "ram": "La memoria o el kit en su empaque original.",
+  "video": "La tarjeta de video en su caja original con su documentación.",
+  "almacenamiento": "La unidad en su empaque original; algunos modelos traen tornillos o disipador.",
+  "fuentes": "La fuente con su cable de corriente, sus cables de conexión y los tornillos.",
+  "cajas": "La caja con los ventiladores que trae instalados, tornillos y accesorios de montaje.",
+  "refrigeracion": "El disipador, la refrigeración líquida o el ventilador con sus soportes y tornillos; varios modelos traen pasta térmica.",
+  "monitores": "El monitor con su base y los cables de corriente y de video que trae de fábrica.",
+  "teclados": "El teclado con su cable o receptor, según el modelo.",
+  "mouse": "El mouse con su cable o receptor, según el modelo.",
+  "diademas": "La diadema con su cable o receptor, según el modelo.",
+  "combos": "El teclado y el mouse, con su cable o receptor.",
+  "pads": "El pad de mouse.",
+  "sillas": "La silla o el escritorio desarmado en su caja, con las piezas y herramientas para armarlo.",
+  "camaras-web": "La cámara web con su cable; algunas traen trípode.",
+  "streaming": "El equipo con los cables y soportes que trae de fábrica.",
+  "soportes": "El soporte con los tornillos y las piezas de montaje.",
+  "memorias": "La memoria o el disco, con su cable cuando aplica.",
+  "portatil-acc": "El accesorio en su empaque original.",
+  "energia": "El regulador o la UPS, listo para conectar.",
+  "redes": "El equipo con su fuente de poder y los cables que trae de fábrica.",
+  "cables": "El cable, adaptador o hub.",
+  "impresoras": "La impresora con sus cables y las tintas o el tóner de inicio.",
+  "varios": "El producto en su empaque original.",
+  "consolas": "La consola con su control y sus cables de corriente y de video.",
+  "controles": "El control y, si es inalámbrico, su cable de carga.",
+  "vr": "El visor con sus controles y el cable de carga.",
+  "simuladores": "El timón, los pedales o el accesorio que indica el nombre, con sus cables y piezas de montaje.",
+  "televisores": "El televisor con su base o patas, el control remoto y el cable de corriente.",
+  "hogar": "El producto con sus accesorios de fábrica.",
+  "movilidad": "La patineta eléctrica y su cargador."
+ },
+ "estados": {
+  "Nuevo": "Nuevo",
+  "CPO": "Reacondicionado certificado (CPO)",
+  "Usado": "Usado",
+  "Open box": "Open box (caja abierta)"
+ },
+ "masVendidos": [
+  "sa07",
+  "xr15c",
+  "p45631",
+  "sa17",
+  "ap4",
+  "mg06",
+  "switch2",
+  "sa56",
+  "jblflip7",
+  "xrn15",
+  "rw5active",
+  "ip16",
+  "tvs43u",
+  "rbuds6p",
+  "p52404"
+ ],
+ "busquedasPopulares": [
+  "iPhone",
+  "Galaxy",
+  "Redmi",
+  "Motorola",
+  "PlayStation",
+  "Nintendo Switch",
+  "Portátil gamer",
+  "RTX 5060",
+  "Audífonos",
+  "Smartwatch"
+ ],
+ "sinonimos": {
+  "playstation": [
+   "playstation",
+   "ps5",
+   "ps4"
+  ],
+  "play": [
+   "play",
+   "ps5",
+   "ps4"
+  ],
+  "smartwatch": [
+   "smartwatch",
+   "watch",
+   "reloj"
+  ],
+  "tablet": [
+   "tablet",
+   "ipad"
+  ],
+  "bocina": [
+   "bocina",
+   "parlante"
+  ],
+  "scooter": [
+   "scooter",
+   "patineta"
+  ],
+  "laptop": [
+   "laptop",
+   "portatil"
+  ]
+ },
+ "tiendaVista": {
+  "pc": "computadores",
+  "comp": "componentes",
+  "per": "perifericos",
+  "con": "consolas",
+  "tv": "televisores",
+  "cel": "celulares",
+  "tab": "tablets",
+  "rel": "relojes",
+  "aud": "audifonos",
+  "par": "parlantes",
+  "acc": "accesorios",
+  "mov": "patinetas"
+ },
+ "vistas": {
+  "inicio": "Inicio",
+  "computadores": "Computadores",
+  "componentes": "Componentes de computador",
+  "perifericos": "Periféricos y gaming",
+  "consolas": "Consolas y videojuegos",
+  "televisores": "Televisores y hogar",
+  "celulares": "Celulares",
+  "tablets": "Tablets",
+  "relojes": "Relojes inteligentes",
+  "audifonos": "Audífonos",
+  "parlantes": "Parlantes",
+  "accesorios": "Accesorios",
+  "patinetas": "Patinetas eléctricas",
+  "blog": "Blog y servicio técnico",
+  "blog-camaras": "Instalación de cámaras de seguridad",
+  "blog-celulares": "Reparación de celulares",
+  "blog-computadores": "Mantenimiento y reparación de computadores"
+ },
+ "ilusCategoria": {
+  "portatiles": "portatil",
+  "portatiles-gamer": "portatil",
+  "escritorio": "escritorio",
+  "escritorio-gamer": "escritorio",
+  "procesadores": "cpu",
+  "ram": "ram",
+  "almacenamiento": "ssd",
+  "video": "gpu",
+  "madre": "placa",
+  "fuentes": "fuente",
+  "refrigeracion": "fan",
+  "cajas": "caja",
+  "monitores": "monitor",
+  "soportes": "soporte",
+  "teclados": "teclado",
+  "mouse": "mouse",
+  "diademas": "diadema",
+  "combos": "teclado",
+  "pads": "pad",
+  "controles": "control",
+  "consolas": "consola",
+  "vr": "vr",
+  "simuladores": "timon",
+  "sillas": "silla",
+  "camaras-web": "webcam",
+  "streaming": "mic",
+  "parlantes-pc": "parlante",
+  "memorias": "usb",
+  "portatil-acc": "portatil",
+  "energia": "ups",
+  "redes": "router",
+  "cables": "cable",
+  "varios": "paquete",
+  "impresoras": "impresora",
+  "televisores": "tv",
+  "hogar": "aspiradora",
+  "ipad": "tablet",
+  "tablets": "tablet",
+  "relojes": "reloj",
+  "manillas": "reloj",
+  "audio": "buds",
+  "audio-diadema": "diadema",
+  "audio-cable": "cable",
+  "parlantes": "parlante",
+  "cargadores": "cargador",
+  "cables-carga": "cable",
+  "powerbank": "powerbank",
+  "lapices": "pencil",
+  "movilidad": "patineta"
+ }
+}

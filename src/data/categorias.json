@@ -1,0 +1,220 @@
+{
+ "pc": [
+  {
+   "id": "portatiles",
+   "nombre": "Portátiles"
+  },
+  {
+   "id": "portatiles-gamer",
+   "nombre": "Portátiles gamer"
+  },
+  {
+   "id": "escritorio",
+   "nombre": "PC de escritorio"
+  },
+  {
+   "id": "escritorio-gamer",
+   "nombre": "PC gamer"
+  }
+ ],
+ "comp": [
+  {
+   "id": "procesadores",
+   "nombre": "Procesadores"
+  },
+  {
+   "id": "madre",
+   "nombre": "Tarjetas madre"
+  },
+  {
+   "id": "ram",
+   "nombre": "Memoria RAM"
+  },
+  {
+   "id": "video",
+   "nombre": "Tarjetas de video"
+  },
+  {
+   "id": "almacenamiento",
+   "nombre": "Discos y SSD"
+  },
+  {
+   "id": "fuentes",
+   "nombre": "Fuentes de poder"
+  },
+  {
+   "id": "cajas",
+   "nombre": "Cajas"
+  },
+  {
+   "id": "refrigeracion",
+   "nombre": "Refrigeración y ventiladores"
+  }
+ ],
+ "per": [
+  {
+   "id": "monitores",
+   "nombre": "Monitores"
+  },
+  {
+   "id": "teclados",
+   "nombre": "Teclados"
+  },
+  {
+   "id": "mouse",
+   "nombre": "Mouse"
+  },
+  {
+   "id": "diademas",
+   "nombre": "Diademas"
+  },
+  {
+   "id": "combos",
+   "nombre": "Combos teclado y mouse"
+  },
+  {
+   "id": "pads",
+   "nombre": "Pads de mouse"
+  },
+  {
+   "id": "sillas",
+   "nombre": "Sillas y escritorios"
+  },
+  {
+   "id": "camaras-web",
+   "nombre": "Cámaras web"
+  },
+  {
+   "id": "streaming",
+   "nombre": "Micrófonos y streaming"
+  },
+  {
+   "id": "soportes",
+   "nombre": "Soportes de monitor"
+  },
+  {
+   "id": "memorias",
+   "nombre": "Memorias y discos externos"
+  },
+  {
+   "id": "portatil-acc",
+   "nombre": "Bases, fundas y morrales"
+  },
+  {
+   "id": "energia",
+   "nombre": "Reguladores y UPS"
+  },
+  {
+   "id": "redes",
+   "nombre": "Redes"
+  },
+  {
+   "id": "cables",
+   "nombre": "Cables, adaptadores y hubs"
+  },
+  {
+   "id": "impresoras",
+   "nombre": "Impresoras"
+  },
+  {
+   "id": "varios",
+   "nombre": "Varios"
+  }
+ ],
+ "con": [
+  {
+   "id": "consolas",
+   "nombre": "Consolas"
+  },
+  {
+   "id": "controles",
+   "nombre": "Controles"
+  },
+  {
+   "id": "vr",
+   "nombre": "Realidad virtual"
+  },
+  {
+   "id": "simuladores",
+   "nombre": "Timones y simuladores"
+  }
+ ],
+ "tv": [
+  {
+   "id": "televisores",
+   "nombre": "Televisores"
+  },
+  {
+   "id": "hogar",
+   "nombre": "Hogar"
+  }
+ ],
+ "tab": [
+  {
+   "id": "ipad",
+   "nombre": "iPad"
+  },
+  {
+   "id": "tablets",
+   "nombre": "Android"
+  }
+ ],
+ "rel": [
+  {
+   "id": "relojes",
+   "nombre": "Relojes"
+  },
+  {
+   "id": "manillas",
+   "nombre": "Manillas"
+  }
+ ],
+ "aud": [
+  {
+   "id": "audio",
+   "nombre": "Inalámbricos"
+  },
+  {
+   "id": "audio-diadema",
+   "nombre": "De diadema"
+  },
+  {
+   "id": "audio-cable",
+   "nombre": "Con cable"
+  }
+ ],
+ "par": [
+  {
+   "id": "parlantes",
+   "nombre": "Bluetooth"
+  },
+  {
+   "id": "parlantes-pc",
+   "nombre": "Para computador"
+  }
+ ],
+ "acc": [
+  {
+   "id": "cargadores",
+   "nombre": "Cargadores"
+  },
+  {
+   "id": "cables-carga",
+   "nombre": "Cables"
+  },
+  {
+   "id": "powerbank",
+   "nombre": "Power banks"
+  },
+  {
+   "id": "lapices",
+   "nombre": "Lápices, teclados y más"
+  }
+ ],
+ "mov": [
+  {
+   "id": "movilidad",
+   "nombre": "Patinetas eléctricas"
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+{
+ "ejemplo": false,
+ "nombre": "Rocket Fix",
+ "whatsapp": "573223262404",
+ "whatsappVisible": "+57 322 326 2404",
+ "atencion": "Por WhatsApp · domicilios en Bogotá y envíos a todo Colombia",
+ "moneda": "COP",
+ "idioma": "es-CO",
+ "pagos": {
+  "bogota": [
+   "Efectivo contra entrega",
+   "Tarjeta débito o crédito contra entrega",
+   "Bre-B (transferencia inmediata desde cualquier banco)",
+   "Daviplata",
+   "Transferencia bancaria"
+  ],
+  "nacional": [
+   "Bre-B (transferencia inmediata desde cualquier banco)",
+   "Daviplata",
+   "Transferencia bancaria",
+   "Tarjeta débito o crédito (te enviamos un link de pago)"
+  ]
+ },
+ "domicilio": "Entrega el mismo día en Bogotá y alrededores.",
+ "envio": "Enviamos a todo Colombia con pago anticipado. Te confirmamos el tiempo de entrega por WhatsApp.",
+ "envios": {
+  "bogota": {
+   "costo": 15000,
+   "gratisDesde": 400000
+  },
+  "nacional": {
+   "costo": 40000,
+   "gratisDesde": 1500000
+  }
+ },
+ "bold": {
+  "llave": "H8Gvn9Zwsy3vw2ev7PEZLytXgYfVcmd9UgRzTV9SbW8",
+  "firmaUrl": ""
+ },
+ "redes": {
+  "instagram": "",
+  "facebook": "",
+  "tiktok": ""
+ },
+ "horario": [
+  {
+   "etiqueta": "Lunes a sábado",
+   "dias": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ],
+   "abre": "08:00",
+   "cierra": "20:00"
+  },
+  {
+   "etiqueta": "Domingo y festivos",
+   "dias": [
+    0
+   ],
+   "abre": null,
+   "cierra": null
+  }
+ ]
+}
