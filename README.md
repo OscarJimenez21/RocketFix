@@ -64,12 +64,9 @@ Mientras `bold.firmaUrl` esté vacío, el cliente escribe el total en Bold (la p
 
 ## Publicar en GitHub Pages
 
-La publicación **no es automática**: el sitio solo cambia cuando inicias a mano el flujo "Publicar la tienda".
+Igual que antes: cada vez que subes cambios a `main` (*Push origin* en GitHub Desktop), el flujo "Publicar la tienda" verifica el catálogo, compila y publica `dist/`. Si la verificación falla, no publica y la tienda anterior sigue en línea. En GitHub → *Actions* ves cada publicación (marca verde = publicada) y puedes repetirla con *Run workflow*.
 
-1. **Una sola vez:** en GitHub → *Settings* → *Pages* → *Build and deployment* → *Source*, elige **GitHub Actions**.
-2. Lleva los cambios a `main` (por ejemplo, uniendo la rama `rediseno-react`) y súbelos.
-3. En GitHub → *Actions* → **Publicar la tienda** → *Run workflow* (rama `main`). El flujo verifica el catálogo, compila y publica `dist/`.
-4. Cuando termine (marca verde), abre la tienda y revisa inicio, un producto, el carrito y el botón de WhatsApp.
+Requisito, una sola vez: en GitHub → *Settings* → *Pages* → *Build and deployment* → *Source* debe estar en **GitHub Actions**.
 
 Para compilar a mano con otra ruta base: `BASE_PATH=/otra-ruta/ npm run build` (por defecto es `/RocketFix/`).
 

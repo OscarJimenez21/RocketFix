@@ -158,7 +158,7 @@ Todas se ejecutaron el 27 de octubre de 2026 en este equipo (Node 22.11, Chrome 
 | Descripciones de productos | Siempre, en el archivo único | Solo al abrir un producto (55 KB comprimidos) |
 | Organización | Datos, estilos y código en un solo archivo | Datos en JSON, 15 componentes, 7 páginas, lógica separada y tipos |
 | Comprobación del catálogo | Manual | `npm run verificar` (también antes de cada publicación) |
-| Publicación | Automática al subir a `main` | Manual, desde Actions, con verificación previa |
+| Publicación | Automática al subir a `main` | Automática al subir a `main`, solo si pasa la verificación del catálogo |
 
 ## 8. Archivos
 
@@ -171,7 +171,7 @@ Todas se ejecutaron el 27 de octubre de 2026 en este equipo (Node 22.11, Chrome 
   - Código y datos: `src/` (tipos, datos, lib, estado, componentes y páginas).
   - Scripts: `scripts/extraer-catalogo.mjs`, `scripts/verificar-catalogo.mjs` y `scripts/auditoria.mjs`.
   - Logos de pago en `public/pagos/`, extraídos de la página anterior.
-  - Publicación: `.github/workflows/publicar.yml`, que solo se ejecuta a mano.
+  - Publicación: `.github/workflows/publicar.yml`, que publica al subir a `main` o a mano desde Actions.
   - Documentación: `docs/auditoria-catalogo.md` y este informe.
 - **Modificados:** `README.md`.
 - **Eliminados:** ninguno.
@@ -190,9 +190,8 @@ Todas se ejecutaron el 27 de octubre de 2026 en este equipo (Node 22.11, Chrome 
 2. **Subir las ramas sin publicar.** En GitHub Desktop: *File → Add local repository* → `Documents\GitHub\RocketFix-react` → *Publish branch* (`rediseno-react`). Sube también `version-estable`. Esto no cambia el sitio, que se publica desde `main`. Si quieres, abre un *pull request* hacia `main` para revisar los cambios.
 3. **Cuando lo apruebes:**
    1. En GitHub, ve a *Settings → Pages → Source* y elige **GitHub Actions**.
-   2. Une `rediseno-react` a `main` y súbelo.
-   3. Ve a *Actions → Publicar la tienda → Run workflow*.
+   2. Une `rediseno-react` a `main` y súbelo con *Push origin*. Al subirlo, el flujo "Publicar la tienda" verifica el catálogo, compila y publica solo.
 
-   Haz estos tres pasos seguidos.
+   Haz el paso 1 antes del 2: si `main` se sube con Pages todavía en "Deploy from a branch", el sitio queda caído hasta que se cambie.
 4. **Comprobar en el teléfono:** inicio, un producto, el carrito y el botón de WhatsApp.
 5. **Para volver atrás:** en *Settings → Pages → Source*, elige *Deploy from a branch* → `version-estable` → `/ (root)`.

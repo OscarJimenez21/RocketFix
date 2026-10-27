@@ -1,9 +1,11 @@
-# Publica la tienda en GitHub Pages. NO se ejecuta solo: hay que iniciarlo a mano en
-# GitHub → Actions → "Publicar la tienda" → Run workflow (ver README, "Publicar en GitHub Pages").
-# Antes de compilar comprueba que el catálogo sea el mismo de la tienda original.
+# Publica la tienda en GitHub Pages cada vez que se suben cambios a main (como antes: Push origin = página actualizada).
+# También se puede iniciar a mano en GitHub → Actions → "Publicar la tienda" → Run workflow.
+# Antes de compilar comprueba que el catálogo sea el mismo de la tienda original; si no coincide, no publica.
 name: Publicar la tienda
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
