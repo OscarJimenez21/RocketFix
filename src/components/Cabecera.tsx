@@ -162,8 +162,9 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
           <a href="#inicio" className="shrink-0" aria-label="Rocket Fix, ir al inicio"><Logo /></a>
           <div className="hidden min-w-0 flex-1 lg:block lg:max-w-[560px]"><Buscador inicial={q} /></div>
           <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
+            {/* En pantallas de menos de 360 px no cabe junto al logo y el carrito; ahí WhatsApp queda en el menú y en el pie */}
             <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"
-              className="inline-flex h-11 min-w-[44px] items-center justify-center gap-2 rounded bg-wa px-3 text-sm font-semibold text-white transition-colors hover:bg-wa-hover">
+              className="inline-flex h-11 min-w-[44px] items-center justify-center gap-2 rounded bg-wa px-3 text-sm font-semibold text-white transition-colors hover:bg-wa-hover max-[359px]:hidden">
               <IconoWhatsApp className="h-5 w-5" /><span className="hidden xl:inline">Escríbenos por WhatsApp</span>
             </a>
             <button type="button" onClick={abrirCarrito} aria-label={`Abrir carrito, ${unidades} ${unidades === 1 ? "producto" : "productos"}`}
