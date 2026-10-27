@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Rocket Fix</title>
+    <script>
+      // GitHub Pages muestra esta página cuando una dirección no existe, por ejemplo /RocketFix/celulares (escrita sin #).
+      // La tienda usa direcciones con # (/RocketFix/#celulares, /RocketFix/#p/sa07), así que se lleva a la persona
+      // a la misma sección. Si la sección tampoco existe, la tienda muestra su propia página de "No la encontramos".
+      (function () {
+        var partes = location.pathname.split("/").filter(Boolean);
+        var base = partes[0] === "RocketFix" ? "/" + partes.shift() + "/" : "/";
+        var resto = partes.join("/").replace(/\.html?$/i, "").replace(/^index$/i, "");
+        location.replace(base + (location.hash || (resto ? "#" + resto : "")));
+      })();
+    </script>
+  </head>
+  <body style="font-family: system-ui, sans-serif; padding: 24px">
+    <p>Te estamos llevando a la tienda. Si no pasa nada, entra a <a href="/RocketFix/">Rocket Fix</a>.</p>
+  </body>
+</html>

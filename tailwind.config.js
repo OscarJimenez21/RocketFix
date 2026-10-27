@@ -16,9 +16,10 @@ export default {
           suave: "#E7F3EC"
         },
         // Naranja del cohete: solo para la acción principal y detalles puntuales. "texto" se lee sobre fondos claros (7:1)
-        acento: { DEFAULT: "#FF6B2C", hover: "#E85A1D", suave: "#FFF0E8", texto: "#9A3412" },
-        // tinta-3 cumple contraste 4,5:1 sobre blanco para textos pequeños
-        tinta: { DEFAULT: "#0F1F18", 2: "#4A5D53", 3: "#66766D" },
+        // "tinta": texto sobre el naranja (el mismo de la tienda original), 6,7:1; el blanco sobre naranja solo da 2,8:1
+        acento: { DEFAULT: "#FF6B2C", hover: "#E85A1D", suave: "#FFF0E8", texto: "#9A3412", tinta: "#1F0B00" },
+        // tinta-3 cumple contraste 4,5:1 sobre blanco y sobre el fondo claro para textos pequeños
+        tinta: { DEFAULT: "#0F1F18", 2: "#4A5D53", 3: "#5F6F66" },
         fondo: "#F4F8F6",
         linea: { DEFAULT: "#DCE6E0", fuerte: "#C5D3CA" },
         // Verde WhatsApp un poco más oscuro para que el texto blanco se lea bien (contraste 4,7:1)

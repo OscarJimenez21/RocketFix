@@ -17,19 +17,21 @@ import type { Producto, Servicio } from "../types";
 const VITRINA = ["ip18pm", "ss26u", "p45631", "mbairm5", "switch2", "appro3"];
 const ESPERA_VITRINA = 6000;
 
-/** Vitrina: un producto grande y los demás en miniatura. Cambia sola con un fundido (se detiene con el mouse encima,
-    al usar el teclado o si la persona pidió menos movimiento). */
+/** Vitrina: un producto grande y los demás en miniatura. Cambia sola con un fundido; se detiene con el mouse encima o
+    al usar el teclado, no se mueve si la persona pidió menos movimiento y deja de cambiar cuando la persona elige un producto
+    (en celular no hay mouse que la detenga). */
 function Vitrina() {
   const productos = useMemo(() => VITRINA.map(id => porId[id]).filter((p): p is Producto => Boolean(p)), []);
   const [i, setI] = useState(0);
   const [quieta, setQuieta] = useState(false);
+  const [elegida, setElegida] = useState(false);
   const [reducir] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
   useEffect(() => {
-    if (quieta || reducir || productos.length < 2) return;
+    if (quieta || elegida || reducir || productos.length < 2) return;
     const t = window.setTimeout(() => setI(x => (x + 1) % productos.length), ESPERA_VITRINA);
     return () => window.clearTimeout(t);
-  }, [i, quieta, reducir, productos.length]);
+  }, [i, quieta, elegida, reducir, productos.length]);
 
   const p = productos[i];
   if (!p) return null;
@@ -45,7 +47,7 @@ function Vitrina() {
         ))}
         <span className="absolute left-3 top-3 rounded-sm bg-fondo px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-tinta-2">{etiquetaDe(p)}</span>
       </div>
-      <div className="flex items-center justify-between gap-3 border-t border-linea px-4 py-3.5 sm:px-5" aria-live={quieta ? "polite" : "off"}>
+      <div className="flex items-center justify-between gap-3 border-t border-linea px-4 py-3.5 sm:px-5" aria-live={quieta || elegida ? "polite" : "off"}>
         <div className="min-w-0">
           <p className="truncate font-display text-[17px] font-bold">{p.nombre}</p>
           <p className="text-sm text-tinta-2">{p.opciones.length > 1 && "Desde "}<b className="font-display text-[15px] tabular-nums text-tinta">{dinero(desde(p))}</b></p>
@@ -54,7 +56,7 @@ function Vitrina() {
       </div>
       <div className="grid grid-cols-6 gap-1.5 border-t border-linea bg-fondo p-2 sm:gap-2 sm:p-2.5">
         {productos.map((x, j) => (
-          <button key={x.id} type="button" onClick={() => setI(j)} aria-label={`Ver ${x.nombre}`} aria-current={j === i || undefined}
+          <button key={x.id} type="button" onClick={() => { setI(j); setElegida(true); }} aria-label={`Ver ${x.nombre}`} aria-current={j === i || undefined}
             className={`aspect-square rounded border bg-white p-1 transition-colors ${j === i ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
             <FotoProducto producto={x} alt="" />
           </button>

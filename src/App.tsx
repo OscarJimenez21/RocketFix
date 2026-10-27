@@ -28,7 +28,8 @@ function tituloDe(r: Ruta) {
   return base;
 }
 
-/** Aviso del resultado cuando Bold devuelve al cliente a la tienda */
+/** Aviso cuando Bold devuelve al cliente a la tienda. El estado viene en la dirección (?bold-tx-status=…) y la página
+    no puede comprobarlo: por eso no afirma que el pago se recibió; Rocket Fix lo verifica en Bold antes de despachar. */
 function RegresoBold() {
   const { vaciar } = useTienda();
   const [regreso] = useState(leerRegresoBold);
@@ -37,8 +38,8 @@ function RegresoBold() {
   let msg = "";
   try { msg = localStorage.getItem("rf-pago-" + regreso.ref) || ""; } catch { /* sin almacenamiento */ }
   const aprobado = regreso.estado === "approved";
-  const titulo = aprobado ? "¡Pago recibido!" : regreso.estado === "pending" ? "Tu pago está en proceso." : "El pago no se completó.";
-  const texto = aprobado ? "Envíanos el pedido por WhatsApp para coordinar la entrega." : regreso.estado === "pending" ? "Te avisamos por WhatsApp cuando Bold lo confirme." : "Puedes intentarlo de nuevo desde el carrito o enviarnos el pedido por WhatsApp.";
+  const titulo = aprobado ? "Bold reportó tu pago como aprobado." : regreso.estado === "pending" ? "Tu pago está en proceso." : "El pago no se completó.";
+  const texto = aprobado ? "Envíanos el pedido por WhatsApp: verificamos el pago y coordinamos la entrega." : regreso.estado === "pending" ? "Te avisamos por WhatsApp cuando Bold lo confirme." : "Puedes intentarlo de nuevo desde el carrito o enviarnos el pedido por WhatsApp.";
   return (
     <div role="status" className={aprobado ? "bg-marca-suave" : "bg-acento-suave"}>
       <p className="contenedor py-3 text-sm"><strong>{titulo}</strong> {texto} Referencia {regreso.ref}.{" "}

@@ -171,7 +171,7 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
               className="inline-flex h-11 items-center gap-1.5 rounded border border-linea-fuerte px-2.5 text-sm font-semibold transition-colors hover:border-tinta-2 sm:gap-2 sm:px-3">
               <IconoBolsa />
               <span className="hidden sm:inline">Carrito</span>
-              <span className={`min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-xs font-bold tabular-nums ${unidades ? "bg-acento text-white" : "bg-fondo text-tinta-2"}`}>{unidades}</span>
+              <span className={`min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-xs font-bold tabular-nums ${unidades ? "bg-acento text-acento-tinta" : "bg-fondo text-tinta-2"}`}>{unidades}</span>
             </button>
           </div>
         </div>

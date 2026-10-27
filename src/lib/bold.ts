@@ -58,11 +58,14 @@ export async function abrirBold(ref: string, total: number, descripcion: string)
   return modo;
 }
 
-/** Cuando Bold devuelve al cliente (?pedido=…&bold-tx-status=…) */
+/** Cuando Bold devuelve al cliente (?pedido=…&bold-tx-status=…). Se lee una sola vez: después se limpian los datos
+    de la dirección, así que una segunda lectura (React la repite en modo de desarrollo) devuelve el mismo resultado. */
+let regreso: { ref: string; estado: string } | null | undefined;
 export function leerRegresoBold(): { ref: string; estado: string } | null {
+  if (regreso !== undefined) return regreso;
   const q = new URLSearchParams(location.search);
   const ref = q.get("pedido"), estado = q.get("bold-tx-status");
-  if (!ref || !estado) return null;
-  history.replaceState(null, "", location.pathname + location.hash);
-  return { ref, estado };
+  regreso = ref && estado ? { ref, estado } : null;
+  if (regreso) history.replaceState(null, "", location.pathname + location.hash);
+  return regreso;
 }

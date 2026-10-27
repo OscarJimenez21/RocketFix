@@ -23,7 +23,7 @@ export function abrirTiendaEn(tienda: TiendaId, cat: string) {
 function Chip({ activo, onClick, children, n }: { activo: boolean; onClick: () => void; children: React.ReactNode; n: number }) {
   return (
     <button type="button" aria-pressed={activo} onClick={onClick} className="chip">
-      {children} <span className={`text-xs tabular-nums ${activo ? "text-white/80" : "text-tinta-3"}`}>{n}</span>
+      {children} <span className={`text-xs tabular-nums ${activo ? "text-white" : "text-tinta-3"}`}>{n}</span>
     </button>
   );
 }

@@ -26,7 +26,7 @@
 
   .btn { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded px-4 text-[15px] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
   .btn-sm { @apply min-h-[40px] px-3 text-sm; }
-  .btn-primario { @apply bg-acento text-white hover:bg-acento-hover; }
+  .btn-primario { @apply bg-acento text-acento-tinta hover:bg-acento-hover; }
   .btn-marca { @apply bg-marca text-white hover:bg-marca-hover; }
   .btn-wa { @apply bg-wa text-white hover:bg-wa-hover; }
   .btn-borde { @apply border border-linea-fuerte bg-white text-tinta hover:border-tinta-2; }
