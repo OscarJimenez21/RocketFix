@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { CABECERAS, CATEGORIAS, ORDEN_CAT, TEXTO_BUSQUEDA, VISTAS, deTienda, desde, marcasDe } from "../data/catalogo";
 import { tiendaPorVista } from "../data/tiendas";
 import { EncabezadoVista } from "../components/EncabezadoVista";
-import { IconoBuscar } from "../components/Iconos";
+import { IconoBuscar, IconoWhatsApp } from "../components/Iconos";
 import { TarjetaProducto } from "../components/TarjetaProducto";
 import { norm } from "../lib/formato";
 import { waLink } from "../lib/whatsapp";
@@ -22,9 +22,8 @@ export function abrirTiendaEn(tienda: TiendaId, cat: string) {
 
 function Chip({ activo, onClick, children, n }: { activo: boolean; onClick: () => void; children: React.ReactNode; n: number }) {
   return (
-    <button type="button" aria-pressed={activo} onClick={onClick}
-      className={`shrink-0 rounded-full border px-3.5 py-1.5 text-sm transition-colors ${activo ? "border-marca bg-marca text-white" : "border-linea-fuerte bg-white text-tinta hover:border-tinta-2"}`}>
-      {children} <span className={activo ? "text-white/75" : "text-tinta-3"}>{n}</span>
+    <button type="button" aria-pressed={activo} onClick={onClick} className="chip">
+      {children} <span className={`text-xs tabular-nums ${activo ? "text-white/80" : "text-tinta-3"}`}>{n}</span>
     </button>
   );
 }
@@ -62,7 +61,7 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
 
   return (
     <>
-      <EncabezadoVista migas={[{ texto: "Inicio", href: "#inicio" }, { texto: "Tienda" }]} titulo={cab?.titulo ?? VISTAS[vista] ?? ""} lead={cab?.lead} nota={cab?.nota} />
+      <EncabezadoVista migas={[{ texto: "Inicio", href: "#inicio" }, { texto: info?.titulo ?? VISTAS[vista] ?? "" }]} titulo={cab?.titulo ?? VISTAS[vista] ?? ""} lead={cab?.lead} nota={cab?.nota} />
       <div className="contenedor py-6">
         {/* Tipo de producto (o marca, en celulares) */}
         {(esCel ? marcas.length > 1 : cats.length > 1) && (
@@ -119,8 +118,12 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
           </ul>
         ) : (
           <div className="mt-6 rounded-md border border-dashed border-linea-fuerte px-6 py-12 text-center">
-            <p className="text-tinta-2">{esCel ? "No encontramos celulares con esos filtros. Pregúntanos: puede que lo consigamos por pedido." : "No encontramos productos con esa búsqueda."}</p>
-            <a href={waLink()} target="_blank" rel="noopener" className="enlace mt-2 inline-block">Pregúntanos por WhatsApp</a>
+            <p className="font-semibold">Ningún producto cumple todos los filtros elegidos.</p>
+            <p className="mt-1 text-sm text-tinta-2">{f.q.trim() ? `No encontramos “${f.q.trim()}” en ${info?.titulo.toLowerCase() ?? "esta sección"}.` : "Prueba con otra marca o tipo de producto."} Si buscas algo puntual, pregúntanos: puede que lo consigamos por pedido.</p>
+            <div className="mt-5 flex flex-wrap justify-center gap-3">
+              <button type="button" onClick={() => poner({ ...inicial })} className="btn btn-borde">Quitar filtros</button>
+              <a href={waLink(f.q.trim() ? `Hola, estoy buscando: ${f.q.trim()}` : undefined)} target="_blank" rel="noopener" className="btn btn-wa"><IconoWhatsApp />Preguntar por WhatsApp</a>
+            </div>
           </div>
         )}
 

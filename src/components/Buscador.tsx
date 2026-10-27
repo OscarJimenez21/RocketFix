@@ -105,7 +105,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
                 <span className="h-11 w-11 shrink-0 rounded border border-linea bg-white p-0.5"><FotoProducto producto={p} alt="" /></span>
                 <span className="min-w-0 flex-1">
                   <span className="line-clamp-1 text-[14.5px] font-semibold">
-                    {resaltar(p.nombre, palabras).map((t, k) => t.marcado ? <mark key={k} className="bg-brillo/40 text-inherit">{t.t}</mark> : <span key={k}>{t.t}</span>)}
+                    {resaltar(p.nombre, palabras).map((t, k) => t.marcado ? <mark key={k} className="bg-transparent font-bold text-marca">{t.t}</mark> : <span key={k}>{t.t}</span>)}
                   </span>
                   <span className="block truncate text-xs text-tinta-2">{[VISTAS[TIENDA_VISTA[p.tienda]], p.marca].filter(Boolean).join(" · ")}</span>
                 </span>

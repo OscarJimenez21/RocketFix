@@ -40,9 +40,11 @@ export function FormularioWhatsApp({ asunto, campos, boton = "Enviar por WhatsAp
   const valores = { ...propios, ...externos };
   const valor = (c: CampoForm) => valores[c.id] ?? (c.tipo === "lista" ? c.opciones?.[0] ?? "" : "");
 
+  // Al escribir en un campo marcado se quita su marca y el aviso (se vuelve a validar al enviar)
   const poner = (id: string, v: string) => {
     setPropios(x => ({ ...x, [id]: v }));
     alCambiar?.(id, v);
+    if (malos.includes(id)) { setMalos(m => m.filter(x => x !== id)); setError(""); }
   };
 
   const mensaje = [`Hola ${CONFIG.nombre}, quiero ${asunto}.`, "", ...campos.map(c => [c.etiqueta, valor(c).trim()]).filter(([, v]) => v).map(([e, v]) => `${e}: ${v}`)].join("\n");
@@ -78,11 +80,11 @@ export function FormularioWhatsApp({ asunto, campos, boton = "Enviar por WhatsAp
         );
       })}
       <div className="sm:col-span-2">
-        {error && <p className="mb-2 text-sm font-semibold text-red-700" role="alert">{error}</p>}
-        <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); }} className="btn btn-wa">
+        {error && <p className="alerta mb-3" role="alert">{error}</p>}
+        <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); }} className="btn btn-wa w-full sm:w-auto">
           <IconoWhatsApp />{boton}
         </a>
-        <p className="mt-2 text-xs text-tinta-3">Se abre WhatsApp con tu solicitud escrita. La revisas y la envías tú.</p>
+        <p className="mt-2 text-xs leading-relaxed text-tinta-3">Se abre WhatsApp con tu solicitud escrita. La solicitud queda hecha cuando envíes ese mensaje.</p>
       </div>
     </form>
   );

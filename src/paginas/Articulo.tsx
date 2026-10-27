@@ -34,11 +34,11 @@ function Paquetes({ cotizar }: { cotizar: (nombre: string) => void }) {
   return (
     <div className="not-prose grid gap-3 sm:grid-cols-3">
       {PAQUETES.map(pk => (
-        <div key={pk.nombre} className="flex flex-col rounded-md border border-linea p-4">
-          <Ilustracion nombre={pk.ilustracion} className="h-12 w-16 text-marca-medio" />
-          <h3 className="mt-2 font-bold">{pk.nombre}</h3>
+        <div key={pk.nombre} className="tarjeta flex flex-col p-4">
+          <span className="flex h-14 w-16 items-center justify-center rounded bg-marca-suave"><Ilustracion nombre={pk.ilustracion} className="h-10 w-14 text-marca-medio" /></span>
+          <h3 className="mt-3 font-bold">{pk.nombre}</h3>
           <ul className="mt-1 text-sm text-tinta-2">{pk.specs.map(s => <li key={s}>{s}</li>)}</ul>
-          <p className="mt-3 text-sm"><span className="text-tinta-3">Desde</span> <b className="font-display text-lg">{dinero(pk.desde)}</b></p>
+          <p className="mt-auto pt-3 text-sm"><span className="text-tinta-3">Desde</span> <b className="font-display text-lg tabular-nums">{dinero(pk.desde)}</b></p>
           <button type="button" onClick={() => cotizar(pk.nombre)} className="btn btn-sm btn-borde mt-3">Cotizar este paquete</button>
         </div>
       ))}
@@ -58,7 +58,7 @@ export function Articulo({ id }: { id: string }) {
 
   return (
     <>
-      <EncabezadoVista migas={[{ texto: "Blog", href: "#blog" }, { texto: a.etiqueta }]} titulo={a.titulo} lead={cab?.lead ?? a.resumen}
+      <EncabezadoVista migas={[{ texto: "Inicio", href: "#inicio" }, { texto: "Blog", href: "#blog" }, { texto: a.etiqueta }]} titulo={a.titulo} lead={cab?.lead ?? a.resumen}
         extra={<p className="mt-3 text-sm text-tinta-3">Por {CONFIG.nombre} · Lectura de {a.minutos} min</p>} />
       <div className="contenedor grid grid-cols-1 gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_300px]">
         {/* El texto del artículo es contenido propio de la tienda original */}
@@ -67,7 +67,7 @@ export function Articulo({ id }: { id: string }) {
           {despues !== null && <><div className="mt-4"><Paquetes cotizar={n => { setPaquete(n); irAlFormulario(); }} /></div><div className="mt-4" dangerouslySetInnerHTML={{ __html: despues ?? "" }} /></>}
         </article>
         <aside className="lg:sticky lg:top-36 lg:self-start">
-          <div className="rounded-md border border-linea p-5">
+          <div className="tarjeta p-5">
             <p className="font-semibold">¿Prefieres hablar ya?</p>
             <p className="mt-2 flex items-center gap-2 text-sm"><PuntoEstado abierto={atencion.abierto} />{atencion.texto}</p>
             <p className="mt-3 font-display text-xl font-bold">{CONFIG.whatsappVisible}</p>
@@ -90,7 +90,7 @@ export function Articulo({ id }: { id: string }) {
             <h2 id="t-form" className="mt-1 text-2xl font-extrabold">{form.titulo}</h2>
             <p className="mt-2 text-sm text-tinta-2">{form.texto}</p>
           </div>
-          <div className="rounded-md border border-linea bg-white p-5 md:p-6">
+          <div className="tarjeta p-5 md:p-6">
             <FormularioWhatsApp asunto={form.asunto} campos={form.campos} boton={form.boton}
               valores={paquete ? { paquete } : undefined} alCambiar={(campo, v) => { if (campo === "paquete") setPaquete(v); }} />
           </div>

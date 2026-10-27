@@ -17,9 +17,9 @@ const secciones = (ids: TiendaId[]) => ids.map(tiendaPorId).filter((t): t is Non
 
 /** Servicio técnico en la segunda fila (escritorio) */
 const SERVICIO = [
-  { texto: "Servicio técnico", href: "#servicios", clave: "servicios" },
-  { texto: "Cámaras de seguridad", href: "#blog-camaras", clave: "blog-camaras" },
-  { texto: "Blog", href: "#blog", clave: "blog" }
+  { texto: "Servicio técnico", href: "#servicios", clave: "servicios", siempre: true },
+  { texto: "Cámaras de seguridad", href: "#blog-camaras", clave: "blog-camaras", siempre: false },
+  { texto: "Blog", href: "#blog", clave: "blog", siempre: false }
 ];
 
 /** Servicio técnico en el menú de celular (con cada línea de servicio) */
@@ -154,20 +154,20 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-linea bg-white">
-        <div className="contenedor flex h-14 items-center gap-2 sm:gap-3 lg:h-[68px] lg:gap-6">
+        <div className="contenedor flex h-14 items-center gap-1.5 sm:gap-3 lg:h-[68px] lg:gap-6">
           <button type="button" onClick={() => setMenu(true)} aria-label="Abrir menú" aria-expanded={menu} aria-controls="menu-movil"
             className="-ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded text-tinta hover:bg-fondo lg:hidden">
             <IconoMenu />
           </button>
           <a href="#inicio" className="shrink-0" aria-label="Rocket Fix, ir al inicio"><Logo /></a>
           <div className="hidden min-w-0 flex-1 lg:block lg:max-w-[560px]"><Buscador inicial={q} /></div>
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
             <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"
               className="inline-flex h-11 min-w-[44px] items-center justify-center gap-2 rounded bg-wa px-3 text-sm font-semibold text-white transition-colors hover:bg-wa-hover">
               <IconoWhatsApp className="h-5 w-5" /><span className="hidden xl:inline">Escríbenos por WhatsApp</span>
             </a>
             <button type="button" onClick={abrirCarrito} aria-label={`Abrir carrito, ${unidades} ${unidades === 1 ? "producto" : "productos"}`}
-              className="inline-flex h-11 items-center gap-2 rounded border border-linea-fuerte px-3 text-sm font-semibold transition-colors hover:border-tinta-2">
+              className="inline-flex h-11 items-center gap-1.5 rounded border border-linea-fuerte px-2.5 text-sm font-semibold transition-colors hover:border-tinta-2 sm:gap-2 sm:px-3">
               <IconoBolsa />
               <span className="hidden sm:inline">Carrito</span>
               <span className={`min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-xs font-bold tabular-nums ${unidades ? "bg-acento text-white" : "bg-fondo text-tinta-2"}`}>{unidades}</span>
@@ -178,7 +178,7 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
         <nav aria-label="Secciones de la tienda" className="hidden border-t border-linea lg:block">
           <div className="contenedor relative flex h-11 items-center">
             <button type="button" onClick={() => setCategorias(v => !v)} aria-expanded={categorias} aria-controls="panel-categorias"
-              className="-ml-2.5 flex h-9 items-center gap-2 rounded px-2.5 text-sm font-semibold transition-colors hover:bg-fondo">
+              className="-ml-2.5 flex h-9 shrink-0 items-center gap-2 whitespace-nowrap rounded px-2.5 text-sm font-semibold transition-colors hover:bg-fondo">
               <IconoCuadricula />Todas las categorías<IconoAbajo className={`h-4 w-4 transition-transform ${categorias ? "rotate-180" : ""}`} />
             </button>
             <span aria-hidden="true" className="mx-3 h-5 w-px bg-linea" />
@@ -186,7 +186,7 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
               {secciones(PRINCIPALES).map(t => (
                 <li key={t.id}>
                   <a href={`#${t.vista}`} aria-current={actual === t.vista ? "page" : undefined}
-                    className={`relative flex h-11 items-center px-2.5 text-sm font-medium transition-colors ${actual === t.vista ? "text-marca after:absolute after:inset-x-2.5 after:bottom-0 after:h-0.5 after:bg-marca" : "text-tinta-2 hover:text-tinta"}`}>
+                    className={`relative flex h-11 items-center whitespace-nowrap px-2.5 text-sm font-medium transition-colors ${actual === t.vista ? "text-marca after:absolute after:inset-x-2.5 after:bottom-0 after:h-0.5 after:bg-marca" : "text-tinta-2 hover:text-tinta"}`}>
                     {t.menu}
                   </a>
                 </li>
@@ -194,9 +194,9 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
             </ul>
             <ul className="ml-auto flex items-center">
               {SERVICIO.map(s => (
-                <li key={s.href}>
+                <li key={s.href} className={s.siempre ? "" : "hidden xl:block"}>
                   <a href={s.href} aria-current={actual === s.clave ? "page" : undefined}
-                    className={`relative flex h-11 items-center px-2.5 text-sm font-semibold transition-colors ${actual === s.clave ? "text-marca after:absolute after:inset-x-2.5 after:bottom-0 after:h-0.5 after:bg-marca" : "text-marca-medio hover:text-marca"}`}>
+                    className={`relative flex h-11 items-center whitespace-nowrap px-2.5 text-sm font-semibold transition-colors ${actual === s.clave ? "text-marca after:absolute after:inset-x-2.5 after:bottom-0 after:h-0.5 after:bg-marca" : "text-marca-medio hover:text-marca"}`}>
                     {s.texto}
                   </a>
                 </li>

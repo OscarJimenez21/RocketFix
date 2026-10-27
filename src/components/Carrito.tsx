@@ -72,7 +72,14 @@ export function Carrito() {
   const mensaje = mensajePedido(lineas, datos);
   const nacional = zona === "nacional";
 
-  const poner = <K extends keyof DatosPedido>(k: K, v: DatosPedido[K]) => setD(x => ({ ...x, [k]: v }));
+  // Al escribir en un campo que estaba marcado, se quita su marca y el aviso (se vuelve a validar al enviar)
+  const poner = <K extends keyof DatosPedido>(k: K, v: DatosPedido[K]) => {
+    setD(x => ({ ...x, [k]: v }));
+    if (k === "nombre" || k === "dir") {
+      const campo = k as "nombre" | "dir";
+      setErrores(e => (e[campo] ? { ...e, [campo]: false, texto: undefined } : e));
+    }
+  };
 
   function validar() {
     const e = { nombre: !d.nombre.trim(), dir: !d.dir.trim() };
@@ -196,19 +203,21 @@ export function Carrito() {
               </div>
               <div className="mt-3 flex items-baseline justify-between border-t border-linea pt-3">
                 <span className="font-semibold">Total</span>
-                <strong className="font-display text-2xl">{dinero(total)}</strong>
+                <strong className="font-display text-2xl tabular-nums">{dinero(total)}</strong>
               </div>
-              {errores.texto && <p className="mt-2 text-sm font-semibold text-red-700" role="alert">{errores.texto}</p>}
+              {errores.texto && <p className="alerta mt-2" role="alert">{errores.texto}</p>}
+              {/* El pedido por WhatsApp es el camino principal: ahí se confirma la disponibilidad antes de cobrar */}
               <div className="mt-3 grid gap-2">
-                {boldActivo() && (
-                  <button type="button" onClick={pagarConBold} className="btn btn-primario w-full"><IconoTarjeta />Pagar en línea con Bold</button>
-                )}
                 <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); }} className="btn btn-wa w-full">
                   <IconoWhatsApp />Enviar pedido por WhatsApp
                 </a>
+                {boldActivo() && (
+                  <button type="button" onClick={pagarConBold} className="btn btn-borde w-full"><IconoTarjeta />Pagar en línea con Bold</button>
+                )}
               </div>
-              <p className="mt-2 text-center text-xs text-tinta-3">
-                {boldActivo() ? "Paga en línea con tarjeta, PSE y más a través de Bold, o envía el pedido por WhatsApp y pagas como prefieras." : "Se abre WhatsApp con el pedido escrito. Lo revisas y lo envías tú."}
+              <p className="mt-2 text-center text-xs leading-relaxed text-tinta-3">
+                Enviar el pedido no es un pago: se abre WhatsApp con el pedido escrito, lo envías y te confirmamos disponibilidad y total.
+                {boldActivo() && " Si prefieres pagar ya, Bold acepta tarjeta, PSE y más."}
               </p>
             </footer>
           </>

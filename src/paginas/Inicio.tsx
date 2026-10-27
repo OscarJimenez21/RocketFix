@@ -68,10 +68,10 @@ function Portada() {
   const atencion = useAtencion();
   return (
     <section className="bg-marca-oscuro text-white">
-      <div className="contenedor grid items-center gap-8 py-9 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)] lg:gap-14 lg:py-14">
+      <div className="contenedor grid items-center gap-8 py-9 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:py-14 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
         <div>
           <p className="etiqueta text-marca-menta">Tienda de tecnología y servicio técnico · Bogotá</p>
-          <h1 tabIndex={-1} className="mt-3 text-[31px] font-extrabold leading-[1.1] text-white sm:text-[40px] lg:text-[46px]">
+          <h1 tabIndex={-1} className="mt-3 text-[31px] font-extrabold leading-[1.1] text-white sm:text-[40px] lg:text-[38px] xl:text-[46px]">
             Tecnología para tu día a día. <span className="text-marca-menta">Soluciones cuando las necesitas.</span>
           </h1>
           <p className="mt-4 max-w-xl text-[16.5px] leading-relaxed text-white/80">
@@ -168,7 +168,7 @@ function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => voi
   return (
     <article aria-labelledby="t-camaras" className="mt-4 overflow-hidden rounded-md bg-marca-oscuro text-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
       <div className="p-6 sm:p-8">
-        <p className="etiqueta text-marca-menta">Para casas, apartamentos y negocios</p>
+        <p className="etiqueta text-marca-menta">Seguridad para tu hogar o negocio</p>
         <h3 id="t-camaras" className="mt-1 text-[22px] font-extrabold text-white sm:text-2xl">Instalación de cámaras de seguridad</h3>
         <p className="mt-2 text-white/80">{servicio.texto}</p>
         <ul className="mt-4 grid gap-2 text-sm text-white/90">
@@ -280,8 +280,9 @@ export function Inicio({ ancla }: { ancla?: string }) {
   const vendidos = MAS_VENDIDOS.map(id => porId[id]).filter((p): p is Producto => Boolean(p));
 
   // #categorias, #servicios, #contacto y #orden llevan a su sección de la portada
+  // Cuando corre el efecto la sección ya está en la página, así que se puede bajar de una vez
   useEffect(() => {
-    if (ancla) requestAnimationFrame(() => document.getElementById(ancla)?.scrollIntoView({ block: "start" }));
+    if (ancla) document.getElementById(ancla)?.scrollIntoView({ block: "start" });
   }, [ancla]);
 
   return (

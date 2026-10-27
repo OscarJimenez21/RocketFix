@@ -4,7 +4,6 @@ import { TiendaProvider, useTienda } from "./estado/TiendaContext";
 import { Aviso } from "./components/Aviso";
 import { Cabecera } from "./components/Cabecera";
 import { Carrito } from "./components/Carrito";
-import { Contacto } from "./components/Contacto";
 import { PiePagina } from "./components/PiePagina";
 import { leerRegresoBold } from "./lib/bold";
 import { claveRuta, tomarPosicion, useRuta } from "./lib/rutas";
@@ -82,11 +81,10 @@ function Marco() {
       <Cabecera ruta={ruta} />
       <div id="pagina">
         <RegresoBold />
-        {CONFIG.ejemplo && <p className="bg-brillo/30 py-2 text-center text-sm">Vista de ejemplo: los precios y productos son ilustrativos.</p>}
+        {CONFIG.ejemplo && <p className="bg-acento-suave py-2 text-center text-sm">Vista de ejemplo: los precios y productos son ilustrativos.</p>}
         <main>
           <Contenido ruta={ruta} />
         </main>
-        <Contacto />
         <PiePagina />
       </div>
       <Carrito />
