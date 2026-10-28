@@ -12,6 +12,7 @@ import { Articulo } from "./paginas/Articulo";
 import { Blog } from "./paginas/Blog";
 import { Buscar } from "./paginas/Buscar";
 import { Inicio } from "./paginas/Inicio";
+import { Marca } from "./paginas/Marca";
 import { NoEncontrada } from "./paginas/NoEncontrada";
 import { Tienda } from "./paginas/Tienda";
 import type { Ruta } from "./types";
@@ -25,6 +26,7 @@ function tituloDe(r: Ruta) {
   if (r.tipo === "blog") return `Blog y servicio técnico · ${CONFIG.nombre}`;
   if (r.tipo === "articulo") return `${ARTICULOS.find(a => a.id === r.id)?.titulo ?? ""} · ${CONFIG.nombre}`;
   if (r.tipo === "buscar") return `Buscar ${r.q} · ${CONFIG.nombre}`;
+  if (r.tipo === "marca") return `${r.marca} · ${CONFIG.nombre}`;
   return base;
 }
 
@@ -54,6 +56,7 @@ function Contenido({ ruta }: { ruta: Ruta }) {
     case "tienda": return <Tienda key={ruta.tienda} vista={ruta.vista} tienda={ruta.tienda} />;
     case "producto": return <Suspense fallback={<div className="contenedor min-h-[60vh] py-16 text-tinta-3">Cargando producto…</div>}><Producto id={ruta.id} /></Suspense>;
     case "buscar": return <Buscar key={ruta.q} q={ruta.q} />;
+    case "marca": return <Marca key={ruta.marca} marca={ruta.marca} />;
     case "blog": return <Blog />;
     case "articulo": return <Articulo key={ruta.id} id={ruta.id} />;
     case "no-encontrada": return <NoEncontrada />;

@@ -147,6 +147,7 @@ export type Ruta =
   | { tipo: "tienda"; vista: string; tienda: TiendaId }
   | { tipo: "producto"; id: string }
   | { tipo: "buscar"; q: string }
+  | { tipo: "marca"; marca: string }
   | { tipo: "blog" }
   | { tipo: "articulo"; id: string }
   | { tipo: "no-encontrada"; hash: string };

@@ -17,6 +17,7 @@ export function leerRuta(hash: string): Ruta {
   if (ANCLAS_INICIO.includes(h)) return { tipo: "inicio", ancla: h };
   if (h.startsWith("p/")) return { tipo: "producto", id: decodificar(h.slice(2)) };
   if (h.startsWith("buscar/") || h === "buscar") return { tipo: "buscar", q: decodificar(h.slice(7)) };
+  if (h.startsWith("marca/")) return { tipo: "marca", marca: decodificar(h.slice(6)) };
   if (h === "blog") return { tipo: "blog" };
   if (ARTICULOS.some(a => a.id === h)) return { tipo: "articulo", id: h };
   const tienda = VISTA_TIENDA[h];
@@ -30,6 +31,7 @@ export const claveRuta = (r: Ruta) => {
     case "tienda": return r.vista;
     case "producto": return `p/${r.id}`;
     case "buscar": return `buscar/${r.q}`;
+    case "marca": return `marca/${r.marca}`;
     case "blog": return "blog";
     case "articulo": return r.id;
     case "no-encontrada": return r.hash;
@@ -38,6 +40,8 @@ export const claveRuta = (r: Ruta) => {
 
 export const hrefProducto = (id: string) => `#p/${encodeURIComponent(id)}`;
 export const hrefBusqueda = (q: string) => `#buscar/${encodeURIComponent(q.trim())}`;
+/** Página con los productos de una marca (por la marca guardada en cada producto, no por texto: "Intel" no trae "inteligente") */
+export const hrefMarca = (marca: string) => `#marca/${encodeURIComponent(marca)}`;
 
 /** Ruta actual. Al regresar a la página anterior (botón atrás o "Volver") se vuelve al mismo punto donde estaba la persona. */
 export function useRuta(): Ruta {

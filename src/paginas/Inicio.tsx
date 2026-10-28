@@ -8,7 +8,7 @@ import { FotoProducto } from "../components/FotoProducto";
 import { IconoCamion, IconoCheck, IconoFlecha, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { Ilustracion } from "../components/Ilustracion";
 import { dinero, recurso } from "../lib/formato";
-import { hrefBusqueda, hrefProducto } from "../lib/rutas";
+import { hrefMarca, hrefProducto } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
 import type { Producto, Servicio, TiendaId } from "../types";
 
@@ -316,16 +316,13 @@ function BandaGamer() {
         <span aria-hidden="true" className="absolute -left-28 -top-28 -z-10 h-[28rem] w-[28rem] rounded-full bg-marca/45 blur-3xl" />
         <span aria-hidden="true" className="absolute -bottom-44 right-[8%] -z-10 h-[30rem] w-[30rem] rounded-full bg-acento/30 blur-3xl" />
         <div className="relative z-10 p-7 sm:p-10 lg:self-center lg:p-14">
-          <p className="etiqueta text-marca-menta">Todo para jugar</p>
+          <p className="etiqueta text-marca-menta">Arma tu setup gamer</p>
           <h2 id="t-gamer" className="mt-3 font-display text-[40px] font-extrabold leading-[0.95] text-white ancho-108 sm:text-[58px]">
-            Arma tu <span className="text-marca-menta">setup gamer</span>
+            Lleva tu juego al <span className="text-marca-menta">siguiente nivel</span>
           </h2>
-          <p className="mt-4 max-w-md text-[17px] leading-relaxed text-white/80">Consolas, monitores, teclados, mouse y diademas. Te asesoramos por WhatsApp para que todo combine.</p>
-          <ul className="mt-5 flex flex-wrap gap-2">
-            {["Consolas", "Monitores", "Teclados", "Mouse", "Diademas"].map(c => (
-              <li key={c} className="rounded-full border border-white/20 bg-white/[0.06] px-3.5 py-1.5 text-[13px] font-semibold text-white/90">{c}</li>
-            ))}
-          </ul>
+          <p className="mt-4 max-w-md text-[17px] leading-relaxed text-white/85">
+            Más FPS, más precisión y sonido que te mete en la partida. Arma tu combo con monitor, teclado, mouse y diadema, y te asesoramos por WhatsApp para que todo combine.
+          </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a href="#perifericos" className="btn btn-primario">Ver periféricos</a>
             <a href="#consolas" className="btn btn-claro">Ver consolas</a>
@@ -333,11 +330,52 @@ function BandaGamer() {
         </div>
         <div aria-hidden="true" className="relative h-[300px] sm:h-[400px] lg:h-auto">
           <span className="absolute bottom-[5%] left-[6%] right-[4%] h-12 rounded-[50%] bg-black/45 blur-2xl" />
-          {foto("p45631", "bottom-[10%] left-[3%] h-[60%]")}
-          {foto("p15412", "bottom-[19%] left-[17%] h-[60%] max-w-[64%]")}
-          {foto("p31252", "bottom-[9%] right-[2%] h-[52%] max-w-[29%]")}
-          {foto("p20008", "bottom-[4%] left-[16%] h-[29%] max-w-[52%]")}
-          {foto("p19066", "bottom-[5%] left-[67%] h-[22%]")}
+          {foto("p15412", "bottom-[19%] left-[6%] h-[62%] max-w-[66%]")}
+          {foto("p31340", "bottom-[8%] right-[3%] h-[54%] max-w-[30%]")}
+          {foto("p20008", "bottom-[4%] left-[4%] h-[30%] max-w-[54%]")}
+          {foto("p19066", "bottom-[5%] left-[59%] h-[23%]")}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Banda de celulares: los modelos más llamativos de la tienda en fila (el iPhone 18 Pro Max al centro, adelante) */
+function BandaCelulares() {
+  // [foto recortada, posición y tamaño]; el orden es de atrás hacia adelante
+  const fila: [string, string][] = [
+    ["galeria-ss25u-2", "bottom-[16%] left-[1%] h-[48%]"],
+    ["galeria-ss26u-2", "bottom-[16%] right-[1%] h-[48%]"],
+    ["xrn15pro", "bottom-[12%] left-[13%] h-[57%]"],
+    ["ip18p", "bottom-[12%] right-[14%] h-[57%]"],
+    ["ip17pm", "bottom-[8%] left-[21%] h-[64%]"],
+    ["ip18pm", "bottom-[5%] left-[52%] h-[72%] -translate-x-1/2"],
+    ["medge60", "bottom-[2%] left-[3%] h-[26%]"]
+  ];
+  return (
+    <section aria-labelledby="t-banda-cel" className="contenedor pt-12">
+      <div className="relative isolate overflow-hidden rounded-xl bg-gradient-to-br from-marca to-marca-oscuro text-white lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+        <span aria-hidden="true" className="absolute right-[18%] top-1/2 -z-10 h-[30rem] w-[30rem] -translate-y-1/2 rounded-full bg-marca-menta/35 blur-3xl" />
+        <span aria-hidden="true" className="absolute -bottom-40 -left-24 -z-10 h-96 w-96 rounded-full bg-acento/25 blur-3xl" />
+        <div className="relative z-10 p-7 sm:p-10 lg:self-center lg:p-14">
+          <p className="etiqueta text-marca-menta">iPhone · Samsung · Xiaomi · Motorola</p>
+          <h2 id="t-banda-cel" className="mt-3 font-display text-[40px] font-extrabold leading-[0.95] text-white ancho-108 sm:text-[58px]">
+            Tu próximo celular <span className="text-marca-menta">te está esperando</span>
+          </h2>
+          <p className="mt-4 max-w-md text-[17px] leading-relaxed text-white/85">
+            Los modelos más buscados, en varias capacidades y colores. Elige el tuyo y te lo llevamos el mismo día en Bogotá.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a href="#celulares" className="btn btn-primario">Ver celulares</a>
+            <a href={waLink("Hola Rocket Fix, quiero asesoría para comprar un celular")} target="_blank" rel="noopener" className="btn btn-claro"><IconoWhatsApp />Te asesoramos</a>
+          </div>
+        </div>
+        <div aria-hidden="true" className="relative h-[300px] sm:h-[420px] lg:h-auto">
+          <span className="absolute bottom-[3%] left-[4%] right-[4%] h-12 rounded-[50%] bg-black/35 blur-2xl" />
+          {fila.map(([id, clase]) => (
+            <img key={id} src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async"
+              className={`pointer-events-none absolute object-contain drop-shadow-[0_24px_24px_rgba(0,0,0,0.45)] ${clase}`} />
+          ))}
         </div>
       </div>
     </section>
@@ -367,7 +405,7 @@ function Marcas() {
             const copia = i >= marcas.length;
             return (
               <li key={`${m}-${i}`} aria-hidden={copia || undefined}>
-                <a href={hrefBusqueda(m)} tabIndex={copia ? -1 : undefined}
+                <a href={hrefMarca(m)} tabIndex={copia ? -1 : undefined}
                   className="flex h-16 items-center whitespace-nowrap rounded-lg border border-linea bg-white px-7 font-display text-[22px] font-extrabold tracking-tight text-tinta-2 transition-colors ancho-108 hover:border-marca hover:text-marca">
                   {m}
                 </a>
@@ -510,6 +548,7 @@ export function Inicio({ ancla }: { ancla?: string }) {
       <Categorias />
       <BandaGamer />
       <Carrusel id="vendidos" etiqueta={<><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</>} titulo="Los que todos quieren" productos={vendidos} cinta="Top ventas" gris />
+      <BandaCelulares />
       <Coleccion id="celulares" etiqueta="Celulares" titulo="Estrena celular" tiendas={["cel"]} />
       <Coleccion id="computadores" etiqueta="Computadores" titulo="Portátiles y PC para cada necesidad" tiendas={["pc"]} gris />
       <Coleccion id="componentes" etiqueta="Componentes" titulo="Arma o mejora tu PC" tiendas={["comp"]} />
