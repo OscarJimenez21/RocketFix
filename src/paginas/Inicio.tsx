@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
-import { CONFIG, GALERIAS, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { CONFIG, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
 import { camposServicio } from "../data/formularios";
 import { TIENDAS, tiendaPorId } from "../data/tiendas";
 import { PuntoEstado, useAtencion } from "../components/Contacto";
-import { FilaProductos } from "../components/FilaProductos";
 import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
 import { FotoProducto } from "../components/FotoProducto";
 import { IconoCamion, IconoCheck, IconoFlecha, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
@@ -116,16 +115,85 @@ function Ventajas() {
   );
 }
 
-function MasVendidos({ productos }: { productos: Producto[] }) {
+const PASO_CARRUSEL = 3500;
+
+/** Tarjeta de las filas de la portada: foto grande, nombre y precio; toda la tarjeta lleva al producto */
+function TarjetaVitrina({ producto: p, cinta, prioridad }: { producto: Producto; cinta?: string; prioridad: boolean }) {
   return (
-    <section aria-labelledby="t-vendidos" className="border-b border-linea bg-fondo">
-      <div className="contenedor py-10 sm:py-12">
-        <FilaProductos productos={productos} etiqueta="Productos más vendidos" cinta="Top ventas" encabezado={
-          <>
-            <p className="etiqueta flex items-center gap-1.5"><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</p>
-            <h2 id="t-vendidos" className="titulo-seccion mt-1">Los que todos quieren</h2>
-          </>
-        } />
+    <a href={hrefProducto(p.id)} className="group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-white transition-shadow hover:shadow-tarjeta">
+      <div className="relative aspect-square p-7 sm:p-8">
+        <FotoProducto producto={p} alt={p.nombre} prioridad={prioridad} className="transition-transform duration-300 motion-safe:group-hover:scale-[1.04]" />
+        {cinta && <span className="absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-acento-texto">{cinta}</span>}
+      </div>
+      <div className="mt-auto border-t border-linea px-5 py-4">
+        <p className="truncate text-[12px] font-semibold uppercase tracking-wide text-tinta-3">{etiquetaDe(p)}</p>
+        <p className="mt-1 line-clamp-2 min-h-[2.75em] font-display text-[18px] font-bold leading-snug text-tinta">{p.nombre}</p>
+        <p className="mt-2 text-sm text-tinta-2">{p.opciones.length > 1 && "Desde "}<b className="font-display text-[22px] tabular-nums text-tinta">{dinero(desde(p))}</b></p>
+      </div>
+    </a>
+  );
+}
+
+/** Fila de productos de la portada (tarjetas grandes solo con foto, nombre y precio). Avanza sola; se detiene con el
+    mouse encima, al usar el teclado o mientras la persona la desliza con el dedo, y no se mueve si la persona pidió
+    menos movimiento. Al llegar al final vuelve al principio. */
+function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris = false }: {
+  id: string; etiqueta: React.ReactNode; titulo: string; productos: Producto[]; enlaces?: { texto: string; href: string }[]; cinta?: string; gris?: boolean;
+}) {
+  const fila = useRef<HTMLUListElement>(null);
+  const [quieta, setQuieta] = useState(false);
+  const [reducir] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const reanudar = useRef<number>();
+
+  const mover = (dir: 1 | -1) => {
+    const el = fila.current;
+    if (!el) return;
+    const paso = (el.querySelector("li")?.getBoundingClientRect().width ?? 280) + 20;
+    if (dir > 0 && el.scrollLeft + el.clientWidth >= el.scrollWidth - 8) el.scrollTo({ left: 0, behavior: "smooth" });
+    else if (dir < 0 && el.scrollLeft <= 8) el.scrollTo({ left: el.scrollWidth, behavior: "smooth" });
+    else el.scrollBy({ left: dir * paso, behavior: "smooth" });
+  };
+  useEffect(() => {
+    if (quieta || reducir || productos.length < 2) return;
+    const t = window.setInterval(() => mover(1), PASO_CARRUSEL);
+    return () => window.clearInterval(t);
+  }, [quieta, reducir, productos.length]);
+  // Con el dedo: se detiene mientras la persona desliza y vuelve a moverse unos segundos después
+  const tocar = () => {
+    setQuieta(true);
+    window.clearTimeout(reanudar.current);
+    reanudar.current = window.setTimeout(() => setQuieta(false), 8000);
+  };
+  useEffect(() => () => window.clearTimeout(reanudar.current), []);
+
+  const flecha = "flex h-11 w-11 items-center justify-center rounded-full border border-linea-fuerte bg-white transition-colors hover:border-tinta-2";
+  return (
+    <section aria-labelledby={`t-${id}`} className={gris ? "border-y border-linea bg-fondo" : ""}>
+      <div className="contenedor py-12 sm:py-14">
+        <div className="mb-6 flex items-end justify-between gap-4">
+          <div className="min-w-0">
+            <p className="etiqueta flex items-center gap-1.5">{etiqueta}</p>
+            <h2 id={`t-${id}`} className="titulo-seccion mt-1">{titulo}</h2>
+            {enlaces.length > 0 && (
+              <p className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+                {enlaces.map(e => <a key={e.href} href={e.href} className="enlace">{e.texto} →</a>)}
+              </p>
+            )}
+          </div>
+          <div className="flex shrink-0 gap-2">
+            <button type="button" onClick={() => mover(-1)} aria-label="Ver productos anteriores" className={flecha}><IconoFlecha dir={-1} /></button>
+            <button type="button" onClick={() => mover(1)} aria-label="Ver productos siguientes" className={flecha}><IconoFlecha /></button>
+          </div>
+        </div>
+        <ul ref={fila} aria-label={titulo} tabIndex={0}
+          onMouseEnter={() => setQuieta(true)} onMouseLeave={() => setQuieta(false)} onFocus={() => setQuieta(true)} onBlur={() => setQuieta(false)} onTouchStart={tocar}
+          className="sin-barra -mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6">
+          {productos.map((p, n) => (
+            <li key={p.id} className="w-[74%] shrink-0 snap-start sm:w-[44%] lg:w-[calc(25%-15px)]">
+              <TarjetaVitrina producto={p} cinta={cinta} prioridad={n < 4} />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -204,76 +272,72 @@ function Categorias() {
   );
 }
 
-/** Productos variados de una o varias secciones para una fila de la portada: primero los que tienen carrusel de fotos,
-    alternando marcas para que la fila no sea de una sola. No repite los de la vitrina ni los más vendidos. */
-function variados(tiendas: TiendaId[], max = 12) {
-  const evitar = new Set([...VITRINA, ...MAS_VENDIDOS]);
-  const todos = tiendas.flatMap(id => deTienda(id)).filter(p => p.imagen && !evitar.has(p.id));
-  const conFotos = todos.filter(p => GALERIAS[p.id]?.length);
-  const base = conFotos.length >= max ? conFotos : [...conFotos, ...todos.filter(p => !GALERIAS[p.id]?.length)];
+/** Todos los productos de una o varias secciones para una fila de la portada, alternando marcas para que la fila no
+    quede de una sola marca seguida. Empiezan las marcas con más productos; dentro de cada marca, el orden de la tienda. */
+function variados(tiendas: TiendaId[]) {
   const porMarca = new Map<string, Producto[]>();
-  for (const p of base) {
+  for (const p of tiendas.flatMap(id => deTienda(id)).filter(p => p.imagen)) {
     const lista = porMarca.get(p.marca || "") ?? [];
     lista.push(p);
     porMarca.set(p.marca || "", lista);
   }
+  const marcas = [...porMarca.values()].sort((a, b) => b.length - a.length);
   const fila: Producto[] = [];
-  while (fila.length < max && [...porMarca.values()].some(l => l.length)) {
-    for (const l of porMarca.values()) {
+  while (marcas.some(l => l.length)) {
+    for (const l of marcas) {
       const p = l.shift();
-      if (p && fila.length < max) fila.push(p);
+      if (p) fila.push(p);
     }
   }
   return fila;
 }
 
-/** Fila de productos de una o varias secciones, con enlace a la sección */
+/** Fila con todos los productos de una sección, con enlace a la sección */
 function Coleccion({ id, etiqueta, titulo, tiendas, gris = false }: { id: string; etiqueta: string; titulo: string; tiendas: TiendaId[]; gris?: boolean }) {
   const productos = useMemo(() => variados(tiendas), [tiendas]);
-  const enlaces = tiendas.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t));
+  const enlaces = tiendas.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t))
+    .map(t => ({ texto: tiendas.length > 1 ? `Ver ${t.menu.toLowerCase()}` : `Ver todo (${productos.length})`, href: `#${t.vista}` }));
   if (!productos.length) return null;
-  return (
-    <section aria-labelledby={`t-${id}`} className={gris ? "border-y border-linea bg-fondo" : ""}>
-      <div className="contenedor py-10 sm:py-12">
-        <FilaProductos productos={productos} etiqueta={titulo} encabezado={
-          <>
-            <p className="etiqueta">{etiqueta}</p>
-            <h2 id={`t-${id}`} className="titulo-seccion mt-1">{titulo}</h2>
-            <p className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-              {enlaces.map(t => <a key={t.id} href={`#${t.vista}`} className="enlace">Ver {enlaces.length > 1 ? t.menu.toLowerCase() : "todo"} →</a>)}
-            </p>
-          </>
-        } />
-      </div>
-    </section>
-  );
+  return <Carrusel id={id} etiqueta={etiqueta} titulo={titulo} productos={productos} enlaces={enlaces} gris={gris} />;
 }
 
-/** Banda grande de gaming: invita a armar el escritorio completo (monitor, teclado, mouse y diadema) */
+/** Banda grande de gaming: invita a armar el escritorio completo (consola, monitor, teclado, mouse y diadema) */
 function BandaGamer() {
   const foto = (id: string, clase: string) => (
     <img src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async"
-      className={`pointer-events-none absolute object-contain drop-shadow-[0_22px_24px_rgba(0,0,0,0.5)] ${clase}`} />
+      className={`pointer-events-none absolute object-contain drop-shadow-[0_26px_26px_rgba(0,0,0,0.55)] ${clase}`} />
   );
+  // Cuadrícula muy tenue de fondo, como un piso de estudio
+  const cuadricula = { backgroundImage: "linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px)", backgroundSize: "46px 46px" };
   return (
-    <section aria-labelledby="t-gamer" className="contenedor py-10 sm:py-12">
-      <div className="relative isolate overflow-hidden rounded-xl bg-marca-noche text-white lg:grid lg:min-h-[360px] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-        <span aria-hidden="true" className="absolute -left-24 -top-24 -z-10 h-80 w-80 rounded-full bg-marca/40 blur-3xl" />
-        <span aria-hidden="true" className="absolute -bottom-32 right-10 -z-10 h-80 w-80 rounded-full bg-acento/25 blur-3xl" />
-        <div className="relative z-10 p-6 sm:p-9 lg:self-center lg:p-12">
+    <section aria-labelledby="t-gamer" className="contenedor pb-12">
+      <div className="relative isolate overflow-hidden rounded-xl bg-marca-noche text-white lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+        <span aria-hidden="true" className="absolute inset-0 -z-10" style={cuadricula} />
+        <span aria-hidden="true" className="absolute -left-28 -top-28 -z-10 h-[28rem] w-[28rem] rounded-full bg-marca/45 blur-3xl" />
+        <span aria-hidden="true" className="absolute -bottom-44 right-[8%] -z-10 h-[30rem] w-[30rem] rounded-full bg-acento/30 blur-3xl" />
+        <div className="relative z-10 p-7 sm:p-10 lg:self-center lg:p-14">
           <p className="etiqueta text-marca-menta">Todo para jugar</p>
-          <h2 id="t-gamer" className="mt-2 font-display text-[34px] font-extrabold leading-[0.98] text-white ancho-108 sm:text-[46px]">Arma tu setup gamer</h2>
-          <p className="mt-3 max-w-md text-white/80">Monitores, teclados, mouse, diademas, consolas y controles. Te asesoramos por WhatsApp para que todo combine.</p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <h2 id="t-gamer" className="mt-3 font-display text-[40px] font-extrabold leading-[0.95] text-white ancho-108 sm:text-[58px]">
+            Arma tu <span className="text-marca-menta">setup gamer</span>
+          </h2>
+          <p className="mt-4 max-w-md text-[17px] leading-relaxed text-white/80">Consolas, monitores, teclados, mouse y diademas. Te asesoramos por WhatsApp para que todo combine.</p>
+          <ul className="mt-5 flex flex-wrap gap-2">
+            {["Consolas", "Monitores", "Teclados", "Mouse", "Diademas"].map(c => (
+              <li key={c} className="rounded-full border border-white/20 bg-white/[0.06] px-3.5 py-1.5 text-[13px] font-semibold text-white/90">{c}</li>
+            ))}
+          </ul>
+          <div className="mt-7 flex flex-wrap gap-3">
             <a href="#perifericos" className="btn btn-primario">Ver periféricos</a>
             <a href="#consolas" className="btn btn-claro">Ver consolas</a>
           </div>
         </div>
-        <div aria-hidden="true" className="relative h-[250px] sm:h-[320px] lg:h-auto">
-          {foto("p15412", "bottom-[18%] left-[12%] h-[66%] max-w-[70%]")}
-          {foto("p20008", "bottom-[4%] left-[4%] h-[34%] max-w-[55%]")}
-          {foto("p19066", "bottom-[5%] left-[58%] h-[26%]")}
-          {foto("p31252", "bottom-[10%] right-[3%] h-[52%] max-w-[30%]")}
+        <div aria-hidden="true" className="relative h-[300px] sm:h-[400px] lg:h-auto">
+          <span className="absolute bottom-[5%] left-[6%] right-[4%] h-12 rounded-[50%] bg-black/45 blur-2xl" />
+          {foto("p45631", "bottom-[10%] left-[3%] h-[60%]")}
+          {foto("p15412", "bottom-[19%] left-[17%] h-[60%] max-w-[64%]")}
+          {foto("p31252", "bottom-[9%] right-[2%] h-[52%] max-w-[29%]")}
+          {foto("p20008", "bottom-[4%] left-[16%] h-[29%] max-w-[52%]")}
+          {foto("p19066", "bottom-[5%] left-[67%] h-[22%]")}
         </div>
       </div>
     </section>
@@ -289,7 +353,7 @@ function Marcas() {
     return [...cuenta.entries()].sort((a, b) => b[1] - a[1]).slice(0, 18).map(([m]) => m);
   }, []);
   return (
-    <section aria-labelledby="t-marcas" className="overflow-hidden border-y border-linea py-9">
+    <section aria-labelledby="t-marcas" className="overflow-hidden border-b border-linea py-9">
       <div className="contenedor flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
         <div>
           <p className="etiqueta">Marcas que manejamos</p>
@@ -442,16 +506,13 @@ export function Inicio({ ancla }: { ancla?: string }) {
     <>
       <Portada />
       <Ventajas />
+      <Marcas />
       <Categorias />
-      <MasVendidos productos={vendidos} />
+      <BandaGamer />
+      <Carrusel id="vendidos" etiqueta={<><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</>} titulo="Los que todos quieren" productos={vendidos} cinta="Top ventas" gris />
       <Coleccion id="celulares" etiqueta="Celulares" titulo="Estrena celular" tiendas={["cel"]} />
       <Coleccion id="computadores" etiqueta="Computadores" titulo="Portátiles y PC para cada necesidad" tiendas={["pc"]} gris />
-      <Marcas />
-      <Coleccion id="componentes" etiqueta="Componentes" titulo="Arma o mejora tu PC" tiendas={["comp"]} gris />
-      <BandaGamer />
-      <Coleccion id="consolas" etiqueta="Gaming" titulo="Consolas y accesorios para jugar" tiendas={["con"]} />
-      <Coleccion id="perifericos" etiqueta="Periféricos" titulo="Monitores, teclados, mouse y diademas" tiendas={["per"]} gris />
-      <Coleccion id="audio" etiqueta="Audio" titulo="Audífonos y parlantes" tiendas={["aud", "par"]} />
+      <Coleccion id="componentes" etiqueta="Componentes" titulo="Arma o mejora tu PC" tiendas={["comp"]} />
       <Servicios />
       <ComoComprar />
     </>
