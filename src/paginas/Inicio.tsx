@@ -1,17 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
-import { CONFIG, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
+import { CONFIG, GALERIAS, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
 import { camposServicio } from "../data/formularios";
-import { PRINCIPALES, TIENDAS, tiendaPorId } from "../data/tiendas";
+import { TIENDAS, tiendaPorId } from "../data/tiendas";
 import { PuntoEstado, useAtencion } from "../components/Contacto";
 import { FilaProductos } from "../components/FilaProductos";
 import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
 import { FotoProducto } from "../components/FotoProducto";
-import { IconoCamion, IconoCheck, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
+import { IconoCamion, IconoCheck, IconoFlecha, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { Ilustracion } from "../components/Ilustracion";
-import { dinero } from "../lib/formato";
-import { hrefProducto } from "../lib/rutas";
+import { dinero, recurso } from "../lib/formato";
+import { hrefBusqueda, hrefProducto } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
-import type { Producto, Servicio } from "../types";
+import type { Producto, Servicio, TiendaId } from "../types";
 
 /** Productos de la vitrina de la portada, en este orden */
 const VITRINA = ["ip18pm", "ss26u", "p45631", "mbairm5", "switch2", "appro3"];
@@ -131,35 +131,186 @@ function MasVendidos({ productos }: { productos: Producto[] }) {
   );
 }
 
-/** Las seis secciones principales con foto; las demás como accesos rápidos, para que la portada no sea un directorio */
+/** Colores de las tarjetas de categoría (todos de la marca). `brillo` es la luz suave de la esquina. */
+const TEMAS = {
+  oscuro: { caja: "bg-marca-oscuro text-white", frase: "text-marca-menta", boton: "bg-white text-marca-oscuro", brillo: "bg-marca-menta/25" },
+  noche: { caja: "bg-marca-noche text-white", frase: "text-marca-menta", boton: "bg-marca-menta text-marca-noche", brillo: "bg-marca/50" },
+  marca: { caja: "bg-marca text-white", frase: "text-white/85", boton: "bg-white text-marca-oscuro", brillo: "bg-marca-menta/45" },
+  acento: { caja: "bg-acento text-acento-tinta", frase: "text-acento-tinta/80", boton: "bg-acento-tinta text-white", brillo: "bg-white/35" },
+  menta: { caja: "bg-marca-menta text-marca-noche", frase: "text-marca-noche/75", boton: "bg-marca-noche text-white", brillo: "bg-white/45" },
+  suave: { caja: "bg-marca-suave text-marca-oscuro", frase: "text-marca-medio", boton: "bg-marca text-white", brillo: "bg-white/80" }
+} as const;
+
+/** Tamaños del mosaico: en computador es una cuadrícula de 12 columnas; en celular, de 2 */
+const FORMAS = {
+  grande: { caja: "col-span-2 h-[300px] sm:h-[360px] lg:col-span-6 lg:row-span-2 lg:h-auto", texto: "max-w-[62%]", titulo: "text-[34px] sm:text-[46px]", foto: "h-[78%] max-w-[50%] sm:h-[84%]", corto: false },
+  ancha: { caja: "col-span-2 h-[210px] sm:h-[230px] lg:col-span-6 lg:h-auto", texto: "max-w-[62%]", titulo: "text-[25px] sm:text-[34px]", foto: "h-[68%] max-w-[45%] sm:h-[86%] sm:max-w-[52%]", corto: false },
+  normal: { caja: "h-[210px] sm:h-[230px] lg:col-span-3 lg:h-auto", texto: "max-w-full sm:max-w-[62%]", titulo: "text-[19px] sm:text-[25px]", foto: "h-[48%] max-w-[52%] sm:h-[58%] sm:max-w-[48%]", corto: true }
+} as const;
+
+/** Cada sección con su frase, su color y un producto recortado (public/fotos/recortes, sin fondo) */
+const MOSAICO: { tienda: TiendaId; frase: string; tema: keyof typeof TEMAS; foto: string; forma: keyof typeof FORMAS }[] = [
+  { tienda: "cel", frase: "Lo último en", tema: "oscuro", foto: "ip17pm", forma: "grande" },
+  { tienda: "pc", frase: "Para estudiar, trabajar y jugar", tema: "acento", foto: "p52396", forma: "ancha" },
+  { tienda: "comp", frase: "Arma o mejora tu PC", tema: "marca", foto: "p3787", forma: "normal" },
+  { tienda: "per", frase: "Más precisión", tema: "menta", foto: "p31252", forma: "normal" },
+  { tienda: "con", frase: "Más diversión", tema: "noche", foto: "switch2", forma: "normal" },
+  { tienda: "tab", frase: "Más pantalla", tema: "suave", foto: "ipadpro", forma: "normal" },
+  { tienda: "rel", frase: "Siempre conectado", tema: "acento", foto: "gw8c", forma: "normal" },
+  { tienda: "aud", frase: "Sonido sin cables", tema: "menta", foto: "gbuds3fe", forma: "normal" },
+  { tienda: "par", frase: "Lleva la música", tema: "marca", foto: "jblflip7", forma: "normal" },
+  { tienda: "tv", frase: "Para tu sala", tema: "oscuro", foto: "tvs43u", forma: "normal" },
+  { tienda: "acc", frase: "Carga y conecta", tema: "suave", foto: "p45648", forma: "normal" },
+  { tienda: "mov", frase: "Muévete por la ciudad", tema: "noche", foto: "xpatineta", forma: "normal" }
+];
+
+/** Mosaico de categorías: tarjetas de colores con un producto que se asoma; todas llevan a su sección */
 function Categorias() {
-  const principales = PRINCIPALES.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t));
-  const otras = TIENDAS.filter(t => !PRINCIPALES.includes(t.id));
   return (
     <section id="categorias" aria-labelledby="t-categorias" className="contenedor py-12">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
-        <h2 id="t-categorias" className="titulo-seccion">Compra por categoría</h2>
+        <div>
+          <p className="etiqueta">Todo en un solo lugar</p>
+          <h2 id="t-categorias" className="titulo-seccion mt-1">Compra por categoría</h2>
+        </div>
         <p className="text-sm text-tinta-2">{PRODUCTOS.length} productos en {TIENDAS.length} categorías</p>
       </div>
-      <ul className="mt-6 grid grid-cols-3 gap-2.5 sm:gap-3 lg:grid-cols-6">
-        {principales.map(t => {
-          const p = porId[t.foto] ?? deTienda(t.id).find(x => x.imagen);
+      <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:auto-rows-[215px] lg:grid-cols-12">
+        {MOSAICO.map(m => {
+          const t = tiendaPorId(m.tienda);
+          if (!t) return null;
+          const tema = TEMAS[m.tema], forma = FORMAS[m.forma];
           return (
-            <li key={t.id}>
-              <a href={`#${t.vista}`} className="tarjeta flex h-full flex-col items-center p-2.5 text-center transition-colors hover:border-marca sm:p-3">
-                <span className="block aspect-square w-full p-1 sm:p-2">{p && <FotoProducto producto={p} alt="" />}</span>
-                <span className="mt-1.5 text-[13.5px] font-semibold leading-tight sm:text-[15px]">{t.menu}</span>
-                <span className="mt-0.5 text-xs text-tinta-3">{deTienda(t.id).length} productos</span>
+            <li key={m.tienda} className={forma.caja}>
+              <a href={`#${t.vista}`} className={`group relative isolate flex h-full overflow-hidden rounded-lg p-4 sm:p-6 ${tema.caja}`}>
+                <span aria-hidden="true" className={`absolute -right-12 -top-16 -z-10 h-56 w-56 rounded-full blur-3xl ${tema.brillo}`} />
+                <span className={`relative z-10 flex min-w-0 flex-col ${forma.texto}`}>
+                  <span className={`text-[12.5px] font-semibold leading-snug sm:text-sm ${tema.frase}`}>{m.frase}</span>
+                  <span className={`mt-1 font-display font-extrabold leading-[0.98] tracking-tight ancho-108 ${forma.titulo}`}>{t.titulo}</span>
+                  <span className="mt-2 text-[13px] opacity-75">{deTienda(t.id).length} productos</span>
+                  {/* En celular las tarjetas pequeñas solo muestran la flecha, para dejarle espacio a la foto */}
+                  <span className={`mt-auto inline-flex w-max items-center gap-1.5 rounded-full text-[13px] font-bold transition-transform group-hover:translate-x-0.5 ${forma.corto ? "p-2.5 sm:px-4 sm:py-2" : "px-4 py-2"} ${tema.boton}`}>
+                    <span className={forma.corto ? "hidden sm:inline" : ""}>Ver todo</span><IconoFlecha className="h-3.5 w-3.5" />
+                  </span>
+                </span>
+                <img src={recurso(`fotos/recortes/${m.foto}.webp`)} alt="" loading="lazy" decoding="async"
+                  className={`pointer-events-none absolute bottom-3 right-3 object-contain drop-shadow-[0_16px_18px_rgba(0,0,0,0.32)] transition-transform duration-300 motion-safe:group-hover:-translate-y-1.5 motion-safe:group-hover:scale-[1.04] sm:bottom-4 sm:right-5 ${forma.foto}`} />
               </a>
             </li>
           );
         })}
       </ul>
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        <span className="mr-1 text-sm text-tinta-2">También:</span>
-        {otras.map(t => (
-          <a key={t.id} href={`#${t.vista}`} className="chip">{t.menu}<span className="text-xs tabular-nums text-tinta-3">{deTienda(t.id).length}</span></a>
-        ))}
+    </section>
+  );
+}
+
+/** Productos variados de una o varias secciones para una fila de la portada: primero los que tienen carrusel de fotos,
+    alternando marcas para que la fila no sea de una sola. No repite los de la vitrina ni los más vendidos. */
+function variados(tiendas: TiendaId[], max = 12) {
+  const evitar = new Set([...VITRINA, ...MAS_VENDIDOS]);
+  const todos = tiendas.flatMap(id => deTienda(id)).filter(p => p.imagen && !evitar.has(p.id));
+  const conFotos = todos.filter(p => GALERIAS[p.id]?.length);
+  const base = conFotos.length >= max ? conFotos : [...conFotos, ...todos.filter(p => !GALERIAS[p.id]?.length)];
+  const porMarca = new Map<string, Producto[]>();
+  for (const p of base) {
+    const lista = porMarca.get(p.marca || "") ?? [];
+    lista.push(p);
+    porMarca.set(p.marca || "", lista);
+  }
+  const fila: Producto[] = [];
+  while (fila.length < max && [...porMarca.values()].some(l => l.length)) {
+    for (const l of porMarca.values()) {
+      const p = l.shift();
+      if (p && fila.length < max) fila.push(p);
+    }
+  }
+  return fila;
+}
+
+/** Fila de productos de una o varias secciones, con enlace a la sección */
+function Coleccion({ id, etiqueta, titulo, tiendas, gris = false }: { id: string; etiqueta: string; titulo: string; tiendas: TiendaId[]; gris?: boolean }) {
+  const productos = useMemo(() => variados(tiendas), [tiendas]);
+  const enlaces = tiendas.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t));
+  if (!productos.length) return null;
+  return (
+    <section aria-labelledby={`t-${id}`} className={gris ? "border-y border-linea bg-fondo" : ""}>
+      <div className="contenedor py-10 sm:py-12">
+        <FilaProductos productos={productos} etiqueta={titulo} encabezado={
+          <>
+            <p className="etiqueta">{etiqueta}</p>
+            <h2 id={`t-${id}`} className="titulo-seccion mt-1">{titulo}</h2>
+            <p className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+              {enlaces.map(t => <a key={t.id} href={`#${t.vista}`} className="enlace">Ver {enlaces.length > 1 ? t.menu.toLowerCase() : "todo"} →</a>)}
+            </p>
+          </>
+        } />
+      </div>
+    </section>
+  );
+}
+
+/** Banda grande de gaming: invita a armar el escritorio completo (monitor, teclado, mouse y diadema) */
+function BandaGamer() {
+  const foto = (id: string, clase: string) => (
+    <img src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async"
+      className={`pointer-events-none absolute object-contain drop-shadow-[0_22px_24px_rgba(0,0,0,0.5)] ${clase}`} />
+  );
+  return (
+    <section aria-labelledby="t-gamer" className="contenedor py-10 sm:py-12">
+      <div className="relative isolate overflow-hidden rounded-xl bg-marca-noche text-white lg:grid lg:min-h-[360px] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+        <span aria-hidden="true" className="absolute -left-24 -top-24 -z-10 h-80 w-80 rounded-full bg-marca/40 blur-3xl" />
+        <span aria-hidden="true" className="absolute -bottom-32 right-10 -z-10 h-80 w-80 rounded-full bg-acento/25 blur-3xl" />
+        <div className="relative z-10 p-6 sm:p-9 lg:self-center lg:p-12">
+          <p className="etiqueta text-marca-menta">Todo para jugar</p>
+          <h2 id="t-gamer" className="mt-2 font-display text-[34px] font-extrabold leading-[0.98] text-white ancho-108 sm:text-[46px]">Arma tu setup gamer</h2>
+          <p className="mt-3 max-w-md text-white/80">Monitores, teclados, mouse, diademas, consolas y controles. Te asesoramos por WhatsApp para que todo combine.</p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a href="#perifericos" className="btn btn-primario">Ver periféricos</a>
+            <a href="#consolas" className="btn btn-claro">Ver consolas</a>
+          </div>
+        </div>
+        <div aria-hidden="true" className="relative h-[250px] sm:h-[320px] lg:h-auto">
+          {foto("p15412", "bottom-[18%] left-[12%] h-[66%] max-w-[70%]")}
+          {foto("p20008", "bottom-[4%] left-[4%] h-[34%] max-w-[55%]")}
+          {foto("p19066", "bottom-[5%] left-[58%] h-[26%]")}
+          {foto("p31252", "bottom-[10%] right-[3%] h-[52%] max-w-[30%]")}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Marcas con más productos en la tienda; cada una lleva a su búsqueda. Desfilan de lado (se detienen con el mouse
+    encima o al usar el teclado, y no se mueven si la persona pidió menos movimiento). */
+function Marcas() {
+  const marcas = useMemo(() => {
+    const cuenta = new Map<string, number>();
+    for (const p of PRODUCTOS) if (p.marca && p.marca.length > 2) cuenta.set(p.marca, (cuenta.get(p.marca) ?? 0) + 1);
+    return [...cuenta.entries()].sort((a, b) => b[1] - a[1]).slice(0, 18).map(([m]) => m);
+  }, []);
+  return (
+    <section aria-labelledby="t-marcas" className="overflow-hidden border-y border-linea py-9">
+      <div className="contenedor flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
+        <div>
+          <p className="etiqueta">Marcas que manejamos</p>
+          <h2 id="t-marcas" className="titulo-seccion mt-1">Las marcas que buscas</h2>
+        </div>
+        <p className="text-sm text-tinta-2">Toca una marca para ver todos sus productos</p>
+      </div>
+      <div className="relative mt-6">
+        <ul className="desfile flex w-max gap-3">
+          {[...marcas, ...marcas].map((m, i) => {
+            const copia = i >= marcas.length;
+            return (
+              <li key={`${m}-${i}`} aria-hidden={copia || undefined}>
+                <a href={hrefBusqueda(m)} tabIndex={copia ? -1 : undefined}
+                  className="flex h-16 items-center whitespace-nowrap rounded-lg border border-linea bg-white px-7 font-display text-[22px] font-extrabold tracking-tight text-tinta-2 transition-colors ancho-108 hover:border-marca hover:text-marca">
+                  {m}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
@@ -291,8 +442,16 @@ export function Inicio({ ancla }: { ancla?: string }) {
     <>
       <Portada />
       <Ventajas />
-      <MasVendidos productos={vendidos} />
       <Categorias />
+      <MasVendidos productos={vendidos} />
+      <Coleccion id="celulares" etiqueta="Celulares" titulo="Estrena celular" tiendas={["cel"]} />
+      <Coleccion id="computadores" etiqueta="Computadores" titulo="Portátiles y PC para cada necesidad" tiendas={["pc"]} gris />
+      <Marcas />
+      <Coleccion id="componentes" etiqueta="Componentes" titulo="Arma o mejora tu PC" tiendas={["comp"]} gris />
+      <BandaGamer />
+      <Coleccion id="consolas" etiqueta="Gaming" titulo="Consolas y accesorios para jugar" tiendas={["con"]} />
+      <Coleccion id="perifericos" etiqueta="Periféricos" titulo="Monitores, teclados, mouse y diademas" tiendas={["per"]} gris />
+      <Coleccion id="audio" etiqueta="Audio" titulo="Audífonos y parlantes" tiendas={["aud", "par"]} />
       <Servicios />
       <ComoComprar />
     </>
