@@ -12,11 +12,11 @@
   "opciones": [
    {
     "nombre": "512 GB",
-    "precio": 4900000
+    "precio": 5150000
    },
    {
     "nombre": "1 TB",
-    "precio": 5550000
+    "precio": 5850000
    }
   ]
  },
@@ -34,11 +34,11 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 2750000
+    "precio": 2800000
    },
    {
     "nombre": "512 GB",
-    "precio": 3200000
+    "precio": 3300000
    }
   ]
  },
@@ -56,19 +56,19 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 5450000
+    "precio": 5750000
    },
    {
     "nombre": "256 GB · morado",
-    "precio": 6100000
+    "precio": 6450000
    },
    {
     "nombre": "512 GB",
-    "precio": 6300000
+    "precio": 6650000
    },
    {
     "nombre": "1 TB",
-    "precio": 7900000
+    "precio": 8350000
    }
   ]
  },
@@ -85,11 +85,11 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 4950000
+    "precio": 5200000
    },
    {
     "nombre": "256 GB · morado",
-    "precio": 5200000
+    "precio": 5500000
    }
   ]
  },
@@ -104,15 +104,15 @@
   "opciones": [
    {
     "nombre": "256 GB · eSIM",
-    "precio": 4600000
-   },
-   {
-    "nombre": "256 GB · SIM física",
     "precio": 4800000
    },
    {
+    "nombre": "256 GB · SIM física",
+    "precio": 5050000
+   },
+   {
     "nombre": "512 GB · eSIM",
-    "precio": 5300000
+    "precio": 5550000
    }
   ]
  },
@@ -127,11 +127,11 @@
   "opciones": [
    {
     "nombre": "256 GB · eSIM",
-    "precio": 4300000
+    "precio": 4500000
    },
    {
     "nombre": "256 GB · SIM física",
-    "precio": 4350000
+    "precio": 4550000
    }
   ]
  },
@@ -149,7 +149,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2900000
+    "precio": 3000000
    }
   ]
  },
@@ -166,7 +166,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3250000
+    "precio": 3400000
    }
   ]
  },
@@ -183,11 +183,11 @@
   "opciones": [
    {
     "nombre": "Activado · azul o negro",
-    "precio": 2250000
+    "precio": 2300000
    },
    {
     "nombre": "Sin activar · azul",
-    "precio": 2450000
+    "precio": 2550000
    }
   ]
  },
@@ -204,7 +204,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2050000
+    "precio": 2100000
    }
   ]
  },
@@ -319,11 +319,11 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 2200000
+    "precio": 2250000
    },
    {
     "nombre": "512 GB",
-    "precio": 2350000
+    "precio": 2400000
    }
   ]
  },
@@ -338,15 +338,15 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 3100000
+    "precio": 3250000
    },
    {
     "nombre": "512 GB",
-    "precio": 3300000
+    "precio": 3400000
    },
    {
     "nombre": "1 TB",
-    "precio": 3650000
+    "precio": 3800000
    }
   ]
  },
@@ -363,7 +363,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2700000
+    "precio": 2800000
    }
   ]
  },
@@ -379,11 +379,11 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 3550000
+    "precio": 3700000
    },
    {
     "nombre": "512 GB",
-    "precio": 4000000
+    "precio": 4150000
    }
   ]
  },
@@ -401,7 +401,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4100000
+    "precio": 4300000
    }
   ]
  },
@@ -421,7 +421,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1500000
+    "precio": 1550000
    }
   ]
  },
@@ -677,7 +677,7 @@
    },
    {
     "nombre": "512 GB",
-    "precio": 1900000
+    "precio": 1950000
    }
   ]
  },
@@ -694,7 +694,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3050000
+    "precio": 3150000
    }
   ]
  },
@@ -711,7 +711,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2150000
+    "precio": 2200000
    }
   ]
  },
@@ -837,7 +837,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1500000
+    "precio": 1550000
    }
   ]
  },
@@ -1315,7 +1315,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1200000
+    "precio": 1250000
    }
   ]
  },
@@ -2019,7 +2019,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4150000
+    "precio": 4350000
    }
   ]
  },
@@ -2037,7 +2037,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2700000
+    "precio": 2750000
    }
   ]
  },
@@ -2057,7 +2057,7 @@
    },
    {
     "nombre": "256 GB · azul o silver",
-    "precio": 2200000
+    "precio": 2250000
    }
   ]
  },
@@ -2075,7 +2075,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1200000
+    "precio": 1250000
    }
   ]
  },
@@ -2284,7 +2284,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2750000
+    "precio": 2800000
    }
   ]
  },
@@ -2304,7 +2304,7 @@
    },
    {
     "nombre": "46 mm",
-    "precio": 1900000
+    "precio": 1950000
    }
   ]
  },
@@ -2322,7 +2322,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1450000
+    "precio": 1500000
    }
   ]
  },
@@ -2524,7 +2524,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1950000
+    "precio": 2000000
    }
   ]
  },
@@ -3441,7 +3441,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2200000
+    "precio": 2250000
    }
   ]
  },
@@ -3460,7 +3460,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2300000
    }
   ]
  },
@@ -3508,7 +3508,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1550000
+    "precio": 1600000
    }
   ]
  },
@@ -3524,7 +3524,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2600000
+    "precio": 2650000
    }
   ]
  },
@@ -3718,7 +3718,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2800000
+    "precio": 2850000
    }
   ]
  },
@@ -3741,7 +3741,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2900000
+    "precio": 3000000
    }
   ]
  },
@@ -3765,7 +3765,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3150000
+    "precio": 3300000
    }
   ]
  },
@@ -3788,7 +3788,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3200000
+    "precio": 3300000
    }
   ]
  },
@@ -3811,7 +3811,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3250000
+    "precio": 3350000
    }
   ]
  },
@@ -3835,7 +3835,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3350000
+    "precio": 3500000
    }
   ]
  },
@@ -3858,7 +3858,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3450000
+    "precio": 3600000
    }
   ]
  },
@@ -3881,7 +3881,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3550000
+    "precio": 3700000
    }
   ]
  },
@@ -3904,7 +3904,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3650000
+    "precio": 3850000
    }
   ]
  },
@@ -3927,7 +3927,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3750000
+    "precio": 3950000
    }
   ]
  },
@@ -3951,7 +3951,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4200000
+    "precio": 4400000
    }
   ]
  },
@@ -3975,7 +3975,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4300000
+    "precio": 4500000
    }
   ]
  },
@@ -3998,7 +3998,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4450000
+    "precio": 4650000
    }
   ]
  },
@@ -4022,7 +4022,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4550000
+    "precio": 4750000
    }
   ]
  },
@@ -4046,7 +4046,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4200000
+    "precio": 4400000
    }
   ]
  },
@@ -4070,7 +4070,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4650000
+    "precio": 4850000
    }
   ]
  },
@@ -4094,7 +4094,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4750000
+    "precio": 5000000
    }
   ]
  },
@@ -4118,7 +4118,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4800000
+    "precio": 5050000
    }
   ]
  },
@@ -4142,7 +4142,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4850000
+    "precio": 5100000
    }
   ]
  },
@@ -4166,7 +4166,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4950000
+    "precio": 5250000
    }
   ]
  },
@@ -4189,7 +4189,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5050000
+    "precio": 5300000
    }
   ]
  },
@@ -4213,7 +4213,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5050000
+    "precio": 5350000
    }
   ]
  },
@@ -4237,7 +4237,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5200000
+    "precio": 5450000
    }
   ]
  },
@@ -4261,7 +4261,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5200000
+    "precio": 5450000
    }
   ]
  },
@@ -4285,7 +4285,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5250000
+    "precio": 5550000
    }
   ]
  },
@@ -4309,7 +4309,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5500000
+    "precio": 5800000
    }
   ]
  },
@@ -4333,7 +4333,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5500000
+    "precio": 5800000
    }
   ]
  },
@@ -4354,7 +4354,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2200000
+    "precio": 2250000
    }
   ]
  },
@@ -4377,7 +4377,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2550000
+    "precio": 2600000
    }
   ]
  },
@@ -4398,7 +4398,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2550000
+    "precio": 2600000
    }
   ]
  },
@@ -4419,7 +4419,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3400000
+    "precio": 3550000
    }
   ]
  },
@@ -4441,7 +4441,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6150000
+    "precio": 6550000
    }
   ]
  },
@@ -4462,7 +4462,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2200000
+    "precio": 2250000
    }
   ]
  },
@@ -4483,7 +4483,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2350000
    }
   ]
  },
@@ -4504,7 +4504,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2400000
+    "precio": 2450000
    }
   ]
  },
@@ -4526,7 +4526,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3500000
+    "precio": 3650000
    }
   ]
  },
@@ -4548,7 +4548,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6000000
+    "precio": 6350000
    }
   ]
  },
@@ -4570,7 +4570,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6000000
+    "precio": 6350000
    }
   ]
  },
@@ -4592,7 +4592,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6900000
+    "precio": 7300000
    }
   ]
  },
@@ -4614,7 +4614,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 7250000
+    "precio": 7700000
    }
   ]
  },
@@ -4636,7 +4636,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 8900000
+    "precio": 9450000
    }
   ]
  },
@@ -4659,7 +4659,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 31400000
+    "precio": 33300000
    }
   ]
  },
@@ -4683,7 +4683,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 8650000
+    "precio": 9150000
    }
   ]
  },
@@ -4705,7 +4705,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5150000
+    "precio": 5400000
    }
   ]
  },
@@ -4727,7 +4727,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6850000
+    "precio": 7250000
    }
   ]
  },
@@ -4751,7 +4751,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3150000
+    "precio": 3300000
    }
   ]
  },
@@ -4775,7 +4775,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3550000
+    "precio": 3700000
    }
   ]
  },
@@ -4799,7 +4799,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6550000
+    "precio": 6950000
    }
   ]
  },
@@ -4823,7 +4823,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 7050000
+    "precio": 7500000
    }
   ]
  },
@@ -4926,7 +4926,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1850000
+    "precio": 1900000
    }
   ]
  },
@@ -4988,7 +4988,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1600000
+    "precio": 1650000
    }
   ]
  },
@@ -5009,7 +5009,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2350000
+    "precio": 2400000
    }
   ]
  },
@@ -5030,7 +5030,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1950000
+    "precio": 2000000
    }
   ]
  },
@@ -5153,7 +5153,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1700000
+    "precio": 1750000
    }
   ]
  },
@@ -5174,7 +5174,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2500000
+    "precio": 2600000
    }
   ]
  },
@@ -5195,7 +5195,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2650000
+    "precio": 2700000
    }
   ]
  },
@@ -5216,7 +5216,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3350000
+    "precio": 3500000
    }
   ]
  },
@@ -5237,7 +5237,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3050000
+    "precio": 3150000
    }
   ]
  },
@@ -5258,7 +5258,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3400000
+    "precio": 3550000
    }
   ]
  },
@@ -5667,7 +5667,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1800000
+    "precio": 1850000
    }
   ]
  },
@@ -5707,7 +5707,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3250000
+    "precio": 3350000
    }
   ]
  },
@@ -5727,7 +5727,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 45850000
+    "precio": 48600000
    }
   ]
  },
@@ -5831,7 +5831,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1700000
+    "precio": 1750000
    }
   ]
  },
@@ -5957,7 +5957,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2300000
    }
   ]
  },
@@ -5978,7 +5978,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2350000
+    "precio": 2400000
    }
   ]
  },
@@ -5998,7 +5998,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2350000
    }
   ]
  },
@@ -6019,7 +6019,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3050000
+    "precio": 3150000
    }
   ]
  },
@@ -6040,7 +6040,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3150000
+    "precio": 3250000
    }
   ]
  },
@@ -6082,7 +6082,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1350000
+    "precio": 1400000
    }
   ]
  },
@@ -6102,7 +6102,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1650000
+    "precio": 1700000
    }
   ]
  },
@@ -6123,7 +6123,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2000000
+    "precio": 2050000
    }
   ]
  },
@@ -6143,7 +6143,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2100000
+    "precio": 2150000
    }
   ]
  },
@@ -6163,7 +6163,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3250000
+    "precio": 3400000
    }
   ]
  },
@@ -6324,7 +6324,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1600000
+    "precio": 1650000
    }
   ]
  },
@@ -6592,7 +6592,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2300000
    }
   ]
  },
@@ -6612,7 +6612,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2350000
+    "precio": 2400000
    }
   ]
  },
@@ -6632,7 +6632,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2400000
+    "precio": 2450000
    }
   ]
  },
@@ -6652,7 +6652,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2400000
+    "precio": 2450000
    }
   ]
  },
@@ -6672,7 +6672,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2400000
+    "precio": 2450000
    }
   ]
  },
@@ -7217,7 +7217,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1500000
+    "precio": 1550000
    }
   ]
  },
@@ -7237,7 +7237,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1350000
+    "precio": 1400000
    }
   ]
  },
@@ -7277,7 +7277,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2300000
    }
   ]
  },
@@ -7298,7 +7298,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2500000
+    "precio": 2550000
    }
   ]
  },
@@ -7319,7 +7319,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2500000
+    "precio": 2600000
    }
   ]
  },
@@ -7339,7 +7339,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3450000
+    "precio": 3600000
    }
   ]
  },
@@ -7359,7 +7359,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3600000
+    "precio": 3750000
    }
   ]
  },
@@ -7380,7 +7380,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3700000
+    "precio": 3900000
    }
   ]
  },
@@ -7707,7 +7707,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1600000
+    "precio": 1650000
    }
   ]
  },
@@ -7851,7 +7851,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2350000
    }
   ]
  },
@@ -8330,7 +8330,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1350000
+    "precio": 1400000
    }
   ]
  },
@@ -8347,11 +8347,11 @@
   "opciones": [
    {
     "nombre": "Negra",
-    "precio": 1550000
+    "precio": 1600000
    },
    {
     "nombre": "Blanca",
-    "precio": 1550000
+    "precio": 1600000
    }
   ]
  },
@@ -8372,7 +8372,7 @@
    },
    {
     "nombre": "Blanca",
-    "precio": 2200000
+    "precio": 2250000
    }
   ]
  },
@@ -8388,7 +8388,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3400000
+    "precio": 3550000
    }
   ]
  },
@@ -8469,11 +8469,11 @@
   "opciones": [
    {
     "nombre": "Blanco",
-    "precio": 1750000
+    "precio": 1800000
    },
    {
     "nombre": "Negro",
-    "precio": 1750000
+    "precio": 1800000
    }
   ]
  },
@@ -8489,7 +8489,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1850000
+    "precio": 1900000
    }
   ]
  },
@@ -9845,7 +9845,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1950000
+    "precio": 2000000
    }
   ]
  },
@@ -9863,7 +9863,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1950000
+    "precio": 2000000
    }
   ]
  },
@@ -9881,7 +9881,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2000000
+    "precio": 2050000
    }
   ]
  },
@@ -9899,7 +9899,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2200000
+    "precio": 2250000
    }
   ]
  },
@@ -9917,7 +9917,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2300000
    }
   ]
  },
@@ -9935,7 +9935,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2300000
    }
   ]
  },
@@ -9953,7 +9953,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2300000
    }
   ]
  },
@@ -9971,7 +9971,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2300000
    }
   ]
  },
@@ -9989,7 +9989,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2350000
    }
   ]
  },
@@ -10007,7 +10007,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2650000
+    "precio": 2700000
    }
   ]
  },
@@ -10025,7 +10025,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2850000
+    "precio": 2950000
    }
   ]
  },
@@ -10043,7 +10043,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2400000
+    "precio": 2450000
    }
   ]
  },
@@ -10061,7 +10061,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4000000
+    "precio": 4200000
    }
   ]
  },
@@ -10079,7 +10079,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4150000
+    "precio": 4350000
    }
   ]
  },
@@ -10097,7 +10097,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4400000
+    "precio": 4600000
    }
   ]
  },
@@ -10115,7 +10115,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3050000
+    "precio": 3150000
    }
   ]
  },
@@ -10133,7 +10133,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4400000
+    "precio": 4600000
    }
   ]
  },
@@ -10152,7 +10152,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 7500000
+    "precio": 7950000
    }
   ]
  },
@@ -10170,7 +10170,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 7950000
+    "precio": 8400000
    }
   ]
  },
@@ -10188,7 +10188,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 8000000
+    "precio": 8500000
    }
   ]
  },
@@ -10207,11 +10207,11 @@
   "opciones": [
    {
     "nombre": "Dorado",
-    "precio": 8100000
+    "precio": 8600000
    },
    {
     "nombre": "Black",
-    "precio": 8100000
+    "precio": 8600000
    }
   ]
  },
@@ -10229,7 +10229,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 8700000
+    "precio": 9200000
    }
   ]
  },
@@ -10247,7 +10247,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 8800000
+    "precio": 9350000
    }
   ]
  },
@@ -10265,7 +10265,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 24150000
+    "precio": 25600000
    }
   ]
  },
@@ -10283,7 +10283,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 25400000
+    "precio": 26950000
    }
   ]
  },
@@ -10299,7 +10299,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3150000
+    "precio": 3250000
    }
   ]
  },
@@ -10315,7 +10315,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4750000
+    "precio": 4950000
    }
   ]
  },
@@ -11073,7 +11073,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1200000
+    "precio": 1250000
    }
   ]
  },
@@ -11124,7 +11124,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2050000
+    "precio": 2100000
    }
   ]
  },
@@ -11140,7 +11140,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2150000
+    "precio": 2200000
    }
   ]
  },
@@ -11160,7 +11160,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2400000
    }
   ]
  },
@@ -11176,7 +11176,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3300000
+    "precio": 3400000
    }
   ]
  },
@@ -11196,7 +11196,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5700000
+    "precio": 6000000
    }
   ]
  },
@@ -11215,7 +11215,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1200000
+    "precio": 1250000
    }
   ]
  },
@@ -11231,7 +11231,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2650000
+    "precio": 2750000
    }
   ]
  },
@@ -11247,7 +11247,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2900000
+    "precio": 3000000
    }
   ]
  },
@@ -11286,7 +11286,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2300000
    }
   ]
  },
@@ -11564,7 +11564,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4500000
+    "precio": 4750000
    }
   ]
  },
@@ -11660,7 +11660,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2450000
+    "precio": 2500000
    }
   ]
  },
@@ -11699,7 +11699,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4400000
+    "precio": 4600000
    }
   ]
  },
@@ -11719,7 +11719,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5300000
+    "precio": 5600000
    }
   ]
  },
@@ -12078,7 +12078,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1650000
+    "precio": 1700000
    }
   ]
  },
@@ -15061,7 +15061,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1350000
+    "precio": 1400000
    }
   ]
  },
@@ -15078,11 +15078,11 @@
   "opciones": [
    {
     "nombre": "Gris negro",
-    "precio": 1350000
+    "precio": 1400000
    },
    {
     "nombre": "Negro",
-    "precio": 1350000
+    "precio": 1400000
    }
   ]
  },
@@ -15183,7 +15183,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2750000
+    "precio": 2800000
    }
   ]
  },
@@ -15199,7 +15199,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2750000
+    "precio": 2800000
    }
   ]
  },
@@ -15247,7 +15247,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1350000
+    "precio": 1400000
    }
   ]
  },
@@ -15715,7 +15715,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1950000
+    "precio": 2000000
    }
   ]
  },
@@ -15731,7 +15731,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2700000
+    "precio": 2800000
    }
   ]
  },
@@ -15747,7 +15747,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3450000
+    "precio": 3600000
    }
   ]
  },
@@ -15795,7 +15795,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1950000
+    "precio": 2000000
    }
   ]
  },
@@ -15875,7 +15875,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2900000
+    "precio": 3000000
    }
   ]
  },
@@ -16034,7 +16034,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1800000
+    "precio": 1850000
    }
   ]
  },
@@ -16050,7 +16050,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2200000
+    "precio": 2250000
    }
   ]
  },
