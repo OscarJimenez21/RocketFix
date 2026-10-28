@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CONFIG, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
 import { camposServicio } from "../data/formularios";
-import { TIENDAS, tiendaPorId } from "../data/tiendas";
+import { tiendaPorId } from "../data/tiendas";
 import { PuntoEstado, useAtencion } from "../components/Contacto";
 import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
 import { FotoProducto } from "../components/FotoProducto";
@@ -241,7 +241,6 @@ function Categorias() {
           <p className="etiqueta">Todo en un solo lugar</p>
           <h2 id="t-categorias" className="titulo-seccion mt-1">Compra por categoría</h2>
         </div>
-        <p className="text-sm text-tinta-2">{PRODUCTOS.length} productos en {TIENDAS.length} categorías</p>
       </div>
       <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:auto-rows-[215px] lg:grid-cols-12">
         {MOSAICO.map(m => {
@@ -349,8 +348,7 @@ function BandaCelulares() {
     ["xrn15pro", "bottom-[12%] left-[13%] h-[57%]"],
     ["ip18p", "bottom-[12%] right-[14%] h-[57%]"],
     ["ip17pm", "bottom-[8%] left-[21%] h-[64%]"],
-    ["ip18pm", "bottom-[5%] left-[52%] h-[72%] -translate-x-1/2"],
-    ["medge60", "bottom-[2%] left-[3%] h-[26%]"]
+    ["ip18pm", "bottom-[5%] left-[52%] h-[72%] -translate-x-1/2"]
   ];
   return (
     <section aria-labelledby="t-banda-cel" className="contenedor pt-12">
@@ -397,7 +395,6 @@ function Marcas() {
           <p className="etiqueta">Marcas que manejamos</p>
           <h2 id="t-marcas" className="titulo-seccion mt-1">Las marcas que buscas</h2>
         </div>
-        <p className="text-sm text-tinta-2">Toca una marca para ver todos sus productos</p>
       </div>
       <div className="relative mt-6">
         <ul className="desfile flex w-max gap-3">
@@ -453,6 +450,53 @@ function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => voi
   );
 }
 
+/** Encabezado de color de cada tarjeta de reparación, con un equipo recortado (public/fotos/recortes) */
+type EstiloServicio = { caja: string; frase: string; texto: string; foto: string; posicion: string };
+const ESTILO_SERVICIO: { pc: EstiloServicio; cel: EstiloServicio } & Record<string, EstiloServicio | undefined> = {
+  pc: { caja: "bg-gradient-to-br from-marca-oscuro to-marca text-white", frase: "text-marca-menta", texto: "text-white/80", foto: "p52396", posicion: "-bottom-2 h-[82%]" },
+  cel: { caja: "bg-gradient-to-br from-acento to-acento-hover text-acento-tinta", frase: "text-acento-tinta/75", texto: "text-acento-tinta/80", foto: "ip18p", posicion: "-bottom-6 h-[98%]" }
+};
+
+/** Banda de portátiles y computadores (fondo claro, para variar con las bandas oscuras) */
+function BandaComputadores() {
+  // [foto recortada, posición y tamaño]; el orden es de atrás hacia adelante
+  const fila: [string, string][] = [
+    ["p52351", "bottom-[24%] left-[0%] h-[42%] max-w-[44%]"],
+    ["p51291", "bottom-[12%] left-[40%] h-[78%]"],
+    ["mbairm5", "bottom-[8%] right-[0%] h-[32%] max-w-[44%]"],
+    ["p52393", "bottom-[4%] left-[5%] h-[46%] max-w-[50%]"]
+  ];
+  const cuadricula = { backgroundImage: "linear-gradient(rgba(11,132,87,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(11,132,87,.07) 1px, transparent 1px)", backgroundSize: "46px 46px" };
+  return (
+    <section aria-labelledby="t-banda-pc" className="contenedor pb-12">
+      <div className="relative isolate overflow-hidden rounded-xl border border-linea bg-gradient-to-br from-marca-suave via-white to-acento-suave lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+        <span aria-hidden="true" className="absolute inset-0 -z-10" style={cuadricula} />
+        <span aria-hidden="true" className="absolute right-[12%] top-1/2 -z-10 h-[28rem] w-[28rem] -translate-y-1/2 rounded-full bg-marca-menta/30 blur-3xl" />
+        <div className="relative z-10 p-7 sm:p-10 lg:self-center lg:p-14">
+          <p className="etiqueta text-marca-medio">Portátiles y computadores</p>
+          <h2 id="t-banda-pc" className="mt-3 font-display text-[40px] font-extrabold leading-[0.95] text-tinta ancho-108 sm:text-[58px]">
+            Potencia para <span className="text-marca">todo lo que haces</span>
+          </h2>
+          <p className="mt-4 max-w-md text-[17px] leading-relaxed text-tinta-2">
+            Portátiles para estudiar y trabajar, equipos gamer y PC de escritorio listos para usar. Te ayudamos a escoger el tuyo por WhatsApp, sin enredos.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <a href="#computadores" className="btn btn-primario">Ver computadores</a>
+            <a href={waLink("Hola Rocket Fix, quiero asesoría para comprar un computador")} target="_blank" rel="noopener" className="btn btn-borde"><IconoWhatsApp className="h-5 w-5 text-wa" />Te asesoramos</a>
+          </div>
+        </div>
+        <div aria-hidden="true" className="relative h-[300px] sm:h-[420px] lg:h-auto">
+          <span className="absolute bottom-[3%] left-[6%] right-[6%] h-12 rounded-[50%] bg-marca-noche/25 blur-2xl" />
+          {fila.map(([id, clase]) => (
+            <img key={id} src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async"
+              className={`pointer-events-none absolute object-contain drop-shadow-[0_22px_22px_rgba(3,36,27,0.35)] ${clase}`} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Servicios() {
   const titulos = [...SERVICIOS.map(s => s.titulo), "Otro servicio"];
   const [elegido, setElegido] = useState(titulos[0] ?? "");
@@ -475,21 +519,41 @@ function Servicios() {
           <p className="mt-2 text-tinta-2">Te decimos el valor antes de reparar. Coordinamos por WhatsApp cómo recibir tu equipo y vamos a tu casa o negocio para instalar cámaras.</p>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {reparacion.map(s => (
-            <article key={s.id} className="tarjeta flex flex-col p-5 sm:p-6">
-              <div className="flex items-start gap-4">
-                <span className="flex h-14 w-16 shrink-0 items-center justify-center rounded bg-marca-suave"><Ilustracion nombre={s.ilustracion} className="h-11 w-14 text-marca-medio" /></span>
-                <div><h3 className="text-lg font-bold">{s.titulo}</h3><p className="mt-0.5 text-sm text-tinta-2">{s.texto}</p></div>
-              </div>
-              <ul className="mt-4 grid gap-x-4 gap-y-1.5 text-sm sm:grid-cols-2">
-                {s.trabajos.map(t => <li key={t} className="flex gap-2"><IconoCheck className="mt-0.5 h-4 w-4 shrink-0 text-marca" />{t}</li>)}
-              </ul>
-              <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-5">
-                <button type="button" onClick={() => solicitar(s.titulo)} className="btn btn-sm btn-marca">Solicitar cotización</button>
-                <a href={`#${s.articulo}`} className="enlace text-sm">Ver detalles y tiempos</a>
-              </div>
-            </article>
-          ))}
+          {reparacion.map(s => {
+            const e = ESTILO_SERVICIO[s.id] ?? ESTILO_SERVICIO.pc;
+            return (
+              <article key={s.id} className="flex flex-col overflow-hidden rounded-xl border border-linea bg-white shadow-tarjeta">
+                {/* Encabezado de color: texto a la izquierda y el equipo recortado en su propia columna (no se montan).
+                    Las tarjetas son angostas en celular y en md (dos columnas), y anchas en sm y lg. */}
+                <div className={`relative isolate flex min-h-[210px] gap-2 overflow-hidden ${e.caja}`}>
+                  <span aria-hidden="true" className="absolute -right-12 -top-16 -z-10 h-56 w-56 rounded-full bg-white/20 blur-3xl" />
+                  <div className="relative z-10 min-w-0 flex-1 py-6 pl-6 sm:py-7 sm:pl-7">
+                    <p className={`etiqueta ${e.frase}`}>Servicio técnico</p>
+                    <h3 className="mt-1.5 font-display text-[23px] font-extrabold leading-[1.02] text-current ancho-108 sm:text-[30px] md:text-[24px] lg:text-[30px]">{s.titulo}</h3>
+                    <p className={`mt-2 text-sm leading-snug ${e.texto}`}>{s.texto}</p>
+                  </div>
+                  <div aria-hidden="true" className="relative w-[34%] shrink-0 sm:w-[40%] md:w-[34%] lg:w-[40%]">
+                    <img src={recurso(`fotos/recortes/${e.foto}.webp`)} alt="" loading="lazy" decoding="async"
+                      className={`pointer-events-none absolute left-0 w-full object-contain object-bottom drop-shadow-[0_18px_20px_rgba(0,0,0,0.4)] ${e.posicion}`} />
+                  </div>
+                </div>
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <p className="etiqueta">Qué hacemos</p>
+                  <ul className="mt-3 grid gap-2 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
+                    {s.trabajos.map(t => (
+                      <li key={t} className="flex items-start gap-2.5 rounded-md bg-fondo px-3 py-2.5 text-sm leading-snug">
+                        <span className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-marca text-white"><IconoCheck className="h-3 w-3" /></span>{t}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-5">
+                    <button type="button" onClick={() => solicitar(s.titulo)} className="btn btn-marca">Solicitar cotización</button>
+                    <a href={`#${s.articulo}`} className="enlace text-sm">Ver detalles y tiempos</a>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
         </div>
         {camaras && <Camaras servicio={camaras} cotizar={() => solicitar(camaras.titulo)} />}
         <div id="orden" className="tarjeta mt-8 grid gap-6 p-5 sm:p-7 md:grid-cols-[260px_minmax(0,1fr)] md:gap-10">
@@ -550,6 +614,7 @@ export function Inicio({ ancla }: { ancla?: string }) {
       <Carrusel id="vendidos" etiqueta={<><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</>} titulo="Los que todos quieren" productos={vendidos} cinta="Top ventas" gris />
       <BandaCelulares />
       <Coleccion id="celulares" etiqueta="Celulares" titulo="Estrena celular" tiendas={["cel"]} />
+      <BandaComputadores />
       <Coleccion id="computadores" etiqueta="Computadores" titulo="Portátiles y PC para cada necesidad" tiendas={["pc"]} gris />
       <Coleccion id="componentes" etiqueta="Componentes" titulo="Arma o mejora tu PC" tiendas={["comp"]} />
       <Servicios />

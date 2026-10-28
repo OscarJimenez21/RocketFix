@@ -7,12 +7,6 @@
    "alt": null
   },
   {
-   "nombre": "Datáfono",
-   "archivo": null,
-   "icono": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect x=\"5\" y=\"2\" width=\"14\" height=\"20\" rx=\"2.5\"/><rect x=\"8\" y=\"5\" width=\"8\" height=\"5\" rx=\"1\"/><path d=\"M8.5 14h.01M12 14h.01M15.5 14h.01M8.5 17.5h.01M12 17.5h.01M15.5 17.5h.01\"/></svg>",
-   "alt": null
-  },
-  {
    "nombre": "Visa",
    "archivo": "pagos/visa.svg",
    "icono": null,
@@ -43,10 +37,16 @@
    "alt": "DaviPlata"
   },
   {
-   "nombre": "Transferencia",
-   "archivo": null,
-   "icono": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 10h18M5 10v10M9.5 10v10M14.5 10v10M19 10v10M2 21h20M12 2.5l9 5H3z\"/></svg>",
-   "alt": null
+   "nombre": "Nu",
+   "archivo": "pagos/nu.svg",
+   "icono": null,
+   "alt": "Nu"
+  },
+  {
+   "nombre": "Grupo Aval",
+   "archivo": "pagos/grupo-aval.png",
+   "icono": null,
+   "alt": "Grupo Aval"
   },
   {
    "nombre": "Bold, pago en línea",
