@@ -8,6 +8,7 @@ import galeriasJson from "./galerias.json";
 import cabecerasJson from "./cabeceras.json";
 import pagosJson from "./pagos.json";
 import resenasJson from "./resenas.json";
+import logosMarcasJson from "./logos-marcas.json";
 import type { Articulo, Cabecera, Categoria, Config, FormaPago, Paquete, Producto, Resena, Servicio, TiendaId } from "../types";
 import { norm } from "../lib/formato";
 
@@ -19,6 +20,8 @@ export const CABECERAS = cabecerasJson as Record<string, Cabecera>;
 export const PAGOS = pagosJson as { lista: FormaPago[]; nota: string };
 /** Calificaciones de clientes que autorizaron publicarlas (las agrega Rocket Fix; la página no recibe datos) */
 export const RESENAS = resenasJson as Resena[];
+/** Logo de cada marca (public/marcas, fondo transparente y 56 px de alto); las marcas sin logo se muestran con su nombre */
+export const LOGOS_MARCAS = logosMarcasJson as Record<string, string>;
 
 const contenido = contenidoJson as {
   paquetes: Paquete[];

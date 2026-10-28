@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CONFIG, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
+import { CONFIG, LOGOS_MARCAS, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
 import { camposServicio } from "../data/formularios";
 import { Calificaciones, ResumenCalificaciones } from "../components/Calificaciones";
 import { tiendaPorId } from "../data/tiendas";
@@ -382,8 +382,8 @@ function BandaCelulares() {
   );
 }
 
-/** Marcas con 5 productos o más, de la que más tiene a la que menos; cada una lleva a su página (#marca/…), que muestra
-    solo los productos guardados con esa marca. La fila avanza sola y también se mueve
+/** Marcas con 5 productos o más, de la que más tiene a la que menos, con su logo (o su nombre si no hay logo); cada una
+    lleva a su página (#marca/…), que muestra solo los productos guardados con esa marca. La fila avanza sola y también se mueve
     a mano: con las flechas, arrastrando con el mouse o deslizando con el dedo; después de moverla espera unos segundos y
     sigue sola. Se detiene con el mouse encima o con el teclado, y no avanza si la persona pidió menos movimiento.
     La lista va tres veces seguidas y la fila se mantiene en la del medio: al acercarse a un borde salta una vuelta
@@ -488,8 +488,10 @@ function Marcas() {
           return (
             <li key={`${m}-${i}`} aria-hidden={copia || undefined} className="shrink-0">
               <a href={hrefMarca(m)} tabIndex={copia ? -1 : undefined} draggable={false}
-                className="flex h-16 items-center whitespace-nowrap rounded-lg border border-linea bg-white px-7 font-display text-[22px] font-extrabold tracking-tight text-tinta-2 transition-colors ancho-108 hover:border-marca hover:text-marca">
-                {m}
+                className="flex h-14 w-36 items-center justify-center whitespace-nowrap rounded-lg border border-linea bg-white px-4 font-display text-lg font-extrabold tracking-tight text-tinta-2 transition-colors ancho-108 hover:border-marca hover:text-marca">
+                {LOGOS_MARCAS[m]
+                  ? <img src={recurso(LOGOS_MARCAS[m])} alt={m} draggable={false} loading="lazy" decoding="async" className="max-h-7 max-w-full object-contain" />
+                  : m}
               </a>
             </li>
           );
