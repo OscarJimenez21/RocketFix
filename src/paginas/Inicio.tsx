@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CONFIG, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
 import { camposServicio } from "../data/formularios";
+import { Calificaciones, ResumenCalificaciones } from "../components/Calificaciones";
 import { tiendaPorId } from "../data/tiendas";
 import { PuntoEstado, useAtencion } from "../components/Contacto";
 import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
@@ -87,6 +88,7 @@ function Portada() {
             <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-semibold text-white hover:underline">
               <IconoWhatsApp className="h-[18px] w-[18px] text-wa-vivo" />{CONFIG.whatsappVisible}
             </a>
+            <ResumenCalificaciones />
           </div>
         </div>
         <Vitrina />
@@ -598,7 +600,7 @@ function ComoComprar() {
 export function Inicio({ ancla }: { ancla?: string }) {
   const vendidos = MAS_VENDIDOS.map(id => porId[id]).filter((p): p is Producto => Boolean(p));
 
-  // #categorias, #servicios, #contacto y #orden llevan a su sección de la portada
+  // #categorias, #servicios, #calificaciones, #contacto y #orden llevan a su sección de la portada
   // Cuando corre el efecto la sección ya está en la página, así que se puede bajar de una vez
   useEffect(() => {
     if (ancla) document.getElementById(ancla)?.scrollIntoView({ block: "start" });
@@ -619,6 +621,7 @@ export function Inicio({ ancla }: { ancla?: string }) {
       <Coleccion id="componentes" etiqueta="Componentes" titulo="Arma o mejora tu PC" tiendas={["comp"]} />
       <Servicios />
       <ComoComprar />
+      <Calificaciones />
     </>
   );
 }

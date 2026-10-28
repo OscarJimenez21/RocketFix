@@ -42,6 +42,12 @@ export const IconoMenu = ({ className = "h-6 w-6" }: P) => (
 export const IconoCheck = ({ className = "h-4 w-4" }: P) => (
   <svg viewBox="0 0 24 24" className={className} {...base} strokeWidth={2.2}><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
 );
-export const IconoMoto = ({ className = "h-5 w-5" }: P) => (
+/** Estrella rellena de las calificaciones */
+export const IconoEstrella = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" fill="currentColor" stroke="currentColor" strokeWidth={1.2} strokeLinejoin="round">
+    <path d="M12 2.8l2.84 5.76 6.36.92-4.6 4.48 1.09 6.33L12 17.3l-5.69 2.99 1.09-6.33-4.6-4.48 6.36-.92z" />
+  </svg>
+);
+export const IconoMoto =({ className = "h-5 w-5" }: P) => (
   <svg viewBox="0 0 24 24" className={className} {...base}><circle cx="5.5" cy="17" r="3" /><circle cx="18.5" cy="17" r="3" /><path d="M8.5 17h6.5l2-7h2.5M15 5h3l1.5 5M5.5 17l3-6h6" /></svg>
 );

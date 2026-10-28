@@ -71,6 +71,18 @@ const tiendas = readFileSync("src/data/tiendas.ts", "utf8");
 for (const [, id] of tiendas.matchAll(/foto: "([^"]+)"/g)) if (!ids.includes(id)) fallar("Portada", `la foto de categoría usa ${id}, que no existe`);
 (contenido.masVendidos || []).filter(id => !ids.includes(id)).forEach(id => fallar("Más vendidos", `${id} no existe`));
 
+// 5b. Calificaciones de clientes: completas y sin datos de contacto (solo nombre e inicial del apellido)
+const resenas = leer("resenas");
+if (!Array.isArray(resenas)) fallar("Calificaciones", "resenas.json debe ser una lista");
+else resenas.forEach((r, k) => {
+  const quien = r?.nombre || `#${k + 1}`;
+  if (!r?.nombre?.trim() || !r?.texto?.trim()) fallar("Calificaciones", `${quien}: falta el nombre o el comentario`);
+  if (!Number.isInteger(r?.estrellas) || r.estrellas < 1 || r.estrellas > 5) fallar("Calificaciones", `${quien}: las estrellas deben ser un número entero de 1 a 5`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(r?.fecha ?? "") || Number.isNaN(Date.parse(r.fecha))) fallar("Calificaciones", `${quien}: la fecha debe ir como AAAA-MM-DD`);
+  const todo = `${r?.nombre} ${r?.texto} ${r?.compra ?? ""}`;
+  if (/(\+?57[\s.-]?)?3\d{2}[\s.-]?\d{3}[\s.-]?\d{4}/.test(todo) || /\S+@\S+\.\S+/.test(todo)) fallar("Calificaciones", `${quien}: parece tener un teléfono o un correo`);
+});
+
 // 6. Nada privado en lo que se publica: sin costos ni márgenes, sin hojas de cálculo, solo la llave pública de Bold
 const camposPrivados = /^(costo|cost|margen|proveedor|precioCompra|utilidad)$/i;
 productos.forEach(p => Object.keys(p).filter(k => camposPrivados.test(k)).forEach(k => fallar("Privado", `${p.id} tiene el campo ${k}`)));
@@ -90,7 +102,7 @@ for (const f of textos) {
 }
 
 console.log(`Productos: ${productos.length} (original: ${original.PRODUCTOS.length}) · versiones: ${versiones}`);
-console.log(`Galerías: ${Object.keys(galerias).length} · descripciones: ${Object.keys(descripciones).length} · archivos revisados: ${archivos.length}`);
+console.log(`Galerías: ${Object.keys(galerias).length} · descripciones: ${Object.keys(descripciones).length} · calificaciones: ${resenas.length} · archivos revisados: ${archivos.length}`);
 if (diferencias.length) {
   console.log(`\nCambios respecto a la tienda anterior (no impiden publicar): ${diferencias.length}`);
   diferencias.slice(0, 15).forEach(d => console.log(" · " + d));

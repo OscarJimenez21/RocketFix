@@ -7,7 +7,8 @@ import contenidoJson from "./contenido.json";
 import galeriasJson from "./galerias.json";
 import cabecerasJson from "./cabeceras.json";
 import pagosJson from "./pagos.json";
-import type { Articulo, Cabecera, Categoria, Config, FormaPago, Paquete, Producto, Servicio, TiendaId } from "../types";
+import resenasJson from "./resenas.json";
+import type { Articulo, Cabecera, Categoria, Config, FormaPago, Paquete, Producto, Resena, Servicio, TiendaId } from "../types";
 import { norm } from "../lib/formato";
 
 export const CONFIG = configJson as Config;
@@ -16,6 +17,8 @@ export const CATEGORIAS = categoriasJson as Record<Exclude<TiendaId, "cel">, Cat
 export const GALERIAS = galeriasJson as Record<string, string[]>;
 export const CABECERAS = cabecerasJson as Record<string, Cabecera>;
 export const PAGOS = pagosJson as { lista: FormaPago[]; nota: string };
+/** Calificaciones de clientes que autorizaron publicarlas (las agrega Rocket Fix; la página no recibe datos) */
+export const RESENAS = resenasJson as Resena[];
 
 const contenido = contenidoJson as {
   paquetes: Paquete[];

@@ -132,6 +132,19 @@ export interface FormaPago {
   alt: string | null;
 }
 
+/** Calificación de un cliente real. Rocket Fix la recibe por WhatsApp y la agrega solo si el cliente autorizó publicarla. */
+export interface Resena {
+  /** Nombre con la inicial del apellido (ej.: "Laura M."), nunca teléfono ni correo */
+  nombre: string;
+  /** De 1 a 5 */
+  estrellas: number;
+  texto: string;
+  /** Qué compró o qué servicio recibió (ej.: "Reparación de celular · iPhone 13") */
+  compra?: string;
+  /** AAAA-MM-DD */
+  fecha: string;
+}
+
 /** Una línea del carrito: un producto en una versión */
 export interface LineaCarrito {
   producto: Producto;

@@ -28,6 +28,7 @@ const SERVICIO = [
 const AYUDA = [
   { texto: "Inicio", href: "#inicio" },
   { texto: "Todas las categorías", href: "#categorias" },
+  { texto: "Calificaciones de clientes", href: "#calificaciones" },
   { texto: "Contacto y horario", href: "#contacto" }
 ];
 
