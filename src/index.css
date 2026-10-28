@@ -4,7 +4,9 @@
 
 /* Base: letras de la marca, fondo y foco visible para teclado */
 @layer base {
+  /* Espacio para la cabecera fija al saltar a una sección (en celular la cabecera incluye el buscador) */
   html { -webkit-text-size-adjust: 100%; scroll-padding-top: 8.5rem; }
+  @media (min-width: 1024px) { html { scroll-padding-top: 5.5rem; } }
   body { @apply bg-white font-sans text-tinta antialiased; font-size: 16px; line-height: 1.5; }
   h1, h2, h3 { @apply font-display text-tinta; font-stretch: 104%; letter-spacing: -0.01em; text-wrap: balance; }
   :focus-visible { outline: 2px solid theme("colors.marca.DEFAULT"); outline-offset: 2px; }
