@@ -116,7 +116,7 @@ function FormularioCalificacion() {
         </fieldset>
         <div>
           <label htmlFor={`${base}-nombre`} className="rotulo">Tu nombre</label>
-          <input id={`${base}-nombre`} className={clase("nombre")} autoComplete="name" placeholder="Ej.: Laura Martínez" value={nombre} aria-invalid={malos.includes("nombre") || undefined}
+          <input id={`${base}-nombre`} className={clase("nombre")} autoComplete="name" placeholder="Nombre y apellido" value={nombre} aria-invalid={malos.includes("nombre") || undefined}
             onChange={e => { setNombre(e.target.value); quitar("nombre"); }} />
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
@@ -128,7 +128,7 @@ function FormularioCalificacion() {
           </div>
           <div>
             <label htmlFor={`${base}-equipo`} className="rotulo">Producto o equipo<span className="opcional"> (opcional)</span></label>
-            <input id={`${base}-equipo`} className="campo" placeholder="Ej.: iPhone 15, portátil Lenovo" value={equipo} onChange={e => setEquipo(e.target.value)} />
+            <input id={`${base}-equipo`} className="campo" placeholder="Modelo del producto o del equipo" value={equipo} onChange={e => setEquipo(e.target.value)} />
           </div>
         </div>
         <div>

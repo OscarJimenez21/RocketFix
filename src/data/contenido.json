@@ -76,8 +76,8 @@
     "Mejora a disco SSD y más memoria RAM",
     "Recuperación de archivos"
    ],
-   "equipo": "Ej.: HP Pavilion 15, PC de escritorio",
-   "detalle": "Ej.: no enciende, está muy lento, se le dañó la pantalla…"
+   "equipo": "Marca y modelo del portátil o PC",
+   "detalle": "Cuéntanos qué falla: no enciende, está lento, la pantalla…"
   },
   {
    "id": "cel",
@@ -93,8 +93,8 @@
     "Celulares mojados o que no encienden",
     "Copia de seguridad de fotos y contactos"
    ],
-   "equipo": "Ej.: Samsung Galaxy A54, iPhone 11",
-   "detalle": "Ej.: pantalla rota, no carga, se mojó…"
+   "equipo": "Marca y modelo del celular",
+   "detalle": "Cuéntanos qué falla: pantalla rota, no carga, se mojó…"
   },
   {
    "id": "cam",
@@ -111,7 +111,7 @@
     "Configuración de la app en tu celular",
     "Mantenimiento y reubicación de cámaras"
    ],
-   "detalle": "Ej.: quiero vigilar la entrada y el parqueadero, ya tengo internet WiFi…"
+   "detalle": "Qué zonas quieres vigilar y si ya tienes internet WiFi"
   }
  ],
  "incluye": {

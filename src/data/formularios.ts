@@ -44,7 +44,7 @@ export const FORMULARIOS_ARTICULO: Record<string, { titulo: string; texto: strin
       { id: "cantidad", rotulo: "Cuántas cámaras", etiqueta: "Cámaras", tipo: "lista", opciones: CAMARAS, inicial: "3 o 4" },
       { id: "paquete", rotulo: "Paquete de interés", etiqueta: "Paquete", tipo: "lista", ancho: "completo",
         opciones: [...PAQUETES.map(p => p.nombre), "Aún no sé, quiero asesoría"], inicial: "Aún no sé, quiero asesoría" },
-      { id: "detalle", rotulo: "Qué quieres vigilar", etiqueta: "Detalle", tipo: "area", opcional: true, placeholder: "Ej.: la entrada y el parqueadero. Ya tengo internet WiFi." }
+      { id: "detalle", rotulo: "Qué quieres vigilar", etiqueta: "Detalle", tipo: "area", opcional: true, placeholder: "Qué zonas quieres vigilar y si ya tienes internet WiFi" }
     ]
   },
   "blog-celulares": {
@@ -53,10 +53,10 @@ export const FORMULARIOS_ARTICULO: Record<string, { titulo: string; texto: strin
     asunto: "cotizar la reparación de mi celular",
     boton: "Enviar por WhatsApp",
     campos: [
-      { id: "modelo", rotulo: "Marca y modelo", etiqueta: "Celular", obligatorio: true, falta: "la marca y el modelo", placeholder: "Ej.: Samsung Galaxy A54" },
+      { id: "modelo", rotulo: "Marca y modelo", etiqueta: "Celular", obligatorio: true, falta: "la marca y el modelo", placeholder: "Marca y modelo de tu celular" },
       { id: "falla", rotulo: "Qué le pasa", etiqueta: "Falla", tipo: "lista",
         opciones: ["Pantalla rota o no se ve", "La batería dura poco", "No carga", "Se mojó", "No enciende", "Cámara, micrófono o altavoz", "Lento o se reinicia", "Otro"] },
-      { id: "detalle", rotulo: "Detalle", etiqueta: "Detalle", tipo: "area", opcional: true, placeholder: "Ej.: se cayó y la pantalla quedó negra, pero vibra." },
+      { id: "detalle", rotulo: "Detalle", etiqueta: "Detalle", tipo: "area", opcional: true, placeholder: "Qué pasó y qué hace ahora el celular" },
       nombre
     ]
   },
@@ -69,9 +69,9 @@ export const FORMULARIOS_ARTICULO: Record<string, { titulo: string; texto: strin
       { id: "tipo", rotulo: "Tipo de equipo", etiqueta: "Equipo", tipo: "lista", opciones: ["Portátil", "PC de escritorio", "Todo en uno"] },
       { id: "servicio", rotulo: "Servicio", etiqueta: "Servicio", tipo: "lista",
         opciones: ["Mantenimiento preventivo", "Reparación", "Formateo e instalación", "Mejora a SSD o RAM", "Armado de PC", "Recuperación de archivos", "Otro"] },
-      { id: "modelo", rotulo: "Marca y modelo", etiqueta: "Modelo", opcional: true, ancho: "completo", placeholder: "Ej.: HP Pavilion 15, Lenovo IdeaPad 3" },
+      { id: "modelo", rotulo: "Marca y modelo", etiqueta: "Modelo", opcional: true, ancho: "completo", placeholder: "Marca y modelo de tu computador" },
       { id: "detalle", rotulo: "Qué le pasa o qué necesitas", etiqueta: "Detalle", tipo: "area", obligatorio: true, falta: "qué le pasa al equipo",
-        placeholder: "Ej.: se calienta y se apaga cuando abro varios programas." },
+        placeholder: "Qué falla, desde cuándo o qué te gustaría mejorar" },
       nombre
     ]
   }

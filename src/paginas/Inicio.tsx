@@ -382,37 +382,119 @@ function BandaCelulares() {
   );
 }
 
-/** Marcas con más productos en la tienda; cada una lleva a su búsqueda. Desfilan de lado (se detienen con el mouse
-    encima o al usar el teclado, y no se mueven si la persona pidió menos movimiento). */
+/** Marcas con 5 productos o más, de la que más tiene a la que menos; cada una lleva a su página (#marca/…), que muestra
+    solo los productos guardados con esa marca. La fila avanza sola y también se mueve
+    a mano: con las flechas, arrastrando con el mouse o deslizando con el dedo; después de moverla espera unos segundos y
+    sigue sola. Se detiene con el mouse encima o con el teclado, y no avanza si la persona pidió menos movimiento.
+    La lista va tres veces seguidas y la fila se mantiene en la del medio: al acercarse a un borde salta una vuelta
+    completa, que se ve igual, así que nunca se acaba hacia ningún lado. */
 function Marcas() {
   const marcas = useMemo(() => {
     const cuenta = new Map<string, number>();
-    for (const p of PRODUCTOS) if (p.marca && p.marca.length > 2) cuenta.set(p.marca, (cuenta.get(p.marca) ?? 0) + 1);
-    return [...cuenta.entries()].sort((a, b) => b[1] - a[1]).slice(0, 18).map(([m]) => m);
+    for (const p of PRODUCTOS) if (p.marca) cuenta.set(p.marca, (cuenta.get(p.marca) ?? 0) + 1);
+    return [...cuenta.entries()].filter(([, n]) => n >= 5).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([m]) => m);
   }, []);
+  const fila = useRef<HTMLUListElement>(null);
+  const encima = useRef(false);
+  const quietaHasta = useRef(0);
+  const arrastre = useRef<{ x: number; inicio: number; movio: boolean } | null>(null);
+  const bloquearClic = useRef(false);
+
+  /** Ancho de una vuelta de la lista (de la primera marca a su copia) */
+  const vuelta = () => {
+    const li = fila.current?.children;
+    return li && li.length > marcas.length ? (li[marcas.length] as HTMLElement).offsetLeft - (li[0] as HTMLElement).offsetLeft : 0;
+  };
+  /** Mantiene la fila en la copia del medio; devuelve cuánto saltó */
+  const centrar = () => {
+    const el = fila.current, v = vuelta();
+    if (!el || !v) return 0;
+    const salto = el.scrollLeft < v * 0.5 ? v : el.scrollLeft >= v * 1.5 ? -v : 0;
+    if (salto) el.scrollLeft += salto;
+    return salto;
+  };
+  const pausar = (ms = 4000) => { quietaHasta.current = performance.now() + ms; };
+
+  useEffect(() => {
+    const el = fila.current;
+    if (!el) return;
+    el.scrollLeft = vuelta();
+    const reducir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let raf = 0, antes = performance.now(), pos = el.scrollLeft;
+    const paso = (t: number) => {
+      const dt = Math.min(t - antes, 64); antes = t;
+      if (reducir || encima.current || arrastre.current || t < quietaHasta.current) pos = el.scrollLeft;
+      else { pos += dt * 0.05; el.scrollLeft = pos; }
+      const salto = centrar();
+      pos += salto;
+      if (arrastre.current) arrastre.current.inicio += salto;
+      raf = requestAnimationFrame(paso);
+    };
+    raf = requestAnimationFrame(paso);
+    return () => cancelAnimationFrame(raf);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const mover = (dir: 1 | -1) => {
+    const el = fila.current, v = vuelta();
+    if (!el) return;
+    const paso = dir * Math.max(el.clientWidth * 0.6, 220);
+    // Si el destino queda fuera de la copia del medio, primero se salta una vuelta (se ve igual) y luego se desliza
+    if (v && el.scrollLeft + paso < v * 0.5) el.scrollLeft += v;
+    else if (v && el.scrollLeft + paso >= v * 1.5) el.scrollLeft -= v;
+    pausar(5000);
+    el.scrollBy({ left: paso, behavior: "smooth" });
+  };
+  // Arrastrar con el mouse (con el dedo la fila se desliza sola, como cualquier lista)
+  const bajar = (e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse" || e.button !== 0 || !fila.current) return;
+    arrastre.current = { x: e.clientX, inicio: fila.current.scrollLeft, movio: false };
+  };
+  const arrastrar = (e: React.PointerEvent) => {
+    const a = arrastre.current, el = fila.current;
+    if (!a || !el) return;
+    const dx = e.clientX - a.x;
+    if (!a.movio && Math.abs(dx) > 5) { a.movio = true; el.setPointerCapture(e.pointerId); }
+    if (a.movio) el.scrollLeft = a.inicio - dx;
+  };
+  const soltar = () => {
+    const a = arrastre.current;
+    arrastre.current = null;
+    if (a?.movio) { bloquearClic.current = true; window.setTimeout(() => { bloquearClic.current = false; }, 80); pausar(); }
+  };
+
+  const flecha = "flex h-11 w-11 items-center justify-center rounded-full border border-linea-fuerte bg-white transition-colors hover:border-tinta-2";
   return (
     <section aria-labelledby="t-marcas" className="overflow-hidden border-b border-linea py-9">
-      <div className="contenedor flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
-        <div>
+      <div className="contenedor flex items-end justify-between gap-4">
+        <div className="min-w-0">
           <p className="etiqueta">Marcas que manejamos</p>
           <h2 id="t-marcas" className="titulo-seccion mt-1">Las marcas que buscas</h2>
         </div>
+        <div className="flex shrink-0 gap-2">
+          <button type="button" onClick={() => mover(-1)} aria-label="Ver marcas anteriores" className={flecha}><IconoFlecha dir={-1} /></button>
+          <button type="button" onClick={() => mover(1)} aria-label="Ver más marcas" className={flecha}><IconoFlecha /></button>
+        </div>
       </div>
-      <div className="relative mt-6">
-        <ul className="desfile flex w-max gap-3">
-          {[...marcas, ...marcas].map((m, i) => {
-            const copia = i >= marcas.length;
-            return (
-              <li key={`${m}-${i}`} aria-hidden={copia || undefined}>
-                <a href={hrefMarca(m)} tabIndex={copia ? -1 : undefined}
-                  className="flex h-16 items-center whitespace-nowrap rounded-lg border border-linea bg-white px-7 font-display text-[22px] font-extrabold tracking-tight text-tinta-2 transition-colors ancho-108 hover:border-marca hover:text-marca">
-                  {m}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <ul ref={fila} aria-label="Marcas"
+        onMouseEnter={() => { encima.current = true; }} onMouseLeave={() => { encima.current = false; soltar(); }}
+        onFocus={() => { encima.current = true; }} onBlur={() => { encima.current = false; }}
+        onTouchStart={() => pausar(8000)} onTouchEnd={() => pausar()} onWheel={() => pausar()}
+        onPointerDown={bajar} onPointerMove={arrastrar} onPointerUp={soltar} onPointerCancel={soltar}
+        onClickCapture={e => { if (bloquearClic.current) { e.preventDefault(); e.stopPropagation(); } }}
+        onDragStart={e => e.preventDefault()}
+        className="sin-barra mt-6 flex cursor-grab select-none gap-3 overflow-x-auto px-4 active:cursor-grabbing sm:px-6">
+        {[...marcas, ...marcas, ...marcas].map((m, i) => {
+          const copia = i < marcas.length || i >= marcas.length * 2;
+          return (
+            <li key={`${m}-${i}`} aria-hidden={copia || undefined} className="shrink-0">
+              <a href={hrefMarca(m)} tabIndex={copia ? -1 : undefined} draggable={false}
+                className="flex h-16 items-center whitespace-nowrap rounded-lg border border-linea bg-white px-7 font-display text-[22px] font-extrabold tracking-tight text-tinta-2 transition-colors ancho-108 hover:border-marca hover:text-marca">
+                {m}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }

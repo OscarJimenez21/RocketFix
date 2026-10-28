@@ -105,12 +105,4 @@
   .sin-barra::-webkit-scrollbar { display: none; }
   .ancho-108 { font-stretch: 108%; }
   .ancho-122 { font-stretch: 122%; }
-  /* Franja de marcas que desfila de lado (la lista va duplicada: al llegar a la mitad vuelve a empezar sin salto) */
-  .desfile { animation: desfile 55s linear infinite; }
-  .desfile:hover, .desfile:focus-within { animation-play-state: paused; }
-}
-
-@keyframes desfile {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
 }

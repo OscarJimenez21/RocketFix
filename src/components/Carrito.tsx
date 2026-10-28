@@ -169,7 +169,7 @@ export function Carrito() {
                 <div>
                   <label htmlFor={`${id}-dir`} className="rotulo">{nacional ? "Ciudad, dirección y barrio" : "Dirección y barrio"}</label>
                   <input id={`${id}-dir`} className={campo("dir")} autoComplete="street-address" value={d.dir}
-                    placeholder={nacional ? "Ej.: Medellín, calle 10 # 43-20, El Poblado" : "Calle, número y barrio"}
+                    placeholder={nacional ? "Ciudad, calle, número y barrio" : "Calle, número y barrio"}
                     aria-invalid={errores.dir || undefined} onChange={e => poner("dir", e.target.value)} />
                   <p className="mt-1.5 text-xs text-tinta-2">{nacional ? CONFIG.envio : CONFIG.domicilio} {reglaEnvio(zona)}</p>
                 </div>
@@ -181,7 +181,7 @@ export function Carrito() {
                 </div>
                 <div>
                   <label htmlFor={`${id}-nota`} className="rotulo">Nota <span className="opcional">(opcional)</span></label>
-                  <input id={`${id}-nota`} className="campo" placeholder="Ej.: color negro, necesito factura" value={d.nota} onChange={e => poner("nota", e.target.value)} />
+                  <input id={`${id}-nota`} className="campo" placeholder="Color, si necesitas factura u otra indicación" value={d.nota} onChange={e => poner("nota", e.target.value)} />
                 </div>
                 <details className="rounded border border-linea bg-white">
                   <summary className="cursor-pointer px-3 py-2.5 text-sm font-semibold text-tinta-2">Ver el mensaje que se va a enviar</summary>
