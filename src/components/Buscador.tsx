@@ -76,7 +76,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
       </label>
       {abierto && (
         <div id={idLista} role="listbox" aria-label="Sugerencias de búsqueda"
-          className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[70vh] overflow-y-auto rounded-md border border-linea bg-white p-2 shadow-flota">
+          className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[70dvh] overflow-y-auto overscroll-contain rounded-md border border-linea bg-white p-2 shadow-flota">
           {!palabras.length && (
             <>
               <p className="etiqueta px-2.5 pb-1.5 pt-1">Búsquedas populares</p>

@@ -6,7 +6,7 @@ export function Aviso() {
   const agregado = aviso.startsWith("Agregaste");
   return (
     <div role="status" aria-live="polite"
-      className={`fixed bottom-4 left-1/2 z-[60] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 transition-all ${aviso && !carritoAbierto ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}>
+      className={`fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] left-1/2 z-[60] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 transition-[opacity,transform] duration-200 ease-salida ${aviso && !carritoAbierto ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}>
       {aviso && (
         <div className="flex items-center gap-3 rounded-md bg-tinta px-4 py-3 text-sm text-white shadow-flota">
           <span className="flex-1">{aviso}</span>

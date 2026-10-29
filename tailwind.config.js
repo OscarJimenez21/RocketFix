@@ -2,6 +2,8 @@
 // Colores y letras de la marca Rocket Fix (los mismos de la tienda original y de las piezas gráficas)
 export default {
   content: { relative: true, files: ["./index.html", "./src/**/*.{ts,tsx}"] },
+  // hover: solo en equipos con mouse; en celular el efecto quedaba pegado después de tocar
+  future: { hoverOnlyWhenSupported: true },
   theme: {
     extend: {
       colors: {
@@ -33,6 +35,8 @@ export default {
         // Sin fuente web: los pocos números que la usan toman la del sistema
         mono: ["ui-monospace", "SFMono-Regular", "Consolas", "monospace"]
       },
+      // Curvas de movimiento: "salida" para lo que aparece o responde a un toque; "cajon" para el carrito y el menú (como iOS)
+      transitionTimingFunction: { salida: "cubic-bezier(0.23, 1, 0.32, 1)", cajon: "cubic-bezier(0.32, 0.72, 0, 1)" },
       borderRadius: { DEFAULT: "6px", md: "8px", lg: "10px" },
       maxWidth: { pagina: "1240px" },
       // Dos sombras en todo el sitio: tarjetas al pasar el mouse y paneles que flotan (menú, carrito, sugerencias)

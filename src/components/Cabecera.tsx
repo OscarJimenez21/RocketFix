@@ -69,12 +69,12 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
     <div className={`fixed inset-0 z-50 overflow-hidden ${abierto ? "" : "pointer-events-none"}`}>
       <div onClick={cerrar} aria-hidden="true" className={`absolute inset-0 bg-marca-noche/40 transition-opacity ${abierto ? "opacity-100" : "opacity-0"}`} />
       <div ref={panel} id="menu-lateral" role="dialog" aria-modal="true" aria-label="Menú"
-        className={`absolute inset-y-0 left-0 flex w-[88%] max-w-[380px] flex-col bg-white shadow-flota transition-transform duration-300 ${abierto ? "translate-x-0" : "-translate-x-full"}`}>
+        className={`absolute inset-y-0 left-0 flex w-[88%] max-w-[380px] flex-col bg-white shadow-flota transition-transform duration-300 ease-cajon ${abierto ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex h-14 shrink-0 items-center justify-between border-b border-linea pl-4 pr-2 lg:h-[68px]">
           <Logo />
           <button ref={botonCerrar} type="button" onClick={cerrar} aria-label="Cerrar menú" className="flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo"><IconoCerrar /></button>
         </div>
-        <nav aria-label="Menú principal" onClick={cerrarAlElegir(cerrar)} className="flex-1 overflow-y-auto px-3 py-3">
+        <nav aria-label="Menú principal" onClick={cerrarAlElegir(cerrar)} className="flex-1 overflow-y-auto overscroll-contain px-3 py-3">
           {GRUPOS.map(g => (
             <div key={g.titulo} className="border-b border-linea py-3 first:pt-1">
               <p className="etiqueta px-2">{g.titulo}</p>
@@ -106,7 +106,7 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
             </ul>
           </div>
         </nav>
-        <div className="shrink-0 border-t border-linea p-4">
+        <div className="shrink-0 border-t border-linea p-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))]">
           <p className="mb-3 flex items-center gap-2 text-sm text-tinta-2"><PuntoEstado abierto={atencion.abierto} />{atencion.texto}</p>
           <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="btn btn-wa w-full"><IconoWhatsApp />Escríbenos por WhatsApp</a>
         </div>

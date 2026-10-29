@@ -5,7 +5,12 @@
 /* Base: letras de la marca, fondo y foco visible para teclado */
 @layer base {
   /* Espacio para la cabecera fija al saltar a una sección (en celular la cabecera incluye el buscador) */
-  html { -webkit-text-size-adjust: 100%; scroll-padding-top: 8.5rem; }
+  html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; scroll-padding-top: 8.5rem; }
+  /* Celular: toque inmediato (sin la espera del doble toque) y los controles no seleccionan su texto al mantener presionado */
+  a, button, label, summary, [role="button"] { touch-action: manipulation; }
+  button, [role="button"] { -webkit-user-select: none; user-select: none; }
+  /* iPhone agranda la página al escribir en campos con letra menor a 16 px y no la devuelve */
+  @media (pointer: coarse) { input, select, textarea { font-size: 16px !important; } }
   @media (min-width: 1024px) { html { scroll-padding-top: 5.5rem; } }
   body { @apply bg-white font-sans text-tinta antialiased; font-size: 16px; line-height: 1.5; }
   h1, h2, h3 { @apply font-display text-tinta; font-stretch: 104%; letter-spacing: -0.01em; text-wrap: balance; }
@@ -27,7 +32,8 @@
   .titulo-seccion { @apply text-[24px] font-extrabold leading-tight sm:text-[28px]; }
 
   /* Todo lo que se toca mide al menos 44 px de alto (tamaño mínimo cómodo para el dedo) */
-  .btn { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded px-4 text-[15px] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
+  /* Al presionar, el botón se achica un poco (respuesta inmediata al toque) */
+  .btn { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded px-4 text-[15px] font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-salida active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50; }
   .btn-sm { @apply px-3 text-sm; }
   .btn-primario { @apply bg-acento text-acento-tinta hover:bg-acento-hover; }
   .btn-marca { @apply bg-marca text-white hover:bg-marca-hover; }
@@ -41,7 +47,7 @@
 
   .tarjeta { @apply rounded-md border border-linea bg-white; }
   /* En celular las pastillas miden 44 px de alto; con mouse (desde 640 px) basta con 36 */
-  .chip { @apply inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full border border-linea-fuerte bg-white px-3.5 py-1.5 text-sm text-tinta transition-colors hover:border-tinta-2 sm:min-h-[36px]; }
+  .chip { @apply inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full border border-linea-fuerte bg-white px-3.5 py-1.5 text-sm text-tinta transition-[color,background-color,border-color,transform] duration-150 ease-salida hover:border-tinta-2 active:scale-[0.97] sm:min-h-[36px]; }
   .chip[aria-pressed="true"], .chip[aria-current="page"] { @apply border-marca bg-marca text-white; }
 
   .campo { @apply block min-h-[44px] w-full rounded border border-linea-fuerte bg-white px-3 py-2.5 text-[15px] text-tinta placeholder:text-tinta-3 focus:border-marca focus:outline-none focus:ring-2 focus:ring-marca/20; }
@@ -105,7 +111,8 @@
 
 @layer utilities {
   /* relative: así la fila recorta también lo que tiene posición absoluta adentro (si no, Chrome en celular aleja la página) */
-  .sin-barra { scrollbar-width: none; position: relative; }
+  /* overscroll-x: al llegar al final de una fila, el deslizamiento no se pasa a la página (ni activa "atrás" en Android) */
+  .sin-barra { scrollbar-width: none; position: relative; overscroll-behavior-x: contain; }
   .sin-barra::-webkit-scrollbar { display: none; }
   /* Enlaces de texto pequeños (la ruta Inicio › …): el área que se puede tocar crece hacia arriba y abajo sin mover nada */
   .toque { position: relative; }

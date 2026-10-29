@@ -8,6 +8,7 @@ import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
 import { FotoProducto } from "../components/FotoProducto";
 import { IconoCamion, IconoCheck, IconoFlecha, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { Ilustracion } from "../components/Ilustracion";
+import { useEnPantalla } from "../lib/enPantalla";
 import { dinero, recurso } from "../lib/formato";
 import { hrefMarca, hrefProducto } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
@@ -125,7 +126,7 @@ function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: st
   return (
     <a href={hrefProducto(p.id)} className="group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-white transition-shadow hover:shadow-tarjeta">
       <div className="relative aspect-square p-7 sm:p-8">
-        <FotoProducto producto={p} alt={p.nombre} className="transition-transform duration-300 motion-safe:group-hover:scale-[1.04]" />
+        <FotoProducto producto={p} alt={p.nombre} className="transition-transform duration-300 ease-salida motion-safe:group-hover:scale-[1.04]" />
         {cinta && <span className="absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-xs font-bold uppercase tracking-wide text-acento-texto">{cinta}</span>}
       </div>
       <div className="mt-auto border-t border-linea px-5 py-4">
@@ -156,11 +157,13 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
     else if (dir < 0 && el.scrollLeft <= 8) el.scrollTo({ left: el.scrollWidth, behavior: "smooth" });
     else el.scrollBy({ left: dir * paso, behavior: "smooth" });
   };
+  // Avanza solo mientras la fila se ve en pantalla
+  const visible = useEnPantalla(fila);
   useEffect(() => {
-    if (quieta || reducir || productos.length < 2) return;
+    if (quieta || reducir || !visible || productos.length < 2) return;
     const t = window.setInterval(() => mover(1), PASO_CARRUSEL);
     return () => window.clearInterval(t);
-  }, [quieta, reducir, productos.length]);
+  }, [quieta, reducir, visible, productos.length]);
   // Con el dedo: se detiene mientras la persona desliza y vuelve a moverse unos segundos después
   const tocar = () => {
     setQuieta(true);
@@ -265,7 +268,7 @@ function Categorias() {
                   </span>
                 </span>
                 <img src={recurso(`fotos/recortes/${m.foto}.webp`)} alt="" loading="lazy" decoding="async"
-                  className={`pointer-events-none absolute bottom-3 right-3 object-contain drop-shadow-[0_16px_18px_rgba(0,0,0,0.32)] transition-transform duration-300 motion-safe:group-hover:-translate-y-1.5 motion-safe:group-hover:scale-[1.04] sm:bottom-4 sm:right-5 ${forma.foto}`} />
+                  className={`pointer-events-none absolute bottom-3 right-3 object-contain drop-shadow-[0_16px_18px_rgba(0,0,0,0.32)] transition-transform duration-300 ease-salida motion-safe:group-hover:-translate-y-1.5 motion-safe:group-hover:scale-[1.04] sm:bottom-4 sm:right-5 ${forma.foto}`} />
               </a>
             </li>
           );
@@ -417,10 +420,14 @@ function Marcas() {
   };
   const pausar = (ms = 4000) => { quietaHasta.current = performance.now() + ms; };
 
+  // Al cargar, la fila arranca en la copia del medio
+  useEffect(() => { if (fila.current) fila.current.scrollLeft = vuelta(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // El movimiento solo corre mientras la fila se ve en pantalla (fuera de ella no gasta batería)
+  const visible = useEnPantalla(fila);
   useEffect(() => {
     const el = fila.current;
-    if (!el) return;
-    el.scrollLeft = vuelta();
+    if (!el || !visible) return;
     const reducir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0, antes = performance.now(), pos = el.scrollLeft;
     const paso = (t: number) => {
@@ -434,7 +441,7 @@ function Marcas() {
     };
     raf = requestAnimationFrame(paso);
     return () => cancelAnimationFrame(raf);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [visible]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const mover = (dir: 1 | -1) => {
     const el = fila.current, v = vuelta();
