@@ -42,7 +42,8 @@ export default function Producto({ id }: { id: string }) {
     if (agregar(p.id, i)) avisar(`Agregaste ${nombreItem(p, o.nombre)} al carrito`);
   };
   const compartir = async () => {
-    const url = `${location.href.split("#")[0]}#p/${p.id}`;
+    // Se comparte la página propia del producto: al pegarla en WhatsApp sale con su foto, nombre y precio
+    const url = `${location.origin}${import.meta.env.BASE_URL}p/${p.id}/`;
     if (navigator.share) { navigator.share({ title: p.nombre, text: `${p.nombre} en ${CONFIG.nombre}`, url }).catch(() => {}); return; }
     try { await navigator.clipboard.writeText(url); setCopiado(true); setTimeout(() => setCopiado(false), 2500); } catch { avisar(url); }
   };
