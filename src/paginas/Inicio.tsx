@@ -45,7 +45,7 @@ function Vitrina() {
             <FotoProducto producto={x} alt={x.nombre} prioridad={j === 0} />
           </a>
         ))}
-        <span className="absolute left-3 top-3 rounded-sm bg-fondo px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-tinta-2">{etiquetaDe(p)}</span>
+        <span className="absolute left-3 top-3 rounded-sm bg-fondo px-2 py-1 text-xs font-semibold uppercase tracking-wide text-tinta-2">{etiquetaDe(p)}</span>
       </div>
       <div className="flex items-center justify-between gap-3 border-t border-linea px-4 py-3.5 sm:px-5" aria-live={quieta || elegida ? "polite" : "off"}>
         <div className="min-w-0">
@@ -85,7 +85,7 @@ function Portada() {
           </div>
           <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/80">
             <p className="flex items-center gap-2"><PuntoEstado abierto={atencion.abierto} claro />{atencion.texto}</p>
-            <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="inline-flex items-center gap-2 font-semibold text-white hover:underline">
+            <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="inline-flex min-h-[44px] items-center gap-2 font-semibold text-white hover:underline">
               <IconoWhatsApp className="h-[18px] w-[18px] text-wa-vivo" />{CONFIG.whatsappVisible}
             </a>
             <ResumenCalificaciones />
@@ -120,12 +120,13 @@ function Ventajas() {
 const PASO_CARRUSEL = 3500;
 
 /** Tarjeta de las filas de la portada: foto grande, nombre y precio; toda la tarjeta lleva al producto */
-function TarjetaVitrina({ producto: p, cinta, prioridad }: { producto: Producto; cinta?: string; prioridad: boolean }) {
+/** Las filas van debajo de la portada: sus fotos cargan cuando la persona se acerca a ellas */
+function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: string }) {
   return (
     <a href={hrefProducto(p.id)} className="group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-white transition-shadow hover:shadow-tarjeta">
       <div className="relative aspect-square p-7 sm:p-8">
-        <FotoProducto producto={p} alt={p.nombre} prioridad={prioridad} className="transition-transform duration-300 motion-safe:group-hover:scale-[1.04]" />
-        {cinta && <span className="absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-[11px] font-bold uppercase tracking-wide text-acento-texto">{cinta}</span>}
+        <FotoProducto producto={p} alt={p.nombre} className="transition-transform duration-300 motion-safe:group-hover:scale-[1.04]" />
+        {cinta && <span className="absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-xs font-bold uppercase tracking-wide text-acento-texto">{cinta}</span>}
       </div>
       <div className="mt-auto border-t border-linea px-5 py-4">
         <p className="truncate text-[12px] font-semibold uppercase tracking-wide text-tinta-3">{etiquetaDe(p)}</p>
@@ -177,8 +178,8 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
             <p className="etiqueta flex items-center gap-1.5">{etiqueta}</p>
             <h2 id={`t-${id}`} className="titulo-seccion mt-1">{titulo}</h2>
             {enlaces.length > 0 && (
-              <p className="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-sm">
-                {enlaces.map(e => <a key={e.href} href={e.href} className="enlace">{e.texto} →</a>)}
+              <p className="flex flex-wrap gap-x-4 text-sm">
+                {enlaces.map(e => <a key={e.href} href={e.href} className="enlace-suelto">{e.texto} →</a>)}
               </p>
             )}
           </div>
@@ -190,9 +191,9 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
         <ul ref={fila} aria-label={titulo} tabIndex={0}
           onMouseEnter={() => setQuieta(true)} onMouseLeave={() => setQuieta(false)} onFocus={() => setQuieta(true)} onBlur={() => setQuieta(false)} onTouchStart={tocar}
           className="sin-barra -mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6">
-          {productos.map((p, n) => (
+          {productos.map(p => (
             <li key={p.id} className="w-[74%] shrink-0 snap-start sm:w-[44%] lg:w-[calc(25%-15px)]">
-              <TarjetaVitrina producto={p} cinta={cinta} prioridad={n < 4} />
+              <TarjetaVitrina producto={p} cinta={cinta} />
             </li>
           ))}
         </ul>
@@ -205,7 +206,7 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
 const TEMAS = {
   oscuro: { caja: "bg-marca-oscuro text-white", frase: "text-marca-menta", boton: "bg-white text-marca-oscuro", brillo: "bg-marca-menta/25" },
   noche: { caja: "bg-marca-noche text-white", frase: "text-marca-menta", boton: "bg-marca-menta text-marca-noche", brillo: "bg-marca/50" },
-  marca: { caja: "bg-marca text-white", frase: "text-white/85", boton: "bg-white text-marca-oscuro", brillo: "bg-marca-menta/45" },
+  marca: { caja: "bg-marca text-white", frase: "text-white", boton: "bg-white text-marca-oscuro", brillo: "bg-marca-menta/45" },
   acento: { caja: "bg-acento text-acento-tinta", frase: "text-acento-tinta/80", boton: "bg-acento-tinta text-white", brillo: "bg-white/35" },
   menta: { caja: "bg-marca-menta text-marca-noche", frase: "text-marca-noche/75", boton: "bg-marca-noche text-white", brillo: "bg-white/45" },
   suave: { caja: "bg-marca-suave text-marca-oscuro", frase: "text-marca-medio", boton: "bg-marca text-white", brillo: "bg-white/80" }
@@ -256,7 +257,8 @@ function Categorias() {
                 <span className={`relative z-10 flex min-w-0 flex-col ${forma.texto}`}>
                   <span className={`text-[12.5px] font-semibold leading-snug sm:text-sm ${tema.frase}`}>{m.frase}</span>
                   <span className={`mt-1 font-display font-extrabold leading-[0.98] tracking-tight ancho-108 ${forma.titulo}`}>{t.titulo}</span>
-                  <span className="mt-2 text-[13px] opacity-75">{deTienda(t.id).length} productos</span>
+                  {/* Mismo color de la frase (con opacidad, en las tarjetas verdes no se leía bien) */}
+                  <span className={`mt-2 text-[13px] ${tema.frase}`}>{deTienda(t.id).length} productos</span>
                   {/* En celular las tarjetas pequeñas solo muestran la flecha, para dejarle espacio a la foto */}
                   <span className={`mt-auto inline-flex w-max items-center gap-1.5 rounded-full text-[13px] font-bold transition-transform group-hover:translate-x-0.5 ${forma.corto ? "p-2.5 sm:px-4 sm:py-2" : "px-4 py-2"} ${tema.boton}`}>
                     <span className={forma.corto ? "hidden sm:inline" : ""}>Ver todo</span><IconoFlecha className="h-3.5 w-3.5" />
@@ -634,7 +636,7 @@ function Servicios() {
                   </ul>
                   <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-5">
                     <button type="button" onClick={() => solicitar(s.titulo)} className="btn btn-marca">Solicitar cotización</button>
-                    <a href={`#${s.articulo}`} className="enlace text-sm">Ver detalles y tiempos</a>
+                    <a href={`#${s.articulo}`} className="enlace-suelto text-sm">Ver detalles y tiempos</a>
                   </div>
                 </div>
               </article>
@@ -648,7 +650,7 @@ function Servicios() {
             <p className="mt-2 text-sm text-tinta-2">Cuéntanos qué necesitas. Te respondemos por WhatsApp con un valor aproximado o la fecha de la visita.</p>
             <ol className="mt-4 grid gap-2.5 text-sm text-tinta-2">
               {["Llenas este formulario.", "Se abre WhatsApp con tu solicitud escrita. Envía ese mensaje para completar la solicitud.", "Te respondemos con el diagnóstico inicial o agendamos la visita."].map((t, n) => (
-                <li key={t} className="flex gap-2.5"><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-marca-suave text-[11px] font-bold text-marca-oscuro">{n + 1}</span>{t}</li>
+                <li key={t} className="flex gap-2.5"><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-marca-suave text-xs font-bold text-marca-oscuro">{n + 1}</span>{t}</li>
               ))}
             </ol>
           </div>

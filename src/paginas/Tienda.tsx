@@ -91,7 +91,7 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
             <div role="group" aria-label="Estado del equipo" className="inline-flex rounded border border-linea-fuerte p-0.5">
               {([["todos", "Todos"], ["nuevo", "Nuevos"], ["cpo", "CPO"]] as const).map(([v, t]) => (
                 <button key={v} type="button" aria-pressed={f.cond === v} onClick={() => poner({ cond: v })}
-                  className={`rounded-sm px-3 py-1.5 text-sm font-semibold ${f.cond === v ? "bg-tinta text-white" : "text-tinta-2 hover:text-tinta"}`}>{t}</button>
+                  className={`min-h-[42px] rounded-sm px-3 py-1.5 text-sm font-semibold sm:min-h-[34px] ${f.cond === v ? "bg-tinta text-white" : "text-tinta-2 hover:text-tinta"}`}>{t}</button>
               ))}
             </div>
           )}
@@ -113,9 +113,13 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
         <p className="mt-4 text-sm text-tinta-2" aria-live="polite">Mostrando {mostrados.length} de {visibles.length} {visibles.length === 1 ? "producto" : "productos"}</p>
 
         {visibles.length ? (
-          <ul className="mt-4 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {mostrados.map((p, i) => <li key={p.id}><TarjetaProducto producto={p} prioridad={i < 4} /></li>)}
-          </ul>
+          <>
+            {/* Para lectores de pantalla: el título de la lista va entre el de la página y los de cada producto */}
+            <h2 className="sr-only">Productos</h2>
+            <ul className="mt-4 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+              {mostrados.map((p, i) => <li key={p.id}><TarjetaProducto producto={p} prioridad={i < 4} /></li>)}
+            </ul>
+          </>
         ) : (
           <div className="mt-6 rounded-md border border-dashed border-linea-fuerte px-6 py-12 text-center">
             <p className="font-semibold">Ningún producto cumple todos los filtros elegidos.</p>

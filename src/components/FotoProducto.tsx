@@ -19,7 +19,7 @@ export function FotoProducto({ producto, src = producto.imagen, alt = producto.n
     return (
       <div className={`flex h-full w-full flex-col items-center justify-center gap-1 text-marca-medio ${className}`} role="img" aria-label={`${producto.nombre} (foto pendiente)`}>
         <Ilustracion nombre={ilustracionDe(producto)} className="w-1/2" />
-        <span className="etiqueta text-[10px] text-tinta-3">Foto pendiente</span>
+        <span className="etiqueta text-tinta-3">Foto pendiente</span>
       </div>
     );
   }

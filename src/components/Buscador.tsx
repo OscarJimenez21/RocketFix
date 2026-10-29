@@ -110,7 +110,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
                   <span className="block truncate text-xs text-tinta-2">{[VISTAS[TIENDA_VISTA[p.tienda]], p.marca].filter(Boolean).join(" · ")}</span>
                 </span>
                 <span className="shrink-0 text-right text-sm font-semibold">
-                  {p.opciones.length > 1 && <small className="block text-[11px] font-normal text-tinta-3">Desde</small>}
+                  {p.opciones.length > 1 && <small className="block text-xs font-normal text-tinta-3">Desde</small>}
                   {dinero(desde(p))}
                 </span>
               </a>

@@ -11,7 +11,7 @@ export function Migas({ migas, className = "" }: { migas: Miga[]; className?: st
       {migas.map((m, i) => (
         <span key={i} className="flex items-center gap-1.5">
           {i > 0 && <span aria-hidden="true" className="text-tinta-3">›</span>}
-          {m.href ? <a href={m.href} className="hover:text-tinta hover:underline">{m.texto}</a> : <span aria-current="page" className="text-tinta">{m.texto}</span>}
+          {m.href ? <a href={m.href} className="toque hover:text-tinta hover:underline">{m.texto}</a> : <span aria-current="page" className="text-tinta">{m.texto}</span>}
         </span>
       ))}
     </nav>
@@ -33,7 +33,7 @@ export function EncabezadoVista({ migas, titulo, lead, nota, extra }: { migas: M
           <aside className="tarjeta p-4 text-sm">
             <p className="font-semibold">{nota.titulo}</p>
             <p className="mt-1 text-tinta-2">{nota.texto}</p>
-            <a className="enlace mt-2 inline-block text-sm"
+            <a className="enlace-suelto mt-0.5 text-sm"
               href={nota.whatsapp !== null ? waLink(nota.whatsapp ? conNombre(nota.whatsapp) : undefined) : `#${nota.href ?? "inicio"}`}
               {...(nota.whatsapp !== null ? { target: "_blank", rel: "noopener" } : {})}>
               {nota.enlace.replace(/\s*→$/, "")} →

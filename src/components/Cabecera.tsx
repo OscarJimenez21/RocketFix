@@ -134,7 +134,7 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
               className="-ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded text-tinta hover:bg-fondo">
               <IconoMenu />
             </button>
-            <a href="#inicio" className="shrink-0" aria-label="Rocket Fix, ir al inicio"><Logo /></a>
+            <a href="#inicio" className="flex h-11 shrink-0 items-center" aria-label="Rocket Fix, ir al inicio"><Logo /></a>
           </div>
           <div className="hidden min-w-0 flex-1 lg:block lg:max-w-[560px]"><Buscador inicial={q} /></div>
           <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">

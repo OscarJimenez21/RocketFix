@@ -8,6 +8,8 @@ export default {
         marca: {
           DEFAULT: "#0B8457", // verde principal
           hover: "#097049",
+          // Verde para textos y enlaces sobre blanco o sobre el fondo claro (5,7:1); el verde principal ahí solo da 4,4:1
+          texto: "#097049",
           claro: "#3DD598",
           menta: "#5BE0A9",
           medio: "#0A6B4B",

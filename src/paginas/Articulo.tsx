@@ -79,7 +79,7 @@ export function Articulo({ id }: { id: string }) {
           </div>
           <nav aria-label="Otros artículos" className="mt-6">
             <p className="etiqueta mb-2">Otros artículos</p>
-            <ul className="grid gap-2 text-sm">{ARTICULOS.filter(x => x.id !== id).map(x => <li key={x.id}><a href={`#${x.id}`} className="enlace font-medium">{x.titulo}</a></li>)}</ul>
+            <ul className="grid text-sm">{ARTICULOS.filter(x => x.id !== id).map(x => <li key={x.id}><a href={`#${x.id}`} className="enlace-suelto py-1 font-medium">{x.titulo}</a></li>)}</ul>
           </nav>
         </aside>
       </div>

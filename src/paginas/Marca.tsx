@@ -40,6 +40,7 @@ export function Marca({ marca }: { marca: string }) {
         )}
         {visibles.length > 0 ? (
           <>
+            <h2 className="sr-only">Productos {marca}</h2>
             <ul className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
               {visibles.slice(0, limite).map((p, i) => <li key={p.id}><TarjetaProducto producto={p} prioridad={i < 4} /></li>)}
             </ul>
@@ -52,7 +53,7 @@ export function Marca({ marca }: { marca: string }) {
         ) : (
           <div className="mt-6 rounded-md border border-dashed border-linea-fuerte px-6 py-12 text-center">
             <p className="font-semibold">No encontramos productos de la marca “{marca}”.</p>
-            <a href={hrefBusqueda(marca)} className="enlace mt-3 inline-block">Buscar “{marca}” en toda la tienda</a>
+            <a href={hrefBusqueda(marca)} className="enlace-suelto mt-2">Buscar “{marca}” en toda la tienda</a>
           </div>
         )}
       </div>

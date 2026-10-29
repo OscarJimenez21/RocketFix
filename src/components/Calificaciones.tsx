@@ -199,7 +199,7 @@ export function Calificaciones() {
               <p className="mt-2 text-sm leading-relaxed text-tinta-2">Aquí aparecerán las opiniones de quienes compran o reparan sus equipos con nosotros, para que cualquiera las pueda ver antes de comprar.</p>
               <ol className="mt-5 grid gap-2.5 text-sm text-tinta-2">
                 {pasos.map((t, n) => (
-                  <li key={t} className="flex gap-2.5"><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-marca-suave text-[11px] font-bold text-marca-oscuro">{n + 1}</span>{t}</li>
+                  <li key={t} className="flex gap-2.5"><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-marca-suave text-xs font-bold text-marca-oscuro">{n + 1}</span>{t}</li>
                 ))}
               </ol>
             </div>

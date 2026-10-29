@@ -74,7 +74,7 @@ export default function Producto({ id }: { id: string }) {
               <div className="grid gap-2 sm:grid-cols-2">
                 {p.opciones.map((op, j) => (
                   <button key={j} type="button" aria-pressed={j === i} onClick={() => elegirVersion(p.id, j)}
-                    className={`flex items-center justify-between gap-3 rounded border px-3.5 py-2.5 text-left text-sm transition-colors ${j === i ? "border-marca bg-marca-suave ring-1 ring-marca" : "border-linea-fuerte hover:border-tinta-2"}`}>
+                    className={`flex min-h-[44px] items-center justify-between gap-3 rounded border px-3.5 py-2.5 text-left text-sm transition-colors ${j === i ? "border-marca bg-marca-suave ring-1 ring-marca" : "border-linea-fuerte hover:border-tinta-2"}`}>
                     <span>{op.nombre}</span><b className="whitespace-nowrap font-display tabular-nums">{dinero(op.precio)}</b>
                   </button>
                 ))}
@@ -96,7 +96,7 @@ export default function Producto({ id }: { id: string }) {
           <ul className="mt-5 grid gap-2.5 text-sm text-tinta-2">
             {entrega.map(e => <li key={e.texto} className="flex items-start gap-2.5"><span className="mt-px shrink-0 text-marca">{e.icono}</span>{e.texto}</li>)}
           </ul>
-          <button type="button" onClick={compartir} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-tinta-2 hover:text-tinta">
+          <button type="button" onClick={compartir} className="mt-3 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-tinta-2 hover:text-tinta">
             <IconoCompartir />{copiado ? "Enlace copiado" : "Compartir este producto"}
           </button>
         </div>
@@ -128,7 +128,7 @@ export default function Producto({ id }: { id: string }) {
         <section aria-labelledby="t-relacionados" className="contenedor py-10">
           <div className="flex items-end justify-between gap-4">
             <h2 id="t-relacionados" className="text-xl font-extrabold">También te puede interesar</h2>
-            <a href={`#${vista}`} className="enlace text-sm">Ver {VISTAS[vista]?.toLowerCase()}</a>
+            <a href={`#${vista}`} className="enlace-suelto shrink-0 text-sm">Ver {VISTAS[vista]?.toLowerCase()}</a>
           </div>
           <ul className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">{relacionados.map(r => <li key={r.id}><TarjetaProducto producto={r} /></li>)}</ul>
         </section>

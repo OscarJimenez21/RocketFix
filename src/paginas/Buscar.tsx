@@ -25,6 +25,7 @@ export function Buscar({ q }: { q: string }) {
       <div className="contenedor py-8">
         {resultados.length > 0 ? (
           <>
+            <h2 className="sr-only">Productos encontrados</h2>
             <ul className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
               {resultados.slice(0, limite).map((p, i) => <li key={p.id}><TarjetaProducto producto={p} prioridad={i < 4} /></li>)}
             </ul>

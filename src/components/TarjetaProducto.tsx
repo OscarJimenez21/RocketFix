@@ -8,7 +8,7 @@ import { FotoProducto } from "./FotoProducto";
 /** Etiqueta del estado cuando no es nuevo (CPO, Usado, Open box) */
 export function Insignia({ producto }: { producto: Producto }) {
   if (producto.estado === "Nuevo") return null;
-  return <span className="absolute left-2 top-2 rounded-sm bg-tinta px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-white">{producto.estado}</span>;
+  return <span className="absolute left-2 top-2 rounded-sm bg-tinta px-1.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-white">{producto.estado}</span>;
 }
 
 /** Nota del producto ("Obsequio: audífonos", "Sobre pedido"…): la disponibilidad va en gris, los regalos en verde */
@@ -38,10 +38,10 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
       <a href={hrefProducto(p.id)} tabIndex={-1} aria-hidden="true" className="relative block aspect-square bg-white p-4">
         <FotoProducto producto={p} alt="" prioridad={prioridad} />
         <Insignia producto={p} />
-        {cinta && <span className="absolute right-2 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide text-acento-texto">{cinta}</span>}
+        {cinta && <span className="absolute right-2 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-acento-texto">{cinta}</span>}
       </a>
       <div className="flex flex-1 flex-col gap-1.5 border-t border-linea/70 p-3.5 sm:p-4">
-        <p className="etiqueta truncate text-[11px] text-tinta-3">{etiquetaDe(p) || " "}</p>
+        <p className="etiqueta truncate text-tinta-3">{etiquetaDe(p) || " "}</p>
         <h3 className="font-sans text-[15px] font-semibold leading-snug tracking-normal">
           <a href={hrefProducto(p.id)} className="line-clamp-2 hover:text-marca">{p.nombre}</a>
         </h3>
@@ -52,7 +52,7 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
             <label className="mb-2.5 block">
               <span className="sr-only">{p.etiqueta || "Versión"} de {p.nombre}</span>
               <select value={i} onChange={e => elegirVersion(p.id, Number(e.target.value))}
-                className="w-full truncate rounded border border-linea bg-fondo px-2 py-1.5 text-[13px] text-tinta focus:border-marca focus:outline-none">
+                className="h-11 w-full truncate rounded border border-linea bg-fondo px-2 text-[13px] text-tinta focus:border-marca focus:outline-none sm:h-9">
                 {p.opciones.map((op, j) => <option key={j} value={j}>{op.nombre} · {dinero(op.precio)}</option>)}
               </select>
             </label>

@@ -26,21 +26,25 @@
   .etiqueta { @apply text-[12px] font-semibold uppercase tracking-[0.08em] text-tinta-2; }
   .titulo-seccion { @apply text-[24px] font-extrabold leading-tight sm:text-[28px]; }
 
+  /* Todo lo que se toca mide al menos 44 px de alto (tamaño mínimo cómodo para el dedo) */
   .btn { @apply inline-flex min-h-[44px] items-center justify-center gap-2 rounded px-4 text-[15px] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
-  .btn-sm { @apply min-h-[40px] px-3 text-sm; }
+  .btn-sm { @apply px-3 text-sm; }
   .btn-primario { @apply bg-acento text-acento-tinta hover:bg-acento-hover; }
   .btn-marca { @apply bg-marca text-white hover:bg-marca-hover; }
   .btn-wa { @apply bg-wa text-white hover:bg-wa-hover; }
   .btn-borde { @apply border border-linea-fuerte bg-white text-tinta hover:border-tinta-2; }
   .btn-suave { @apply bg-marca-suave text-marca-oscuro hover:bg-marca hover:text-white; }
   .btn-claro { @apply border border-white/35 bg-transparent text-white hover:bg-white/10; }
-  .enlace { @apply font-semibold text-marca underline-offset-4 hover:underline; }
+  .enlace { @apply font-semibold text-marca-texto underline-offset-4 hover:underline; }
+  /* Enlace que va solo en su renglón (no dentro de un párrafo): con alto táctil de 44 px */
+  .enlace-suelto { @apply enlace inline-flex min-h-[44px] items-center; }
 
   .tarjeta { @apply rounded-md border border-linea bg-white; }
-  .chip { @apply inline-flex shrink-0 items-center gap-1.5 rounded-full border border-linea-fuerte bg-white px-3.5 py-1.5 text-sm text-tinta transition-colors hover:border-tinta-2; }
+  /* En celular las pastillas miden 44 px de alto; con mouse (desde 640 px) basta con 36 */
+  .chip { @apply inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full border border-linea-fuerte bg-white px-3.5 py-1.5 text-sm text-tinta transition-colors hover:border-tinta-2 sm:min-h-[36px]; }
   .chip[aria-pressed="true"], .chip[aria-current="page"] { @apply border-marca bg-marca text-white; }
 
-  .campo { @apply block w-full rounded border border-linea-fuerte bg-white px-3 py-2.5 text-[15px] text-tinta placeholder:text-tinta-3 focus:border-marca focus:outline-none focus:ring-2 focus:ring-marca/20; }
+  .campo { @apply block min-h-[44px] w-full rounded border border-linea-fuerte bg-white px-3 py-2.5 text-[15px] text-tinta placeholder:text-tinta-3 focus:border-marca focus:outline-none focus:ring-2 focus:ring-marca/20; }
   .campo-invalido { @apply border-red-600 focus:border-red-600 focus:ring-red-600/20; }
   .rotulo { @apply mb-1.5 block text-sm font-semibold text-tinta; }
   .opcional { @apply font-normal text-tinta-3; }
@@ -103,6 +107,9 @@
   /* relative: así la fila recorta también lo que tiene posición absoluta adentro (si no, Chrome en celular aleja la página) */
   .sin-barra { scrollbar-width: none; position: relative; }
   .sin-barra::-webkit-scrollbar { display: none; }
+  /* Enlaces de texto pequeños (la ruta Inicio › …): el área que se puede tocar crece hacia arriba y abajo sin mover nada */
+  .toque { position: relative; }
+  .toque::after { content: ""; position: absolute; inset: -12px -2px; }
   .ancho-108 { font-stretch: 108%; }
   .ancho-122 { font-stretch: 122%; }
 }

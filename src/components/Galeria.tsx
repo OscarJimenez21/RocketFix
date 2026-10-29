@@ -49,9 +49,9 @@ export function Galeria({ producto }: { producto: Producto }) {
         </div>
         <Insignia producto={producto} />
         <button type="button" onClick={() => ir(actual - 1)} disabled={actual <= 0} aria-label="Foto anterior"
-          className="absolute left-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-linea bg-white/95 disabled:opacity-0"><IconoFlecha dir={-1} /></button>
+          className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-linea bg-white/95 disabled:opacity-0"><IconoFlecha dir={-1} /></button>
         <button type="button" onClick={() => ir(actual + 1)} disabled={actual >= fotos.length - 1} aria-label="Foto siguiente"
-          className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-linea bg-white/95 disabled:opacity-0"><IconoFlecha /></button>
+          className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-linea bg-white/95 disabled:opacity-0"><IconoFlecha /></button>
         <span className="absolute bottom-2 right-2 rounded-sm bg-tinta/75 px-2 py-0.5 font-mono text-xs text-white" aria-hidden="true">{actual + 1} / {fotos.length}</span>
       </div>
       <div className="sin-barra mt-3 flex gap-2 overflow-x-auto pb-1">
