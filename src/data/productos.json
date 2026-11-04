@@ -12,11 +12,11 @@
   "opciones": [
    {
     "nombre": "512 GB",
-    "precio": 5150000
+    "precio": 4900000
    },
    {
     "nombre": "1 TB",
-    "precio": 5850000
+    "precio": 5550000
    }
   ]
  },
@@ -34,11 +34,11 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 2800000
+    "precio": 2850000
    },
    {
     "nombre": "512 GB",
-    "precio": 3300000
+    "precio": 3250000
    }
   ]
  },
@@ -56,19 +56,19 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 5750000
+    "precio": 5400000
    },
    {
     "nombre": "256 GB · morado",
-    "precio": 6450000
+    "precio": 5700000
    },
    {
     "nombre": "512 GB",
-    "precio": 6650000
+    "precio": 6550000
    },
    {
     "nombre": "1 TB",
-    "precio": 8350000
+    "precio": 8100000
    }
   ]
  },
@@ -85,11 +85,15 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 5200000
+    "precio": 4800000
    },
    {
     "nombre": "256 GB · morado",
-    "precio": 5500000
+    "precio": 4900000
+   },
+   {
+    "nombre": "512 GB",
+    "precio": 5800000
    }
   ]
  },
@@ -104,15 +108,15 @@
   "opciones": [
    {
     "nombre": "256 GB · eSIM",
-    "precio": 4800000
+    "precio": 4500000
    },
    {
     "nombre": "256 GB · SIM física",
-    "precio": 5050000
+    "precio": 4800000
    },
    {
     "nombre": "512 GB · eSIM",
-    "precio": 5550000
+    "precio": 5300000
    }
   ]
  },
@@ -127,11 +131,15 @@
   "opciones": [
    {
     "nombre": "256 GB · eSIM",
-    "precio": 4500000
+    "precio": 4300000
    },
    {
     "nombre": "256 GB · SIM física",
-    "precio": 4550000
+    "precio": 4350000
+   },
+   {
+    "nombre": "512 GB · eSIM",
+    "precio": 5250000
    }
   ]
  },
@@ -149,7 +157,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3000000
+    "precio": 2900000
    }
   ]
  },
@@ -158,15 +166,17 @@
   "tienda": "cel",
   "marca": "Apple",
   "nombre": "iPhone 15 Pro Max",
-  "specs": [
-   "256 GB"
-  ],
+  "specs": [],
   "estado": "CPO",
   "imagen": "fotos/ip15pm.jpg",
   "opciones": [
    {
-    "nombre": "",
-    "precio": 3400000
+    "nombre": "256 GB",
+    "precio": 3200000
+   },
+   {
+    "nombre": "512 GB",
+    "precio": 3450000
    }
   ]
  },
@@ -183,11 +193,11 @@
   "opciones": [
    {
     "nombre": "Activado · azul o negro",
-    "precio": 2300000
+    "precio": 2250000
    },
    {
     "nombre": "Sin activar · azul",
-    "precio": 2550000
+    "precio": 2450000
    }
   ]
  },
@@ -221,7 +231,7 @@
   "opciones": [
    {
     "nombre": "64 GB",
-    "precio": 400000
+    "precio": 420000
    },
    {
     "nombre": "128 GB · 6 GB RAM",
@@ -229,7 +239,7 @@
    },
    {
     "nombre": "128 GB · 4 GB RAM",
-    "precio": 470000
+    "precio": 460000
    }
   ]
  },
@@ -238,19 +248,21 @@
   "tienda": "cel",
   "marca": "Samsung",
   "nombre": "Samsung Galaxy A17",
-  "specs": [
-   "Duos (doble SIM)"
-  ],
+  "specs": [],
   "imagen": "fotos/sa17.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "128 GB",
+    "nombre": "128 GB · Duos",
     "precio": 540000
    },
    {
-    "nombre": "256 GB · 4G",
+    "nombre": "256 GB · 4G · Duos",
     "precio": 780000
+   },
+   {
+    "nombre": "256 GB · 5G · 1 SIM",
+    "precio": 850000
    }
   ]
  },
@@ -283,7 +295,7 @@
   "opciones": [
    {
     "nombre": "128 GB",
-    "precio": 980000
+    "precio": 960000
    },
    {
     "nombre": "256 GB",
@@ -296,15 +308,17 @@
   "tienda": "cel",
   "marca": "Samsung",
   "nombre": "Samsung Galaxy A57",
-  "specs": [
-   "128 GB"
-  ],
+  "specs": [],
   "imagen": "fotos/sa57.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
+    "nombre": "128 GB",
     "precio": 1350000
+   },
+   {
+    "nombre": "256 GB",
+    "precio": 1600000
    }
   ]
  },
@@ -319,11 +333,11 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 2250000
+    "precio": 2200000
    },
    {
     "nombre": "512 GB",
-    "precio": 2400000
+    "precio": 2350000
    }
   ]
  },
@@ -338,15 +352,15 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 3250000
+    "precio": 3050000
    },
    {
     "nombre": "512 GB",
-    "precio": 3400000
+    "precio": 3250000
    },
    {
     "nombre": "1 TB",
-    "precio": 3800000
+    "precio": 3650000
    }
   ]
  },
@@ -363,7 +377,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2800000
+    "precio": 2700000
    }
   ]
  },
@@ -379,11 +393,15 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 3700000
+    "precio": 3550000
    },
    {
     "nombre": "512 GB",
-    "precio": 4150000
+    "precio": 4100000
+   },
+   {
+    "nombre": "1 TB",
+    "precio": 5350000
    }
   ]
  },
@@ -401,7 +419,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4300000
+    "precio": 4100000
    }
   ]
  },
@@ -436,11 +454,11 @@
   "opciones": [
    {
     "nombre": "64 GB",
-    "precio": 410000
+    "precio": 420000
    },
    {
     "nombre": "128 GB",
-    "precio": 480000
+    "precio": 490000
    }
   ]
  },
@@ -449,15 +467,17 @@
   "tienda": "cel",
   "marca": "Xiaomi",
   "nombre": "Redmi 14C",
-  "specs": [
-   "128 GB"
-  ],
+  "specs": [],
   "imagen": "fotos/xr14c.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
+    "nombre": "128 GB",
     "precio": 480000
+   },
+   {
+    "nombre": "256 GB",
+    "precio": 520000
    }
   ]
  },
@@ -493,11 +513,11 @@
   "opciones": [
    {
     "nombre": "128 GB",
-    "precio": 550000
+    "precio": 540000
    },
    {
     "nombre": "256 GB · 8 + 8 GB RAM",
-    "precio": 670000
+    "precio": 650000
    }
   ]
  },
@@ -514,7 +534,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 710000
+    "precio": 700000
    }
   ]
  },
@@ -529,7 +549,7 @@
   "opciones": [
    {
     "nombre": "128 GB",
-    "precio": 630000
+    "precio": 560000
    },
    {
     "nombre": "256 GB · 4 + 4 GB RAM",
@@ -537,7 +557,7 @@
    },
    {
     "nombre": "256 GB · 6 + 6 GB RAM",
-    "precio": 780000
+    "precio": 730000
    },
    {
     "nombre": "256 GB · 4 + 4 GB RAM · 5G",
@@ -550,16 +570,17 @@
   "tienda": "cel",
   "marca": "Xiaomi",
   "nombre": "Redmi Note 15",
-  "specs": [
-   "256 GB",
-   "4G"
-  ],
+  "specs": [],
   "imagen": "fotos/xrn15.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
-    "precio": 840000
+    "nombre": "256 GB · 4G",
+    "precio": 860000
+   },
+   {
+    "nombre": "512 GB",
+    "precio": 930000
    }
   ]
  },
@@ -592,11 +613,11 @@
   "opciones": [
    {
     "nombre": "128 GB",
-    "precio": 740000
+    "precio": 700000
    },
    {
     "nombre": "256 GB · 6 + 6 GB RAM",
-    "precio": 860000
+    "precio": 850000
    },
    {
     "nombre": "256 GB · 8 + 8 GB RAM",
@@ -673,11 +694,11 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 1550000
+    "precio": 1600000
    },
    {
     "nombre": "512 GB",
-    "precio": 1950000
+    "precio": 1750000
    }
   ]
  },
@@ -694,7 +715,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3150000
+    "precio": 3050000
    }
   ]
  },
@@ -711,7 +732,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2200000
+    "precio": 2150000
    }
   ]
  },
@@ -729,7 +750,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1650000
+    "precio": 1700000
    }
   ]
  },
@@ -761,11 +782,11 @@
   "opciones": [
    {
     "nombre": "64 GB",
-    "precio": 390000
+    "precio": 410000
    },
    {
     "nombre": "128 GB",
-    "precio": 460000
+    "precio": 480000
    }
   ]
  },
@@ -783,7 +804,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 610000
+    "precio": 600000
    }
   ]
  },
@@ -798,7 +819,7 @@
   "opciones": [
    {
     "nombre": "256 GB · 8 GB RAM",
-    "precio": 1100000
+    "precio": 1150000
    },
    {
     "nombre": "512 GB · 12 GB RAM",
@@ -837,7 +858,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1550000
+    "precio": 1500000
    }
   ]
  },
@@ -846,15 +867,17 @@
   "tienda": "cel",
   "marca": "Motorola",
   "nombre": "Motorola Edge 60 Fusion",
-  "specs": [
-   "256 GB"
-  ],
+  "specs": [],
   "imagen": "fotos/medge60f.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
-    "precio": 1150000
+    "nombre": "128 GB · 8 GB RAM",
+    "precio": 930000
+   },
+   {
+    "nombre": "256 GB",
+    "precio": 1100000
    }
   ]
  },
@@ -905,11 +928,11 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 520000
+    "precio": 510000
    },
    {
     "nombre": "128 GB",
-    "precio": 460000
+    "precio": 470000
    }
   ]
  },
@@ -999,7 +1022,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 760000
+    "precio": 780000
    }
   ]
  },
@@ -1035,7 +1058,7 @@
    },
    {
     "nombre": "256 GB",
-    "precio": 540000
+    "precio": 550000
    }
   ]
  },
@@ -1124,7 +1147,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1100000
+    "precio": 1050000
    }
   ]
  },
@@ -1159,11 +1182,11 @@
   "opciones": [
    {
     "nombre": "4G",
-    "precio": 760000
+    "precio": 750000
    },
    {
     "nombre": "5G",
-    "precio": 990000
+    "precio": 970000
    }
   ]
  },
@@ -1201,7 +1224,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 670000
+    "precio": 690000
    }
   ]
  },
@@ -1259,7 +1282,7 @@
    },
    {
     "nombre": "A100cs",
-    "precio": 370000
+    "precio": 390000
    }
   ]
  },
@@ -1274,11 +1297,11 @@
   "opciones": [
    {
     "nombre": "64 GB · 3 + 5 GB RAM",
-    "precio": 360000
+    "precio": 390000
    },
    {
     "nombre": "128 GB · 8 GB RAM",
-    "precio": 400000
+    "precio": 430000
    }
   ]
  },
@@ -1315,7 +1338,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1250000
+    "precio": 1200000
    }
   ]
  },
@@ -1394,15 +1417,17 @@
   "tienda": "cel",
   "marca": "Oppo",
   "nombre": "Oppo A6 C",
-  "specs": [
-   "64 GB"
-  ],
+  "specs": [],
   "imagen": "fotos/oa6c.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
-    "precio": 810000
+    "nombre": "64 GB",
+    "precio": 570000
+   },
+   {
+    "nombre": "128 GB",
+    "precio": 720000
    }
   ]
  },
@@ -1419,11 +1444,11 @@
   "opciones": [
    {
     "nombre": "Estándar",
-    "precio": 1550000
+    "precio": 1500000
    },
    {
     "nombre": "Edición Pininfarina",
-    "precio": 1750000
+    "precio": 1500000
    }
   ]
  },
@@ -1441,7 +1466,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1100000
+    "precio": 1050000
    }
   ]
  },
@@ -1478,7 +1503,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 570000
+    "precio": 550000
    }
   ]
  },
@@ -1497,7 +1522,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1100000
+    "precio": 1150000
    }
   ]
  },
@@ -1545,7 +1570,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 420000
+    "precio": 430000
    }
   ]
  },
@@ -1728,7 +1753,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 150000
+    "precio": 160000
    }
   ]
  },
@@ -1743,7 +1768,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 140000
+    "precio": 150000
    }
   ]
  },
@@ -1851,7 +1876,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 550000
+    "precio": 480000
    }
   ]
  },
@@ -2005,6 +2030,437 @@
   ]
  },
  {
+  "id": "ip17",
+  "tienda": "cel",
+  "marca": "Apple",
+  "nombre": "iPhone 17",
+  "imagen": "fotos/ip17.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "256 GB · eSIM",
+    "precio": 3550000
+   },
+   {
+    "nombre": "256 GB · SIM física",
+    "precio": 3600000
+   }
+  ]
+ },
+ {
+  "id": "ipair",
+  "tienda": "cel",
+  "marca": "Apple",
+  "nombre": "iPhone Air",
+  "imagen": "fotos/ipair.jpg",
+  "specs": [
+   "256 GB",
+   "eSIM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3850000
+   }
+  ]
+ },
+ {
+  "id": "szfold8",
+  "tienda": "cel",
+  "marca": "Samsung",
+  "nombre": "Samsung Galaxy Z Fold 8",
+  "imagen": "fotos/szfold8.jpg",
+  "specs": [
+   "12 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "256 GB",
+    "precio": 5650000
+   },
+   {
+    "nombre": "512 GB",
+    "precio": 5950000
+   }
+  ]
+ },
+ {
+  "id": "xrn15pp",
+  "tienda": "cel",
+  "marca": "Xiaomi",
+  "nombre": "Redmi Note 15 Pro+",
+  "imagen": "fotos/xrn15pp.jpg",
+  "specs": [
+   "256 GB"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1400000
+   }
+  ]
+ },
+ {
+  "id": "xra5",
+  "tienda": "cel",
+  "marca": "Xiaomi",
+  "nombre": "Redmi A5",
+  "imagen": "fotos/xra5.jpg",
+  "specs": [
+   "128 GB"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 410000
+   }
+  ]
+ },
+ {
+  "id": "xra7",
+  "tienda": "cel",
+  "marca": "Xiaomi",
+  "nombre": "Redmi A7",
+  "imagen": "fotos/xra7.jpg",
+  "specs": [
+   "64 GB",
+   "4 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 430000
+   }
+  ]
+ },
+ {
+  "id": "pocox8",
+  "tienda": "cel",
+  "marca": "Xiaomi",
+  "nombre": "POCO X8 5G",
+  "imagen": "fotos/pocox8.jpg",
+  "specs": [
+   "256 GB",
+   "8 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1100000
+   }
+  ]
+ },
+ {
+  "id": "hx6e",
+  "tienda": "cel",
+  "marca": "Honor",
+  "nombre": "Honor X6E",
+  "imagen": "fotos/hx6e.jpg",
+  "specs": [
+   "256 GB",
+   "4 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 740000
+   }
+  ]
+ },
+ {
+  "id": "mg56",
+  "tienda": "cel",
+  "marca": "Motorola",
+  "nombre": "Moto G56",
+  "imagen": "fotos/mg56.jpg",
+  "specs": [
+   "256 GB",
+   "8 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 940000
+   }
+  ]
+ },
+ {
+  "id": "oa6k",
+  "tienda": "cel",
+  "marca": "Oppo",
+  "nombre": "Oppo A6K",
+  "imagen": "fotos/oa6k.jpg",
+  "specs": [
+   "256 GB",
+   "4 + 8 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1000000
+   }
+  ]
+ },
+ {
+  "id": "igt50pro",
+  "tienda": "cel",
+  "marca": "Infinix",
+  "nombre": "Infinix GT 50 Pro",
+  "imagen": "fotos/igt50pro.jpg",
+  "specs": [
+   "256 GB",
+   "12 + 12 GB RAM",
+   "5G"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2400000
+   }
+  ]
+ },
+ {
+  "id": "inote60u",
+  "tienda": "cel",
+  "marca": "Infinix",
+  "nombre": "Infinix Note 60 Ultra",
+  "imagen": "fotos/inote60u.jpg",
+  "specs": [
+   "Edición Pininfarina",
+   "512 GB",
+   "24 GB RAM",
+   "5G"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3300000
+   }
+  ]
+ },
+ {
+  "id": "kblacks",
+  "tienda": "cel",
+  "marca": "Kalley",
+  "nombre": "Kalley Black S",
+  "imagen": "fotos/kblacks.jpg",
+  "specs": [
+   "64 GB",
+   "3 + 3 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 330000
+   }
+  ]
+ },
+ {
+  "id": "kblacke2",
+  "tienda": "cel",
+  "marca": "Kalley",
+  "nombre": "Kalley Black E2",
+  "imagen": "fotos/kblacke2.jpg",
+  "specs": [
+   "128 GB",
+   "4 + 4 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 390000
+   }
+  ]
+ },
+ {
+  "id": "kblackz1",
+  "tienda": "cel",
+  "marca": "Kalley",
+  "nombre": "Kalley Black Z1",
+  "imagen": "fotos/kblackz1.jpg",
+  "specs": [
+   "256 GB",
+   "4 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 450000
+   }
+  ]
+ },
+ {
+  "id": "kblack3",
+  "tienda": "cel",
+  "marca": "Kalley",
+  "nombre": "Kalley Black 3",
+  "imagen": "fotos/kblack3.jpg",
+  "specs": [
+   "512 GB",
+   "8 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 600000
+   }
+  ]
+ },
+ {
+  "id": "flyfy100",
+  "tienda": "cel",
+  "marca": "Fly",
+  "nombre": "Fly FY100 4G",
+  "imagen": "fotos/flyfy100.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 110000
+   }
+  ]
+ },
+ {
+  "id": "ularmor34p",
+  "tienda": "cel",
+  "marca": "Ulefone",
+  "nombre": "Ulefone Armor 34 Pro",
+  "imagen": "fotos/ularmor34p.jpg",
+  "specs": [
+   "512 GB",
+   "Con proyector"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3400000
+   }
+  ]
+ },
+ {
+  "id": "ularmor30p",
+  "tienda": "cel",
+  "marca": "Ulefone",
+  "nombre": "Ulefone Armor 30 Pro",
+  "imagen": "fotos/ularmor30p.jpg",
+  "specs": [
+   "512 GB",
+   "Doble pantalla"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2450000
+   }
+  ]
+ },
+ {
+  "id": "ularmor21",
+  "tienda": "cel",
+  "marca": "Ulefone",
+  "nombre": "Ulefone Armor 21",
+  "imagen": "fotos/ularmor21.jpg",
+  "specs": [
+   "256 GB"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1100000
+   }
+  ]
+ },
+ {
+  "id": "ularmor22",
+  "tienda": "cel",
+  "marca": "Ulefone",
+  "nombre": "Ulefone Armor 22",
+  "imagen": "fotos/ularmor22.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "128 GB",
+    "precio": 900000
+   },
+   {
+    "nombre": "256 GB",
+    "precio": 1000000
+   }
+  ]
+ },
+ {
+  "id": "ularmorx32",
+  "tienda": "cel",
+  "marca": "Ulefone",
+  "nombre": "Ulefone Armor X32",
+  "imagen": "fotos/ularmorx32.jpg",
+  "specs": [
+   "128 GB"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 760000
+   }
+  ]
+ },
+ {
+  "id": "ularmorx13",
+  "tienda": "cel",
+  "marca": "Ulefone",
+  "nombre": "Ulefone Armor X13",
+  "imagen": "fotos/ularmorx13.jpg",
+  "specs": [
+   "64 GB"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 700000
+   }
+  ]
+ },
+ {
+  "id": "ularmorx12p",
+  "tienda": "cel",
+  "marca": "Ulefone",
+  "nombre": "Ulefone Armor X12 Pro",
+  "imagen": "fotos/ularmorx12p.jpg",
+  "specs": [
+   "64 GB"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 610000
+   }
+  ]
+ },
+ {
   "id": "ipadpro",
   "tienda": "tab",
   "categoria": "ipad",
@@ -2019,7 +2475,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4350000
+    "precio": 4150000
    }
   ]
  },
@@ -2029,15 +2485,17 @@
   "categoria": "ipad",
   "marca": "Apple",
   "nombre": "iPad Air 11\" chip M4",
-  "specs": [
-   "128 GB"
-  ],
+  "specs": [],
   "imagen": "fotos/ipadair.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
-    "precio": 2750000
+    "nombre": "128 GB",
+    "precio": 2700000
+   },
+   {
+    "nombre": "256 GB",
+    "precio": 3400000
    }
   ]
  },
@@ -2057,7 +2515,25 @@
    },
    {
     "nombre": "256 GB · azul o silver",
-    "precio": 2250000
+    "precio": 2150000
+   }
+  ]
+ },
+ {
+  "id": "ipadpro13",
+  "tienda": "tab",
+  "categoria": "ipad",
+  "marca": "Apple",
+  "nombre": "iPad Pro 13\" chip M5",
+  "imagen": "fotos/ipadpro13.jpg",
+  "specs": [
+   "256 GB"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 5250000
    }
   ]
  },
@@ -2075,7 +2551,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1250000
+    "precio": 1200000
    }
   ]
  },
@@ -2101,14 +2577,16 @@
   "categoria": "tablets",
   "marca": "Samsung",
   "nombre": "Samsung Galaxy Tab A11+",
-  "specs": [
-   "256 GB"
-  ],
+  "specs": [],
   "imagen": "fotos/taba11p.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
+    "nombre": "128 GB · 6 GB RAM",
+    "precio": 780000
+   },
+   {
+    "nombre": "256 GB",
     "precio": 900000
    }
   ]
@@ -2167,11 +2645,15 @@
    },
    {
     "nombre": "64 GB",
-    "precio": 540000
+    "precio": 550000
    },
    {
     "nombre": "128 GB · con funda",
     "precio": 680000
+   },
+   {
+    "nombre": "256 GB",
+    "precio": 760000
    }
   ]
  },
@@ -2271,6 +2753,67 @@
   ]
  },
  {
+  "id": "ixpad30e",
+  "tienda": "tab",
+  "categoria": "tablets",
+  "marca": "Infinix",
+  "nombre": "Infinix XPad 30E",
+  "imagen": "fotos/ixpad30e.jpg",
+  "specs": [
+   "128 GB",
+   "4 GB RAM",
+   "4G LTE"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 700000
+   }
+  ]
+ },
+ {
+  "id": "ktab10",
+  "tienda": "tab",
+  "categoria": "tablets",
+  "marca": "Kalley",
+  "nombre": "Tablet Kalley 10\"",
+  "imagen": "fotos/ktab10.jpg",
+  "specs": [
+   "128 GB",
+   "4 GB RAM",
+   "WiFi"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 380000
+   }
+  ]
+ },
+ {
+  "id": "lentab",
+  "tienda": "tab",
+  "categoria": "tablets",
+  "marca": "Lenovo",
+  "nombre": "Lenovo Tab",
+  "imagen": "fotos/lentab.jpg",
+  "specs": [
+   "128 GB",
+   "4 GB RAM",
+   "WiFi",
+   "Incluye funda tipo folio y audífonos Lenovo E310"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 750000
+   }
+  ]
+ },
+ {
   "id": "awultra3",
   "tienda": "rel",
   "categoria": "relojes",
@@ -2284,7 +2827,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2800000
+    "precio": 2650000
    }
   ]
  },
@@ -2340,7 +2883,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1200000
+    "precio": 1100000
    }
   ]
  },
@@ -2524,7 +3067,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2000000
+    "precio": 1950000
    }
   ]
  },
@@ -2541,7 +3084,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 870000
+    "precio": 980000
    }
   ]
  },
@@ -2561,7 +3104,7 @@
    },
    {
     "nombre": "Con cancelación de ruido",
-    "precio": 650000
+    "precio": 560000
    }
   ]
  },
@@ -2571,15 +3114,17 @@
   "categoria": "audio",
   "marca": "Apple",
   "nombre": "AirPods Serie 5",
-  "specs": [
-   "Sin carga magnética"
-  ],
+  "specs": [],
   "imagen": "fotos/aps5.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
+    "nombre": "Sin carga magnética",
     "precio": 610000
+   },
+   {
+    "nombre": "Con carga magnética",
+    "precio": 730000
    }
   ]
  },
@@ -2665,7 +3210,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 390000
+    "precio": 370000
    }
   ]
  },
@@ -2697,7 +3242,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 160000
+    "precio": 140000
    }
   ]
  },
@@ -2891,7 +3436,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 450000
+    "precio": 380000
    }
   ]
  },
@@ -3152,7 +3697,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 55000
+    "precio": 52000
    }
   ]
  },
@@ -3293,6 +3838,22 @@
   ]
  },
  {
+  "id": "xcar20",
+  "tienda": "acc",
+  "categoria": "cargadores",
+  "marca": "Xiaomi",
+  "nombre": "Cargador Xiaomi 20 W USB-C",
+  "imagen": "fotos/xcar20.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 33000
+   }
+  ]
+ },
+ {
   "id": "adatac100",
   "tienda": "acc",
   "categoria": "cables-carga",
@@ -3371,7 +3932,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 460000
+    "precio": 440000
    }
   ]
  },
@@ -3405,7 +3966,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 400000
+    "precio": 380000
    }
   ]
  },
@@ -3441,7 +4002,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2200000
    }
   ]
  },
@@ -3460,7 +4021,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2250000
    }
   ]
  },
@@ -3524,7 +4085,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2650000
+    "precio": 2600000
    }
   ]
  },
@@ -3684,6 +4245,25 @@
   ]
  },
  {
+  "id": "tvkalley55",
+  "tienda": "tv",
+  "categoria": "televisores",
+  "marca": "Kalley",
+  "nombre": "Televisor Kalley 55\"",
+  "imagen": "fotos/tvkalley55.jpg",
+  "specs": [
+   "55\"",
+   "Smart TV Android"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1450000
+   }
+  ]
+ },
+ {
   "id": "hvacr3",
   "tienda": "tv",
   "categoria": "hogar",
@@ -3718,7 +4298,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2850000
+    "precio": 2800000
    }
   ]
  },
@@ -3741,7 +4321,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3000000
+    "precio": 2900000
    }
   ]
  },
@@ -3765,7 +4345,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3300000
+    "precio": 3150000
    }
   ]
  },
@@ -3788,7 +4368,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3300000
+    "precio": 3100000
    }
   ]
  },
@@ -3811,7 +4391,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3350000
+    "precio": 3150000
    }
   ]
  },
@@ -3835,7 +4415,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3500000
+    "precio": 3350000
    }
   ]
  },
@@ -3858,7 +4438,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3600000
+    "precio": 3450000
    }
   ]
  },
@@ -3881,7 +4461,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3700000
+    "precio": 3550000
    }
   ]
  },
@@ -3904,7 +4484,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3850000
+    "precio": 3650000
    }
   ]
  },
@@ -3927,7 +4507,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3950000
+    "precio": 3750000
    }
   ]
  },
@@ -3951,7 +4531,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4400000
+    "precio": 4200000
    }
   ]
  },
@@ -3975,7 +4555,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4500000
+    "precio": 4300000
    }
   ]
  },
@@ -3998,7 +4578,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4650000
+    "precio": 4450000
    }
   ]
  },
@@ -4022,7 +4602,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4750000
+    "precio": 4550000
    }
   ]
  },
@@ -4046,7 +4626,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4400000
+    "precio": 4200000
    }
   ]
  },
@@ -4070,7 +4650,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4850000
+    "precio": 4650000
    }
   ]
  },
@@ -4094,7 +4674,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5000000
+    "precio": 4750000
    }
   ]
  },
@@ -4118,7 +4698,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5050000
+    "precio": 4800000
    }
   ]
  },
@@ -4142,7 +4722,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5100000
+    "precio": 4850000
    }
   ]
  },
@@ -4166,7 +4746,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5250000
+    "precio": 4950000
    }
   ]
  },
@@ -4189,7 +4769,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5300000
+    "precio": 5050000
    }
   ]
  },
@@ -4213,7 +4793,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5350000
+    "precio": 5050000
    }
   ]
  },
@@ -4237,7 +4817,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5450000
+    "precio": 5200000
    }
   ]
  },
@@ -4261,7 +4841,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5450000
+    "precio": 5200000
    }
   ]
  },
@@ -4285,7 +4865,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5550000
+    "precio": 5250000
    }
   ]
  },
@@ -4309,7 +4889,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5800000
+    "precio": 5500000
    }
   ]
  },
@@ -4333,7 +4913,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5800000
+    "precio": 5500000
    }
   ]
  },
@@ -4354,7 +4934,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2200000
    }
   ]
  },
@@ -4368,16 +4948,14 @@
    "Core 5 1334U",
    "12GB DDR5",
    "SSD NVMe 512GB",
-   "Pantalla 15,6\" FHD Huella",
-   "Incluye morral",
-   "Incluye mouse"
+   "Pantalla 15,6\" FHD Huella"
   ],
   "imagen": "fotos/p52383.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
     "nombre": "",
-    "precio": 2600000
+    "precio": 2150000
    }
   ]
  },
@@ -4398,7 +4976,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2600000
+    "precio": 2300000
    }
   ]
  },
@@ -4419,7 +4997,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3550000
+    "precio": 3150000
    }
   ]
  },
@@ -4441,7 +5019,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6550000
+    "precio": 6150000
    }
   ]
  },
@@ -4462,7 +5040,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2000000
    }
   ]
  },
@@ -4483,7 +5061,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2350000
+    "precio": 2150000
    }
   ]
  },
@@ -4504,7 +5082,1481 @@
   "opciones": [
    {
     "nombre": "",
+    "precio": 2400000
+   }
+  ]
+ },
+ {
+  "id": "acag1571p57kn",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Acer",
+  "nombre": "Portátil Acer Aspire Go 15 AG15-71P-57KN",
+  "imagen": "fotos/acag1571p57kn.jpg",
+  "specs": [
+   "Core i5 13420H",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Mist Green"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2050000
+   }
+  ]
+ },
+ {
+  "id": "acal1653p56s5",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Acer",
+  "nombre": "Portátil Acer Aspire Lite 16 AL16-53P-56S5",
+  "imagen": "fotos/acal1653p56s5.jpg",
+  "specs": [
+   "Core Ultra 5 115U",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 16\" WUXGA",
+   "Color Light Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2150000
+   }
+  ]
+ },
+ {
+  "id": "acal1541pr7jp",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Acer",
+  "nombre": "Portátil Acer Aspire Lite 15 AL15-41P-R7JP",
+  "imagen": "fotos/acal1541pr7jp.jpg",
+  "specs": [
+   "Ryzen 7 5700U",
+   "8GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Light Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2150000
+   }
+  ]
+ },
+ {
+  "id": "p52405",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Acer",
+  "nombre": "Portátil Acer Aspire Lite AL15-21P-R7PV",
+  "imagen": "fotos/p52405.jpg",
+  "specs": [
+   "Ryzen 5 40",
+   "16GB LPDDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD IPS",
+   "Color Light Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2150000
+   }
+  ]
+ },
+ {
+  "id": "acal1543pr6gw",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Acer",
+  "nombre": "Portátil Acer Aspire Lite 15 AL15-43P-R6GW",
+  "imagen": "fotos/acal1543pr6gw.jpg",
+  "specs": [
+   "Ryzen 7 5825U",
+   "8GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Light Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2250000
+   }
+  ]
+ },
+ {
+  "id": "acal1572p71th",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Acer",
+  "nombre": "Portátil Acer Aspire Lite 15 AL15-72P-71TH",
+  "imagen": "fotos/acal1572p71th.jpg",
+  "specs": [
+   "Core i7 13620H",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Light Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2750000
+   }
+  ]
+ },
+ {
+  "id": "p52407",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Acer",
+  "nombre": "Portátil Acer Aspire Go 15 AG15-52P-56CQ",
+  "imagen": "fotos/p52407.jpg",
+  "specs": [
+   "Core Ultra 5 115U",
+   "16GB DDR5",
+   "SSD 1TB",
+   "Pantalla 15,6\" FHD IPS",
+   "Windows 11 Home",
+   "Color Gris"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2650000
+   }
+  ]
+ },
+ {
+  "id": "p52406",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Acer",
+  "nombre": "Portátil Acer Aspire Lite AL15-53P-79QS",
+  "imagen": "fotos/p52406.jpg",
+  "specs": [
+   "Core i7 150U",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD IPS",
+   "Color Gris"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2850000
+   }
+  ]
+ },
+ {
+  "id": "ase1504fabq2771",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS E1504FA-BQ2771",
+  "imagen": "fotos/ase1504fabq2771.jpg",
+  "specs": [
+   "Ryzen 3 30",
+   "8GB LPDDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\"",
+   "Color Mixed Black"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1500000
+   }
+  ]
+ },
+ {
+  "id": "asx1504vabq4375",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS X1504VA-BQ4375",
+  "imagen": "fotos/asx1504vabq4375.jpg",
+  "specs": [
+   "Core i3 1315U",
+   "8GB DDR4",
+   "SSD 1TB",
+   "Pantalla 15,6\" FHD",
+   "Color Cool Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1800000
+   }
+  ]
+ },
+ {
+  "id": "ase1504fabq2334",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS E1504FA-BQ2334",
+  "imagen": "fotos/ase1504fabq2334.jpg",
+  "specs": [
+   "Ryzen 5 7520U",
+   "16GB LPDDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Cool Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2250000
+   }
+  ]
+ },
+ {
+  "id": "asx1504vabq3836",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS X1504VA-BQ3836",
+  "imagen": "fotos/asx1504vabq3836.jpg",
+  "specs": [
+   "Core i5 1334U",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Cool Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2350000
+   }
+  ]
+ },
+ {
+  "id": "asm1605naqmb101",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS M1605NAQ-MB101",
+  "imagen": "fotos/asm1605naqmb101.jpg",
+  "specs": [
+   "Ryzen 7 170",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 16\" WUXGA",
+   "Color Indie Black"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2600000
+   }
+  ]
+ },
+ {
+  "id": "p52408",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS Vivobook X1404VA-EB2263",
+  "imagen": "fotos/p52408.jpg",
+  "specs": [
+   "Core 5 120U",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 14\" FHD",
+   "Color Azul"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2750000
+   }
+  ]
+ },
+ {
+  "id": "asb1403cvas65016",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS ExpertBook B1403CVA-S65016",
+  "imagen": "fotos/asb1403cvas65016.jpg",
+  "specs": [
+   "Core i7 1335U",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 14\" FHD",
+   "Color Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2750000
+   }
+  ]
+ },
+ {
+  "id": "asf1605vaab74",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS F1605VA-AB74",
+  "imagen": "fotos/asf1605vaab74.jpg",
+  "specs": [
+   "Core i7 1355U",
+   "16GB",
+   "SSD 1TB",
+   "Pantalla 16\"",
+   "Windows 11",
+   "Color Indie Black"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2750000
+   }
+  ]
+ },
+ {
+  "id": "p52409",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS Vivobook M1607KA-MB150W",
+  "imagen": "fotos/p52409.jpg",
+  "specs": [
+   "Ryzen AI 5 330",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 16\" WUXGA",
+   "Windows 11 Home",
+   "Color Gris"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2800000
+   }
+  ]
+ },
+ {
+  "id": "asm1607kamb144",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS M1607KA-MB144",
+  "imagen": "fotos/asm1607kamb144.jpg",
+  "specs": [
+   "Ryzen AI 5 330",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 16\" WUXGA",
+   "Color Cool Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2850000
+   }
+  ]
+ },
+ {
+  "id": "asx1502vanj929",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS X1502VA-NJ929",
+  "imagen": "fotos/asx1502vanj929.jpg",
+  "specs": [
+   "Core i7 13620H",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Quiet Blue"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3100000
+   }
+  ]
+ },
+ {
+  "id": "asm1607kamb123",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS M1607KA-MB123",
+  "imagen": "fotos/asm1607kamb123.jpg",
+  "specs": [
+   "Ryzen AI 7 350",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 16\" WUXGA",
+   "Color Quiet Blue"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3200000
+   }
+  ]
+ },
+ {
+  "id": "asx1605vapbfmb239",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS X1605VAPBF-MB239",
+  "imagen": "fotos/asx1605vapbfmb239.jpg",
+  "specs": [
+   "Core 9 270H",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 16\" WUXGA",
+   "Color Cool Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3400000
+   }
+  ]
+ },
+ {
+  "id": "asux3407qaqd232w",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS Zenbook UX3407QA-QD232W",
+  "imagen": "fotos/asux3407qaqd232w.jpg",
+  "specs": [
+   "Snapdragon X X1-26-100",
+   "16GB LPDDR5X",
+   "SSD 1TB",
+   "Pantalla 14\" OLED WUXGA",
+   "Windows 11",
+   "Color Gray"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 5300000
+   }
+  ]
+ },
+ {
+  "id": "asum3406gaql121",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS Zenbook UM3406GA-QL121",
+  "imagen": "fotos/asum3406gaql121.jpg",
+  "specs": [
+   "Ryzen AI 7 445",
+   "16GB LPDDR5X",
+   "SSD 1TB",
+   "Pantalla 14\" OLED WUXGA",
+   "Color Jade Black"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 5300000
+   }
+  ]
+ },
+ {
+  "id": "asux3407qaqd288w",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS Zenbook UX3407QA-QD288W",
+  "imagen": "fotos/asux3407qaqd288w.jpg",
+  "specs": [
+   "Snapdragon X X1-26-100",
+   "32GB LPDDR5X",
+   "SSD 1TB",
+   "Pantalla 14\" OLED WUXGA",
+   "Windows 11",
+   "Color Beige"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 5950000
+   }
+  ]
+ },
+ {
+  "id": "asum5606karj032w",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS Zenbook UM5606KA-RJ032W",
+  "imagen": "fotos/asum5606karj032w.jpg",
+  "specs": [
+   "Ryzen AI 7 350",
+   "24GB LPDDR5X",
+   "SSD 1TB",
+   "Pantalla 16\" OLED 3K WQ+ táctil",
+   "Windows 11",
+   "Color Gray"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 7150000
+   }
+  ]
+ },
+ {
+  "id": "hp14dq3502la",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 14-DQ3502LA",
+  "imagen": "fotos/hp14dq3502la.jpg",
+  "specs": [
+   "Celeron N4500",
+   "8GB DDR4",
+   "SSD 512GB",
+   "Pantalla 14\" HD",
+   "Color Natural Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1350000
+   }
+  ]
+ },
+ {
+  "id": "hp14em0217la",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 14-EM0217LA",
+  "imagen": "fotos/hp14em0217la.jpg",
+  "specs": [
+   "Athlon Silver 7120U",
+   "8GB LPDDR5",
+   "SSD 512GB",
+   "Pantalla 14\" HD",
+   "Color Dorado"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1400000
+   }
+  ]
+ },
+ {
+  "id": "hp245g10r3",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 245 G10 Ryzen 3 7330U",
+  "imagen": "fotos/hp245g10r3.jpg",
+  "specs": [
+   "Ryzen 3 7330U",
+   "8GB DDR4",
+   "SSD 512GB",
+   "Pantalla 14\" HD",
+   "Color Negro"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1600000
+   }
+  ]
+ },
+ {
+  "id": "hp200g2ar3",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 200 G2A Ryzen 3 210",
+  "imagen": "fotos/hp200g2ar3.jpg",
+  "specs": [
+   "Ryzen 3 210",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 14\" WUXGA",
+   "Color Iron Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1600000
+   }
+  ]
+ },
+ {
+  "id": "hp15fc0232la",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 15-FC0232LA",
+  "imagen": "fotos/hp15fc0232la.jpg",
+  "specs": [
+   "Ryzen 3 7320U",
+   "8GB LPDDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Azul claro de luna"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1650000
+   }
+  ]
+ },
+ {
+  "id": "hp255g10r3",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 255 G10",
+  "imagen": "fotos/hp255g10r3.jpg",
+  "specs": [
+   "Ryzen 3 7320U",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" HD",
+   "Color Negro"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1700000
+   }
+  ]
+ },
+ {
+  "id": "hp15fd0242la",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 15-FD0242LA",
+  "imagen": "fotos/hp15fd0242la.jpg",
+  "specs": [
+   "Core 3 100U",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Dorado cálido"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1750000
+   }
+  ]
+ },
+ {
+  "id": "hp255rtn350",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 255RT",
+  "imagen": "fotos/hp255rtn350.jpg",
+  "specs": [
+   "Core 3 N350",
+   "16GB DDR4",
+   "SSD 1TB",
+   "Pantalla 15,6\" FHD",
+   "Color Gray"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1850000
+   }
+  ]
+ },
+ {
+  "id": "hp240g10i5",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 240 G10",
+  "imagen": "fotos/hp240g10i5.jpg",
+  "specs": [
+   "Core i5 1334U",
+   "8GB DDR4",
+   "SSD 512GB",
+   "Pantalla 14\" HD"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1950000
+   }
+  ]
+ },
+ {
+  "id": "hp250g10i5",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 250 G10",
+  "imagen": "fotos/hp250g10i5.jpg",
+  "specs": [
+   "Core i5 1334U",
+   "8GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" HD",
+   "Color Ceniza oscuro"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2000000
+   }
+  ]
+ },
+ {
+  "id": "hp15fd1252la",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 15-FD1252LA",
+  "imagen": "fotos/hp15fd1252la.jpg",
+  "specs": [
+   "Core Ultra 5 125H",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2100000
+   }
+  ]
+ },
+ {
+  "id": "hp15fc0256la",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 15-FC0256LA",
+  "imagen": "fotos/hp15fc0256la.jpg",
+  "specs": [
+   "Ryzen 5 7520U",
+   "16GB LPDDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Azul claro de luna"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2100000
+   }
+  ]
+ },
+ {
+  "id": "hp200g2ar5",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 200 G2A Ryzen 5 220",
+  "imagen": "fotos/hp200g2ar5.jpg",
+  "specs": [
+   "Ryzen 5 220",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 16\" WUXGA",
+   "Color Plata meteoro"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2150000
+   }
+  ]
+ },
+ {
+  "id": "hp15fd0260la",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 15-FD0260LA",
+  "imagen": "fotos/hp15fd0260la.jpg",
+  "specs": [
+   "Core i5 1334U",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Dorado cálido"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2350000
+   }
+  ]
+ },
+ {
+  "id": "hp15df0354la",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 15-DF0354LA",
+  "imagen": "fotos/hp15df0354la.jpg",
+  "specs": [
+   "Core 5 120U",
+   "24GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Dorado cálido"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2500000
+   }
+  ]
+ },
+ {
+  "id": "hp245g10r7",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 245 G10 Ryzen 7 7730U",
+  "imagen": "fotos/hp245g10r7.jpg",
+  "specs": [
+   "Ryzen 7 7730U",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 14\" HD",
+   "Color Plateado ceniza oscuro"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2500000
+   }
+  ]
+ },
+ {
+  "id": "hp15fc0275la",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 15-FC0275LA",
+  "imagen": "fotos/hp15fc0275la.jpg",
+  "specs": [
+   "Ryzen 7 7730U",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Dorado cálido"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2550000
+   }
+  ]
+ },
+ {
+  "id": "hp250rg10c7",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 250R G10",
+  "imagen": "fotos/hp250rg10c7.jpg",
+  "specs": [
+   "Core 7 150U",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Plateado ceniza oscuro"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2650000
+   }
+  ]
+ },
+ {
+  "id": "hp15fd0276la",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 15-FD0276LA",
+  "imagen": "fotos/hp15fd0276la.jpg",
+  "specs": [
+   "Core i7 1355U",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Natural Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2750000
+   }
+  ]
+ },
+ {
+  "id": "hp15fd1378la",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "HP",
+  "nombre": "Portátil HP 15-FD1378LA",
+  "imagen": "fotos/hp15fd1378la.jpg",
+  "specs": [
+   "Core Ultra 7 155H",
+   "24GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3250000
+   }
+  ]
+ },
+ {
+  "id": "lnslim315iru8",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo IdeaPad Slim 3 15IRU8",
+  "imagen": "fotos/lnslim315iru8.jpg",
+  "specs": [
+   "Core i3 1315U",
+   "8GB LPDDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Arctic Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1650000
+   }
+  ]
+ },
+ {
+  "id": "lnslim315irh10a",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo IdeaPad Slim 3 15IRH10 Core i5 13420H",
+  "imagen": "fotos/lnslim315irh10a.jpg",
+  "specs": [
+   "Core i5 13420H",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,3\" WUXGA",
+   "Color Luna Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2000000
+   }
+  ]
+ },
+ {
+  "id": "lnv14g5i5",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo V14 G5 IRL Core i5 13420H",
+  "imagen": "fotos/lnv14g5i5.jpg",
+  "specs": [
+   "Core i5 13420H",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 14\" FHD",
+   "Color Luna Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2050000
+   }
+  ]
+ },
+ {
+  "id": "lnslim315ahp10",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo IdeaPad Slim 3 15AHP10",
+  "imagen": "fotos/lnslim315ahp10.jpg",
+  "specs": [
+   "Ryzen 5 8640HS",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,3\" WUXGA",
+   "Color Cosmic Blue"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2100000
+   }
+  ]
+ },
+ {
+  "id": "p52345",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo V15 G4 AMN",
+  "imagen": "fotos/p52345.jpg",
+  "specs": [
+   "Ryzen 5 7520U",
+   "16GB LPDDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Arctic Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2150000
+   }
+  ]
+ },
+ {
+  "id": "lnv14g5c5",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo V14 G5 IRL Core 5 210H",
+  "imagen": "fotos/lnv14g5c5.jpg",
+  "specs": [
+   "Core 5 210H",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 14\" FHD",
+   "Color Luna Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2250000
+   }
+  ]
+ },
+ {
+  "id": "lnv14g5i7",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo V14 G5 IRL Core i7 13620H",
+  "imagen": "fotos/lnv14g5i7.jpg",
+  "specs": [
+   "Core i7 13620H",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 14\" FHD",
+   "Color Luna Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2350000
+   }
+  ]
+ },
+ {
+  "id": "lntb14g7arp",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo ThinkBook 14 G7 ARP",
+  "imagen": "fotos/lntb14g7arp.jpg",
+  "specs": [
+   "Ryzen 5 7535HS",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 14\" WUXGA",
+   "Color Arctic Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
     "precio": 2450000
+   }
+  ]
+ },
+ {
+  "id": "p52388",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo IdeaPad Slim 3 15IRH10 Core i5 13420H 16GB",
+  "imagen": "fotos/p52388.jpg",
+  "specs": [
+   "Core i5 13420H",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,3\" WUXGA",
+   "Color Gris"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2500000
+   }
+  ]
+ },
+ {
+  "id": "lnv14g6arp",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo V14 G6 ARP",
+  "imagen": "fotos/lnv14g6arp.jpg",
+  "specs": [
+   "Ryzen 7 170",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 14\" FHD",
+   "Color Luna Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2600000
+   }
+  ]
+ },
+ {
+  "id": "lnv15g6arp",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo V15 G6 ARP",
+  "imagen": "fotos/lnv15g6arp.jpg",
+  "specs": [
+   "Ryzen 7 170",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Luna Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2650000
+   }
+  ]
+ },
+ {
+  "id": "lnv15g5i7",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo V15 G5 IRL Core i7 13620H",
+  "imagen": "fotos/lnv15g5i7.jpg",
+  "specs": [
+   "Core i7 13620H",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Luna Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2850000
+   }
+  ]
+ },
+ {
+  "id": "lnv14g5c7",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo V14 G5 IRL Core 7 240H",
+  "imagen": "fotos/lnv14g5c7.jpg",
+  "specs": [
+   "Core 7 240H",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 14\" FHD",
+   "Color Luna Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2850000
+   }
+  ]
+ },
+ {
+  "id": "lntb14g8irl",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo ThinkBook 14 G8 IRL",
+  "imagen": "fotos/lntb14g8irl.jpg",
+  "specs": [
+   "Core 5 210H",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 14\" WUXGA",
+   "Color Arctic Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2950000
+   }
+  ]
+ },
+ {
+  "id": "lnslim315arp10",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo IdeaPad Slim 3 15ARP10",
+  "imagen": "fotos/lnslim315arp10.jpg",
+  "specs": [
+   "Ryzen 7 7735HS",
+   "24GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,3\" WUXGA",
+   "Color Cosmic Blue"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3000000
+   }
+  ]
+ },
+ {
+  "id": "lnslim315irh10b",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo IdeaPad Slim 3 15IRH10 Core i7 13620H",
+  "imagen": "fotos/lnslim315irh10b.jpg",
+  "specs": [
+   "Core i7 13620H",
+   "24GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,3\" WUXGA",
+   "Color Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3050000
+   }
+  ]
+ },
+ {
+  "id": "lnslim514imh9",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo IdeaPad Slim 5 14IMH9",
+  "imagen": "fotos/lnslim514imh9.jpg",
+  "specs": [
+   "Core Ultra 7 155H",
+   "16GB LPDDR5",
+   "SSD 1TB",
+   "Pantalla 14\" WUXGA",
+   "Windows 11",
+   "Color Gray"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 4550000
+   }
+  ]
+ },
+ {
+  "id": "lnyogaslim714imh9",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo Yoga Slim 7 14IMH9",
+  "imagen": "fotos/lnyogaslim714imh9.jpg",
+  "specs": [
+   "Core Ultra 7 155H",
+   "16GB LPDDR5X",
+   "SSD 1TB",
+   "Pantalla 14\" WUXGA OLED",
+   "Windows 11",
+   "Color Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 5000000
+   }
+  ]
+ },
+ {
+  "id": "lnyoga714akp10",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo Yoga 7 2 en 1 14AKP10",
+  "imagen": "fotos/lnyoga714akp10.jpg",
+  "specs": [
+   "Ryzen AI 5 340",
+   "16GB LPDDR5X",
+   "SSD 512GB",
+   "Pantalla 14\" WUXGA táctil",
+   "Windows 11"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 5300000
+   }
+  ]
+ },
+ {
+  "id": "dellpro15pv15250",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Dell",
+  "nombre": "Portátil Dell Pro 15 PV15250",
+  "imagen": "fotos/dellpro15pv15250.jpg",
+  "specs": [
+   "Core i5 1334U",
+   "8GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Platinum Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1950000
+   }
+  ]
+ },
+ {
+  "id": "dell15dc15250",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Dell",
+  "nombre": "Portátil Dell 15 DC15250",
+  "imagen": "fotos/dell15dc15250.jpg",
+  "specs": [
+   "Core i7 1355U",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "Color Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2750000
+   }
+  ]
+ },
+ {
+  "id": "mbair15m5",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Apple",
+  "nombre": "MacBook Air 15\" chip M5",
+  "imagen": "fotos/mbair15m5.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "512 GB",
+    "precio": 5800000
    }
   ]
  },
@@ -4526,7 +6578,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3650000
+    "precio": 3500000
    }
   ]
  },
@@ -4548,7 +6600,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6350000
+    "precio": 6000000
    }
   ]
  },
@@ -4570,7 +6622,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6350000
+    "precio": 6000000
    }
   ]
  },
@@ -4592,7 +6644,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 7300000
+    "precio": 6900000
    }
   ]
  },
@@ -4614,7 +6666,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 7700000
+    "precio": 7250000
    }
   ]
  },
@@ -4636,7 +6688,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 9450000
+    "precio": 8900000
    }
   ]
  },
@@ -4659,7 +6711,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 33300000
+    "precio": 31850000
    }
   ]
  },
@@ -4683,7 +6735,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 9150000
+    "precio": 8650000
    }
   ]
  },
@@ -4705,7 +6757,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5400000
+    "precio": 5150000
    }
   ]
  },
@@ -4727,7 +6779,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 7250000
+    "precio": 6950000
    }
   ]
  },
@@ -4751,7 +6803,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3300000
+    "precio": 3150000
    }
   ]
  },
@@ -4775,7 +6827,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3700000
+    "precio": 3550000
    }
   ]
  },
@@ -4799,7 +6851,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6950000
+    "precio": 6550000
    }
   ]
  },
@@ -4823,7 +6875,454 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 7500000
+    "precio": 7050000
+   }
+  ]
+ },
+ {
+  "id": "acnl1671g5616",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "Acer",
+  "nombre": "Portátil Acer Nitro Lite NL16-71G-5616",
+  "imagen": "fotos/acnl1671g5616.jpg",
+  "specs": [
+   "Core 5 210H",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 16\" WUXGA",
+   "RTX 3050 6GB",
+   "Color Negro"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3500000
+   }
+  ]
+ },
+ {
+  "id": "acanv1542r976",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "Acer",
+  "nombre": "Portátil Acer Nitro V 15 ANV15-42-R976",
+  "imagen": "fotos/acanv1542r976.jpg",
+  "specs": [
+   "Ryzen 7 7445HS",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "RTX 3050 6GB",
+   "Color Negro"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3600000
+   }
+  ]
+ },
+ {
+  "id": "acanv155258ht",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "Acer",
+  "nombre": "Portátil Acer Nitro ANV15-52-58HT",
+  "imagen": "fotos/acanv155258ht.jpg",
+  "specs": [
+   "Core 5 210H",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "RTX 5050 8GB",
+   "Color Negro"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 5050000
+   }
+  ]
+ },
+ {
+  "id": "asfx607vjrl016",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS TUF Gaming F16 FX607VJ-RL016",
+  "imagen": "fotos/asfx607vjrl016.jpg",
+  "specs": [
+   "Core 5 210H",
+   "8GB DDR4",
+   "SSD 512GB",
+   "Pantalla 16\" WUXGA",
+   "RTX 3050 6GB",
+   "Color Gray"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3400000
+   }
+  ]
+ },
+ {
+  "id": "astuff16c5",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS TUF Gaming F16",
+  "imagen": "fotos/astuff16c5.jpg",
+  "specs": [
+   "Core 5 210H",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 16\" 1920x1200 144 Hz",
+   "RTX 4050 6GB",
+   "Windows 11",
+   "Color Mecha Gray"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 4000000
+   }
+  ]
+ },
+ {
+  "id": "astufa16r7",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS TUF Gaming A16",
+  "imagen": "fotos/astufa16r7.jpg",
+  "specs": [
+   "Ryzen 7 170",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 16\" WUXGA",
+   "RTX 4050 6GB",
+   "Windows 11",
+   "Color Gray"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 4350000
+   }
+  ]
+ },
+ {
+  "id": "asg835lxsa137w",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "ASUS",
+  "nombre": "Portátil ASUS ROG Strix Scar 18 G835LX-SA137W",
+  "imagen": "fotos/asg835lxsa137w.jpg",
+  "specs": [
+   "Core Ultra 9 275HX",
+   "32GB DDR5",
+   "SSD 2TB",
+   "Pantalla 18\" 2,5K",
+   "RTX 5090 24GB",
+   "Windows 11"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 26150000
+   }
+  ]
+ },
+ {
+  "id": "hpvic15fa2013dx",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "HP",
+  "nombre": "Portátil HP Victus 15-FA2013DX",
+  "imagen": "fotos/hpvic15fa2013dx.jpg",
+  "specs": [
+   "Core i5 13420H",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD 144 Hz",
+   "RTX 3050 6GB",
+   "Windows 11",
+   "Color Mica Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3100000
+   }
+  ]
+ },
+ {
+  "id": "hpvic15fb3019la",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "HP",
+  "nombre": "Portátil HP Victus 15-FB3019LA",
+  "imagen": "fotos/hpvic15fb3019la.jpg",
+  "specs": [
+   "Ryzen 7 7445HS",
+   "8GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "RTX 3050 6GB",
+   "Color Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3200000
+   }
+  ]
+ },
+ {
+  "id": "hpvic15fa2700la",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "HP",
+  "nombre": "Portátil HP Victus 15-FA2700LA",
+  "imagen": "fotos/hpvic15fa2700la.jpg",
+  "specs": [
+   "Core i5 13420H",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "RTX 3050 6GB",
+   "Windows 11",
+   "Color Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3600000
+   }
+  ]
+ },
+ {
+  "id": "hpprobook440g10",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "HP",
+  "nombre": "Portátil HP ProBook 440 G10",
+  "imagen": "fotos/hpprobook440g10.jpg",
+  "specs": [
+   "Core i5 1335U",
+   "32GB DDR4",
+   "SSD 1TB",
+   "Pantalla 14\" HD",
+   "RTX 2050 4GB",
+   "Windows 11",
+   "Color Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3950000
+   }
+  ]
+ },
+ {
+  "id": "hpvic15fb3093dx",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "HP",
+  "nombre": "Portátil HP Victus 15-FB3093DX",
+  "imagen": "fotos/hpvic15fb3093dx.jpg",
+  "specs": [
+   "Ryzen 7 7445HS",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD 144 Hz",
+   "RTX 4050 6GB",
+   "Windows 11",
+   "Color Silver"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 4150000
+   }
+  ]
+ },
+ {
+  "id": "hpvic15fa2104tx",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "HP",
+  "nombre": "Portátil HP Victus 15-FA2104TX",
+  "imagen": "fotos/hpvic15fa2104tx.jpg",
+  "specs": [
+   "Core i7 13620H",
+   "16GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD 144 Hz",
+   "RTX 4050 6GB",
+   "Windows 11",
+   "Color Blue"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 4350000
+   }
+  ]
+ },
+ {
+  "id": "lnloq15arp9",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo LOQ 15ARP9",
+  "imagen": "fotos/lnloq15arp9.jpg",
+  "specs": [
+   "Ryzen 5 7235HS",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "RTX 4050 6GB",
+   "Windows 11",
+   "Color Luna Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3750000
+   }
+  ]
+ },
+ {
+  "id": "lnloq15arp10e",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo LOQ 15ARP10E",
+  "imagen": "fotos/lnloq15arp10e.jpg",
+  "specs": [
+   "Ryzen 7 170",
+   "16GB DDR5",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "RTX 4050 6GB",
+   "Windows 11",
+   "Color Luna Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 4150000
+   }
+  ]
+ },
+ {
+  "id": "lnyogapro714ahp9",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo Yoga Pro 7 14AHP9",
+  "imagen": "fotos/lnyogapro714ahp9.jpg",
+  "specs": [
+   "Ryzen 7 8845HS",
+   "16GB LPDDR5X",
+   "SSD 1TB",
+   "Pantalla 14,5\" 2,5K WQXGA",
+   "RTX 3050 6GB",
+   "Windows 11"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 5650000
+   }
+  ]
+ },
+ {
+  "id": "lnlegionpro716iax10h",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "Lenovo",
+  "nombre": "Portátil Lenovo Legion Pro 7 16IAX10H",
+  "imagen": "fotos/lnlegionpro716iax10h.jpg",
+  "specs": [
+   "Core Ultra 9 275HX",
+   "32GB DDR5",
+   "SSD 2TB",
+   "Pantalla 16\" WQXGA",
+   "RTX 5070 12GB",
+   "Windows 11",
+   "Color Black"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 15700000
+   }
+  ]
+ },
+ {
+  "id": "msithin15b13uc3060",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "MSI",
+  "nombre": "Portátil MSI Thin 15 B13UC-3060XCO",
+  "imagen": "fotos/msithin15b13uc3060.jpg",
+  "specs": [
+   "Core i5 13420H",
+   "8GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "RTX 3050 4GB",
+   "Color Grey"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2850000
+   }
+  ]
+ },
+ {
+  "id": "msithin15b13uc3464",
+  "tienda": "pc",
+  "categoria": "portatiles-gamer",
+  "marca": "MSI",
+  "nombre": "Portátil MSI Thin 15 B13UC-3464XCO",
+  "imagen": "fotos/msithin15b13uc3464.jpg",
+  "specs": [
+   "Core i7 13620H",
+   "8GB DDR4",
+   "SSD 512GB",
+   "Pantalla 15,6\" FHD",
+   "RTX 3050 4GB",
+   "Color Gray"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3200000
    }
   ]
  },
@@ -4885,7 +7384,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1150000
+    "precio": 1100000
    }
   ]
  },
@@ -4926,7 +7425,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1900000
+    "precio": 1850000
    }
   ]
  },
@@ -4947,7 +7446,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1000000
+    "precio": 990000
    }
   ]
  },
@@ -4968,7 +7467,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1300000
+    "precio": 1250000
    }
   ]
  },
@@ -4988,7 +7487,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1650000
+    "precio": 1600000
    }
   ]
  },
@@ -5009,7 +7508,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2400000
+    "precio": 2350000
    }
   ]
  },
@@ -5030,7 +7529,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2000000
+    "precio": 1950000
    }
   ]
  },
@@ -5153,7 +7652,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1750000
+    "precio": 1700000
    }
   ]
  },
@@ -5174,7 +7673,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2600000
+    "precio": 2500000
    }
   ]
  },
@@ -5195,7 +7694,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2700000
+    "precio": 2650000
    }
   ]
  },
@@ -5216,7 +7715,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3500000
+    "precio": 3350000
    }
   ]
  },
@@ -5237,7 +7736,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3150000
+    "precio": 3050000
    }
   ]
  },
@@ -5258,7 +7757,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3550000
+    "precio": 3400000
    }
   ]
  },
@@ -5378,7 +7877,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 460000
+    "precio": 450000
    }
   ]
  },
@@ -5667,7 +8166,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1850000
+    "precio": 1800000
    }
   ]
  },
@@ -5707,7 +8206,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3350000
+    "precio": 3250000
    }
   ]
  },
@@ -5727,7 +8226,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 48600000
+    "precio": 48050000
    }
   ]
  },
@@ -5831,7 +8330,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1750000
+    "precio": 1700000
    }
   ]
  },
@@ -5935,7 +8434,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1750000
+    "precio": 1350000
    }
   ]
  },
@@ -5957,7 +8456,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2250000
    }
   ]
  },
@@ -5978,7 +8477,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2400000
+    "precio": 2350000
    }
   ]
  },
@@ -5998,7 +8497,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2350000
+    "precio": 2300000
    }
   ]
  },
@@ -6019,7 +8518,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3150000
+    "precio": 3050000
    }
   ]
  },
@@ -6040,7 +8539,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3250000
+    "precio": 3150000
    }
   ]
  },
@@ -6082,7 +8581,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1400000
+    "precio": 1350000
    }
   ]
  },
@@ -6102,7 +8601,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1700000
+    "precio": 1650000
    }
   ]
  },
@@ -6123,7 +8622,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2050000
+    "precio": 2000000
    }
   ]
  },
@@ -6143,7 +8642,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2150000
+    "precio": 2100000
    }
   ]
  },
@@ -6163,7 +8662,28 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3400000
+    "precio": 3250000
+   }
+  ]
+ },
+ {
+  "id": "p1138",
+  "tienda": "comp",
+  "categoria": "procesadores",
+  "marca": "Intel",
+  "nombre": "Intel Core Ultra 9 285K",
+  "imagen": "fotos/p1138.jpg",
+  "specs": [
+   "Socket LGA1851",
+   "24 núcleos",
+   "3,7 GHz",
+   "Sin disipador"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3650000
    }
   ]
  },
@@ -6324,7 +8844,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1650000
+    "precio": 1600000
    }
   ]
  },
@@ -6419,7 +8939,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 590000
+    "precio": 650000
    }
   ]
  },
@@ -6438,7 +8958,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 700000
+    "precio": 730000
    }
   ]
  },
@@ -6457,7 +8977,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 700000
+    "precio": 710000
    }
   ]
  },
@@ -6495,7 +9015,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1150000
+    "precio": 1200000
    }
   ]
  },
@@ -6553,7 +9073,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1250000
+    "precio": 1300000
    }
   ]
  },
@@ -6572,7 +9092,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1250000
+    "precio": 1300000
    }
   ]
  },
@@ -6632,7 +9152,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2450000
+    "precio": 2500000
    }
   ]
  },
@@ -6672,7 +9192,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2450000
+    "precio": 2500000
    }
   ]
  },
@@ -6917,6 +9437,84 @@
   ]
  },
  {
+  "id": "p5463",
+  "tienda": "comp",
+  "categoria": "ram",
+  "marca": "Kingston",
+  "nombre": "Memoria Kingston Fury Beast 16GB DDR5",
+  "imagen": "fotos/p5463.jpg",
+  "specs": [
+   "DDR5",
+   "5600 MHz"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1250000
+   }
+  ]
+ },
+ {
+  "id": "p5441",
+  "tienda": "comp",
+  "categoria": "ram",
+  "marca": "Kingston",
+  "nombre": "Memoria Kingston Fury Beast 32GB DDR5",
+  "imagen": "fotos/p5441.jpg",
+  "specs": [
+   "DDR5",
+   "5600 MHz"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2400000
+   }
+  ]
+ },
+ {
+  "id": "p5550",
+  "tienda": "comp",
+  "categoria": "ram",
+  "marca": "Kingston",
+  "nombre": "Memoria Kingston 48GB DDR5",
+  "imagen": "fotos/p5550.jpg",
+  "specs": [
+   "DDR5",
+   "4800 MHz",
+   "Sin disipador"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2500000
+   }
+  ]
+ },
+ {
+  "id": "p5523",
+  "tienda": "comp",
+  "categoria": "ram",
+  "marca": "Corsair",
+  "nombre": "Kit memoria Corsair Dominator Platinum RGB 64GB DDR5",
+  "imagen": "fotos/p5523.jpg",
+  "specs": [
+   "DDR5",
+   "5200 MHz",
+   "2 × 32GB"
+  ],
+  "estado": "Open box",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 4650000
+   }
+  ]
+ },
+ {
   "id": "p12121",
   "tienda": "comp",
   "categoria": "almacenamiento",
@@ -6930,7 +9528,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 310000
+    "precio": 280000
    }
   ]
  },
@@ -6948,7 +9546,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 460000
+    "precio": 440000
    }
   ]
  },
@@ -6984,7 +9582,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 520000
+    "precio": 510000
    }
   ]
  },
@@ -7002,7 +9600,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 450000
+    "precio": 420000
    }
   ]
  },
@@ -7115,7 +9713,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 450000
+    "precio": 470000
    }
   ]
  },
@@ -7237,7 +9835,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1400000
+    "precio": 1350000
    }
   ]
  },
@@ -7277,7 +9875,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2250000
    }
   ]
  },
@@ -7298,7 +9896,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2550000
+    "precio": 2500000
    }
   ]
  },
@@ -7319,7 +9917,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2600000
+    "precio": 2500000
    }
   ]
  },
@@ -7339,7 +9937,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3600000
+    "precio": 3450000
    }
   ]
  },
@@ -7359,7 +9957,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3750000
+    "precio": 3600000
    }
   ]
  },
@@ -7380,7 +9978,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3900000
+    "precio": 3700000
    }
   ]
  },
@@ -7399,6 +9997,97 @@
    {
     "nombre": "",
     "precio": 1100000
+   }
+  ]
+ },
+ {
+  "id": "p12142",
+  "tienda": "comp",
+  "categoria": "almacenamiento",
+  "marca": "Lexar",
+  "nombre": "SSD SATA 256GB Lexar NQ100",
+  "imagen": "fotos/p12142.jpg",
+  "specs": [
+   "SATA 2,5\""
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 260000
+   }
+  ]
+ },
+ {
+  "id": "p12144",
+  "tienda": "comp",
+  "categoria": "almacenamiento",
+  "marca": "Lenovo",
+  "nombre": "SSD SATA 480GB Lenovo LS800",
+  "imagen": "fotos/p12144.jpg",
+  "specs": [
+   "SATA 2,5\""
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 330000
+   }
+  ]
+ },
+ {
+  "id": "p12143",
+  "tienda": "comp",
+  "categoria": "almacenamiento",
+  "marca": "Lexar",
+  "nombre": "SSD SATA 512GB Lexar NQ100",
+  "imagen": "fotos/p12143.jpg",
+  "specs": [
+   "SATA 2,5\""
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 390000
+   }
+  ]
+ },
+ {
+  "id": "p13147",
+  "tienda": "comp",
+  "categoria": "almacenamiento",
+  "marca": "Patriot",
+  "nombre": "SSD M.2 NVMe 512GB Patriot P300",
+  "imagen": "fotos/p13147.jpg",
+  "specs": [
+   "Lectura 1700 MB/s",
+   "M.2 NVMe"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 440000
+   }
+  ]
+ },
+ {
+  "id": "p7081",
+  "tienda": "comp",
+  "categoria": "almacenamiento",
+  "marca": "Western Digital",
+  "nombre": "Disco Duro Western Digital Purple 24/7 8TB",
+  "imagen": "fotos/p7081.jpg",
+  "specs": [
+   "SATA 3,5\""
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1600000
    }
   ]
  },
@@ -7707,7 +10396,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1650000
+    "precio": 1600000
    }
   ]
  },
@@ -7755,7 +10444,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 280000
+    "precio": 270000
    }
   ]
  },
@@ -7851,7 +10540,23 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2350000
+    "precio": 2300000
+   }
+  ]
+ },
+ {
+  "id": "p14235",
+  "tienda": "comp",
+  "categoria": "fuentes",
+  "marca": "XPG",
+  "nombre": "Fuente XPG 850W Core Reactor II VE 80 Plus Gold",
+  "imagen": "fotos/p14235.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 520000
    }
   ]
  },
@@ -8000,7 +10705,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 370000
+    "precio": 330000
    }
   ]
  },
@@ -8032,7 +10737,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 400000
+    "precio": 390000
    }
   ]
  },
@@ -8330,7 +11035,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1400000
+    "precio": 1350000
    }
   ]
  },
@@ -8347,11 +11052,11 @@
   "opciones": [
    {
     "nombre": "Negra",
-    "precio": 1600000
+    "precio": 1550000
    },
    {
     "nombre": "Blanca",
-    "precio": 1600000
+    "precio": 1550000
    }
   ]
  },
@@ -8372,7 +11077,7 @@
    },
    {
     "nombre": "Blanca",
-    "precio": 2250000
+    "precio": 2200000
    }
   ]
  },
@@ -8388,7 +11093,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3550000
+    "precio": 3400000
    }
   ]
  },
@@ -8469,11 +11174,11 @@
   "opciones": [
    {
     "nombre": "Blanco",
-    "precio": 1800000
+    "precio": 1750000
    },
    {
     "nombre": "Negro",
-    "precio": 1800000
+    "precio": 1750000
    }
   ]
  },
@@ -8489,7 +11194,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1900000
+    "precio": 1850000
    }
   ]
  },
@@ -8553,7 +11258,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 210000
+    "precio": 190000
    }
   ]
  },
@@ -8887,6 +11592,22 @@
    {
     "nombre": "",
     "precio": 610000
+   }
+  ]
+ },
+ {
+  "id": "p16618",
+  "tienda": "comp",
+  "categoria": "cajas",
+  "marca": "Antec",
+  "nombre": "Caja Antec VCX300 Vidrio Templado + 5 ARGB",
+  "imagen": "fotos/p16618.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 260000
    }
   ]
  },
@@ -9845,7 +12566,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2000000
+    "precio": 1950000
    }
   ]
  },
@@ -9863,7 +12584,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2000000
+    "precio": 1950000
    }
   ]
  },
@@ -9881,7 +12602,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2050000
+    "precio": 2000000
    }
   ]
  },
@@ -9899,7 +12620,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2350000
    }
   ]
  },
@@ -9917,7 +12638,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2350000
    }
   ]
  },
@@ -9935,7 +12656,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2350000
    }
   ]
  },
@@ -9953,7 +12674,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2350000
    }
   ]
  },
@@ -9971,7 +12692,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2350000
    }
   ]
  },
@@ -9989,7 +12710,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2350000
+    "precio": 2300000
    }
   ]
  },
@@ -10025,7 +12746,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2950000
+    "precio": 2850000
    }
   ]
  },
@@ -10043,7 +12764,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2450000
+    "precio": 2500000
    }
   ]
  },
@@ -10061,7 +12782,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4200000
+    "precio": 4000000
    }
   ]
  },
@@ -10079,7 +12800,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4350000
+    "precio": 4750000
    }
   ]
  },
@@ -10097,7 +12818,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4600000
+    "precio": 4400000
    }
   ]
  },
@@ -10115,7 +12836,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3150000
+    "precio": 3050000
    }
   ]
  },
@@ -10133,7 +12854,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4600000
+    "precio": 4400000
    }
   ]
  },
@@ -10152,7 +12873,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 7950000
+    "precio": 8450000
    }
   ]
  },
@@ -10170,7 +12891,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 8400000
+    "precio": 7950000
    }
   ]
  },
@@ -10188,7 +12909,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 8500000
+    "precio": 8000000
    }
   ]
  },
@@ -10207,11 +12928,11 @@
   "opciones": [
    {
     "nombre": "Dorado",
-    "precio": 8600000
+    "precio": 9100000
    },
    {
     "nombre": "Black",
-    "precio": 8600000
+    "precio": 9100000
    }
   ]
  },
@@ -10229,7 +12950,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 9200000
+    "precio": 9400000
    }
   ]
  },
@@ -10247,7 +12968,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 9350000
+    "precio": 8800000
    }
   ]
  },
@@ -10283,7 +13004,62 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 26950000
+    "precio": 25400000
+   }
+  ]
+ },
+ {
+  "id": "p4188",
+  "tienda": "comp",
+  "categoria": "video",
+  "marca": "ASUS",
+  "nombre": "ASUS AMD Radeon RX 9060 XT Dual 16GB",
+  "imagen": "fotos/p4188.jpg",
+  "specs": [
+   "16 GB de memoria"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3300000
+   }
+  ]
+ },
+ {
+  "id": "p3775",
+  "tienda": "comp",
+  "categoria": "video",
+  "marca": "Gigabyte",
+  "nombre": "Gigabyte GeForce RTX 5060 Ti WindForce OC 16GB",
+  "imagen": "fotos/p3775.jpg",
+  "specs": [
+   "16 GB de memoria"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 4400000
+   }
+  ]
+ },
+ {
+  "id": "p3702",
+  "tienda": "comp",
+  "categoria": "video",
+  "marca": "ASUS",
+  "nombre": "ASUS Prime GeForce RTX 5070 Ti OC 16GB",
+  "imagen": "fotos/p3702.jpg",
+  "specs": [
+   "16 GB de memoria",
+   "3 ventiladores"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 7400000
    }
   ]
  },
@@ -10299,7 +13075,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3250000
+    "precio": 3150000
    }
   ]
  },
@@ -10315,7 +13091,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4950000
+    "precio": 4750000
    }
   ]
  },
@@ -10699,7 +13475,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 98000
+    "precio": 87000
    }
   ]
  },
@@ -10795,7 +13571,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 840000
+    "precio": 770000
    }
   ]
  },
@@ -10997,7 +13773,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 490000
+    "precio": 460000
    }
   ]
  },
@@ -11073,7 +13849,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1250000
+    "precio": 1200000
    }
   ]
  },
@@ -11124,7 +13900,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2100000
+    "precio": 2050000
    }
   ]
  },
@@ -11140,7 +13916,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2200000
+    "precio": 2150000
    }
   ]
  },
@@ -11160,7 +13936,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2400000
+    "precio": 2350000
    }
   ]
  },
@@ -11176,7 +13952,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3400000
+    "precio": 3300000
    }
   ]
  },
@@ -11196,7 +13972,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6000000
+    "precio": 5700000
    }
   ]
  },
@@ -11215,7 +13991,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1250000
+    "precio": 1200000
    }
   ]
  },
@@ -11231,7 +14007,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2750000
+    "precio": 2650000
    }
   ]
  },
@@ -11247,7 +14023,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3000000
+    "precio": 2850000
    }
   ]
  },
@@ -11286,7 +14062,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2300000
+    "precio": 2250000
    }
   ]
  },
@@ -11564,7 +14340,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4750000
+    "precio": 4500000
    }
   ]
  },
@@ -11660,7 +14436,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2500000
+    "precio": 2450000
    }
   ]
  },
@@ -11699,7 +14475,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4600000
+    "precio": 4400000
    }
   ]
  },
@@ -11719,7 +14495,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 5600000
+    "precio": 5500000
    }
   ]
  },
@@ -11777,6 +14553,119 @@
    {
     "nombre": "",
     "precio": 1300000
+   }
+  ]
+ },
+ {
+  "id": "p15424",
+  "tienda": "per",
+  "categoria": "monitores",
+  "marca": "LG",
+  "nombre": "Monitor LG 27\" OLED QHD 2K Pivot 27GX704A-B UltraGear",
+  "imagen": "fotos/p15424.jpg",
+  "specs": [
+   "OLED",
+   "240 Hz",
+   "0,03 ms"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2250000
+   }
+  ]
+ },
+ {
+  "id": "p15458",
+  "tienda": "per",
+  "categoria": "monitores",
+  "marca": "LG",
+  "nombre": "Monitor LG 32\" FHD VA 32U501SB-B Smart Monitor",
+  "imagen": "fotos/p15458.jpg",
+  "specs": [
+   "120 Hz"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1150000
+   }
+  ]
+ },
+ {
+  "id": "p15459",
+  "tienda": "per",
+  "categoria": "monitores",
+  "marca": "LG",
+  "nombre": "Monitor LG 32\" OLED 4K UHD 32GX870B-B UltraGear",
+  "imagen": "fotos/p15459.jpg",
+  "specs": [
+   "OLED",
+   "480 Hz",
+   "1 ms"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 4350000
+   }
+  ]
+ },
+ {
+  "id": "p15395",
+  "tienda": "per",
+  "categoria": "monitores",
+  "marca": "LG",
+  "nombre": "Monitor LG 34″ VA 2K WQHD Curvo 34G600A-B",
+  "imagen": "fotos/p15395.jpg",
+  "specs": [
+   "160 Hz",
+   "1 ms"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1550000
+   }
+  ]
+ },
+ {
+  "id": "p15416",
+  "tienda": "per",
+  "categoria": "monitores",
+  "marca": "Xiaomi",
+  "nombre": "Monitor Xiaomi 27″ IPS FHD A27i",
+  "imagen": "fotos/p15416.jpg",
+  "specs": [
+   "144 Hz"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 490000
+   }
+  ]
+ },
+ {
+  "id": "p15449",
+  "tienda": "per",
+  "categoria": "monitores",
+  "marca": "Xiaomi",
+  "nombre": "Monitor Xiaomi 27\" IPS QHD 2K A27Qi",
+  "imagen": "fotos/p15449.jpg",
+  "specs": [
+   "120 Hz"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 670000
    }
   ]
  },
@@ -11988,7 +14877,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 260000
+    "precio": 220000
    }
   ]
  },
@@ -12021,11 +14910,15 @@
   "opciones": [
    {
     "nombre": "Lila",
-    "precio": 390000
+    "precio": 380000
    },
    {
     "nombre": "Blanca",
-    "precio": 390000
+    "precio": 380000
+   },
+   {
+    "nombre": "Negra",
+    "precio": 380000
    }
   ]
  },
@@ -12042,11 +14935,11 @@
   "opciones": [
    {
     "nombre": "Blanco",
-    "precio": 960000
+    "precio": 930000
    },
    {
     "nombre": "Negro",
-    "precio": 960000
+    "precio": 930000
    }
   ]
  },
@@ -12078,7 +14971,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1700000
+    "precio": 1650000
    }
   ]
  },
@@ -12550,7 +15443,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 230000
+    "precio": 220000
    }
   ]
  },
@@ -12704,7 +15597,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 650000
+    "precio": 520000
    }
   ]
  },
@@ -13481,7 +16374,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 390000
+    "precio": 370000
    }
   ]
  },
@@ -13546,15 +16439,15 @@
   "opciones": [
    {
     "nombre": "Blanco",
-    "precio": 540000
+    "precio": 490000
    },
    {
     "nombre": "Magenta",
-    "precio": 540000
+    "precio": 490000
    },
    {
     "nombre": "Negro",
-    "precio": 540000
+    "precio": 490000
    }
   ]
  },
@@ -13592,11 +16485,11 @@
   "opciones": [
    {
     "nombre": "Negro",
-    "precio": 690000
+    "precio": 670000
    },
    {
     "nombre": "Blanco",
-    "precio": 690000
+    "precio": 670000
    }
   ]
  },
@@ -13957,6 +16850,22 @@
    {
     "nombre": "",
     "precio": 64000
+   }
+  ]
+ },
+ {
+  "id": "p46096",
+  "tienda": "per",
+  "categoria": "pads",
+  "marca": "Logitech",
+  "nombre": "Pad Mouse Logitech G240",
+  "imagen": "fotos/p46096.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 57000
    }
   ]
  },
@@ -14413,7 +17322,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 870000
+    "precio": 850000
    }
   ]
  },
@@ -14482,6 +17391,22 @@
   ]
  },
  {
+  "id": "p30027",
+  "tienda": "par",
+  "categoria": "parlantes-pc",
+  "marca": "Logitech",
+  "nombre": "Logitech Z407 (2.1) 80W Bluetooth",
+  "imagen": "fotos/p30027.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 510000
+   }
+  ]
+ },
+ {
   "id": "p21006",
   "tienda": "per",
   "categoria": "combos",
@@ -14493,7 +17418,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 79000
+    "precio": 77000
    }
   ]
  },
@@ -14509,7 +17434,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 98000
+    "precio": 94000
    }
   ]
  },
@@ -14557,7 +17482,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 140000
+    "precio": 130000
    }
   ]
  },
@@ -14589,7 +17514,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 190000
+    "precio": 180000
    }
   ]
  },
@@ -14638,11 +17563,19 @@
   "opciones": [
    {
     "nombre": "Lila",
-    "precio": 350000
+    "precio": 280000
    },
    {
     "nombre": "Rosado",
-    "precio": 350000
+    "precio": 280000
+   },
+   {
+    "nombre": "Blanco",
+    "precio": 280000
+   },
+   {
+    "nombre": "Graphite",
+    "precio": 280000
    }
   ]
  },
@@ -14727,6 +17660,66 @@
   ]
  },
  {
+  "id": "p31176",
+  "tienda": "per",
+  "categoria": "diademas",
+  "marca": "Logitech",
+  "nombre": "Diadema Logitech G535 Lightspeed Inalámbrica Negra",
+  "imagen": "fotos/p31176.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 520000
+   }
+  ]
+ },
+ {
+  "id": "p31321",
+  "tienda": "per",
+  "categoria": "diademas",
+  "marca": "Logitech",
+  "nombre": "Diadema Logitech G522 Lightspeed Inalámbrica",
+  "etiqueta": "Color",
+  "imagen": "fotos/p31321.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "Negro",
+    "precio": 760000
+   },
+   {
+    "nombre": "Blanco",
+    "precio": 760000
+   }
+  ]
+ },
+ {
+  "id": "p31214",
+  "tienda": "per",
+  "categoria": "diademas",
+  "marca": "Astro",
+  "nombre": "Diadema Astro A10 Gen 2",
+  "etiqueta": "Color",
+  "imagen": "fotos/p31214.jpg",
+  "specs": [
+   "PC, Mac, PS5, Xbox, Switch y celular"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "Negra y gris",
+    "precio": 300000
+   },
+   {
+    "nombre": "Gris",
+    "precio": 300000
+   }
+  ]
+ },
+ {
   "id": "p20046",
   "tienda": "per",
   "categoria": "teclados",
@@ -14759,6 +17752,43 @@
   ]
  },
  {
+  "id": "p20220",
+  "tienda": "per",
+  "categoria": "teclados",
+  "marca": "Logitech",
+  "nombre": "Teclado Logitech Wave Keys Ergonómico Inalámbrico (español)",
+  "etiqueta": "Color",
+  "imagen": "fotos/p20220.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "Estándar",
+    "precio": 290000
+   },
+   {
+    "nombre": "Blanco",
+    "precio": 290000
+   }
+  ]
+ },
+ {
+  "id": "p20284",
+  "tienda": "per",
+  "categoria": "teclados",
+  "marca": "Logitech",
+  "nombre": "Teclado Logitech MX Mechanical Inalámbrico Retroiluminado",
+  "imagen": "fotos/p20284.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 770000
+   }
+  ]
+ },
+ {
   "id": "p19246",
   "tienda": "per",
   "categoria": "mouse",
@@ -14787,11 +17817,15 @@
   "opciones": [
    {
     "nombre": "Blanco",
-    "precio": 51000
+    "precio": 49000
    },
    {
     "nombre": "Azul",
-    "precio": 51000
+    "precio": 49000
+   },
+   {
+    "nombre": "Negro",
+    "precio": 49000
    }
   ]
  },
@@ -14823,7 +17857,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 68000
+    "precio": 61000
    }
   ]
  },
@@ -14839,7 +17873,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 85000
+    "precio": 81000
    }
   ]
  },
@@ -14896,7 +17930,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 330000
+    "precio": 310000
    }
   ]
  },
@@ -15002,6 +18036,59 @@
   ]
  },
  {
+  "id": "p19303",
+  "tienda": "per",
+  "categoria": "mouse",
+  "marca": "Logitech",
+  "nombre": "Mouse Logitech G Pro X2 Superstrike Inalámbrico Blanco",
+  "imagen": "fotos/p19303.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 690000
+   }
+  ]
+ },
+ {
+  "id": "p19262",
+  "tienda": "per",
+  "categoria": "mouse",
+  "marca": "Logitech",
+  "nombre": "Mouse Logitech Lift Vertical Ergonómico",
+  "imagen": "fotos/p19262.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 310000
+   }
+  ]
+ },
+ {
+  "id": "p19298",
+  "tienda": "per",
+  "categoria": "mouse",
+  "marca": "Logitech",
+  "nombre": "Mouse Logitech MX Master 4 Bluetooth Recargable",
+  "etiqueta": "Color",
+  "imagen": "fotos/p19298.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "Negro",
+    "precio": 550000
+   },
+   {
+    "nombre": "Blanco",
+    "precio": 550000
+   }
+  ]
+ },
+ {
   "id": "p61110",
   "tienda": "per",
   "categoria": "sillas",
@@ -15061,7 +18148,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1400000
+    "precio": 1350000
    }
   ]
  },
@@ -15078,11 +18165,11 @@
   "opciones": [
    {
     "nombre": "Gris negro",
-    "precio": 1400000
+    "precio": 1350000
    },
    {
     "nombre": "Negro",
-    "precio": 1400000
+    "precio": 1350000
    }
   ]
  },
@@ -15183,7 +18270,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2800000
+    "precio": 2750000
    }
   ]
  },
@@ -15199,7 +18286,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2800000
+    "precio": 2750000
    }
   ]
  },
@@ -15247,7 +18334,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1400000
+    "precio": 1350000
    }
   ]
  },
@@ -15705,6 +18792,75 @@
   ]
  },
  {
+  "id": "p45651",
+  "tienda": "per",
+  "categoria": "streaming",
+  "marca": "HyperX",
+  "nombre": "Micrófono HyperX SoloCast 2 Negro",
+  "imagen": "fotos/p45651.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 230000
+   }
+  ]
+ },
+ {
+  "id": "p45597",
+  "tienda": "per",
+  "categoria": "streaming",
+  "marca": "HyperX",
+  "nombre": "Micrófono HyperX QuadCast 2 Negro",
+  "imagen": "fotos/p45597.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 520000
+   }
+  ]
+ },
+ {
+  "id": "p59013",
+  "tienda": "per",
+  "categoria": "streaming",
+  "marca": "Streamplify",
+  "nombre": "Capturadora Streamplify 4K 60 Hz HDMI",
+  "imagen": "fotos/p59013.jpg",
+  "specs": [
+   "4K a 60 Hz",
+   "HDMI",
+   "Audio 48 kHz / 24 bits",
+   "VRR"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 620000
+   }
+  ]
+ },
+ {
+  "id": "p59018",
+  "tienda": "per",
+  "categoria": "streaming",
+  "marca": "Elgato",
+  "nombre": "Capturadora Elgato Game Capture 4K Pro",
+  "imagen": "fotos/p59018.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1350000
+   }
+  ]
+ },
+ {
   "id": "p45601",
   "tienda": "con",
   "categoria": "vr",
@@ -15716,7 +18872,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2000000
+    "precio": 1950000
    }
   ]
  },
@@ -15725,7 +18881,7 @@
   "tienda": "con",
   "categoria": "vr",
   "marca": "Meta",
-  "nombre": "VR Meta Quest 3S 256GB Juego Incluido",
+  "nombre": "VR Meta Quest 3S 256GB",
   "imagen": "fotos/p45518.jpg",
   "estado": "Nuevo",
   "specs": [],
@@ -15748,7 +18904,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3600000
+    "precio": 3450000
    }
   ]
  },
@@ -15764,7 +18920,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 270000
+    "precio": 250000
    }
   ]
  },
@@ -15796,7 +18952,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2000000
+    "precio": 1950000
    }
   ]
  },
@@ -15828,7 +18984,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1200000
+    "precio": 1150000
    }
   ]
  },
@@ -15876,7 +19032,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3000000
+    "precio": 2900000
    }
   ]
  },
@@ -15892,7 +19048,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1400000
+    "precio": 1350000
    }
   ]
  },
@@ -15908,7 +19064,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1400000
+    "precio": 1350000
    }
   ]
  },
@@ -15940,7 +19096,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1550000
+    "precio": 1500000
    }
   ]
  },
@@ -16036,7 +19192,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1850000
+    "precio": 1800000
    }
   ]
  },
@@ -16052,7 +19208,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2250000
+    "precio": 2200000
    }
   ]
  },
@@ -16069,6 +19225,22 @@
    {
     "nombre": "",
     "precio": 500000
+   }
+  ]
+ },
+ {
+  "id": "p45650b",
+  "tienda": "con",
+  "categoria": "simuladores",
+  "marca": "Logitech",
+  "nombre": "Timón Logitech RS50 System (PlayStation y PC) + Palanca G-RS H-Shifter",
+  "imagen": "fotos/p45650b.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3600000
    }
   ]
  },
@@ -16221,6 +19393,24 @@
    {
     "nombre": "",
     "precio": 81000
+   }
+  ]
+ },
+ {
+  "id": "p9060",
+  "tienda": "per",
+  "categoria": "memorias",
+  "marca": "Kingston",
+  "nombre": "SSD externo USB-C 2TB Kingston XS1000 Negro",
+  "imagen": "fotos/p9060.jpg",
+  "specs": [
+   "Lectura 1000 MB/s"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1300000
    }
   ]
  },
@@ -16721,6 +19911,38 @@
   ]
  },
  {
+  "id": "jblclip4",
+  "tienda": "par",
+  "categoria": "parlantes",
+  "marca": "JBL",
+  "nombre": "JBL Clip 4",
+  "imagen": "fotos/jblclip4.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 220000
+   }
+  ]
+ },
+ {
+  "id": "jblgrip",
+  "tienda": "par",
+  "categoria": "parlantes",
+  "marca": "JBL",
+  "nombre": "JBL Grip",
+  "imagen": "fotos/jblgrip.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 310000
+   }
+  ]
+ },
+ {
   "id": "p45530",
   "tienda": "mov",
   "categoria": "movilidad",
@@ -16733,6 +19955,54 @@
    {
     "nombre": "",
     "precio": 1400000
+   }
+  ]
+ },
+ {
+  "id": "xsc6pro",
+  "tienda": "mov",
+  "categoria": "movilidad",
+  "marca": "Xiaomi",
+  "nombre": "Patineta eléctrica Xiaomi 6 Pro",
+  "imagen": "fotos/xsc6pro.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2250000
+   }
+  ]
+ },
+ {
+  "id": "xsc6u",
+  "tienda": "mov",
+  "categoria": "movilidad",
+  "marca": "Xiaomi",
+  "nombre": "Patineta eléctrica Xiaomi 6 Ultra",
+  "imagen": "fotos/xsc6u.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3250000
+   }
+  ]
+ },
+ {
+  "id": "xsc4l",
+  "tienda": "mov",
+  "categoria": "movilidad",
+  "marca": "Xiaomi",
+  "nombre": "Patineta eléctrica Xiaomi 4 Lite",
+  "imagen": "fotos/xsc4l.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1100000
    }
   ]
  },
@@ -16861,6 +20131,56 @@
    {
     "nombre": "",
     "precio": 520000
+   }
+  ]
+ },
+ {
+  "id": "awultra4",
+  "tienda": "rel",
+  "categoria": "relojes",
+  "marca": "Apple",
+  "nombre": "Apple Watch Ultra 4",
+  "imagen": "fotos/awultra4.jpg",
+  "specs": [
+   "49 mm"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3300000
+   }
+  ]
+ },
+ {
+  "id": "itelw020",
+  "tienda": "rel",
+  "categoria": "relojes",
+  "marca": "itel",
+  "nombre": "Reloj inteligente itel ISW-020",
+  "imagen": "fotos/itelw020.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 91000
+   }
+  ]
+ },
+ {
+  "id": "itelw023",
+  "tienda": "rel",
+  "categoria": "relojes",
+  "marca": "itel",
+  "nombre": "Reloj inteligente itel ISW-023 Plus",
+  "imagen": "fotos/itelw023.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 120000
    }
   ]
  },

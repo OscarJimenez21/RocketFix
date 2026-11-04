@@ -28,7 +28,10 @@
    - Borde (btn-borde): acciones de apoyo. Suave (btn-suave): "Agregar" dentro de las tarjetas, para que la cuadrícula no se llene de naranja. */
 @layer components {
   .contenedor { @apply mx-auto w-full max-w-pagina px-4 sm:px-6; }
-  .etiqueta { @apply text-[12px] font-semibold uppercase tracking-[0.08em] text-tinta-2; }
+  /* Rótulo pequeño (grupo del menú, "Qué incluye la caja", columnas del pie): en minúscula normal, sin espaciado extra */
+  .etiqueta { @apply text-[13px] font-semibold text-tinta-2; }
+  /* Título de la portada: Archivo ancho y pesado, la misma letra del logo (es el único texto con este trato) */
+  .titulo-portada { font-stretch: 122%; font-weight: 850; letter-spacing: -0.02em; line-height: 0.98; }
   .titulo-seccion { @apply text-[24px] font-extrabold leading-tight sm:text-[28px]; }
 
   /* Todo lo que se toca mide al menos 44 px de alto (tamaño mínimo cómodo para el dedo) */

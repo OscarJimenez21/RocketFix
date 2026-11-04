@@ -8,7 +8,7 @@ import { FotoProducto } from "./FotoProducto";
 /** Etiqueta del estado cuando no es nuevo (CPO, Usado, Open box) */
 export function Insignia({ producto }: { producto: Producto }) {
   if (producto.estado === "Nuevo") return null;
-  return <span className="absolute left-2 top-2 rounded-sm bg-tinta px-1.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-white">{producto.estado}</span>;
+  return <span className="absolute left-2 top-2 rounded-sm bg-tinta px-1.5 py-0.5 text-[12.5px] font-semibold text-white">{producto.estado}</span>;
 }
 
 /** Nota del producto ("Obsequio: audífonos", "Sobre pedido"…): la disponibilidad va en gris, los regalos en verde */
@@ -38,7 +38,7 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
       <a href={hrefProducto(p.id)} tabIndex={-1} aria-hidden="true" className="relative block aspect-square bg-white p-4">
         <FotoProducto producto={p} alt="" prioridad={prioridad} />
         <Insignia producto={p} />
-        {cinta && <span className="absolute right-2 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-xs font-semibold uppercase tracking-wide text-acento-texto">{cinta}</span>}
+        {cinta && <span className="absolute right-2 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-[12.5px] font-semibold text-acento-texto">{cinta}</span>}
       </a>
       <div className="flex flex-1 flex-col gap-1.5 border-t border-linea/70 p-3.5 sm:p-4">
         <p className="etiqueta truncate text-tinta-3">{etiquetaDe(p) || " "}</p>

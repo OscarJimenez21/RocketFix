@@ -46,7 +46,7 @@ function Vitrina() {
             <FotoProducto producto={x} alt={x.nombre} prioridad={j === 0} />
           </a>
         ))}
-        <span className="absolute left-3 top-3 rounded-sm bg-fondo px-2 py-1 text-xs font-semibold uppercase tracking-wide text-tinta-2">{etiquetaDe(p)}</span>
+        <span className="absolute left-3 top-3 rounded-sm bg-fondo px-2 py-1 text-[13px] font-semibold text-tinta-2">{etiquetaDe(p)}</span>
       </div>
       <div className="flex items-center justify-between gap-3 border-t border-linea px-4 py-3.5 sm:px-5" aria-live={quieta || elegida ? "polite" : "off"}>
         <div className="min-w-0">
@@ -73,9 +73,9 @@ function Portada() {
     <section className="bg-marca-oscuro text-white">
       <div className="contenedor grid items-center gap-8 py-9 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:py-14 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
         <div>
-          <p className="etiqueta text-marca-menta">Tienda de tecnología y servicio técnico · Bogotá</p>
-          <h1 tabIndex={-1} className="mt-3 text-[31px] font-extrabold leading-[1.1] text-white sm:text-[40px] lg:text-[38px] xl:text-[46px]">
-            Tecnología para tu día a día. <span className="text-marca-menta">Soluciones cuando las necesitas.</span>
+          <p className="text-[15px] font-semibold text-marca-menta">Tienda de tecnología y servicio técnico en Bogotá</p>
+          <h1 tabIndex={-1} className="titulo-portada mt-4 text-[34px] text-white sm:text-[46px] lg:text-[44px] xl:text-[54px]">
+            Tecnología para tu día a día. Soluciones cuando las necesitas.
           </h1>
           <p className="mt-4 max-w-xl text-[16.5px] leading-relaxed text-white/80">
             Celulares, computadores, gaming y accesorios con entrega a domicilio. Compra con asesoría por WhatsApp y solicita servicio técnico para tu hogar o negocio.
@@ -127,10 +127,10 @@ function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: st
     <a href={hrefProducto(p.id)} className="group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-white transition-shadow hover:shadow-tarjeta">
       <div className="relative aspect-square p-7 sm:p-8">
         <FotoProducto producto={p} alt={p.nombre} className="transition-transform duration-300 ease-salida motion-safe:group-hover:scale-[1.04]" />
-        {cinta && <span className="absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-xs font-bold uppercase tracking-wide text-acento-texto">{cinta}</span>}
+        {cinta && <span className="absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-[13px] font-bold text-acento-texto">{cinta}</span>}
       </div>
       <div className="mt-auto border-t border-linea px-5 py-4">
-        <p className="truncate text-[12px] font-semibold uppercase tracking-wide text-tinta-3">{etiquetaDe(p)}</p>
+        <p className="truncate text-[13px] font-semibold text-tinta-3">{etiquetaDe(p)}</p>
         <p className="mt-1 line-clamp-2 min-h-[2.75em] font-display text-[18px] font-bold leading-snug text-tinta">{p.nombre}</p>
         <p className="mt-2 text-sm text-tinta-2">{p.opciones.length > 1 && "Desde "}<b className="font-display text-[22px] tabular-nums text-tinta">{dinero(desde(p))}</b></p>
       </div>
@@ -182,7 +182,7 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
             <h2 id={`t-${id}`} className="titulo-seccion mt-1">{titulo}</h2>
             {enlaces.length > 0 && (
               <p className="flex flex-wrap gap-x-4 text-sm">
-                {enlaces.map(e => <a key={e.href} href={e.href} className="enlace-suelto">{e.texto} →</a>)}
+                {enlaces.map(e => <a key={e.href} href={e.href} className="enlace-suelto">{e.texto}</a>)}
               </p>
             )}
           </div>
@@ -205,14 +205,14 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
   );
 }
 
-/** Colores de las tarjetas de categoría (todos de la marca). `brillo` es la luz suave de la esquina. */
+/** Colores de las tarjetas de categoría (todos de la marca, planos: sin luces de adorno) */
 const TEMAS = {
-  oscuro: { caja: "bg-marca-oscuro text-white", frase: "text-marca-menta", boton: "bg-white text-marca-oscuro", brillo: "bg-marca-menta/25" },
-  noche: { caja: "bg-marca-noche text-white", frase: "text-marca-menta", boton: "bg-marca-menta text-marca-noche", brillo: "bg-marca/50" },
-  marca: { caja: "bg-marca text-white", frase: "text-white", boton: "bg-white text-marca-oscuro", brillo: "bg-marca-menta/45" },
-  acento: { caja: "bg-acento text-acento-tinta", frase: "text-acento-tinta/80", boton: "bg-acento-tinta text-white", brillo: "bg-white/35" },
-  menta: { caja: "bg-marca-menta text-marca-noche", frase: "text-marca-noche/75", boton: "bg-marca-noche text-white", brillo: "bg-white/45" },
-  suave: { caja: "bg-marca-suave text-marca-oscuro", frase: "text-marca-medio", boton: "bg-marca text-white", brillo: "bg-white/80" }
+  oscuro: { caja: "bg-marca-oscuro text-white", frase: "text-marca-menta", boton: "bg-white text-marca-oscuro" },
+  noche: { caja: "bg-marca-noche text-white", frase: "text-marca-menta", boton: "bg-marca-menta text-marca-noche" },
+  marca: { caja: "bg-marca text-white", frase: "text-white", boton: "bg-white text-marca-oscuro" },
+  acento: { caja: "bg-acento text-acento-tinta", frase: "text-acento-tinta/80", boton: "bg-acento-tinta text-white" },
+  menta: { caja: "bg-marca-menta text-marca-noche", frase: "text-marca-noche/75", boton: "bg-marca-noche text-white" },
+  suave: { caja: "bg-marca-suave text-marca-oscuro", frase: "text-marca-medio", boton: "bg-marca text-white" }
 } as const;
 
 /** Tamaños del mosaico: en computador es una cuadrícula de 12 columnas; en celular, de 2 */
@@ -243,10 +243,7 @@ function Categorias() {
   return (
     <section id="categorias" aria-labelledby="t-categorias" className="contenedor py-12">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
-        <div>
-          <p className="etiqueta">Todo en un solo lugar</p>
-          <h2 id="t-categorias" className="titulo-seccion mt-1">Compra por categoría</h2>
-        </div>
+        <h2 id="t-categorias" className="titulo-seccion">Compra por categoría</h2>
       </div>
       <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:auto-rows-[215px] lg:grid-cols-12">
         {MOSAICO.map(m => {
@@ -256,7 +253,6 @@ function Categorias() {
           return (
             <li key={m.tienda} className={forma.caja}>
               <a href={`#${t.vista}`} className={`group relative isolate flex h-full overflow-hidden rounded-lg p-4 sm:p-6 ${tema.caja}`}>
-                <span aria-hidden="true" className={`absolute -right-12 -top-16 -z-10 h-56 w-56 rounded-full blur-3xl ${tema.brillo}`} />
                 <span className={`relative z-10 flex min-w-0 flex-col ${forma.texto}`}>
                   <span className={`text-[12.5px] font-semibold leading-snug sm:text-sm ${tema.frase}`}>{m.frase}</span>
                   <span className={`mt-1 font-display font-extrabold leading-[0.98] tracking-tight ancho-108 ${forma.titulo}`}>{t.titulo}</span>
@@ -319,12 +315,9 @@ function BandaGamer() {
     <section aria-labelledby="t-gamer" className="contenedor pb-12">
       <div className="relative isolate overflow-hidden rounded-xl bg-marca-noche text-white lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         <span aria-hidden="true" className="absolute inset-0 -z-10" style={cuadricula} />
-        <span aria-hidden="true" className="absolute -left-28 -top-28 -z-10 h-[28rem] w-[28rem] rounded-full bg-marca/45 blur-3xl" />
-        <span aria-hidden="true" className="absolute -bottom-44 right-[8%] -z-10 h-[30rem] w-[30rem] rounded-full bg-acento/30 blur-3xl" />
         <div className="relative z-10 p-7 sm:p-10 lg:self-center lg:p-14">
-          <p className="etiqueta text-marca-menta">Arma tu setup gamer</p>
-          <h2 id="t-gamer" className="mt-3 font-display text-[40px] font-extrabold leading-[0.95] text-white ancho-108 sm:text-[58px]">
-            Lleva tu juego al <span className="text-marca-menta">siguiente nivel</span>
+          <h2 id="t-gamer" className="font-display text-[40px] font-extrabold leading-[0.95] text-white ancho-108 sm:text-[58px]">
+            Lleva tu juego al siguiente nivel
           </h2>
           <p className="mt-4 max-w-md text-[17px] leading-relaxed text-white/85">
             Más FPS, más precisión y sonido que te mete en la partida. Arma tu combo con monitor, teclado, mouse y diadema, y te asesoramos por WhatsApp para que todo combine.
@@ -359,13 +352,11 @@ function BandaCelulares() {
   ];
   return (
     <section aria-labelledby="t-banda-cel" className="contenedor pt-12">
-      <div className="relative isolate overflow-hidden rounded-xl bg-gradient-to-br from-marca to-marca-oscuro text-white lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-        <span aria-hidden="true" className="absolute right-[18%] top-1/2 -z-10 h-[30rem] w-[30rem] -translate-y-1/2 rounded-full bg-marca-menta/35 blur-3xl" />
-        <span aria-hidden="true" className="absolute -bottom-40 -left-24 -z-10 h-96 w-96 rounded-full bg-acento/25 blur-3xl" />
+      <div className="relative isolate overflow-hidden rounded-xl bg-marca-medio text-white lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         <div className="relative z-10 p-7 sm:p-10 lg:self-center lg:p-14">
-          <p className="etiqueta text-marca-menta">iPhone · Samsung · Xiaomi · Motorola</p>
+          <p className="text-[15px] font-semibold text-marca-menta">iPhone, Samsung, Xiaomi y Motorola</p>
           <h2 id="t-banda-cel" className="mt-3 font-display text-[40px] font-extrabold leading-[0.95] text-white ancho-108 sm:text-[58px]">
-            Tu próximo celular <span className="text-marca-menta">te está esperando</span>
+            Tu próximo celular te está esperando
           </h2>
           <p className="mt-4 max-w-md text-[17px] leading-relaxed text-white/85">
             Los modelos más buscados, en varias capacidades y colores. Elige el tuyo y te lo llevamos el mismo día en Bogotá.
@@ -475,10 +466,7 @@ function Marcas() {
   return (
     <section aria-labelledby="t-marcas" className="overflow-hidden border-b border-linea py-9">
       <div className="contenedor flex items-end justify-between gap-4">
-        <div className="min-w-0">
-          <p className="etiqueta">Marcas que manejamos</p>
-          <h2 id="t-marcas" className="titulo-seccion mt-1">Las marcas que buscas</h2>
-        </div>
+        <h2 id="t-marcas" className="titulo-seccion min-w-0">Las marcas que buscas</h2>
         <div className="flex shrink-0 gap-2">
           <button type="button" onClick={() => mover(-1)} aria-label="Ver marcas anteriores" className={flecha}><IconoFlecha dir={-1} /></button>
           <button type="button" onClick={() => mover(1)} aria-label="Ver más marcas" className={flecha}><IconoFlecha /></button>
@@ -548,8 +536,8 @@ function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => voi
 /** Encabezado de color de cada tarjeta de reparación, con un equipo recortado (public/fotos/recortes) */
 type EstiloServicio = { caja: string; frase: string; texto: string; foto: string; posicion: string };
 const ESTILO_SERVICIO: { pc: EstiloServicio; cel: EstiloServicio } & Record<string, EstiloServicio | undefined> = {
-  pc: { caja: "bg-gradient-to-br from-marca-oscuro to-marca text-white", frase: "text-marca-menta", texto: "text-white/80", foto: "p52396", posicion: "-bottom-2 h-[82%]" },
-  cel: { caja: "bg-gradient-to-br from-acento to-acento-hover text-acento-tinta", frase: "text-acento-tinta/75", texto: "text-acento-tinta/80", foto: "ip18p", posicion: "-bottom-6 h-[98%]" }
+  pc: { caja: "bg-marca-oscuro text-white", frase: "text-marca-menta", texto: "text-white/80", foto: "p52396", posicion: "-bottom-2 h-[82%]" },
+  cel: { caja: "bg-acento text-acento-tinta", frase: "text-acento-tinta/75", texto: "text-acento-tinta/80", foto: "ip18p", posicion: "-bottom-6 h-[98%]" }
 };
 
 /** Banda de portátiles y computadores (fondo claro, para variar con las bandas oscuras) */
@@ -564,13 +552,12 @@ function BandaComputadores() {
   const cuadricula = { backgroundImage: "linear-gradient(rgba(11,132,87,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(11,132,87,.07) 1px, transparent 1px)", backgroundSize: "46px 46px" };
   return (
     <section aria-labelledby="t-banda-pc" className="contenedor pb-12">
-      <div className="relative isolate overflow-hidden rounded-xl border border-linea bg-gradient-to-br from-marca-suave via-white to-acento-suave lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+      <div className="relative isolate overflow-hidden rounded-xl border border-linea bg-marca-suave lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         <span aria-hidden="true" className="absolute inset-0 -z-10" style={cuadricula} />
-        <span aria-hidden="true" className="absolute right-[12%] top-1/2 -z-10 h-[28rem] w-[28rem] -translate-y-1/2 rounded-full bg-marca-menta/30 blur-3xl" />
         <div className="relative z-10 p-7 sm:p-10 lg:self-center lg:p-14">
-          <p className="etiqueta text-marca-medio">Portátiles y computadores</p>
+          <p className="text-[15px] font-semibold text-marca-medio">Portátiles y computadores</p>
           <h2 id="t-banda-pc" className="mt-3 font-display text-[40px] font-extrabold leading-[0.95] text-tinta ancho-108 sm:text-[58px]">
-            Potencia para <span className="text-marca">todo lo que haces</span>
+            Potencia para todo lo que haces
           </h2>
           <p className="mt-4 max-w-md text-[17px] leading-relaxed text-tinta-2">
             Portátiles para estudiar y trabajar, equipos gamer y PC de escritorio listos para usar. Te ayudamos a escoger el tuyo por WhatsApp, sin enredos.
@@ -609,8 +596,7 @@ function Servicios() {
     <section id="servicios" aria-labelledby="t-servicios" className="border-y border-linea bg-fondo">
       <div className="contenedor py-12 sm:py-14">
         <div className="max-w-2xl">
-          <p className="etiqueta">Servicio técnico</p>
-          <h2 id="t-servicios" className="titulo-seccion mt-1">Reparamos tus equipos e instalamos cámaras de seguridad</h2>
+          <h2 id="t-servicios" className="titulo-seccion">Reparamos tus equipos e instalamos cámaras de seguridad</h2>
           <p className="mt-2 text-tinta-2">Te decimos el valor antes de reparar. Coordinamos por WhatsApp cómo recibir tu equipo y vamos a tu casa o negocio para instalar cámaras.</p>
         </div>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -621,10 +607,8 @@ function Servicios() {
                 {/* Encabezado de color: texto a la izquierda y el equipo recortado en su propia columna (no se montan).
                     Las tarjetas son angostas en celular y en md (dos columnas), y anchas en sm y lg. */}
                 <div className={`relative isolate flex min-h-[210px] gap-2 overflow-hidden ${e.caja}`}>
-                  <span aria-hidden="true" className="absolute -right-12 -top-16 -z-10 h-56 w-56 rounded-full bg-white/20 blur-3xl" />
-                  <div className="relative z-10 min-w-0 flex-1 py-6 pl-6 sm:py-7 sm:pl-7">
-                    <p className={`etiqueta ${e.frase}`}>Servicio técnico</p>
-                    <h3 className="mt-1.5 font-display text-[23px] font-extrabold leading-[1.02] text-current ancho-108 sm:text-[30px] md:text-[24px] lg:text-[30px]">{s.titulo}</h3>
+                  <div className="relative z-10 min-w-0 flex-1 self-center py-6 pl-6 sm:py-7 sm:pl-7">
+                    <h3 className="font-display text-[23px] font-extrabold leading-[1.02] text-current ancho-108 sm:text-[30px] md:text-[24px] lg:text-[30px]">{s.titulo}</h3>
                     <p className={`mt-2 text-sm leading-snug ${e.texto}`}>{s.texto}</p>
                   </div>
                   <div aria-hidden="true" className="relative w-[34%] shrink-0 sm:w-[40%] md:w-[34%] lg:w-[40%]">

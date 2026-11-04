@@ -8,10 +8,10 @@ export function TarjetaArticulo({ id }: { id: string }) {
   return (
     <a href={`#${a.id}`} className="tarjeta group flex h-full flex-col p-5 transition-[border-color,box-shadow] hover:border-marca hover:shadow-tarjeta">
       <span className="flex h-16 w-20 items-center justify-center rounded bg-marca-suave"><Ilustracion nombre={a.ilustracion} className="h-12 w-16 text-marca-medio" /></span>
-      <p className="etiqueta mt-4">{a.etiqueta} · {a.minutos} min de lectura</p>
+      <p className="etiqueta mt-4">{a.etiqueta}, {a.minutos} min de lectura</p>
       <h2 className="mt-1 text-lg font-bold leading-snug group-hover:text-marca">{a.titulo}</h2>
       <p className="mt-2 text-sm leading-relaxed text-tinta-2">{a.resumen}</p>
-      <p className="mt-auto pt-4 text-sm font-semibold text-marca">Leer el artículo →</p>
+      <p className="mt-auto pt-4 text-sm font-semibold text-marca-texto">Leer el artículo</p>
     </a>
   );
 }

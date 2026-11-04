@@ -2187,7 +2187,7 @@
   "resumen": "Portátil ASUS Vivobook de 15,6\" Full HD para estudio, oficina y entretenimiento. Trae procesador Intel Core 3 100U, 16 GB de RAM DDR5 y SSD NVMe de 512 GB para que arranque y abra programas rápido."
  },
  "p52383": {
-  "resumen": "Portátil ASUS de 15,6\" Full HD con procesador Intel Core 5, 12 GB de RAM DDR5 y SSD NVMe de 512 GB, con lector de huella para desbloquearlo al instante. Viene con morral y mouse."
+  "resumen": "Portátil ASUS de 15,6\" Full HD con procesador Intel Core 5, 12 GB de RAM DDR5 y SSD NVMe de 512 GB, con lector de huella para desbloquearlo al instante."
  },
  "p52401": {
   "resumen": "Portátil ASUS Vivobook de 15,6\" Full HD con procesador Intel Core 5 120U, 16 GB de RAM y SSD NVMe de 512 GB. Tiene lector de huella y color azul."
@@ -3072,7 +3072,7 @@
   "resumen": "Gafas de realidad virtual Meta Quest 3S de 128 GB: juegos y experiencias inmersivas sin cables ni PC, con realidad mixta a color."
  },
  "p45518": {
-  "resumen": "Gafas de realidad virtual Meta Quest 3S de 256 GB con juego incluido: realidad virtual y mixta sin cables ni PC."
+  "resumen": "Gafas de realidad virtual Meta Quest 3S de 256 GB: realidad virtual y mixta sin cables ni PC."
  },
  "p45649": {
   "resumen": "Palanca de cambios Logitech G RS H-Shifter con patrón H, para simulación de carreras en PC."
@@ -3339,7 +3339,7 @@
   ]
  },
  "ip15pm": {
-  "resumen": "iPhone 15 Pro Max de 256 GB reacondicionado certificado (CPO): revisado para funcionar como nuevo. Tiene marco de titanio, pantalla de 6,7\" ProMotion, chip A17 Pro, teleobjetivo de 5x y conector USB-C.",
+  "resumen": "iPhone 15 Pro Max reacondicionado certificado (CPO), en 256 GB o 512 GB: revisado para funcionar como nuevo. Tiene marco de titanio, pantalla de 6,7\" ProMotion, chip A17 Pro, teleobjetivo de 5x y conector USB-C.",
   "ficha": [
    [
     "Pantalla",
@@ -3443,7 +3443,7 @@
   ]
  },
  "sa17": {
-  "resumen": "Samsung Galaxy A17 Duos con doble SIM y la experiencia One UI de Samsung, para redes, fotos y videos. Disponible en 128 GB y en 256 GB versión 4G."
+  "resumen": "Samsung Galaxy A17 con la experiencia One UI de Samsung, para redes, fotos y videos. Disponible en 128 GB y 256 GB 4G con doble SIM (Duos), y en 256 GB 5G con una SIM."
  },
  "sa27": {
   "resumen": "Samsung Galaxy A27 5G de 256 GB con pantalla Super AMOLED a 120 Hz, batería de 5000 mAh y resistencia IP64.",
@@ -3488,7 +3488,7 @@
   ]
  },
  "sa57": {
-  "resumen": "Samsung Galaxy A57 de 128 GB con pantalla Super AMOLED Plus FHD+, batería de 5000 mAh con carga de 45 W y resistencia IP67, lo mejor de la serie A de Samsung.",
+  "resumen": "Samsung Galaxy A57 en 128 GB o 256 GB, con pantalla Super AMOLED Plus FHD+, batería de 5000 mAh con carga de 45 W y resistencia IP67, lo mejor de la serie A de Samsung.",
   "ficha": [
    [
     "Pantalla",
@@ -3574,7 +3574,7 @@
   "resumen": "Samsung Galaxy S26 FE de 256 GB, la versión Fan Edition de la serie Galaxy S26: el diseño y las funciones de Galaxy AI de la gama S a un precio más accesible."
  },
  "ss26u": {
-  "resumen": "Samsung Galaxy S26 Ultra, el tope de gama de Samsung, con la mejor cámara y pantalla de la marca y las funciones de Galaxy AI. Disponible en 256 GB y 512 GB."
+  "resumen": "Samsung Galaxy S26 Ultra, el tope de gama de Samsung, con la mejor cámara y pantalla de la marca y las funciones de Galaxy AI. Disponible en 256 GB, 512 GB y 1 TB."
  },
  "szflip8": {
   "resumen": "Samsung Galaxy Z Flip 8 de 512 GB, el plegable compacto de Samsung: se dobla a la mitad para caber en cualquier bolsillo y su pantalla exterior te deja ver notificaciones y tomar selfies sin abrirlo."
@@ -3735,7 +3735,7 @@
   ]
  },
  "xrn15": {
-  "resumen": "Xiaomi Redmi Note 15 de 256 GB en versión 4G, de la serie Note de Xiaomi, conocida por su pantalla AMOLED y su muy buena relación precio-calidad."
+  "resumen": "Xiaomi Redmi Note 15 en 256 GB (versión 4G) o 512 GB, de la serie Note de Xiaomi, conocida por su pantalla AMOLED y su muy buena relación precio-calidad."
  },
  "xrn15pro": {
   "resumen": "Xiaomi Redmi Note 15 Pro de 256 GB en versión 4G, de la serie Note, con pantalla AMOLED y cámara de alta resolución."
@@ -3864,7 +3864,7 @@
   "resumen": "Motorola Edge 60 de 512 GB, con pantalla pOLED curva, resistencia IP68 y el diseño premium de la línea Edge."
  },
  "medge60f": {
-  "resumen": "Motorola Edge 60 Fusion de 256 GB con pantalla pOLED curva de 6,7\", cámara de 50 MP, batería de 5200 mAh y conectividad 5G.",
+  "resumen": "Motorola Edge 60 Fusion en 128 GB (8 GB de RAM) o 256 GB, con pantalla pOLED curva de 6,7\", cámara de 50 MP, batería de 5200 mAh y conectividad 5G.",
   "ficha": [
    [
     "Pantalla",
@@ -4174,7 +4174,7 @@
   "resumen": "Oppo A5 5G de 256 GB, de la serie A de Oppo, resistente y con batería de larga duración."
  },
  "oa6c": {
-  "resumen": "Oppo A6 C de 64 GB, económico y práctico para el día a día."
+  "resumen": "Oppo A6 C en 64 GB o 128 GB, económico y práctico para el día a día."
  },
  "inote60p": {
   "resumen": "Infinix Note 60 Pro de 256 GB con procesador Snapdragon 7s Gen 4, pantalla de 6,78\" a 120 Hz y cámara de 50 MP. Disponible en edición estándar y en la edición especial Pininfarina.",
@@ -4400,7 +4400,7 @@
   ]
  },
  "ipadair": {
-  "resumen": "iPad Air de 11\" con chip M4 y 128 GB, potente y liviano, compatible con Apple Pencil Pro."
+  "resumen": "iPad Air de 11\" con chip M4, en 128 GB o 256 GB, potente y liviano, compatible con Apple Pencil Pro."
  },
  "ipad11": {
   "resumen": "iPad de 11\" con chip A16, pantalla Liquid Retina y USB-C. Compatible con Apple Pencil (USB-C).",
@@ -4430,7 +4430,7 @@
   "resumen": "Samsung Galaxy Tab S6 Lite con pantalla de 10,4\" y S Pen incluido, ideal para estudiar y tomar notas."
  },
  "taba11p": {
-  "resumen": "Samsung Galaxy Tab A11+ de 256 GB, para series, clases y videollamadas."
+  "resumen": "Samsung Galaxy Tab A11+ en 128 GB (6 GB de RAM) o 256 GB, para series, clases y videollamadas."
  },
  "taba11": {
   "resumen": "Samsung Galaxy Tab A11 de 8,7\", compacta, con 128 GB y 8 GB de RAM, conexión WiFi."
@@ -4439,7 +4439,7 @@
   "resumen": "Xiaomi Redmi Pad Pro 2 de 12\" y 256 GB, con pantalla grande para series, clases y trabajo."
  },
  "rpad2": {
-  "resumen": "Xiaomi Redmi Pad 2 con pantalla de 11\", batería de 9000 mAh y buen sonido, ideal para series, clases y lectura. Disponible en 64 GB y 128 GB, también con funda."
+  "resumen": "Xiaomi Redmi Pad 2 con pantalla de 11\", batería de 9000 mAh y buen sonido, ideal para series, clases y lectura. Disponible en 64 GB, 128 GB y 256 GB; la de 128 GB también viene con funda."
  },
  "tabtecno": {
   "resumen": "Tablet Tecno de 256 GB, para entretenimiento, clases y lectura."
@@ -4598,7 +4598,7 @@
   "resumen": "AirPods 4 de diseño abierto con estuche USB-C. La versión con cancelación activa de ruido agrega modo Ambiente y estuche con carga inalámbrica."
  },
  "aps5": {
-  "resumen": "AirPods de 5.ª generación de Apple, que se emparejan al instante con tu iPhone. Versión con estuche sin carga magnética."
+  "resumen": "AirPods de 5.ª generación de Apple, que se emparejan al instante con tu iPhone. Elige el estuche sin carga magnética o con carga magnética."
  },
  "epusbc": {
   "resumen": "Audífonos EarPods de Apple con conector USB-C, con control y micrófono para llamadas. Funcionan con iPhone 15 en adelante, iPad y Mac con USB-C. Vienen en su caja."
@@ -4868,5 +4868,260 @@
  },
  "tvs32": {
   "resumen": "Televisor Samsung H5000F de 32\" HD Smart TV, con tus aplicaciones de streaming favoritas."
+ },
+ "acag1571p57kn": {
+  "resumen": "Portátil Acer Aspire Go 15 AG15-71P-57KN con procesador Intel Core i5 13420H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Mist Green."
+ },
+ "acal1653p56s5": {
+  "resumen": "Portátil Acer Aspire Lite 16 AL16-53P-56S5 con procesador Intel Core Ultra 5 115U, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Light Silver."
+ },
+ "acal1541pr7jp": {
+  "resumen": "Portátil Acer Aspire Lite 15 AL15-41P-R7JP con procesador AMD Ryzen 7 5700U, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Light Silver."
+ },
+ "p52405": {
+  "resumen": "Portátil Acer Aspire Lite AL15-21P-R7PV con procesador AMD Ryzen 5 40, 16 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD IPS. Color Light Silver."
+ },
+ "acal1543pr6gw": {
+  "resumen": "Portátil Acer Aspire Lite 15 AL15-43P-R6GW con procesador AMD Ryzen 7 5825U, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Light Silver."
+ },
+ "acal1572p71th": {
+  "resumen": "Portátil Acer Aspire Lite 15 AL15-72P-71TH con procesador Intel Core i7 13620H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Light Silver."
+ },
+ "p52407": {
+  "resumen": "Portátil Acer Aspire Go 15 AG15-52P-56CQ con procesador Intel Core Ultra 5 115U, 16 GB DDR5 de RAM, SSD de 1 TB y pantalla de 15,6\" FHD IPS. Trae Windows 11 Home. Color Gris."
+ },
+ "p52406": {
+  "resumen": "Portátil Acer Aspire Lite AL15-53P-79QS con procesador Intel Core i7 150U, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD IPS. Color Gris."
+ },
+ "acnl1671g5616": {
+  "resumen": "Portátil Acer Nitro Lite NL16-71G-5616 con procesador Intel Core 5 210H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 6 GB. Color Negro."
+ },
+ "acanv1542r976": {
+  "resumen": "Portátil Acer Nitro V 15 ANV15-42-R976 con procesador AMD Ryzen 7 7445HS, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 6 GB. Color Negro."
+ },
+ "acanv155258ht": {
+  "resumen": "Portátil Acer Nitro ANV15-52-58HT con procesador Intel Core 5 210H, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 5050 de 8 GB. Color Negro."
+ },
+ "ase1504fabq2771": {
+  "resumen": "Portátil ASUS E1504FA-BQ2771 con procesador AMD Ryzen 3 30, 8 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\". Color Mixed Black."
+ },
+ "asx1504vabq4375": {
+  "resumen": "Portátil ASUS X1504VA-BQ4375 con procesador Intel Core i3 1315U, 8 GB DDR4 de RAM, SSD de 1 TB y pantalla de 15,6\" FHD. Color Cool Silver."
+ },
+ "ase1504fabq2334": {
+  "resumen": "Portátil ASUS E1504FA-BQ2334 con procesador AMD Ryzen 5 7520U, 16 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Cool Silver."
+ },
+ "asx1504vabq3836": {
+  "resumen": "Portátil ASUS X1504VA-BQ3836 con procesador Intel Core i5 1334U, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Cool Silver."
+ },
+ "asm1605naqmb101": {
+  "resumen": "Portátil ASUS M1605NAQ-MB101 con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Indie Black."
+ },
+ "p52408": {
+  "resumen": "Portátil ASUS Vivobook X1404VA-EB2263 con procesador Intel Core 5 120U, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Azul."
+ },
+ "asb1403cvas65016": {
+  "resumen": "Portátil ASUS ExpertBook B1403CVA-S65016 con procesador Intel Core i7 1335U, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Grey."
+ },
+ "asf1605vaab74": {
+  "resumen": "Portátil ASUS F1605VA-AB74 con procesador Intel Core i7 1355U, 16 GB de RAM, SSD de 1 TB y pantalla de 16\". Trae Windows 11. Color Indie Black."
+ },
+ "p52409": {
+  "resumen": "Portátil ASUS Vivobook M1607KA-MB150W con procesador AMD Ryzen AI 5 330, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Trae Windows 11 Home. Color Gris."
+ },
+ "asm1607kamb144": {
+  "resumen": "Portátil ASUS M1607KA-MB144 con procesador AMD Ryzen AI 5 330, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Cool Silver."
+ },
+ "asx1502vanj929": {
+  "resumen": "Portátil ASUS X1502VA-NJ929 con procesador Intel Core i7 13620H, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Quiet Blue."
+ },
+ "asm1607kamb123": {
+  "resumen": "Portátil ASUS M1607KA-MB123 con procesador AMD Ryzen AI 7 350, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Quiet Blue."
+ },
+ "asx1605vapbfmb239": {
+  "resumen": "Portátil ASUS X1605VAPBF-MB239 con procesador Intel Core 9 270H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Cool Silver."
+ },
+ "asux3407qaqd232w": {
+  "resumen": "Portátil ASUS Zenbook UX3407QA-QD232W con procesador Qualcomm Snapdragon X X1-26-100, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" OLED WUXGA. Trae Windows 11. Color Gray."
+ },
+ "asum3406gaql121": {
+  "resumen": "Portátil ASUS Zenbook UM3406GA-QL121 con procesador AMD Ryzen AI 7 445, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" OLED WUXGA. Color Jade Black."
+ },
+ "asux3407qaqd288w": {
+  "resumen": "Portátil ASUS Zenbook UX3407QA-QD288W con procesador Qualcomm Snapdragon X X1-26-100, 32 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" OLED WUXGA. Trae Windows 11. Color Beige."
+ },
+ "asum5606karj032w": {
+  "resumen": "Portátil ASUS Zenbook UM5606KA-RJ032W con procesador AMD Ryzen AI 7 350, 24 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 16\" OLED 3K WQ+ táctil. Trae Windows 11. Color Gray."
+ },
+ "asfx607vjrl016": {
+  "resumen": "Portátil ASUS TUF Gaming F16 FX607VJ-RL016 con procesador Intel Core 5 210H, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 6 GB. Color Gray."
+ },
+ "astuff16c5": {
+  "resumen": "Portátil ASUS TUF Gaming F16 con procesador Intel Core 5 210H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" 1920x1200 144 Hz, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Mecha Gray."
+ },
+ "astufa16r7": {
+  "resumen": "Portátil ASUS TUF Gaming A16 con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Gray."
+ },
+ "asg835lxsa137w": {
+  "resumen": "Portátil ASUS ROG Strix Scar 18 G835LX-SA137W con procesador Intel Core Ultra 9 275HX, 32 GB DDR5 de RAM, SSD de 2 TB y pantalla de 18\" 2,5K, con tarjeta gráfica NVIDIA GeForce RTX 5090 de 24 GB. Trae Windows 11."
+ },
+ "hp14dq3502la": {
+  "resumen": "Portátil HP 14-DQ3502LA con procesador Intel Celeron N4500, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 14\" HD. Color Natural Silver."
+ },
+ "hp14em0217la": {
+  "resumen": "Portátil HP 14-EM0217LA con procesador AMD Athlon Silver 7120U, 8 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 14\" HD. Color Dorado."
+ },
+ "hp245g10r3": {
+  "resumen": "Portátil HP 245 G10 con procesador AMD Ryzen 3 7330U, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 14\" HD. Color Negro."
+ },
+ "hp200g2ar3": {
+  "resumen": "Portátil HP 200 G2A con procesador AMD Ryzen 3 210, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" WUXGA. Color Iron Grey."
+ },
+ "hp15fc0232la": {
+  "resumen": "Portátil HP 15-FC0232LA con procesador AMD Ryzen 3 7320U, 8 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Azul claro de luna."
+ },
+ "hp255g10r3": {
+  "resumen": "Portátil HP 255 G10 con procesador AMD Ryzen 3 7320U, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" HD. Color Negro."
+ },
+ "hp15fd0242la": {
+  "resumen": "Portátil HP 15-FD0242LA con procesador Intel Core 3 100U, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Dorado cálido."
+ },
+ "hp255rtn350": {
+  "resumen": "Portátil HP 255RT con procesador Intel Core 3 N350, 16 GB DDR4 de RAM, SSD de 1 TB y pantalla de 15,6\" FHD. Color Gray."
+ },
+ "hp240g10i5": {
+  "resumen": "Portátil HP 240 G10 con procesador Intel Core i5 1334U, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 14\" HD."
+ },
+ "hp250g10i5": {
+  "resumen": "Portátil HP 250 G10 con procesador Intel Core i5 1334U, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" HD. Color Ceniza oscuro."
+ },
+ "hp15fd1252la": {
+  "resumen": "Portátil HP 15-FD1252LA con procesador Intel Core Ultra 5 125H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Silver."
+ },
+ "hp15fc0256la": {
+  "resumen": "Portátil HP 15-FC0256LA con procesador AMD Ryzen 5 7520U, 16 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Azul claro de luna."
+ },
+ "hp200g2ar5": {
+  "resumen": "Portátil HP 200 G2A con procesador AMD Ryzen 5 220, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Plata meteoro."
+ },
+ "hp15fd0260la": {
+  "resumen": "Portátil HP 15-FD0260LA con procesador Intel Core i5 1334U, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Dorado cálido."
+ },
+ "hp15df0354la": {
+  "resumen": "Portátil HP 15-DF0354LA con procesador Intel Core 5 120U, 24 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Dorado cálido."
+ },
+ "hp245g10r7": {
+  "resumen": "Portátil HP 245 G10 con procesador AMD Ryzen 7 7730U, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 14\" HD. Color Plateado ceniza oscuro."
+ },
+ "hp15fc0275la": {
+  "resumen": "Portátil HP 15-FC0275LA con procesador AMD Ryzen 7 7730U, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Dorado cálido."
+ },
+ "hp250rg10c7": {
+  "resumen": "Portátil HP 250R G10 con procesador Intel Core 7 150U, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Plateado ceniza oscuro."
+ },
+ "hp15fd0276la": {
+  "resumen": "Portátil HP 15-FD0276LA con procesador Intel Core i7 1355U, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Natural Silver."
+ },
+ "hp15fd1378la": {
+  "resumen": "Portátil HP 15-FD1378LA con procesador Intel Core Ultra 7 155H, 24 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD."
+ },
+ "hpvic15fa2013dx": {
+  "resumen": "Portátil HP Victus 15-FA2013DX con procesador Intel Core i5 13420H, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD 144 Hz, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 6 GB. Trae Windows 11. Color Mica Silver."
+ },
+ "hpvic15fb3019la": {
+  "resumen": "Portátil HP Victus 15-FB3019LA con procesador AMD Ryzen 7 7445HS, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 6 GB. Color Silver."
+ },
+ "hpvic15fa2700la": {
+  "resumen": "Portátil HP Victus 15-FA2700LA con procesador Intel Core i5 13420H, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 6 GB. Trae Windows 11. Color Silver."
+ },
+ "hpprobook440g10": {
+  "resumen": "Portátil HP ProBook 440 G10 con procesador Intel Core i5 1335U, 32 GB DDR4 de RAM, SSD de 1 TB y pantalla de 14\" HD, con tarjeta gráfica NVIDIA GeForce RTX 2050 de 4 GB. Trae Windows 11. Color Silver."
+ },
+ "hpvic15fb3093dx": {
+  "resumen": "Portátil HP Victus 15-FB3093DX con procesador AMD Ryzen 7 7445HS, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD 144 Hz, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Silver."
+ },
+ "hpvic15fa2104tx": {
+  "resumen": "Portátil HP Victus 15-FA2104TX con procesador Intel Core i7 13620H, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD 144 Hz, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Blue."
+ },
+ "lnslim315iru8": {
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRU8 con procesador Intel Core i3 1315U, 8 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Arctic Grey."
+ },
+ "lnslim315irh10a": {
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRH10 con procesador Intel Core i5 13420H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Luna Grey."
+ },
+ "lnv14g5i5": {
+  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core i5 13420H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey."
+ },
+ "lnslim315ahp10": {
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15AHP10 con procesador AMD Ryzen 5 8640HS, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Cosmic Blue."
+ },
+ "p52345": {
+  "resumen": "Portátil Lenovo V15 G4 AMN con procesador AMD Ryzen 5 7520U, 16 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Arctic Grey."
+ },
+ "lnv14g5c5": {
+  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core 5 210H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey."
+ },
+ "lnv14g5i7": {
+  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core i7 13620H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey."
+ },
+ "lntb14g7arp": {
+  "resumen": "Portátil Lenovo ThinkBook 14 G7 ARP con procesador AMD Ryzen 5 7535HS, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" WUXGA. Color Arctic Grey."
+ },
+ "p52388": {
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRH10 con procesador Intel Core i5 13420H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Gris."
+ },
+ "lnv14g6arp": {
+  "resumen": "Portátil Lenovo V14 G6 ARP con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey."
+ },
+ "lnv15g6arp": {
+  "resumen": "Portátil Lenovo V15 G6 ARP con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Luna Grey."
+ },
+ "lnv15g5i7": {
+  "resumen": "Portátil Lenovo V15 G5 IRL con procesador Intel Core i7 13620H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Luna Grey."
+ },
+ "lnv14g5c7": {
+  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core 7 240H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey."
+ },
+ "lntb14g8irl": {
+  "resumen": "Portátil Lenovo ThinkBook 14 G8 IRL con procesador Intel Core 5 210H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" WUXGA. Color Arctic Grey."
+ },
+ "lnslim315arp10": {
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15ARP10 con procesador AMD Ryzen 7 7735HS, 24 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Cosmic Blue."
+ },
+ "lnslim315irh10b": {
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRH10 con procesador Intel Core i7 13620H, 24 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Grey."
+ },
+ "lnslim514imh9": {
+  "resumen": "Portátil Lenovo IdeaPad Slim 5 14IMH9 con procesador Intel Core Ultra 7 155H, 16 GB LPDDR5 de RAM, SSD de 1 TB y pantalla de 14\" WUXGA. Trae Windows 11. Color Gray."
+ },
+ "lnyogaslim714imh9": {
+  "resumen": "Portátil Lenovo Yoga Slim 7 14IMH9 con procesador Intel Core Ultra 7 155H, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" WUXGA OLED. Trae Windows 11. Color Grey."
+ },
+ "lnyoga714akp10": {
+  "resumen": "Portátil Lenovo Yoga 7 2 en 1 14AKP10 con procesador AMD Ryzen AI 5 340, 16 GB LPDDR5X de RAM, SSD de 512 GB y pantalla de 14\" WUXGA táctil. Trae Windows 11."
+ },
+ "lnloq15arp9": {
+  "resumen": "Portátil Lenovo LOQ 15ARP9 con procesador AMD Ryzen 5 7235HS, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Luna Grey."
+ },
+ "lnloq15arp10e": {
+  "resumen": "Portátil Lenovo LOQ 15ARP10E con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Luna Grey."
+ },
+ "lnyogapro714ahp9": {
+  "resumen": "Portátil Lenovo Yoga Pro 7 14AHP9 con procesador AMD Ryzen 7 8845HS, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14,5\" 2,5K WQXGA, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 6 GB. Trae Windows 11."
+ },
+ "lnlegionpro716iax10h": {
+  "resumen": "Portátil Lenovo Legion Pro 7 16IAX10H con procesador Intel Core Ultra 9 275HX, 32 GB DDR5 de RAM, SSD de 2 TB y pantalla de 16\" WQXGA, con tarjeta gráfica NVIDIA GeForce RTX 5070 de 12 GB. Trae Windows 11. Color Black."
+ },
+ "msithin15b13uc3060": {
+  "resumen": "Portátil MSI Thin 15 B13UC-3060XCO con procesador Intel Core i5 13420H, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 4 GB. Color Grey."
+ },
+ "msithin15b13uc3464": {
+  "resumen": "Portátil MSI Thin 15 B13UC-3464XCO con procesador Intel Core i7 13620H, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 4 GB. Color Gray."
+ },
+ "dellpro15pv15250": {
+  "resumen": "Portátil Dell Pro 15 PV15250 con procesador Intel Core i5 1334U, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Platinum Silver."
+ },
+ "dell15dc15250": {
+  "resumen": "Portátil Dell 15 DC15250 con procesador Intel Core i7 1355U, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Silver."
  }
 }
