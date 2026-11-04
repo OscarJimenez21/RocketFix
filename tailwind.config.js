@@ -37,6 +37,17 @@ export default {
       },
       // Curvas de movimiento: "salida" para lo que aparece o responde a un toque; "cajon" para el carrito y el menú (como iOS)
       transitionTimingFunction: { salida: "cubic-bezier(0.23, 1, 0.32, 1)", cajon: "cubic-bezier(0.32, 0.72, 0, 1)" },
+      // entrar: la página nueva aparece al navegar; latido: el contador del carrito al agregar; desplegar: las sugerencias del buscador
+      keyframes: {
+        entrar: { from: { opacity: "0", transform: "translateY(6px)" } },
+        latido: { "40%": { transform: "scale(1.3)" } },
+        desplegar: { from: { opacity: "0", transform: "translateY(-4px) scale(0.98)" } }
+      },
+      animation: {
+        entrar: "entrar 260ms cubic-bezier(0.23, 1, 0.32, 1) backwards",
+        latido: "latido 380ms cubic-bezier(0.23, 1, 0.32, 1)",
+        desplegar: "desplegar 160ms cubic-bezier(0.23, 1, 0.32, 1)"
+      },
       borderRadius: { DEFAULT: "6px", md: "8px", lg: "10px" },
       maxWidth: { pagina: "1240px" },
       // Dos sombras en todo el sitio: tarjetas al pasar el mouse y paneles que flotan (menú, carrito, sugerencias)

@@ -4,6 +4,7 @@
    (/RocketFix/p/sa07/, /RocketFix/celulares/…) a partir de dist/index.html, cada una con:
    - su título, descripción, dirección canónica e imagen para compartir (WhatsApp muestra la foto del producto);
    - datos estructurados (JSON-LD): Product con su precio en pesos, BreadcrumbList, y en la portada la tienda (OnlineStore);
+     los productos de «Preguntar disponibilidad» (consultar: true) no llevan precio ni Product, solo BreadcrumbList;
    - el contenido básico en el HTML (#estatico), para los buscadores y asistentes de IA que no ejecutan JavaScript.
      Con JavaScript se oculta y la tienda se carga encima, igual que siempre (main.tsx lleva la dirección a su #).
    También escribe sitemap.xml. Solo usa datos reales del catálogo: no declara disponibilidad, garantías ni calificaciones.
@@ -111,7 +112,8 @@ const migas = items => ({
 });
 const migasHtml = items => `<nav aria-label="Ruta">${items.map(([n, r]) => r != null ? `<a href="${BASE}${r}">${esc(n)}</a>` : `<span>${esc(n)}</span>`).join(" › ")}</nav>`;
 const contacto = `<p>Pedidos y asesoría por WhatsApp: <a href="${wa(`Hola ${CONFIG.nombre}, `)}">${esc(CONFIG.whatsappVisible)}</a>. ${esc(CONFIG.domicilio)} ${esc(CONFIG.envio)}</p>`;
-const listaProductos = ps => `<ul>${ps.map(p => `<li><a href="${BASE}${rutaProducto(p)}">${esc(p.nombre)}</a> · ${p.opciones.length > 1 ? "desde " : ""}${esc(dinero(desde(p)))}</li>`).join("")}</ul>`;
+const precioLista = p => p.consultar ? "preguntar disponibilidad" : `${p.opciones.length > 1 ? "desde " : ""}${dinero(desde(p))}`;
+const listaProductos = ps => `<ul>${ps.map(p => `<li><a href="${BASE}${rutaProducto(p)}">${esc(p.nombre)}</a> · ${esc(precioLista(p))}</li>`).join("")}</ul>`;
 const CONDICION = { Nuevo: "https://schema.org/NewCondition", CPO: "https://schema.org/RefurbishedCondition", Usado: "https://schema.org/UsedCondition" };
 
 const urls = [];
@@ -147,23 +149,28 @@ for (const p of PRODUCTOS) {
     offers: oferta
   };
   const camino = [["Inicio", ""], [VISTAS[vista] ?? vista, rutaVista(vista)], [p.nombre, null]];
-  const precioTxt = `${varias ? "desde " : ""}${dinero(precio)}`;
-  const descripcion = recortar(`${p.nombre}${distintivo[p.id] ? ` (${distintivo[p.id]})` : ""} ${precioTxt}${p.estado !== "Nuevo" ? ` (${ESTADOS[p.estado] ?? p.estado})` : ""}. Domicilio en Bogotá y envíos a todo Colombia. Compra con asesoría por WhatsApp en ${CONFIG.nombre}.`, 160);
+  const consultar = Boolean(p.consultar);
+  const precioTxt = consultar ? "preguntar disponibilidad" : `${varias ? "desde " : ""}${dinero(precio)}`;
+  const descripcion = recortar(`${p.nombre}${distintivo[p.id] ? ` (${distintivo[p.id]})` : ""}${consultar ? ":" : ""} ${precioTxt}${p.estado !== "Nuevo" ? ` (${ESTADOS[p.estado] ?? p.estado})` : ""}. Domicilio en Bogotá y envíos a todo Colombia. Compra con asesoría por WhatsApp en ${CONFIG.nombre}.`, 160);
   const cuerpo = [
     migasHtml(camino),
     `<h1>${esc(p.nombre)}</h1>`,
     etiquetaDe(p) ? `<p>${esc(etiquetaDe(p))}</p>` : "",
     fotos[0] ? `<img src="${BASE}${fotos[0]}" alt="${esc(p.nombre)}" width="800" height="800">` : "",
-    `<p><strong>${esc(precioTxt[0].toUpperCase() + precioTxt.slice(1))}</strong> (pesos colombianos)</p>`,
-    varias ? `<ul>${p.opciones.map(o => `<li>${esc(o.nombre)}: ${esc(dinero(o.precio))}</li>`).join("")}</ul>` : "",
+    consultar ? `<p><strong>Preguntar disponibilidad</strong></p>` : `<p><strong>${esc(precioTxt[0].toUpperCase() + precioTxt.slice(1))}</strong> (pesos colombianos)</p>`,
+    varias ? `<ul>${p.opciones.map(o => `<li>${esc(o.nombre)}${consultar ? "" : `: ${esc(dinero(o.precio))}`}</li>`).join("")}</ul>` : "",
     p.nota ? `<p>${esc(p.nota)}</p>` : "",
     `<h2>Descripción</h2><p>${esc(d.resumen)}</p>`,
     `<h2>Características</h2><dl>${d.filas.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("")}</dl>`,
     d.incluye ? `<h2>Qué incluye la caja</h2><p>${esc(d.incluye)}</p>` : "",
-    `<p><a href="${wa(`Hola ${CONFIG.nombre}, me interesa ${p.nombre} (${dinero(precio)}). ¿Está disponible?`)}">Preguntar por WhatsApp</a>. Antes de cualquier pago te confirmamos disponibilidad.</p>`,
+    consultar
+      ? `<p><a href="${wa(`Hola ${CONFIG.nombre}, me interesa ${p.nombre}. ¿Está disponible y qué precio tiene?`)}">Preguntar disponibilidad por WhatsApp</a>.</p>`
+      : `<p><a href="${wa(`Hola ${CONFIG.nombre}, me interesa ${p.nombre} (${dinero(precio)}). ¿Está disponible?`)}">Preguntar por WhatsApp</a>. Antes de cualquier pago te confirmamos disponibilidad.</p>`,
     contacto
   ].join("");
-  urls.push(pagina({ ruta, titulo: tituloProducto(p), descripcion, imagen: fotos[0], altImagen: p.nombre, jsonld: [producto, migas(camino)], cuerpo }));
+  // Sin precio publicado no hay oferta que declarar: Google pide precio en Product, así que solo van las migas
+  const jsonld = consultar ? [migas(camino)] : [producto, migas(camino)];
+  urls.push(pagina({ ruta, titulo: tituloProducto(p), descripcion, imagen: fotos[0], altImagen: p.nombre, jsonld, cuerpo }));
 }
 
 // ---------- Secciones ----------

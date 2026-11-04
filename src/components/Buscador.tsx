@@ -76,7 +76,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
       </label>
       {abierto && (
         <div id={idLista} role="listbox" aria-label="Sugerencias de búsqueda"
-          className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[70dvh] overflow-y-auto overscroll-contain rounded-md border border-linea bg-white p-2 shadow-flota">
+          className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[70dvh] origin-top overflow-y-auto overscroll-contain rounded-md border border-linea bg-white p-2 shadow-flota motion-safe:animate-desplegar">
           {!palabras.length && (
             <>
               <p className="etiqueta px-2.5 pb-1.5 pt-1">Búsquedas populares</p>
@@ -109,10 +109,14 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
                   </span>
                   <span className="block truncate text-xs text-tinta-2">{[VISTAS[TIENDA_VISTA[p.tienda]], p.marca].filter(Boolean).join(" · ")}</span>
                 </span>
-                <span className="shrink-0 text-right text-sm font-semibold">
-                  {p.opciones.length > 1 && <small className="block text-xs font-normal text-tinta-3">Desde</small>}
-                  {dinero(desde(p))}
-                </span>
+                {p.consultar ? (
+                  <span className="w-[5.5rem] shrink-0 text-right text-xs font-semibold leading-tight text-tinta-2">Preguntar disponibilidad</span>
+                ) : (
+                  <span className="shrink-0 text-right text-sm font-semibold">
+                    {p.opciones.length > 1 && <small className="block text-xs font-normal text-tinta-3">Desde</small>}
+                    {dinero(desde(p))}
+                  </span>
+                )}
               </a>
             );
           })}

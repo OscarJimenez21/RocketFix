@@ -1,7 +1,7 @@
 /* Página de una marca (#marca/Intel): todos sus productos según la marca guardada en cada producto, no por texto
    (buscar "Intel" como texto también traía "relojes inteligentes" y portátiles "con procesador Intel"). */
 import { useMemo, useState } from "react";
-import { PRODUCTOS } from "../data/catalogo";
+import { PRODUCTOS, conPrecioPrimero } from "../data/catalogo";
 import { TIENDAS } from "../data/tiendas";
 import { EncabezadoVista } from "../components/EncabezadoVista";
 import { TarjetaProducto } from "../components/TarjetaProducto";
@@ -12,7 +12,8 @@ import type { TiendaId } from "../types";
 const PAGINA = 24;
 
 export function Marca({ marca }: { marca: string }) {
-  const productos = useMemo(() => PRODUCTOS.filter(p => p.marca && norm(p.marca) === norm(marca)), [marca]);
+  // Los de «Preguntar disponibilidad» van al final
+  const productos = useMemo(() => PRODUCTOS.filter(p => p.marca && norm(p.marca) === norm(marca)).sort(conPrecioPrimero), [marca]);
   const nombre = productos[0]?.marca ?? marca;
   const secciones = TIENDAS.filter(t => productos.some(p => p.tienda === t.id));
   const [seccion, setSeccion] = useState<TiendaId | "todas">("todas");

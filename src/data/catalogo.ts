@@ -57,6 +57,10 @@ export const ORDEN_CAT: Record<string, number> = Object.fromEntries(Object.value
 
 export const deTienda = (t: TiendaId) => PRODUCTOS.filter(p => p.tienda === t);
 export const desde = (p: Producto) => Math.min(...p.opciones.map(o => o.precio));
+/** Para ordenar: primero los productos con precio, al final los de «Preguntar disponibilidad» (el resto del orden se mantiene) */
+export const conPrecioPrimero = (a: Producto, b: Producto) => Number(Boolean(a.consultar)) - Number(Boolean(b.consultar));
+/** Mensaje de WhatsApp para un producto sin precio publicado */
+export const textoConsulta = (p: Producto, nombreOpcion = "") => `Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, nombreOpcion)}. ¿Está disponible y qué precio tiene?`;
 export const galeriaDe = (p: Producto): string[] => (p.imagen ? [p.imagen, ...(GALERIAS[p.id] ?? [])] : []);
 
 /** "Memoria RAM · Corsair" (los celulares solo muestran la marca) */

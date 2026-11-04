@@ -67,6 +67,10 @@ function Marco() {
   const ruta = useRuta();
   const clave = claveRuta(ruta);
   const primera = useRef(true);
+  // La primera página que abre la persona aparece de una vez (así no se retrasa lo primero que ve); desde la segunda,
+  // cada página nueva entra con un fundido corto en vez de cambiar de golpe
+  const navego = useRef(false);
+  useEffect(() => { navego.current = true; }, []);
 
   // Al cambiar de página: vuelve a la posición anterior si la persona regresó, o sube al inicio; y lleva el foco al título
   useLayoutEffect(() => {
@@ -86,7 +90,9 @@ function Marco() {
       <div id="pagina">
         <RegresoBold />
         {CONFIG.ejemplo && <p className="bg-acento-suave py-2 text-center text-sm">Vista de ejemplo: los precios y productos son ilustrativos.</p>}
-        <main>
+        {/* La clave es la de la página: al ir a otra, se vuelve a montar y corre la animación (en la portada, ir a
+            #categorias o #servicios no cuenta como otra página: solo baja) */}
+        <main key={clave} className={navego.current ? "motion-safe:animate-entrar" : undefined}>
           <Contenido ruta={ruta} />
         </main>
         <PiePagina />

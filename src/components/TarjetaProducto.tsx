@@ -1,9 +1,11 @@
-import { etiquetaDe } from "../data/catalogo";
+import { etiquetaDe, textoConsulta } from "../data/catalogo";
 import { useTienda } from "../estado/TiendaContext";
 import { dinero } from "../lib/formato";
 import { hrefProducto } from "../lib/rutas";
+import { waLink } from "../lib/whatsapp";
 import type { Producto } from "../types";
 import { FotoProducto } from "./FotoProducto";
+import { IconoWhatsApp } from "./Iconos";
 
 /** Etiqueta del estado cuando no es nuevo (CPO, Usado, Open box) */
 export function Insignia({ producto }: { producto: Producto }) {
@@ -34,9 +36,10 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
   };
 
   return (
-    <article className="tarjeta relative flex h-full flex-col overflow-hidden transition-[border-color,box-shadow] hover:border-linea-fuerte hover:shadow-tarjeta">
+    <article className="tarjeta group relative flex h-full flex-col overflow-hidden transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
+      {/* Con el mouse encima de la tarjeta, la foto se acerca un poco (solo con mouse; en celular no queda pegado) */}
       <a href={hrefProducto(p.id)} tabIndex={-1} aria-hidden="true" className="relative block aspect-square bg-white p-4">
-        <FotoProducto producto={p} alt="" prioridad={prioridad} />
+        <FotoProducto producto={p} alt="" prioridad={prioridad} className="motion-safe:group-hover:scale-[1.05]" />
         <Insignia producto={p} />
         {cinta && <span className="absolute right-2 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-[12.5px] font-semibold text-acento-texto">{cinta}</span>}
       </a>
@@ -53,16 +56,28 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
               <span className="sr-only">{p.etiqueta || "Versión"} de {p.nombre}</span>
               <select value={i} onChange={e => elegirVersion(p.id, Number(e.target.value))}
                 className="h-11 w-full truncate rounded border border-linea bg-fondo px-2 text-[13px] text-tinta focus:border-marca focus:outline-none sm:h-9">
-                {p.opciones.map((op, j) => <option key={j} value={j}>{op.nombre} · {dinero(op.precio)}</option>)}
+                {p.opciones.map((op, j) => <option key={j} value={j}>{p.consultar ? op.nombre : `${op.nombre} · ${dinero(op.precio)}`}</option>)}
               </select>
             </label>
           )}
           {/* Precio arriba y botón a lo ancho: en celular las tarjetas miden ~165 px y no caben lado a lado */}
-          <p className="font-display text-[19px] font-bold leading-none tracking-tight tabular-nums">{dinero(o.precio)}</p>
-          <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-sm btn-suave mt-3 w-full">
-            <TextoAgregar cantidad={q} tope={tope} />
-          </button>
-          <p className="mt-1.5 h-4 text-xs font-semibold text-marca" aria-live="polite">{q > 0 ? `${q} en el carrito` : ""}</p>
+          {p.consultar ? (
+            <>
+              <p className="font-display text-[16px] font-bold leading-tight tracking-tight text-tinta-2">Preguntar disponibilidad</p>
+              <a href={waLink(textoConsulta(p, o.nombre))} target="_blank" rel="noopener" className="btn btn-sm btn-suave mt-3 w-full">
+                <IconoWhatsApp className="h-4 w-4 shrink-0" />Preguntar
+              </a>
+              <p className="mt-1.5 h-4" />
+            </>
+          ) : (
+            <>
+              <p className="font-display text-[19px] font-bold leading-none tracking-tight tabular-nums">{dinero(o.precio)}</p>
+              <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-sm btn-suave mt-3 w-full">
+                <TextoAgregar cantidad={q} tope={tope} />
+              </button>
+              <p className="mt-1.5 h-4 text-xs font-semibold text-marca" aria-live="polite">{q > 0 ? `${q} en el carrito` : ""}</p>
+            </>
+          )}
         </div>
       </div>
     </article>

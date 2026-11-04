@@ -1,7 +1,7 @@
 /* Página de una sección de la tienda: filtros por tipo (o marca en celulares), marca, estado, búsqueda y orden.
    Los filtros de cada sección se recuerdan mientras la persona navega (ej.: al volver de un producto). */
 import { useMemo, useState } from "react";
-import { CABECERAS, CATEGORIAS, ORDEN_CAT, TEXTO_BUSQUEDA, VISTAS, deTienda, desde, marcasDe } from "../data/catalogo";
+import { CABECERAS, CATEGORIAS, ORDEN_CAT, TEXTO_BUSQUEDA, VISTAS, conPrecioPrimero, deTienda, desde, marcasDe } from "../data/catalogo";
 import { tiendaPorVista } from "../data/tiendas";
 import { EncabezadoVista } from "../components/EncabezadoVista";
 import { IconoBuscar, IconoWhatsApp } from "../components/Iconos";
@@ -53,7 +53,8 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
     if (f.orden === "rel" && !esCel) vis = [...vis].sort((a, b) => (ORDEN_CAT[a.categoria ?? ""] ?? 999) - (ORDEN_CAT[b.categoria ?? ""] ?? 999));
     if (f.orden === "menor") vis = [...vis].sort((a, b) => desde(a) - desde(b));
     if (f.orden === "mayor") vis = [...vis].sort((a, b) => desde(b) - desde(a));
-    return vis;
+    // En cualquier orden, los de «Preguntar disponibilidad» van al final
+    return [...vis].sort(conPrecioPrimero);
   }, [base, f, esCel]);
 
   const mostrados = visibles.slice(0, f.limite);
@@ -91,7 +92,7 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
             <div role="group" aria-label="Estado del equipo" className="inline-flex rounded border border-linea-fuerte p-0.5">
               {([["todos", "Todos"], ["nuevo", "Nuevos"], ["cpo", "CPO"]] as const).map(([v, t]) => (
                 <button key={v} type="button" aria-pressed={f.cond === v} onClick={() => poner({ cond: v })}
-                  className={`min-h-[42px] rounded-sm px-3 py-1.5 text-sm font-semibold sm:min-h-[34px] ${f.cond === v ? "bg-tinta text-white" : "text-tinta-2 hover:text-tinta"}`}>{t}</button>
+                  className={`presionable min-h-[42px] rounded-sm px-3 py-1.5 text-sm font-semibold sm:min-h-[34px] ${f.cond === v ? "bg-tinta text-white" : "text-tinta-2 hover:text-tinta"}`}>{t}</button>
               ))}
             </div>
           )}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import descripcionesJson from "../data/descripciones.json";
-import { CONFIG, TIENDA_VISTA, VISTAS, deTienda, etiquetaDe, nombreCat, nombreItem, porId } from "../data/catalogo";
+import { CONFIG, TIENDA_VISTA, VISTAS, conPrecioPrimero, deTienda, etiquetaDe, nombreCat, nombreItem, porId, textoConsulta } from "../data/catalogo";
 import { useTienda } from "../estado/TiendaContext";
 import { Migas } from "../components/EncabezadoVista";
 import { Galeria } from "../components/Galeria";
@@ -34,9 +34,9 @@ export default function Producto({ id }: { id: string }) {
   const d = armarDescripcion(p, DESCRIPCIONES[p.id]);
   const cat = p.tienda !== "cel" && p.categoria ? nombreCat[p.categoria] : null;
 
-  // Primero los de la misma categoría y marca, luego el resto de la sección
+  // Primero los de la misma categoría y marca, luego el resto de la sección; los que tienen precio antes que los de «Preguntar disponibilidad»
   const puntos = (r: typeof p) => (r.categoria === p.categoria ? 2 : 0) + (r.marca && r.marca === p.marca ? 1 : 0);
-  const relacionados = deTienda(p.tienda).filter(r => r.id !== p.id).sort((a, b) => puntos(b) - puntos(a)).slice(0, 4);
+  const relacionados = deTienda(p.tienda).filter(r => r.id !== p.id).sort((a, b) => conPrecioPrimero(a, b) || puntos(b) - puntos(a)).slice(0, 4);
 
   const alAgregar = () => {
     if (agregar(p.id, i)) avisar(`Agregaste ${nombreItem(p, o.nombre)} al carrito`);
@@ -75,24 +75,35 @@ export default function Producto({ id }: { id: string }) {
               <div className="grid gap-2 sm:grid-cols-2">
                 {p.opciones.map((op, j) => (
                   <button key={j} type="button" aria-pressed={j === i} onClick={() => elegirVersion(p.id, j)}
-                    className={`flex min-h-[44px] items-center justify-between gap-3 rounded border px-3.5 py-2.5 text-left text-sm transition-colors ${j === i ? "border-marca bg-marca-suave ring-1 ring-marca" : "border-linea-fuerte hover:border-tinta-2"}`}>
-                    <span>{op.nombre}</span><b className="whitespace-nowrap font-display tabular-nums">{dinero(op.precio)}</b>
+                    className={`presionable flex min-h-[44px] items-center justify-between gap-3 rounded border px-3.5 py-2.5 text-left text-sm ${j === i ? "border-marca bg-marca-suave ring-1 ring-marca" : "border-linea-fuerte hover:border-tinta-2"}`}>
+                    <span>{op.nombre}</span>{!p.consultar && <b className="whitespace-nowrap font-display tabular-nums">{dinero(op.precio)}</b>}
                   </button>
                 ))}
               </div>
             </fieldset>
           )}
 
-          <div className="tarjeta mt-6 p-5">
-            <p className="font-display text-[34px] font-extrabold leading-none tabular-nums">{dinero(o.precio)}</p>
-            <p className="mt-2 text-[13px] text-tinta-3">Precio en pesos colombianos. Antes de cualquier pago te confirmamos disponibilidad por WhatsApp.</p>
-            <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
-              <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario w-full"><TextoAgregar cantidad={q} tope={tope} /> al carrito</button>
-              <a href={waLink(`Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, o.nombre)} (${dinero(o.precio)}). ¿Está disponible?`)} target="_blank" rel="noopener"
-                className="btn btn-borde w-full"><IconoWhatsApp className="h-[18px] w-[18px] text-wa" />Preguntar por WhatsApp</a>
+          {p.consultar ? (
+            <div className="tarjeta mt-6 p-5">
+              <p className="font-display text-[28px] font-extrabold leading-tight">Preguntar disponibilidad</p>
+              <p className="mt-2 text-[13px] text-tinta-3">Por ahora no tenemos precio publicado para este producto. Escríbenos por WhatsApp y te confirmamos si está disponible y su precio.</p>
+              <a href={waLink(textoConsulta(p, o.nombre))} target="_blank" rel="noopener" className="btn btn-wa mt-4 w-full sm:w-auto">
+                <IconoWhatsApp className="h-[18px] w-[18px]" />Preguntar disponibilidad por WhatsApp
+              </a>
             </div>
-            {q > 0 && <p className="mt-3 text-sm font-semibold text-marca">{q} en el carrito · <button type="button" onClick={abrirCarrito} className="underline underline-offset-2">Ver carrito</button></p>}
-          </div>
+          ) : (
+            <div className="tarjeta mt-6 p-5">
+              {/* Al cambiar de versión, el precio nuevo entra con un fundido corto (la clave lo vuelve a montar) */}
+              <p key={o.precio} className="font-display text-[34px] font-extrabold leading-none tabular-nums motion-safe:animate-entrar">{dinero(o.precio)}</p>
+              <p className="mt-2 text-[13px] text-tinta-3">Precio en pesos colombianos. Antes de cualquier pago te confirmamos disponibilidad por WhatsApp.</p>
+              <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario w-full"><TextoAgregar cantidad={q} tope={tope} /> al carrito</button>
+                <a href={waLink(`Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, o.nombre)} (${dinero(o.precio)}). ¿Está disponible?`)} target="_blank" rel="noopener"
+                  className="btn btn-borde w-full"><IconoWhatsApp className="h-[18px] w-[18px] text-wa" />Preguntar por WhatsApp</a>
+              </div>
+              {q > 0 && <p className="mt-3 text-sm font-semibold text-marca">{q} en el carrito · <button type="button" onClick={abrirCarrito} className="underline underline-offset-2">Ver carrito</button></p>}
+            </div>
+          )}
 
           <ul className="mt-5 grid gap-2.5 text-sm text-tinta-2">
             {entrega.map(e => <li key={e.texto} className="flex items-start gap-2.5"><span className="mt-px shrink-0 text-marca">{e.icono}</span>{e.texto}</li>)}

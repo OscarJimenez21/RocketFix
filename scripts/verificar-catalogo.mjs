@@ -28,7 +28,9 @@ if (new Set(ids).size !== ids.length) fallar("Identificadores", "hay ids repetid
 productos.forEach(p => {
   if (!p.id || !p.nombre || !p.tienda) fallar("Producto", `${p.id || "(sin id)"} no tiene id, nombre o sección`);
   if (!p.opciones?.length || p.opciones.some(o => !Number.isFinite(o.precio) || o.precio <= 0)) fallar("Precio", `${p.id}: precio vacío o inválido`);
+  if ("consultar" in p && p.consultar !== true) fallar("Disponibilidad", `${p.id}: "consultar" debe ser true o no estar`);
 });
+const aConsultar = productos.filter(p => p.consultar).length;
 const versiones = productos.reduce((s, p) => s + p.opciones.length, 0);
 
 // 2. Comparación con la tienda anterior (solo informativa, salvo con --estricto)
@@ -101,7 +103,7 @@ for (const f of textos) {
   if (/(sk_live|sk_test|secret[_-]?key|llave[_ ]secreta)\s*[:=]\s*["'][^"']{8,}/i.test(t)) fallar("Privado", `posible llave secreta en ${f}`);
 }
 
-console.log(`Productos: ${productos.length} (original: ${original.PRODUCTOS.length}) · versiones: ${versiones}`);
+console.log(`Productos: ${productos.length} (original: ${original.PRODUCTOS.length}) · versiones: ${versiones} · preguntar disponibilidad: ${aConsultar}`);
 console.log(`Galerías: ${Object.keys(galerias).length} · descripciones: ${Object.keys(descripciones).length} · calificaciones: ${resenas.length} · archivos revisados: ${archivos.length}`);
 if (diferencias.length) {
   console.log(`\nCambios respecto a la tienda anterior (no impiden publicar): ${diferencias.length}`);

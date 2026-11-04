@@ -1,6 +1,6 @@
 /* Buscador general: misma lógica que la tienda original. Todas las palabras deben aparecer (con sinónimos);
    suben los productos cuyo nombre empieza con lo buscado, los de la marca buscada y los más vendidos. */
-import { MAS_VENDIDOS, PRODUCTOS, SINONIMOS, TEXTO_BUSQUEDA, desde } from "../data/catalogo";
+import { MAS_VENDIDOS, PRODUCTOS, SINONIMOS, TEXTO_BUSQUEDA, conPrecioPrimero, desde } from "../data/catalogo";
 import type { Producto } from "../types";
 import { norm } from "./formato";
 
@@ -26,7 +26,8 @@ export function buscarProductos(q: string): Producto[] {
     }
     resultados.push({ p, puntos });
   }
-  return resultados.sort((a, b) => b.puntos - a.puntos || desde(a.p) - desde(b.p)).map(r => r.p);
+  // Con los mismos puntos, primero los que tienen precio y luego el más barato
+  return resultados.sort((a, b) => b.puntos - a.puntos || conPrecioPrimero(a.p, b.p) || desde(a.p) - desde(b.p)).map(r => r.p);
 }
 
 /** Parte un texto en trozos marcando las letras que coinciden con lo escrito (sin importar tildes) */

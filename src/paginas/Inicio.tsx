@@ -6,9 +6,10 @@ import { tiendaPorId } from "../data/tiendas";
 import { PuntoEstado, useAtencion } from "../components/Contacto";
 import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
 import { FotoProducto } from "../components/FotoProducto";
+import { FlechaMovil } from "../components/FilaProductos";
 import { IconoCamion, IconoCheck, IconoFlecha, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { Ilustracion } from "../components/Ilustracion";
-import { useEnPantalla } from "../lib/enPantalla";
+import { useEnPantalla, useVisto } from "../lib/enPantalla";
 import { dinero, recurso } from "../lib/formato";
 import { hrefMarca, hrefProducto } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
@@ -22,7 +23,8 @@ const ESPERA_VITRINA = 6000;
     al usar el teclado, no se mueve si la persona pidió menos movimiento y deja de cambiar cuando la persona elige un producto
     (en celular no hay mouse que la detenga). */
 function Vitrina() {
-  const productos = useMemo(() => VITRINA.map(id => porId[id]).filter((p): p is Producto => Boolean(p)), []);
+  // Los de «Preguntar disponibilidad» no salen en la vitrina
+  const productos = useMemo(() => VITRINA.map(id => porId[id]).filter((p): p is Producto => Boolean(p) && !p?.consultar), []);
   const [i, setI] = useState(0);
   const [quieta, setQuieta] = useState(false);
   const [elegida, setElegida] = useState(false);
@@ -42,7 +44,7 @@ function Vitrina() {
       <div className="relative aspect-[4/3]">
         {productos.map((x, j) => (
           <a key={x.id} href={hrefProducto(x.id)} tabIndex={j === i ? 0 : -1} aria-hidden={j !== i}
-            className={`absolute inset-0 p-6 transition-opacity duration-500 sm:p-8 ${j === i ? "opacity-100" : "pointer-events-none opacity-0"}`}>
+            className={`absolute inset-0 p-6 transition-[opacity,transform] duration-500 ease-salida sm:p-8 ${j === i ? "opacity-100" : "pointer-events-none scale-[0.96] opacity-0"}`}>
             <FotoProducto producto={x} alt={x.nombre} prioridad={j === 0} />
           </a>
         ))}
@@ -55,10 +57,12 @@ function Vitrina() {
         </div>
         <a href={hrefProducto(p.id)} className="btn btn-sm btn-marca shrink-0">Ver producto</a>
       </div>
-      <div className="grid grid-cols-6 gap-1.5 border-t border-linea bg-fondo p-2 sm:gap-2 sm:p-2.5">
+      {/* Miniaturas del tamaño de 6 por fila; si hay menos (los de «Preguntar disponibilidad» no salen), quedan centradas */}
+      <div className="grid justify-center gap-[var(--hueco)] border-t border-linea bg-fondo p-2 [--hueco:0.375rem] sm:p-2.5 sm:[--hueco:0.5rem]"
+        style={{ gridTemplateColumns: `repeat(${productos.length}, calc((100% - 5 * var(--hueco)) / 6))` }}>
         {productos.map((x, j) => (
           <button key={x.id} type="button" onClick={() => { setI(j); setElegida(true); }} aria-label={`Ver ${x.nombre}`} aria-current={j === i || undefined}
-            className={`aspect-square rounded border bg-white p-1 transition-colors ${j === i ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
+            className={`presionable aspect-square rounded border bg-white p-1 ${j === i ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
             <FotoProducto producto={x} alt="" />
           </button>
         ))}
@@ -124,15 +128,17 @@ const PASO_CARRUSEL = 3500;
 /** Las filas van debajo de la portada: sus fotos cargan cuando la persona se acerca a ellas */
 function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: string }) {
   return (
-    <a href={hrefProducto(p.id)} className="group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-white transition-shadow hover:shadow-tarjeta">
+    <a href={hrefProducto(p.id)} className="group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-white transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
       <div className="relative aspect-square p-7 sm:p-8">
-        <FotoProducto producto={p} alt={p.nombre} className="transition-transform duration-300 ease-salida motion-safe:group-hover:scale-[1.04]" />
+        <FotoProducto producto={p} alt={p.nombre} className="motion-safe:group-hover:scale-[1.05]" />
         {cinta && <span className="absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-[13px] font-bold text-acento-texto">{cinta}</span>}
       </div>
       <div className="mt-auto border-t border-linea px-5 py-4">
         <p className="truncate text-[13px] font-semibold text-tinta-3">{etiquetaDe(p)}</p>
         <p className="mt-1 line-clamp-2 min-h-[2.75em] font-display text-[18px] font-bold leading-snug text-tinta">{p.nombre}</p>
-        <p className="mt-2 text-sm text-tinta-2">{p.opciones.length > 1 && "Desde "}<b className="font-display text-[22px] tabular-nums text-tinta">{dinero(desde(p))}</b></p>
+        {p.consultar
+          ? <p className="mt-2 font-display text-[17px] font-bold text-tinta-2">Preguntar disponibilidad</p>
+          : <p className="mt-2 text-sm text-tinta-2">{p.opciones.length > 1 && "Desde "}<b className="font-display text-[22px] tabular-nums text-tinta">{dinero(desde(p))}</b></p>}
       </div>
     </a>
   );
@@ -172,7 +178,7 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
   };
   useEffect(() => () => window.clearTimeout(reanudar.current), []);
 
-  const flecha = "flex h-11 w-11 items-center justify-center rounded-full border border-linea-fuerte bg-white transition-colors hover:border-tinta-2";
+  const flecha = "presionable group flex h-11 w-11 items-center justify-center rounded-full border border-linea-fuerte bg-white hover:border-tinta-2";
   return (
     <section aria-labelledby={`t-${id}`} className={gris ? "border-y border-linea bg-fondo" : ""}>
       <div className="contenedor py-12 sm:py-14">
@@ -187,8 +193,8 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
             )}
           </div>
           <div className="flex shrink-0 gap-2">
-            <button type="button" onClick={() => mover(-1)} aria-label="Ver productos anteriores" className={flecha}><IconoFlecha dir={-1} /></button>
-            <button type="button" onClick={() => mover(1)} aria-label="Ver productos siguientes" className={flecha}><IconoFlecha /></button>
+            <button type="button" onClick={() => mover(-1)} aria-label="Ver productos anteriores" className={flecha}><FlechaMovil dir={-1} /></button>
+            <button type="button" onClick={() => mover(1)} aria-label="Ver productos siguientes" className={flecha}><FlechaMovil /></button>
           </div>
         </div>
         <ul ref={fila} aria-label={titulo} tabIndex={0}
@@ -252,14 +258,14 @@ function Categorias() {
           const tema = TEMAS[m.tema], forma = FORMAS[m.forma];
           return (
             <li key={m.tienda} className={forma.caja}>
-              <a href={`#${t.vista}`} className={`group relative isolate flex h-full overflow-hidden rounded-lg p-4 sm:p-6 ${tema.caja}`}>
+              <a href={`#${t.vista}`} className={`group relative isolate flex h-full overflow-hidden rounded-lg p-4 transition-transform duration-150 ease-salida active:scale-[0.98] sm:p-6 ${tema.caja}`}>
                 <span className={`relative z-10 flex min-w-0 flex-col ${forma.texto}`}>
                   <span className={`text-[12.5px] font-semibold leading-snug sm:text-sm ${tema.frase}`}>{m.frase}</span>
                   <span className={`mt-1 font-display font-extrabold leading-[0.98] tracking-tight ancho-108 ${forma.titulo}`}>{t.titulo}</span>
                   {/* Mismo color de la frase (con opacidad, en las tarjetas verdes no se leía bien) */}
                   <span className={`mt-2 text-[13px] ${tema.frase}`}>{deTienda(t.id).length} productos</span>
                   {/* En celular las tarjetas pequeñas solo muestran la flecha, para dejarle espacio a la foto */}
-                  <span className={`mt-auto inline-flex w-max items-center gap-1.5 rounded-full text-[13px] font-bold transition-transform group-hover:translate-x-0.5 ${forma.corto ? "p-2.5 sm:px-4 sm:py-2" : "px-4 py-2"} ${tema.boton}`}>
+                  <span className={`mt-auto inline-flex w-max items-center gap-1.5 rounded-full text-[13px] font-bold transition-transform duration-200 ease-salida group-hover:translate-x-0.5 ${forma.corto ? "p-2.5 sm:px-4 sm:py-2" : "px-4 py-2"} ${tema.boton}`}>
                     <span className={forma.corto ? "hidden sm:inline" : ""}>Ver todo</span><IconoFlecha className="h-3.5 w-3.5" />
                   </span>
                 </span>
@@ -278,7 +284,7 @@ function Categorias() {
     quede de una sola marca seguida. Empiezan las marcas con más productos; dentro de cada marca, el orden de la tienda. */
 function variados(tiendas: TiendaId[]) {
   const porMarca = new Map<string, Producto[]>();
-  for (const p of tiendas.flatMap(id => deTienda(id)).filter(p => p.imagen)) {
+  for (const p of tiendas.flatMap(id => deTienda(id)).filter(p => p.imagen && !p.consultar)) {
     const lista = porMarca.get(p.marca || "") ?? [];
     lista.push(p);
     porMarca.set(p.marca || "", lista);
@@ -298,16 +304,19 @@ function variados(tiendas: TiendaId[]) {
 function Coleccion({ id, etiqueta, titulo, tiendas, gris = false }: { id: string; etiqueta: string; titulo: string; tiendas: TiendaId[]; gris?: boolean }) {
   const productos = useMemo(() => variados(tiendas), [tiendas]);
   const enlaces = tiendas.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t))
-    .map(t => ({ texto: tiendas.length > 1 ? `Ver ${t.menu.toLowerCase()}` : `Ver todo (${productos.length})`, href: `#${t.vista}` }));
+    // El número es el de la sección completa (la fila no muestra los de «Preguntar disponibilidad»)
+    .map(t => ({ texto: tiendas.length > 1 ? `Ver ${t.menu.toLowerCase()}` : `Ver todo (${deTienda(t.id).length})`, href: `#${t.vista}` }));
   if (!productos.length) return null;
   return <Carrusel id={id} etiqueta={etiqueta} titulo={titulo} productos={productos} enlaces={enlaces} gris={gris} />;
 }
 
 /** Banda grande de gaming: invita a armar el escritorio completo (consola, monitor, teclado, mouse y diadema) */
 function BandaGamer() {
-  const foto = (id: string, clase: string) => (
-    <img src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async"
-      className={`pointer-events-none absolute object-contain drop-shadow-[0_26px_26px_rgba(0,0,0,0.55)] ${clase}`} />
+  const fotos = useRef<HTMLDivElement>(null);
+  const visto = useVisto(fotos);
+  const foto = (id: string, clase: string, orden: number) => (
+    <img src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async" style={{ "--orden": orden } as React.CSSProperties}
+      className={`aparece pointer-events-none absolute object-contain drop-shadow-[0_26px_26px_rgba(0,0,0,0.55)] ${clase}`} />
   );
   // Cuadrícula muy tenue de fondo, como un piso de estudio
   const cuadricula = { backgroundImage: "linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px)", backgroundSize: "46px 46px" };
@@ -327,12 +336,12 @@ function BandaGamer() {
             <a href="#consolas" className="btn btn-claro">Ver consolas</a>
           </div>
         </div>
-        <div aria-hidden="true" className="relative h-[300px] sm:h-[400px] lg:h-auto">
+        <div ref={fotos} aria-hidden="true" data-visto={visto || undefined} className="revelar relative h-[300px] sm:h-[400px] lg:h-auto">
           <span className="absolute bottom-[5%] left-[6%] right-[4%] h-12 rounded-[50%] bg-black/45 blur-2xl" />
-          {foto("p15412", "bottom-[19%] left-[6%] h-[62%] max-w-[66%]")}
-          {foto("p31340", "bottom-[8%] right-[3%] h-[54%] max-w-[30%]")}
-          {foto("p20008", "bottom-[4%] left-[4%] h-[30%] max-w-[54%]")}
-          {foto("p19066", "bottom-[5%] left-[59%] h-[23%]")}
+          {foto("p15412", "bottom-[19%] left-[6%] h-[62%] max-w-[66%]", 0)}
+          {foto("p31340", "bottom-[8%] right-[3%] h-[54%] max-w-[30%]", 1)}
+          {foto("p20008", "bottom-[4%] left-[4%] h-[30%] max-w-[54%]", 2)}
+          {foto("p19066", "bottom-[5%] left-[59%] h-[23%]", 3)}
         </div>
       </div>
     </section>
@@ -350,6 +359,8 @@ function BandaCelulares() {
     ["ip17pm", "bottom-[8%] left-[21%] h-[64%]"],
     ["ip18pm", "bottom-[5%] left-[52%] h-[72%] -translate-x-1/2"]
   ];
+  const fotos = useRef<HTMLDivElement>(null);
+  const visto = useVisto(fotos);
   return (
     <section aria-labelledby="t-banda-cel" className="contenedor pt-12">
       <div className="relative isolate overflow-hidden rounded-xl bg-marca-medio text-white lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
@@ -366,11 +377,11 @@ function BandaCelulares() {
             <a href={waLink("Hola Rocket Fix, quiero asesoría para comprar un celular")} target="_blank" rel="noopener" className="btn btn-claro"><IconoWhatsApp />Te asesoramos</a>
           </div>
         </div>
-        <div aria-hidden="true" className="relative h-[300px] sm:h-[420px] lg:h-auto">
+        <div ref={fotos} aria-hidden="true" data-visto={visto || undefined} className="revelar relative h-[300px] sm:h-[420px] lg:h-auto">
           <span className="absolute bottom-[3%] left-[4%] right-[4%] h-12 rounded-[50%] bg-black/35 blur-2xl" />
-          {fila.map(([id, clase]) => (
-            <img key={id} src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async"
-              className={`pointer-events-none absolute object-contain drop-shadow-[0_24px_24px_rgba(0,0,0,0.45)] ${clase}`} />
+          {fila.map(([id, clase], n) => (
+            <img key={id} src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async" style={{ "--orden": n } as React.CSSProperties}
+              className={`aparece pointer-events-none absolute object-contain drop-shadow-[0_24px_24px_rgba(0,0,0,0.45)] ${clase}`} />
           ))}
         </div>
       </div>
@@ -462,14 +473,14 @@ function Marcas() {
     if (a?.movio) { bloquearClic.current = true; window.setTimeout(() => { bloquearClic.current = false; }, 80); pausar(); }
   };
 
-  const flecha = "flex h-11 w-11 items-center justify-center rounded-full border border-linea-fuerte bg-white transition-colors hover:border-tinta-2";
+  const flecha = "presionable group flex h-11 w-11 items-center justify-center rounded-full border border-linea-fuerte bg-white hover:border-tinta-2";
   return (
     <section aria-labelledby="t-marcas" className="overflow-hidden border-b border-linea py-9">
       <div className="contenedor flex items-end justify-between gap-4">
         <h2 id="t-marcas" className="titulo-seccion min-w-0">Las marcas que buscas</h2>
         <div className="flex shrink-0 gap-2">
-          <button type="button" onClick={() => mover(-1)} aria-label="Ver marcas anteriores" className={flecha}><IconoFlecha dir={-1} /></button>
-          <button type="button" onClick={() => mover(1)} aria-label="Ver más marcas" className={flecha}><IconoFlecha /></button>
+          <button type="button" onClick={() => mover(-1)} aria-label="Ver marcas anteriores" className={flecha}><FlechaMovil dir={-1} /></button>
+          <button type="button" onClick={() => mover(1)} aria-label="Ver más marcas" className={flecha}><FlechaMovil /></button>
         </div>
       </div>
       <ul ref={fila} aria-label="Marcas"
@@ -550,6 +561,8 @@ function BandaComputadores() {
     ["p52393", "bottom-[4%] left-[5%] h-[46%] max-w-[50%]"]
   ];
   const cuadricula = { backgroundImage: "linear-gradient(rgba(11,132,87,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(11,132,87,.07) 1px, transparent 1px)", backgroundSize: "46px 46px" };
+  const fotos = useRef<HTMLDivElement>(null);
+  const visto = useVisto(fotos);
   return (
     <section aria-labelledby="t-banda-pc" className="contenedor pb-12">
       <div className="relative isolate overflow-hidden rounded-xl border border-linea bg-marca-suave lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
@@ -567,11 +580,11 @@ function BandaComputadores() {
             <a href={waLink("Hola Rocket Fix, quiero asesoría para comprar un computador")} target="_blank" rel="noopener" className="btn btn-borde"><IconoWhatsApp className="h-5 w-5 text-wa" />Te asesoramos</a>
           </div>
         </div>
-        <div aria-hidden="true" className="relative h-[300px] sm:h-[420px] lg:h-auto">
+        <div ref={fotos} aria-hidden="true" data-visto={visto || undefined} className="revelar relative h-[300px] sm:h-[420px] lg:h-auto">
           <span className="absolute bottom-[3%] left-[6%] right-[6%] h-12 rounded-[50%] bg-marca-noche/25 blur-2xl" />
-          {fila.map(([id, clase]) => (
-            <img key={id} src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async"
-              className={`pointer-events-none absolute object-contain drop-shadow-[0_22px_22px_rgba(3,36,27,0.35)] ${clase}`} />
+          {fila.map(([id, clase], n) => (
+            <img key={id} src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async" style={{ "--orden": n } as React.CSSProperties}
+              className={`aparece pointer-events-none absolute object-contain drop-shadow-[0_22px_22px_rgba(3,36,27,0.35)] ${clase}`} />
           ))}
         </div>
       </div>
@@ -675,7 +688,7 @@ function ComoComprar() {
 }
 
 export function Inicio({ ancla }: { ancla?: string }) {
-  const vendidos = MAS_VENDIDOS.map(id => porId[id]).filter((p): p is Producto => Boolean(p));
+  const vendidos = MAS_VENDIDOS.map(id => porId[id]).filter((p): p is Producto => Boolean(p) && !p?.consultar);
 
   // #categorias, #servicios, #calificaciones, #contacto y #orden llevan a su sección de la portada
   // Cuando corre el efecto la sección ya está en la página, así que se puede bajar de una vez

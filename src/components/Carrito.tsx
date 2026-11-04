@@ -108,12 +108,12 @@ export function Carrito() {
   return (
     <div className={`fixed inset-0 z-50 overflow-hidden ${carritoAbierto ? "" : "pointer-events-none"}`}>
       <div onClick={cerrarCarrito} aria-hidden="true"
-        className={`absolute inset-0 bg-marca-noche/40 transition-opacity ${carritoAbierto ? "opacity-100" : "opacity-0"}`} />
+        className={`absolute inset-0 bg-marca-noche/40 transition-opacity duration-300 ${carritoAbierto ? "opacity-100" : "opacity-0"}`} />
       <div ref={panel} role="dialog" aria-modal="true" aria-labelledby={`${id}-titulo`}
         className={`absolute inset-y-0 right-0 flex w-full max-w-[440px] flex-col bg-white shadow-flota transition-transform duration-300 ease-cajon ${carritoAbierto ? "translate-x-0" : "translate-x-full"}`}>
         <header className="flex items-center justify-between border-b border-linea px-5 py-4">
           <h2 id={`${id}-titulo`} className="text-xl font-extrabold">Tu pedido</h2>
-          <button ref={cerrar} type="button" onClick={cerrarCarrito} aria-label="Cerrar carrito" className="-my-1 -mr-2 flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo hover:text-tinta"><IconoCerrar /></button>
+          <button ref={cerrar} type="button" onClick={cerrarCarrito} aria-label="Cerrar carrito" className="presionable -my-1 -mr-2 flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo hover:text-tinta"><IconoCerrar /></button>
         </header>
 
         {lineas.length === 0 ? (
@@ -138,9 +138,9 @@ export function Carrito() {
                         {/* Con montos grandes o en pantallas angostas, el total baja a su propio renglón (antes se salía de la pantalla) */}
                         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
                           <div className="inline-flex items-center rounded border border-linea-fuerte" role="group" aria-label={`Cantidad de ${nombre}`}>
-                            <button type="button" onClick={() => cambiar(clave, -1)} aria-label="Quitar una unidad" className="h-11 w-11 text-lg leading-none hover:bg-fondo">−</button>
+                            <button type="button" onClick={() => cambiar(clave, -1)} aria-label="Quitar una unidad" className="presionable h-11 w-11 text-lg leading-none hover:bg-fondo">−</button>
                             <output className="w-7 text-center font-mono text-sm" aria-live="polite">{cantidad}</output>
-                            <button type="button" onClick={() => cambiar(clave, 1)} disabled={tope} aria-label="Agregar una unidad" className="h-11 w-11 text-lg leading-none hover:bg-fondo disabled:opacity-40">+</button>
+                            <button type="button" onClick={() => cambiar(clave, 1)} disabled={tope} aria-label="Agregar una unidad" className="presionable h-11 w-11 text-lg leading-none hover:bg-fondo disabled:opacity-40">+</button>
                           </div>
                           <button type="button" onClick={() => quitar(clave)} className="min-h-[44px] px-1 text-[13px] font-semibold text-tinta-2 underline-offset-2 hover:text-red-700 hover:underline">Quitar</button>
                           <span className="ml-auto whitespace-nowrap font-semibold tabular-nums">{dinero(o.precio * cantidad)}</span>

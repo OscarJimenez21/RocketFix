@@ -21,6 +21,9 @@ export interface Producto {
   specs: string[];
   opciones: Opcion[];
   estado: EstadoProducto | string;
+  /** No sale en las listas de precios de los proveedores: la página muestra «Preguntar disponibilidad» en vez del
+      precio y no deja agregarlo al carrito. El precio se conserva para cuando vuelva a estar en una lista. */
+  consultar?: boolean;
   /** Ruta de la foto principal dentro de public/ (ej.: "fotos/sa07.jpg") */
   imagen?: string;
   /** Dibujo para cuando no hay foto */

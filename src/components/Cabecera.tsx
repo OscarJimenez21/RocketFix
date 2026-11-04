@@ -63,16 +63,16 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
     };
   }, [abierto, cerrar]);
 
-  const fila = (activo: boolean) => `flex items-center justify-between gap-3 rounded px-2 py-2.5 ${activo ? "bg-marca-suave font-semibold text-marca-oscuro" : "hover:bg-fondo"}`;
+  const fila = (activo: boolean) => `flex items-center justify-between gap-3 rounded px-2 py-2.5 transition-colors duration-150 ${activo ? "bg-marca-suave font-semibold text-marca-oscuro" : "hover:bg-fondo active:bg-fondo"}`;
   return (
     // El contenedor mide lo mismo que la pantalla y recorta el panel cerrado (si sobresaliera, Chrome en celular alejaría la página)
     <div className={`fixed inset-0 z-50 overflow-hidden ${abierto ? "" : "pointer-events-none"}`}>
-      <div onClick={cerrar} aria-hidden="true" className={`absolute inset-0 bg-marca-noche/40 transition-opacity ${abierto ? "opacity-100" : "opacity-0"}`} />
+      <div onClick={cerrar} aria-hidden="true" className={`absolute inset-0 bg-marca-noche/40 transition-opacity duration-300 ${abierto ? "opacity-100" : "opacity-0"}`} />
       <div ref={panel} id="menu-lateral" role="dialog" aria-modal="true" aria-label="Menú"
         className={`absolute inset-y-0 left-0 flex w-[88%] max-w-[380px] flex-col bg-white shadow-flota transition-transform duration-300 ease-cajon ${abierto ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex h-14 shrink-0 items-center justify-between border-b border-linea pl-4 pr-2 lg:h-[68px]">
           <Logo />
-          <button ref={botonCerrar} type="button" onClick={cerrar} aria-label="Cerrar menú" className="flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo"><IconoCerrar /></button>
+          <button ref={botonCerrar} type="button" onClick={cerrar} aria-label="Cerrar menú" className="presionable flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo"><IconoCerrar /></button>
         </div>
         <nav aria-label="Menú principal" onClick={cerrarAlElegir(cerrar)} className="flex-1 overflow-y-auto overscroll-contain px-3 py-3">
           {GRUPOS.map(g => (
@@ -118,6 +118,13 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
 export function Cabecera({ ruta }: { ruta: Ruta }) {
   const { unidades, abrirCarrito } = useTienda();
   const [menu, setMenu] = useState(false);
+  // Cada vez que se agrega algo al carrito, el contador da un pequeño salto (no al cargar la página ni al quitar)
+  const antes = useRef(unidades);
+  const [saltos, setSaltos] = useState(0);
+  useEffect(() => {
+    if (unidades > antes.current) setSaltos(n => n + 1);
+    antes.current = unidades;
+  }, [unidades]);
   const actual = ruta.tipo === "tienda" ? ruta.vista : ruta.tipo === "articulo" ? ruta.id : ruta.tipo === "blog" ? "blog" : "";
   const q = ruta.tipo === "buscar" ? ruta.q : "";
   const clave = claveRuta(ruta);
@@ -131,7 +138,7 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
         <div className="contenedor flex h-14 items-center gap-1.5 sm:gap-3 lg:h-[68px] lg:gap-6">
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             <button type="button" onClick={() => setMenu(true)} aria-label="Abrir menú" aria-expanded={menu} aria-controls="menu-lateral"
-              className="-ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded text-tinta hover:bg-fondo">
+              className="presionable -ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded text-tinta hover:bg-fondo">
               <IconoMenu />
             </button>
             <a href="#inicio" className="flex h-11 shrink-0 items-center" aria-label="Rocket Fix, ir al inicio"><Logo /></a>
@@ -140,14 +147,15 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
           <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
             {/* En pantallas de menos de 360 px no cabe junto al logo y el carrito; ahí WhatsApp queda en el menú y en el pie */}
             <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"
-              className="inline-flex h-11 min-w-[44px] items-center justify-center gap-2 rounded bg-wa px-3 text-sm font-semibold text-white transition-colors hover:bg-wa-hover max-[359px]:hidden">
+              className="presionable inline-flex h-11 min-w-[44px] items-center justify-center gap-2 rounded bg-wa px-3 text-sm font-semibold text-white hover:bg-wa-hover max-[359px]:hidden">
               <IconoWhatsApp className="h-5 w-5" /><span className="hidden xl:inline">Escríbenos por WhatsApp</span>
             </a>
             <button type="button" onClick={abrirCarrito} aria-label={`Abrir carrito, ${unidades} ${unidades === 1 ? "producto" : "productos"}`}
-              className="inline-flex h-11 items-center gap-1.5 rounded border border-linea-fuerte px-2.5 text-sm font-semibold transition-colors hover:border-tinta-2 sm:gap-2 sm:px-3">
+              className="presionable inline-flex h-11 items-center gap-1.5 rounded border border-linea-fuerte px-2.5 text-sm font-semibold hover:border-tinta-2 sm:gap-2 sm:px-3">
               <IconoBolsa />
               <span className="hidden sm:inline">Carrito</span>
-              <span className={`min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-xs font-bold tabular-nums ${unidades ? "bg-acento text-acento-tinta" : "bg-fondo text-tinta-2"}`}>{unidades}</span>
+              {/* La clave cambia con cada producto agregado: así la animación vuelve a empezar */}
+              <span key={saltos} className={`min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-xs font-bold tabular-nums transition-colors duration-200 ${unidades ? "bg-acento text-acento-tinta" : "bg-fondo text-tinta-2"} ${saltos ? "motion-safe:animate-latido" : ""}`}>{unidades}</span>
             </button>
           </div>
         </div>

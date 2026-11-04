@@ -8,11 +8,12 @@ const CLAVE = "rocketfix-carrito-v3-" + CONFIG.whatsapp;
 const MAX = 99;
 
 export const claveLinea = (id: string, i: number) => `${id}~${i}`;
+/** Los productos de «Preguntar disponibilidad» no entran al carrito (y salen de los carritos guardados) */
 function deClave(k: string) {
   const [id = "", i = ""] = k.split("~");
   const producto = porId[id];
   const opcion = producto?.opciones[Number(i)];
-  return producto && opcion ? { producto, opcion, indice: Number(i) } : null;
+  return producto && opcion && !producto.consultar ? { producto, opcion, indice: Number(i) } : null;
 }
 
 function cargar(): Record<string, number> {
