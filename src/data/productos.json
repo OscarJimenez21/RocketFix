@@ -170,25 +170,6 @@
   ]
  },
  {
-  "id": "ip16",
-  "tienda": "cel",
-  "marca": "Apple",
-  "nombre": "iPhone 16",
-  "specs": [
-   "128 GB",
-   "SIM física"
-  ],
-  "imagen": "fotos/ip16.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 2900000
-   }
-  ]
- },
- {
   "id": "ip15pm",
   "tienda": "cel",
   "marca": "Apple",
@@ -204,28 +185,6 @@
    {
     "nombre": "512 GB",
     "precio": 3450000
-   }
-  ]
- },
- {
-  "id": "ip15",
-  "tienda": "cel",
-  "marca": "Apple",
-  "nombre": "iPhone 15",
-  "specs": [
-   "128 GB"
-  ],
-  "imagen": "fotos/ip15.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "Activado · azul o negro",
-    "precio": 2250000
-   },
-   {
-    "nombre": "Sin activar · azul",
-    "precio": 2450000
    }
   ]
  },
@@ -291,25 +250,6 @@
    {
     "nombre": "256 GB · 5G · 1 SIM",
     "precio": 850000
-   }
-  ]
- },
- {
-  "id": "sa27",
-  "tienda": "cel",
-  "marca": "Samsung",
-  "nombre": "Samsung Galaxy A27 5G",
-  "specs": [
-   "256 GB",
-   "5G"
-  ],
-  "imagen": "fotos/sa27.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1050000
    }
   ]
  },
@@ -614,25 +554,6 @@
   ]
  },
  {
-  "id": "xrn15pro",
-  "tienda": "cel",
-  "marca": "Xiaomi",
-  "nombre": "Redmi Note 15 Pro",
-  "specs": [
-   "256 GB",
-   "4G"
-  ],
-  "imagen": "fotos/xrn15pro.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1050000
-   }
-  ]
- },
- {
   "id": "xrn17",
   "tienda": "cel",
   "marca": "Xiaomi",
@@ -785,24 +706,6 @@
   ]
  },
  {
-  "id": "pococ85",
-  "tienda": "cel",
-  "marca": "Xiaomi",
-  "nombre": "POCO C85",
-  "specs": [
-   "256 GB"
-  ],
-  "imagen": "fotos/pococ85.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 640000
-   }
-  ]
- },
- {
   "id": "pococ71",
   "tienda": "cel",
   "marca": "Xiaomi",
@@ -855,25 +758,6 @@
    {
     "nombre": "512 GB · 12 GB RAM",
     "precio": 1350000
-   }
-  ]
- },
- {
-  "id": "pocof8pro",
-  "tienda": "cel",
-  "marca": "Xiaomi",
-  "nombre": "POCO F8 Pro",
-  "specs": [
-   "256 GB",
-   "8 GB RAM"
-  ],
-  "imagen": "fotos/pocof8pro.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1800000
    }
   ]
  },
@@ -1750,26 +1634,6 @@
    {
     "nombre": "",
     "precio": 980000
-   }
-  ]
- },
- {
-  "id": "nneo5gt",
-  "tienda": "cel",
-  "marca": "ZTE",
-  "nombre": "Nubia Neo 5 GT 5G",
-  "specs": [
-   "512 GB",
-   "24 GB RAM",
-   "5G"
-  ],
-  "imagen": "fotos/nneo5gt.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1400000
    }
   ]
  },
@@ -2955,44 +2819,6 @@
   ]
  },
  {
-  "id": "hgt6pro",
-  "tienda": "rel",
-  "categoria": "relojes",
-  "marca": "Huawei",
-  "nombre": "Huawei Watch GT 6 Pro",
-  "specs": [
-   "46 mm"
-  ],
-  "imagen": "fotos/hgt6pro.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 980000
-   }
-  ]
- },
- {
-  "id": "hgt5pro",
-  "tienda": "rel",
-  "categoria": "relojes",
-  "marca": "Huawei",
-  "nombre": "Huawei Watch GT 5 Pro",
-  "specs": [
-   "42 mm"
-  ],
-  "imagen": "fotos/hgt5pro.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 980000
-   }
-  ]
- },
- {
   "id": "hfit5pro",
   "tienda": "rel",
   "categoria": "relojes",
@@ -3005,57 +2831,6 @@
    {
     "nombre": "",
     "precio": 760000
-   }
-  ]
- },
- {
-  "id": "hfit4",
-  "tienda": "rel",
-  "categoria": "relojes",
-  "marca": "Huawei",
-  "nombre": "Huawei Watch Fit 4",
-  "imagen": "fotos/hfit4.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 580000
-   }
-  ]
- },
- {
-  "id": "hfit3",
-  "tienda": "rel",
-  "categoria": "relojes",
-  "marca": "Huawei",
-  "nombre": "Huawei Watch Fit 3",
-  "imagen": "fotos/hfit3.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 460000
-   }
-  ]
- },
- {
-  "id": "hband11",
-  "tienda": "rel",
-  "categoria": "manillas",
-  "marca": "Huawei",
-  "nombre": "Huawei Band 11",
-  "imagen": "fotos/hband11.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 220000
    }
   ]
  },
@@ -3367,40 +3142,6 @@
   ]
  },
  {
-  "id": "ztebuds",
-  "tienda": "aud",
-  "categoria": "audio",
-  "marca": "ZTE",
-  "nombre": "Audífonos ZTE",
-  "imagen": "fotos/ztebuds.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 39000
-   }
-  ]
- },
- {
-  "id": "hx7e",
-  "tienda": "aud",
-  "categoria": "audio",
-  "marca": "Honor",
-  "nombre": "Honor Earbuds X7e",
-  "imagen": "fotos/hx7e.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 91000
-   }
-  ]
- },
- {
   "id": "hclip",
   "tienda": "aud",
   "categoria": "audio",
@@ -3413,57 +3154,6 @@
    {
     "nombre": "",
     "precio": 240000
-   }
-  ]
- },
- {
-  "id": "hdiadema",
-  "tienda": "aud",
-  "categoria": "audio-diadema",
-  "marca": "Honor",
-  "nombre": "Audífonos de diadema Honor",
-  "imagen": "fotos/hdiadema.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 220000
-   }
-  ]
- },
- {
-  "id": "jblbb4",
-  "tienda": "par",
-  "categoria": "parlantes",
-  "marca": "JBL",
-  "nombre": "JBL Boombox 4",
-  "imagen": "fotos/jblbb4.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1750000
-   }
-  ]
- },
- {
-  "id": "jblch6",
-  "tienda": "par",
-  "categoria": "parlantes",
-  "marca": "JBL",
-  "nombre": "JBL Charge 6",
-  "imagen": "fotos/jblch6.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 610000
    }
   ]
  },
@@ -3496,23 +3186,6 @@
    {
     "nombre": "",
     "precio": 370000
-   }
-  ]
- },
- {
-  "id": "ztebafle",
-  "tienda": "par",
-  "categoria": "parlantes",
-  "marca": "ZTE",
-  "nombre": "Parlante ZTE",
-  "imagen": "fotos/ztebafle.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 39000
    }
   ]
  },
@@ -3617,85 +3290,6 @@
    {
     "nombre": "En caja",
     "precio": 85000
-   }
-  ]
- },
- {
-  "id": "acc2m",
-  "tienda": "acc",
-  "categoria": "cables-carga",
-  "marca": "Apple",
-  "nombre": "Cable USB-C a USB-C de 2 m",
-  "specs": [
-   "Trenzado"
-  ],
-  "ilustracion": "cable",
-  "imagen": "fotos/acc2m.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 120000
-   }
-  ]
- },
- {
-  "id": "acc1m",
-  "tienda": "acc",
-  "categoria": "cables-carga",
-  "marca": "Apple",
-  "nombre": "Cable USB-C a USB-C de 1 m",
-  "specs": [
-   "Trenzado",
-   "Sin caja"
-  ],
-  "ilustracion": "cable",
-  "imagen": "fotos/acc1m.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 65000
-   }
-  ]
- },
- {
-  "id": "acclight",
-  "tienda": "acc",
-  "categoria": "cables-carga",
-  "marca": "Apple",
-  "nombre": "Cable USB-C a Lightning",
-  "specs": [
-   "Sin caja"
-  ],
-  "ilustracion": "cable",
-  "imagen": "fotos/acclight.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 55000
-   }
-  ]
- },
- {
-  "id": "accwatch",
-  "tienda": "acc",
-  "categoria": "cables-carga",
-  "marca": "Apple",
-  "nombre": "Cable de carga para Apple Watch",
-  "ilustracion": "cable",
-  "imagen": "fotos/accwatch.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 100000
    }
   ]
  },
@@ -4034,24 +3628,6 @@
    {
     "nombre": "",
     "precio": 490000
-   }
-  ]
- },
- {
-  "id": "switch2",
-  "tienda": "con",
-  "categoria": "consolas",
-  "marca": "Nintendo",
-  "nombre": "Nintendo Switch 2",
-  "nota": "Incluye un juego",
-  "imagen": "fotos/switch2.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 2200000
    }
   ]
  },
@@ -4886,31 +4462,6 @@
   ],
   "imagen": "fotos/p51252.jpg",
   "estado": "Nuevo",
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 5200000
-   }
-  ]
- },
- {
-  "id": "p51274",
-  "tienda": "pc",
-  "categoria": "escritorio-gamer",
-  "nombre": "PC Ryzen 7 8700F + RTX 5050",
-  "specs": [
-   "16GB DDR5",
-   "SSD NVMe 512GB",
-   "RTX 5050 8GB",
-   "Board B650M WiFi",
-   "Fuente 600W 80 Plus Bronze",
-   "Monitor ASUS 24\" IPS FHD (1 ms-146 Hz)",
-   "Teclado y mouse 801 RGB",
-   "Caja Power CL-W78"
-  ],
-  "imagen": "fotos/p51274.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
   "opciones": [
    {
     "nombre": "",
@@ -7400,28 +6951,6 @@
   ]
  },
  {
-  "id": "p2110",
-  "tienda": "comp",
-  "categoria": "procesadores",
-  "marca": "AMD",
-  "nombre": "AMD Ryzen 5 5500",
-  "specs": [
-   "Socket AM4",
-   "6 núcleos",
-   "4,2 GHz",
-   "Sin gráficos integrados"
-  ],
-  "imagen": "fotos/p2110.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 580000
-   }
-  ]
- },
- {
   "id": "p2095",
   "tienda": "comp",
   "categoria": "procesadores",
@@ -7483,28 +7012,6 @@
   ]
  },
  {
-  "id": "p2083",
-  "tienda": "comp",
-  "categoria": "procesadores",
-  "marca": "AMD",
-  "nombre": "AMD Ryzen 7 5800X3D",
-  "specs": [
-   "Socket AM4",
-   "8 núcleos",
-   "3,4 GHz",
-   "Sin disipador"
-  ],
-  "imagen": "fotos/p2083.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1850000
-   }
-  ]
- },
- {
   "id": "p2079",
   "tienda": "comp",
   "categoria": "procesadores",
@@ -7543,27 +7050,6 @@
    {
     "nombre": "",
     "precio": 1250000
-   }
-  ]
- },
- {
-  "id": "p2085",
-  "tienda": "comp",
-  "categoria": "procesadores",
-  "marca": "AMD",
-  "nombre": "AMD Ryzen 7 7700",
-  "specs": [
-   "Socket AM5",
-   "8 núcleos",
-   "3,8 GHz"
-  ],
-  "imagen": "fotos/p2085.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1600000
    }
   ]
  },
@@ -7999,28 +7485,6 @@
   ]
  },
  {
-  "id": "p34335",
-  "tienda": "comp",
-  "categoria": "madre",
-  "marca": "MSI",
-  "nombre": "MSI B550M Gaming Plus WiFi 6E",
-  "specs": [
-   "Socket AM4",
-   "4 ranuras DDR4",
-   "PCIe 4.0",
-   "Micro-ATX"
-  ],
-  "imagen": "fotos/p34335.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 530000
-   }
-  ]
- },
- {
   "id": "p34243",
   "tienda": "comp",
   "categoria": "madre",
@@ -8228,27 +7692,6 @@
   ]
  },
  {
-  "id": "p34292",
-  "tienda": "comp",
-  "categoria": "madre",
-  "marca": "ASUS",
-  "nombre": "ASUS ROG Strix B850-F Gaming WiFi",
-  "specs": [
-   "Socket AM5",
-   "4 ranuras DDR5",
-   "ATX"
-  ],
-  "imagen": "fotos/p34292.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1800000
-   }
-  ]
- },
- {
   "id": "p34281",
   "tienda": "comp",
   "categoria": "madre",
@@ -8265,27 +7708,6 @@
    {
     "nombre": "",
     "precio": 1850000
-   }
-  ]
- },
- {
-  "id": "p34336",
-  "tienda": "comp",
-  "categoria": "madre",
-  "marca": "ASUS",
-  "nombre": "ASUS ROG Crosshair X870E Dark Hero",
-  "specs": [
-   "Socket AM5",
-   "4 ranuras DDR5",
-   "ATX"
-  ],
-  "imagen": "fotos/p34336.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 3250000
    }
   ]
  },
@@ -8685,49 +8107,6 @@
   ]
  },
  {
-  "id": "p1141",
-  "tienda": "comp",
-  "categoria": "procesadores",
-  "marca": "Intel",
-  "nombre": "Intel Core Ultra 7 265F",
-  "specs": [
-   "Socket LGA1851",
-   "20 núcleos",
-   "2,4 GHz",
-   "Sin gráficos integrados"
-  ],
-  "imagen": "fotos/p1141.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 2000000
-   }
-  ]
- },
- {
-  "id": "p1142",
-  "tienda": "comp",
-  "categoria": "procesadores",
-  "marca": "Intel",
-  "nombre": "Intel Core Ultra 7 265",
-  "specs": [
-   "Socket LGA1851",
-   "20 núcleos",
-   "2,4 GHz"
-  ],
-  "imagen": "fotos/p1142.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 2100000
-   }
-  ]
- },
- {
   "id": "p1139",
   "tienda": "comp",
   "categoria": "procesadores",
@@ -8881,70 +8260,6 @@
   ],
   "imagen": "fotos/p33349.jpg",
   "estado": "Nuevo",
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1250000
-   }
-  ]
- },
- {
-  "id": "p33399",
-  "tienda": "comp",
-  "categoria": "madre",
-  "marca": "ASUS",
-  "nombre": "ASUS TUF B860-Plus WiFi",
-  "specs": [
-   "Socket LGA1851",
-   "4 ranuras DDR5",
-   "PCIe 5.0",
-   "ATX"
-  ],
-  "imagen": "fotos/p33399.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1100000
-   }
-  ]
- },
- {
-  "id": "p33370",
-  "tienda": "comp",
-  "categoria": "madre",
-  "marca": "ASUS",
-  "nombre": "ASUS ROG B860-A Strix Gaming WiFi",
-  "specs": [
-   "Socket LGA1851",
-   "4 ranuras DDR5",
-   "ATX"
-  ],
-  "imagen": "fotos/p33370.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1600000
-   }
-  ]
- },
- {
-  "id": "p33361",
-  "tienda": "comp",
-  "categoria": "madre",
-  "marca": "ASUS",
-  "nombre": "ASUS Prime Z890-P WiFi",
-  "specs": [
-   "Socket LGA1851",
-   "4 ranuras DDR5",
-   "ATX"
-  ],
-  "imagen": "fotos/p33361.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
   "opciones": [
    {
     "nombre": "",
@@ -9401,48 +8716,6 @@
   ]
  },
  {
-  "id": "p6109",
-  "tienda": "comp",
-  "categoria": "ram",
-  "marca": "Samsung",
-  "nombre": "Memoria portátil Samsung 8GB DDR5",
-  "specs": [
-   "DDR5",
-   "5600 MHz",
-   "SO-DIMM"
-  ],
-  "imagen": "fotos/p6109.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 570000
-   }
-  ]
- },
- {
-  "id": "p6142",
-  "tienda": "comp",
-  "categoria": "ram",
-  "marca": "Crucial",
-  "nombre": "Memoria portátil Crucial 8GB DDR5",
-  "specs": [
-   "DDR5",
-   "5600 MHz",
-   "SO-DIMM"
-  ],
-  "imagen": "fotos/p6142.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 610000
-   }
-  ]
- },
- {
   "id": "p6135",
   "tienda": "comp",
   "categoria": "ram",
@@ -9633,25 +8906,6 @@
    {
     "nombre": "",
     "precio": 440000
-   }
-  ]
- },
- {
-  "id": "p12141",
-  "tienda": "comp",
-  "categoria": "almacenamiento",
-  "marca": "SanDisk",
-  "nombre": "SSD SATA 500GB SanDisk Ultra 3D",
-  "specs": [
-   "SATA 2,5\""
-  ],
-  "imagen": "fotos/p12141.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 390000
    }
   ]
  },
@@ -9861,28 +9115,6 @@
    {
     "nombre": "",
     "precio": 1350000
-   }
-  ]
- },
- {
-  "id": "p13190",
-  "tienda": "comp",
-  "categoria": "almacenamiento",
-  "marca": "Samsung",
-  "nombre": "SSD M.2 NVMe 1TB Samsung 990 Pro Disipado",
-  "specs": [
-   "Lectura 7450 MB/s",
-   "M.2 NVMe",
-   "Con disipador"
-  ],
-  "ilustracion": "nvme",
-  "imagen": "fotos/p13190.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1500000
    }
   ]
  },
@@ -10425,23 +9657,6 @@
   ]
  },
  {
-  "id": "p14247",
-  "tienda": "comp",
-  "categoria": "fuentes",
-  "marca": "Corsair",
-  "nombre": "Fuente Corsair 850W RM850E 80 Plus Gold PCI 5.1 Modular",
-  "imagen": "fotos/p14247.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 570000
-   }
-  ]
- },
- {
   "id": "p14246",
   "tienda": "comp",
   "categoria": "fuentes",
@@ -10570,23 +9785,6 @@
   ]
  },
  {
-  "id": "p14252",
-  "tienda": "comp",
-  "categoria": "fuentes",
-  "marca": "XPG",
-  "nombre": "Fuente XPG 850W Core Reactor II 80 Plus Gold",
-  "imagen": "fotos/p14252.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 520000
-   }
-  ]
- },
- {
   "id": "p14254",
   "tienda": "comp",
   "categoria": "fuentes",
@@ -10658,23 +9856,6 @@
   "nombre": "Caja Antec AX20 Extreme Vidrio Templado + 5 RGB Fijo",
   "imagen": "fotos/p16576.jpg",
   "estado": "Nuevo",
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 240000
-   }
-  ]
- },
- {
-  "id": "p16614",
-  "tienda": "comp",
-  "categoria": "cajas",
-  "marca": "Antec",
-  "nombre": "Caja Antec AX27 Elite Vidrio Templado + 4 RGB Fijo",
-  "imagen": "fotos/p16614.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
   "specs": [],
   "opciones": [
    {
@@ -10833,23 +10014,6 @@
   ]
  },
  {
-  "id": "p16632",
-  "tienda": "comp",
-  "categoria": "cajas",
-  "marca": "Antec",
-  "nombre": "Caja Antec CX Espejo Vidrio Templado + 7 ARGB Blanco",
-  "imagen": "fotos/p16632.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 520000
-   }
-  ]
- },
- {
   "id": "p16616",
   "tienda": "comp",
   "categoria": "cajas",
@@ -10947,23 +10111,6 @@
    {
     "nombre": "",
     "precio": 510000
-   }
-  ]
- },
- {
-  "id": "p16490",
-  "tienda": "comp",
-  "categoria": "cajas",
-  "marca": "Antec",
-  "nombre": "Caja Antec DF700 Flux Vidrio Templado Blanca 3ARGB+2 NO RGB",
-  "imagen": "fotos/p16490.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 520000
    }
   ]
  },
@@ -11207,23 +10354,6 @@
   ]
  },
  {
-  "id": "p16574",
-  "tienda": "comp",
-  "categoria": "cajas",
-  "marca": "Corsair",
-  "nombre": "Caja Corsair 480T Vidrio Templado + 3 ARGB Airflow Negra",
-  "imagen": "fotos/p16574.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 330000
-   }
-  ]
- },
- {
   "id": "p16561",
   "tienda": "comp",
   "categoria": "cajas",
@@ -11236,23 +10366,6 @@
    {
     "nombre": "",
     "precio": 530000
-   }
-  ]
- },
- {
-  "id": "p16605",
-  "tienda": "comp",
-  "categoria": "cajas",
-  "marca": "Corsair",
-  "nombre": "Caja Corsair Air 5400 Vidrio Templado + 3 RS120R ARGB Negra",
-  "imagen": "fotos/p16605.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1050000
    }
   ]
  },
@@ -11274,23 +10387,6 @@
    {
     "nombre": "Negro",
     "precio": 1750000
-   }
-  ]
- },
- {
-  "id": "p16640",
-  "tienda": "comp",
-  "categoria": "cajas",
-  "marca": "Corsair",
-  "nombre": "Caja Corsair 9000D Airflow Vidrio Templado Blanco NO Fan",
-  "imagen": "fotos/p16640.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1850000
    }
   ]
  },
@@ -11676,23 +10772,6 @@
   ]
  },
  {
-  "id": "p17077",
-  "tienda": "comp",
-  "categoria": "cajas",
-  "marca": "Cougar",
-  "nombre": "Combo Caja Cougar FV150 Vidrio Templado + 4 ARGB Negro + Fuente 750W Atlas",
-  "imagen": "fotos/p17077.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 610000
-   }
-  ]
- },
- {
   "id": "p16618",
   "tienda": "comp",
   "categoria": "cajas",
@@ -11822,23 +10901,6 @@
    {
     "nombre": "",
     "precio": 140000
-   }
-  ]
- },
- {
-  "id": "p26132",
-  "tienda": "comp",
-  "categoria": "refrigeracion",
-  "marca": "Antec",
-  "nombre": "Kit X3 Ventiladores Antec Connect 120 Inverso ARGB Blanco",
-  "imagen": "fotos/p26132.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 150000
    }
   ]
  },
@@ -12193,23 +11255,6 @@
   ]
  },
  {
-  "id": "p11174",
-  "tienda": "comp",
-  "categoria": "refrigeracion",
-  "marca": "ASUS",
-  "nombre": "Refrigeración ASUS ROG Strix LC III 360 ARGB Negra",
-  "imagen": "fotos/p11174.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1200000
-   }
-  ]
- },
- {
   "id": "p11172",
   "tienda": "comp",
   "categoria": "refrigeracion",
@@ -12242,23 +11287,6 @@
   ]
  },
  {
-  "id": "p11196",
-  "tienda": "comp",
-  "categoria": "refrigeracion",
-  "marca": "Cougar",
-  "nombre": "Refrigeración Cougar Poseidon Vistek ARGB 240 Blanco LCD 4\"",
-  "imagen": "fotos/p11196.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 400000
-   }
-  ]
- },
- {
   "id": "p11131",
   "tienda": "comp",
   "categoria": "refrigeracion",
@@ -12271,23 +11299,6 @@
    {
     "nombre": "",
     "precio": 410000
-   }
-  ]
- },
- {
-  "id": "p11165",
-  "tienda": "comp",
-  "categoria": "refrigeracion",
-  "marca": "Cougar",
-  "nombre": "Refrigeración Cougar Poseidon Ultra ARGB 240 Blanca",
-  "imagen": "fotos/p11165.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 400000
    }
   ]
  },
@@ -12798,25 +11809,6 @@
   ]
  },
  {
-  "id": "p3772",
-  "tienda": "comp",
-  "categoria": "video",
-  "marca": "Gigabyte",
-  "nombre": "Gigabyte RTX 5060 Eagle Max Windforce OC 3 Fan 8GB",
-  "specs": [
-   "8 GB de memoria"
-  ],
-  "imagen": "fotos/p3772.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 2300000
-   }
-  ]
- },
- {
   "id": "p3743",
   "tienda": "comp",
   "categoria": "video",
@@ -12831,25 +11823,6 @@
    {
     "nombre": "",
     "precio": 2700000
-   }
-  ]
- },
- {
-  "id": "p3737",
-  "tienda": "comp",
-  "categoria": "video",
-  "marca": "MSI",
-  "nombre": "MSI GeForce RTX 5060 Ti Gaming Trio OC 8GB",
-  "specs": [
-   "8 GB de memoria"
-  ],
-  "imagen": "fotos/p3737.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 2850000
    }
   ]
  },
@@ -12872,25 +11845,6 @@
   ]
  },
  {
-  "id": "p3732",
-  "tienda": "comp",
-  "categoria": "video",
-  "marca": "MSI",
-  "nombre": "MSI GeForce RTX 5070 Ventus 3X OC 12GB",
-  "specs": [
-   "12 GB de memoria"
-  ],
-  "imagen": "fotos/p3732.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 4000000
-   }
-  ]
- },
- {
   "id": "p3739",
   "tienda": "comp",
   "categoria": "video",
@@ -12905,63 +11859,6 @@
    {
     "nombre": "",
     "precio": 4750000
-   }
-  ]
- },
- {
-  "id": "p3787",
-  "tienda": "comp",
-  "categoria": "video",
-  "marca": "Gigabyte",
-  "nombre": "Gigabyte GeForce RTX 5070 Aorus Master OC Windforce 3X 12GB",
-  "specs": [
-   "12 GB de memoria"
-  ],
-  "imagen": "fotos/p3787.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 4400000
-   }
-  ]
- },
- {
-  "id": "p4186",
-  "tienda": "comp",
-  "categoria": "video",
-  "marca": "Gigabyte",
-  "nombre": "Gigabyte AMD Radeon RX 9060 XT Gaming OC 3X 16GB",
-  "specs": [
-   "16 GB de memoria"
-  ],
-  "imagen": "fotos/p4186.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 3050000
-   }
-  ]
- },
- {
-  "id": "p4177",
-  "tienda": "comp",
-  "categoria": "video",
-  "marca": "ASUS",
-  "nombre": "ASUS Prime AMD Radeon RX 9070 XT OC 16GB",
-  "specs": [
-   "16 GB de memoria"
-  ],
-  "imagen": "fotos/p4177.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 4400000
    }
   ]
  },
@@ -12981,44 +11878,6 @@
    {
     "nombre": "",
     "precio": 8450000
-   }
-  ]
- },
- {
-  "id": "p3719",
-  "tienda": "comp",
-  "categoria": "video",
-  "marca": "MSI",
-  "nombre": "MSI GeForce RTX 5080 Shadow 3X OC 16GB",
-  "specs": [
-   "16 GB de memoria"
-  ],
-  "imagen": "fotos/p3719.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 7950000
-   }
-  ]
- },
- {
-  "id": "p3700",
-  "tienda": "comp",
-  "categoria": "video",
-  "marca": "Gigabyte",
-  "nombre": "Gigabyte GeForce RTX 5080 Windforce OC SFF 3X 16GB",
-  "specs": [
-   "16 GB de memoria"
-  ],
-  "imagen": "fotos/p3700.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 8000000
    }
   ]
  },
@@ -13064,25 +11923,6 @@
   ]
  },
  {
-  "id": "p3704",
-  "tienda": "comp",
-  "categoria": "video",
-  "marca": "ASUS",
-  "nombre": "ASUS TUF Gaming GeForce RTX 5080 OC 16GB",
-  "specs": [
-   "16 GB de memoria"
-  ],
-  "imagen": "fotos/p3704.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 8800000
-   }
-  ]
- },
- {
   "id": "p3771",
   "tienda": "comp",
   "categoria": "video",
@@ -13097,25 +11937,6 @@
    {
     "nombre": "",
     "precio": 25600000
-   }
-  ]
- },
- {
-  "id": "p3708",
-  "tienda": "comp",
-  "categoria": "video",
-  "marca": "ASUS",
-  "nombre": "ASUS ROG Astral GeForce RTX 5090 OC 32GB",
-  "specs": [
-   "32 GB de memoria"
-  ],
-  "imagen": "fotos/p3708.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 25400000
    }
   ]
  },
@@ -13171,23 +11992,6 @@
    {
     "nombre": "",
     "precio": 7400000
-   }
-  ]
- },
- {
-  "id": "p45631",
-  "tienda": "con",
-  "categoria": "consolas",
-  "marca": "Sony",
-  "nombre": "Consola Sony PS5 825 GB Control ED Digital 4K",
-  "imagen": "fotos/p45631.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 3150000
    }
   ]
  },
@@ -13656,23 +12460,6 @@
   ]
  },
  {
-  "id": "p18034",
-  "tienda": "per",
-  "categoria": "energia",
-  "marca": "Unitec",
-  "nombre": "UPS Unitec 2500 Interactiva / 2000VA / 1200W / LED",
-  "imagen": "fotos/p18034.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 650000
-   }
-  ]
- },
- {
   "id": "p18042",
   "tienda": "per",
   "categoria": "energia",
@@ -14090,26 +12877,6 @@
   ]
  },
  {
-  "id": "p15419",
-  "tienda": "per",
-  "categoria": "monitores",
-  "marca": "ASUS",
-  "nombre": "Monitor ASUS 31,5\" TUF Fast VA QHD Curvo VG32WQ3B",
-  "specs": [
-   "180 Hz",
-   "0,5 ms"
-  ],
-  "imagen": "fotos/p15419.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1200000
-   }
-  ]
- },
- {
   "id": "p15342",
   "tienda": "per",
   "categoria": "monitores",
@@ -14333,23 +13100,6 @@
   ]
  },
  {
-  "id": "p15352",
-  "tienda": "per",
-  "categoria": "monitores",
-  "marca": "LG",
-  "nombre": "Monitor LG 27\" IPS UHD 4K HDR10 27US500-W UltraFine",
-  "imagen": "fotos/p15352.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1400000
-   }
-  ]
- },
- {
   "id": "p15436",
   "tienda": "per",
   "categoria": "monitores",
@@ -14532,27 +13282,6 @@
    {
     "nombre": "",
     "precio": 950000
-   }
-  ]
- },
- {
-  "id": "p15422",
-  "tienda": "per",
-  "categoria": "monitores",
-  "marca": "MSI",
-  "nombre": "Monitor MSI 27″ WQHD 2K Pivot 271QP USB-C",
-  "specs": [
-   "QD-OLED",
-   "280 Hz",
-   "0,03 ms"
-  ],
-  "imagen": "fotos/p15422.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 2450000
    }
   ]
  },
@@ -14818,23 +13547,6 @@
   ]
  },
  {
-  "id": "p45614",
-  "tienda": "per",
-  "categoria": "soportes",
-  "marca": "NB",
-  "nombre": "Soporte Monitor NB 17\"- 32\" A5-XE Blanco",
-  "imagen": "fotos/p45614.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 120000
-   }
-  ]
- },
- {
   "id": "p45529",
   "tienda": "per",
   "categoria": "soportes",
@@ -14931,23 +13643,6 @@
    {
     "nombre": "",
     "precio": 500000
-   }
-  ]
- },
- {
-  "id": "p31292",
-  "tienda": "per",
-  "categoria": "diademas",
-  "marca": "Corsair",
-  "nombre": "Diadema Corsair HS65 Surround Negra",
-  "imagen": "fotos/p31292.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 230000
    }
   ]
  },
@@ -15122,23 +13817,6 @@
    {
     "nombre": "",
     "precio": 270000
-   }
-  ]
- },
- {
-  "id": "p31329",
-  "tienda": "per",
-  "categoria": "diademas",
-  "marca": "Razer",
-  "nombre": "Diadema Gamer Razer BlackShark V3 X HyperSpeed",
-  "imagen": "fotos/p31329.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 410000
    }
   ]
  },
@@ -16806,23 +15484,6 @@
    {
     "nombre": "Negro",
     "precio": 190000
-   }
-  ]
- },
- {
-  "id": "p19304",
-  "tienda": "per",
-  "categoria": "mouse",
-  "marca": "Redragon",
-  "nombre": "Mouse Redragon King Ultra M999 Inalámbrico / 6 Botones / Base para Recargar",
-  "imagen": "fotos/p19304.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 200000
    }
   ]
  },
@@ -19237,23 +17898,6 @@
   ]
  },
  {
-  "id": "p45581",
-  "tienda": "con",
-  "categoria": "simuladores",
-  "marca": "PXN",
-  "nombre": "Timón + Pedales + Palanca PXN V9 GEN2",
-  "imagen": "fotos/p45581.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 760000
-   }
-  ]
- },
- {
   "id": "p45610",
   "tienda": "con",
   "categoria": "simuladores",
@@ -19564,22 +18208,6 @@
    {
     "nombre": "",
     "precio": 220000
-   }
-  ]
- },
- {
-  "id": "p45397",
-  "tienda": "per",
-  "categoria": "varios",
-  "nombre": "Espuma Limpiadora 16 onzas",
-  "imagen": "fotos/p45397.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 34000
    }
   ]
  },
@@ -20534,23 +19162,6 @@
   ]
  },
  {
-  "id": "p31346",
-  "tienda": "aud",
-  "categoria": "audio",
-  "marca": "Xiaomi",
-  "nombre": "Xiaomi Redmi Buds 8 Pro Cloud Blanco",
-  "imagen": "fotos/p31346.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 310000
-   }
-  ]
- },
- {
   "id": "p31356",
   "tienda": "aud",
   "categoria": "audio",
@@ -20659,23 +19270,6 @@
    {
     "nombre": "",
     "precio": 120000
-   }
-  ]
- },
- {
-  "id": "p45617",
-  "tienda": "acc",
-  "categoria": "powerbank",
-  "marca": "Hora",
-  "nombre": "Power Bank Hora 20000 mAh 10.5W Max/Luz/Cable USB-C-Lightning",
-  "imagen": "fotos/p45617.jpg",
-  "estado": "Nuevo",
-  "consultar": true,
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 130000
    }
   ]
  }

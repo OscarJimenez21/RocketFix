@@ -16,7 +16,7 @@ import { waLink } from "../lib/whatsapp";
 import type { Producto, Servicio, TiendaId } from "../types";
 
 /** Productos de la vitrina de la portada, en este orden */
-const VITRINA = ["ip18pm", "ss26u", "p45631", "mbairm5", "switch2", "appro3"];
+const VITRINA = ["ip18pm", "ss26u", "mbairm5", "appro3"];
 const ESPERA_VITRINA = 6000;
 
 /** Vitrina: un producto grande y los demás en miniatura. Cambia sola con un fundido; se detiene con el mouse encima o
@@ -232,9 +232,9 @@ const FORMAS = {
 const MOSAICO: { tienda: TiendaId; frase: string; tema: keyof typeof TEMAS; foto: string; forma: keyof typeof FORMAS }[] = [
   { tienda: "cel", frase: "Lo último en", tema: "oscuro", foto: "ip17pm", forma: "grande" },
   { tienda: "pc", frase: "Para estudiar, trabajar y jugar", tema: "acento", foto: "p52396", forma: "ancha" },
-  { tienda: "comp", frase: "Arma o mejora tu PC", tema: "marca", foto: "p3787", forma: "normal" },
+  { tienda: "comp", frase: "Arma o mejora tu PC", tema: "marca", foto: "p3789", forma: "normal" },
   { tienda: "per", frase: "Más precisión", tema: "menta", foto: "p31252", forma: "normal" },
-  { tienda: "con", frase: "Más diversión", tema: "noche", foto: "switch2", forma: "normal" },
+  { tienda: "con", frase: "Más diversión", tema: "noche", foto: "p45585", forma: "normal" },
   { tienda: "tab", frase: "Más pantalla", tema: "suave", foto: "ipadpro", forma: "normal" },
   { tienda: "rel", frase: "Siempre conectado", tema: "acento", foto: "gw8c", forma: "normal" },
   { tienda: "aud", frase: "Sonido sin cables", tema: "menta", foto: "gbuds3fe", forma: "normal" },
@@ -354,7 +354,7 @@ function BandaCelulares() {
   const fila: [string, string][] = [
     ["galeria-ss25u-2", "bottom-[16%] left-[1%] h-[48%]"],
     ["galeria-ss26u-2", "bottom-[16%] right-[1%] h-[48%]"],
-    ["xrn15pro", "bottom-[12%] left-[13%] h-[57%]"],
+    ["xrn15", "bottom-[12%] left-[13%] h-[57%]"],
     ["ip18p", "bottom-[12%] right-[14%] h-[57%]"],
     ["ip17pm", "bottom-[8%] left-[21%] h-[64%]"],
     ["ip18pm", "bottom-[5%] left-[52%] h-[72%] -translate-x-1/2"]

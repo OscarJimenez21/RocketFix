@@ -1082,9 +1082,6 @@
  "p34148": {
   "resumen": "La serie ASUS Prime está diseñada por expertos para liberar todo el potencial de la plataforma AMD Ryzen de tercera generación."
  },
- "p34335": {
-  "resumen": "Ideal para quienes buscan una tarjeta madre gaming confiable, con conectividad moderna y funciones diseñadas para mejorar la experiencia de juego. Construye tu próxima PC con MSI y lleva tu configuración al siguiente nivel."
- },
  "p34232": {
   "resumen": "Tarjeta madre AMD B650E AM5 ATX con 12 + 2 fases de poder, DDR5, SSD PCIe® 5.0 NVMe®, un PCIe 5.0 x16 SafeSlot con Q-Release, USB 3.2 Gen 2×2 Type-C® posterior, USB 3.2 Gen 2 Type-C® para panel frontal, WiFi 6E e iluminación Aura Sync RGB."
  },
@@ -1105,9 +1102,6 @@
  },
  "p34281": {
   "resumen": "La ASUS TUF X870 GAMING PLUS WIFI es una placa base impresionante diseñada para aprovechar al máximo los procesadores AMD Ryzen."
- },
- "p34336": {
-  "resumen": "La ASUS ROG Crosshair X870E Dark Hero es una excelente opción para construir un equipo de alto rendimiento, combinando diseño sofisticado, tecnologías inteligentes y conectividad avanzada para quienes buscan una plataforma preparada para llevar su configuración al siguiente nivel."
  },
  "p34283": {
   "resumen": "La MSI B650M GAMING WIFI es una placa base impresionante diseñada para los entusiastas de la construcción de PC."
@@ -1130,9 +1124,6 @@
  "p1143": {
   "resumen": "El Intel Core Ultra 5 235 combina 14 núcleos híbridos, soporte para memoria DDR5 de alta velocidad y gráficos integrados Intel Arc, ofreciendo un procesador versátil para usuarios que buscan potencia equilibrada en gaming, multitarea y productividad."
  },
- "p1142": {
-  "resumen": "El procesador Intel Core Ultra 7 265 es una opción potente y eficiente para diversas aplicaciones. Cuenta con 20 núcleos (8 núcleos de rendimiento y 12 núcleos de eficiencia), una velocidad base de 2.4 GHz que puede alcanzar hasta 5.5 GHz en modo turbo, y un caché de 36 MB."
- },
  "p1139": {
   "resumen": "El Intel Core Ultra 9 285 es un procesador de alto rendimiento diseñado para computadoras de escritorio."
  },
@@ -1150,12 +1141,6 @@
  },
  "p33349": {
   "resumen": "La Placa Madre PRO Z790-P WIFI está diseñada con toneladas de herramientas flexibles y una cómoda solución Wi-Fi con la versión de memoria DDR5."
- },
- "p33370": {
-  "resumen": "La placa base ASUS ROG STRIX B860-A Gaming WiFi es una excelente opción para los gamers y entusiastas de la informática."
- },
- "p33361": {
-  "resumen": "La placa base ASUS PRIME Z890-P WIFI está diseñada para construcciones de alto rendimiento."
  },
  "p5356": {
   "resumen": "El escudo térmico de aluminio de Viper Steel RGB proporciona una disipación de calor suprema para mantener un rendimiento increíble."
@@ -1217,9 +1202,6 @@
  "p13236": {
   "resumen": "El 990 EVO Plus ofrece velocidades de lectura/escritura secuencial mejoradas de hasta 7150/6300 MB/s¹. Aproveche al máximo la potencia de su unidad con el rendimiento mejorado de archivos grandes de Intelligent TurboWrite 2.0, ahora disponible en capacidad de 2 TB. Mantenga la calma mientras trabaja o juega sin preocuparse por el sobrecalentamiento ni la duración de la batería, gracias a un controlador recubierto de níquel que mejora la eficiencia."
  },
- "p13190": {
-  "resumen": "El Samsung 990 PRO PCIe 4.0 NVMe SSD 1 TB con disipador es una solución premium para quienes buscan máxima velocidad, eficiencia y confiabilidad en almacenamiento."
- },
  "p13252": {
   "resumen": "El Samsung SSD 9100 PRO GEN 5 de 1TB es una unidad M.2 de alto rendimiento diseñada para aprovechar la velocidad de la interfaz PCIe 5.0. Ofrece una solución de almacenamiento rápida y eficiente para sistemas exigentes, ideal para tareas intensivas como edición de video, gaming avanzado y procesamiento de datos."
  },
@@ -1264,9 +1246,6 @@
  },
  "p14245": {
   "resumen": "Ofrece una potencia continua de 650W, ideal para sistemas de PC de gama media y alta."
- },
- "p14247": {
-  "resumen": "La Corsair RM850e es una fuente de alimentación ATX totalmente modular, diseñada para ofrecer un rendimiento eficiente y silencioso."
  },
  "p14266": {
   "resumen": "La Corsair HX1500i es una fuente de poder ATX totalmente modular de 1500 W con certificación 80 PLUS Platinum, operación silenciosa con modo Zero RPM y componentes de alta calidad, ideal para sistemas de alto rendimiento que requieren máxima eficiencia y confiabilidad"
@@ -1318,9 +1297,6 @@
  },
  "p16621": {
   "resumen": "El Corsair Frame 4000d Lcd Rs Argb Premium es un chasis semitorre con pantalla táctil LCD de 14,5”, ventiladores ARGB y soporte para radiadores de hasta 360 mm. Compatible con placas Mini-ITX, MicroATX, ATX y E-ATX, ofrece diseño premium y alto rendimiento para equipos exigentes."
- },
- "p16640": {
-  "resumen": "El Corsair 9000D RGB Airflow es un gabinete supertorre de gran formato, con soporte para sistemas de refrigeración extremos, espacio para múltiples GPUs y almacenamiento abundante, ideal para proyectos de PC de alto rendimiento y configuraciones avanzadas."
  },
  "p16287": {
   "resumen": "Panel frontal de malla fina Tomas de malla Ventiladores ARGB dobles Flujo de aire optimizado. Panel lateral de vidrio templado Caja de transmisión adaptable. Opciones de enfriamiento versátiles Espacio para actualizaciones"
@@ -1415,9 +1391,6 @@
  "p11201": {
   "resumen": "El Antec Vortex View 360 es un sistema de refrigeración líquida con radiador de 360 mm, ventiladores PWM de alto rendimiento y compatibilidad con los sockets más recientes de Intel y AMD, ofreciendo una solución eficiente, silenciosa y duradera para mantener tu PC en condiciones óptimas."
  },
- "p11165": {
-  "resumen": "El Poseidon Ultra ARGB se sitúa en la cúspide de la refrigeración líquida para PC. Su ventilador de radiador Vortent consigue la relación perfecta entre rendimiento y silencio, con su exclusivo diseño de estructura que genera un efecto vórtice optimizando el flujo y la presión del aire."
- },
  "p11187": {
   "resumen": "El Cougar Poseidon Vistek ARGB 360 es un sistema de refrigeración líquida de alto rendimiento con radiador de gran tamaño, bomba eficiente y ventiladores ARGB optimizados. Ofrece disipación térmica superior, monitoreo en tiempo real y un diseño personalizable que eleva la estética y el rendimiento de cualquier PC avanzada."
  },
@@ -1475,26 +1448,14 @@
  "p3731": {
   "resumen": "VENTUS se centra en lo esencial para afrontar cualquier desafío. Su eficiente solución térmica está encapsulada en una carcasa resistente con una estética neutra, lo que permite que esta elegante tarjeta gráfica se integre a la perfección en cualquier sistema."
  },
- "p3737": {
-  "resumen": "Rendimiento de última generación con la MSI GeForce RTX™ 5060 Ti GAMING TRIO OC, equipada con 8 GB GDDR7, tecnología de refrigeración avanzada y soporte para Ray Tracing y DLSS 4. Ideal para jugar y crear en 1080p y 1440p con fluidez y estilo."
- },
  "p4183": {
   "resumen": "La ASUS Prime Radeon RX 9060 XT OC Edition 8GB es una opción equilibrada para quienes buscan una combinación de potencia, eficiencia térmica y compatibilidad con las últimas tecnologías gráficas"
  },
  "p3739": {
   "resumen": "La ASUS Dual GeForce RTX 5070 12G combina rendimiento gráfico avanzado con un diseño compacto y elegante. Su sistema de refrigeración silencioso y eficiente la hace ideal para largas sesiones de juego o trabajo intensivo, todo sin sacrificar estilo ni estabilidad. Pensada para quienes buscan potencia sin complicaciones."
  },
- "p4177": {
-  "resumen": "La ASUS Prime Radeon RX 9070 XT OC Edition es una tarjeta gráfica de alto rendimiento basada en la arquitectura AMD RDNA 4. Está equipada con 16 GB de memoria GDDR6 y cuenta con tres ventiladores Axial-tech para una refrigeración eficiente."
- },
  "p3791": {
   "resumen": "El MSI GeForce RTX 5070 Ti Frieren Edition OC junto al combo de periféricos Frieren Edition ofrecen un set exclusivo que une potencia gráfica de última generación con teclado, mouse y pad temáticos, brindando rendimiento extremo y un diseño coleccionable inspirado en Frieren: Beyond Journey’s End."
- },
- "p3719": {
-  "resumen": "La MSI GeForce RTX 5080 Shadow 3X OC cuenta con 16GB GDDR7, arquitectura NVIDIA Blackwell y tecnología DLSS 4 para rendimiento extremo. Su diseño incorpora TORX Fan 5.0, baseplate de cobre niquelado y Core Pipe para una refrigeración eficiente, ideal para gaming y creación de contenido."
- },
- "p3700": {
-  "resumen": "La Gigabyte RTX 5080 WINDFORCE OC 16G combina 10,752 núcleos CUDA, 16 GB GDDR7 y frecuencias de hasta 2670 MHz, con conectividad moderna y soporte para resoluciones 8K, siendo una opción potente y confiable para gamers y creadores que buscan rendimiento gráfico de última generación"
  },
  "p3786": {
   "resumen": "La MSI RTX 5080 INSPIRE 3X OC combina 16 GB GDDR7, frecuencias de hasta 2655 MHz y un sistema de refrigeración avanzado, ofreciendo potencia gráfica de última generación para gamers y creadores que buscan rendimiento extremo y estabilidad en sus equipos."
@@ -1502,17 +1463,8 @@
  "p3789": {
   "resumen": "La AORUS RTX 5080 XTREME WATERFORCE 16G combina potencia gráfica de última generación con un sistema de refrigeración líquida avanzado de 360 mm, ofreciendo rendimiento extremo, estabilidad y un diseño premium para gamers y creadores que buscan lo mejor en su setup."
  },
- "p3704": {
-  "resumen": "Rendimiento de IA: 1858 IA TOPS Modo OC 2730 MHz/ 2700 MHz (modo predeterminado) Con la tecnología de la arquitectura NVIDIA Blackwell y DLSS 4. Los componentes de grado militar ofrecen una potencia sólida y una vida útil más prolongada para una máxima durabilidad. El revestimiento protector de PCB ayuda a proteger contra cortocircuitos causados ​​por humedad, polvo o residuos."
- },
  "p3771": {
   "resumen": "La ASUS TUF Gaming GeForce RTX™ 5090 OC Edition 32GB GDDR7 ofrece un rendimiento gráfico extremo con la arquitectura NVIDIA Blackwell y 32 GB de memoria ultrarrápida. Su diseño reforzado con componentes de grado militar y sistema de refrigeración avanzado asegura estabilidad y durabilidad en cada partida o proyecto creativo."
- },
- "p3708": {
-  "resumen": "La ASUS ROG Astral GeForce RTX™ 5090 OC Edition es una tarjeta gráfica de última generación diseñada para ofrecer un rendimiento excepcional."
- },
- "p45631": {
-  "resumen": "La Sony PS5 Digital Edition de 825GB ofrece potencia de nueva generación con gráficos en 4K, almacenamiento ultrarrápido en SSD, sonido 3D envolvente y el innovador control DualSense, siendo la opción perfecta para quienes prefieren un ecosistema 100% digital."
  },
  "p45585": {
   "resumen": "La ROG Xbox Ally X es una consola portátil de alto rendimiento que combina potencia, diseño ergonómico y acceso directo al ecosistema Xbox. Ideal para jugar en cualquier lugar con fluidez, ofrece una experiencia inmersiva y versátil para gamers exigentes"
@@ -1628,9 +1580,6 @@
  "p15427": {
   "resumen": "LG UltraGear 27G440A-B de 27”: monitor gamer IPS Full HD con 240Hz y 1ms, colores sRGB 99% y compatibilidad con G-SYNC y FreeSync Premium Pro para máxima fluidez en cada partida."
  },
- "p15352": {
-  "resumen": "El LG 27US500-W es un monitor IPS UHD 4K de 27 pulgadas que admite HDR10. Forma parte de la serie UltraFine de LG, diseñada para ofrecer imágenes de alta calidad para trabajos profesionales y creativos."
- },
  "p15436": {
   "resumen": "El LG 27U710B‑B Smart Monitor combina pantalla 4K IPS, HDR10, funciones inteligentes con webOS, altavoces integrados y conectividad avanzada, siendo una solución versátil para quienes buscan un monitor que funcione como centro de entretenimiento y productividad sin depender de un computador."
  },
@@ -1652,14 +1601,8 @@
  "p15435": {
   "resumen": "El MSI MAG 275QF es un monitor gaming de 27 pulgadas con resolución WQHD, frecuencia de actualización de 180 Hz y tiempo de respuesta ultrarrápido de 0.5 ms, diseñado para ofrecer imágenes fluidas y precisas en juegos competitivos."
  },
- "p15422": {
-  "resumen": "Monitor gamer MSI MAG 271QP QD-OLED X28 de 26.5” WQHD con panel QD‑OLED, colores intensos y negros profundos, frecuencia de 280Hz y respuesta ultrarrápida de 0.03ms, ideal para máxima fluidez y precisión en juegos competitivos."
- },
  "p15344": {
   "resumen": "Xiaomi Curved Gaming Monitor G34WQi 2026: pantalla curva de 34” WQHD, 180Hz y 1ms para máxima fluidez e inmersión en juegos."
- },
- "p45614": {
-  "resumen": "Soporte para monitor NB A5-XE blanco, diseñado para pantallas de 17″ a 32″. Ofrece ajuste ergonómico completo, instalación versátil y un acabado moderno que optimiza tu espacio de trabajo con estilo y funcionalidad."
  },
  "p45529": {
   "resumen": "Soporte articulado en negro mate para monitores de 17″ a 30″. Su diseño ergonómico permite ajustar la posición del monitor con facilidad, optimizando la comodidad visual y el espacio de trabajo. Ideal para oficinas, setups gamer o estaciones creativas"
@@ -2078,9 +2021,6 @@
  "p45582": {
   "resumen": "El PXN V900 Gen2 es un combo de volante y pedales diseñado para brindar una experiencia de conducción fluida, versátil y realista. Ideal para jugadores que buscan comodidad, compatibilidad multiplataforma y control preciso en cada carrera"
  },
- "p45581": {
-  "resumen": "El PXN V9 Gen2 es un set de volante, pedales y palanca diseñado para ofrecer una experiencia de conducción realista, precisa y envolvente. Ideal para simracers que buscan control total y compatibilidad multiplataforma en cada carrera."
- },
  "p45598": {
   "resumen": "El set PXN V10 ofrece una experiencia de conducción realista y envolvente gracias a su volante de 900°, pedales magnéticos sensibles y palanca de cambios mecánica. Diseñado para brindar precisión y durabilidad, es compatible con múltiples plataformas y se convierte en la opción ideal para quienes buscan máxima inmersión en simuladores de carreras"
  },
@@ -2176,9 +2116,6 @@
  },
  "p51252": {
   "resumen": "PC gamer con AMD Ryzen 7 5700X de 8 núcleos y NVIDIA GeForce RTX 5060 de 8 GB, equilibrado para jugar y transmitir. Trae 16 GB de RAM, SSD NVMe de 480 GB, board con WiFi, fuente de 650 W y monitor MSI de 24\" a 144 Hz, con teclado y mouse."
- },
- "p51274": {
-  "resumen": "PC gamer con AMD Ryzen 7 8700F de 8 núcleos y NVIDIA GeForce RTX 5050 de 8 GB, sobre plataforma AM5 con memoria DDR5, lista para mejorar más adelante. Incluye 16 GB de RAM DDR5, SSD NVMe de 512 GB, board con WiFi y monitor ASUS de 24\" a 146 Hz, con teclado y mouse RGB."
  },
  "p51284": {
   "resumen": "PC gamer con AMD Ryzen 7 8700F de 8 núcleos y NVIDIA GeForce RTX 5060 de 8 GB, sobre plataforma AM5 con DDR5. Trae 16 GB de RAM, SSD NVMe de 512 GB, fuente de 750 W y monitor ASUS de 24\" a 146 Hz, con teclado y mouse Genius."
@@ -2539,9 +2476,6 @@
  "pporttilgig": {
   "resumen": "Portátil gamer Gigabyte A16 con Intel Core i7 13620H y NVIDIA GeForce RTX 5070 de 8 GB. Pantalla de 16\" a 165 Hz, teclado RGB, 16 GB de RAM DDR5, SSD NVMe de 1 TB y Windows 11 Home."
  },
- "p2110": {
-  "resumen": "Procesador AMD Ryzen 5 5500 de 6 núcleos y 12 hilos para socket AM4, una opción económica para armar un PC gamer con tarjeta de video. No tiene gráficos integrados."
- },
  "p2095": {
   "resumen": "Procesador AMD Ryzen 5 5600GT de 6 núcleos y 12 hilos para socket AM4, con gráficos Radeon integrados: sirve para armar un PC sin tarjeta de video y agregarla después."
  },
@@ -2551,14 +2485,8 @@
  "p2069": {
   "resumen": "Procesador AMD Ryzen 7 5700G de 8 núcleos y 16 hilos para socket AM4, con gráficos Radeon integrados para usar el PC sin tarjeta de video."
  },
- "p2083": {
-  "resumen": "Procesador AMD Ryzen 7 5800X3D de 8 núcleos y 16 hilos con tecnología 3D V-Cache, la memoria caché extra que más rendimiento da en juegos. Es la mejor mejora para un PC AM4. No incluye disipador."
- },
  "p2079": {
   "resumen": "Procesador AMD Ryzen 5 7600X de 6 núcleos y 12 hilos para socket AM5, con memoria DDR5 y PCIe 5.0, rápido para juegos. No incluye disipador."
- },
- "p2085": {
-  "resumen": "Procesador AMD Ryzen 7 7700 de 8 núcleos y 16 hilos para socket AM5, eficiente (65 W) y potente para jugar, crear contenido y trabajar."
  },
  "p2081": {
   "resumen": "Procesador AMD Ryzen 9 7900X de 12 núcleos y 24 hilos para socket AM5, para edición de video, renderizado y multitarea pesada. No incluye disipador."
@@ -2602,9 +2530,6 @@
  "p1122": {
   "resumen": "Procesador Intel Core i9 14900K de 24 núcleos y 32 hilos, desbloqueado, el tope de la 14.ª generación de Intel para socket LGA1700. No incluye disipador."
  },
- "p1141": {
-  "resumen": "Procesador Intel Core Ultra 7 265F de 20 núcleos para el socket LGA1851 (tarjetas madre serie 800). No tiene gráficos integrados: va con tarjeta de video."
- },
  "p34199": {
   "resumen": "Tarjeta madre ASUS Prime A520M-A II para procesadores AMD Ryzen de socket AM4, formato Micro-ATX, con 4 ranuras de memoria DDR4 y salidas de video para usar procesadores con gráficos integrados."
  },
@@ -2638,9 +2563,6 @@
  "p34307": {
   "resumen": "Tarjeta madre ASUS ROG Strix B850-A Gaming WiFi para procesadores AMD de socket AM5, formato ATX, con 4 ranuras DDR5, WiFi y el diseño blanco de la línea ROG Strix."
  },
- "p34292": {
-  "resumen": "Tarjeta madre ASUS ROG Strix B850-F Gaming WiFi para socket AM5, formato ATX, con 4 ranuras DDR5 y WiFi, para equipos gamer de gama alta."
- },
  "p34338": {
   "resumen": "Combo de edición especial ASUS ROG por los 20 años de la marca: tarjeta de video ROG Astral GeForce RTX 5090 OC de 32 GB, la más potente de NVIDIA, y tarjeta madre ROG Crosshair X870E Edition 20 para procesadores AMD AM5."
  },
@@ -2655,9 +2577,6 @@
  },
  "p33353": {
   "resumen": "Tarjeta madre MSI PRO B760M-P para procesadores Intel de 12.ª, 13.ª y 14.ª generación (socket LGA1700), Micro-ATX, con 4 ranuras DDR5."
- },
- "p33399": {
-  "resumen": "Tarjeta madre ASUS TUF Gaming B860-Plus WiFi para procesadores Intel Core Ultra (socket LGA1851), formato ATX, con 4 ranuras DDR5, PCIe 5.0 y WiFi."
  },
  "p5014": {
   "resumen": "Memoria RAM de 4 GB DDR3 a 1600 MHz para PC de escritorio, usada y probada. Sirve para revivir o completar equipos antiguos que usan DDR3."
@@ -2692,12 +2611,6 @@
  "p6078": {
   "resumen": "Memoria RAM para portátil (SO-DIMM) Crucial de 16 GB DDR4 a 3200 MHz, para que tu portátil maneje más programas y pestañas a la vez."
  },
- "p6109": {
-  "resumen": "Memoria RAM para portátil (SO-DIMM) Samsung de 8 GB DDR5 a 5600 MHz, para portátiles recientes con memoria DDR5."
- },
- "p6142": {
-  "resumen": "Memoria RAM para portátil (SO-DIMM) Crucial de 8 GB DDR5 a 5600 MHz, para ampliar portátiles recientes con DDR5."
- },
  "p6135": {
   "resumen": "Memoria RAM para portátil (SO-DIMM) Crucial de 16 GB DDR5 a 4800 MHz, para portátiles con memoria DDR5."
  },
@@ -2706,9 +2619,6 @@
  },
  "p6140": {
   "resumen": "Memoria RAM para portátil (SO-DIMM) Samsung de 32 GB DDR5 a 4800 MHz, para portátiles de trabajo pesado, edición o juegos."
- },
- "p12141": {
-  "resumen": "Disco sólido SanDisk Ultra 3D de 500 GB, SATA de 2,5\". Es la mejora más notoria para un portátil o PC con disco duro: arranca y abre programas mucho más rápido."
  },
  "p12140": {
   "resumen": "Disco sólido SanDisk Ultra 3D de 1 TB, SATA de 2,5\", con memoria 3D NAND. Ideal para reemplazar el disco duro de un portátil o PC."
@@ -2776,9 +2686,6 @@
  "p14281": {
   "resumen": "Fuente de poder XPG Kyber II de 850 W con certificación 80 Plus Gold, para PC gamer con tarjetas de video recientes."
  },
- "p14252": {
-  "resumen": "Fuente de poder XPG Core Reactor II de 850 W, 80 Plus Gold, para PC gamer de gama alta."
- },
  "p14254": {
   "resumen": "Fuente de poder XPG Core Reactor II de 1000 W, 80 Plus Gold y modular, para equipos de alto consumo."
  },
@@ -2788,9 +2695,6 @@
  "p14206": {
   "resumen": "Fuente de poder XPG Fusion de 1600 W con certificación 80 Plus Titanium, la máxima eficiencia, para estaciones de trabajo y PC extremos."
  },
- "p16614": {
-  "resumen": "Caja para PC Antec AX27 Elite con panel de vidrio templado y 4 ventiladores RGB de color fijo incluidos."
- },
  "p16579": {
   "resumen": "Caja para PC Antec CX300 blanca con vidrio templado y 3 ventiladores ARGB incluidos, con buena ventilación."
  },
@@ -2799,9 +2703,6 @@
  },
  "p16633": {
   "resumen": "Caja para PC Antec CX705 con vidrio templado y 5 ventiladores ARGB incluidos, para un armado con mucha iluminación y buen flujo de aire."
- },
- "p16632": {
-  "resumen": "Caja para PC Antec CX blanca con frente tipo espejo, vidrio templado y 7 ventiladores ARGB incluidos."
  },
  "p16616": {
   "resumen": "Caja para PC Antec AX1000 Elite con vidrio templado y 4 ventiladores ARGB de 120 mm incluidos."
@@ -2817,9 +2718,6 @@
  },
  "p16544": {
   "resumen": "Caja para PC Antec CX600M Wood negra con detalles en madera, vidrio templado y 3 ventiladores ARGB incluidos."
- },
- "p16490": {
-  "resumen": "Caja para PC Antec DF700 Flux blanca con vidrio templado, 3 ventiladores ARGB y 2 sin iluminación incluidos, pensada para un flujo de aire alto."
  },
  "p16546": {
   "resumen": "Caja para PC Antec CX800 Wood negra con detalles en madera, vidrio templado y 4 ventiladores ARGB incluidos."
@@ -2845,14 +2743,8 @@
  "p16642": {
   "resumen": "Caja para PC ASUS ROG GR20 de la edición por los 20 años de ROG, compatible con tarjetas madre E-ATX."
  },
- "p16574": {
-  "resumen": "Caja para PC Corsair 480T Airflow negra con vidrio templado y 3 ventiladores ARGB incluidos."
- },
  "p16561": {
   "resumen": "Caja para PC Corsair 4000D Frame RS negra con vidrio templado y 3 ventiladores ARGB incluidos, con buen flujo de aire y fácil manejo de cables."
- },
- "p16605": {
-  "resumen": "Caja para PC Corsair Air 5400 negra con vidrio templado y 3 ventiladores RS120R ARGB incluidos, diseñada para refrigeración líquida."
  },
  "p16641": {
   "resumen": "Caja para PC Cougar MX110 con vidrio templado y 4 ventiladores RGB de color fijo incluidos."
@@ -2890,9 +2782,6 @@
  "p16569": {
   "resumen": "Caja para PC XPG Starker Air BTF con vidrio templado y 4 ventiladores ARGB, compatible con tarjetas madre de conectores traseros (BTF) para un interior sin cables a la vista."
  },
- "p17077": {
-  "resumen": "Combo de caja Cougar FV150 negra con vidrio templado y 4 ventiladores ARGB, más fuente de poder Cougar Atlas de 750 W. Base lista para armar un PC."
- },
  "p26092": {
   "resumen": "Ventilador Cooler Master SickleFlow 120 ARGB blanco de 120 mm, para mejorar la ventilación y la iluminación del PC."
  },
@@ -2905,26 +2794,17 @@
  "p26131": {
   "resumen": "Kit de 3 ventiladores Antec Connect 120 ARGB blancos de 120 mm, con conexión simplificada."
  },
- "p26132": {
-  "resumen": "Kit de 3 ventiladores Antec Connect 120 ARGB blancos de giro inverso, que muestran la cara limpia del ventilador hacia el vidrio."
- },
  "p26122": {
   "resumen": "Kit de 3 ventiladores Cougar Apolar 120 ARGB blancos de giro inverso, con conexión magnética entre ellos."
  },
  "p10096": {
   "resumen": "Disipador por aire Arctic Freezer 36 negro, de torre y con dos ventiladores, silencioso y eficaz para procesadores Intel y AMD."
  },
- "p11174": {
-  "resumen": "Refrigeración líquida ASUS ROG Strix LC III 360 ARGB negra, con radiador de 360 mm, para procesadores de gama alta."
- },
  "p11172": {
   "resumen": "Refrigeración líquida ASUS ROG Strix LC III 360 ARGB con pantalla LCD en la bomba, para mostrar temperaturas, imágenes o animaciones."
  },
  "p11173": {
   "resumen": "Refrigeración líquida ASUS ROG Ryujin III 360 ARGB Extreme, tope de gama de ASUS, con pantalla en la bomba y radiador de 360 mm."
- },
- "p11196": {
-  "resumen": "Refrigeración líquida Cougar Poseidon Vistek 240 ARGB blanca, con radiador de 240 mm y pantalla LCD de 4\" en la bomba."
  },
  "p11131": {
   "resumen": "Refrigeración líquida Cougar Poseidon Elite ARGB 360 blanca, con radiador de 360 mm."
@@ -2962,20 +2842,8 @@
  "p3740": {
   "resumen": "Tarjeta de video MSI GeForce RTX 5060 Gaming OC de 8 GB, con DLSS 4, para jugar en Full HD con altas tasas de cuadros."
  },
- "p3772": {
-  "resumen": "Tarjeta de video Gigabyte GeForce RTX 5060 Eagle Max OC de 8 GB con 3 ventiladores, más fresca y silenciosa."
- },
  "p3743": {
   "resumen": "Tarjeta de video MSI GeForce RTX 5060 Ti Gaming OC de 8 GB, con DLSS 4, para jugar en Full HD y 2K."
- },
- "p3732": {
-  "resumen": "Tarjeta de video MSI GeForce RTX 5070 Ventus 3X OC de 12 GB, con DLSS 4, para jugar en 2K con altos detalles."
- },
- "p3787": {
-  "resumen": "Tarjeta de video Gigabyte Aorus GeForce RTX 5070 Master OC de 12 GB, la versión premium de Gigabyte, para jugar en 2K con altos detalles."
- },
- "p4186": {
-  "resumen": "Tarjeta de video Gigabyte AMD Radeon RX 9060 XT Gaming OC de 16 GB con 3 ventiladores, con FSR 4, para jugar en Full HD y 2K."
  },
  "p25071": {
   "resumen": "Tarjeta microSD Kingston Canvas Go! de 256 GB, con lectura de hasta 200 MB/s y Clase 10, apta para grabar video 4K en cámaras de acción, drones y celulares."
@@ -3019,9 +2887,6 @@
  "p18030": {
   "resumen": "UPS Unitec de 800 VA / 480 W: mantiene encendido tu PC unos minutos cuando se va la luz para que guardes tu trabajo y apagues con seguridad, y lo protege de bajones de voltaje."
  },
- "p18034": {
-  "resumen": "UPS interactiva Unitec de 2000 VA / 1200 W con indicadores LED, para PC gamer, estaciones de trabajo o varios equipos a la vez."
- },
  "p18042": {
   "resumen": "UPS interactiva Forza de 2200 VA / 1200 W con pantalla LCD, que regula el voltaje y da respaldo cuando se va la luz."
  },
@@ -3051,9 +2916,6 @@
  },
  "pmonitorasub": {
   "resumen": "Monitor gamer ASUS ROG Swift PG27AQWP-G de 27\" QHD con panel WOLED a 540 Hz y 0,02 ms, edición especial por los 20 años de ROG. De los monitores más rápidos del mercado."
- },
- "p15419": {
-  "resumen": "Monitor gamer ASUS TUF VG32WQ3B de 31,5\" VA QHD (2K) curvo, a 180 Hz y 0,5 ms, para juegos inmersivos."
  },
  "p15342": {
   "resumen": "Monitor ASUS ProArt PA329CV de 32\" IPS 4K UHD, con color calibrado de fábrica para diseño, fotografía y video."
@@ -3106,9 +2968,6 @@
  "p45558": {
   "resumen": "Base de piso tipo pedestal para televisores de 32\" a 70\", para ubicar el TV donde quieras sin taladrar la pared."
  },
- "p31292": {
-  "resumen": "Diadema gamer Corsair HS65 Surround con sonido envolvente 7.1, micrófono que se silencia al levantarlo y conexión por cable."
- },
  "p31291": {
   "resumen": "Diadema Corsair Virtuoso Pro blanca, de nivel estudio para streaming y juegos, con micrófono desmontable de alta calidad."
  },
@@ -3117,9 +2976,6 @@
  },
  "p31338": {
   "resumen": "Diadema gamer inalámbrica Astro A20 X blanca, con conexión Lightspeed, cómoda para largas sesiones de juego."
- },
- "p31329": {
-  "resumen": "Diadema gamer inalámbrica Razer BlackShark V3 X HyperSpeed, liviana, con conexión inalámbrica de baja latencia y micrófono desmontable."
  },
  "p31305": {
   "resumen": "Diadema gamer Redragon H211 Cronus RGB negra, con micrófono y conexión por cable, para PC y consolas."
@@ -3249,9 +3105,6 @@
  },
  "p19282": {
   "resumen": "Mouse Redragon M917B-Pro Star Pro azul con tres modos de conexión: Bluetooth, inalámbrico de 2,4 GHz y cable USB."
- },
- "p19304": {
-  "resumen": "Mouse gamer inalámbrico Redragon King Ultra M999 con 6 botones y base para recargarlo."
  },
  "p19247": {
   "resumen": "Mouse gamer Redragon M916 King Pro 4K, con conexión Bluetooth, inalámbrica y por cable."
@@ -3463,9 +3316,6 @@
  "p24103": {
   "resumen": "Cargador universal Startec con salida USB-C para portátiles que cargan por USB-C."
  },
- "p45397": {
-  "resumen": "Espuma limpiadora de 16 onzas para limpiar pantallas, teclados y carcasas de equipos."
- },
  "p45340": {
   "resumen": "Funda Startec ST-SL-005 negra para portátil de 15,4\", acolchada para protegerlo de golpes y rayones."
  },
@@ -3657,39 +3507,6 @@
    ]
   ]
  },
- "ip16": {
-  "resumen": "iPhone 16 de 128 GB con chip A18, cámara Fusion de 48 MP, botón de Acción y el botón Control de Cámara para tomar fotos y videos al instante. Conector USB-C.",
-  "ficha": [
-   [
-    "Pantalla",
-    "6,1\" Super Retina XDR (OLED)"
-   ],
-   [
-    "Procesador",
-    "Apple A18"
-   ],
-   [
-    "Cámaras traseras",
-    "48 MP Fusion y 12 MP ultra gran angular"
-   ],
-   [
-    "Cámara frontal",
-    "12 MP"
-   ],
-   [
-    "Botones",
-    "Acción y Control de Cámara"
-   ],
-   [
-    "Conector",
-    "USB-C"
-   ],
-   [
-    "Seguridad",
-    "Face ID"
-   ]
-  ]
- },
  "ip15pm": {
   "resumen": "iPhone 15 Pro Max reacondicionado certificado (CPO), en 256 GB o 512 GB: revisado para funcionar como nuevo. Tiene marco de titanio, pantalla de 6,7\" ProMotion, chip A17 Pro, teleobjetivo de 5x y conector USB-C.",
   "ficha": [
@@ -3712,35 +3529,6 @@
    [
     "Material",
     "titanio"
-   ],
-   [
-    "Conector",
-    "USB-C"
-   ],
-   [
-    "Seguridad",
-    "Face ID"
-   ]
-  ]
- },
- "ip15": {
-  "resumen": "iPhone 15 de 128 GB con Dynamic Island, cámara principal de 48 MP, chip A16 Bionic y conector USB-C. Disponible activado o sin activar.",
-  "ficha": [
-   [
-    "Pantalla",
-    "6,1\" Super Retina XDR (OLED) con Dynamic Island"
-   ],
-   [
-    "Procesador",
-    "Apple A16 Bionic"
-   ],
-   [
-    "Cámaras traseras",
-    "48 MP principal y 12 MP ultra gran angular"
-   ],
-   [
-    "Cámara frontal",
-    "12 MP"
    ],
    [
     "Conector",
@@ -3813,31 +3601,6 @@
  "sa17": {
   "resumen": "Samsung Galaxy A17 con la experiencia One UI de Samsung, para redes, fotos y videos. Disponible en 128 GB y 256 GB 4G con doble SIM (Duos), y en 256 GB 5G con una SIM.",
   "ficha": [
-   [
-    "Seguridad",
-    "Lector de huella"
-   ]
-  ]
- },
- "sa27": {
-  "resumen": "Samsung Galaxy A27 5G de 256 GB con pantalla Super AMOLED a 120 Hz, batería de 5000 mAh y resistencia IP64.",
-  "ficha": [
-   [
-    "Pantalla",
-    "Super AMOLED FHD+ a 120 Hz"
-   ],
-   [
-    "Batería",
-    "5000 mAh, carga de 25 W"
-   ],
-   [
-    "Resistencia",
-    "IP64"
-   ],
-   [
-    "Red",
-    "5G"
-   ],
    [
     "Seguridad",
     "Lector de huella"
@@ -4161,15 +3924,6 @@
    ]
   ]
  },
- "xrn15pro": {
-  "resumen": "Xiaomi Redmi Note 15 Pro de 256 GB en versión 4G, de la serie Note, con pantalla AMOLED y cámara de alta resolución.",
-  "ficha": [
-   [
-    "Seguridad",
-    "Huella en la pantalla y reconocimiento facial"
-   ]
-  ]
- },
  "xrn17": {
   "resumen": "Xiaomi Redmi Note 17 con pantalla AMOLED FHD+, batería de 7700 mAh y resistencia IP65. Disponible en varias combinaciones de memoria y una versión 5G.",
   "ficha": [
@@ -4273,15 +4027,6 @@
    ]
   ]
  },
- "pococ85": {
-  "resumen": "POCO C85 de 256 GB, un celular económico de POCO con pantalla grande y batería de larga duración.",
-  "ficha": [
-   [
-    "Seguridad",
-    "Huella lateral y reconocimiento facial"
-   ]
-  ]
- },
  "pococ71": {
   "resumen": "POCO C71 con pantalla de 6,88\" a 120 Hz, cámara de 32 MP y batería de 5200 mAh. Disponible en 64 GB y 128 GB.",
   "ficha": [
@@ -4342,15 +4087,6 @@
    [
     "Seguridad",
     "Huella en la pantalla y reconocimiento facial"
-   ]
-  ]
- },
- "pocof8pro": {
-  "resumen": "POCO F8 Pro de 256 GB y 8 GB de RAM, de la serie F, la más potente de POCO, pensada para juegos exigentes.",
-  "ficha": [
-   [
-    "Seguridad",
-    "Huella ultrasónica en la pantalla y reconocimiento facial"
    ]
   ]
  },
@@ -4920,9 +4656,6 @@
  "nneo5": {
   "resumen": "Nubia Neo 5 5G de 256 GB, de la línea gamer Neo de ZTE."
  },
- "nneo5gt": {
-  "resumen": "Nubia Neo 5 GT 5G de 512 GB, la versión más potente de la línea gamer Neo de ZTE."
- },
  "nk110": {
   "resumen": "Nokia 110 4G, celular básico con cámara, radio FM, linterna y batería que dura días. Ideal como segundo celular o para quien no necesita smartphone."
  },
@@ -5164,12 +4897,6 @@
  "rw5lite": {
   "resumen": "Xiaomi Redmi Watch 5 Lite con pantalla AMOLED grande, GPS integrado y llamadas por Bluetooth."
  },
- "hgt6pro": {
-  "resumen": "Huawei Watch GT 6 Pro de 46 mm, con batería de varios días y funciones avanzadas para deporte y salud."
- },
- "hgt5pro": {
-  "resumen": "Huawei Watch GT 5 Pro de 42 mm con caja de cerámica, para deporte y salud, con batería de varios días."
- },
  "hfit5pro": {
   "resumen": "Huawei Watch Fit 5 Pro con pantalla AMOLED, resistencia al agua 5 ATM y funciones de entrenamiento y salud.",
   "ficha": [
@@ -5182,29 +4909,6 @@
     "5 ATM"
    ]
   ]
- },
- "hfit4": {
-  "resumen": "Huawei Watch Fit 4, delgado y liviano, con pantalla AMOLED y funciones de salud y deporte."
- },
- "hfit3": {
-  "resumen": "Huawei Watch Fit 3 con pantalla AMOLED grande, diseño delgado y resistencia al agua 5 ATM.",
-  "ficha": [
-   [
-    "Pantalla",
-    "AMOLED"
-   ],
-   [
-    "Resistencia al agua",
-    "5 ATM"
-   ],
-   [
-    "Sensores",
-    "acelerómetro, giroscopio, magnetómetro, frecuencia cardíaca y luz ambiente"
-   ]
-  ]
- },
- "hband11": {
-  "resumen": "Huawei Band 11, manilla liviana para medir actividad, sueño y frecuencia cardíaca."
  },
  "rw5active": {
   "resumen": "Xiaomi Redmi Watch 5 Active con pantalla de 2\", llamadas por Bluetooth y batería de larga duración."
@@ -5301,32 +5005,14 @@
  "hfbse4": {
   "resumen": "Huawei FreeBuds SE 4 ANC con cancelación activa de ruido y estuche de carga compacto."
  },
- "ztebuds": {
-  "resumen": "Audífonos inalámbricos ZTE con estuche de carga."
- },
- "hx7e": {
-  "resumen": "Honor Earbuds X7e, audífonos inalámbricos con buena batería y estuche compacto."
- },
  "hclip": {
   "resumen": "Honor Choice Earbuds Clip, audífonos de diseño abierto tipo clip que dejan oír el entorno, cómodos para hacer deporte."
- },
- "hdiadema": {
-  "resumen": "Audífonos de diadema Honor, inalámbricos y cómodos para música y llamadas."
- },
- "jblbb4": {
-  "resumen": "JBL Boombox 4, el parlante portátil más potente de JBL, con bajos profundos, resistencia IP68 al agua y al polvo y batería para todo el día."
- },
- "jblch6": {
-  "resumen": "JBL Charge 6 con resistencia IP68, batería de larga duración y función de power bank para cargar tu celular."
  },
  "jblflip7": {
   "resumen": "JBL Flip 7, compacto y resistente al agua, al polvo (IP68) y a caídas, con sonido potente para llevar a todas partes."
  },
  "xsparty": {
   "resumen": "Parlante Bluetooth Xiaomi Sound Party, con sonido potente para reuniones y fiestas."
- },
- "ztebafle": {
-  "resumen": "Parlante Bluetooth ZTE, portátil y práctico."
  },
  "xbtred": {
   "resumen": "Parlante Bluetooth Xiaomi redondo, compacto y con correa para llevarlo a todas partes."
@@ -5345,18 +5031,6 @@
  },
  "acub20": {
   "resumen": "Cargador original Apple de 20 W con puerto USB-C, para carga rápida del iPhone. Disponible con o sin caja."
- },
- "acc2m": {
-  "resumen": "Cable original Apple USB-C a USB-C trenzado de 2 m, para cargar iPhone, iPad y Mac."
- },
- "acc1m": {
-  "resumen": "Cable Apple USB-C a USB-C trenzado de 1 m. Se entrega sin caja."
- },
- "acclight": {
-  "resumen": "Cable Apple USB-C a Lightning para cargar y sincronizar iPhone con puerto Lightning, compatible con carga rápida. Se entrega sin caja."
- },
- "accwatch": {
-  "resumen": "Cable de carga magnético para Apple Watch."
  },
  "scar60": {
   "resumen": "Cargador Samsung de 60 W para carga súper rápida de celulares, tablets y portátiles compatibles."
@@ -5414,27 +5088,6 @@
  },
  "airtag4": {
   "resumen": "Paquete de 4 AirTag (segunda generación) para encontrar llaves, maletas o morrales con la app Encontrar del iPhone."
- },
- "switch2": {
-  "resumen": "Nintendo Switch 2 con pantalla de 7,9\" Full HD, 256 GB de almacenamiento y Joy-Con 2 magnéticos que también funcionan como mouse. Se juega en modo portátil o conectada al TV, hasta en 4K.",
-  "ficha": [
-   [
-    "Pantalla",
-    "7,9\" LCD Full HD"
-   ],
-   [
-    "Almacenamiento",
-    "256 GB"
-   ],
-   [
-    "Controles",
-    "Joy-Con 2 magnéticos con función de mouse"
-   ],
-   [
-    "Salida al TV",
-    "hasta 4K"
-   ]
-  ]
  },
  "xpatineta": {
   "resumen": "Patineta eléctrica Xiaomi 5 Plus con sillín, para moverte por la ciudad sentado o de pie."
@@ -5516,17 +5169,11 @@
  "p31311": {
   "resumen": "Xiaomi Redmi Buds 6 Pro blancos, con cancelación activa de ruido avanzada y sonido de alta calidad."
  },
- "p31346": {
-  "resumen": "Xiaomi Redmi Buds 8 Pro blancos, los audífonos más completos de la línea Redmi Buds."
- },
  "p45647": {
   "resumen": "Power bank Hora de 10.000 mAh con 4 cables incorporados y pantalla digital que muestra la carga restante."
  },
  "p45648": {
   "resumen": "Power bank Hora de 20.000 mAh con 4 cables incorporados y pantalla digital que muestra la carga restante."
- },
- "p45617": {
-  "resumen": "Power bank Hora de 20.000 mAh con linterna y cable USB-C y Lightning."
  },
  "rmnote80": {
   "resumen": "Realme Note 80 de 128 GB con 4 GB de RAM más 4 GB virtuales, económico y rendidor para el día a día.",
