@@ -5,6 +5,7 @@ import { CONFIG, deTienda } from "../data/catalogo";
 import { GRUPOS, TIENDAS, tiendaPorId } from "../data/tiendas";
 import { useTienda } from "../estado/TiendaContext";
 import { claveRuta } from "../lib/rutas";
+import { ATERRIZAJE, hayVuelo } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
 import type { Ruta, TiendaId } from "../types";
 import { Buscador } from "./Buscador";
@@ -118,13 +119,19 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
 export function Cabecera({ ruta }: { ruta: Ruta }) {
   const { unidades, abrirCarrito } = useTienda();
   const [menu, setMenu] = useState(false);
-  // Cada vez que se agrega algo al carrito, el contador da un pequeño salto (no al cargar la página ni al quitar)
+  // Cada vez que se agrega algo al carrito, el contador da un pequeño salto (no al cargar la página ni al quitar).
+  // Si la foto del producto va volando hacia el carrito, el salto espera a que aterrice
   const antes = useRef(unidades);
   const [saltos, setSaltos] = useState(0);
   useEffect(() => {
-    if (unidades > antes.current) setSaltos(n => n + 1);
+    if (unidades > antes.current && !hayVuelo()) setSaltos(n => n + 1);
     antes.current = unidades;
   }, [unidades]);
+  useEffect(() => {
+    const saltar = () => setSaltos(n => n + 1);
+    window.addEventListener(ATERRIZAJE, saltar);
+    return () => window.removeEventListener(ATERRIZAJE, saltar);
+  }, []);
   const actual = ruta.tipo === "tienda" ? ruta.vista : ruta.tipo === "articulo" ? ruta.id : ruta.tipo === "blog" ? "blog" : "";
   const q = ruta.tipo === "buscar" ? ruta.q : "";
   const clave = claveRuta(ruta);
@@ -155,7 +162,7 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
               <IconoBolsa />
               <span className="hidden sm:inline">Carrito</span>
               {/* La clave cambia con cada producto agregado: así la animación vuelve a empezar */}
-              <span key={saltos} className={`min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-xs font-bold tabular-nums transition-colors duration-200 ${unidades ? "bg-acento text-acento-tinta" : "bg-fondo text-tinta-2"} ${saltos ? "motion-safe:animate-latido" : ""}`}>{unidades}</span>
+              <span key={saltos} data-destino-carrito className={`min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-xs font-bold tabular-nums transition-colors duration-200 ${unidades ? "bg-acento text-acento-tinta" : "bg-fondo text-tinta-2"} ${saltos ? "motion-safe:animate-latido" : ""}`}>{unidades}</span>
             </button>
           </div>
         </div>

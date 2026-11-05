@@ -1,11 +1,13 @@
+import { useCallback, useEffect, useRef, useState } from "react";
 import { etiquetaDe, textoConsulta } from "../data/catalogo";
 import { useTienda } from "../estado/TiendaContext";
-import { dinero } from "../lib/formato";
+import { dinero, recurso } from "../lib/formato";
 import { hrefProducto } from "../lib/rutas";
+import { volarAlCarrito } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
 import type { Producto } from "../types";
 import { FotoProducto } from "./FotoProducto";
-import { IconoWhatsApp } from "./Iconos";
+import { IconoCheck, IconoWhatsApp } from "./Iconos";
 
 /** Etiqueta del estado cuando no es nuevo (CPO, Usado, Open box) */
 export function Insignia({ producto }: { producto: Producto }) {
@@ -23,6 +25,31 @@ export function TextoAgregar({ cantidad, tope }: { cantidad: number; tope: boole
   return <>{tope ? "Sin más unidades" : cantidad ? "Agregar otra" : "Agregar"}</>;
 }
 
+/** Después de agregar, el botón dice «Agregado» con un ✓ durante 1,2 s (confirma que el toque funcionó); luego vuelve a
+    «Agregar otra». Cada vez que se agrega, el ✓ vuelve a aparecer y el tiempo empieza de nuevo. */
+export function useAgregado() {
+  const [vez, setVez] = useState(0);
+  const [recien, setRecien] = useState(false);
+  const reloj = useRef<number>();
+  useEffect(() => () => window.clearTimeout(reloj.current), []);
+  const marcar = useCallback(() => {
+    setVez(n => n + 1);
+    setRecien(true);
+    window.clearTimeout(reloj.current);
+    reloj.current = window.setTimeout(() => setRecien(false), 1200);
+  }, []);
+  return { vez, recien, marcar };
+}
+
+/** Texto del botón de agregar: «Agregado ✓» justo después de agregar; si no, «Agregar», «Agregar otra» o «Sin más unidades» */
+export function EtiquetaAgregar({ vez, recien, cantidad, tope, sufijo = "" }: { vez: number; recien: boolean; cantidad: number; tope: boolean; sufijo?: string }) {
+  if (recien) {
+    return <span key={`ok-${vez}`} className="inline-flex items-center gap-1.5"><IconoCheck className="h-4 w-4 shrink-0 motion-safe:animate-marcar" />Agregado</span>;
+  }
+  // Al volver de «Agregado», el texto entra con un fundido corto (la primera vez no se mueve)
+  return <span key={`texto-${vez}`} className={`inline-block ${vez ? "motion-safe:animate-entrar" : ""}`}><TextoAgregar cantidad={cantidad} tope={tope} />{sufijo}</span>;
+}
+
 /** `cinta`: etiqueta opcional arriba a la derecha de la foto (ej.: "Top ventas") */
 export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { producto: Producto; prioridad?: boolean; cinta?: string }) {
   const { version, elegirVersion, cantidadDe, agregar, avisar } = useTienda();
@@ -30,15 +57,21 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
   const o = p.opciones[i] ?? p.opciones[0]!;
   const q = cantidadDe(p.id, i);
   const tope = p.stock != null && q >= p.stock;
+  const foto = useRef<HTMLAnchorElement>(null);
+  const { vez, recien, marcar } = useAgregado();
 
-  const alAgregar = () => {
-    if (agregar(p.id, i)) avisar(`Agregaste ${p.nombre}${o.nombre ? ` (${o.nombre})` : ""} al carrito`);
+  const alAgregar = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!agregar(p.id, i)) return;
+    marcar();
+    // La foto despega hacia el carrito (desde la foto de la tarjeta o, si no se ve entera, desde el botón)
+    volarAlCarrito([foto.current, e.currentTarget], p.imagen && recurso(p.imagen));
+    avisar(`Agregaste ${p.nombre}${o.nombre ? ` (${o.nombre})` : ""} al carrito`);
   };
 
   return (
     <article className="tarjeta group relative flex h-full flex-col overflow-hidden transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
       {/* Con el mouse encima de la tarjeta, la foto se acerca un poco (solo con mouse; en celular no queda pegado) */}
-      <a href={hrefProducto(p.id)} tabIndex={-1} aria-hidden="true" className="relative block aspect-square bg-white p-4">
+      <a ref={foto} href={hrefProducto(p.id)} tabIndex={-1} aria-hidden="true" className="relative block aspect-square bg-white p-4">
         <FotoProducto producto={p} alt="" prioridad={prioridad} className="motion-safe:group-hover:scale-[1.05]" />
         <Insignia producto={p} />
         {cinta && <span className="absolute right-2 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-[12.5px] font-semibold text-acento-texto">{cinta}</span>}
@@ -71,11 +104,14 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
             </>
           ) : (
             <>
-              <p className="font-display text-[19px] font-bold leading-none tracking-tight tabular-nums">{dinero(o.precio)}</p>
+              {/* Al cambiar de versión, el precio nuevo entra con un fundido corto (como en la página del producto) */}
+              <p key={o.precio} className="font-display text-[19px] font-bold leading-none tracking-tight tabular-nums motion-safe:animate-entrar">{dinero(o.precio)}</p>
               <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-sm btn-suave mt-3 w-full">
-                <TextoAgregar cantidad={q} tope={tope} />
+                <EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} />
               </button>
-              <p className="mt-1.5 h-4 text-xs font-semibold text-marca" aria-live="polite">{q > 0 ? `${q} en el carrito` : ""}</p>
+              <p className="mt-1.5 h-4 text-xs font-semibold text-marca" aria-live="polite">
+                {q > 0 && <span key={q} className="inline-block motion-safe:animate-entrar">{q} en el carrito</span>}
+              </p>
             </>
           )}
         </div>

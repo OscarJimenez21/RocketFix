@@ -27,20 +27,23 @@ function Vitrina() {
   // Los de «Preguntar disponibilidad» no salen en la vitrina
   const productos = useMemo(() => VITRINA.map(id => porId[id]).filter((p): p is Producto => Boolean(p) && !p?.consultar), []);
   const [i, setI] = useState(0);
+  // Cuántas veces ha cambiado (el nombre y el precio solo entran con fundido desde el primer cambio, no al cargar)
+  const [cambios, setCambios] = useState(0);
   const [quieta, setQuieta] = useState(false);
   const [elegida, setElegida] = useState(false);
   const [reducir] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const caja = useRef<HTMLDivElement>(null);
+  const visible = useEnPantalla(caja);
+  const ir = (j: number) => { setI(j); setCambios(n => n + 1); };
 
-  useEffect(() => {
-    if (quieta || elegida || reducir || productos.length < 2) return;
-    const t = window.setTimeout(() => setI(x => (x + 1) % productos.length), ESPERA_VITRINA);
-    return () => window.clearTimeout(t);
-  }, [i, quieta, elegida, reducir, productos.length]);
+  // El tiempo lo lleva la línea que se llena bajo la miniatura activa: al llenarse, pasa al siguiente producto.
+  // Se pausa con el mouse encima, al usar el teclado o mientras la vitrina no se ve; si la persona elige un producto, se quita
+  const avanza = !elegida && !reducir && productos.length > 1;
 
   const p = productos[i];
   if (!p) return null;
   return (
-    <div role="region" aria-roledescription="carrusel" aria-label="Productos destacados" className="tarjeta w-full overflow-hidden border-0 text-tinta"
+    <div ref={caja} role="region" aria-roledescription="carrusel" aria-label="Productos destacados" className="tarjeta w-full overflow-hidden border-0 text-tinta"
       onMouseEnter={() => setQuieta(true)} onMouseLeave={() => setQuieta(false)} onFocus={() => setQuieta(true)} onBlur={() => setQuieta(false)}>
       <div className="relative aspect-[4/3]">
         {productos.map((x, j) => (
@@ -52,7 +55,8 @@ function Vitrina() {
         <span className="absolute left-3 top-3 rounded-sm bg-fondo px-2 py-1 text-[13px] font-semibold text-tinta-2">{etiquetaDe(p)}</span>
       </div>
       <div className="flex items-center justify-between gap-3 border-t border-linea px-4 py-3.5 sm:px-5" aria-live={quieta || elegida ? "polite" : "off"}>
-        <div className="min-w-0">
+        {/* El nombre y el precio cambian junto con la foto (entran con un fundido corto) */}
+        <div key={p.id} className={`min-w-0 ${cambios ? "motion-safe:animate-entrar" : ""}`}>
           <p className="truncate font-display text-[17px] font-bold">{p.nombre}</p>
           <p className="text-sm text-tinta-2">{p.opciones.length > 1 && "Desde "}<b className="font-display text-[15px] tabular-nums text-tinta">{dinero(desde(p))}</b></p>
         </div>
@@ -62,9 +66,15 @@ function Vitrina() {
       <div className="grid justify-center gap-[var(--hueco)] border-t border-linea bg-fondo p-2 [--hueco:0.375rem] sm:p-2.5 sm:[--hueco:0.5rem]"
         style={{ gridTemplateColumns: `repeat(${productos.length}, calc((100% - 5 * var(--hueco)) / 6))` }}>
         {productos.map((x, j) => (
-          <button key={x.id} type="button" onClick={() => { setI(j); setElegida(true); }} aria-label={`Ver ${x.nombre}`} aria-current={j === i || undefined}
-            className={`presionable aspect-square rounded border bg-white p-1 ${j === i ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
+          <button key={x.id} type="button" onClick={() => { if (j !== i) ir(j); setElegida(true); }} aria-label={`Ver ${x.nombre}`} aria-current={j === i || undefined}
+            className={`presionable relative aspect-square overflow-hidden rounded border bg-white p-1 ${j === i ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
             <FotoProducto producto={x} alt="" />
+            {/* Línea que se llena en 6 s: cuenta el tiempo hasta el siguiente producto (la clave la reinicia en cada cambio) */}
+            {avanza && j === i && (
+              <span key={cambios} aria-hidden="true" onAnimationEnd={() => ir((i + 1) % productos.length)}
+                className="absolute inset-x-0 bottom-0 h-[3px] origin-left bg-marca"
+                style={{ animation: `avance ${ESPERA_VITRINA}ms linear forwards`, animationPlayState: quieta || !visible ? "paused" : "running" }} />
+            )}
           </button>
         ))}
       </div>
@@ -682,13 +692,20 @@ function ComoComprar() {
     ["Envía el pedido por WhatsApp", "El mensaje sale escrito con los productos, el total y la forma de entrega. Enviarlo no es un pago."],
     ["Confirmamos y entregamos", `Te confirmamos disponibilidad y pago. En Bogotá y alrededores te lo llevamos el mismo día y puedes pagar contra entrega; al resto de Colombia lo enviamos con pago anticipado. Envío gratis en Bogotá desde ${dinero(CONFIG.envios.bogota.gratisDesde)} y al resto del país desde ${dinero(CONFIG.envios.nacional.gratisDesde)}.`]
   ];
+  // La primera vez que la lista aparece en pantalla, los pasos se encienden uno tras otro (ver .pasos en index.css)
+  const lista = useRef<HTMLOListElement>(null);
+  const visto = useVisto(lista);
   return (
     <section aria-labelledby="t-como" className="contenedor py-12">
       <h2 id="t-como" className="titulo-seccion">Cómo comprar</h2>
-      <ol className="mt-6 grid gap-6 md:grid-cols-3 md:gap-8">
+      <ol ref={lista} data-visto={visto || undefined} className="pasos mt-6 grid gap-6 md:grid-cols-3 md:gap-8">
         {pasos.map(([t, d], i) => (
-          <li key={t} className="flex gap-3">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-marca-suave text-sm font-bold text-marca-oscuro">{i + 1}</span>
+          <li key={t} style={{ "--orden": i } as React.CSSProperties} className="relative flex gap-3 md:flex-col">
+            {/* Línea punteada hasta el círculo del paso siguiente: hacia abajo en celular, hacia la derecha desde 768 px */}
+            {i < pasos.length - 1 && (
+              <span aria-hidden="true" className="paso-ruta absolute left-[calc(1rem-2px)] top-[calc(2rem+5px)] h-[calc(100%-0.5rem-10px)] w-1 md:left-[calc(2rem+6px)] md:top-[calc(1rem-2px)] md:h-1 md:w-[calc(100%-12px)]" />
+            )}
+            <span className="paso-num flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold">{i + 1}</span>
             <div><p className="font-semibold">{t}</p><p className="mt-1 text-sm leading-relaxed text-tinta-2">{d}</p></div>
           </li>
         ))}

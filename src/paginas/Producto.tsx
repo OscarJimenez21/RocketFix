@@ -5,9 +5,10 @@ import { useTienda } from "../estado/TiendaContext";
 import { Migas } from "../components/EncabezadoVista";
 import { Galeria } from "../components/Galeria";
 import { IconoCamion, IconoCompartir, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
-import { NotaProducto, TarjetaProducto, TextoAgregar } from "../components/TarjetaProducto";
+import { EtiquetaAgregar, NotaProducto, TarjetaProducto, useAgregado } from "../components/TarjetaProducto";
 import { armarDescripcion } from "../lib/descripcion";
-import { dinero } from "../lib/formato";
+import { dinero, recurso } from "../lib/formato";
+import { volarAlCarrito } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
 import type { Descripcion } from "../types";
 import { NoEncontrada } from "./NoEncontrada";
@@ -19,6 +20,7 @@ export default function Producto({ id }: { id: string }) {
   const p = porId[id];
   const { version, elegirVersion, cantidadDe, agregar, avisar, abrirCarrito } = useTienda();
   const [copiado, setCopiado] = useState(false);
+  const { vez, recien, marcar } = useAgregado();
 
   useEffect(() => {
     if (p) document.title = `${p.nombre} · ${CONFIG.nombre}`;
@@ -38,8 +40,12 @@ export default function Producto({ id }: { id: string }) {
   const puntos = (r: typeof p) => (r.categoria === p.categoria ? 2 : 0) + (r.marca && r.marca === p.marca ? 1 : 0);
   const relacionados = deTienda(p.tienda).filter(r => r.id !== p.id).sort((a, b) => conPrecioPrimero(a, b) || puntos(b) - puntos(a)).slice(0, 4);
 
-  const alAgregar = () => {
-    if (agregar(p.id, i)) avisar(`Agregaste ${nombreItem(p, o.nombre)} al carrito`);
+  const alAgregar = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!agregar(p.id, i)) return;
+    marcar();
+    // La foto despega hacia el carrito (desde la foto grande o, si ya no se ve entera, desde el botón)
+    volarAlCarrito([document.querySelector("[data-foto-principal]"), e.currentTarget], p.imagen && recurso(p.imagen));
+    avisar(`Agregaste ${nombreItem(p, o.nombre)} al carrito`);
   };
   const compartir = async () => {
     // Se comparte la página propia del producto: al pegarla en WhatsApp sale con su foto, nombre y precio
@@ -97,11 +103,11 @@ export default function Producto({ id }: { id: string }) {
               <p key={o.precio} className="font-display text-[34px] font-extrabold leading-none tabular-nums motion-safe:animate-entrar">{dinero(o.precio)}</p>
               <p className="mt-2 text-[13px] text-tinta-3">Precio en pesos colombianos. Antes de cualquier pago te confirmamos disponibilidad por WhatsApp.</p>
               <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
-                <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario w-full"><TextoAgregar cantidad={q} tope={tope} /> al carrito</button>
+                <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario w-full"><EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" /></button>
                 <a href={waLink(`Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, o.nombre)} (${dinero(o.precio)}). ¿Está disponible?`)} target="_blank" rel="noopener"
                   className="btn btn-borde w-full"><IconoWhatsApp className="h-[18px] w-[18px] text-wa" />Preguntar por WhatsApp</a>
               </div>
-              {q > 0 && <p className="mt-3 text-sm font-semibold text-marca">{q} en el carrito · <button type="button" onClick={abrirCarrito} className="underline underline-offset-2">Ver carrito</button></p>}
+              {q > 0 && <p className="mt-3 text-sm font-semibold text-marca"><span key={q} className="inline-block motion-safe:animate-entrar">{q} en el carrito</span> ·<button type="button" onClick={abrirCarrito} className="underline underline-offset-2">Ver carrito</button></p>}
             </div>
           )}
 

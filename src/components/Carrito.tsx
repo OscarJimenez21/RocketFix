@@ -11,6 +11,7 @@ import { waLink } from "../lib/whatsapp";
 import type { ZonaEntrega } from "../types";
 import { FotoProducto } from "./FotoProducto";
 import { IconoCerrar, IconoTarjeta, IconoWhatsApp } from "./Iconos";
+import { Cohete } from "./Logo";
 
 const GUARDADO = "rocketfix-datos-pedido";
 const datosIniciales = (): DatosPedido => {
@@ -138,6 +139,11 @@ export function Carrito() {
 
         {lineas.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
+            {/* El cohete del logo, quieto en su plataforma, esperando el primer producto */}
+            <span aria-hidden="true" className="mb-1 flex flex-col items-center">
+              <Cohete className="h-14 w-14 text-marca" />
+              <span className="mt-2.5 h-[3px] w-16 rounded-full bg-linea-fuerte" />
+            </span>
             <p className="text-lg font-semibold">Tu carrito está vacío</p>
             <p className="text-sm text-tinta-2">Agrega celulares, computadores o accesorios y aquí armamos el mensaje para WhatsApp.</p>
             <button type="button" onClick={cerrarCarrito} className="btn btn-borde mt-2">Seguir viendo productos</button>

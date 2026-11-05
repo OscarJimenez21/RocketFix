@@ -37,16 +37,22 @@ export default {
       },
       // Curvas de movimiento: "salida" para lo que aparece o responde a un toque; "cajon" para el carrito y el menú (como iOS)
       transitionTimingFunction: { salida: "cubic-bezier(0.23, 1, 0.32, 1)", cajon: "cubic-bezier(0.32, 0.72, 0, 1)" },
-      // entrar: la página nueva aparece al navegar; latido: el contador del carrito al agregar; desplegar: las sugerencias del buscador
+      // entrar: la página nueva aparece al navegar; latido: el contador del carrito al agregar; desplegar: las sugerencias del buscador;
+      // marcar: el ✓ de «Agregado»; deriva: el cohete perdido de la página no encontrada
+      // (la línea que cuenta el tiempo de la vitrina usa @keyframes avance, en index.css)
       keyframes: {
         entrar: { from: { opacity: "0", transform: "translateY(6px)" } },
         latido: { "40%": { transform: "scale(1.3)" } },
-        desplegar: { from: { opacity: "0", transform: "translateY(-4px) scale(0.98)" } }
+        desplegar: { from: { opacity: "0", transform: "translateY(-4px) scale(0.98)" } },
+        marcar: { from: { opacity: "0", transform: "scale(0.5)" } },
+        deriva: { from: { opacity: "0", transform: "translateY(44px) rotate(-24deg)" } }
       },
       animation: {
         entrar: "entrar 260ms cubic-bezier(0.23, 1, 0.32, 1) backwards",
         latido: "latido 380ms cubic-bezier(0.23, 1, 0.32, 1)",
-        desplegar: "desplegar 160ms cubic-bezier(0.23, 1, 0.32, 1)"
+        desplegar: "desplegar 160ms cubic-bezier(0.23, 1, 0.32, 1)",
+        marcar: "marcar 200ms cubic-bezier(0.23, 1, 0.32, 1) backwards",
+        deriva: "deriva 900ms cubic-bezier(0.23, 1, 0.32, 1) 150ms backwards"
       },
       borderRadius: { DEFAULT: "6px", md: "8px", lg: "10px" },
       maxWidth: { pagina: "1240px" },
