@@ -23,5 +23,6 @@ export function BotonCopiar({ texto, className = "btn-borde" }: { texto: string;
   const copiar = async () => {
     try { await navigator.clipboard.writeText(texto); setCopiado(true); setTimeout(() => setCopiado(false), 2000); } catch { /* sin permiso */ }
   };
-  return <button type="button" onClick={copiar} className={`btn btn-sm ${className}`}>{copiado ? "Copiado" : "Copiar número"}</button>;
+  // «Copiado» entra con un fundido corto para que se note que funcionó
+  return <button type="button" onClick={copiar} className={`btn btn-sm ${className}`}>{copiado ? <span className="inline-block motion-safe:animate-entrar">Copiado</span> : "Copiar número"}</button>;
 }

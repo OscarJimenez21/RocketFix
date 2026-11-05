@@ -72,6 +72,26 @@ export function Carrito() {
   const mensaje = mensajePedido(lineas, datos);
   const nacional = zona === "nacional";
 
+  // Al quitar un producto, su línea se desvanece hacia la derecha (180 ms) antes de salir; con «reducir movimiento» sale de una vez
+  const [saliendo, setSaliendo] = useState<string[]>([]);
+  const sacar = (clave: string) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { quitar(clave); return; }
+    setSaliendo(s => (s.includes(clave) ? s : [...s, clave]));
+    window.setTimeout(() => { quitar(clave); setSaliendo(s => s.filter(x => x !== clave)); }, 180);
+  };
+
+  // Cuando el pedido llega al envío gratis, «Gratis» da un salto y el aviso cambia. Si pasa con el carrito cerrado
+  // (al agregar desde un producto), se celebra al abrirlo
+  const envioAntes = useRef(envio);
+  const porCelebrar = useRef(false);
+  const [festejo, setFestejo] = useState(0);
+  useEffect(() => {
+    if (envioAntes.current > 0 && envio === 0 && subtotal > 0) porCelebrar.current = true;
+    if (envio > 0) porCelebrar.current = false;
+    envioAntes.current = envio;
+    if (porCelebrar.current && carritoAbierto) { porCelebrar.current = false; setFestejo(n => n + 1); }
+  }, [envio, subtotal, carritoAbierto]);
+
   // Al escribir en un campo que estaba marcado, se quita su marca y el aviso (se vuelve a validar al enviar)
   const poner = <K extends keyof DatosPedido>(k: K, v: DatosPedido[K]) => {
     setD(x => ({ ...x, [k]: v }));
@@ -130,7 +150,7 @@ export function Carrito() {
                   const nombre = nombreItem(p, o.nombre);
                   const tope = p.stock != null && cantidad >= p.stock;
                   return (
-                    <li key={clave} className="grid grid-cols-[64px_1fr] gap-3 py-4">
+                    <li key={clave} className={`grid grid-cols-[64px_1fr] gap-3 py-4 transition-[opacity,transform] duration-[180ms] ease-salida ${saliendo.includes(clave) ? "pointer-events-none translate-x-3 opacity-0" : ""}`}>
                       <a href={hrefProducto(p.id)} className="h-16 w-16 rounded border border-linea bg-white p-1" tabIndex={-1} aria-hidden="true"><FotoProducto producto={p} alt="" /></a>
                       <div className="min-w-0">
                         <a href={hrefProducto(p.id)} className="line-clamp-2 text-[14.5px] font-semibold leading-snug hover:text-marca">{nombre}</a>
@@ -138,11 +158,11 @@ export function Carrito() {
                         {/* Con montos grandes o en pantallas angostas, el total baja a su propio renglón (antes se salía de la pantalla) */}
                         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
                           <div className="inline-flex items-center rounded border border-linea-fuerte" role="group" aria-label={`Cantidad de ${nombre}`}>
-                            <button type="button" onClick={() => cambiar(clave, -1)} aria-label="Quitar una unidad" className="presionable h-11 w-11 text-lg leading-none hover:bg-fondo">−</button>
+                            <button type="button" onClick={() => (cantidad === 1 ? sacar(clave) : cambiar(clave, -1))} aria-label="Quitar una unidad" className="presionable h-11 w-11 text-lg leading-none hover:bg-fondo">−</button>
                             <output className="w-7 text-center font-mono text-sm" aria-live="polite">{cantidad}</output>
                             <button type="button" onClick={() => cambiar(clave, 1)} disabled={tope} aria-label="Agregar una unidad" className="presionable h-11 w-11 text-lg leading-none hover:bg-fondo disabled:opacity-40">+</button>
                           </div>
-                          <button type="button" onClick={() => quitar(clave)} className="min-h-[44px] px-1 text-[13px] font-semibold text-tinta-2 underline-offset-2 hover:text-red-700 hover:underline">Quitar</button>
+                          <button type="button" onClick={() => sacar(clave)} className="min-h-[44px] px-1 text-[13px] font-semibold text-tinta-2 underline-offset-2 hover:text-red-700 hover:underline">Quitar</button>
                           <span className="ml-auto whitespace-nowrap font-semibold tabular-nums">{dinero(o.precio * cantidad)}</span>
                         </div>
                       </div>
@@ -194,10 +214,12 @@ export function Carrito() {
             <footer className="border-t border-linea px-5 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pt-4">
               <dl className="grid gap-1 text-sm">
                 <div className="flex justify-between"><dt className="text-tinta-2">Productos</dt><dd>{dinero(subtotal)}</dd></div>
-                <div className="flex justify-between"><dt className="text-tinta-2">{nacional ? "Envío a otra ciudad" : "Envío en Bogotá"}</dt><dd className={envio ? "" : "font-semibold text-marca"}>{envio ? dinero(envio) : "Gratis"}</dd></div>
+                <div className="flex justify-between"><dt className="text-tinta-2">{nacional ? "Envío a otra ciudad" : "Envío en Bogotá"}</dt>
+                  {/* La clave vuelve a montar «Gratis» en cada festejo para que el salto se repita */}
+                  <dd key={envio ? "pago" : `gratis-${festejo}`} className={envio ? "" : `font-semibold text-marca ${festejo ? "motion-safe:animate-latido motion-safe:[animation-delay:200ms]" : ""}`}>{envio ? dinero(envio) : "Gratis"}</dd></div>
               </dl>
               <div className="mt-2">
-                <p className="text-xs text-tinta-2">{envio ? `Te faltan ${dinero(meta - subtotal)} para el envío gratis ${nacional ? "a otra ciudad" : "en Bogotá"}.` : "¡Tu pedido tiene envío gratis!"}</p>
+                <p key={envio ? "falta" : `gratis-${festejo}`} className={`text-xs ${envio ? "text-tinta-2" : "font-semibold text-marca motion-safe:animate-entrar"}`}>{envio ? `Te faltan ${dinero(meta - subtotal)} para el envío gratis ${nacional ? "a otra ciudad" : "en Bogotá"}.` : "¡Tu pedido tiene envío gratis!"}</p>
                 <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-fondo" aria-hidden="true">
                   {/* Se mueve con scaleX (no con el ancho), que no obliga a recalcular la página */}
                   <div className="h-full origin-left bg-marca transition-transform duration-300 ease-salida" style={{ transform: `scaleX(${Math.min(1, subtotal / meta)})` }} />

@@ -30,11 +30,20 @@ function Chip({ activo, onClick, children, n }: { activo: boolean; onClick: () =
 
 export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
   const [f, setF] = useState<Filtros>(() => recordados[tienda] ?? inicial);
-  const poner = (cambio: Partial<Filtros>) => setF(x => {
-    const sig = { ...x, limite: PAGINA, ...cambio };
-    recordados[tienda] = sig;
-    return sig;
-  });
+  // Desde qué posición están las tarjetas que trajo «Ver más productos» (entran en cascada); se olvida al cambiar un filtro
+  const [nuevos, setNuevos] = useState<{ tienda: TiendaId; desde: number } | null>(null);
+  const poner = (cambio: Partial<Filtros>) => {
+    setNuevos(null);
+    setF(x => {
+      const sig = { ...x, limite: PAGINA, ...cambio };
+      recordados[tienda] = sig;
+      return sig;
+    });
+  };
+  const verMas = () => {
+    setNuevos({ tienda, desde: f.limite });
+    setF(x => { const sig = { ...x, limite: x.limite + PAGINA }; recordados[tienda] = sig; return sig; });
+  };
 
   const base = useMemo(() => deTienda(tienda), [tienda]);
   const info = tiendaPorVista(vista);
@@ -118,7 +127,15 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
             {/* Para lectores de pantalla: el título de la lista va entre el de la página y los de cada producto */}
             <h2 className="sr-only">Productos</h2>
             <ul className="mt-4 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
-              {mostrados.map((p, i) => <li key={p.id}><TarjetaProducto producto={p} prioridad={i < 4} /></li>)}
+              {mostrados.map((p, i) => {
+                // Las tarjetas nuevas entran una tras otra (30 ms entre cada una; desde la novena, todas juntas)
+                const k = nuevos && nuevos.tienda === tienda && i >= nuevos.desde ? i - nuevos.desde : -1;
+                return (
+                  <li key={p.id} className={k >= 0 ? "motion-safe:animate-entrar" : undefined} style={k >= 0 ? { animationDelay: `${Math.min(k, 8) * 30}ms` } : undefined}>
+                    <TarjetaProducto producto={p} prioridad={i < 4} />
+                  </li>
+                );
+              })}
             </ul>
           </>
         ) : (
@@ -134,7 +151,7 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
 
         {quedan > 0 && (
           <div className="mt-8 text-center">
-            <button type="button" onClick={() => setF(x => { const sig = { ...x, limite: x.limite + PAGINA }; recordados[tienda] = sig; return sig; })} className="btn btn-borde">
+            <button type="button" onClick={verMas} className="btn btn-borde">
               Ver más productos (quedan {quedan})
             </button>
           </div>

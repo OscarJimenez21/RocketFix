@@ -104,10 +104,11 @@ function FormularioCalificacion() {
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
             <div className="-ml-1 flex" onMouseLeave={() => setEncima(0)}>
               {[1, 2, 3, 4, 5].map(n => (
-                <label key={n} onMouseEnter={() => setEncima(n)} className="cursor-pointer rounded p-1 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-marca">
+                <label key={n} onMouseEnter={() => setEncima(n)} className="presionable cursor-pointer rounded p-1 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-marca">
                   <input type="radio" name={`${base}-estrellas`} id={n === 1 ? `${base}-estrellas` : undefined} value={n} checked={estrellas === n} className="sr-only"
                     aria-label={`${n} ${n === 1 ? "estrella" : "estrellas"}: ${PALABRAS[n]}`} onChange={() => { setEstrellas(n); quitar("estrellas"); }} />
-                  <IconoEstrella className={`h-9 w-9 transition-colors ${n <= marcada ? "text-acento" : malos.includes("estrellas") ? "text-red-200" : "text-linea-fuerte"}`} />
+                  {/* La estrella elegida da un salto corto al tocarla */}
+                  <IconoEstrella className={`h-9 w-9 transition-colors ${n === estrellas ? "motion-safe:animate-latido" : ""} ${n <= marcada ? "text-acento" : malos.includes("estrellas") ? "text-red-200" : "text-linea-fuerte"}`} />
                 </label>
               ))}
             </div>
@@ -147,7 +148,7 @@ function FormularioCalificacion() {
             <IconoWhatsApp />Enviar calificación por WhatsApp
           </a>
           {enviado
-            ? <p role="status" className="mt-3 rounded bg-marca-suave px-3 py-2 text-sm text-marca-oscuro"><strong>¡Gracias!</strong> Envía el mensaje que se abrió en WhatsApp para que nos llegue tu calificación.</p>
+            ? <p role="status" className="mt-3 rounded bg-marca-suave px-3 py-2 text-sm text-marca-oscuro motion-safe:animate-entrar"><strong>¡Gracias!</strong> Envía el mensaje que se abrió en WhatsApp para que nos llegue tu calificación.</p>
             : <p className="mt-2 text-xs leading-relaxed text-tinta-3">Se abre WhatsApp con tu calificación escrita. Revisamos cada calificación y solo publicamos las que nos autorizas. Al enviarla aceptas el <a href="#datos-personales" className="enlace">tratamiento de tus datos personales</a>.</p>}
         </div>
       </form>

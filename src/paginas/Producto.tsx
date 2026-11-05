@@ -109,7 +109,7 @@ export default function Producto({ id }: { id: string }) {
             {entrega.map(e => <li key={e.texto} className="flex items-start gap-2.5"><span className="mt-px shrink-0 text-marca">{e.icono}</span>{e.texto}</li>)}
           </ul>
           <button type="button" onClick={compartir} className="mt-3 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-tinta-2 hover:text-tinta">
-            <IconoCompartir />{copiado ? "Enlace copiado" : "Compartir este producto"}
+            <IconoCompartir />{copiado ? <span className="inline-block motion-safe:animate-entrar">Enlace copiado</span> : "Compartir este producto"}
           </button>
         </div>
       </div>

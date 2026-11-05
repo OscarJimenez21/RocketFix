@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { CONFIG, LOGOS_MARCAS, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
 import { camposServicio } from "../data/formularios";
 import { Calificaciones, ResumenCalificaciones } from "../components/Calificaciones";
+import { Despegue } from "../components/Despegue";
 import { tiendaPorId } from "../data/tiendas";
 import { PuntoEstado, useAtencion } from "../components/Contacto";
 import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
@@ -71,24 +72,33 @@ function Vitrina() {
   );
 }
 
+/** La portada entra en cascada solo la primera vez que se abre en la visita (al volver a Inicio ya está quieta) */
+let portadaVista = false;
+
 function Portada() {
   const atencion = useAtencion();
+  const [entra] = useState(() => !portadaVista);
+  useEffect(() => { portadaVista = true; }, []);
+  // Cada pieza del texto entra 60 ms después de la anterior; el título solo sube (ver .entrada en index.css)
+  const en = (orden: number) => (entra ? { extra: orden === 1 ? " entrada entrada-titulo" : " entrada", style: { "--orden": orden } as React.CSSProperties } : { extra: "", style: undefined });
   return (
-    <section className="bg-marca-oscuro text-white">
+    <section className="relative isolate overflow-hidden bg-marca-oscuro text-white">
+      <Despegue />
       <div className="contenedor grid items-center gap-8 py-9 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:py-14 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
         <div>
-          <p className="text-[15px] font-semibold text-marca-menta">Tienda de tecnología y servicio técnico en Bogotá</p>
-          <h1 tabIndex={-1} className="titulo-portada mt-4 text-[34px] text-white sm:text-[46px] lg:text-[44px] xl:text-[54px]">
+          <p className={`text-[15px] font-semibold text-marca-menta${en(0).extra}`} style={en(0).style}>Tienda de tecnología y servicio técnico en Bogotá</p>
+          <h1 tabIndex={-1} className={`titulo-portada mt-4 text-[34px] text-white sm:text-[46px] lg:text-[44px] xl:text-[54px]${en(1).extra}`} style={en(1).style}>
             Tecnología para tu día a día. Soluciones cuando las necesitas.
           </h1>
-          <p className="mt-4 max-w-xl text-[16.5px] leading-relaxed text-white/80">
+          <p className={`mt-4 max-w-xl text-[16.5px] leading-relaxed text-white/80${en(2).extra}`} style={en(2).style}>
             Celulares, computadores, gaming y accesorios con entrega a domicilio. Compra con asesoría por WhatsApp y solicita servicio técnico para tu hogar o negocio.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3">
+          {/* data-despegue: en celular el cohete del fondo pasa a la derecha de estos botones */}
+          <div data-despegue className={`mt-7 flex flex-wrap gap-3${en(3).extra}`} style={en(3).style}>
             <a href="#categorias" className="btn btn-primario">Comprar tecnología</a>
             <a href="#servicios" className="btn btn-claro">Solicitar servicio técnico</a>
           </div>
-          <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/80">
+          <div className={`mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/80${en(4).extra}`} style={en(4).style}>
             <p className="flex items-center gap-2"><PuntoEstado abierto={atencion.abierto} claro />{atencion.texto}</p>
             <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="inline-flex min-h-[44px] items-center gap-2 font-semibold text-white hover:underline">
               <IconoWhatsApp className="h-[18px] w-[18px] text-wa-vivo" />{CONFIG.whatsappVisible}
