@@ -43,6 +43,32 @@
   ]
  },
  {
+  "id": "ipduo",
+  "tienda": "cel",
+  "marca": "Apple",
+  "nombre": "iPhone Duo",
+  "specs": [
+   "Plegable",
+   "eSIM"
+  ],
+  "imagen": "fotos/ipduo.jpg",
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "256 GB · negro",
+    "precio": 9850000
+   },
+   {
+    "nombre": "512 GB · negro",
+    "precio": 10700000
+   },
+   {
+    "nombre": "512 GB · blanco",
+    "precio": 10700000
+   }
+  ]
+ },
+ {
   "id": "ip18pm",
   "tienda": "cel",
   "marca": "Apple",

@@ -5123,5 +5123,54 @@
  },
  "dell15dc15250": {
   "resumen": "Portátil Dell 15 DC15250 con procesador Intel Core i7 1355U, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Silver."
+ },
+ "ipduo": {
+  "resumen": "iPhone Duo, el primer iPhone plegable de Apple. Abierto tiene una pantalla interior de 7,6\" y cerrado una pantalla exterior de 5,4\", ambas Super Retina XDR a 120 Hz. Chip A20 Pro, dos cámaras Fusion de 48 MP, diseño plegable de titanio y resistencia IP68. Funciona solo con eSIM (no usa SIM física).",
+  "ficha": [
+   [
+    "Pantalla interior",
+    "7,6\" OLED plegable Super Retina XDR, ProMotion hasta 120 Hz"
+   ],
+   [
+    "Pantalla exterior",
+    "5,4\" OLED Super Retina XDR, ProMotion hasta 120 Hz"
+   ],
+   [
+    "Procesador",
+    "Apple A20 Pro"
+   ],
+   [
+    "Cámaras traseras",
+    "48 MP Fusion principal y 48 MP Fusion ultra gran angular"
+   ],
+   [
+    "Cámaras frontales",
+    "12 MP Center Stage (exterior) y cámara FaceTime debajo de la pantalla interior"
+   ],
+   [
+    "Resistencia",
+    "IP68 al agua y al polvo"
+   ],
+   [
+    "SIM",
+    "Doble eSIM (no es compatible con SIM física)"
+   ],
+   [
+    "Conector",
+    "USB-C (USB 3)"
+   ],
+   [
+    "Peso",
+    "254 g"
+   ],
+   [
+    "Colores",
+    "Cielo nocturno (negro) y blanco estrella"
+   ],
+   [
+    "Seguridad",
+    "Huella en el botón lateral (Touch ID)"
+   ]
+  ]
  }
 }
