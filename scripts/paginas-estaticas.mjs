@@ -207,6 +207,23 @@ for (const a of ARTICULOS) {
   urls.push(pagina({ ruta: `${a.id}/`, titulo: `${a.titulo} · ${CONFIG.nombre}`, descripcion: recortar(a.resumen, 160), jsonld: [migas(camino)], cuerpo: migasHtml(camino) + `<h1>${esc(a.titulo)}</h1><p>${esc(a.resumen)}</p>${parrafos}` + contacto }));
 }
 
+// ---------- Políticas: garantía, cambios y devoluciones (retracto) y datos personales ----------
+{
+  const POLITICAS = leer("politicas.json");
+  const fijos = { whatsapp: CONFIG.whatsappVisible, nombre: CONFIG.nombre };
+  // Un dato sin llenar sale como [etiqueta], igual que en la tienda
+  const legal = t => esc(t.replace(/\{(\w+)\}/g, (_, k) => fijos[k] ?? POLITICAS.datos[k]?.valor ?? `[${POLITICAS.datos[k]?.etiqueta ?? k}]`));
+  for (const p of POLITICAS.paginas) {
+    const camino = [["Inicio", ""], [p.titulo, null]];
+    const texto = p.secciones.map(s => `<h2>${esc(s.titulo)}</h2>` + s.bloques.map(b => {
+      if (typeof b === "string") return `<p>${legal(b)}</p>`;
+      const tag = b.numerada ? "ol" : "ul";
+      return `<${tag}>${b.lista.map(x => `<li>${legal(x)}</li>`).join("")}</${tag}>`;
+    }).join("")).join("");
+    urls.push(pagina({ ruta: `${p.id}/`, titulo: `${p.titulo} · ${CONFIG.nombre}`, descripcion: recortar(p.lead, 160), jsonld: [migas(camino)], cuerpo: migasHtml(camino) + `<h1>${esc(p.titulo)}</h1><p>${esc(p.lead)}</p>${texto}` + contacto }));
+  }
+}
+
 // ---------- Portada: la tienda y el sitio, más enlaces a todo ----------
 {
   const tiendaLd = {

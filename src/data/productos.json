@@ -4375,6 +4375,29 @@
   ]
  },
  {
+  "id": "p51295",
+  "tienda": "pc",
+  "categoria": "escritorio",
+  "nombre": "PC Ryzen 5 8500G con monitor 27\"",
+  "specs": [
+   "16GB DDR5 RGB",
+   "SSD NVMe 512GB",
+   "Board B840M",
+   "WiFi USB ASUS AC53 Nano",
+   "Monitor Acer Nitro 27\" IPS FHD (1 ms-180 Hz)",
+   "Teclado y mouse Power 801 RGB",
+   "Caja Power CL-W28"
+  ],
+  "imagen": "fotos/p51295.jpg",
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3100000
+   }
+  ]
+ },
+ {
   "id": "p51287",
   "tienda": "pc",
   "categoria": "escritorio",
@@ -19676,6 +19699,25 @@
    {
     "nombre": "",
     "precio": 33000
+   }
+  ]
+ },
+ {
+  "id": "p44029",
+  "tienda": "per",
+  "categoria": "varios",
+  "marca": "Microsoft",
+  "nombre": "Windows 11 Pro 64 bits en español",
+  "specs": [
+   "Licencia DSP",
+   "1 equipo"
+  ],
+  "imagen": "fotos/p44029.jpg",
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 740000
    }
   ]
  },

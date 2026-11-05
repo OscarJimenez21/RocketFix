@@ -2184,22 +2184,354 @@
   "resumen": "PC gamer con AMD Ryzen 7 8700F de 8 núcleos y NVIDIA GeForce RTX 5060 de 8 GB, sobre plataforma AM5 con DDR5. Trae 16 GB de RAM, SSD NVMe de 512 GB, fuente de 750 W y monitor ASUS de 24\" a 146 Hz, con teclado y mouse Genius."
  },
  "p52404": {
-  "resumen": "Portátil ASUS Vivobook de 15,6\" Full HD para estudio, oficina y entretenimiento. Trae procesador Intel Core 3 100U, 16 GB de RAM DDR5 y SSD NVMe de 512 GB para que arranque y abra programas rápido."
+  "resumen": "Portátil ASUS Vivobook de 15,6\" Full HD para estudio, oficina y entretenimiento. Trae procesador Intel Core 3 100U, 16 GB de RAM DDR5 y SSD NVMe de 512 GB para que arranque y abra programas rápido.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core 3 100U: 6 núcleos, 8 hilos, hasta 4,7 GHz, 10 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Parlantes SonicMaster y micrófono integrado"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-A 2.0, USB-C 5 Gbps, 1 HDMI 1.4 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "42 Wh"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "359,7 x 232,5 x 17,9 mm; 1,70 kg"
+   ],
+   [
+    "Color",
+    "Terra Cotta"
+   ]
+  ]
  },
  "p52383": {
-  "resumen": "Portátil ASUS de 15,6\" Full HD con procesador Intel Core 5, 12 GB de RAM DDR5 y SSD NVMe de 512 GB, con lector de huella para desbloquearlo al instante."
+  "resumen": "Portátil ASUS de 15,6\" Full HD con procesador Intel Core 5, 12 GB de RAM DDR5 y SSD NVMe de 512 GB, con lector de huella para desbloquearlo al instante.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core 5 1334U"
+   ],
+   [
+    "Memoria RAM",
+    "12GB DDR5"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Parlantes SonicMaster y micrófono integrado"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-A 2.0, USB-C 5 Gbps, 1 HDMI 1.4 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "42 Wh"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella en el touchpad y TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "359,7 x 232,5 x 17,9 mm; 1,70 kg"
+   ]
+  ]
  },
  "p52401": {
-  "resumen": "Portátil ASUS Vivobook de 15,6\" Full HD con procesador Intel Core 5 120U, 16 GB de RAM y SSD NVMe de 512 GB. Tiene lector de huella y color azul."
+  "resumen": "Portátil ASUS Vivobook de 15,6\" Full HD con procesador Intel Core 5 120U, 16 GB de RAM y SSD NVMe de 512 GB. Tiene lector de huella y color azul.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core 5 120U: 10 núcleos, 12 hilos, hasta 5,0 GHz, 12 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Parlantes SonicMaster y micrófono integrado"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-A 2.0, USB-C 5 Gbps, 1 HDMI 1.4 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "42 Wh"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella en el touchpad y TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "359,7 x 232,5 x 17,9 mm; 1,70 kg"
+   ],
+   [
+    "Color",
+    "Azul"
+   ]
+  ]
  },
  "p52351": {
-  "resumen": "Portátil ASUS Vivobook de 16\" con procesador AMD Ryzen 9 270 de alto rendimiento, 16 GB de RAM DDR5 y SSD NVMe de 512 GB, para multitarea pesada, edición y trabajo exigente."
+  "resumen": "Portátil ASUS Vivobook de 16\" con procesador AMD Ryzen 9 270 de alto rendimiento, 16 GB de RAM DDR5 y SSD NVMe de 512 GB, para multitarea pesada, edición y trabajo exigente.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 9 270: 8 núcleos, 16 hilos, hasta 5,2 GHz, 24 MB de caché; NPU de hasta 16 TOPS"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5 en placa; 1 ranura SO-DIMM libre, ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe 4.0"
+   ],
+   [
+    "Pantalla",
+    "16″"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado, con teclado numérico"
+   ],
+   [
+    "Cámara",
+    "FHD con infrarrojo (Windows Hello) y tapa de privacidad"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2) y Bluetooth 5.2"
+   ],
+   [
+    "Puertos",
+    "2 USB-C 5 Gbps (video y carga), 2 USB-A 5 Gbps, 1 HDMI 2.1 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "70 Wh"
+   ],
+   [
+    "Cargador",
+    "65 W USB-C"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja, TPM 2.0 y Microsoft Pluton"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "357 x 250,6 x 15,9-17,9 mm; 1,70 kg"
+   ]
+  ]
  },
  "p52402": {
-  "resumen": "Portátil ASUS Zenbook de 14\" con pantalla OLED WUXGA de colores intensos, procesador Intel Core Ultra 9 285H, 16 GB de RAM DDR5 y SSD NVMe de 1 TB. Delgado y liviano, viene con Windows 11 Home."
+  "resumen": "Portátil ASUS Zenbook de 14\" con pantalla OLED WUXGA de colores intensos, procesador Intel Core Ultra 9 285H, 16 GB de RAM DDR5 y SSD NVMe de 1 TB. Delgado y liviano, viene con Windows 11 Home.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core Ultra 9 285H: 16 núcleos, 16 hilos, hasta 5,4 GHz, 24 MB de caché; NPU de hasta 13 TOPS"
+   ],
+   [
+    "Gráfica",
+    "Intel Arc Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB LPDDR5X soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "1TB M.2 NVMe PCIe 4.0"
+   ],
+   [
+    "Pantalla",
+    "14″ WUXGA (1920x1200) OLED"
+   ],
+   [
+    "Cámara",
+    "FHD con infrarrojo (Windows Hello) y tapa de privacidad"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 7 (802.11be 2x2) y Bluetooth 5.4"
+   ],
+   [
+    "Puertos",
+    "2 Thunderbolt 4 (40 Gbps, video y carga), 1 USB-A 5 Gbps, 1 HDMI 2.1 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "75 Wh"
+   ],
+   [
+    "Cargador",
+    "65 W USB-C"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja y TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "312,4 x 220,1 x 14,9 mm; desde 1,20 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11 Home"
+   ]
+  ]
  },
  "p52396": {
-  "resumen": "Portátil gamer ASUS TUF Gaming A16 con AMD Ryzen 7 260 y NVIDIA GeForce RTX 5050 de 8 GB. Trae pantalla de 16\" WUXGA, 16 GB de RAM DDR5 y SSD NVMe de 1 TB, con la construcción resistente de la línea TUF."
+  "resumen": "Portátil gamer ASUS TUF Gaming A16 con AMD Ryzen 7 260 y NVIDIA GeForce RTX 5050 de 8 GB. Trae pantalla de 16\" WUXGA, 16 GB de RAM DDR5 y SSD NVMe de 1 TB, con la construcción resistente de la línea TUF.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 7 260: 8 núcleos, 16 hilos, hasta 5,1 GHz, 24 MB de caché; NPU de hasta 16 TOPS"
+   ],
+   [
+    "Tarjeta gráfica",
+    "NVIDIA GeForce RTX 5050 8GB GDDR7, hasta 115 W con Dynamic Boost"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5-5600; 2 ranuras SO-DIMM, ampliable hasta 64GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "1TB NVMe (tiene 2 ranuras M.2 PCIe)"
+   ],
+   [
+    "Pantalla",
+    "16″ WUXGA (1920x1200) IPS antirreflejo, 165 Hz, 100% sRGB, G-Sync y MUX Switch"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado RGB (1 zona), con teclado numérico y tecla Copilot"
+   ],
+   [
+    "Cámara",
+    "FHD 1080p con infrarrojo (Windows Hello)"
+   ],
+   [
+    "Audio",
+    "2 parlantes con Dolby Atmos y cancelación de ruido con IA"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6E (802.11ax 2x2), Bluetooth 5.4 y Ethernet RJ-45"
+   ],
+   [
+    "Puertos",
+    "1 USB4 tipo C, 1 USB-C 10 Gbps (DisplayPort, carga y G-SYNC), 2 USB-A 10 Gbps, 1 USB-A 2.0, 1 HDMI 2.1, 1 Ethernet RJ-45 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "90 Wh"
+   ],
+   [
+    "Cargador",
+    "240 W"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja y Microsoft Pluton"
+   ],
+   [
+    "Tamaño y peso",
+    "354 x 269 x 17,9-25,7 mm; 2,20 kg"
+   ],
+   [
+    "Color",
+    "Gris"
+   ]
+  ]
  },
  "p52403": {
   "resumen": "Portátil ASUS de 16\" WUXGA con procesador Intel Core 7 240H y tarjeta de video NVIDIA GeForce RTX 5070 de 8 GB, para juegos, diseño y edición. Trae 16 GB de RAM DDR5 y SSD NVMe de 1 TB."
@@ -3231,6 +3563,10 @@
    [
     "SIM",
     "eSIM"
+   ],
+   [
+    "Seguridad",
+    "Face ID"
    ]
   ]
  },
@@ -3256,6 +3592,10 @@
    [
     "SIM",
     "eSIM"
+   ],
+   [
+    "Seguridad",
+    "Face ID"
    ]
   ]
  },
@@ -3281,6 +3621,10 @@
    [
     "Conector",
     "USB-C"
+   ],
+   [
+    "Seguridad",
+    "Face ID"
    ]
   ]
  },
@@ -3306,6 +3650,10 @@
    [
     "Conector",
     "USB-C"
+   ],
+   [
+    "Seguridad",
+    "Face ID"
    ]
   ]
  },
@@ -3335,6 +3683,10 @@
    [
     "Conector",
     "USB-C"
+   ],
+   [
+    "Seguridad",
+    "Face ID"
    ]
   ]
  },
@@ -3364,6 +3716,10 @@
    [
     "Conector",
     "USB-C"
+   ],
+   [
+    "Seguridad",
+    "Face ID"
    ]
   ]
  },
@@ -3389,6 +3745,10 @@
    [
     "Conector",
     "USB-C"
+   ],
+   [
+    "Seguridad",
+    "Face ID"
    ]
   ]
  },
@@ -3414,6 +3774,10 @@
    [
     "Conector",
     "Lightning"
+   ],
+   [
+    "Seguridad",
+    "Face ID"
    ]
   ]
  },
@@ -3439,11 +3803,21 @@
    [
     "Sistema",
     "Android 15 con One UI 7"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella"
    ]
   ]
  },
  "sa17": {
-  "resumen": "Samsung Galaxy A17 con la experiencia One UI de Samsung, para redes, fotos y videos. Disponible en 128 GB y 256 GB 4G con doble SIM (Duos), y en 256 GB 5G con una SIM."
+  "resumen": "Samsung Galaxy A17 con la experiencia One UI de Samsung, para redes, fotos y videos. Disponible en 128 GB y 256 GB 4G con doble SIM (Duos), y en 256 GB 5G con una SIM.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Lector de huella"
+   ]
+  ]
  },
  "sa27": {
   "resumen": "Samsung Galaxy A27 5G de 256 GB con pantalla Super AMOLED a 120 Hz, batería de 5000 mAh y resistencia IP64.",
@@ -3463,6 +3837,10 @@
    [
     "Red",
     "5G"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella"
    ]
   ]
  },
@@ -3484,6 +3862,10 @@
    [
     "Sistema",
     "Android 16 con One UI 8.5"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella"
    ]
   ]
  },
@@ -3505,6 +3887,10 @@
    [
     "Sistema",
     "Android 16 con One UI 8.5"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella"
    ]
   ]
  },
@@ -3534,6 +3920,10 @@
    [
     "Resistencia",
     "IP68"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella"
    ]
   ]
  },
@@ -3605,6 +3995,10 @@
    [
     "Resistencia",
     "IP67"
+   ],
+   [
+    "Seguridad",
+    "Huella en la pantalla"
    ]
   ]
  },
@@ -3626,6 +4020,10 @@
    [
     "Red",
     "4G"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
    ]
   ]
  },
@@ -3647,6 +4045,10 @@
    [
     "Batería",
     "5160 mAh"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
    ]
   ]
  },
@@ -3664,6 +4066,10 @@
    [
     "Cámara frontal",
     "32 MP"
+   ],
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
    ]
   ]
  },
@@ -3685,6 +4091,10 @@
    [
     "Sistema",
     "Android 15"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
    ]
   ]
  },
@@ -3706,6 +4116,10 @@
    [
     "Sistema",
     "Android 15"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
    ]
   ]
  },
@@ -3731,14 +4145,30 @@
    [
     "Sistema",
     "Xiaomi HyperOS 3"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
    ]
   ]
  },
  "xrn15": {
-  "resumen": "Xiaomi Redmi Note 15 en 256 GB (versión 4G) o 512 GB, de la serie Note de Xiaomi, conocida por su pantalla AMOLED y su muy buena relación precio-calidad."
+  "resumen": "Xiaomi Redmi Note 15 en 256 GB (versión 4G) o 512 GB, de la serie Note de Xiaomi, conocida por su pantalla AMOLED y su muy buena relación precio-calidad.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
+   ]
+  ]
  },
  "xrn15pro": {
-  "resumen": "Xiaomi Redmi Note 15 Pro de 256 GB en versión 4G, de la serie Note, con pantalla AMOLED y cámara de alta resolución."
+  "resumen": "Xiaomi Redmi Note 15 Pro de 256 GB en versión 4G, de la serie Note, con pantalla AMOLED y cámara de alta resolución.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
+   ]
+  ]
  },
  "xrn17": {
   "resumen": "Xiaomi Redmi Note 17 con pantalla AMOLED FHD+, batería de 7700 mAh y resistencia IP65. Disponible en varias combinaciones de memoria y una versión 5G.",
@@ -3762,6 +4192,10 @@
    [
     "Sistema",
     "Xiaomi HyperOS 3"
+   ],
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
    ]
   ]
  },
@@ -3787,26 +4221,66 @@
    [
     "Red",
     "5G"
+   ],
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
    ]
   ]
  },
  "xrn17pro": {
-  "resumen": "Xiaomi Redmi Note 17 Pro 5G, de la gama alta de la serie Note, con conectividad 5G. Disponible en 128 GB, 256 GB y 512 GB."
+  "resumen": "Xiaomi Redmi Note 17 Pro 5G, de la gama alta de la serie Note, con conectividad 5G. Disponible en 128 GB, 256 GB y 512 GB.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
+   ]
+  ]
  },
  "xrn17pm": {
-  "resumen": "Xiaomi Redmi Note 17 Pro Max, el modelo más completo de la serie Note. Disponible en 256 GB y 512 GB."
+  "resumen": "Xiaomi Redmi Note 17 Pro Max, el modelo más completo de la serie Note. Disponible en 256 GB y 512 GB.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla"
+   ]
+  ]
  },
  "x17tpro": {
-  "resumen": "Xiaomi 17T Pro de 512 GB, el gama alta de la serie T de Xiaomi, pensado para fotografía y alto rendimiento."
+  "resumen": "Xiaomi 17T Pro de 512 GB, el gama alta de la serie T de Xiaomi, pensado para fotografía y alto rendimiento.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
+   ]
+  ]
  },
  "pocox8pm": {
-  "resumen": "POCO X8 Pro Max de 512 GB, de POCO, la marca de Xiaomi enfocada en rendimiento para juegos al mejor precio."
+  "resumen": "POCO X8 Pro Max de 512 GB, de POCO, la marca de Xiaomi enfocada en rendimiento para juegos al mejor precio.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella ultrasónica en la pantalla y reconocimiento facial"
+   ]
+  ]
  },
  "pocox8pro": {
-  "resumen": "POCO X8 Pro de 512 GB y 12 GB de RAM, de la línea de POCO pensada para juegos y alto rendimiento."
+  "resumen": "POCO X8 Pro de 512 GB y 12 GB de RAM, de la línea de POCO pensada para juegos y alto rendimiento.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
+   ]
+  ]
  },
  "pococ85": {
-  "resumen": "POCO C85 de 256 GB, un celular económico de POCO con pantalla grande y batería de larga duración."
+  "resumen": "POCO C85 de 256 GB, un celular económico de POCO con pantalla grande y batería de larga duración.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
  },
  "pococ71": {
   "resumen": "POCO C71 con pantalla de 6,88\" a 120 Hz, cámara de 32 MP y batería de 5200 mAh. Disponible en 64 GB y 128 GB.",
@@ -3830,6 +4304,10 @@
    [
     "Batería",
     "5200 mAh"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
    ]
   ]
  },
@@ -3851,17 +4329,39 @@
    [
     "Red",
     "4G"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
    ]
   ]
  },
  "pocom8pro": {
-  "resumen": "POCO M8 Pro, gama media de POCO con buen rendimiento. Disponible en 256 GB con 8 GB de RAM y 512 GB con 12 GB de RAM."
+  "resumen": "POCO M8 Pro, gama media de POCO con buen rendimiento. Disponible en 256 GB con 8 GB de RAM y 512 GB con 12 GB de RAM.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
+   ]
+  ]
  },
  "pocof8pro": {
-  "resumen": "POCO F8 Pro de 256 GB y 8 GB de RAM, de la serie F, la más potente de POCO, pensada para juegos exigentes."
+  "resumen": "POCO F8 Pro de 256 GB y 8 GB de RAM, de la serie F, la más potente de POCO, pensada para juegos exigentes.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella ultrasónica en la pantalla y reconocimiento facial"
+   ]
+  ]
  },
  "medge60": {
-  "resumen": "Motorola Edge 60 de 512 GB, con pantalla pOLED curva, resistencia IP68 y el diseño premium de la línea Edge."
+  "resumen": "Motorola Edge 60 de 512 GB, con pantalla pOLED curva, resistencia IP68 y el diseño premium de la línea Edge.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
+   ]
+  ]
  },
  "medge60f": {
   "resumen": "Motorola Edge 60 Fusion en 128 GB (8 GB de RAM) o 256 GB, con pantalla pOLED curva de 6,7\", cámara de 50 MP, batería de 5200 mAh y conectividad 5G.",
@@ -3885,6 +4385,10 @@
    [
     "Red",
     "5G"
+   ],
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
    ]
   ]
  },
@@ -3918,6 +4422,10 @@
    [
     "Red",
     "5G"
+   ],
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
    ]
   ]
  },
@@ -3935,6 +4443,10 @@
    [
     "Memoria ampliable",
     "hasta 2 TB"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella y reconocimiento facial"
    ]
   ]
  },
@@ -3960,6 +4472,10 @@
    [
     "Sistema",
     "Android 15"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
    ]
   ]
  },
@@ -3984,23 +4500,51 @@
    [
     "Cámara frontal",
     "32 MP"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
    ]
   ]
  },
  "hmagic8l": {
-  "resumen": "Honor Magic 8 Lite, de la serie Magic de Honor, con batería de larga duración y pantalla resistente. Disponible en 256 GB y 512 GB."
+  "resumen": "Honor Magic 8 Lite, de la serie Magic de Honor, con batería de larga duración y pantalla resistente. Disponible en 256 GB y 512 GB.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Lector de huella y reconocimiento facial"
+   ]
+  ]
  },
  "hx8d": {
-  "resumen": "Honor X8 D de 512 GB, de la serie X de Honor, con mucho espacio para fotos, videos y apps."
+  "resumen": "Honor X8 D de 512 GB, de la serie X de Honor, con mucho espacio para fotos, videos y apps.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Lector de huella y reconocimiento facial"
+   ]
+  ]
  },
  "h400s": {
-  "resumen": "Honor 400 Smart de 256 GB, con batería de larga duración y buena pantalla para el día a día."
+  "resumen": "Honor 400 Smart de 256 GB, con batería de larga duración y buena pantalla para el día a día.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Lector de huella y reconocimiento facial"
+   ]
+  ]
  },
  "h5d": {
   "resumen": "Honor 5D de 256 GB, un celular rendidor para redes, fotos y videos."
  },
  "hx5d": {
-  "resumen": "Honor X5 D, celular económico de Honor para el día a día. Disponible en 128 GB y 256 GB."
+  "resumen": "Honor X5 D, celular económico de Honor para el día a día. Disponible en 128 GB y 256 GB.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Lector de huella y reconocimiento facial"
+   ]
+  ]
  },
  "hplay10a": {
   "resumen": "Honor Play 10A de 128 GB, económico y con batería para todo el día."
@@ -4027,6 +4571,10 @@
    [
     "Batería",
     "5000 mAh"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella"
    ]
   ]
  },
@@ -4037,7 +4585,13 @@
   "resumen": "Tecno Camon 50 Pro 5G de 256 GB, de la serie Camon de Tecno, enfocada en fotografía."
  },
  "tpovaslim": {
-  "resumen": "Tecno Pova Slim de 256 GB, de diseño muy delgado y liviano."
+  "resumen": "Tecno Pova Slim de 256 GB, de diseño muy delgado y liviano.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla"
+   ]
+  ]
  },
  "tpovac2": {
   "resumen": "Tecno Pova Curve 2 5G de 256 GB con pantalla curva a 120 Hz, procesador MediaTek Dimensity 7100 y cámara de 50 MP.",
@@ -4061,11 +4615,21 @@
    [
     "Red",
     "5G"
+   ],
+   [
+    "Seguridad",
+    "Huella en la pantalla"
    ]
   ]
  },
  "tspark50": {
-  "resumen": "Tecno Spark 50 de 256 GB, celular de buena relación precio-calidad. Disponible en versión 4G y 5G."
+  "resumen": "Tecno Spark 50 de 256 GB, celular de buena relación precio-calidad. Disponible en versión 4G y 5G.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral"
+   ]
+  ]
  },
  "tsparkgo3": {
   "resumen": "Tecno Spark Go 3 con pantalla de 6,75\", cámara de 13 MP y batería de 5000 mAh. Disponible en 64 GB y 128 GB.",
@@ -4093,6 +4657,10 @@
    [
     "Red",
     "4G"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral"
    ]
   ]
  },
@@ -4112,7 +4680,13 @@
   "resumen": "itel A200, económico y con buena memoria para su precio. Disponible en 64 GB y 128 GB."
  },
  "vv60lite": {
-  "resumen": "Vivo V60 Lite 5G de 256 GB, de la serie V de Vivo, con diseño delgado y enfoque en fotografía."
+  "resumen": "Vivo V60 Lite 5G de 256 GB, de la serie V de Vivo, con diseño delgado y enfoque en fotografía.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla"
+   ]
+  ]
  },
  "vy31": {
   "resumen": "Vivo Y31 5G de 256 GB con batería de 6500 mAh y resistencia IP68 e IP69 al agua y al polvo.",
@@ -4132,11 +4706,21 @@
    [
     "Red",
     "5G"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral"
    ]
   ]
  },
  "vy21d": {
-  "resumen": "Vivo Y21 D de 256 GB, celular rendidor para el día a día."
+  "resumen": "Vivo Y21 D de 256 GB, celular rendidor para el día a día.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral"
+   ]
+  ]
  },
  "oreno11": {
   "resumen": "Oppo Reno 11 5G con pantalla AMOLED curva a 120 Hz, cámara de 50 MP con teleobjetivo de 32 MP para retratos y carga rápida de 67 W.",
@@ -4164,17 +4748,39 @@
    [
     "Red",
     "5G"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella y reconocimiento facial"
    ]
   ]
  },
  "oa6": {
-  "resumen": "Oppo A6 5G de 256 GB, de la serie A de Oppo, resistente y con batería de larga duración."
+  "resumen": "Oppo A6 5G de 256 GB, de la serie A de Oppo, resistente y con batería de larga duración.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
  },
  "oa5": {
-  "resumen": "Oppo A5 5G de 256 GB, de la serie A de Oppo, resistente y con batería de larga duración."
+  "resumen": "Oppo A5 5G de 256 GB, de la serie A de Oppo, resistente y con batería de larga duración.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
  },
  "oa6c": {
-  "resumen": "Oppo A6 C en 64 GB o 128 GB, económico y práctico para el día a día."
+  "resumen": "Oppo A6 C en 64 GB o 128 GB, económico y práctico para el día a día.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
  },
  "inote60p": {
   "resumen": "Infinix Note 60 Pro de 256 GB con procesador Snapdragon 7s Gen 4, pantalla de 6,78\" a 120 Hz y cámara de 50 MP. Disponible en edición estándar y en la edición especial Pininfarina.",
@@ -4194,6 +4800,10 @@
    [
     "Cámara frontal",
     "13 MP"
+   ],
+   [
+    "Seguridad",
+    "Huella en la pantalla"
    ]
   ]
  },
@@ -4214,6 +4824,10 @@
    [
     "Sistema",
     "Android 16"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral"
    ]
   ]
  },
@@ -4231,6 +4845,10 @@
    [
     "Sistema",
     "Android 16"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella"
    ]
   ]
  },
@@ -4255,10 +4873,22 @@
   ]
  },
  "zta35e": {
-  "resumen": "ZTE A35 E, celular básico con Android para llamadas, WhatsApp y redes."
+  "resumen": "ZTE A35 E, celular básico con Android para llamadas, WhatsApp y redes.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Reconocimiento facial"
+   ]
+  ]
  },
  "zta56": {
-  "resumen": "ZTE A56 de 128 GB, económico y práctico para el día a día."
+  "resumen": "ZTE A56 de 128 GB, económico y práctico para el día a día.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Lector de huella y reconocimiento facial"
+   ]
+  ]
  },
  "zta57pro": {
   "resumen": "ZTE A57 Pro de 128 GB, con buena memoria para su precio."
@@ -4270,7 +4900,13 @@
   "resumen": "ZTE V80 Pro de 256 GB, de la serie V de ZTE."
  },
  "nmusic2": {
-  "resumen": "Nubia Music 2 de 256 GB, de ZTE, pensado para la música con parlante potente."
+  "resumen": "Nubia Music 2 de 256 GB, de ZTE, pensado para la música con parlante potente.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Lector de huella y reconocimiento facial"
+   ]
+  ]
  },
  "nfocus2": {
   "resumen": "Nubia Focus 2 5G de 256 GB, de ZTE, enfocado en fotografía."
@@ -4311,14 +4947,30 @@
    [
     "Red",
     "4G"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral"
    ]
   ]
  },
  "rmc100i": {
-  "resumen": "Realme C100i de 128 GB, económico y con buena memoria para su precio."
+  "resumen": "Realme C100i de 128 GB, económico y con buena memoria para su precio.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
  },
  "rmc71": {
-  "resumen": "Realme C71 de 256 GB, económico y rendidor, con memoria RAM ampliable."
+  "resumen": "Realme C71 de 256 GB, económico y rendidor, con memoria RAM ampliable.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral"
+   ]
+  ]
  },
  "rmc100": {
   "resumen": "Realme C100 de 256 GB con batería de 8000 mAh y resistencia IP69K, Android 16.",
@@ -4338,14 +4990,30 @@
    [
     "Sistema",
     "Android 16"
+   ],
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
    ]
   ]
  },
  "kblackz2": {
-  "resumen": "Kalley Black Z2 de 256 GB y 8 GB de RAM, celular de la marca colombiana Kalley."
+  "resumen": "Kalley Black Z2 de 256 GB y 8 GB de RAM, celular de la marca colombiana Kalley.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral"
+   ]
+  ]
  },
  "tcl605": {
-  "resumen": "TCL 605 de 128 GB, celular rendidor de TCL para el día a día."
+  "resumen": "TCL 605 de 128 GB, celular rendidor de TCL para el día a día.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Reconocimiento facial"
+   ]
+  ]
  },
  "alc1041": {
   "resumen": "Alcatel 1041 4G, celular básico con pantalla de 2\", ideal para llamadas y mensajes.",
@@ -4861,7 +5529,13 @@
   "resumen": "Power bank Hora de 20.000 mAh con linterna y cable USB-C y Lightning."
  },
  "rmnote80": {
-  "resumen": "Realme Note 80 de 128 GB con 4 GB de RAM más 4 GB virtuales, económico y rendidor para el día a día."
+  "resumen": "Realme Note 80 de 128 GB con 4 GB de RAM más 4 GB virtuales, económico y rendidor para el día a día.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
  },
  "hfreeclip2": {
   "resumen": "Huawei FreeClip 2, audífonos de diseño abierto tipo clip que se sujetan a la oreja y dejan oír el entorno, cómodos para usar todo el día."
@@ -4903,61 +5577,1045 @@
   "resumen": "Portátil Acer Nitro ANV15-52-58HT con procesador Intel Core 5 210H, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 5050 de 8 GB. Color Negro."
  },
  "ase1504fabq2771": {
-  "resumen": "Portátil ASUS E1504FA-BQ2771 con procesador AMD Ryzen 3 30, 8 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\". Color Mixed Black."
+  "resumen": "Portátil ASUS E1504FA-BQ2771 con procesador AMD Ryzen 3 30, 8 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\". Color Mixed Black.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 3 30"
+   ],
+   [
+    "Memoria RAM",
+    "8GB LPDDR5 soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe"
+   ],
+   [
+    "Pantalla",
+    "15,6″"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Puertos",
+    "1 USB-C 5 Gbps con carga, 1 USB-C 5 Gbps, 1 USB-A 5 Gbps, 1 USB-A 2.0, 1 HDMI 1.4 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "360,3 x 232,5 x 17,9 mm; 1,63 kg"
+   ],
+   [
+    "Color",
+    "Mixed Black"
+   ]
+  ]
  },
  "asx1504vabq4375": {
-  "resumen": "Portátil ASUS X1504VA-BQ4375 con procesador Intel Core i3 1315U, 8 GB DDR4 de RAM, SSD de 1 TB y pantalla de 15,6\" FHD. Color Cool Silver."
+  "resumen": "Portátil ASUS X1504VA-BQ4375 con procesador Intel Core i3 1315U, 8 GB DDR4 de RAM, SSD de 1 TB y pantalla de 15,6\" FHD. Color Cool Silver.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core i3-1315U: 6 núcleos, 8 hilos, hasta 4,5 GHz, 10 MB de caché"
+   ],
+   [
+    "Memoria RAM",
+    "8GB DDR4"
+   ],
+   [
+    "Unidad de estado sólido",
+    "1TB M.2 NVMe PCIe"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Parlantes SonicMaster y micrófono integrado"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-A 2.0, USB-C 5 Gbps, 1 HDMI 1.4 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "42 Wh"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "359,7 x 232,5 x 17,9 mm; 1,70 kg"
+   ],
+   [
+    "Color",
+    "Cool Silver"
+   ]
+  ]
  },
  "ase1504fabq2334": {
-  "resumen": "Portátil ASUS E1504FA-BQ2334 con procesador AMD Ryzen 5 7520U, 16 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Cool Silver."
+  "resumen": "Portátil ASUS E1504FA-BQ2334 con procesador AMD Ryzen 5 7520U, 16 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Cool Silver.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 5 7520U: 4 núcleos, 8 hilos, hasta 4,3 GHz"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB LPDDR5 soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe 3.0"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080)"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Parlantes SonicMaster y micrófono integrado"
+   ],
+   [
+    "Puertos",
+    "1 USB-C 5 Gbps con carga, 1 USB-C 5 Gbps, 1 USB-A 5 Gbps, 1 USB-A 2.0, 1 HDMI 1.4 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "360,3 x 232,5 x 17,9 mm; 1,63 kg"
+   ],
+   [
+    "Color",
+    "Cool Silver"
+   ]
+  ]
  },
  "asx1504vabq3836": {
-  "resumen": "Portátil ASUS X1504VA-BQ3836 con procesador Intel Core i5 1334U, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Cool Silver."
+  "resumen": "Portátil ASUS X1504VA-BQ3836 con procesador Intel Core i5 1334U, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Cool Silver.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core i5-1334U: 10 núcleos, 12 hilos, hasta 4,6 GHz, 12 MB de caché"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR4"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Parlantes SonicMaster y micrófono integrado"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-A 2.0, USB-C 5 Gbps, 1 HDMI 1.4 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "42 Wh"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "359,7 x 232,5 x 17,9 mm; 1,70 kg"
+   ],
+   [
+    "Color",
+    "Cool Silver"
+   ]
+  ]
  },
  "asm1605naqmb101": {
-  "resumen": "Portátil ASUS M1605NAQ-MB101 con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Indie Black."
+  "resumen": "Portátil ASUS M1605NAQ-MB101 con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Indie Black.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 7 170: 8 núcleos, 16 hilos, hasta 4,75 GHz"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5 (8GB en placa + 8GB SO-DIMM); hasta 24GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe 4.0"
+   ],
+   [
+    "Pantalla",
+    "16″ WUXGA (1920x1200)"
+   ],
+   [
+    "Teclado",
+    "Con teclado numérico"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Parlantes SonicMaster y micrófonos integrados"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2) y Bluetooth 5.4"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps con carga, 1 USB-C 5 Gbps, 1 USB-A 2.0, 1 HDMI 1.4 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Cargador",
+    "68 W USB-C"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "358,7 x 249,5 x 19,9 mm; 1,88 kg"
+   ],
+   [
+    "Color",
+    "Indie Black"
+   ]
+  ]
  },
  "p52408": {
-  "resumen": "Portátil ASUS Vivobook X1404VA-EB2263 con procesador Intel Core 5 120U, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Azul."
+  "resumen": "Portátil ASUS Vivobook X1404VA-EB2263 con procesador Intel Core 5 120U, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Azul.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core 5 120U: 10 núcleos, 12 hilos, hasta 5,0 GHz, 12 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe"
+   ],
+   [
+    "Pantalla",
+    "14″ FHD (1920x1080)"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Batería",
+    "42 Wh"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "324,9 x 213,9 x 17,9 mm; 1,40 kg"
+   ],
+   [
+    "Color",
+    "Azul"
+   ]
+  ]
  },
  "asb1403cvas65016": {
-  "resumen": "Portátil ASUS ExpertBook B1403CVA-S65016 con procesador Intel Core i7 1335U, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Grey."
+  "resumen": "Portátil ASUS ExpertBook B1403CVA-S65016 con procesador Intel Core i7 1335U, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core i7 1335U"
+   ],
+   [
+    "Memoria RAM",
+    "8GB DDR5 SO-DIMM; 2 ranuras, ampliable hasta 64GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe 4.0 (ranuras M.2 2280 y M.2 2230)"
+   ],
+   [
+    "Pantalla",
+    "14″ FHD (1920x1080) antirreflejo, 300 nits"
+   ],
+   [
+    "Cámara",
+    "Con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Audio by Dirac y micrófonos integrados"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 o 6E (802.11ax 2x2), Bluetooth 5.4 y Ethernet Gigabit"
+   ],
+   [
+    "Puertos",
+    "2 USB-C 10 Gbps (video y carga), 2 USB-A 5 Gbps, 1 Ethernet RJ-45, 1 HDMI 1.4 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y ranura de seguridad Kensington Nano"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "324,5 x 214,4 x 19,7 mm; desde 1,40 kg"
+   ],
+   [
+    "Color",
+    "Grey"
+   ]
+  ]
  },
  "asf1605vaab74": {
   "resumen": "Portátil ASUS F1605VA-AB74 con procesador Intel Core i7 1355U, 16 GB de RAM, SSD de 1 TB y pantalla de 16\". Trae Windows 11. Color Indie Black."
  },
  "p52409": {
-  "resumen": "Portátil ASUS Vivobook M1607KA-MB150W con procesador AMD Ryzen AI 5 330, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Trae Windows 11 Home. Color Gris."
+  "resumen": "Portátil ASUS Vivobook M1607KA-MB150W con procesador AMD Ryzen AI 5 330, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Trae Windows 11 Home. Color Gris.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen AI 5 330: 4 núcleos, 8 hilos, hasta 4,5 GHz, 12 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5 en placa; 1 ranura SO-DIMM libre, ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe 4.0"
+   ],
+   [
+    "Pantalla",
+    "16″ WUXGA (1920x1200) IPS antirreflejo, 300 nits, 60 Hz"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado, con teclado numérico y tecla Copilot"
+   ],
+   [
+    "Cámara",
+    "FHD con infrarrojo (Windows Hello) y tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Parlantes SonicMaster y micrófonos integrados"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2) y Bluetooth 5.2"
+   ],
+   [
+    "Puertos",
+    "2 USB-C 5 Gbps (video y carga), 2 USB-A 5 Gbps, 1 HDMI 2.1 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Cargador",
+    "65 W USB-C"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja, TPM 2.0 y Microsoft Pluton"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "357 x 250,6 x 17,9-19,9 mm; desde 1,88 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11 Home"
+   ],
+   [
+    "Color",
+    "Gris"
+   ]
+  ]
  },
  "asm1607kamb144": {
-  "resumen": "Portátil ASUS M1607KA-MB144 con procesador AMD Ryzen AI 5 330, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Cool Silver."
+  "resumen": "Portátil ASUS M1607KA-MB144 con procesador AMD Ryzen AI 5 330, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Cool Silver.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen AI 5 330: 4 núcleos, 8 hilos, hasta 4,5 GHz, 12 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5 en placa; 1 ranura SO-DIMM libre, ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe 4.0"
+   ],
+   [
+    "Pantalla",
+    "16″ WUXGA (1920x1200) IPS antirreflejo, 300 nits, 60 Hz"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado, con teclado numérico y tecla Copilot"
+   ],
+   [
+    "Cámara",
+    "FHD con infrarrojo (Windows Hello) y tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Parlantes SonicMaster y micrófonos integrados"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2) y Bluetooth 5.2"
+   ],
+   [
+    "Puertos",
+    "2 USB-C 5 Gbps (video y carga), 2 USB-A 5 Gbps, 1 HDMI 2.1 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Cargador",
+    "65 W USB-C"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja, TPM 2.0 y Microsoft Pluton"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "357 x 250,6 x 17,9-19,9 mm; desde 1,88 kg"
+   ],
+   [
+    "Color",
+    "Cool Silver"
+   ]
+  ]
  },
  "asx1502vanj929": {
-  "resumen": "Portátil ASUS X1502VA-NJ929 con procesador Intel Core i7 13620H, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Quiet Blue."
+  "resumen": "Portátil ASUS X1502VA-NJ929 con procesador Intel Core i7 13620H, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Quiet Blue.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core i7-13620H: 10 núcleos, 16 hilos, hasta 4,9 GHz, 24 MB de caché"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR4"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Teclado",
+    "Con teclado numérico"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps con carga, 1 USB-A 2.0, 1 HDMI 1.4 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "42 Wh"
+   ],
+   [
+    "Cargador",
+    "65 W"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "359,7 x 232,5 x 19,9 mm; 1,70 kg"
+   ],
+   [
+    "Color",
+    "Quiet Blue"
+   ]
+  ]
  },
  "asm1607kamb123": {
-  "resumen": "Portátil ASUS M1607KA-MB123 con procesador AMD Ryzen AI 7 350, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Quiet Blue."
+  "resumen": "Portátil ASUS M1607KA-MB123 con procesador AMD Ryzen AI 7 350, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Quiet Blue.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen AI 7 350: 8 núcleos, 16 hilos, hasta 5,0 GHz, 24 MB de caché; NPU de hasta 50 TOPS"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5 en placa; 1 ranura SO-DIMM libre, ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe 4.0"
+   ],
+   [
+    "Pantalla",
+    "16″ WUXGA (1920x1200) IPS antirreflejo, 300 nits, 60 Hz"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado, con teclado numérico y tecla Copilot"
+   ],
+   [
+    "Cámara",
+    "FHD con infrarrojo (Windows Hello) y tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Parlantes SonicMaster y micrófonos integrados"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2) y Bluetooth 5.2"
+   ],
+   [
+    "Puertos",
+    "2 USB-C 5 Gbps (video y carga), 2 USB-A 5 Gbps, 1 HDMI 2.1 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Cargador",
+    "65 W USB-C"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja, TPM 2.0 y Microsoft Pluton"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "357 x 250,6 x 17,9-19,9 mm; desde 1,88 kg"
+   ],
+   [
+    "Color",
+    "Quiet Blue"
+   ]
+  ]
  },
  "asx1605vapbfmb239": {
-  "resumen": "Portátil ASUS X1605VAPBF-MB239 con procesador Intel Core 9 270H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Cool Silver."
+  "resumen": "Portátil ASUS X1605VAPBF-MB239 con procesador Intel Core 9 270H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA. Color Cool Silver.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core 9 270H"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 NVMe PCIe"
+   ],
+   [
+    "Pantalla",
+    "16″ WUXGA (1920x1200)"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "Parlantes SonicMaster y micrófono integrado"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "358,7 x 249,5 x 19,9 mm; 1,88 kg"
+   ],
+   [
+    "Color",
+    "Cool Silver"
+   ]
+  ]
  },
  "asux3407qaqd232w": {
-  "resumen": "Portátil ASUS Zenbook UX3407QA-QD232W con procesador Qualcomm Snapdragon X X1-26-100, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" OLED WUXGA. Trae Windows 11. Color Gray."
+  "resumen": "Portátil ASUS Zenbook UX3407QA-QD232W con procesador Qualcomm Snapdragon X X1-26-100, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" OLED WUXGA. Trae Windows 11. Color Gray.",
+  "ficha": [
+   [
+    "Procesador",
+    "Qualcomm Snapdragon X X1-26-100: 8 núcleos, hasta 2,97 GHz, 30 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Qualcomm Adreno integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB LPDDR5X soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "1TB M.2 NVMe PCIe 4.0"
+   ],
+   [
+    "Pantalla",
+    "14″ WUXGA (1920x1200) OLED, 400 nits (600 nits en HDR), 100% DCI-P3"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado, con tecla Copilot"
+   ],
+   [
+    "Cámara",
+    "FHD con infrarrojo (Windows Hello)"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6E (802.11ax 2x2) y Bluetooth 5.3"
+   ],
+   [
+    "Puertos",
+    "2 USB4 tipo C de 40 Gbps (video y carga), 1 USB-A 10 Gbps, 1 HDMI 2.1 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja, TPM 2.0 y Microsoft Pluton"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "310,7 x 213,9 x 13,4-15,9 mm; desde 0,90 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11"
+   ],
+   [
+    "Color",
+    "Gray"
+   ]
+  ]
  },
  "asum3406gaql121": {
-  "resumen": "Portátil ASUS Zenbook UM3406GA-QL121 con procesador AMD Ryzen AI 7 445, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" OLED WUXGA. Color Jade Black."
+  "resumen": "Portátil ASUS Zenbook UM3406GA-QL121 con procesador AMD Ryzen AI 7 445, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" OLED WUXGA. Color Jade Black.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen AI 7 445: 6 núcleos, 12 hilos, hasta 4,6 GHz, 14 MB de caché; NPU de hasta 50 TOPS"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB LPDDR5X soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "1TB M.2 NVMe PCIe 4.0"
+   ],
+   [
+    "Pantalla",
+    "14″ WUXGA (1920x1200) OLED, 400 nits (500 nits en HDR), 100% DCI-P3"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado, con tecla Copilot"
+   ],
+   [
+    "Cámara",
+    "FHD con infrarrojo (Windows Hello) y tapa de privacidad"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6E (802.11ax 2x2) y Bluetooth 5.4"
+   ],
+   [
+    "Puertos",
+    "1 USB4 tipo C de 40 Gbps (video y carga), 1 USB-C 10 Gbps (video y carga), 1 USB-A 5 Gbps, 1 HDMI 2.1 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "75 Wh"
+   ],
+   [
+    "Cargador",
+    "68 W USB-C"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja, TPM 2.0 y Microsoft Pluton"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "312,4 x 220,1 x 14,9 mm; desde 1,20 kg"
+   ],
+   [
+    "Color",
+    "Jade Black"
+   ]
+  ]
  },
  "asux3407qaqd288w": {
-  "resumen": "Portátil ASUS Zenbook UX3407QA-QD288W con procesador Qualcomm Snapdragon X X1-26-100, 32 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" OLED WUXGA. Trae Windows 11. Color Beige."
+  "resumen": "Portátil ASUS Zenbook UX3407QA-QD288W con procesador Qualcomm Snapdragon X X1-26-100, 32 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" OLED WUXGA. Trae Windows 11. Color Beige.",
+  "ficha": [
+   [
+    "Procesador",
+    "Qualcomm Snapdragon X X1-26-100: 8 núcleos, hasta 2,97 GHz, 30 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Qualcomm Adreno integrada"
+   ],
+   [
+    "Memoria RAM",
+    "32GB LPDDR5X soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "1TB M.2 NVMe PCIe 4.0"
+   ],
+   [
+    "Pantalla",
+    "14″ WUXGA (1920x1200) OLED, 400 nits (600 nits en HDR), 100% DCI-P3"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado, con tecla Copilot"
+   ],
+   [
+    "Cámara",
+    "FHD con infrarrojo (Windows Hello)"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6E (802.11ax 2x2) y Bluetooth 5.3"
+   ],
+   [
+    "Puertos",
+    "2 USB4 tipo C de 40 Gbps (video y carga), 1 USB-A 10 Gbps, 1 HDMI 2.1 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja, TPM 2.0 y Microsoft Pluton"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "310,7 x 213,9 x 13,4-15,9 mm; desde 0,90 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11"
+   ],
+   [
+    "Color",
+    "Beige"
+   ]
+  ]
  },
  "asum5606karj032w": {
-  "resumen": "Portátil ASUS Zenbook UM5606KA-RJ032W con procesador AMD Ryzen AI 7 350, 24 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 16\" OLED 3K WQ+ táctil. Trae Windows 11. Color Gray."
+  "resumen": "Portátil ASUS Zenbook UM5606KA-RJ032W con procesador AMD Ryzen AI 7 350, 24 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 16\" OLED 3K WQ+ táctil. Trae Windows 11. Color Gray.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen AI 7 350: 8 núcleos, 16 hilos, hasta 5,0 GHz, 24 MB de caché; NPU de hasta 50 TOPS"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "24GB LPDDR5X soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "1TB M.2 NVMe PCIe 4.0"
+   ],
+   [
+    "Pantalla",
+    "16″ 3K (2880x1800) OLED táctil, 120 Hz, 400 nits (500 nits en HDR), 100% DCI-P3"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado, con tecla Copilot"
+   ],
+   [
+    "Cámara",
+    "FHD con infrarrojo (Windows Hello)"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 7 (802.11be 2x2) y Bluetooth 5.4"
+   ],
+   [
+    "Puertos",
+    "2 USB4 tipo C de 40 Gbps (video y carga), 1 USB-A 10 Gbps, 1 HDMI 2.1, lector de tarjetas SD 4.0 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "78 Wh"
+   ],
+   [
+    "Cargador",
+    "65 W USB-C"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja, TPM 2.0 y Microsoft Pluton"
+   ],
+   [
+    "Resistencia",
+    "Norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "353,6 x 243 x 11,9-12,9 mm; 1,50 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11"
+   ],
+   [
+    "Color",
+    "Gray"
+   ]
+  ]
  },
  "asfx607vjrl016": {
-  "resumen": "Portátil ASUS TUF Gaming F16 FX607VJ-RL016 con procesador Intel Core 5 210H, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 6 GB. Color Gray."
+  "resumen": "Portátil ASUS TUF Gaming F16 FX607VJ-RL016 con procesador Intel Core 5 210H, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 6 GB. Color Gray.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core 5 210H: 8 núcleos (4P + 4E), 12 hilos, hasta 4,8 GHz, 12 MB de caché"
+   ],
+   [
+    "Tarjeta gráfica",
+    "NVIDIA GeForce RTX 3050 6GB GDDR6, 65 W (50 W + 15 W de Dynamic Boost)"
+   ],
+   [
+    "Memoria RAM",
+    "8GB DDR4-3200 SO-DIMM; ampliable hasta 64GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB NVMe (tiene 2 ranuras M.2 PCIe)"
+   ],
+   [
+    "Pantalla",
+    "16″ WUXGA (1920x1200) IPS antirreflejo"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado RGB (1 zona), con teclado numérico y tecla Copilot"
+   ],
+   [
+    "Cámara",
+    "HD 720p"
+   ],
+   [
+    "Audio",
+    "2 parlantes con Dolby Atmos y cancelación de ruido con IA"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2) y Ethernet RJ-45"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 10 Gbps (DisplayPort y carga), 1 HDMI 2.1, 1 Ethernet RJ-45 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "56 Wh"
+   ],
+   [
+    "Cargador",
+    "150 W"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y ranura de seguridad Kensington"
+   ],
+   [
+    "Tamaño y peso",
+    "354 x 251 x 22,1-26,7 mm; 2,20 kg"
+   ],
+   [
+    "Color",
+    "Gray"
+   ]
+  ]
  },
  "astuff16c5": {
-  "resumen": "Portátil ASUS TUF Gaming F16 con procesador Intel Core 5 210H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" 1920x1200 144 Hz, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Mecha Gray."
+  "resumen": "Portátil ASUS TUF Gaming F16 con procesador Intel Core 5 210H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" 1920x1200 144 Hz, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Mecha Gray.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core 5 210H: 8 núcleos (4P + 4E), 12 hilos, hasta 4,8 GHz, 12 MB de caché"
+   ],
+   [
+    "Tarjeta gráfica",
+    "NVIDIA GeForce RTX 4050 6GB"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB NVMe"
+   ],
+   [
+    "Pantalla",
+    "16″ (1920x1200), 144 Hz"
+   ],
+   [
+    "Cámara",
+    "HD 720p"
+   ],
+   [
+    "Audio",
+    "2 parlantes con Dolby Atmos y cancelación de ruido con IA"
+   ],
+   [
+    "Batería",
+    "56 Wh"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y ranura de seguridad Kensington"
+   ],
+   [
+    "Tamaño y peso",
+    "354 x 251 x 22,1-26,7 mm; 2,20 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11"
+   ],
+   [
+    "Color",
+    "Mecha Gray"
+   ]
+  ]
  },
  "astufa16r7": {
   "resumen": "Portátil ASUS TUF Gaming A16 con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 16\" WUXGA, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Gray."
@@ -5044,73 +6702,1355 @@
   "resumen": "Portátil HP Victus 15-FA2104TX con procesador Intel Core i7 13620H, 16 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD 144 Hz, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Blue."
  },
  "lnslim315iru8": {
-  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRU8 con procesador Intel Core i3 1315U, 8 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Arctic Grey."
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRU8 con procesador Intel Core i3 1315U, 8 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Arctic Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core i3-1315U: 6 núcleos (2P + 4E), 8 hilos, hasta 4,5 GHz, 10 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel UHD Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "8GB LPDDR5-4800 soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 PCIe 4.0 NVMe"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 1,5 W con Dolby Audio y 2 micrófonos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2) y Bluetooth 5.2"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4, lector de tarjetas y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "47 Wh"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H (21 pruebas)"
+   ],
+   [
+    "Tamaño y peso",
+    "359,3 x 235 x 17,9 mm; desde 1,62 kg"
+   ],
+   [
+    "Color",
+    "Arctic Grey"
+   ]
+  ]
  },
  "lnslim315irh10a": {
-  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRH10 con procesador Intel Core i5 13420H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Luna Grey."
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRH10 con procesador Intel Core i5 13420H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Luna Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core i5-13420H: 8 núcleos (4P + 4E), 12 hilos, hasta 4,6 GHz, 12 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel UHD Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "8GB DDR5-4800"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe 4.0 NVMe (tiene 2 ranuras M.2)"
+   ],
+   [
+    "Pantalla",
+    "15,3″ WUXGA (1920x1200) IPS antirreflejo, 300 nits, 60 Hz"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W con Dolby Audio y 2 micrófonos"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4, lector de tarjetas SD y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H (21 pruebas)"
+   ],
+   [
+    "Peso",
+    "Desde 1,59 kg"
+   ],
+   [
+    "Color",
+    "Luna Grey"
+   ]
+  ]
  },
  "lnv14g5i5": {
-  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core i5 13420H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey."
+  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core i5 13420H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core i5-13420H: 8 núcleos (4P + 4E), 12 hilos, hasta 4,6 GHz, 12 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel UHD Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "8GB DDR5-5200 (1 módulo SODIMM); 2 ranuras, ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe NVMe"
+   ],
+   [
+    "Pantalla",
+    "14″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 1,5 W y 2 micrófonos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2), Bluetooth 5.2 y Ethernet Gigabit"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4b, 1 Ethernet RJ-45 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "47 Wh"
+   ],
+   [
+    "Seguridad",
+    "Chip TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "324,2 x 215,2 x 17,9 mm; desde 1,37 kg"
+   ],
+   [
+    "Color",
+    "Luna Grey"
+   ]
+  ]
  },
  "lnslim315ahp10": {
-  "resumen": "Portátil Lenovo IdeaPad Slim 3 15AHP10 con procesador AMD Ryzen 5 8640HS, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Cosmic Blue."
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15AHP10 con procesador AMD Ryzen 5 8640HS, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Cosmic Blue.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 5 8640HS"
+   ],
+   [
+    "Memoria RAM",
+    "8GB DDR5"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe 4.0 NVMe (tiene 2 ranuras M.2)"
+   ],
+   [
+    "Pantalla",
+    "15,3″ WUXGA (1920x1200) IPS antirreflejo, 300 nits, 60 Hz"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W con Dolby Audio y 2 micrófonos"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4, lector de tarjetas SD y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H (21 pruebas)"
+   ],
+   [
+    "Material",
+    "Tapa de aluminio y base de plástico PC-ABS"
+   ],
+   [
+    "Tamaño y peso",
+    "343,4 x 239,5 x 16,9-17,9 mm; desde 1,59 kg"
+   ],
+   [
+    "Color",
+    "Cosmic Blue"
+   ]
+  ]
  },
  "p52345": {
-  "resumen": "Portátil Lenovo V15 G4 AMN con procesador AMD Ryzen 5 7520U, 16 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Arctic Grey."
+  "resumen": "Portátil Lenovo V15 G4 AMN con procesador AMD Ryzen 5 7520U, 16 GB LPDDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Arctic Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 5 7520U: 4 núcleos, 8 hilos, hasta 4,3 GHz, 4 MB de caché L3"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon 610M integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB LPDDR5-5500 soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe NVMe"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 1,5 W con Dolby Audio y 2 micrófonos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2), Bluetooth 5.3 y Ethernet Gigabit"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4b, 1 Ethernet RJ-45 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "359,2 x 235,8 x 19,9 mm; menos de 1,63 kg"
+   ],
+   [
+    "Color",
+    "Arctic Grey"
+   ]
+  ]
  },
  "lnv14g5c5": {
-  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core 5 210H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey."
+  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core 5 210H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core 5 210H: 8 núcleos (4P + 4E), 12 hilos, hasta 4,8 GHz, 12 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "8GB DDR5-5200 (1 módulo SODIMM); 2 ranuras, ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe NVMe"
+   ],
+   [
+    "Pantalla",
+    "14″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 1,5 W y 2 micrófonos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2), Bluetooth 5.2 y Ethernet Gigabit"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4b, 1 Ethernet RJ-45 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "47 Wh"
+   ],
+   [
+    "Seguridad",
+    "Chip TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "324,2 x 215,2 x 17,9 mm; desde 1,37 kg"
+   ],
+   [
+    "Color",
+    "Luna Grey"
+   ]
+  ]
  },
  "lnv14g5i7": {
-  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core i7 13620H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey."
+  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core i7 13620H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core i7-13620H: 10 núcleos (6P + 4E), 16 hilos, hasta 4,9 GHz, 24 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel UHD Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "8GB DDR5-5200 (1 módulo SODIMM); 2 ranuras, ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe NVMe"
+   ],
+   [
+    "Pantalla",
+    "14″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 1,5 W y 2 micrófonos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2), Bluetooth 5.2 y Ethernet Gigabit"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4b, 1 Ethernet RJ-45 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "47 Wh"
+   ],
+   [
+    "Seguridad",
+    "Chip TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "324,2 x 215,2 x 17,9 mm; desde 1,37 kg"
+   ],
+   [
+    "Color",
+    "Luna Grey"
+   ]
+  ]
  },
  "lntb14g7arp": {
-  "resumen": "Portátil Lenovo ThinkBook 14 G7 ARP con procesador AMD Ryzen 5 7535HS, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" WUXGA. Color Arctic Grey."
+  "resumen": "Portátil Lenovo ThinkBook 14 G7 ARP con procesador AMD Ryzen 5 7535HS, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" WUXGA. Color Arctic Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 5 7535HS: 6 núcleos, 12 hilos, hasta 4,55 GHz, 16 MB de caché L3"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon 660M integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5-4800 (1 módulo SODIMM); 2 ranuras, ampliable hasta 64GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 PCIe 4.0 NVMe (tiene 2 ranuras M.2 2280)"
+   ],
+   [
+    "Pantalla",
+    "14″ WUXGA (1920x1200) IPS antirreflejo, 300 nits"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W con Dolby Audio y 2 micrófonos"
+   ],
+   [
+    "Puertos",
+    "1 USB-A 5 Gbps, 1 USB-A 5 Gbps siempre encendido, 1 USB-C 10 Gbps (carga USB PD 45-65 W y DisplayPort 1.4), 1 USB-C USB4 40 Gbps (carga USB PD 45-65 W y DisplayPort 1.4), 1 HDMI 2.1 (hasta 4K a 60 Hz), 1 Ethernet RJ-45, lector de tarjetas SD y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Cargador",
+    "65 W USB-C"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella en el botón de encendido, TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H"
+   ],
+   [
+    "Peso",
+    "Desde 1,36 kg"
+   ],
+   [
+    "Color",
+    "Arctic Grey"
+   ]
+  ]
  },
  "p52388": {
-  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRH10 con procesador Intel Core i5 13420H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Gris."
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRH10 con procesador Intel Core i5 13420H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Gris.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core i5-13420H: 8 núcleos (4P + 4E), 12 hilos, hasta 4,6 GHz, 12 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel UHD Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5-4800"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe 4.0 NVMe (tiene 2 ranuras M.2)"
+   ],
+   [
+    "Pantalla",
+    "15,3″ WUXGA (1920x1200) IPS antirreflejo, 300 nits, 60 Hz"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W con Dolby Audio y 2 micrófonos"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4, lector de tarjetas SD y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H (21 pruebas)"
+   ],
+   [
+    "Peso",
+    "Desde 1,59 kg"
+   ],
+   [
+    "Color",
+    "Gris"
+   ]
+  ]
  },
  "lnv14g6arp": {
-  "resumen": "Portátil Lenovo V14 G6 ARP con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey."
+  "resumen": "Portátil Lenovo V14 G6 ARP con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 7 170: 8 núcleos, 16 hilos, hasta 4,75 GHz, 16 MB de caché L3"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon 680M integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5-4800 (1 módulo SODIMM); 2 ranuras, ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 PCIe 4.0 NVMe"
+   ],
+   [
+    "Pantalla",
+    "14″ FHD (1920x1080) antirreflejo, 300 nits"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W y 2 micrófonos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2), Bluetooth 5.2 y Ethernet Gigabit"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 10 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4b, 1 Ethernet RJ-45 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "47 Wh"
+   ],
+   [
+    "Seguridad",
+    "Chip TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "324,2 x 215,2 x 19,9 mm; desde 1,37 kg"
+   ],
+   [
+    "Color",
+    "Luna Grey"
+   ]
+  ]
  },
  "lnv15g6arp": {
-  "resumen": "Portátil Lenovo V15 G6 ARP con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Luna Grey."
+  "resumen": "Portátil Lenovo V15 G6 ARP con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Luna Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 7 170: 8 núcleos, 16 hilos, hasta 4,75 GHz, 16 MB de caché L3"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon 680M integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5-4800 (1 módulo SODIMM); 2 ranuras, ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 PCIe 4.0 NVMe"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) antirreflejo, 300 nits"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W y 2 micrófonos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2), Bluetooth 5.2 y Ethernet Gigabit"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 10 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4b, 1 Ethernet RJ-45 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "47 Wh"
+   ],
+   [
+    "Seguridad",
+    "Chip TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "359,2 x 235,8 x 19,9 mm; desde 1,6 kg"
+   ],
+   [
+    "Color",
+    "Luna Grey"
+   ]
+  ]
  },
  "lnv15g5i7": {
-  "resumen": "Portátil Lenovo V15 G5 IRL con procesador Intel Core i7 13620H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Luna Grey."
+  "resumen": "Portátil Lenovo V15 G5 IRL con procesador Intel Core i7 13620H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD. Color Luna Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core i7-13620H: 10 núcleos (6P + 4E), 16 hilos, hasta 4,9 GHz, 24 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel UHD Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5-5200; 2 ranuras SODIMM, ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe 4.0 NVMe"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 1,5 W y 2 micrófonos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2), Bluetooth 5.2 y Ethernet Gigabit"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4b, 1 Ethernet RJ-45 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "47 Wh"
+   ],
+   [
+    "Seguridad",
+    "Chip TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "359,2 x 235,8 x 18,3 mm; desde 1,61 kg"
+   ],
+   [
+    "Color",
+    "Luna Grey"
+   ]
+  ]
  },
  "lnv14g5c7": {
-  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core 7 240H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey."
+  "resumen": "Portátil Lenovo V14 G5 IRL con procesador Intel Core 7 240H, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Luna Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core 7 240H: 10 núcleos (6P + 4E), 16 hilos, hasta 5,2 GHz, 24 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "8GB DDR5-5200 (1 módulo SODIMM); 2 ranuras, ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe NVMe"
+   ],
+   [
+    "Pantalla",
+    "14″ FHD (1920x1080) antirreflejo"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 1,5 W y 2 micrófonos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2), Bluetooth 5.2 y Ethernet Gigabit"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4b, 1 Ethernet RJ-45 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "47 Wh"
+   ],
+   [
+    "Seguridad",
+    "Chip TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "324,2 x 215,2 x 17,9 mm; desde 1,37 kg"
+   ],
+   [
+    "Color",
+    "Luna Grey"
+   ]
+  ]
  },
  "lntb14g8irl": {
-  "resumen": "Portátil Lenovo ThinkBook 14 G8 IRL con procesador Intel Core 5 210H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" WUXGA. Color Arctic Grey."
+  "resumen": "Portátil Lenovo ThinkBook 14 G8 IRL con procesador Intel Core 5 210H, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" WUXGA. Color Arctic Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core 5 210H: 8 núcleos (4P + 4E), 12 hilos, hasta 4,8 GHz, 12 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5; 2 ranuras SODIMM, ampliable hasta 64GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 PCIe 4.0 NVMe (tiene 2 ranuras M.2 2280)"
+   ],
+   [
+    "Pantalla",
+    "14″ WUXGA (1920x1200) IPS antirreflejo, 300 nits, 60 Hz"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W con Dolby Audio y 2 micrófonos"
+   ],
+   [
+    "Puertos",
+    "1 USB-A 5 Gbps, 1 USB-A 5 Gbps siempre encendido, 1 USB-C 10 Gbps (carga USB PD 45-65 W y DisplayPort 1.4), 1 USB-C Thunderbolt 4 / USB4 40 Gbps (carga USB PD 45-65 W y DisplayPort 2.1), 1 HDMI 2.1 (hasta 4K a 60 Hz), 1 Ethernet RJ-45, lector de tarjetas SD y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Cargador",
+    "65 W USB-C"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H"
+   ],
+   [
+    "Tamaño y peso",
+    "313,5 x 224 x 17,5 mm; desde 1,36 kg"
+   ],
+   [
+    "Color",
+    "Arctic Grey"
+   ]
+  ]
  },
  "lnslim315arp10": {
-  "resumen": "Portátil Lenovo IdeaPad Slim 3 15ARP10 con procesador AMD Ryzen 7 7735HS, 24 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Cosmic Blue."
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15ARP10 con procesador AMD Ryzen 7 7735HS, 24 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Cosmic Blue.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 7 7735HS: 8 núcleos, 16 hilos, hasta 4,75 GHz, 16 MB de caché L3"
+   ],
+   [
+    "Gráfica",
+    "AMD Radeon 680M integrada"
+   ],
+   [
+    "Memoria RAM",
+    "24GB DDR5-4800 (8GB soldada + 1 módulo SODIMM de 16GB); máximo 24GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe 4.0 NVMe (tiene 2 ranuras M.2)"
+   ],
+   [
+    "Pantalla",
+    "15,3″ WUXGA (1920x1200) IPS antirreflejo, 300 nits, 60 Hz"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W con Dolby Audio y 2 micrófonos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2) y Bluetooth 5.3"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4, lector de tarjetas SD y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H (21 pruebas)"
+   ],
+   [
+    "Color",
+    "Cosmic Blue"
+   ]
+  ]
  },
  "lnslim315irh10b": {
-  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRH10 con procesador Intel Core i7 13620H, 24 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Grey."
+  "resumen": "Portátil Lenovo IdeaPad Slim 3 15IRH10 con procesador Intel Core i7 13620H, 24 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,3\" WUXGA. Color Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core i7-13620H: 10 núcleos (6P + 4E), 16 hilos, hasta 4,9 GHz, 24 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel UHD Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "24GB DDR5"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe 4.0 NVMe (tiene 2 ranuras M.2)"
+   ],
+   [
+    "Pantalla",
+    "15,3″ WUXGA (1920x1200) IPS antirreflejo, 300 nits, 60 Hz"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W con Dolby Audio y 2 micrófonos"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 45-65 W y DisplayPort 1.2), 1 HDMI 1.4, lector de tarjetas SD y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H (21 pruebas)"
+   ],
+   [
+    "Peso",
+    "Desde 1,59 kg"
+   ],
+   [
+    "Color",
+    "Gris"
+   ]
+  ]
  },
  "lnslim514imh9": {
-  "resumen": "Portátil Lenovo IdeaPad Slim 5 14IMH9 con procesador Intel Core Ultra 7 155H, 16 GB LPDDR5 de RAM, SSD de 1 TB y pantalla de 14\" WUXGA. Trae Windows 11. Color Gray."
+  "resumen": "Portátil Lenovo IdeaPad Slim 5 14IMH9 con procesador Intel Core Ultra 7 155H, 16 GB LPDDR5 de RAM, SSD de 1 TB y pantalla de 14\" WUXGA. Trae Windows 11. Color Gray.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core Ultra 7 155H: 16 núcleos (6P + 8E + 2LPE), 22 hilos, hasta 4,8 GHz, 24 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel Arc Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB LPDDR5x-7467 soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "1TB M.2 PCIe 4.0 NVMe"
+   ],
+   [
+    "Pantalla",
+    "14″ WUXGA (1920x1200)"
+   ],
+   [
+    "Cámara",
+    "FHD 1080p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W con Dolby Audio y 2 micrófonos"
+   ],
+   [
+    "Puertos",
+    "1 USB-A 5 Gbps, 1 USB-A 5 Gbps siempre encendido, 2 USB-C 5 Gbps (carga USB PD y DisplayPort 1.4), 1 HDMI 1.4b, lector de tarjetas microSD y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "57 Wh"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H (21 pruebas)"
+   ],
+   [
+    "Material",
+    "Aluminio (tapa y base)"
+   ],
+   [
+    "Tamaño y peso",
+    "312 x 221 x 16,9 mm; desde 1,48 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11"
+   ],
+   [
+    "Color",
+    "Gris"
+   ]
+  ]
  },
  "lnyogaslim714imh9": {
-  "resumen": "Portátil Lenovo Yoga Slim 7 14IMH9 con procesador Intel Core Ultra 7 155H, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" WUXGA OLED. Trae Windows 11. Color Grey."
+  "resumen": "Portátil Lenovo Yoga Slim 7 14IMH9 con procesador Intel Core Ultra 7 155H, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14\" WUXGA OLED. Trae Windows 11. Color Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core Ultra 7 155H: 16 núcleos (6P + 8E + 2LPE), 22 hilos, hasta 4,8 GHz, 24 MB de caché"
+   ],
+   [
+    "Gráfica",
+    "Intel Arc Graphics integrada"
+   ],
+   [
+    "Memoria RAM",
+    "16GB soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "1TB M.2 PCIe 4.0 NVMe"
+   ],
+   [
+    "Pantalla",
+    "14″ WUXGA (1920x1200) OLED, 400 nits, 100% DCI-P3, Dolby Vision"
+   ],
+   [
+    "Cámara",
+    "FHD 1080p + infrarroja, con obturador electrónico"
+   ],
+   [
+    "Audio",
+    "4 parlantes de 2 W con Dolby Atmos y 4 micrófonos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6E (802.11ax 2x2) y Bluetooth 5.3"
+   ],
+   [
+    "Puertos",
+    "1 USB-A 5 Gbps siempre encendido, 2 Thunderbolt 4 (carga USB PD y DisplayPort 1.4), 1 HDMI 2.1 (hasta 4K a 60 Hz) y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "65 Wh"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja y TPM 2.0"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H (21 pruebas)"
+   ],
+   [
+    "Material",
+    "Aluminio (tapa y base)"
+   ],
+   [
+    "Tamaño y peso",
+    "312 x 221 x 14,9 mm; desde 1,39 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11"
+   ],
+   [
+    "Color",
+    "Luna Grey"
+   ]
+  ]
  },
  "lnyoga714akp10": {
-  "resumen": "Portátil Lenovo Yoga 7 2 en 1 14AKP10 con procesador AMD Ryzen AI 5 340, 16 GB LPDDR5X de RAM, SSD de 512 GB y pantalla de 14\" WUXGA táctil. Trae Windows 11."
+  "resumen": "Portátil Lenovo Yoga 7 2 en 1 14AKP10 con procesador AMD Ryzen AI 5 340, 16 GB LPDDR5X de RAM, SSD de 512 GB y pantalla de 14\" WUXGA táctil. Trae Windows 11.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen AI 5 340: 6 núcleos, 12 hilos, hasta 4,8 GHz, 22 MB de caché"
+   ],
+   [
+    "Memoria RAM",
+    "16GB soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe 4.0 NVMe"
+   ],
+   [
+    "Pantalla",
+    "14″ WUXGA (1920x1200) OLED táctil, 400 nits (600 nits de pico)"
+   ],
+   [
+    "Lápiz",
+    "Compatible con el Lenovo Yoga Pen"
+   ],
+   [
+    "Cámara",
+    "5 MP + infrarroja, con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "4 parlantes (2 woofers y 2 tweeters de 2 W) con Dolby Atmos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 7 (802.11be 2x2) y Bluetooth 5.4"
+   ],
+   [
+    "Puertos",
+    "1 USB-A 5 Gbps siempre encendido, 2 USB-C 10 Gbps (carga USB PD 45-65 W y DisplayPort), 1 HDMI 2.1 (hasta 4K a 60 Hz), lector de tarjetas microSD y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "70 Wh"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja, TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Resistencia",
+    "Probado con la norma militar MIL-STD-810H (21 pruebas)"
+   ],
+   [
+    "Material",
+    "Aluminio (tapa y base)"
+   ],
+   [
+    "Tamaño y peso",
+    "317 x 228 x 15,45 mm; desde 1,38 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11"
+   ]
+  ]
  },
  "lnloq15arp9": {
-  "resumen": "Portátil Lenovo LOQ 15ARP9 con procesador AMD Ryzen 5 7235HS, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Luna Grey."
+  "resumen": "Portátil Lenovo LOQ 15ARP9 con procesador AMD Ryzen 5 7235HS, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Luna Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 5 7235HS: 4 núcleos, 8 hilos, hasta 4,2 GHz, 8 MB de caché L3"
+   ],
+   [
+    "Tarjeta gráfica",
+    "NVIDIA GeForce RTX 4050 6GB GDDR6, hasta 2370 MHz, TGP 105 W"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5-4800 (2 módulos SODIMM de 8GB); ampliable hasta 32GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 PCIe 4.0 NVMe (tiene 2 ranuras M.2 2280)"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) IPS antirreflejo, 144 Hz, 300 nits, 100% sRGB, G-SYNC"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado en blanco"
+   ],
+   [
+    "Cámara",
+    "HD 720p con obturador electrónico"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W con Nahimic Audio"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2), Bluetooth 5.2 y Ethernet Gigabit"
+   ],
+   [
+    "Puertos",
+    "3 USB-A 5 Gbps, 1 USB-C 10 Gbps (DisplayPort 1.4 y carga de hasta 140 W), 1 HDMI 2.1 (hasta 8K a 60 Hz), 1 Ethernet RJ-45 y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "60 Wh"
+   ],
+   [
+    "Cargador",
+    "170 W"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0"
+   ],
+   [
+    "Tamaño y peso",
+    "359,86 x 258,7 x 21,9-23,9 mm; desde 2,38 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11"
+   ],
+   [
+    "Color",
+    "Luna Grey"
+   ]
+  ]
  },
  "lnloq15arp10e": {
-  "resumen": "Portátil Lenovo LOQ 15ARP10E con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Luna Grey."
+  "resumen": "Portátil Lenovo LOQ 15ARP10E con procesador AMD Ryzen 7 170, 16 GB DDR5 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 4050 de 6 GB. Trae Windows 11. Color Luna Grey.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 7 170: 8 núcleos, 16 hilos, hasta 4,75 GHz, 16 MB de caché L3"
+   ],
+   [
+    "Tarjeta gráfica",
+    "NVIDIA GeForce RTX 4050 6GB GDDR6, hasta 2145 MHz, TGP 65 W"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5-4800 (1 módulo SODIMM); 2 ranuras"
+   ],
+   [
+    "Unidad de estado sólido",
+    "512GB M.2 2242 PCIe 4.0 NVMe (tiene 2 ranuras M.2)"
+   ],
+   [
+    "Pantalla",
+    "15,6″ FHD (1920x1080) IPS antirreflejo, 144 Hz, 300 nits, 100% sRGB, FreeSync"
+   ],
+   [
+    "Cámara",
+    "HD 720p con tapa de privacidad"
+   ],
+   [
+    "Audio",
+    "2 parlantes estéreo de 2 W con Nahimic Audio"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6 (802.11ax 2x2), Bluetooth 5.2 y Ethernet Gigabit"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-C 5 Gbps (carga USB PD 65-100 W), 1 HDMI 2.1 (hasta 8K a 60 Hz), 1 Ethernet RJ-45, lector de tarjetas y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "57,5 Wh"
+   ],
+   [
+    "Cargador",
+    "135 W"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0 y tapa de privacidad en la cámara"
+   ],
+   [
+    "Tamaño y peso",
+    "359,2 x 236 x 19,9-22,95 mm; desde 1,8 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11"
+   ],
+   [
+    "Color",
+    "Luna Grey"
+   ]
+  ]
  },
  "lnyogapro714ahp9": {
-  "resumen": "Portátil Lenovo Yoga Pro 7 14AHP9 con procesador AMD Ryzen 7 8845HS, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14,5\" 2,5K WQXGA, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 6 GB. Trae Windows 11."
+  "resumen": "Portátil Lenovo Yoga Pro 7 14AHP9 con procesador AMD Ryzen 7 8845HS, 16 GB LPDDR5X de RAM, SSD de 1 TB y pantalla de 14,5\" 2,5K WQXGA, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 6 GB. Trae Windows 11.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 7 8845HS: 8 núcleos, 16 hilos, hasta 5,1 GHz, 16 MB de caché L3"
+   ],
+   [
+    "Tarjeta gráfica",
+    "NVIDIA GeForce RTX 3050 6GB GDDR6"
+   ],
+   [
+    "Memoria RAM",
+    "16GB LPDDR5x-6400 soldada (no se puede ampliar)"
+   ],
+   [
+    "Unidad de estado sólido",
+    "1TB M.2 2280 PCIe 4.0 NVMe"
+   ],
+   [
+    "Pantalla",
+    "14,5″ 2,5K WQXGA (2560x1600) IPS, 350 nits, 100% sRGB, 90 Hz"
+   ],
+   [
+    "Cámara",
+    "FHD 1080p + infrarroja, con obturador electrónico"
+   ],
+   [
+    "Audio",
+    "4 parlantes (2 woofers y 2 tweeters de 2 W) con Dolby Atmos"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 6E (802.11ax 2x2) y Bluetooth 5.3"
+   ],
+   [
+    "Puertos",
+    "1 USB-A 5 Gbps siempre encendido, 1 USB-C 10 Gbps (carga USB PD y DisplayPort 1.4), 1 USB-C USB4 40 Gbps (carga USB PD y DisplayPort 1.4), 1 HDMI 2.1 (hasta 4K a 60 Hz) y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Batería",
+    "73 Wh"
+   ],
+   [
+    "Seguridad",
+    "Reconocimiento facial (Windows Hello) con cámara infrarroja y chip Microsoft Pluton (TPM 2.0)"
+   ],
+   [
+    "Material",
+    "Aluminio (tapa y base)"
+   ],
+   [
+    "Tamaño",
+    "325,5 x 226,49 x 16,6 mm"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11"
+   ]
+  ]
  },
  "lnlegionpro716iax10h": {
-  "resumen": "Portátil Lenovo Legion Pro 7 16IAX10H con procesador Intel Core Ultra 9 275HX, 32 GB DDR5 de RAM, SSD de 2 TB y pantalla de 16\" WQXGA, con tarjeta gráfica NVIDIA GeForce RTX 5070 de 12 GB. Trae Windows 11. Color Black."
+  "resumen": "Portátil Lenovo Legion Pro 7 16IAX10H con procesador Intel Core Ultra 9 275HX, 32 GB DDR5 de RAM, SSD de 2 TB y pantalla de 16\" WQXGA, con tarjeta gráfica NVIDIA GeForce RTX 5070 de 12 GB. Trae Windows 11. Color Black.",
+  "ficha": [
+   [
+    "Procesador",
+    "Intel Core Ultra 9 275HX: 24 núcleos (8P + 16E), 24 hilos, hasta 5,4 GHz, 36 MB de caché"
+   ],
+   [
+    "Memoria RAM",
+    "32GB DDR5-6400 (2 módulos CSODIMM de 16GB); ampliable hasta 64GB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "2TB NVMe; 2 ranuras M.2 2280 (una PCIe 5.0 y una PCIe 4.0)"
+   ],
+   [
+    "Pantalla",
+    "16″ WQXGA (2560x1600) OLED, 240 Hz, 500 nits (1100 nits de pico), 100% DCI-P3, DisplayHDR True Black 1000, Dolby Vision y G-SYNC"
+   ],
+   [
+    "Teclado",
+    "Retroiluminado RGB tecla por tecla"
+   ],
+   [
+    "Cámara",
+    "5 MP con obturador electrónico"
+   ],
+   [
+    "Audio",
+    "4 parlantes (2 woofers y 2 tweeters de 2 W) con Nahimic Audio"
+   ],
+   [
+    "Conectividad",
+    "Wi-Fi 7 (802.11be 2x2), Bluetooth 5.4 y Ethernet 2.5GbE"
+   ],
+   [
+    "Puertos",
+    "2 USB-A 5 Gbps, 1 USB-A 10 Gbps siempre encendido, 1 USB-C 10 Gbps (carga USB PD 95-100 W y DisplayPort 2.1), 1 Thunderbolt 4 / USB4 40 Gbps (DisplayPort 2.1), 1 HDMI 2.1 (hasta 8K a 60 Hz), 1 Ethernet RJ-45 2.5GbE y 1 jack de audio 3,5 mm"
+   ],
+   [
+    "Cargador",
+    "400 W"
+   ],
+   [
+    "Seguridad",
+    "TPM 2.0"
+   ],
+   [
+    "Material",
+    "Aluminio (tapa y base)"
+   ],
+   [
+    "Tamaño y peso",
+    "364,38 x 275,94 x 21,9-26,65 mm; desde 2,57 kg"
+   ],
+   [
+    "Sistema operativo",
+    "Windows 11"
+   ],
+   [
+    "Color",
+    "Eclipse Black"
+   ]
+  ]
  },
  "msithin15b13uc3060": {
   "resumen": "Portátil MSI Thin 15 B13UC-3060XCO con procesador Intel Core i5 13420H, 8 GB DDR4 de RAM, SSD de 512 GB y pantalla de 15,6\" FHD, con tarjeta gráfica NVIDIA GeForce RTX 3050 de 4 GB. Color Grey."
@@ -5170,6 +8110,228 @@
    [
     "Seguridad",
     "Huella en el botón lateral (Touch ID)"
+   ]
+  ]
+ },
+ "p44029": {
+  "resumen": "Licencia original de Windows 11 Pro de 64 bits en español, versión DSP para instalar en un equipo. Trae las funciones de la edición Pro, como el cifrado de disco BitLocker, y la protección integrada de Seguridad de Windows (Windows Defender). Antes de comprarla, revisa que tu PC cumpla los requisitos de Windows 11, en especial el TPM 2.0.",
+  "ficha": [
+   [
+    "Edición",
+    "Windows 11 Pro"
+   ],
+   [
+    "Arquitectura",
+    "64 bits"
+   ],
+   [
+    "Idioma",
+    "Español"
+   ],
+   [
+    "Licencia",
+    "DSP para 1 equipo (1PK)"
+   ],
+   [
+    "Requisitos mínimos",
+    "Procesador compatible de 64 bits a 1 GHz o más con 2 núcleos, 4 GB de RAM, 64 GB de almacenamiento, UEFI con arranque seguro, TPM 2.0, gráficos DirectX 12 y pantalla HD (720p)"
+   ]
+  ]
+ },
+ "p51295": {
+  "resumen": "PC de escritorio con AMD Ryzen 5 8500G, que trae gráficos Radeon integrados: no necesita tarjeta de video para estudio, oficina, navegación y juegos livianos. Viene con 16 GB de RAM DDR5 RGB, SSD NVMe de 512 GB y WiFi por adaptador USB ASUS, y se entrega completo con monitor Acer Nitro de 27\" a 180 Hz, teclado y mouse RGB.",
+  "ficha": [
+   [
+    "Procesador",
+    "AMD Ryzen 5 8500G"
+   ],
+   [
+    "Memoria RAM",
+    "16GB DDR5 RGB"
+   ],
+   [
+    "Unidad de estado sólido",
+    "M.2 NVMe 512GB"
+   ],
+   [
+    "Chasis",
+    "POWER CL-W28 V.T. + 5ARGB"
+   ],
+   [
+    "Board",
+    "B840M"
+   ],
+   [
+    "WiFi",
+    "Adaptador USB ASUS USB-AC53 Nano"
+   ],
+   [
+    "Monitor",
+    "Acer Nitro KG270 27″ IPS FHD 1ms-180Hz"
+   ],
+   [
+    "Teclado y Mouse",
+    "Power 801 RGB"
+   ]
+  ]
+ },
+ "ip17": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Face ID"
+   ]
+  ]
+ },
+ "ipair": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Face ID"
+   ]
+  ]
+ },
+ "xra5": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
+ },
+ "xra7": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
+ },
+ "xrn15pp": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
+   ]
+  ]
+ },
+ "pocox8": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
+   ]
+  ]
+ },
+ "mg56": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Lector de huella y reconocimiento facial"
+   ]
+  ]
+ },
+ "hx6e": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Lector de huella y reconocimiento facial"
+   ]
+  ]
+ },
+ "oa6k": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
+ },
+ "igt50pro": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla"
+   ]
+  ]
+ },
+ "inote60u": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla"
+   ]
+  ]
+ },
+ "kblacke2": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral"
+   ]
+  ]
+ },
+ "kblackz1": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
+ },
+ "kblack3": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
+ },
+ "ularmor34p": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
+ },
+ "ularmor30p": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
+ },
+ "ularmorx13": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
+ },
+ "ularmor22": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella lateral y reconocimiento facial"
+   ]
+  ]
+ },
+ "ularmorx32": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Reconocimiento facial"
+   ]
+  ]
+ },
+ "ularmorx12p": {
+  "ficha": [
+   [
+    "Seguridad",
+    "Reconocimiento facial"
    ]
   ]
  }

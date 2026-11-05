@@ -221,6 +221,10 @@ export function Carrito() {
                 Enviar el pedido no es un pago: se abre WhatsApp con el pedido escrito, lo envías y te confirmamos disponibilidad y total.
                 {boldActivo() && " Si prefieres pagar ya, Bold acepta tarjeta, PSE y más."}
               </p>
+              {/* Antes de comprar: el derecho de retracto (arts. 46 y 50, Ley 1480) y la política de datos */}
+              <p className="mt-1.5 text-center text-xs leading-relaxed text-tinta-3">
+                Tienes <a href="#cambios-y-devoluciones" className="enlace">derecho de retracto</a> por 5 días hábiles desde la entrega. Al enviar el pedido aceptas el <a href="#datos-personales" className="enlace">tratamiento de tus datos</a>.
+              </p>
             </footer>
           </>
         )}

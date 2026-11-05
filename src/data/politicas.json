@@ -1,0 +1,193 @@
+{
+ "_nota": "Políticas de la tienda (garantía, retracto y devoluciones, datos personales), redactadas con la Ley 1480 de 2011, la Ley 2439 de 2024 y la Ley 1581 de 2012. Los textos entre llaves se llenan con «datos» (y {whatsapp} y {nombre} con config.json). Mientras un dato esté en null, la página muestra el espacio resaltado como pendiente: no se debe publicar así.",
+ "datos": {
+  "titular": { "etiqueta": "nombre o razón social del responsable", "valor": null },
+  "documento": { "etiqueta": "NIT o cédula", "valor": null },
+  "direccion": { "etiqueta": "dirección física para notificaciones", "valor": null },
+  "correo": { "etiqueta": "correo electrónico", "valor": null },
+  "plazoNuevos": { "etiqueta": "plazo de garantía de productos nuevos", "valor": null },
+  "plazoUsados": { "etiqueta": "plazo de garantía de usados, open box y CPO", "valor": null },
+  "plazoReparaciones": { "etiqueta": "plazo de garantía de reparaciones", "valor": null },
+  "vigencia": { "etiqueta": "fecha desde la que rigen", "valor": null }
+ },
+ "paginas": [
+  {
+   "id": "garantia",
+   "menu": "Garantía",
+   "titulo": "Garantía",
+   "lead": "Todo lo que vendemos y reparamos tiene garantía legal, como lo exige el Estatuto del Consumidor (Ley 1480 de 2011).",
+   "secciones": [
+    {
+     "titulo": "Plazos",
+     "bloques": [
+      { "lista": [
+       "Productos nuevos: {plazoNuevos}, contados desde el día en que recibes el producto. Si el fabricante anuncia un plazo mayor, se aplica ese plazo.",
+       "Productos usados, open box y CPO (certificados): {plazoUsados}, contados desde la entrega.",
+       "Reparaciones del servicio técnico: {plazoReparaciones} sobre el repuesto y el trabajo realizado, contados desde que te entregamos el equipo."
+      ] }
+     ]
+    },
+    {
+     "titulo": "Qué cubre",
+     "bloques": [
+      "La garantía responde por la calidad, la idoneidad, la seguridad y el buen funcionamiento del producto. Si aparece una falla dentro del plazo:",
+      { "lista": [
+       "Lo reparamos sin costo para ti, incluido el transporte cuando haga falta, con los repuestos que necesite.",
+       "Si no se puede reparar, lo cambiamos por otro o te devolvemos el dinero.",
+       "Si la falla se repite, tú eliges: una nueva reparación, el cambio por un producto igual o de características similares (nunca inferiores) o la devolución total o parcial de lo que pagaste."
+      ] }
+     ]
+    },
+    {
+     "titulo": "Cuándo no aplica",
+     "bloques": [
+      "Según el artículo 16 de la Ley 1480, la garantía no aplica cuando se demuestra que la falla viene de:",
+      { "lista": [
+       "Fuerza mayor o caso fortuito.",
+       "El hecho de un tercero.",
+       "El uso indebido del producto.",
+       "No haber seguido las instrucciones de instalación, uso o mantenimiento del manual o de la garantía."
+      ] }
+     ]
+    },
+    {
+     "titulo": "Cómo solicitarla",
+     "bloques": [
+      "Escríbenos por WhatsApp al {whatsapp} o al correo {correo} con tu nombre, el producto, la fecha de compra y la falla que presenta. Si puedes, envía fotos o un video. Te respondemos con los pasos para revisar el equipo."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cambios-y-devoluciones",
+   "menu": "Cambios y devoluciones",
+   "titulo": "Cambios, devoluciones y retracto",
+   "lead": "Tus derechos cuando nos compras a distancia, por la página o por WhatsApp.",
+   "secciones": [
+    {
+     "titulo": "Derecho de retracto",
+     "bloques": [
+      "Como compras sin ir a una tienda física, tienes derecho de retracto (artículo 47 de la Ley 1480 de 2011): puedes deshacer la compra dentro de los 5 días hábiles siguientes a la entrega del producto.",
+      { "lista": [
+       "Avísanos dentro de ese plazo por WhatsApp al {whatsapp} o al correo {correo}, con tu nombre y el producto que compraste.",
+       "Devuelve el producto por los mismos medios y en las mismas condiciones en que lo recibiste, con sus accesorios, manuales y empaque.",
+       "Los costos de transporte de la devolución corren por tu cuenta."
+      ] },
+      "Te devolvemos todo el dinero que pagaste, sin descuentos ni retenciones, a más tardar 15 días calendario después de que ejerzas el retracto, nos des los datos para el reembolso y recibamos el producto. La devolución se hace por el medio de pago que prefieras."
+     ]
+    },
+    {
+     "titulo": "Cuándo no aplica el retracto",
+     "bloques": [
+      "La ley excluye del retracto:",
+      { "lista": [
+       "Los servicios que ya empezaron con tu acuerdo, como una reparación o una instalación.",
+       "Los productos hechos o personalizados según tus especificaciones.",
+       "Los productos que por su naturaleza no se pueden devolver o se deterioran rápido, y los perecederos.",
+       "Los bienes de uso personal."
+      ] }
+     ]
+    },
+    {
+     "titulo": "Entrega de tu pedido",
+     "bloques": [
+      "Te confirmamos el tiempo de entrega por WhatsApp. Si no acordamos un plazo, la entrega no puede pasar de 30 días calendario. Si el producto no está disponible o la entrega se retrasa, puedes cancelar la compra y te devolvemos el dinero en máximo 15 días calendario, sin retenciones.",
+      "Si el producto llega con una falla, aplica la garantía."
+     ]
+    },
+    {
+     "titulo": "Reversión del pago",
+     "bloques": [
+      "Si pagaste en línea con tarjeta de crédito o débito, PSE u otro medio electrónico, puedes pedir que se reverse el pago (artículo 51 de la Ley 1480) cuando:",
+      { "lista": [
+       "Fuiste víctima de fraude o no hiciste la operación.",
+       "No recibiste el producto.",
+       "El producto no corresponde a lo que pediste o es defectuoso."
+      ] },
+      "Para pedirla, dentro de los 5 días hábiles siguientes a la fecha en que te enteraste del problema o en que debías recibir el producto:",
+      { "numerada": true, "lista": [
+       "Preséntanos la queja por WhatsApp o por correo.",
+       "Devuelve el producto, cuando aplique.",
+       "Avisa de la reclamación al banco o la entidad que emitió tu medio de pago."
+      ] }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "datos-personales",
+   "menu": "Datos personales",
+   "titulo": "Tratamiento de datos personales",
+   "lead": "Qué datos usamos, para qué, y cómo puedes consultarlos, corregirlos o pedir que los borremos (Ley 1581 de 2012).",
+   "secciones": [
+    {
+     "titulo": "Responsable",
+     "bloques": [
+      { "lista": [
+       "{titular}, identificado con {documento}.",
+       "Domicilio en Bogotá, Colombia: {direccion}.",
+       "Correo: {correo}. WhatsApp: {whatsapp}."
+      ] }
+     ]
+    },
+    {
+     "titulo": "Qué datos recogemos",
+     "bloques": [
+      "Solo los que nos das para atender tu compra o tu solicitud de servicio: tu nombre, tu número de WhatsApp, la dirección y la ciudad de entrega, el producto o servicio que te interesa y lo que nos cuentes en la conversación. No pedimos datos sensibles.",
+      "El carrito y los formularios de la página no guardan tus datos en un servidor: arman un mensaje que tú decides enviar por WhatsApp. El carrito queda guardado solo en tu navegador.",
+      "Los pagos en línea se hacen en la plataforma de Bold, que trata los datos de pago según sus propias políticas."
+     ]
+    },
+    {
+     "titulo": "Para qué los usamos",
+     "bloques": [
+      { "lista": [
+       "Atender tu pedido o tu solicitud y responder tus preguntas.",
+       "Coordinar el pago, la entrega o el envío.",
+       "Atender garantías, cambios, devoluciones, peticiones, quejas y reclamos.",
+       "Cumplir obligaciones legales, como la facturación.",
+       "Enviarte información de productos y promociones, solo si nos autorizas."
+      ] }
+     ]
+    },
+    {
+     "titulo": "Con quién los compartimos",
+     "bloques": [
+      "Solo con quienes intervienen en tu pedido: la empresa de mensajería o transporte que hace la entrega y la plataforma de pagos cuando pagas en línea. Nuestra atención se hace por WhatsApp, un servicio de Meta. No vendemos tus datos."
+     ]
+    },
+    {
+     "titulo": "Tus derechos",
+     "bloques": [
+      { "lista": [
+       "Conocer, actualizar y corregir tus datos.",
+       "Pedir prueba de la autorización que nos diste.",
+       "Saber, si lo pides, qué uso les hemos dado.",
+       "Revocar la autorización o pedir que borremos tus datos, salvo cuando debamos conservarlos por una obligación legal o contractual.",
+       "Acceder gratis a tus datos.",
+       "Presentar quejas ante la Superintendencia de Industria y Comercio."
+      ] }
+     ]
+    },
+    {
+     "titulo": "Cómo ejercerlos",
+     "bloques": [
+      "Escríbenos por WhatsApp al {whatsapp} o al correo {correo}. Las consultas y los reclamos los atiende {titular}.",
+      { "lista": [
+       "Consultas, por ejemplo saber qué datos tenemos: respondemos en máximo 10 días hábiles desde que la recibimos. Si no alcanzamos, te avisamos el motivo y la nueva fecha, que no pasará de 5 días hábiles más.",
+       "Reclamos, para corregir, actualizar o borrar tus datos o revocar la autorización: incluye tu nombre e identificación, qué pides y por qué, tu dirección y los documentos que quieras aportar. Si falta algo, te lo pedimos dentro de los 5 días siguientes; si pasan 2 meses sin que lo completes, se entiende que desististe. Respondemos en máximo 15 días hábiles desde el día siguiente a recibirlo; si no alcanzamos, te avisamos el motivo y la nueva fecha, que no pasará de 8 días hábiles más."
+      ] },
+      "Después de hacer la consulta o el reclamo con nosotros, si no quedas conforme puedes presentar una queja ante la Superintendencia de Industria y Comercio."
+     ]
+    },
+    {
+     "titulo": "Autorización y vigencia",
+     "bloques": [
+      "Cuando nos escribes por WhatsApp o envías un pedido o una solicitud desde la página, nos autorizas a tratar tus datos para las finalidades de esta política.",
+      "Esta política rige desde {vigencia}. Conservamos los datos mientras sean necesarios para esas finalidades y para cumplir nuestras obligaciones legales."
+     ]
+    }
+   ]
+  }
+ ]
+}

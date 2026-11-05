@@ -84,7 +84,7 @@ export function FormularioWhatsApp({ asunto, campos, boton = "Enviar por WhatsAp
         <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); }} className="btn btn-wa w-full sm:w-auto">
           <IconoWhatsApp />{boton}
         </a>
-        <p className="mt-2 text-xs leading-relaxed text-tinta-3">Se abre WhatsApp con tu solicitud escrita. La solicitud queda hecha cuando envíes ese mensaje.</p>
+        <p className="mt-2 text-xs leading-relaxed text-tinta-3">Se abre WhatsApp con tu solicitud escrita. La solicitud queda hecha cuando envíes ese mensaje. Al enviarla aceptas el <a href="#datos-personales" className="enlace">tratamiento de tus datos personales</a>.</p>
       </div>
     </form>
   );

@@ -6,6 +6,7 @@ import { waLink } from "../lib/whatsapp";
 import { BotonCopiar, PuntoEstado, useAtencion } from "./Contacto";
 import { IconoWhatsApp } from "./Iconos";
 import { Logo } from "./Logo";
+import { POLITICAS, TextoLegal } from "./TextoLegal";
 
 /** Pie de todas las páginas. Incluye el contacto (#contacto): WhatsApp, horario y estado de atención. */
 export function PiePagina() {
@@ -74,8 +75,17 @@ export function PiePagina() {
           {PAGOS.nota && <p className="mt-4 max-w-3xl text-sm">{PAGOS.nota}</p>}
         </div>
       </section>
+      {/* Identidad del vendedor (art. 50, Ley 1480) y enlaces a las políticas */}
       <div className="border-t border-white/10">
-        <p className="contenedor py-5 text-xs text-white/55">© {new Date().getFullYear()} {CONFIG.nombre} · Bogotá, Colombia</p>
+        <div className="contenedor flex flex-col gap-3 py-5 text-xs text-white/55 md:flex-row md:items-start md:justify-between md:gap-8">
+          <div className="min-w-0">
+            <p>© {new Date().getFullYear()} {CONFIG.nombre} · Bogotá, Colombia</p>
+            <p className="mt-1 [overflow-wrap:anywhere]"><TextoLegal t="{titular} · {documento} · {direccion} · {correo}" /></p>
+          </div>
+          <nav aria-label="Políticas de la tienda" className="shrink-0">
+            <ul className="flex flex-wrap gap-x-4 gap-y-1">{POLITICAS.map(p => <li key={p.id}><a href={`#${p.id}`} className={enlace}>{p.menu}</a></li>)}</ul>
+          </nav>
+        </div>
       </div>
     </footer>
   );

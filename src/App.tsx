@@ -14,6 +14,8 @@ import { Buscar } from "./paginas/Buscar";
 import { Inicio } from "./paginas/Inicio";
 import { Marca } from "./paginas/Marca";
 import { NoEncontrada } from "./paginas/NoEncontrada";
+import { Politica } from "./paginas/Politica";
+import { POLITICAS } from "./components/TextoLegal";
 import { Tienda } from "./paginas/Tienda";
 import type { Ruta } from "./types";
 
@@ -27,6 +29,7 @@ function tituloDe(r: Ruta) {
   if (r.tipo === "articulo") return `${ARTICULOS.find(a => a.id === r.id)?.titulo ?? ""} · ${CONFIG.nombre}`;
   if (r.tipo === "buscar") return `Buscar ${r.q} · ${CONFIG.nombre}`;
   if (r.tipo === "marca") return `${r.marca} · ${CONFIG.nombre}`;
+  if (r.tipo === "politica") return `${POLITICAS.find(p => p.id === r.id)?.titulo ?? ""} · ${CONFIG.nombre}`;
   return base;
 }
 
@@ -60,6 +63,7 @@ function Contenido({ ruta }: { ruta: Ruta }) {
     case "marca": return <Marca key={ruta.marca} marca={ruta.marca} />;
     case "blog": return <Blog />;
     case "articulo": return <Articulo key={ruta.id} id={ruta.id} />;
+    case "politica": return <Politica key={ruta.id} id={ruta.id} />;
     case "no-encontrada": return <NoEncontrada />;
   }
 }

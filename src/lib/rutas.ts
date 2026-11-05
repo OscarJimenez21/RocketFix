@@ -2,7 +2,11 @@
    Así los enlaces que ya se compartieron siguen funcionando y GitHub Pages no da 404 al recargar. */
 import { useEffect, useState } from "react";
 import { ARTICULOS, VISTA_TIENDA } from "../data/catalogo";
+import politicas from "../data/politicas.json";
 import type { Ruta } from "../types";
+
+/** Páginas de políticas (#garantia, #cambios-y-devoluciones, #datos-personales) */
+const POLITICAS_IDS = politicas.paginas.map(p => p.id);
 
 const decodificar = (s: string) => {
   try { return decodeURIComponent(s); } catch { return s; }
@@ -20,6 +24,7 @@ export function leerRuta(hash: string): Ruta {
   if (h.startsWith("marca/")) return { tipo: "marca", marca: decodificar(h.slice(6)) };
   if (h === "blog") return { tipo: "blog" };
   if (ARTICULOS.some(a => a.id === h)) return { tipo: "articulo", id: h };
+  if (POLITICAS_IDS.includes(h)) return { tipo: "politica", id: h };
   const tienda = VISTA_TIENDA[h];
   if (tienda) return { tipo: "tienda", vista: h, tienda };
   return { tipo: "no-encontrada", hash: h };
@@ -34,6 +39,7 @@ export const claveRuta = (r: Ruta) => {
     case "marca": return `marca/${r.marca}`;
     case "blog": return "blog";
     case "articulo": return r.id;
+    case "politica": return r.id;
     case "no-encontrada": return r.hash;
   }
 };

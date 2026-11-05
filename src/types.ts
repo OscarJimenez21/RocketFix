@@ -166,4 +166,5 @@ export type Ruta =
   | { tipo: "marca"; marca: string }
   | { tipo: "blog" }
   | { tipo: "articulo"; id: string }
+  | { tipo: "politica"; id: string }
   | { tipo: "no-encontrada"; hash: string };

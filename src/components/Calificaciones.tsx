@@ -148,7 +148,7 @@ function FormularioCalificacion() {
           </a>
           {enviado
             ? <p role="status" className="mt-3 rounded bg-marca-suave px-3 py-2 text-sm text-marca-oscuro"><strong>¡Gracias!</strong> Envía el mensaje que se abrió en WhatsApp para que nos llegue tu calificación.</p>
-            : <p className="mt-2 text-xs leading-relaxed text-tinta-3">Se abre WhatsApp con tu calificación escrita. Revisamos cada calificación y solo publicamos las que nos autorizas.</p>}
+            : <p className="mt-2 text-xs leading-relaxed text-tinta-3">Se abre WhatsApp con tu calificación escrita. Revisamos cada calificación y solo publicamos las que nos autorizas. Al enviarla aceptas el <a href="#datos-personales" className="enlace">tratamiento de tus datos personales</a>.</p>}
         </div>
       </form>
     </div>
