@@ -54,7 +54,8 @@ function Contenido({ ruta }: { ruta: Ruta }) {
   switch (ruta.tipo) {
     case "inicio": return <Inicio ancla={ruta.ancla} />;
     case "tienda": return <Tienda key={ruta.tienda} vista={ruta.vista} tienda={ruta.tienda} />;
-    case "producto": return <Suspense fallback={<div className="contenedor min-h-[60vh] py-16 text-tinta-3">Cargando producto…</div>}><Producto id={ruta.id} /></Suspense>;
+    // (el aviso ocupa toda la pantalla para que el pie de página no se alcance a ver y luego salte al cargar el producto)
+    case "producto": return <Suspense fallback={<div className="contenedor min-h-[100svh] py-16 text-tinta-3">Cargando producto…</div>}><Producto id={ruta.id} /></Suspense>;
     case "buscar": return <Buscar key={ruta.q} q={ruta.q} />;
     case "marca": return <Marca key={ruta.marca} marca={ruta.marca} />;
     case "blog": return <Blog />;
