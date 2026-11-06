@@ -56,15 +56,15 @@
   "opciones": [
    {
     "nombre": "256 GB · negro",
-    "precio": 9850000
+    "precio": 9350000
    },
    {
     "nombre": "512 GB · negro",
-    "precio": 10700000
+    "precio": 10350000
    },
    {
     "nombre": "512 GB · blanco",
-    "precio": 10700000
+    "precio": 10350000
    }
   ]
  },
@@ -2392,7 +2392,7 @@
    },
    {
     "nombre": "256 GB",
-    "precio": 3400000
+    "precio": 3250000
    }
   ]
  },
