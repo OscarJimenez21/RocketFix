@@ -38,21 +38,42 @@ export default {
       // Curvas de movimiento: "salida" para lo que aparece o responde a un toque; "cajon" para el carrito y el menú (como iOS)
       transitionTimingFunction: { salida: "cubic-bezier(0.23, 1, 0.32, 1)", cajon: "cubic-bezier(0.32, 0.72, 0, 1)" },
       // entrar: la página nueva aparece al navegar; latido: el contador del carrito al agregar; desplegar: las sugerencias del buscador;
-      // marcar: el ✓ de «Agregado»; deriva: el cohete perdido de la página no encontrada
+      // marcar: el ✓ de «Agregado»; deriva: el cohete perdido de la página no encontrada;
+      // pulso: el anillo del punto verde de «Abierto»; flotar: el cohete del carrito vacío; brinco: el cohete de la barra de envío gratis;
+      // rodar-arriba / rodar-abajo: la cantidad de cada producto del carrito; resaltar: el total del carrito cuando cambia;
+      // desvanecer: el fondo verde del último producto agregado; entrar-lado: los grupos del menú; despegar: el cohete de «Volver arriba»
       // (la línea que cuenta el tiempo de la vitrina usa @keyframes avance, en index.css)
       keyframes: {
         entrar: { from: { opacity: "0", transform: "translateY(6px)" } },
         latido: { "40%": { transform: "scale(1.3)" } },
         desplegar: { from: { opacity: "0", transform: "translateY(-4px) scale(0.98)" } },
         marcar: { from: { opacity: "0", transform: "scale(0.5)" } },
-        deriva: { from: { opacity: "0", transform: "translateY(44px) rotate(-24deg)" } }
+        deriva: { from: { opacity: "0", transform: "translateY(44px) rotate(-24deg)" } },
+        pulso: { "0%": { transform: "scale(1)", opacity: "0.7" }, "75%, 100%": { transform: "scale(2.8)", opacity: "0" } },
+        flotar: { "0%, 100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-5px)" } },
+        brinco: { "40%": { transform: "translateY(-7px)" } },
+        "rodar-arriba": { from: { opacity: "0", transform: "translateY(-70%)" } },
+        "rodar-abajo": { from: { opacity: "0", transform: "translateY(70%)" } },
+        resaltar: { from: { color: "#0B8457" } },
+        desvanecer: { from: { opacity: "1" }, to: { opacity: "0" } },
+        "entrar-lado": { from: { opacity: "0", transform: "translateX(-12px)" } },
+        despegar: { "25%": { transform: "translateY(3px)" }, "100%": { transform: "translateY(-30px)", opacity: "0" } }
       },
       animation: {
         entrar: "entrar 260ms cubic-bezier(0.23, 1, 0.32, 1) backwards",
         latido: "latido 380ms cubic-bezier(0.23, 1, 0.32, 1)",
         desplegar: "desplegar 160ms cubic-bezier(0.23, 1, 0.32, 1)",
         marcar: "marcar 200ms cubic-bezier(0.23, 1, 0.32, 1) backwards",
-        deriva: "deriva 900ms cubic-bezier(0.23, 1, 0.32, 1) 150ms backwards"
+        deriva: "deriva 900ms cubic-bezier(0.23, 1, 0.32, 1) 150ms backwards",
+        pulso: "pulso 2400ms cubic-bezier(0, 0, 0.2, 1) infinite",
+        flotar: "flotar 2800ms ease-in-out infinite",
+        brinco: "brinco 420ms cubic-bezier(0.23, 1, 0.32, 1) 150ms",
+        "rodar-arriba": "rodar-arriba 200ms cubic-bezier(0.23, 1, 0.32, 1) backwards",
+        "rodar-abajo": "rodar-abajo 200ms cubic-bezier(0.23, 1, 0.32, 1) backwards",
+        resaltar: "resaltar 900ms cubic-bezier(0.23, 1, 0.32, 1)",
+        desvanecer: "desvanecer 1400ms ease-out 350ms both",
+        "entrar-lado": "entrar-lado 300ms cubic-bezier(0.23, 1, 0.32, 1) backwards",
+        despegar: "despegar 520ms cubic-bezier(0.55, 0, 1, 0.45) forwards"
       },
       borderRadius: { DEFAULT: "6px", md: "8px", lg: "10px" },
       maxWidth: { pagina: "1240px" },

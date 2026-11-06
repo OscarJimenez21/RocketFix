@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import { CONFIG } from "../data/catalogo";
 import { lista } from "../lib/formato";
+import { temblor } from "../lib/movimiento";
 import { waLink } from "../lib/whatsapp";
 import { IconoWhatsApp } from "./Iconos";
 
@@ -37,6 +38,8 @@ export function FormularioWhatsApp({ asunto, campos, boton = "Enviar por WhatsAp
     Object.fromEntries(campos.map(c => [c.id, c.inicial ?? (c.tipo === "lista" ? c.opciones?.[0] ?? "" : "")])));
   const [malos, setMalos] = useState<string[]>([]);
   const [error, setError] = useState("");
+  // Envíos con campos faltantes: en cada uno, los campos marcados tiemblan
+  const [intento, setIntento] = useState(0);
   const valores = { ...propios, ...externos };
   const valor = (c: CampoForm) => valores[c.id] ?? (c.tipo === "lista" ? c.opciones?.[0] ?? "" : "");
 
@@ -53,6 +56,7 @@ export function FormularioWhatsApp({ asunto, campos, boton = "Enviar por WhatsAp
     const faltan = campos.filter(c => c.obligatorio && !valor(c).trim());
     setMalos(faltan.map(c => c.id));
     setError(faltan.length ? `Completa ${lista(faltan.map(c => c.falta ?? c.etiqueta.toLowerCase()))} para enviar.` : "");
+    if (faltan.length) setIntento(n => n + 1);
     if (faltan[0]) document.getElementById(`${base}-${faltan[0].id}`)?.focus();
     return !faltan.length;
   };
@@ -61,7 +65,7 @@ export function FormularioWhatsApp({ asunto, campos, boton = "Enviar por WhatsAp
     <form className="grid gap-4 sm:grid-cols-2" noValidate onSubmit={e => e.preventDefault()}>
       {campos.map(c => {
         const id = `${base}-${c.id}`;
-        const clase = `campo ${malos.includes(c.id) ? "campo-invalido" : ""}`;
+        const clase = `campo ${malos.includes(c.id) ? "campo-invalido" : ""}${temblor(malos.includes(c.id), intento)}`;
         return (
           <div key={c.id} className={c.ancho === "completo" || c.tipo === "area" ? "sm:col-span-2" : ""}>
             <label htmlFor={id} className="rotulo">{c.rotulo}{c.opcional && <span className="opcional"> (opcional)</span>}</label>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ARTICULOS, CONFIG, PAGOS } from "../data/catalogo";
 import { TIENDAS } from "../data/tiendas";
 import { recurso } from "../lib/formato";
@@ -5,8 +6,26 @@ import { filasHorario } from "../lib/horario";
 import { waLink } from "../lib/whatsapp";
 import { BotonCopiar, PuntoEstado, useAtencion } from "./Contacto";
 import { IconoWhatsApp } from "./Iconos";
-import { Logo } from "./Logo";
+import { Cohete, Logo } from "./Logo";
 import { POLITICAS, TextoLegal } from "./TextoLegal";
+
+/** «Volver arriba»: el cohete despega hacia arriba mientras la página sube. Con «reducir movimiento» la página salta
+    arriba de una vez. El foco pasa al logo de la cabecera, para seguir con el teclado desde arriba */
+function VolverArriba() {
+  const [despega, setDespega] = useState(0);
+  const subir = () => {
+    const reducir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reducir) { setDespega(n => n + 1); window.setTimeout(() => setDespega(0), 700); }
+    window.scrollTo({ top: 0, behavior: reducir ? "auto" : "smooth" });
+    document.querySelector<HTMLElement>("header a")?.focus({ preventScroll: true });
+  };
+  return (
+    <button type="button" onClick={subir} className="btn btn-sm btn-claro">
+      <span key={despega} className={`inline-block ${despega ? "animate-despegar" : ""}`}><Cohete className="h-[18px] w-[18px] text-marca-menta" /></span>
+      Volver arriba
+    </button>
+  );
+}
 
 /** Pie de todas las páginas. Incluye el contacto (#contacto): WhatsApp, horario y estado de atención. */
 export function PiePagina() {
@@ -20,6 +39,7 @@ export function PiePagina() {
           <div className="max-w-xl">
             <h2 id="t-contacto" className="text-xl font-extrabold text-white sm:text-2xl">¿Necesitas ayuda para elegir?</h2>
             <p className="mt-1.5 text-[15px] leading-relaxed">Escríbenos por WhatsApp: te asesoramos, confirmamos disponibilidad y coordinamos la entrega o el servicio.</p>
+            <a href="#como-comprar" className="mt-1 inline-flex min-h-[44px] items-center text-[15px] font-semibold text-marca-menta underline-offset-4 hover:underline">Mira cómo comprar en 3 pasos</a>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="btn btn-wa"><IconoWhatsApp />Escribir por WhatsApp</a>
@@ -82,9 +102,12 @@ export function PiePagina() {
             <p>© {new Date().getFullYear()} {CONFIG.nombre} · Bogotá, Colombia</p>
             <p className="mt-1 [overflow-wrap:anywhere]"><TextoLegal t="{titular} · {documento} · {direccion} · {correo}" /></p>
           </div>
-          <nav aria-label="Políticas de la tienda" className="shrink-0">
-            <ul className="flex flex-wrap gap-x-4 gap-y-1">{POLITICAS.map(p => <li key={p.id}><a href={`#${p.id}`} className={enlace}>{p.menu}</a></li>)}</ul>
-          </nav>
+          <div className="flex shrink-0 flex-col items-start gap-3 md:items-end">
+            <nav aria-label="Políticas de la tienda">
+              <ul className="flex flex-wrap gap-x-4 gap-y-1">{POLITICAS.map(p => <li key={p.id}><a href={`#${p.id}`} className={enlace}>{p.menu}</a></li>)}</ul>
+            </nav>
+            <VolverArriba />
+          </div>
         </div>
       </div>
     </footer>

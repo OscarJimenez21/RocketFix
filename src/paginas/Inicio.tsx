@@ -8,9 +8,9 @@ import { PuntoEstado, useAtencion } from "../components/Contacto";
 import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
 import { FotoProducto } from "../components/FotoProducto";
 import { FlechaMovil } from "../components/FilaProductos";
-import { IconoCamion, IconoCheck, IconoFlecha, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
+import { IconoBolsa, IconoCamion, IconoCheck, IconoFlecha, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { Ilustracion } from "../components/Ilustracion";
-import { useEnPantalla, useVisto } from "../lib/enPantalla";
+import { useEnPantalla, useRevelarHijos, useVisto } from "../lib/enPantalla";
 import { dinero, recurso } from "../lib/formato";
 import { hrefMarca, hrefProducto } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
@@ -122,18 +122,22 @@ function Portada() {
   );
 }
 
+/** Ventajas debajo de la portada. La primera vez que se ven, cada ícono se mueve una vez a su manera: la moto avanza y
+    frena, el camión rueda y la tarjeta gira (ver .ventajas en index.css) */
 function Ventajas() {
   const items = [
-    { icono: <IconoMoto />, titulo: "Entrega el mismo día en Bogotá", texto: `Gratis desde ${dinero(CONFIG.envios.bogota.gratisDesde)}. Pagas contra entrega.` },
-    { icono: <IconoCamion />, titulo: "Envíos a todo Colombia", texto: `Gratis desde ${dinero(CONFIG.envios.nacional.gratisDesde)}, con pago anticipado.` },
-    { icono: <IconoTarjeta />, titulo: "Paga como prefieras", texto: "Tarjeta, PSE, Bre-B, Daviplata, transferencia o efectivo." }
+    { icono: <IconoMoto />, clase: "icono-moto", titulo: "Entrega el mismo día en Bogotá", texto: `Gratis desde ${dinero(CONFIG.envios.bogota.gratisDesde)}. Pagas contra entrega.` },
+    { icono: <IconoCamion />, clase: "icono-camion", titulo: "Envíos a todo Colombia", texto: `Gratis desde ${dinero(CONFIG.envios.nacional.gratisDesde)}, con pago anticipado.` },
+    { icono: <IconoTarjeta />, clase: "icono-tarjeta", titulo: "Paga como prefieras", texto: "Tarjeta, PSE, Bre-B, Daviplata, transferencia o efectivo." }
   ];
+  const lista = useRef<HTMLUListElement>(null);
+  const visto = useVisto(lista);
   return (
     <div className="border-b border-linea">
-      <ul className="contenedor grid divide-y divide-linea sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-        {items.map(v => (
+      <ul ref={lista} data-visto={visto || undefined} className="ventajas contenedor grid divide-y divide-linea sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        {items.map((v, n) => (
           <li key={v.titulo} className="flex gap-3 py-4 sm:px-5 sm:first:pl-0">
-            <span className="mt-0.5 text-marca">{v.icono}</span>
+            <span style={{ "--orden": n } as React.CSSProperties} className={`icono-ventaja mt-0.5 inline-block h-5 text-marca ${v.clase}`}>{v.icono}</span>
             <div><p className="text-sm font-semibold">{v.titulo}</p><p className="text-[13px] text-tinta-2">{v.texto}</p></div>
           </li>
         ))}
@@ -151,7 +155,8 @@ function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: st
     <a href={hrefProducto(p.id)} className="group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-white transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
       <div className="relative aspect-square p-7 sm:p-8">
         <FotoProducto producto={p} alt={p.nombre} className="motion-safe:group-hover:scale-[1.05]" />
-        {cinta && <span className="absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-[13px] font-bold text-acento-texto">{cinta}</span>}
+        {/* brillo: la cinta tiene un destello que la cruza una vez cuando la fila aparece (ver .brillo en index.css) */}
+        {cinta && <span className="brillo absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-[13px] font-bold text-acento-texto">{cinta}</span>}
       </div>
       <div className="mt-auto border-t border-linea px-5 py-4">
         <p className="truncate text-[13px] font-semibold text-tinta-3">{etiquetaDe(p)}</p>
@@ -185,6 +190,8 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
   };
   // Avanza solo mientras la fila se ve en pantalla
   const visible = useEnPantalla(fila);
+  // La primera vez que la fila aparece, las cintas («Top ventas») tienen su destello
+  const visto = useVisto(fila);
   useEffect(() => {
     if (quieta || reducir || !visible || productos.length < 2) return;
     const t = window.setInterval(() => mover(1), PASO_CARRUSEL);
@@ -217,11 +224,11 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
             <button type="button" onClick={() => mover(1)} aria-label="Ver productos siguientes" className={flecha}><FlechaMovil /></button>
           </div>
         </div>
-        <ul ref={fila} aria-label={titulo} tabIndex={0}
+        <ul ref={fila} aria-label={titulo} tabIndex={0} data-visto={(cinta && visto) || undefined}
           onMouseEnter={() => setQuieta(true)} onMouseLeave={() => setQuieta(false)} onFocus={() => setQuieta(true)} onBlur={() => setQuieta(false)} onTouchStart={tocar}
           className="sin-barra -mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6">
-          {productos.map(p => (
-            <li key={p.id} className="w-[74%] shrink-0 snap-start sm:w-[44%] lg:w-[calc(25%-15px)]">
+          {productos.map((p, k) => (
+            <li key={p.id} style={cinta ? { "--orden": Math.min(k, 4) } as React.CSSProperties : undefined} className="w-[74%] shrink-0 snap-start sm:w-[44%] lg:w-[calc(25%-15px)]">
               <TarjetaVitrina producto={p} cinta={cinta} />
             </li>
           ))}
@@ -264,20 +271,24 @@ const MOSAICO: { tienda: TiendaId; frase: string; tema: keyof typeof TEMAS; foto
   { tienda: "mov", frase: "Muévete por la ciudad", tema: "noche", foto: "xpatineta", forma: "normal" }
 ];
 
-/** Mosaico de categorías: tarjetas de colores con un producto que se asoma; todas llevan a su sección */
+/** Mosaico de categorías: tarjetas de colores con un producto que se asoma; todas llevan a su sección.
+    El producto de cada tarjeta sube desde el borde la primera vez que la tarjeta aparece en pantalla (las que aparecen
+    juntas, una tras otra; ver .aparece-mosaico en index.css) */
 function Categorias() {
+  const mosaico = useRef<HTMLUListElement>(null);
+  useRevelarHijos(mosaico);
   return (
     <section id="categorias" aria-labelledby="t-categorias" className="contenedor py-12">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
         <h2 id="t-categorias" className="titulo-seccion">Compra por categoría</h2>
       </div>
-      <ul className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:auto-rows-[215px] lg:grid-cols-12">
+      <ul ref={mosaico} className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:auto-rows-[215px] lg:grid-cols-12">
         {MOSAICO.map(m => {
           const t = tiendaPorId(m.tienda);
           if (!t) return null;
           const tema = TEMAS[m.tema], forma = FORMAS[m.forma];
           return (
-            <li key={m.tienda} className={forma.caja}>
+            <li key={m.tienda} data-revelar className={`revelar ${forma.caja}`}>
               <a href={`#${t.vista}`} className={`group relative isolate flex h-full overflow-hidden rounded-lg p-4 transition-transform duration-150 ease-salida active:scale-[0.98] sm:p-6 ${tema.caja}`}>
                 <span className={`relative z-10 flex min-w-0 flex-col ${forma.texto}`}>
                   <span className={`text-[12.5px] font-semibold leading-snug sm:text-sm ${tema.frase}`}>{m.frase}</span>
@@ -290,7 +301,7 @@ function Categorias() {
                   </span>
                 </span>
                 <img src={recurso(`fotos/recortes/${m.foto}.webp`)} alt="" loading="lazy" decoding="async"
-                  className={`pointer-events-none absolute bottom-3 right-3 object-contain drop-shadow-[0_16px_18px_rgba(0,0,0,0.32)] transition-transform duration-300 ease-salida motion-safe:group-hover:-translate-y-1.5 motion-safe:group-hover:scale-[1.04] sm:bottom-4 sm:right-5 ${forma.foto}`} />
+                  className={`aparece-mosaico pointer-events-none absolute bottom-3 right-3 object-contain drop-shadow-[0_16px_18px_rgba(0,0,0,0.32)] motion-safe:group-hover:-translate-y-1.5 motion-safe:group-hover:scale-[1.04] sm:bottom-4 sm:right-5 ${forma.foto}`} />
               </a>
             </li>
           );
@@ -625,6 +636,12 @@ function Servicios() {
   };
   const reparacion = SERVICIOS.filter(s => !s.camaras);
   const camaras = SERVICIOS.find(s => s.camaras);
+  // La primera vez que se ve cada tarjeta, el equipo sube a su lugar y los ✓ de «Qué hacemos» se marcan uno tras otro
+  const tarjetas = useRef<HTMLDivElement>(null);
+  useRevelarHijos(tarjetas);
+  // Los 3 pasos de «Solicita un servicio» se encienden uno tras otro, como los de «Cómo comprar»
+  const pasosOrden = useRef<HTMLOListElement>(null);
+  const ordenVisto = useVisto(pasosOrden);
   return (
     <section id="servicios" aria-labelledby="t-servicios" className="border-y border-linea bg-fondo">
       <div className="contenedor py-12 sm:py-14">
@@ -632,29 +649,29 @@ function Servicios() {
           <h2 id="t-servicios" className="titulo-seccion">Reparamos tus equipos e instalamos cámaras de seguridad</h2>
           <p className="mt-2 text-tinta-2">Te decimos el valor antes de reparar. Coordinamos por WhatsApp cómo recibir tu equipo y vamos a tu casa o negocio para instalar cámaras.</p>
         </div>
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
+        <div ref={tarjetas} className="mt-8 grid gap-4 md:grid-cols-2">
           {reparacion.map(s => {
             const e = ESTILO_SERVICIO[s.id] ?? ESTILO_SERVICIO.pc;
             return (
               <article key={s.id} className="flex flex-col overflow-hidden rounded-xl border border-linea bg-white shadow-tarjeta">
                 {/* Encabezado de color: texto a la izquierda y el equipo recortado en su propia columna (no se montan).
                     Las tarjetas son angostas en celular y en md (dos columnas), y anchas en sm y lg. */}
-                <div className={`relative isolate flex min-h-[210px] gap-2 overflow-hidden ${e.caja}`}>
+                <div data-revelar className={`revelar relative isolate flex min-h-[210px] gap-2 overflow-hidden ${e.caja}`}>
                   <div className="relative z-10 min-w-0 flex-1 self-center py-6 pl-6 sm:py-7 sm:pl-7">
                     <h3 className="font-display text-[23px] font-extrabold leading-[1.02] text-current ancho-108 sm:text-[30px] md:text-[24px] lg:text-[30px]">{s.titulo}</h3>
                     <p className={`mt-2 text-sm leading-snug ${e.texto}`}>{s.texto}</p>
                   </div>
                   <div aria-hidden="true" className="relative w-[34%] shrink-0 sm:w-[40%] md:w-[34%] lg:w-[40%]">
                     <img src={recurso(`fotos/recortes/${e.foto}.webp`)} alt="" loading="lazy" decoding="async"
-                      className={`pointer-events-none absolute left-0 w-full object-contain object-bottom drop-shadow-[0_18px_20px_rgba(0,0,0,0.4)] ${e.posicion}`} />
+                      className={`aparece pointer-events-none absolute left-0 w-full object-contain object-bottom drop-shadow-[0_18px_20px_rgba(0,0,0,0.4)] ${e.posicion}`} />
                   </div>
                 </div>
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
                   <p className="etiqueta">Qué hacemos</p>
-                  <ul className="mt-3 grid gap-2 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
-                    {s.trabajos.map(t => (
-                      <li key={t} className="flex items-start gap-2.5 rounded-md bg-fondo px-3 py-2.5 text-sm leading-snug">
-                        <span className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-marca text-white"><IconoCheck className="h-3 w-3" /></span>{t}
+                  <ul data-revelar className="revelar mt-3 grid gap-2 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
+                    {s.trabajos.map((t, k) => (
+                      <li key={t} style={{ "--i": k } as React.CSSProperties} className="flex items-start gap-2.5 rounded-md bg-fondo px-3 py-2.5 text-sm leading-snug">
+                        <span className="check-paso mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-marca text-white"><IconoCheck className="h-3 w-3" /></span>{t}
                       </li>
                     ))}
                   </ul>
@@ -672,9 +689,9 @@ function Servicios() {
           <div>
             <h3 className="text-xl font-bold">Solicita un servicio</h3>
             <p className="mt-2 text-sm text-tinta-2">Cuéntanos qué necesitas. Te respondemos por WhatsApp con un valor aproximado o la fecha de la visita.</p>
-            <ol className="mt-4 grid gap-2.5 text-sm text-tinta-2">
+            <ol ref={pasosOrden} data-visto={ordenVisto || undefined} className="pasos mt-4 grid gap-2.5 text-sm text-tinta-2">
               {["Llenas este formulario.", "Se abre WhatsApp con tu solicitud escrita. Envía ese mensaje para completar la solicitud.", "Te respondemos con el diagnóstico inicial o agendamos la visita."].map((t, n) => (
-                <li key={t} className="flex gap-2.5"><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-marca-suave text-xs font-bold text-marca-oscuro">{n + 1}</span>{t}</li>
+                <li key={t} style={{ "--orden": n } as React.CSSProperties} className="flex gap-2.5"><span className="paso-num flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold">{n + 1}</span>{t}</li>
               ))}
             </ol>
           </div>
@@ -686,30 +703,41 @@ function Servicios() {
   );
 }
 
+/** Cómo comprar: va justo debajo de las ventajas, en una franja verde clara, para que se vea apenas la persona empieza a
+    bajar. #como-comprar lleva aquí (desde el menú y el pie de página). Cada paso lleva su ícono y su número; la primera vez
+    que se ve, los círculos se encienden uno tras otro y una línea punteada (como la trayectoria del cohete de la portada)
+    se dibuja hasta el siguiente (ver .pasos en index.css) */
 function ComoComprar() {
-  const pasos = [
-    ["Arma tu carrito", "Elige la versión de cada equipo y agrégalo. Puedes cambiar las cantidades antes de enviar."],
-    ["Envía el pedido por WhatsApp", "El mensaje sale escrito con los productos, el total y la forma de entrega. Enviarlo no es un pago."],
-    ["Confirmamos y entregamos", `Te confirmamos disponibilidad y pago. En Bogotá y alrededores te lo llevamos el mismo día y puedes pagar contra entrega; al resto de Colombia lo enviamos con pago anticipado. Envío gratis en Bogotá desde ${dinero(CONFIG.envios.bogota.gratisDesde)} y al resto del país desde ${dinero(CONFIG.envios.nacional.gratisDesde)}.`]
+  const pasos: [React.ReactNode, string, string][] = [
+    [<IconoBolsa key="b" className="h-6 w-6" />, "Arma tu carrito", "Elige la versión de cada equipo y agrégalo. Puedes cambiar las cantidades antes de enviar."],
+    [<IconoWhatsApp key="w" className="h-6 w-6" />, "Envía el pedido por WhatsApp", "El mensaje sale escrito con los productos, el total y la forma de entrega. Enviarlo no es un pago."],
+    [<IconoMoto key="m" className="h-6 w-6" />, "Confirmamos y entregamos", `Te confirmamos disponibilidad y pago. En Bogotá y alrededores te lo llevamos el mismo día y puedes pagar contra entrega; al resto de Colombia lo enviamos con pago anticipado. Envío gratis en Bogotá desde ${dinero(CONFIG.envios.bogota.gratisDesde)} y al resto del país desde ${dinero(CONFIG.envios.nacional.gratisDesde)}.`]
   ];
-  // La primera vez que la lista aparece en pantalla, los pasos se encienden uno tras otro (ver .pasos en index.css)
   const lista = useRef<HTMLOListElement>(null);
   const visto = useVisto(lista);
   return (
-    <section aria-labelledby="t-como" className="contenedor py-12">
-      <h2 id="t-como" className="titulo-seccion">Cómo comprar</h2>
-      <ol ref={lista} data-visto={visto || undefined} className="pasos mt-6 grid gap-6 md:grid-cols-3 md:gap-8">
-        {pasos.map(([t, d], i) => (
-          <li key={t} style={{ "--orden": i } as React.CSSProperties} className="relative flex gap-3 md:flex-col">
-            {/* Línea punteada hasta el círculo del paso siguiente: hacia abajo en celular, hacia la derecha desde 768 px */}
-            {i < pasos.length - 1 && (
-              <span aria-hidden="true" className="paso-ruta absolute left-[calc(1rem-2px)] top-[calc(2rem+5px)] h-[calc(100%-0.5rem-10px)] w-1 md:left-[calc(2rem+6px)] md:top-[calc(1rem-2px)] md:h-1 md:w-[calc(100%-12px)]" />
-            )}
-            <span className="paso-num flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold">{i + 1}</span>
-            <div><p className="font-semibold">{t}</p><p className="mt-1 text-sm leading-relaxed text-tinta-2">{d}</p></div>
-          </li>
-        ))}
-      </ol>
+    <section id="como-comprar" aria-labelledby="t-como" className="border-b border-linea bg-marca-suave">
+      <div className="contenedor py-10 sm:py-12">
+        <h2 id="t-como" className="titulo-seccion">Cómo comprar</h2>
+        <ol ref={lista} data-visto={visto || undefined} className="pasos pasos-claros mt-7 grid gap-6 md:grid-cols-3 md:gap-8">
+          {pasos.map(([icono, t, d], i) => (
+            <li key={t} style={{ "--orden": i } as React.CSSProperties} className="relative flex gap-4 md:flex-col md:gap-3">
+              {/* Línea punteada hasta el círculo del paso siguiente: hacia abajo en celular, hacia la derecha desde 768 px */}
+              {i < pasos.length - 1 && (
+                <span aria-hidden="true" className="paso-ruta absolute left-[calc(1.5rem-2px)] top-[calc(3rem+5px)] h-[calc(100%-1.5rem-10px)] w-1 md:left-[calc(3rem+6px)] md:top-[calc(1.5rem-2px)] md:h-1 md:w-[calc(100%-1rem-12px)]" />
+              )}
+              <span className="paso-num relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
+                {icono}
+                <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-marca-oscuro text-[11px] font-bold text-white">{i + 1}</span>
+              </span>
+              <div className="min-w-0">
+                <p className="font-display text-[17px] font-bold">{t}</p>
+                <p className="mt-1 text-sm leading-relaxed text-tinta-2">{d}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
     </section>
   );
 }
@@ -717,7 +745,7 @@ function ComoComprar() {
 export function Inicio({ ancla }: { ancla?: string }) {
   const vendidos = MAS_VENDIDOS.map(id => porId[id]).filter((p): p is Producto => Boolean(p) && !p?.consultar);
 
-  // #categorias, #servicios, #calificaciones, #contacto y #orden llevan a su sección de la portada
+  // #categorias, #servicios, #calificaciones, #contacto, #orden y #como-comprar llevan a su sección de la portada
   // Cuando corre el efecto la sección ya está en la página, así que se puede bajar de una vez
   useEffect(() => {
     if (ancla) document.getElementById(ancla)?.scrollIntoView({ block: "start" });
@@ -727,6 +755,7 @@ export function Inicio({ ancla }: { ancla?: string }) {
     <>
       <Portada />
       <Ventajas />
+      <ComoComprar />
       <Marcas />
       <Categorias />
       <BandaGamer />
@@ -737,7 +766,6 @@ export function Inicio({ ancla }: { ancla?: string }) {
       <Coleccion id="computadores" etiqueta="Computadores" titulo="Portátiles y PC para cada necesidad" tiendas={["pc"]} gris />
       <Coleccion id="componentes" etiqueta="Componentes" titulo="Arma o mejora tu PC" tiendas={["comp"]} />
       <Servicios />
-      <ComoComprar />
       <Calificaciones />
     </>
   );

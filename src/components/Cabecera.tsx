@@ -28,6 +28,7 @@ const SERVICIO = [
 /** Accesos generales al final del menú */
 const AYUDA = [
   { texto: "Inicio", href: "#inicio" },
+  { texto: "Cómo comprar", href: "#como-comprar" },
   { texto: "Todas las categorías", href: "#categorias" },
   { texto: "Calificaciones de clientes", href: "#calificaciones" },
   { texto: "Contacto y horario", href: "#contacto" }
@@ -65,6 +66,8 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
   }, [abierto, cerrar]);
 
   const fila = (activo: boolean) => `flex items-center justify-between gap-3 rounded px-2 py-2.5 transition-colors duration-150 ${activo ? "bg-marca-suave font-semibold text-marca-oscuro" : "hover:bg-fondo active:bg-fondo"}`;
+  // Al abrir el menú, sus grupos entran uno tras otro desde la izquierda (45 ms entre cada uno)
+  const entra = (n: number) => (abierto ? { className: " motion-safe:animate-entrar-lado", style: { animationDelay: `${90 + n * 45}ms` } } : { className: "", style: undefined });
   return (
     // El contenedor mide lo mismo que la pantalla y recorta el panel cerrado (si sobresaliera, Chrome en celular alejaría la página)
     <div className={`fixed inset-0 z-50 overflow-hidden ${abierto ? "" : "pointer-events-none"}`}>
@@ -76,8 +79,8 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
           <button ref={botonCerrar} type="button" onClick={cerrar} aria-label="Cerrar menú" className="presionable flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo"><IconoCerrar /></button>
         </div>
         <nav aria-label="Menú principal" onClick={cerrarAlElegir(cerrar)} className="flex-1 overflow-y-auto overscroll-contain px-3 py-3">
-          {GRUPOS.map(g => (
-            <div key={g.titulo} className="border-b border-linea py-3 first:pt-1">
+          {GRUPOS.map((g, n) => (
+            <div key={g.titulo} className={`border-b border-linea py-3 first:pt-1${entra(n).className}`} style={entra(n).style}>
               <p className="etiqueta px-2">{g.titulo}</p>
               <ul className="mt-1.5">
                 {secciones(g.tiendas).map(t => (
@@ -90,7 +93,7 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
               </ul>
             </div>
           ))}
-          <div className="border-b border-linea py-3">
+          <div className={`border-b border-linea py-3${entra(GRUPOS.length).className}`} style={entra(GRUPOS.length).style}>
             <p className="etiqueta px-2">Servicio técnico</p>
             <ul className="mt-1.5">
               {SERVICIO.map(s => (
@@ -98,7 +101,7 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
               ))}
             </ul>
           </div>
-          <div className="py-3">
+          <div className={`py-3${entra(GRUPOS.length + 1).className}`} style={entra(GRUPOS.length + 1).style}>
             <p className="etiqueta px-2">Rocket Fix</p>
             <ul className="mt-1.5">
               {AYUDA.map(s => (

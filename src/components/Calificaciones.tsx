@@ -1,9 +1,11 @@
 /* Calificaciones de clientes (#calificaciones). La página no tiene servidor ni guarda datos: el cliente califica aquí,
    se abre WhatsApp con su calificación escrita y Rocket Fix la recibe. Solo se publican calificaciones reales que el
    cliente autorizó: se agregan a src/data/resenas.json con el nombre y la inicial del apellido (nunca teléfono ni correo). */
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { CONFIG, RESENAS } from "../data/catalogo";
+import { useVisto } from "../lib/enPantalla";
 import { lista } from "../lib/formato";
+import { temblor } from "../lib/movimiento";
 import { waLink } from "../lib/whatsapp";
 import { IconoEstrella, IconoWhatsApp } from "./Iconos";
 import type { Resena } from "../types";
@@ -29,7 +31,8 @@ export function Estrellas({ valor, className = "h-4 w-4", vacia = "text-linea-fu
   return (
     <span role="img" aria-label={`${numero(valor)} de 5 estrellas`} className="relative inline-flex">
       {fila(vacia)}
-      <span className="absolute inset-y-0 left-0 overflow-hidden" style={{ width: `${(valor / 5) * 100}%` }}>{fila("text-acento")}</span>
+      {/* estrellas-color: en el resumen de calificaciones se pintan de izquierda a derecha la primera vez que se ven */}
+      <span className="estrellas-color absolute inset-y-0 left-0 overflow-hidden" style={{ width: `${(valor / 5) * 100}%` }}>{fila("text-acento")}</span>
     </span>
   );
 }
@@ -72,6 +75,7 @@ function FormularioCalificacion() {
   const [texto, setTexto] = useState("");
   const [publicar, setPublicar] = useState(false);
   const [malos, setMalos] = useState<string[]>([]);
+  const [intento, setIntento] = useState(0);
   const [enviado, setEnviado] = useState(false);
   const quitar = (id: string) => setMalos(m => m.filter(x => x !== id));
   const marcada = encima || estrellas;
@@ -89,10 +93,12 @@ function FormularioCalificacion() {
   const validar = () => {
     const faltan = [!estrellas && "estrellas", !nombre.trim() && "nombre", !texto.trim() && "texto"].filter((x): x is string => Boolean(x));
     setMalos(faltan);
+    if (faltan.length) setIntento(n => n + 1);
     if (faltan[0]) document.getElementById(`${base}-${faltan[0]}`)?.focus();
     return !faltan.length;
   };
-  const clase = (id: string) => `campo ${malos.includes(id) ? "campo-invalido" : ""}`;
+  // Lo que falta tiembla corto en cada intento de envío
+  const clase = (id: string) => `campo ${malos.includes(id) ? "campo-invalido" : ""}${temblor(malos.includes(id), intento)}`;
 
   return (
     <div className="tarjeta self-start p-5 shadow-tarjeta sm:p-7">
@@ -102,7 +108,7 @@ function FormularioCalificacion() {
         <fieldset>
           <legend className="rotulo">Tu calificación</legend>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <div className="-ml-1 flex" onMouseLeave={() => setEncima(0)}>
+            <div className={`-ml-1 flex${temblor(malos.includes("estrellas"), intento)}`} onMouseLeave={() => setEncima(0)}>
               {[1, 2, 3, 4, 5].map(n => (
                 <label key={n} onMouseEnter={() => setEncima(n)} className="presionable cursor-pointer rounded p-1 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-marca">
                   <input type="radio" name={`${base}-estrellas`} id={n === 1 ? `${base}-estrellas` : undefined} value={n} checked={estrellas === n} className="sr-only"
@@ -161,6 +167,10 @@ export function Calificaciones() {
   const [limite, setLimite] = useState(POR_PAGINA);
   const recientes = [...RESENAS].sort((a, b) => b.fecha.localeCompare(a.fecha));
   const pasos = ["Calificas aquí con estrellas y un comentario.", "Se abre WhatsApp con tu calificación escrita. Envía ese mensaje.", "La revisamos y, si nos autorizas, la publicamos en esta sección."];
+  const caja = useRef<HTMLDivElement>(null);
+  const visto = useVisto(caja);
+  const pasosVacio = useRef<HTMLOListElement>(null);
+  const vistoVacio = useVisto(pasosVacio);
 
   return (
     <section id="calificaciones" aria-labelledby="t-calificaciones" className="border-t border-linea bg-fondo">
@@ -170,17 +180,20 @@ export function Calificaciones() {
           <h2 id="t-calificaciones" className="titulo-seccion mt-1">Lo que dicen nuestros clientes</h2>
           {total > 0 ? (
             <>
-              <div className="tarjeta mt-6 grid gap-6 p-5 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:gap-10 sm:p-7">
+              {/* La primera vez que se ve: las estrellas se pintan y las barras se llenan, una tras otra (ver .resumen-calif en index.css) */}
+              <div ref={caja} data-visto={visto || undefined} className="resumen-calif tarjeta mt-6 grid gap-6 p-5 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:gap-10 sm:p-7">
                 <div>
                   <p className="font-display text-[56px] font-extrabold leading-none ancho-108">{numero(promedio)}</p>
                   <div className="mt-2"><Estrellas valor={promedio} className="h-6 w-6" /></div>
                   <p className="mt-1.5 text-sm text-tinta-2">{total} {total === 1 ? "calificación" : "calificaciones"}</p>
                 </div>
                 <ul className="grid gap-2">
-                  {conteo.map(([e, n]) => (
+                  {conteo.map(([e, n], k) => (
                     <li key={e} className="flex items-center gap-3 text-sm">
                       <span className="w-[4.75rem] shrink-0 whitespace-nowrap text-tinta-2">{e} {e === 1 ? "estrella" : "estrellas"}</span>
-                      <span className="h-2 flex-1 overflow-hidden rounded-full bg-linea"><span className="block h-full rounded-full bg-acento" style={{ width: `${(n / total) * 100}%` }} /></span>
+                      <span className="h-2 flex-1 overflow-hidden rounded-full bg-linea">
+                        <span className="barra-calif block h-full rounded-full bg-acento" style={{ width: `${(n / total) * 100}%`, "--orden": k } as React.CSSProperties} />
+                      </span>
                       <span className="w-6 shrink-0 text-right tabular-nums text-tinta-3">{n}</span>
                     </li>
                   ))}
@@ -198,9 +211,10 @@ export function Calificaciones() {
               <Estrellas valor={0} className="h-8 w-8" />
               <p className="mt-4 text-lg font-bold">Todavía no hay calificaciones publicadas. ¡La tuya puede ser la primera!</p>
               <p className="mt-2 text-sm leading-relaxed text-tinta-2">Aquí aparecerán las opiniones de quienes compran o reparan sus equipos con nosotros, para que cualquiera las pueda ver antes de comprar.</p>
-              <ol className="mt-5 grid gap-2.5 text-sm text-tinta-2">
+              {/* Mientras no hay calificaciones, sus 3 pasos se encienden uno tras otro la primera vez que se ven */}
+              <ol ref={pasosVacio} data-visto={vistoVacio || undefined} className="pasos mt-5 grid gap-2.5 text-sm text-tinta-2">
                 {pasos.map((t, n) => (
-                  <li key={t} className="flex gap-2.5"><span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-marca-suave text-xs font-bold text-marca-oscuro">{n + 1}</span>{t}</li>
+                  <li key={t} style={{ "--orden": n } as React.CSSProperties} className="flex gap-2.5"><span className="paso-num flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold">{n + 1}</span>{t}</li>
                 ))}
               </ol>
             </div>

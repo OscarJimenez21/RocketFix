@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { galeriaDe } from "../data/catalogo";
 import { recurso } from "../lib/formato";
+import { useMarco } from "../lib/movimiento";
 import type { Producto } from "../types";
 import { FotoProducto, Imagen } from "./FotoProducto";
 import { IconoFlecha } from "./Iconos";
@@ -12,6 +13,8 @@ export function Galeria({ producto }: { producto: Producto }) {
   const [fotos, setFotos] = useState(() => galeriaDe(producto));
   const [actual, setActual] = useState(0);
   const pista = useRef<HTMLDivElement>(null);
+  const tira = useRef<HTMLDivElement>(null);
+  const marco = useMarco(tira, actual);
   useEffect(() => { setFotos(galeriaDe(producto)); setActual(0); pista.current?.scrollTo({ left: 0 }); }, [producto]);
 
   const ir = (i: number) => {
@@ -57,13 +60,15 @@ export function Galeria({ producto }: { producto: Producto }) {
           <IconoFlecha className="h-5 w-5 transition-transform duration-200 ease-salida group-hover:translate-x-0.5" /></button>
         <span className="absolute bottom-2 right-2 rounded-sm bg-tinta/75 px-2 py-0.5 font-mono text-xs text-white" aria-hidden="true">{actual + 1} / {fotos.length}</span>
       </div>
-      <div className="sin-barra mt-3 flex gap-2 overflow-x-auto pb-1">
+      {/* Al pasar de foto, el marco verde se desliza de una miniatura a la otra (va encima de las miniaturas, solo es el borde) */}
+      <div ref={tira} className="sin-barra mt-3 flex gap-2 overflow-x-auto pb-1 pt-px">
         {fotos.map((f, i) => (
-          <button key={f} type="button" onClick={() => ir(i)} aria-label={`Ver foto ${i + 1}`} aria-current={i === actual || undefined}
-            className={`presionable h-16 w-16 shrink-0 rounded border bg-white p-1 ${i === actual ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
+          <button key={f} data-opcion type="button" onClick={() => ir(i)} aria-label={`Ver foto ${i + 1}`} aria-current={i === actual || undefined}
+            className={`presionable h-16 w-16 shrink-0 rounded border bg-white p-1 ${i === actual && !marco ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
             <Imagen src={recurso(f)} alt="" className="h-full w-full object-contain" />
           </button>
         ))}
+        {marco && <span aria-hidden="true" className="pointer-events-none absolute left-0 top-0 rounded border border-marca ring-1 ring-marca" style={marco} />}
       </div>
     </div>
   );

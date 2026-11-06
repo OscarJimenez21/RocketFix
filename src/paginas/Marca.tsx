@@ -9,6 +9,7 @@ import { TarjetaProducto } from "../components/TarjetaProducto";
 import { norm } from "../lib/formato";
 import { hrefBusqueda } from "../lib/rutas";
 import type { TiendaId } from "../types";
+import { CohetePerdido } from "./NoEncontrada";
 
 const PAGINA = 24;
 interface Filtros { seccion: TiendaId | "todas"; orden: "rel" | "menor" | "mayor"; limite: number }
@@ -79,6 +80,7 @@ export function Marca({ marca }: { marca: string }) {
           </>
         ) : (
           <div className="mt-6 rounded-md border border-dashed border-linea-fuerte px-6 py-12 text-center">
+            <CohetePerdido className="mb-5" />
             <p className="font-semibold">No encontramos productos de la marca “{marca}”.</p>
             <a href={hrefBusqueda(marca)} className="enlace-suelto mt-2">Buscar “{marca}” en toda la tienda</a>
           </div>

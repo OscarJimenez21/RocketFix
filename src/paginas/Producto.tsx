@@ -1,26 +1,90 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
 import descripcionesJson from "../data/descripciones.json";
 import { CONFIG, TIENDA_VISTA, VISTAS, conPrecioPrimero, deTienda, etiquetaDe, nombreCat, nombreItem, porId, textoConsulta } from "../data/catalogo";
 import { useTienda } from "../estado/TiendaContext";
 import { Migas } from "../components/EncabezadoVista";
 import { Galeria } from "../components/Galeria";
-import { IconoCamion, IconoCompartir, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
+import { IconoCamion, IconoCheck, IconoCompartir, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { EtiquetaAgregar, NotaProducto, TarjetaProducto, useAgregado } from "../components/TarjetaProducto";
 import { armarDescripcion } from "../lib/descripcion";
 import { dinero, recurso } from "../lib/formato";
+import { useMarco } from "../lib/movimiento";
 import { volarAlCarrito } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
-import type { Descripcion } from "../types";
+import type { Descripcion, Producto as TipoProducto } from "../types";
 import { NoEncontrada } from "./NoEncontrada";
 
 // TypeScript lee cada fila de la ficha como string[]; scripts/verificar-catalogo.mjs comprueba que todas tengan exactamente 2 textos
 const DESCRIPCIONES = descripcionesJson as unknown as Record<string, Descripcion>;
+
+/** Versiones del producto: al elegir otra, el marco verde se desliza hasta ella en vez de saltar */
+function Versiones({ producto: p, elegida, elegir }: { producto: TipoProducto; elegida: number; elegir: (j: number) => void }) {
+  const caja = useRef<HTMLDivElement>(null);
+  const marco = useMarco(caja, elegida);
+  return (
+    <div ref={caja} className="relative grid gap-2 sm:grid-cols-2">
+      {marco && <span aria-hidden="true" className="pointer-events-none absolute left-0 top-0 rounded border border-marca bg-marca-suave ring-1 ring-marca" style={marco} />}
+      {p.opciones.map((op, j) => (
+        <button key={j} data-opcion type="button" aria-pressed={j === elegida} onClick={() => elegir(j)}
+          className={`presionable relative flex min-h-[44px] items-center justify-between gap-3 rounded border px-3.5 py-2.5 text-left text-sm ${j === elegida ? (marco ? "border-transparent" : "border-marca bg-marca-suave ring-1 ring-marca") : "border-linea-fuerte hover:border-tinta-2"}`}>
+          <span>{op.nombre}</span>{!p.consultar && <b className="whitespace-nowrap font-display tabular-nums">{dinero(op.precio)}</b>}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/** Celular y tableta: cuando el botón «Agregar al carrito» de la ficha sale por arriba de la pantalla, sube una barra fija
+    abajo con el precio y el botón. Baja cuando el botón vuelve a verse o cuando aparece el pie de página.
+    Mientras se ve, el aviso «Agregaste…» sale encima de ella (--barra-abajo) */
+function BarraAgregar({ boton, nombre, precio, tope, alAgregar, etiqueta }: {
+  boton: RefObject<HTMLButtonElement>; nombre: string; precio: number; tope: boolean; alAgregar: (e: React.MouseEvent<HTMLButtonElement>) => void; etiqueta: ReactNode;
+}) {
+  const barra = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  // Se revisa al mover la página (una vez por cuadro). Con IntersectionObserver no bastaba: si la página baja de golpe
+  // (un salto o un deslizamiento muy rápido), el botón pasa de abajo a arriba sin «verse» y no avisaba.
+  // El botón tapado por la cabecera fija ya cuenta como fuera de la pantalla
+  useEffect(() => {
+    const b = boton.current, pie = document.getElementById("contacto"), cabecera = document.querySelector("header");
+    if (!b) return;
+    let cuadro = 0;
+    const revisar = () => {
+      cuadro = 0;
+      const arriba = b.getBoundingClientRect().bottom < (cabecera?.getBoundingClientRect().bottom ?? 0);
+      const conPie = pie ? pie.getBoundingClientRect().top < window.innerHeight : false;
+      setVisible(arriba && !conPie);
+    };
+    const alMover = () => { if (!cuadro) cuadro = requestAnimationFrame(revisar); };
+    window.addEventListener("scroll", alMover, { passive: true });
+    window.addEventListener("resize", alMover);
+    revisar();
+    return () => { window.removeEventListener("scroll", alMover); window.removeEventListener("resize", alMover); cancelAnimationFrame(cuadro); };
+  }, [boton]);
+  useEffect(() => {
+    if (barra.current) barra.current.inert = !visible;
+    document.documentElement.style.setProperty("--barra-abajo", visible && barra.current ? `${barra.current.offsetHeight}px` : "0px");
+  }, [visible]);
+  useEffect(() => () => { document.documentElement.style.removeProperty("--barra-abajo"); }, []);
+  return (
+    <div ref={barra} className={`fixed inset-x-0 bottom-0 z-30 border-t border-linea bg-white px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] pt-3 shadow-flota transition-transform duration-300 ease-salida lg:hidden ${visible ? "translate-y-0" : "translate-y-[calc(100%+24px)]"}`}>
+      <div className="mx-auto flex max-w-pagina items-center gap-3">
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-[13px] text-tinta-2">{nombre}</p>
+          <p key={precio} className="font-display text-lg font-extrabold leading-tight tabular-nums motion-safe:animate-entrar">{dinero(precio)}</p>
+        </div>
+        <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario shrink-0">{etiqueta}</button>
+      </div>
+    </div>
+  );
+}
 
 export default function Producto({ id }: { id: string }) {
   const p = porId[id];
   const { version, elegirVersion, cantidadDe, agregar, avisar, abrirCarrito } = useTienda();
   const [copiado, setCopiado] = useState(false);
   const { vez, recien, marcar } = useAgregado();
+  const boton = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (p) document.title = `${p.nombre} · ${CONFIG.nombre}`;
@@ -78,14 +142,7 @@ export default function Producto({ id }: { id: string }) {
           {p.opciones.length > 1 && (
             <fieldset className="mt-6">
               <legend className="etiqueta mb-2">{p.etiqueta || "Versión"}</legend>
-              <div className="grid gap-2 sm:grid-cols-2">
-                {p.opciones.map((op, j) => (
-                  <button key={j} type="button" aria-pressed={j === i} onClick={() => elegirVersion(p.id, j)}
-                    className={`presionable flex min-h-[44px] items-center justify-between gap-3 rounded border px-3.5 py-2.5 text-left text-sm ${j === i ? "border-marca bg-marca-suave ring-1 ring-marca" : "border-linea-fuerte hover:border-tinta-2"}`}>
-                    <span>{op.nombre}</span>{!p.consultar && <b className="whitespace-nowrap font-display tabular-nums">{dinero(op.precio)}</b>}
-                  </button>
-                ))}
-              </div>
+              <Versiones producto={p} elegida={i} elegir={j => elegirVersion(p.id, j)} />
             </fieldset>
           )}
 
@@ -103,7 +160,7 @@ export default function Producto({ id }: { id: string }) {
               <p key={o.precio} className="font-display text-[34px] font-extrabold leading-none tabular-nums motion-safe:animate-entrar">{dinero(o.precio)}</p>
               <p className="mt-2 text-[13px] text-tinta-3">Precio en pesos colombianos. Antes de cualquier pago te confirmamos disponibilidad por WhatsApp.</p>
               <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
-                <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario w-full"><EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" /></button>
+                <button ref={boton} type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario w-full"><EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" /></button>
                 <a href={waLink(`Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, o.nombre)} (${dinero(o.precio)}). ¿Está disponible?`)} target="_blank" rel="noopener"
                   className="btn btn-borde w-full"><IconoWhatsApp className="h-[18px] w-[18px] text-wa" />Preguntar por WhatsApp</a>
               </div>
@@ -115,10 +172,17 @@ export default function Producto({ id }: { id: string }) {
             {entrega.map(e => <li key={e.texto} className="flex items-start gap-2.5"><span className="mt-px shrink-0 text-marca">{e.icono}</span>{e.texto}</li>)}
           </ul>
           <button type="button" onClick={compartir} className="mt-3 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-tinta-2 hover:text-tinta">
-            <IconoCompartir />{copiado ? <span className="inline-block motion-safe:animate-entrar">Enlace copiado</span> : "Compartir este producto"}
+            {/* Al copiar el enlace, la flecha se cambia por un ✓ que se dibuja */}
+            {copiado
+              ? <><IconoCheck className="dibujar h-4 w-4 text-marca" /><span className="inline-block motion-safe:animate-entrar">Enlace copiado</span></>
+              : <><IconoCompartir />Compartir este producto</>}
           </button>
         </div>
       </div>
+      {!p.consultar && (
+        <BarraAgregar boton={boton} nombre={nombreItem(p, o.nombre)} precio={o.precio} tope={tope} alAgregar={alAgregar}
+          etiqueta={<EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} />} />
+      )}
 
       <section aria-labelledby="h-desc" className="border-t border-linea bg-fondo">
         <div className="contenedor grid gap-8 py-10 lg:grid-cols-2 lg:gap-12">

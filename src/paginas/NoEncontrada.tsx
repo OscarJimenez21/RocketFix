@@ -6,10 +6,11 @@ const ESTRELLAS: [number, number, number, number][] = [
   [14, 18, 1.6, 0.5], [46, 8, 1.2, 0.35], [92, 14, 1.4, 0.45], [168, 22, 1.6, 0.5], [158, 96, 1.2, 0.35], [28, 74, 1.2, 0.3], [112, 108, 1.4, 0.4]
 ];
 
-/** El cohete del logo, perdido en el espacio: entra flotando y girando suave por su trayectoria punteada y se queda quieto */
-function CohetePerdido() {
+/** El cohete del logo, perdido en el espacio: entra flotando y girando suave por su trayectoria punteada y se queda quieto.
+    También sale cuando una búsqueda, una sección con filtros o una marca no tienen productos */
+export function CohetePerdido({ className = "" }: { className?: string }) {
   return (
-    <div aria-hidden="true" className="relative mx-auto h-[120px] w-[180px]">
+    <div aria-hidden="true" className={`relative mx-auto h-[120px] w-[180px] ${className}`}>
       <svg viewBox="0 0 180 120" className="absolute inset-0 h-full w-full">
         {ESTRELLAS.map(([x, y, r, o], i) => <circle key={i} cx={x} cy={y} r={r} className="fill-marca" opacity={o} />)}
         {/* Trayectoria con una vuelta, como si el cohete se hubiera desviado */}

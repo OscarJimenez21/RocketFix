@@ -17,7 +17,7 @@ export function Aviso() {
       {/* Lo que leen los lectores de pantalla (solo el aviso nuevo, no el que se está yendo) */}
       <div role="status" aria-live="polite" className="sr-only">{aviso}</div>
       <div ref={caja}
-        className={`fixed bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] left-1/2 z-[60] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 transition-[opacity,transform] duration-200 ease-salida ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}>
+        className={`fixed bottom-[calc(1rem+max(var(--barra-abajo,0px),env(safe-area-inset-bottom,0px)))] left-1/2 z-[60] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 transition-[opacity,transform] duration-200 ease-salida ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}>
         {texto && (
           <div className="flex items-center gap-3 rounded-md bg-tinta px-4 py-3 text-sm text-white shadow-flota">
             <span aria-hidden="true" className="flex-1">{texto}</span>

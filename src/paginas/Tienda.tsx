@@ -8,6 +8,7 @@ import { IconoBuscar, IconoWhatsApp } from "../components/Iconos";
 import { TarjetaProducto } from "../components/TarjetaProducto";
 import { norm } from "../lib/formato";
 import { waLink } from "../lib/whatsapp";
+import { CohetePerdido } from "./NoEncontrada";
 import type { Producto, TiendaId } from "../types";
 
 const PAGINA = 24;
@@ -140,6 +141,7 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
           </>
         ) : (
           <div className="mt-6 rounded-md border border-dashed border-linea-fuerte px-6 py-12 text-center">
+            <CohetePerdido className="mb-5" />
             <p className="font-semibold">Ningún producto cumple todos los filtros elegidos.</p>
             <p className="mt-1 text-sm text-tinta-2">{f.q.trim() ? `No encontramos “${f.q.trim()}” en ${info?.titulo.toLowerCase() ?? "esta sección"}.` : "Prueba con otra marca o tipo de producto."} Si buscas algo puntual, pregúntanos: puede que lo consigamos por pedido.</p>
             <div className="mt-5 flex flex-wrap justify-center gap-3">

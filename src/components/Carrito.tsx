@@ -9,9 +9,44 @@ import { envioDe, mensajePedido, reglaEnvio, subtotalDe, type DatosPedido } from
 import { hrefProducto } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
 import type { ZonaEntrega } from "../types";
+import { temblor } from "../lib/movimiento";
 import { FotoProducto } from "./FotoProducto";
-import { IconoCerrar, IconoTarjeta, IconoWhatsApp } from "./Iconos";
+import { IconoCerrar, IconoCheck, IconoTarjeta, IconoWhatsApp } from "./Iconos";
 import { Cohete } from "./Logo";
+
+/** Cantidad de un producto en el carrito: al sumar, el número nuevo entra desde arriba; al restar, desde abajo */
+function Cantidad({ valor }: { valor: number }) {
+  const [paso, setPaso] = useState({ valor, dir: 0 });
+  if (paso.valor !== valor) setPaso({ valor, dir: valor > paso.valor ? 1 : -1 });
+  const dir = paso.valor !== valor ? (valor > paso.valor ? 1 : -1) : paso.dir;
+  return (
+    <output className="block h-5 w-7 overflow-hidden text-center font-mono text-sm leading-5" aria-live="polite">
+      <span key={valor} className={`block ${dir > 0 ? "motion-safe:animate-rodar-arriba" : dir < 0 ? "motion-safe:animate-rodar-abajo" : ""}`}>{valor}</span>
+    </output>
+  );
+}
+
+/** Guía corta arriba del carrito: los tres pasos de la compra y en cuál va la persona (el primero ya está hecho porque
+    tiene productos). `vez` cuenta las veces que se abre el carrito: el ✓ del primer paso se dibuja en cada apertura */
+function GuiaPasos({ vez }: { vez: number }) {
+  const pasos = ["Arma tu carrito", "Envía el pedido por WhatsApp", "Confirmamos y entregamos"];
+  return (
+    <ol aria-label="Pasos para comprar" className="grid shrink-0 grid-cols-3 gap-2 border-b border-linea bg-fondo px-4 py-3">
+      {pasos.map((t, i) => (
+        <li key={t} aria-current={i === 1 ? "step" : undefined} className="relative flex flex-col items-center gap-1.5 text-center">
+          {/* Línea punteada hasta el paso siguiente: verde la que ya se recorrió */}
+          {i < pasos.length - 1 && (
+            <span aria-hidden="true" className={`absolute left-[calc(50%+16px)] top-[11px] w-[calc(100%-24px)] border-t-2 border-dotted ${i === 0 ? "border-marca/60" : "border-linea-fuerte"}`} />
+          )}
+          <span className={`relative flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${i === 0 ? "bg-marca text-white" : i === 1 ? "bg-white text-marca ring-2 ring-marca" : "bg-white text-tinta-3 ring-1 ring-linea-fuerte"}`}>
+            {i === 0 ? <IconoCheck key={vez} className="dibujar h-3.5 w-3.5 [--retraso:280ms]" /> : i + 1}
+          </span>
+          <span className={`text-[12px] leading-tight ${i === 1 ? "font-semibold text-tinta" : "text-tinta-2"}`}>{t}{i === 0 && <span className="sr-only"> (hecho)</span>}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
 
 const GUARDADO = "rocketfix-datos-pedido";
 const datosIniciales = (): DatosPedido => {
@@ -26,6 +61,8 @@ export function Carrito() {
   const { lineas, carritoAbierto, cerrarCarrito, cambiar, quitar, avisar } = useTienda();
   const [d, setD] = useState<DatosPedido>(datosIniciales);
   const [errores, setErrores] = useState<{ nombre?: boolean; dir?: boolean; texto?: string }>({});
+  // Envíos con datos faltantes: en cada uno, los campos marcados tiemblan
+  const [intento, setIntento] = useState(0);
   const panel = useRef<HTMLDivElement>(null);
   const cerrar = useRef<HTMLButtonElement>(null);
   const foco = useRef<Element | null>(null);
@@ -93,6 +130,31 @@ export function Carrito() {
     if (porCelebrar.current && carritoAbierto) { porCelebrar.current = false; setFestejo(n => n + 1); }
   }, [envio, subtotal, carritoAbierto]);
 
+  // El producto que se agregó con el carrito cerrado se resalta al abrirlo: un fondo verde que se desvanece.
+  // Si quedó abajo en la lista, la lista baja hasta él
+  const cantidades = useRef<Record<string, number>>(Object.fromEntries(lineas.map(l => [l.clave, l.cantidad])));
+  const porResaltar = useRef<string | null>(null);
+  const [resaltada, setResaltada] = useState<{ clave: string; vez: number } | null>(null);
+  useEffect(() => {
+    if (!carritoAbierto) {
+      const nueva = lineas.find(l => l.cantidad > (cantidades.current[l.clave] ?? 0));
+      if (nueva) porResaltar.current = nueva.clave;
+    }
+    cantidades.current = Object.fromEntries(lineas.map(l => [l.clave, l.cantidad]));
+  }, [lineas, carritoAbierto]);
+  // Veces que se ha abierto el carrito (el ✓ de la guía se dibuja en cada apertura)
+  const [aperturas, setAperturas] = useState(0);
+  useEffect(() => {
+    if (!carritoAbierto) return;
+    setAperturas(n => n + 1);
+    const clave = porResaltar.current;
+    porResaltar.current = null;
+    if (clave) setResaltada(r => ({ clave, vez: (r?.vez ?? 0) + 1 }));
+  }, [carritoAbierto]);
+  useEffect(() => {
+    if (resaltada) panel.current?.querySelector(`[data-clave="${CSS.escape(resaltada.clave)}"]`)?.scrollIntoView({ block: "nearest" });
+  }, [resaltada]);
+
   // Al escribir en un campo que estaba marcado, se quita su marca y el aviso (se vuelve a validar al enviar)
   const poner = <K extends keyof DatosPedido>(k: K, v: DatosPedido[K]) => {
     setD(x => ({ ...x, [k]: v }));
@@ -106,6 +168,7 @@ export function Carrito() {
     const e = { nombre: !d.nombre.trim(), dir: !d.dir.trim() };
     const faltan = [e.nombre && "tu nombre", e.dir && (nacional ? "la ciudad y la dirección" : "la dirección de entrega")].filter(Boolean) as string[];
     setErrores({ ...e, texto: faltan.length ? `Completa ${lista(faltan)} para enviar el pedido.` : undefined });
+    if (faltan.length) setIntento(n => n + 1);
     if (faltan.length) document.getElementById(`${id}-${e.nombre ? "nombre" : "dir"}`)?.focus();
     return !faltan.length;
   }
@@ -123,7 +186,15 @@ export function Carrito() {
     }
   }
 
-  const campo = (k: "nombre" | "dir") => `campo ${errores[k] ? "campo-invalido" : ""}`;
+  const campo = (k: "nombre" | "dir") => `campo ${errores[k] ? "campo-invalido" : ""}${temblor(Boolean(errores[k]), intento)}`;
+
+  // Cada vez que cambia el total, se ilumina en verde un instante
+  const [cambiosTotal, setCambiosTotal] = useState({ total, n: 0 });
+  if (cambiosTotal.total !== total) setCambiosTotal({ total, n: cambiosTotal.n + 1 });
+  const vezTotal = cambiosTotal.total !== total ? cambiosTotal.n + 1 : cambiosTotal.n;
+
+  // El cohete de la barra de envío gratis va en la punta de la barra (0 a 1)
+  const avance = Math.min(1, subtotal / meta);
 
   // El contenedor mide lo mismo que la pantalla y recorta el panel cerrado: si sobresaliera, Chrome en celular alejaría toda la página
   return (
@@ -139,9 +210,9 @@ export function Carrito() {
 
         {lineas.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
-            {/* El cohete del logo, quieto en su plataforma, esperando el primer producto */}
+            {/* El cohete del logo flota suave sobre su plataforma, esperando el primer producto */}
             <span aria-hidden="true" className="mb-1 flex flex-col items-center">
-              <Cohete className="h-14 w-14 text-marca" />
+              <span className="motion-safe:animate-flotar"><Cohete className="h-14 w-14 text-marca" /></span>
               <span className="mt-2.5 h-[3px] w-16 rounded-full bg-linea-fuerte" />
             </span>
             <p className="text-lg font-semibold">Tu carrito está vacío</p>
@@ -150,13 +221,16 @@ export function Carrito() {
           </div>
         ) : (
           <>
+            <GuiaPasos vez={aperturas} />
             <div className="flex-1 overflow-y-auto overscroll-contain">
               <ul className="divide-y divide-linea px-5">
                 {lineas.map(({ producto: p, opcion: o, clave, cantidad }) => {
                   const nombre = nombreItem(p, o.nombre);
                   const tope = p.stock != null && cantidad >= p.stock;
                   return (
-                    <li key={clave} className={`grid grid-cols-[64px_1fr] gap-3 py-4 transition-[opacity,transform] duration-[180ms] ease-salida ${saliendo.includes(clave) ? "pointer-events-none translate-x-3 opacity-0" : ""}`}>
+                    <li key={clave} data-clave={clave} className={`relative isolate grid grid-cols-[64px_1fr] gap-3 py-4 transition-[opacity,transform] duration-[180ms] ease-salida ${saliendo.includes(clave) ? "pointer-events-none translate-x-3 opacity-0" : ""}`}>
+                      {/* El último producto agregado: fondo verde claro que se desvanece al abrir el carrito */}
+                      {resaltada?.clave === clave && <span key={resaltada.vez} aria-hidden="true" className="absolute inset-y-0 -left-5 -right-5 -z-10 bg-marca-suave opacity-0 motion-safe:animate-desvanecer" />}
                       <a href={hrefProducto(p.id)} className="h-16 w-16 rounded border border-linea bg-white p-1" tabIndex={-1} aria-hidden="true"><FotoProducto producto={p} alt="" /></a>
                       <div className="min-w-0">
                         <a href={hrefProducto(p.id)} className="line-clamp-2 text-[14.5px] font-semibold leading-snug hover:text-marca">{nombre}</a>
@@ -165,7 +239,7 @@ export function Carrito() {
                         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
                           <div className="inline-flex items-center rounded border border-linea-fuerte" role="group" aria-label={`Cantidad de ${nombre}`}>
                             <button type="button" onClick={() => (cantidad === 1 ? sacar(clave) : cambiar(clave, -1))} aria-label="Quitar una unidad" className="presionable h-11 w-11 text-lg leading-none hover:bg-fondo">−</button>
-                            <output className="w-7 text-center font-mono text-sm" aria-live="polite">{cantidad}</output>
+                            <Cantidad valor={cantidad} />
                             <button type="button" onClick={() => cambiar(clave, 1)} disabled={tope} aria-label="Agregar una unidad" className="presionable h-11 w-11 text-lg leading-none hover:bg-fondo disabled:opacity-40">+</button>
                           </div>
                           <button type="button" onClick={() => sacar(clave)} className="min-h-[44px] px-1 text-[13px] font-semibold text-tinta-2 underline-offset-2 hover:text-red-700 hover:underline">Quitar</button>
@@ -222,18 +296,31 @@ export function Carrito() {
                 <div className="flex justify-between"><dt className="text-tinta-2">Productos</dt><dd>{dinero(subtotal)}</dd></div>
                 <div className="flex justify-between"><dt className="text-tinta-2">{nacional ? "Envío a otra ciudad" : "Envío en Bogotá"}</dt>
                   {/* La clave vuelve a montar «Gratis» en cada festejo para que el salto se repita */}
-                  <dd key={envio ? "pago" : `gratis-${festejo}`} className={envio ? "" : `font-semibold text-marca ${festejo ? "motion-safe:animate-latido motion-safe:[animation-delay:200ms]" : ""}`}>{envio ? dinero(envio) : "Gratis"}</dd></div>
+                  <dd key={envio ? "pago" : `gratis-${festejo}`} className={envio ? "" : `origin-right font-semibold text-marca ${festejo ? "motion-safe:animate-latido motion-safe:[animation-delay:200ms]" : ""}`}>{envio ? dinero(envio) : "Gratis"}</dd></div>
               </dl>
               <div className="mt-2">
                 <p key={envio ? "falta" : `gratis-${festejo}`} className={`text-xs ${envio ? "text-tinta-2" : "font-semibold text-marca motion-safe:animate-entrar"}`}>{envio ? `Te faltan ${dinero(meta - subtotal)} para el envío gratis ${nacional ? "a otra ciudad" : "en Bogotá"}.` : "¡Tu pedido tiene envío gratis!"}</p>
-                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-fondo" aria-hidden="true">
-                  {/* Se mueve con scaleX (no con el ancho), que no obliga a recalcular la página */}
-                  <div className="h-full origin-left bg-marca transition-transform duration-300 ease-salida" style={{ transform: `scaleX(${Math.min(1, subtotal / meta)})` }} />
+                <div className="relative mt-2.5" aria-hidden="true">
+                  <div className="h-1.5 overflow-hidden rounded-full bg-fondo">
+                    {/* Se mueve con scaleX (no con el ancho), que no obliga a recalcular la página */}
+                    <div className="h-full origin-left bg-marca transition-transform duration-300 ease-salida" style={{ transform: `scaleX(${avance})` }} />
+                  </div>
+                  {/* Un cohete pequeño va en la punta de la barra. Se ubica con left (no con una capa corrida con transform, que
+                      se salía del panel y lo dejaba correrse de lado). Recorre la barra de borde a borde: a cualquier avance cubre la punta
+                      de la parte llena sin salirse por los lados. Al llegar al envío gratis da un salto (la clave lo repite) */}
+                  <div className="pointer-events-none absolute top-1/2 h-0 w-0 transition-[left] duration-300 ease-salida" style={{ left: `calc(${avance} * (100% - 1.5rem))` }}>
+                    <span className="absolute left-0 top-0 block -translate-y-1/2">
+                      <span key={festejo} className={`flex h-6 w-6 items-center justify-center rounded-full transition-colors duration-300 ${envio ? "bg-white text-marca ring-1 ring-linea-fuerte" : "bg-marca text-white"} ${festejo ? "motion-safe:animate-brinco" : ""}`}>
+                        <Cohete className="h-4 w-4 rotate-90" />
+                      </span>
+                    </span>
+                  </div>
                 </div>
               </div>
               <div className="mt-3 flex items-baseline justify-between border-t border-linea pt-3">
                 <span className="font-semibold">Total</span>
-                <strong className="font-display text-2xl tabular-nums">{dinero(total)}</strong>
+                {/* La clave cambia con el total: así se ilumina en verde cada vez que cambia */}
+                <strong key={vezTotal} className={`font-display text-2xl tabular-nums ${vezTotal ? "motion-safe:animate-resaltar" : ""}`}>{dinero(total)}</strong>
               </div>
               {errores.texto && <p className="alerta mt-2" role="alert">{errores.texto}</p>}
               {/* El pedido por WhatsApp es el camino principal: ahí se confirma la disponibilidad antes de cobrar */}
