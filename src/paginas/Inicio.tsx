@@ -19,7 +19,7 @@ import { waLink } from "../lib/whatsapp";
 import type { Producto, Servicio, TiendaId } from "../types";
 
 /** Productos de la vitrina de la portada, en este orden */
-const VITRINA = ["ip18pm", "ss26u", "mbairm5", "appro3"];
+const VITRINA = ["ip18pm", "ss26u", "p45585", "mbairm5", "awultra4", "appro3"];
 const ESPERA_VITRINA = 6000;
 
 /** Vitrina: un producto grande y los demás en miniatura. Cambia sola con un fundido; se detiene con el mouse encima o

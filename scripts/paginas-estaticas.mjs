@@ -233,7 +233,7 @@ for (const a of ARTICULOS) {
   };
   const sitioLd = { "@type": "WebSite", "@id": SITIO + "#sitio", name: CONFIG.nombre, url: SITIO, inLanguage: "es-CO", publisher: { "@id": ORGANIZACION } };
   const secciones = Object.entries(TIENDA_VISTA).filter(([t]) => PRODUCTOS.some(p => p.tienda === t));
-  const cuerpo = `<h1>${esc(CONFIG.nombre)}: tecnología para tu día a día</h1>` +
+  const cuerpo = `<h1>${esc(CONFIG.nombre)}: hacemos despegar tu tecnología</h1>` +
     `<p>Celulares, computadores, gaming y accesorios con entrega a domicilio. Compra con asesoría por WhatsApp y solicita servicio técnico para tu hogar o negocio.</p>` +
     `<h2>Secciones</h2><ul>${secciones.map(([, v]) => `<li><a href="${BASE}${rutaVista(v)}">${esc(VISTAS[v] ?? v)}</a></li>`).join("")}</ul>` +
     `<h2>Marcas</h2><ul>${MARCAS.map(m => `<li><a href="${BASE}${rutaMarca(m)}">${esc(m)}</a></li>`).join("")}</ul>` +
