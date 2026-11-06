@@ -20,6 +20,13 @@ if (!location.hash && location.pathname.startsWith(base) && location.pathname !=
 // El contenido estático (para quien no ejecuta JavaScript) ya no hace falta
 document.getElementById("estatico")?.remove();
 
+// Solo al trabajar en local: las animaciones en prueba que se apagaron en el panel de revisión siguen apagadas al recargar
+if (import.meta.env.DEV) {
+  try {
+    for (const n of JSON.parse(localStorage.getItem("rf-animaciones-apagadas") || "[]") as number[]) document.documentElement.classList.add(`sin-a${n}`);
+  } catch { /* sin almacenamiento */ }
+}
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />

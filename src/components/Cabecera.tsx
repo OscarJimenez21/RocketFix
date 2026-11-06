@@ -76,7 +76,7 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
         className={`absolute inset-y-0 left-0 flex w-[88%] max-w-[380px] flex-col bg-white shadow-flota transition-transform duration-300 ease-cajon ${abierto ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex h-14 shrink-0 items-center justify-between border-b border-linea pl-4 pr-2 lg:h-[68px]">
           <Logo />
-          <button ref={botonCerrar} type="button" onClick={cerrar} aria-label="Cerrar menú" className="presionable flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo"><IconoCerrar /></button>
+          <button ref={botonCerrar} type="button" onClick={cerrar} aria-label="Cerrar menú" className="cerrar-gira presionable flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo"><IconoCerrar /></button>
         </div>
         <nav aria-label="Menú principal" onClick={cerrarAlElegir(cerrar)} className="flex-1 overflow-y-auto overscroll-contain px-3 py-3">
           {GRUPOS.map((g, n) => (
@@ -142,9 +142,14 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
   useEffect(() => { setMenu(false); }, [clave]);
   const cerrarMenu = useCallback(() => setMenu(false), []);
 
+  // Animación 8: el botón de WhatsApp saluda una vez, solo en la primera página que se abre en la visita
+  const [saluda] = useState(() => { try { return !sessionStorage.getItem("rf-saludo"); } catch { return false; } });
+  useEffect(() => { try { sessionStorage.setItem("rf-saludo", "1"); } catch { /* sin almacenamiento */ } }, []);
+
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-linea bg-white">
+      {/* cabecera: al bajar aparece una sombra suave debajo (animación 7) */}
+      <header className="cabecera sticky top-0 z-40 border-b border-linea bg-white">
         <div className="contenedor flex h-14 items-center gap-1.5 sm:gap-3 lg:h-[68px] lg:gap-6">
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             <button type="button" onClick={() => setMenu(true)} aria-label="Abrir menú" aria-expanded={menu} aria-controls="menu-lateral"
@@ -157,7 +162,7 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
           <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
             {/* En pantallas de menos de 360 px no cabe junto al logo y el carrito; ahí WhatsApp queda en el menú y en el pie */}
             <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"
-              className="presionable inline-flex h-11 min-w-[44px] items-center justify-center gap-2 rounded bg-wa px-3 text-sm font-semibold text-white hover:bg-wa-hover max-[359px]:hidden">
+              className={`presionable inline-flex h-11 min-w-[44px] items-center justify-center gap-2 rounded bg-wa px-3 text-sm font-semibold text-white hover:bg-wa-hover max-[359px]:hidden${saluda ? " saludo-wa" : ""}`}>
               <IconoWhatsApp className="h-5 w-5" /><span className="hidden xl:inline">Escríbenos por WhatsApp</span>
             </a>
             <button type="button" onClick={abrirCarrito} aria-label={`Abrir carrito, ${unidades} ${unidades === 1 ? "producto" : "productos"}`}

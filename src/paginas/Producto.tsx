@@ -6,9 +6,11 @@ import { Migas } from "../components/EncabezadoVista";
 import { Galeria } from "../components/Galeria";
 import { IconoCamion, IconoCheck, IconoCompartir, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { EtiquetaAgregar, NotaProducto, TarjetaProducto, useAgregado } from "../components/TarjetaProducto";
+import { activa } from "../lib/animaciones";
 import { armarDescripcion } from "../lib/descripcion";
+import { useVisto } from "../lib/enPantalla";
 import { dinero, recurso } from "../lib/formato";
-import { useMarco } from "../lib/movimiento";
+import { useDireccion, useMarco } from "../lib/movimiento";
 import { volarAlCarrito } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
 import type { Descripcion, Producto as TipoProducto } from "../types";
@@ -79,12 +81,22 @@ function BarraAgregar({ boton, nombre, precio, tope, alAgregar, etiqueta }: {
   );
 }
 
+/** Animación 20: el precio rueda hacia arriba si la versión elegida es más cara y hacia abajo si es más barata */
+function Precio({ valor }: { valor: number }) {
+  const dir = useDireccion(valor);
+  const clase = !activa(20) || !dir ? "motion-safe:animate-entrar" : dir > 0 ? "precio-sube" : "precio-baja";
+  return <p key={valor} className={`font-display text-[34px] font-extrabold leading-none tabular-nums ${clase}`}>{dinero(valor)}</p>;
+}
+
 export default function Producto({ id }: { id: string }) {
   const p = porId[id];
   const { version, elegirVersion, cantidadDe, agregar, avisar, abrirCarrito } = useTienda();
   const [copiado, setCopiado] = useState(false);
   const { vez, recien, marcar } = useAgregado();
   const boton = useRef<HTMLButtonElement>(null);
+  // Animación 22: los íconos de entrega se mueven la primera vez que se ven
+  const entregaLista = useRef<HTMLUListElement>(null);
+  const entregaVista = useVisto(entregaLista);
 
   useEffect(() => {
     if (p) document.title = `${p.nombre} · ${CONFIG.nombre}`;
@@ -118,9 +130,9 @@ export default function Producto({ id }: { id: string }) {
     try { await navigator.clipboard.writeText(url); setCopiado(true); setTimeout(() => setCopiado(false), 2500); } catch { avisar(url); }
   };
   const entrega = [
-    { icono: <IconoMoto className="h-[18px] w-[18px]" />, texto: `Entrega el mismo día en Bogotá y alrededores, gratis desde ${dinero(CONFIG.envios.bogota.gratisDesde)}` },
-    { icono: <IconoCamion className="h-[18px] w-[18px]" />, texto: `Envíos a todo Colombia, gratis desde ${dinero(CONFIG.envios.nacional.gratisDesde)}` },
-    { icono: <IconoTarjeta className="h-[18px] w-[18px]" />, texto: "Paga con tarjeta, Bre-B, Daviplata, transferencia o efectivo" }
+    { icono: <IconoMoto className="h-[18px] w-[18px]" />, clase: "icono-moto", texto: `Entrega el mismo día en Bogotá y alrededores, gratis desde ${dinero(CONFIG.envios.bogota.gratisDesde)}` },
+    { icono: <IconoCamion className="h-[18px] w-[18px]" />, clase: "icono-camion", texto: `Envíos a todo Colombia, gratis desde ${dinero(CONFIG.envios.nacional.gratisDesde)}` },
+    { icono: <IconoTarjeta className="h-[18px] w-[18px]" />, clase: "icono-tarjeta", texto: "Paga con tarjeta, Bre-B, Daviplata, transferencia o efectivo" }
   ];
 
   return (
@@ -131,11 +143,13 @@ export default function Producto({ id }: { id: string }) {
       <div className="contenedor grid gap-8 pb-10 pt-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-12">
         <Galeria producto={p} />
 
-        <div className="min-w-0">
+        {/* cascada-info: al abrir el producto, cada bloque de esta columna entra 50 ms después del anterior (animación 18) */}
+        <div className="cascada-info min-w-0">
           <p className="etiqueta text-tinta-3">{etiquetaDe(p)}</p>
           <h1 tabIndex={-1} className="mt-1.5 text-[26px] font-extrabold leading-tight md:text-[32px]">{p.nombre}</h1>
           {p.specs.length > 0 && (
-            <ul className="mt-3 flex flex-wrap gap-1.5">{p.specs.map(s => <li key={s} className="rounded-sm bg-fondo px-2 py-1 text-[13px] text-tinta-2">{s}</li>)}</ul>
+            // specs-cascada: las características cortas aparecen una por una (animación 19)
+            <ul className="specs-cascada mt-3 flex flex-wrap gap-1.5">{p.specs.map((s, k) => <li key={s} style={{ "--i": k } as React.CSSProperties} className="rounded-sm bg-fondo px-2 py-1 text-[13px] text-tinta-2">{s}</li>)}</ul>
           )}
           {p.nota && <NotaProducto nota={p.nota} className="mt-3" />}
 
@@ -156,11 +170,12 @@ export default function Producto({ id }: { id: string }) {
             </div>
           ) : (
             <div className="tarjeta mt-6 p-5">
-              {/* Al cambiar de versión, el precio nuevo entra con un fundido corto (la clave lo vuelve a montar) */}
-              <p key={o.precio} className="font-display text-[34px] font-extrabold leading-none tabular-nums motion-safe:animate-entrar">{dinero(o.precio)}</p>
+              {/* Al cambiar de versión, el precio nuevo entra rodando (la clave lo vuelve a montar) */}
+              <Precio valor={o.precio} />
               <p className="mt-2 text-[13px] text-tinta-3">Precio en pesos colombianos. Antes de cualquier pago te confirmamos disponibilidad por WhatsApp.</p>
               <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
-                <button ref={boton} type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario w-full"><EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" /></button>
+                {/* barrido-agregar: un destello lo cruza una vez al abrir el producto (animación 21) */}
+                <button ref={boton} type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario barrido barrido-agregar w-full"><EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" /></button>
                 <a href={waLink(`Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, o.nombre)} (${dinero(o.precio)}). ¿Está disponible?`)} target="_blank" rel="noopener"
                   className="btn btn-borde w-full"><IconoWhatsApp className="h-[18px] w-[18px] text-wa" />Preguntar por WhatsApp</a>
               </div>
@@ -168,8 +183,13 @@ export default function Producto({ id }: { id: string }) {
             </div>
           )}
 
-          <ul className="mt-5 grid gap-2.5 text-sm text-tinta-2">
-            {entrega.map(e => <li key={e.texto} className="flex items-start gap-2.5"><span className="mt-px shrink-0 text-marca">{e.icono}</span>{e.texto}</li>)}
+          {/* ventajas y entrega-iconos: la moto avanza, el camión rueda y la tarjeta gira, como en la portada (animación 22) */}
+          <ul ref={entregaLista} data-visto={entregaVista || undefined} className="ventajas entrega-iconos mt-5 grid gap-2.5 text-sm text-tinta-2">
+            {entrega.map((e, n) => (
+              <li key={e.texto} className="flex items-start gap-2.5">
+                <span style={{ "--orden": n } as React.CSSProperties} className={`icono-ventaja mt-px inline-block shrink-0 text-marca ${e.clase}`}>{e.icono}</span>{e.texto}
+              </li>
+            ))}
           </ul>
           <button type="button" onClick={compartir} className="mt-3 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-tinta-2 hover:text-tinta">
             {/* Al copiar el enlace, la flecha se cambia por un ✓ que se dibuja */}

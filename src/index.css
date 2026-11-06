@@ -166,6 +166,254 @@
   @keyframes temblar-1 { 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
   @keyframes temblar-2 { 20% { transform: translateX(-6px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
 
+  /* ───── Animaciones en prueba (05/11/2026), numeradas como en el panel de revisión (ver lib/animaciones.ts).
+     Cada regla empieza con :root:not(.sin-aN): el panel apaga la N poniendo esa clase en <html>.
+     Solo mueven transform, translate, rotate, scale u opacity (no obligan a recalcular la página) y respetan «reducir movimiento».
+     Las que siguen al desplazamiento usan las líneas de tiempo del navegador (animation-timeline), sin JavaScript. */
+
+  /* 1 · Portada: el eslogan entra palabra por palabra. Solo suben, sin desvanecerse: así no se retrasa la medida de carga (LCP) */
+  .eslogan .palabra { display: inline-block; }
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a1) .eslogan-entra .palabra { animation: palabra 820ms cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: calc(var(--p, 0) * 90ms + 80ms); }
+  }
+  @keyframes palabra { from { transform: translateY(0.42em); } }
+
+  /* 2 · El cohete del logo cierra el eslogan (en lugar del punto) y llega despegando, con su estela punteada */
+  .cohete-eslogan { position: relative; display: inline-block; width: 0.58em; height: 0.58em; margin-left: 0.12em; vertical-align: -0.04em; color: theme("colors.marca.menta"); rotate: 45deg; }
+  .cohete-eslogan svg { display: block; width: 100%; height: 100%; stroke-width: 2.6; }
+  .cohete-eslogan::before { content: ""; position: absolute; left: calc(50% - 2px); top: 98%; width: 4px; height: 0.5em; opacity: 0.6; transform-origin: top;
+    background: radial-gradient(circle, currentColor 1.5px, transparent 2px) center top / 4px 0.15em repeat-y; }
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a2) .cohete-llega { animation: cohete-llega 760ms cubic-bezier(0.23, 1, 0.32, 1) 640ms backwards; }
+    :root:not(.sin-a2) .cohete-llega::before { animation: estela-eslogan 760ms cubic-bezier(0.23, 1, 0.32, 1) 640ms backwards; }
+  }
+  @keyframes cohete-llega { from { opacity: 0; translate: -0.55em 0.55em; } }
+  @keyframes estela-eslogan { from { transform: scaleY(0); } }
+
+  /* 3 · Estrellas que titilan en el fondo de la portada (se detienen mientras la portada no se ve) */
+  .estrella-titila { position: absolute; width: 3px; height: 3px; border-radius: 9999px; background: #fff; box-shadow: 0 0 6px 1px rgb(255 255 255 / 0.55); opacity: 0.5; }
+  :root.sin-a3 .estrella-titila { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .estrella-titila { animation: titilar 3.4s ease-in-out infinite; animation-delay: var(--t, 0s); }
+    [data-fuera] .estrella-titila { animation-play-state: paused; }
+  }
+  @keyframes titilar { 0%, 100% { opacity: 0.2; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1.3); } }
+
+  /* 4 · Vitrina: el producto nuevo entra por el lado hacia donde se avanza y el anterior sale por el otro */
+  @media (prefers-reduced-motion: no-preference) {
+    .vitrina-entra-der, .vitrina-entra-izq { animation: vitrina-entra 560ms cubic-bezier(0.23, 1, 0.32, 1) both; }
+    .vitrina-sale-izq, .vitrina-sale-der { animation: vitrina-sale 420ms cubic-bezier(0.23, 1, 0.32, 1) both; }
+    .vitrina-entra-der { --desde: 36px; }
+    .vitrina-entra-izq { --desde: -36px; }
+    .vitrina-sale-izq { --hacia: -36px; }
+    .vitrina-sale-der { --hacia: 36px; }
+  }
+  @keyframes vitrina-entra { from { opacity: 0; transform: translateX(var(--desde)); } to { opacity: 1; transform: none; } }
+  @keyframes vitrina-sale { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(var(--hacia)); } }
+
+  /* 5, 21 y 26 · Un destello cruza el botón una vez: «Comprar tecnología» al abrir la portada, «Agregar al carrito» al abrir
+     un producto y «Enviar pedido por WhatsApp» cuando el nombre y la dirección ya están escritos. Va detrás del texto */
+  .barrido { position: relative; overflow: hidden; isolation: isolate; }
+  .barrido::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; transform: translateX(-120%) skewX(-20deg);
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.6), transparent); }
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a5) .barrido-portada::after { animation: barrido 950ms cubic-bezier(0.45, 0, 0.55, 1) 1400ms; }
+    :root:not(.sin-a21) .barrido-agregar::after { animation: barrido 950ms cubic-bezier(0.45, 0, 0.55, 1) 700ms; }
+    :root:not(.sin-a26) .barrido-enviar::after { animation: barrido 950ms cubic-bezier(0.45, 0, 0.55, 1) 150ms; }
+  }
+  @keyframes barrido { from { transform: translateX(-120%) skewX(-20deg); } to { transform: translateX(120%) skewX(-20deg); } }
+
+  /* 6 · Logo de la cabecera: con el mouse encima, el cohete se eleva un poco */
+  .logo-cohete { transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a6) a:hover > .logo .logo-cohete { transform: translate(2px, -3px) rotate(10deg); }
+  }
+
+  /* 7 · Cabecera: al bajar por la página aparece una sombra suave debajo (sigue al desplazamiento) */
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      :root:not(.sin-a7) .cabecera::after { content: ""; position: absolute; inset-inline: 0; top: 100%; height: 14px; pointer-events: none;
+        background: linear-gradient(rgb(15 31 24 / 0.1), transparent); animation: sombra-cabecera linear both; animation-timeline: scroll(root); animation-range: 0 120px; }
+    }
+  }
+  @keyframes sombra-cabecera { from { opacity: 0; } to { opacity: 1; } }
+
+  /* 8 · Botón de WhatsApp de la cabecera: saluda una vez a los 4 segundos (solo en la primera página de la visita) */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a8) .saludo-wa svg { animation: saludo 1s ease-in-out 4s; transform-origin: 50% 60%; }
+  }
+  @keyframes saludo { 15% { transform: rotate(-14deg) scale(1.12); } 30% { transform: rotate(12deg) scale(1.12); } 45% { transform: rotate(-9deg) scale(1.08); } 60% { transform: rotate(6deg); } 75% { transform: rotate(-3deg); } }
+
+  /* 9 y 16 · Texto que rueda desde abajo al cambiar (ejemplos del buscador, «Mostrando N de M») */
+  @media (prefers-reduced-motion: no-preference) {
+    .rueda { animation: rueda 360ms cubic-bezier(0.23, 1, 0.32, 1) backwards; }
+  }
+  @keyframes rueda { from { opacity: 0; transform: translateY(60%); } }
+  /* En celular los campos usan letra de 16 px (ver arriba): el texto de ayuda que rueda también */
+  @media (pointer: coarse) { .ayuda-campo { font-size: 16px; } }
+
+  /* 10 · Sugerencias del buscador: entran una tras otra al abrirlo */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a10) .sugerencia { animation: sugerencia 260ms cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: calc(var(--i, 0) * 30ms + 40ms); }
+  }
+  @keyframes sugerencia { from { opacity: 0; transform: translateY(6px); } }
+
+  /* 11 · Buscador: al escribir, la lupa se inclina y se pinta de verde */
+  .lupa { transition: rotate 220ms cubic-bezier(0.23, 1, 0.32, 1), scale 220ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms; }
+  :root:not(.sin-a11) label:focus-within > .lupa { rotate: -14deg; scale: 1.12; color: theme("colors.marca.DEFAULT"); }
+
+  /* 12 · Secciones de la tienda: al cambiar un filtro, las tarjetas entran en cascada */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a12) .cascada-filtro { animation: tarjeta-entra 420ms cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: calc(var(--i, 0) * 35ms); }
+  }
+  @keyframes tarjeta-entra { from { opacity: 0; transform: translateY(12px) scale(0.98); } }
+
+  /* 13 · Tarjetas de producto: se elevan un poco con el mouse encima */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a13) .tarjeta-eleva { transition: border-color 200ms, box-shadow 200ms, translate 260ms cubic-bezier(0.23, 1, 0.32, 1); }
+    :root:not(.sin-a13) .tarjeta-eleva:hover { translate: 0 -4px; }
+  }
+
+  /* 17 · Producto: con el mouse encima, la foto se acerca y sigue al puntero */
+  @media (hover: hover) and (pointer: fine) {
+    :root:not(.sin-a17) .zoom-foto { cursor: zoom-in; }
+    :root:not(.sin-a17) .zoom-foto img { transform-origin: var(--zx, 50%) var(--zy, 50%); transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }
+    :root:not(.sin-a17) .zoom-foto:hover img { transform: scale(1.6); }
+  }
+
+  /* 18 · Producto: la columna de información entra en cascada al abrirlo (el título solo sube) */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a18) .cascada-info > * { animation: entrada 520ms cubic-bezier(0.23, 1, 0.32, 1) backwards; }
+    :root:not(.sin-a18) .cascada-info > h1 { animation-name: entrada-titulo; }
+    .cascada-info > :nth-child(2) { animation-delay: 50ms; }
+    .cascada-info > :nth-child(3) { animation-delay: 100ms; }
+    .cascada-info > :nth-child(4) { animation-delay: 150ms; }
+    .cascada-info > :nth-child(5) { animation-delay: 200ms; }
+    .cascada-info > :nth-child(6) { animation-delay: 250ms; }
+    .cascada-info > :nth-child(n + 7) { animation-delay: 300ms; }
+  }
+
+  /* 19 · Producto: las características cortas aparecen una por una */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a19) .specs-cascada > li { animation: sugerencia 300ms cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: calc(var(--i, 0) * 45ms + 180ms); }
+  }
+
+  /* 20 · Producto: al cambiar de versión, el precio rueda hacia arriba si sube y hacia abajo si baja */
+  @media (prefers-reduced-motion: no-preference) {
+    .precio-sube { animation: precio-sube 300ms cubic-bezier(0.23, 1, 0.32, 1) backwards; }
+    .precio-baja { animation: precio-baja 300ms cubic-bezier(0.23, 1, 0.32, 1) backwards; }
+  }
+  @keyframes precio-sube { from { opacity: 0; transform: translateY(45%); } }
+  @keyframes precio-baja { from { opacity: 0; transform: translateY(-45%); } }
+
+  /* 22 · Producto: los íconos de entrega se mueven como los de las ventajas de la portada (usa las reglas de .ventajas) */
+  :root.sin-a22 .entrega-iconos .icono-ventaja { animation: none !important; opacity: 1 !important; }
+
+  /* 23 · Producto: mientras carga, un esqueleto de la página con un brillo que lo recorre */
+  .esqueleto { position: relative; overflow: hidden; border-radius: 6px; background: theme("colors.fondo"); }
+  @media (prefers-reduced-motion: no-preference) {
+    .esqueleto::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); animation: esqueleto 1.3s ease-in-out infinite;
+      background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.8), transparent); }
+  }
+  @keyframes esqueleto { to { transform: translateX(100%); } }
+
+  /* 24 · Carrito: al abrirlo, los productos entran uno tras otro */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a24) .linea-entra { animation: linea-entra 380ms cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: calc(var(--i, 0) * 50ms + 150ms); }
+  }
+  @keyframes linea-entra { from { opacity: 0; transform: translateX(18px); } }
+
+  /* 27 · Carrito: al quitar el último producto, el cohete aterriza en su plataforma */
+  @media (prefers-reduced-motion: no-preference) {
+    .cohete-aterriza { animation: aterrizar 950ms cubic-bezier(0.23, 1, 0.32, 1) backwards; }
+  }
+  @keyframes aterrizar { 0% { opacity: 0; transform: translateY(-52px); } 55% { opacity: 1; transform: translateY(4px); } 78% { transform: translateY(-2px); } 100% { transform: none; } }
+
+  /* 28 · Aviso de «Agregaste…»: una línea abajo cuenta el tiempo hasta que se va */
+  .aviso-cuenta { transform-origin: left; }
+  @media (prefers-reduced-motion: no-preference) { .aviso-cuenta { animation: aviso-cuenta 4200ms linear forwards; } }
+  @media (prefers-reduced-motion: reduce) { .aviso-cuenta { display: none; } }
+  @keyframes aviso-cuenta { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+
+  /* 29 · Menú y carrito: la X de cerrar gira con el mouse encima */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .cerrar-gira svg { transition: rotate 260ms cubic-bezier(0.23, 1, 0.32, 1); }
+    :root:not(.sin-a29) .cerrar-gira:hover svg { rotate: 90deg; }
+  }
+
+  /* 31 · Portada: bajo los títulos de las secciones se dibuja una estela punteada mientras se baja hasta ellos */
+  :root:not(.sin-a31) .titulo-trazo::after { content: ""; display: block; width: 76px; height: 4px; margin-top: 10px; color: rgb(11 132 87 / 0.55);
+    background: radial-gradient(circle, currentColor 1.6px, transparent 2px) left center / 9px 4px repeat-x; }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      :root:not(.sin-a31) .titulo-trazo::after { animation: trazo linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
+    }
+  }
+  @keyframes trazo { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+
+  /* 32 · Bandas de la portada: las fotos se desplazan un poco más lento que la página (paralaje). Mueve transform:
+     la entrada (.aparece) usa translate y el abanico (34) usa rotate, así que no se pisan */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      :root:not(.sin-a32) .paralaje { animation: paralaje linear both; animation-timeline: view(); animation-range: cover; }
+    }
+  }
+  @keyframes paralaje {
+    from { transform: translate(var(--tw-translate-x, 0), calc(var(--vel, 1) * 26px)); }
+    to { transform: translate(var(--tw-translate-x, 0), calc(var(--vel, 1) * -26px)); }
+  }
+
+  /* 33 · Banda gamer: la cuadrícula del fondo se desliza despacio (se detiene mientras la banda no se ve) */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a33) .cuadricula-deriva { animation: cuadricula-deriva 7s linear infinite; }
+    [data-fuera] .cuadricula-deriva { animation-play-state: paused; }
+  }
+  @keyframes cuadricula-deriva { to { transform: translate(46px, 46px); } }
+
+  /* 34 · Banda de celulares: con el mouse encima, los equipos se abren en abanico, uno tras otro */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a34) .abanico img { transform-origin: 50% 100%; transition: opacity 600ms cubic-bezier(0.23, 1, 0.32, 1), translate 800ms cubic-bezier(0.23, 1, 0.32, 1), rotate 520ms cubic-bezier(0.23, 1, 0.32, 1); transition-delay: calc(var(--orden, 0) * 60ms); }
+    :root:not(.sin-a34) .banda-cel:hover .abanico img { rotate: var(--giro, 0deg); }
+  }
+
+  /* 35 · Marcas: el logo se eleva con el mouse encima */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a35) .marca-eleva { transition: color 150ms, border-color 150ms, box-shadow 200ms, translate 240ms cubic-bezier(0.23, 1, 0.32, 1); }
+    :root:not(.sin-a35) .marca-eleva:hover { translate: 0 -3px; box-shadow: theme("boxShadow.tarjeta"); }
+  }
+
+  /* 36 · Cámaras de seguridad: el punto rojo de «REC» parpadea */
+  :root.sin-a36 .rec { display: none; }
+  @media (prefers-reduced-motion: no-preference) { .rec-punto { animation: rec 1.6s steps(1, end) infinite; } }
+  @keyframes rec { 50% { opacity: 0.15; } }
+
+  /* 37 · Formularios: el borde y el anillo del campo aparecen suave al escribir, y su rótulo se pinta de verde */
+  .rotulo { transition: color 160ms; }
+  :root:not(.sin-a37) .campo { transition: border-color 160ms, box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1); }
+  :root:not(.sin-a37) div:has(> .campo:focus) > .rotulo { color: theme("colors.marca.texto"); }
+
+  /* 38 · Blog: el dibujo de la tarjeta se mece con el mouse encima */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a38) .group:hover .ilus-mece { animation: mecer 800ms ease-in-out; }
+  }
+  @keyframes mecer { 20% { transform: rotate(-7deg); } 45% { transform: rotate(6deg); } 70% { transform: rotate(-3deg); } }
+
+  /* 39 · Artículos: una línea verde arriba de la pantalla muestra cuánto se ha leído */
+  .progreso-lectura { display: none; }
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      :root:not(.sin-a39) .progreso-lectura { display: block; transform-origin: left; animation: progreso-lectura linear both; animation-timeline: scroll(root); }
+    }
+  }
+  @keyframes progreso-lectura { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  /* 40 · Pie de página: el botón de WhatsApp lanza dos ondas la primera vez que se ve */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a40) .onda-wa::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px solid theme("colors.wa.vivo"); pointer-events: none; opacity: 0;
+      animation: onda-wa 1300ms cubic-bezier(0, 0, 0.2, 1) 300ms 2; }
+  }
+  @keyframes onda-wa { from { opacity: 0.9; transform: scale(1); } to { opacity: 0; transform: scale(1.12, 1.45); } }
+
   /* Dibujos de producto (se usan para servicios y cuando falta una foto) */
   .ilus { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
   .ilus * { fill: theme("colors.white"); }

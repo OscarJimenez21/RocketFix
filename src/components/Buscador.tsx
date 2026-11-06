@@ -2,13 +2,19 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { BUSQUEDAS_POPULARES, TIENDA_VISTA, VISTAS, deTienda, desde } from "../data/catalogo";
 import { TIENDAS } from "../data/tiendas";
+import { activa, reducirMovimiento } from "../lib/animaciones";
 import { buscarProductos, palabrasDe, resaltar } from "../lib/busqueda";
+import { useEnPantalla } from "../lib/enPantalla";
 import { dinero, norm } from "../lib/formato";
 import { hrefBusqueda, hrefProducto } from "../lib/rutas";
 import { FotoProducto } from "./FotoProducto";
 import { IconoBuscar } from "./Iconos";
 
 type Opcion = { href: string; clave: string };
+
+const TEXTO_CAMPO = "Buscar celulares, portátiles, consolas…";
+/** Animación 9: con el campo vacío, el texto de ayuda va mostrando búsquedas de ejemplo, una cada 2,8 s */
+const EJEMPLOS = [TEXTO_CAMPO, ...BUSQUEDAS_POPULARES.map(b => `Buscar «${b}»`)];
 
 export function Buscador({ inicial = "" }: { inicial?: string }) {
   const [q, setQ] = useState(inicial);
@@ -18,6 +24,17 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
   const idLista = useId();
 
   useEffect(() => setQ(inicial), [inicial]);
+
+  // Los ejemplos solo ruedan mientras el campo se ve, está vacío y no se está escribiendo en él
+  const [rueda] = useState(() => activa(9) && !reducirMovimiento());
+  const [ejemplo, setEjemplo] = useState(0);
+  const [enfocado, setEnfocado] = useState(false);
+  const visible = useEnPantalla(caja);
+  useEffect(() => {
+    if (!rueda || q || enfocado || !visible) return;
+    const reloj = window.setInterval(() => setEjemplo(k => (k + 1) % EJEMPLOS.length), 2800);
+    return () => window.clearInterval(reloj);
+  }, [rueda, q, enfocado, visible]);
 
   const palabras = palabrasDe(q);
   const productos = useMemo(() => (palabras.length ? buscarProductos(q).slice(0, 6) : []), [q]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -65,14 +82,21 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
     <div ref={caja} className="relative w-full" role="search">
       <label className="relative block">
         <span className="sr-only">Buscar en toda la tienda</span>
-        <IconoBuscar className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-tinta-3" />
+        {/* lupa: al escribir se inclina y se pinta de verde (animación 11) */}
+        <IconoBuscar className="lupa pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-tinta-3" />
         <input
-          type="search" value={q} placeholder="Buscar celulares, portátiles, consolas…" autoComplete="off" enterKeyHint="search"
+          type="search" value={q} placeholder={rueda ? "" : TEXTO_CAMPO} autoComplete="off" enterKeyHint="search"
           role="combobox" aria-expanded={abierto} aria-controls={idLista} aria-autocomplete="list"
           aria-activedescendant={activo >= 0 ? idOpcion(activo) : undefined}
-          onChange={e => { setQ(e.target.value); setAbierto(true); }} onFocus={() => setAbierto(true)} onKeyDown={alTecla}
+          onChange={e => { setQ(e.target.value); setAbierto(true); }} onFocus={() => { setAbierto(true); setEnfocado(true); }} onBlur={() => setEnfocado(false)} onKeyDown={alTecla}
           className="h-11 w-full rounded border border-linea-fuerte bg-fondo pl-10 pr-3 text-[15px] placeholder:text-tinta-3 focus:border-marca focus:bg-white focus:outline-none focus:ring-2 focus:ring-marca/20"
         />
+        {/* Texto de ayuda que rueda (los lectores de pantalla ya tienen el rótulo «Buscar en toda la tienda») */}
+        {rueda && !q && (
+          <span aria-hidden="true" className="ayuda-campo pointer-events-none absolute inset-y-0 left-10 right-3 flex items-center overflow-hidden text-[15px] text-tinta-3">
+            <span key={ejemplo} className={`truncate${ejemplo ? " rueda" : ""}`}>{EJEMPLOS[ejemplo]}</span>
+          </span>
+        )}
       </label>
       {abierto && (
         <div id={idLista} role="listbox" aria-label="Sugerencias de búsqueda"
@@ -81,9 +105,10 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
             <>
               <p className="etiqueta px-2.5 pb-1.5 pt-1">Búsquedas populares</p>
               <div className="flex flex-wrap gap-1.5 px-1.5 pb-1.5">
+                {/* sugerencia: entran una tras otra al abrir el buscador (animación 10) */}
                 {BUSQUEDAS_POPULARES.map((b, i) => (
-                  <a key={b} id={idOpcion(i)} role="option" aria-selected={i === activo} href={hrefBusqueda(b)}
-                    className={`rounded-full border px-3 py-1 text-sm ${i === activo ? "border-marca bg-marca-suave" : "border-linea hover:border-linea-fuerte"}`}>{b}</a>
+                  <a key={b} id={idOpcion(i)} role="option" aria-selected={i === activo} href={hrefBusqueda(b)} style={{ "--i": i } as React.CSSProperties}
+                    className={`sugerencia rounded-full border px-3 py-1 text-sm ${i === activo ? "border-marca bg-marca-suave" : "border-linea hover:border-linea-fuerte"}`}>{b}</a>
                 ))}
               </div>
             </>
@@ -101,7 +126,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
           {palabras.length > 0 && productos.map(p => {
             n++;
             return (
-              <a key={p.id} id={idOpcion(n)} role="option" aria-selected={n === activo} href={hrefProducto(p.id)} className={claseOpcion(n)}>
+              <a key={p.id} id={idOpcion(n)} role="option" aria-selected={n === activo} href={hrefProducto(p.id)} style={{ "--i": n } as React.CSSProperties} className={`sugerencia ${claseOpcion(n)}`}>
                 <span className="h-11 w-11 shrink-0 rounded border border-linea bg-white p-0.5"><FotoProducto producto={p} alt="" /></span>
                 <span className="min-w-0 flex-1">
                   <span className="line-clamp-1 text-[14.5px] font-semibold">

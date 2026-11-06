@@ -27,10 +27,17 @@ export function Galeria({ producto }: { producto: Producto }) {
     const el = pista.current;
     if (el) setActual(Math.round(el.scrollLeft / (el.clientWidth || 1)));
   };
+  // Animación 17: con el mouse encima, la foto se acerca hacia donde está el puntero (zoom-foto en index.css).
+  // Se escribe directo en el estilo, sin volver a dibujar el componente en cada movimiento
+  const seguir = (e: React.MouseEvent<HTMLDivElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--zx", `${(((e.clientX - r.left) / r.width) * 100).toFixed(1)}%`);
+    e.currentTarget.style.setProperty("--zy", `${(((e.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
+  };
 
   if (fotos.length < 2) {
     return (
-      <div data-foto-principal className="relative aspect-square rounded-md border border-linea bg-white p-6">
+      <div data-foto-principal onMouseMove={seguir} className="zoom-foto relative aspect-square overflow-hidden rounded-md border border-linea bg-white p-6">
         <FotoProducto producto={producto} prioridad />
         <Insignia producto={producto} />
       </div>
@@ -40,7 +47,7 @@ export function Galeria({ producto }: { producto: Producto }) {
   return (
     <div>
       {/* data-foto-principal: de aquí despega la foto hacia el carrito al agregar */}
-      <div data-foto-principal className="relative aspect-square overflow-hidden rounded-md border border-linea bg-white">
+      <div data-foto-principal onMouseMove={seguir} className="zoom-foto relative aspect-square overflow-hidden rounded-md border border-linea bg-white">
         <div ref={pista} onScroll={alDeslizar} tabIndex={0} role="group" aria-roledescription="carrusel" aria-label={`Fotos de ${producto.nombre}`}
           className="sin-barra flex h-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain">
           {fotos.map((f, i) => (

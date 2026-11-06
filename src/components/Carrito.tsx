@@ -9,7 +9,8 @@ import { envioDe, mensajePedido, reglaEnvio, subtotalDe, type DatosPedido } from
 import { hrefProducto } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
 import type { ZonaEntrega } from "../types";
-import { temblor } from "../lib/movimiento";
+import { activa } from "../lib/animaciones";
+import { temblor, useMarco } from "../lib/movimiento";
 import { FotoProducto } from "./FotoProducto";
 import { IconoCerrar, IconoCheck, IconoTarjeta, IconoWhatsApp } from "./Iconos";
 import { Cohete } from "./Logo";
@@ -45,6 +46,24 @@ function GuiaPasos({ vez }: { vez: number }) {
         </li>
       ))}
     </ol>
+  );
+}
+
+/** Entrega en Bogotá o en otra ciudad. Animación 25: al cambiar, el marco verde se desliza de una opción a la otra */
+function OpcionesEntrega({ zona, nombre, elegir }: { zona: ZonaEntrega; nombre: string; elegir: (z: ZonaEntrega) => void }) {
+  const opciones: [ZonaEntrega, string][] = [["bogota", "Bogotá y alrededores"], ["nacional", "Otra ciudad"]];
+  const caja = useRef<HTMLDivElement>(null);
+  const medido = useMarco(caja, zona === "bogota" ? 0 : 1);
+  const marco = activa(25) ? medido : null;
+  return (
+    <div ref={caja} className="relative grid grid-cols-2 gap-2">
+      {opciones.map(([v, t]) => (
+        <label key={v} data-opcion className={`flex cursor-pointer items-center gap-2 rounded border bg-white px-3 py-2.5 text-sm font-semibold ${zona === v && !marco ? "border-marca ring-1 ring-marca" : "border-linea-fuerte"}`}>
+          <input type="radio" name={nombre} value={v} checked={zona === v} onChange={() => elegir(v)} className="accent-[#0B8457]" />{t}
+        </label>
+      ))}
+      {marco && <span aria-hidden="true" className="pointer-events-none absolute left-0 top-0 rounded border border-marca ring-1 ring-marca" style={marco} />}
+    </div>
   );
 }
 
@@ -196,6 +215,14 @@ export function Carrito() {
   // El cohete de la barra de envío gratis va en la punta de la barra (0 a 1)
   const avance = Math.min(1, subtotal / meta);
 
+  // Animación 27: si la persona quita el último producto con el carrito abierto, el cohete aterriza en su plataforma
+  const [aterrizajes, setAterrizajes] = useState({ hay: lineas.length > 0, n: 0 });
+  if (aterrizajes.hay !== lineas.length > 0) setAterrizajes({ hay: lineas.length > 0, n: aterrizajes.n + (lineas.length === 0 && carritoAbierto ? 1 : 0) });
+  // Animación 24: al abrir el carrito, sus productos entran uno tras otro
+  const lineasEntran = carritoAbierto && activa(24);
+  // Animación 26: cuando el nombre y la dirección ya están escritos, un destello cruza el botón de enviar
+  const listo = Boolean(d.nombre.trim() && d.dir.trim());
+
   // El contenedor mide lo mismo que la pantalla y recorta el panel cerrado: si sobresaliera, Chrome en celular alejaría toda la página
   return (
     <div className={`fixed inset-0 z-50 overflow-hidden ${carritoAbierto ? "" : "pointer-events-none"}`}>
@@ -205,14 +232,16 @@ export function Carrito() {
         className={`absolute inset-y-0 right-0 flex w-full max-w-[440px] flex-col bg-white shadow-flota transition-transform duration-300 ease-cajon ${carritoAbierto ? "translate-x-0" : "translate-x-full"}`}>
         <header className="flex items-center justify-between border-b border-linea px-5 py-4">
           <h2 id={`${id}-titulo`} className="text-xl font-extrabold">Tu pedido</h2>
-          <button ref={cerrar} type="button" onClick={cerrarCarrito} aria-label="Cerrar carrito" className="presionable -my-1 -mr-2 flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo hover:text-tinta"><IconoCerrar /></button>
+          <button ref={cerrar} type="button" onClick={cerrarCarrito} aria-label="Cerrar carrito" className="cerrar-gira presionable -my-1 -mr-2 flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo hover:text-tinta"><IconoCerrar /></button>
         </header>
 
         {lineas.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
             {/* El cohete del logo flota suave sobre su plataforma, esperando el primer producto */}
             <span aria-hidden="true" className="mb-1 flex flex-col items-center">
-              <span className="motion-safe:animate-flotar"><Cohete className="h-14 w-14 text-marca" /></span>
+              <span key={aterrizajes.n} className={aterrizajes.n && activa(27) ? "cohete-aterriza" : undefined}>
+                <span className="block motion-safe:animate-flotar"><Cohete className="h-14 w-14 text-marca" /></span>
+              </span>
               <span className="mt-2.5 h-[3px] w-16 rounded-full bg-linea-fuerte" />
             </span>
             <p className="text-lg font-semibold">Tu carrito está vacío</p>
@@ -224,11 +253,12 @@ export function Carrito() {
             <GuiaPasos vez={aperturas} />
             <div className="flex-1 overflow-y-auto overscroll-contain">
               <ul className="divide-y divide-linea px-5">
-                {lineas.map(({ producto: p, opcion: o, clave, cantidad }) => {
+                {lineas.map(({ producto: p, opcion: o, clave, cantidad }, k) => {
                   const nombre = nombreItem(p, o.nombre);
                   const tope = p.stock != null && cantidad >= p.stock;
                   return (
-                    <li key={clave} data-clave={clave} className={`relative isolate grid grid-cols-[64px_1fr] gap-3 py-4 transition-[opacity,transform] duration-[180ms] ease-salida ${saliendo.includes(clave) ? "pointer-events-none translate-x-3 opacity-0" : ""}`}>
+                    <li key={clave} data-clave={clave} style={{ "--i": Math.min(k, 6) } as React.CSSProperties}
+                      className={`relative isolate grid grid-cols-[64px_1fr] gap-3 py-4 transition-[opacity,transform] duration-[180ms] ease-salida ${saliendo.includes(clave) ? "pointer-events-none translate-x-3 opacity-0" : ""}${lineasEntran ? " linea-entra" : ""}`}>
                       {/* El último producto agregado: fondo verde claro que se desvanece al abrir el carrito */}
                       {resaltada?.clave === clave && <span key={resaltada.vez} aria-hidden="true" className="absolute inset-y-0 -left-5 -right-5 -z-10 bg-marca-suave opacity-0 motion-safe:animate-desvanecer" />}
                       <a href={hrefProducto(p.id)} className="h-16 w-16 rounded border border-linea bg-white p-1" tabIndex={-1} aria-hidden="true"><FotoProducto producto={p} alt="" /></a>
@@ -259,13 +289,7 @@ export function Carrito() {
                 </div>
                 <fieldset>
                   <legend className="rotulo">Entrega</legend>
-                  <div className="grid grid-cols-2 gap-2">
-                    {([["bogota", "Bogotá y alrededores"], ["nacional", "Otra ciudad"]] as [ZonaEntrega, string][]).map(([v, t]) => (
-                      <label key={v} className={`flex cursor-pointer items-center gap-2 rounded border px-3 py-2.5 text-sm font-semibold ${zona === v ? "border-marca bg-white ring-1 ring-marca" : "border-linea-fuerte bg-white"}`}>
-                        <input type="radio" name={`${id}-entrega`} value={v} checked={zona === v} onChange={() => poner("entrega", v)} className="accent-[#0B8457]" />{t}
-                      </label>
-                    ))}
-                  </div>
+                  <OpcionesEntrega zona={zona} nombre={`${id}-entrega`} elegir={v => poner("entrega", v)} />
                 </fieldset>
                 <div>
                   <label htmlFor={`${id}-dir`} className="rotulo">{nacional ? "Ciudad, dirección y barrio" : "Dirección y barrio"}</label>
@@ -325,7 +349,7 @@ export function Carrito() {
               {errores.texto && <p className="alerta mt-2" role="alert">{errores.texto}</p>}
               {/* El pedido por WhatsApp es el camino principal: ahí se confirma la disponibilidad antes de cobrar */}
               <div className="mt-3 grid gap-2">
-                <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); }} className="btn btn-wa w-full">
+                <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); }} className={`btn btn-wa barrido w-full${listo ? " barrido-enviar" : ""}`}>
                   <IconoWhatsApp />Enviar pedido por WhatsApp
                 </a>
                 {boldActivo() && (

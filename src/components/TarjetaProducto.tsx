@@ -69,7 +69,8 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
   };
 
   return (
-    <article className="tarjeta group relative flex h-full flex-col overflow-hidden transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
+    // tarjeta-eleva: con el mouse encima, la tarjeta sube un poco (animación 13)
+    <article className="tarjeta tarjeta-eleva group relative flex h-full flex-col overflow-hidden transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
       {/* Con el mouse encima de la tarjeta, la foto se acerca un poco (solo con mouse; en celular no queda pegado) */}
       <a ref={foto} href={hrefProducto(p.id)} tabIndex={-1} aria-hidden="true" className="relative block aspect-square bg-white p-4">
         <FotoProducto producto={p} alt="" prioridad={prioridad} className="motion-safe:group-hover:scale-[1.05]" />

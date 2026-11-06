@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import { CONFIG, LOGOS_MARCAS, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
 import { camposServicio } from "../data/formularios";
 import { Calificaciones, ResumenCalificaciones } from "../components/Calificaciones";
@@ -10,6 +10,8 @@ import { FotoProducto } from "../components/FotoProducto";
 import { FlechaMovil } from "../components/FilaProductos";
 import { IconoBolsa, IconoCamion, IconoCheck, IconoFlecha, IconoLlama, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { Ilustracion } from "../components/Ilustracion";
+import { Cohete } from "../components/Logo";
+import { activa, reducirMovimiento } from "../lib/animaciones";
 import { useEnPantalla, useRevelarHijos, useVisto } from "../lib/enPantalla";
 import { dinero, recurso } from "../lib/formato";
 import { hrefMarca, hrefProducto } from "../lib/rutas";
@@ -34,7 +36,10 @@ function Vitrina() {
   const [reducir] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const caja = useRef<HTMLDivElement>(null);
   const visible = useEnPantalla(caja);
-  const ir = (j: number) => { setI(j); setCambios(n => n + 1); };
+  // Animación 4: de cuál producto viene y hacia qué lado avanza (1: siguiente, -1: anterior)
+  const [mov, setMov] = useState<{ de: number; dir: 1 | -1 } | null>(null);
+  const ir = (j: number, dir: 1 | -1 = j > i ? 1 : -1) => { setMov({ de: i, dir }); setI(j); setCambios(n => n + 1); };
+  const lados = activa(4) && mov !== null;
 
   // El tiempo lo lleva la línea que se llena bajo la miniatura activa: al llenarse, pasa al siguiente producto.
   // Se pausa con el mouse encima, al usar el teclado o mientras la vitrina no se ve; si la persona elige un producto, se quita
@@ -48,7 +53,8 @@ function Vitrina() {
       <div className="relative aspect-[4/3]">
         {productos.map((x, j) => (
           <a key={x.id} href={hrefProducto(x.id)} tabIndex={j === i ? 0 : -1} aria-hidden={j !== i}
-            className={`absolute inset-0 p-6 transition-[opacity,transform] duration-500 ease-salida sm:p-8 ${j === i ? "opacity-100" : "pointer-events-none scale-[0.96] opacity-0"}`}>
+            className={`absolute inset-0 p-6 transition-[opacity,transform] duration-500 ease-salida sm:p-8 ${j === i ? "opacity-100" : "pointer-events-none scale-[0.96] opacity-0"}${
+              lados && j === i ? (mov.dir > 0 ? " vitrina-entra-der" : " vitrina-entra-izq") : lados && j === mov.de ? (mov.dir > 0 ? " vitrina-sale-izq" : " vitrina-sale-der") : ""}`}>
             <FotoProducto producto={x} alt={x.nombre} prioridad={j === 0} />
           </a>
         ))}
@@ -71,7 +77,7 @@ function Vitrina() {
             <FotoProducto producto={x} alt="" />
             {/* Línea que se llena en 6 s: cuenta el tiempo hasta el siguiente producto (la clave la reinicia en cada cambio) */}
             {avanza && j === i && (
-              <span key={cambios} aria-hidden="true" onAnimationEnd={() => ir((i + 1) % productos.length)}
+              <span key={cambios} aria-hidden="true" onAnimationEnd={() => ir((i + 1) % productos.length, 1)}
                 className="absolute inset-x-0 bottom-0 h-[3px] origin-left bg-marca"
                 style={{ animation: `avance ${ESPERA_VITRINA}ms linear forwards`, animationPlayState: quieta || !visible ? "paused" : "running" }} />
             )}
@@ -85,30 +91,46 @@ function Vitrina() {
 /** La portada entra en cascada solo la primera vez que se abre en la visita (al volver a Inicio ya está quieta) */
 let portadaVista = false;
 
+/** Eslogan de la marca (manual de marca, aprobado el 04/11/2026). Cada palabra va aparte para que entren una tras otra */
+const ESLOGAN = ["Hacemos", "despegar", "tu", "tecnología"];
+
+/** Portada: el eslogan grande, una línea que dice qué es la tienda, los dos botones y el estado de atención; a la derecha
+    (abajo en celular), la vitrina. El cohete del logo cierra el eslogan en lugar del punto */
 function Portada() {
   const atencion = useAtencion();
   const [entra] = useState(() => !portadaVista);
+  // Animación 1: el eslogan entra palabra por palabra (si está apagada, el título sube entero, como antes)
+  const [porPalabras] = useState(() => !portadaVista && activa(1));
   useEffect(() => { portadaVista = true; }, []);
   // Cada pieza del texto entra 60 ms después de la anterior; el título solo sube (ver .entrada en index.css)
-  const en = (orden: number) => (entra ? { extra: orden === 1 ? " entrada entrada-titulo" : " entrada", style: { "--orden": orden } as React.CSSProperties } : { extra: "", style: undefined });
+  const en = (orden: number) => (entra ? { extra: " entrada", style: { "--orden": orden } as React.CSSProperties } : { extra: "", style: undefined });
   return (
     <section className="relative isolate overflow-hidden bg-marca-oscuro text-white">
       <Despegue />
-      <div className="contenedor grid items-center gap-8 py-9 sm:py-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:py-14 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
+      <div className="contenedor grid items-center gap-8 py-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:py-16 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
         <div>
-          <p className={`text-[15px] font-semibold text-marca-menta${en(0).extra}`} style={en(0).style}>Tienda de tecnología y servicio técnico en Bogotá</p>
-          <h1 tabIndex={-1} className={`titulo-portada mt-4 text-[34px] text-white sm:text-[46px] lg:text-[44px] xl:text-[54px]${en(1).extra}`} style={en(1).style}>
-            Tecnología para tu día a día. Soluciones cuando las necesitas.
+          <h1 tabIndex={-1} style={porPalabras ? undefined : en(0).style}
+            className={`eslogan titulo-portada text-[clamp(2.25rem,10.4vw,3rem)] text-white sm:text-[64px] lg:text-[60px] xl:text-[74px]${porPalabras ? " eslogan-entra" : entra ? " entrada entrada-titulo" : ""}`}>
+            {ESLOGAN.map((w, k) => {
+              const ultima = k === ESLOGAN.length - 1;
+              return (
+                <Fragment key={w}>
+                  {k > 0 && " "}
+                  {/* La última palabra y el cohete no se separan de renglón */}
+                  <span className={`palabra${ultima ? " whitespace-nowrap" : ""}`} style={{ "--p": k } as React.CSSProperties}>
+                    {w}{ultima && <span aria-hidden="true" className={`cohete-eslogan${entra ? " cohete-llega" : ""}`}><Cohete /></span>}
+                  </span>
+                </Fragment>
+              );
+            })}
           </h1>
-          <p className={`mt-4 max-w-xl text-[16.5px] leading-relaxed text-white/80${en(2).extra}`} style={en(2).style}>
-            Celulares, computadores, gaming y accesorios con entrega a domicilio. Compra con asesoría por WhatsApp y solicita servicio técnico para tu hogar o negocio.
-          </p>
+          <p className={`mt-5 text-[17px] font-semibold text-marca-menta sm:text-lg${en(1).extra}`} style={en(1).style}>Tienda de tecnología y servicio técnico en Bogotá</p>
           {/* data-despegue: en celular el cohete del fondo pasa a la derecha de estos botones */}
-          <div data-despegue className={`mt-7 flex flex-wrap gap-3${en(3).extra}`} style={en(3).style}>
-            <a href="#categorias" className="btn btn-primario">Comprar tecnología</a>
+          <div data-despegue className={`mt-8 flex flex-wrap gap-3${en(2).extra}`} style={en(2).style}>
+            <a href="#categorias" className={`btn btn-primario${entra ? " barrido barrido-portada" : ""}`}>Comprar tecnología</a>
             <a href="#servicios" className="btn btn-claro">Solicitar servicio técnico</a>
           </div>
-          <div className={`mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/80${en(4).extra}`} style={en(4).style}>
+          <div className={`mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/80${en(3).extra}`} style={en(3).style}>
             <p className="flex items-center gap-2"><PuntoEstado abierto={atencion.abierto} claro />{atencion.texto}</p>
             <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="inline-flex min-h-[44px] items-center gap-2 font-semibold text-white hover:underline">
               <IconoWhatsApp className="h-[18px] w-[18px] text-wa-vivo" />{CONFIG.whatsappVisible}
@@ -152,7 +174,7 @@ const PASO_CARRUSEL = 3500;
 /** Las filas van debajo de la portada: sus fotos cargan cuando la persona se acerca a ellas */
 function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: string }) {
   return (
-    <a href={hrefProducto(p.id)} className="group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-white transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
+    <a href={hrefProducto(p.id)} className="tarjeta-eleva group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-white transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
       <div className="relative aspect-square p-7 sm:p-8">
         <FotoProducto producto={p} alt={p.nombre} className="motion-safe:group-hover:scale-[1.05]" />
         {/* brillo: la cinta tiene un destello que la cruza una vez cuando la fila aparece (ver .brillo en index.css) */}
@@ -212,7 +234,7 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
         <div className="mb-6 flex items-end justify-between gap-4">
           <div className="min-w-0">
             <p className="etiqueta flex items-center gap-1.5">{etiqueta}</p>
-            <h2 id={`t-${id}`} className="titulo-seccion mt-1">{titulo}</h2>
+            <h2 id={`t-${id}`} className="titulo-seccion titulo-trazo mt-1">{titulo}</h2>
             {enlaces.length > 0 && (
               <p className="flex flex-wrap gap-x-4 text-sm">
                 {enlaces.map(e => <a key={e.href} href={e.href} className="enlace-suelto">{e.texto}</a>)}
@@ -271,6 +293,27 @@ const MOSAICO: { tienda: TiendaId; frase: string; tema: keyof typeof TEMAS; foto
   { tienda: "mov", frase: "Muévete por la ciudad", tema: "noche", foto: "xpatineta", forma: "normal" }
 ];
 
+/** Animación 30: el número de productos de una categoría cuenta desde 0 la primera vez que se ve (en 0,9 s, frenando al final) */
+function Contador({ valor }: { valor: number }) {
+  const caja = useRef<HTMLSpanElement>(null);
+  const visto = useVisto(caja);
+  const [cuenta] = useState(() => activa(30) && !reducirMovimiento());
+  const [n, setN] = useState(cuenta ? 0 : valor);
+  useEffect(() => {
+    if (!cuenta || !visto) return;
+    let cuadro = 0;
+    const inicio = performance.now();
+    const paso = (t: number) => {
+      const p = Math.min(1, (t - inicio) / 900);
+      setN(Math.round(valor * (1 - (1 - p) ** 3)));
+      if (p < 1) cuadro = requestAnimationFrame(paso);
+    };
+    cuadro = requestAnimationFrame(paso);
+    return () => cancelAnimationFrame(cuadro);
+  }, [cuenta, visto, valor]);
+  return <span ref={caja} className="tabular-nums">{n}</span>;
+}
+
 /** Mosaico de categorías: tarjetas de colores con un producto que se asoma; todas llevan a su sección.
     El producto de cada tarjeta sube desde el borde la primera vez que la tarjeta aparece en pantalla (las que aparecen
     juntas, una tras otra; ver .aparece-mosaico en index.css) */
@@ -280,7 +323,7 @@ function Categorias() {
   return (
     <section id="categorias" aria-labelledby="t-categorias" className="contenedor py-12">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
-        <h2 id="t-categorias" className="titulo-seccion">Compra por categoría</h2>
+        <h2 id="t-categorias" className="titulo-seccion titulo-trazo">Compra por categoría</h2>
       </div>
       <ul ref={mosaico} className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:auto-rows-[215px] lg:grid-cols-12">
         {MOSAICO.map(m => {
@@ -294,7 +337,7 @@ function Categorias() {
                   <span className={`text-[12.5px] font-semibold leading-snug sm:text-sm ${tema.frase}`}>{m.frase}</span>
                   <span className={`mt-1 font-display font-extrabold leading-[0.98] tracking-tight ancho-108 ${forma.titulo}`}>{t.titulo}</span>
                   {/* Mismo color de la frase (con opacidad, en las tarjetas verdes no se leía bien) */}
-                  <span className={`mt-2 text-[13px] ${tema.frase}`}>{deTienda(t.id).length} productos</span>
+                  <span className={`mt-2 text-[13px] ${tema.frase}`}><Contador valor={deTienda(t.id).length} /> productos</span>
                   {/* En celular las tarjetas pequeñas solo muestran la flecha, para dejarle espacio a la foto */}
                   <span className={`mt-auto inline-flex w-max items-center gap-1.5 rounded-full text-[13px] font-bold transition-transform duration-200 ease-salida group-hover:translate-x-0.5 ${forma.corto ? "p-2.5 sm:px-4 sm:py-2" : "px-4 py-2"} ${tema.boton}`}>
                     <span className={forma.corto ? "hidden sm:inline" : ""}>Ver todo</span><IconoFlecha className="h-3.5 w-3.5" />
@@ -345,16 +388,20 @@ function Coleccion({ id, etiqueta, titulo, tiendas, gris = false }: { id: string
 function BandaGamer() {
   const fotos = useRef<HTMLDivElement>(null);
   const visto = useVisto(fotos);
-  const foto = (id: string, clase: string, orden: number) => (
-    <img src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async" style={{ "--orden": orden } as React.CSSProperties}
-      className={`aparece pointer-events-none absolute object-contain drop-shadow-[0_26px_26px_rgba(0,0,0,0.55)] ${clase}`} />
+  // Animación 33: la cuadrícula se desliza solo mientras la banda se ve
+  const banda = useRef<HTMLDivElement>(null);
+  const enPantalla = useEnPantalla(banda);
+  // vel: cuánto se desplaza cada foto con el paralaje (animación 32); las de adelante, más
+  const foto = (id: string, clase: string, orden: number, vel: number) => (
+    <img src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async" style={{ "--orden": orden, "--vel": vel } as React.CSSProperties}
+      className={`aparece paralaje pointer-events-none absolute object-contain drop-shadow-[0_26px_26px_rgba(0,0,0,0.55)] ${clase}`} />
   );
-  // Cuadrícula muy tenue de fondo, como un piso de estudio
+  // Cuadrícula muy tenue de fondo, como un piso de estudio (sobra una celda arriba y a la izquierda para poder deslizarse)
   const cuadricula = { backgroundImage: "linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px)", backgroundSize: "46px 46px" };
   return (
     <section aria-labelledby="t-gamer" className="contenedor pb-12">
-      <div className="relative isolate overflow-hidden rounded-xl bg-marca-noche text-white lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-        <span aria-hidden="true" className="absolute inset-0 -z-10" style={cuadricula} />
+      <div ref={banda} data-fuera={!enPantalla || undefined} className="relative isolate overflow-hidden rounded-xl bg-marca-noche text-white lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+        <span aria-hidden="true" className="cuadricula-deriva absolute -left-[46px] -top-[46px] bottom-0 right-0 -z-10" style={cuadricula} />
         <div className="relative z-10 p-7 sm:p-10 lg:self-center lg:p-14">
           <h2 id="t-gamer" className="font-display text-[40px] font-extrabold leading-[0.95] text-white ancho-108 sm:text-[58px]">
             Lleva tu juego al siguiente nivel
@@ -369,10 +416,10 @@ function BandaGamer() {
         </div>
         <div ref={fotos} aria-hidden="true" data-visto={visto || undefined} className="revelar relative h-[300px] sm:h-[400px] lg:h-auto">
           <span className="absolute bottom-[5%] left-[6%] right-[4%] h-12 rounded-[50%] bg-black/45 blur-2xl" />
-          {foto("p15412", "bottom-[19%] left-[6%] h-[62%] max-w-[66%]", 0)}
-          {foto("p31340", "bottom-[8%] right-[3%] h-[54%] max-w-[30%]", 1)}
-          {foto("p20008", "bottom-[4%] left-[4%] h-[30%] max-w-[54%]", 2)}
-          {foto("p19066", "bottom-[5%] left-[59%] h-[23%]", 3)}
+          {foto("p15412", "bottom-[19%] left-[6%] h-[62%] max-w-[66%]", 0, 0.5)}
+          {foto("p31340", "bottom-[8%] right-[3%] h-[54%] max-w-[30%]", 1, 0.8)}
+          {foto("p20008", "bottom-[4%] left-[4%] h-[30%] max-w-[54%]", 2, 1.2)}
+          {foto("p19066", "bottom-[5%] left-[59%] h-[23%]", 3, 1.4)}
         </div>
       </div>
     </section>
@@ -381,20 +428,20 @@ function BandaGamer() {
 
 /** Banda de celulares: los modelos más llamativos de la tienda en fila (el iPhone 18 Pro Max al centro, adelante) */
 function BandaCelulares() {
-  // [foto recortada, posición y tamaño]; el orden es de atrás hacia adelante
-  const fila: [string, string][] = [
-    ["galeria-ss25u-2", "bottom-[16%] left-[1%] h-[48%]"],
-    ["galeria-ss26u-2", "bottom-[16%] right-[1%] h-[48%]"],
-    ["xrn15", "bottom-[12%] left-[13%] h-[57%]"],
-    ["ip18p", "bottom-[12%] right-[14%] h-[57%]"],
-    ["ip17pm", "bottom-[8%] left-[21%] h-[64%]"],
-    ["ip18pm", "bottom-[5%] left-[52%] h-[72%] -translate-x-1/2"]
+  // [foto recortada, posición y tamaño, giro del abanico (animación 34), paralaje (animación 32)]; el orden es de atrás hacia adelante
+  const fila: [string, string, number, number][] = [
+    ["galeria-ss25u-2", "bottom-[16%] left-[1%] h-[48%]", -10, 0.4],
+    ["galeria-ss26u-2", "bottom-[16%] right-[1%] h-[48%]", 10, 0.4],
+    ["xrn15", "bottom-[12%] left-[13%] h-[57%]", -6, 0.7],
+    ["ip18p", "bottom-[12%] right-[14%] h-[57%]", 6, 0.7],
+    ["ip17pm", "bottom-[8%] left-[21%] h-[64%]", -3, 1],
+    ["ip18pm", "bottom-[5%] left-[52%] h-[72%] -translate-x-1/2", 0, 1.3]
   ];
   const fotos = useRef<HTMLDivElement>(null);
   const visto = useVisto(fotos);
   return (
     <section aria-labelledby="t-banda-cel" className="contenedor pt-12">
-      <div className="relative isolate overflow-hidden rounded-xl bg-marca-medio text-white lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+      <div className="banda-cel relative isolate overflow-hidden rounded-xl bg-marca-medio text-white lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         <div className="relative z-10 p-7 sm:p-10 lg:self-center lg:p-14">
           <p className="text-[15px] font-semibold text-marca-menta">iPhone, Samsung, Xiaomi y Motorola</p>
           <h2 id="t-banda-cel" className="mt-3 font-display text-[40px] font-extrabold leading-[0.95] text-white ancho-108 sm:text-[58px]">
@@ -408,11 +455,11 @@ function BandaCelulares() {
             <a href={waLink("Hola Rocket Fix, quiero asesoría para comprar un celular")} target="_blank" rel="noopener" className="btn btn-claro"><IconoWhatsApp />Te asesoramos</a>
           </div>
         </div>
-        <div ref={fotos} aria-hidden="true" data-visto={visto || undefined} className="revelar relative h-[300px] sm:h-[420px] lg:h-auto">
+        <div ref={fotos} aria-hidden="true" data-visto={visto || undefined} className="abanico revelar relative h-[300px] sm:h-[420px] lg:h-auto">
           <span className="absolute bottom-[3%] left-[4%] right-[4%] h-12 rounded-[50%] bg-black/35 blur-2xl" />
-          {fila.map(([id, clase], n) => (
-            <img key={id} src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async" style={{ "--orden": n } as React.CSSProperties}
-              className={`aparece pointer-events-none absolute object-contain drop-shadow-[0_24px_24px_rgba(0,0,0,0.45)] ${clase}`} />
+          {fila.map(([id, clase, giro, vel], n) => (
+            <img key={id} src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async" style={{ "--orden": n, "--giro": `${giro}deg`, "--vel": vel } as React.CSSProperties}
+              className={`aparece paralaje pointer-events-none absolute object-contain drop-shadow-[0_24px_24px_rgba(0,0,0,0.45)] ${clase}`} />
           ))}
         </div>
       </div>
@@ -508,7 +555,7 @@ function Marcas() {
   return (
     <section aria-labelledby="t-marcas" className="overflow-hidden border-b border-linea py-9">
       <div className="contenedor flex items-end justify-between gap-4">
-        <h2 id="t-marcas" className="titulo-seccion min-w-0">Las marcas que buscas</h2>
+        <h2 id="t-marcas" className="titulo-seccion titulo-trazo min-w-0">Las marcas que buscas</h2>
         <div className="flex shrink-0 gap-2">
           <button type="button" onClick={() => mover(-1)} aria-label="Ver marcas anteriores" className={flecha}><FlechaMovil dir={-1} /></button>
           <button type="button" onClick={() => mover(1)} aria-label="Ver más marcas" className={flecha}><FlechaMovil /></button>
@@ -521,13 +568,14 @@ function Marcas() {
         onPointerDown={bajar} onPointerMove={arrastrar} onPointerUp={soltar} onPointerCancel={soltar}
         onClickCapture={e => { if (bloquearClic.current) { e.preventDefault(); e.stopPropagation(); } }}
         onDragStart={e => e.preventDefault()}
-        className="sin-barra mt-6 flex cursor-grab select-none gap-3 overflow-x-auto px-4 active:cursor-grabbing sm:px-6">
+        className="sin-barra mt-5 flex cursor-grab select-none gap-3 overflow-x-auto px-4 py-1 active:cursor-grabbing sm:px-6">
         {[...marcas, ...marcas, ...marcas].map((m, i) => {
           const copia = i < marcas.length || i >= marcas.length * 2;
           return (
             <li key={`${m}-${i}`} aria-hidden={copia || undefined} className="shrink-0">
+              {/* marca-eleva: animación 35 (el py-1 de la fila le deja espacio para subir sin recortarse) */}
               <a href={hrefMarca(m)} tabIndex={copia ? -1 : undefined} draggable={false}
-                className="flex h-14 w-36 items-center justify-center whitespace-nowrap rounded-lg border border-linea bg-white px-4 font-display text-lg font-extrabold tracking-tight text-tinta-2 transition-colors ancho-108 hover:border-marca hover:text-marca">
+                className="marca-eleva flex h-14 w-36 items-center justify-center whitespace-nowrap rounded-lg border border-linea bg-white px-4 font-display text-lg font-extrabold tracking-tight text-tinta-2 transition-colors ancho-108 hover:border-marca hover:text-marca">
                 {LOGOS_MARCAS[m]
                   ? <img src={recurso(LOGOS_MARCAS[m])} alt={m} draggable={false} loading="lazy" decoding="async" className="max-h-7 max-w-full object-contain" />
                   : m}
@@ -545,7 +593,13 @@ function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => voi
   return (
     <article aria-labelledby="t-camaras" className="mt-4 overflow-hidden rounded-md bg-marca-oscuro text-white lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)]">
       <div className="p-6 sm:p-8">
-        <p className="etiqueta text-marca-menta">Seguridad para tu hogar o negocio</p>
+        <p className="etiqueta flex items-center gap-2.5 text-marca-menta">
+          {/* Animación 36: el punto rojo de «REC» parpadea, como en una cámara que está grabando */}
+          <span aria-hidden="true" className="rec inline-flex items-center gap-1 rounded-sm bg-black/25 px-1.5 py-0.5 text-[11px] font-bold tracking-wider text-white/90">
+            <span className="rec-punto h-2 w-2 rounded-full bg-red-500" />REC
+          </span>
+          Seguridad para tu hogar o negocio
+        </p>
         <h3 id="t-camaras" className="mt-1 text-[22px] font-extrabold text-white sm:text-2xl">Instalación de cámaras de seguridad</h3>
         <p className="mt-2 text-white/80">{servicio.texto}</p>
         <ul className="mt-4 grid gap-2 text-sm text-white/90">
@@ -614,8 +668,8 @@ function BandaComputadores() {
         <div ref={fotos} aria-hidden="true" data-visto={visto || undefined} className="revelar relative h-[300px] sm:h-[420px] lg:h-auto">
           <span className="absolute bottom-[3%] left-[6%] right-[6%] h-12 rounded-[50%] bg-marca-noche/25 blur-2xl" />
           {fila.map(([id, clase], n) => (
-            <img key={id} src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async" style={{ "--orden": n } as React.CSSProperties}
-              className={`aparece pointer-events-none absolute object-contain drop-shadow-[0_22px_22px_rgba(3,36,27,0.35)] ${clase}`} />
+            <img key={id} src={recurso(`fotos/recortes/${id}.webp`)} alt="" loading="lazy" decoding="async" style={{ "--orden": n, "--vel": 0.5 + n * 0.3 } as React.CSSProperties}
+              className={`aparece paralaje pointer-events-none absolute object-contain drop-shadow-[0_22px_22px_rgba(3,36,27,0.35)] ${clase}`} />
           ))}
         </div>
       </div>
@@ -646,7 +700,7 @@ function Servicios() {
     <section id="servicios" aria-labelledby="t-servicios" className="border-y border-linea bg-fondo">
       <div className="contenedor py-12 sm:py-14">
         <div className="max-w-2xl">
-          <h2 id="t-servicios" className="titulo-seccion">Reparamos tus equipos e instalamos cámaras de seguridad</h2>
+          <h2 id="t-servicios" className="titulo-seccion titulo-trazo">Reparamos tus equipos e instalamos cámaras de seguridad</h2>
           <p className="mt-2 text-tinta-2">Te decimos el valor antes de reparar. Coordinamos por WhatsApp cómo recibir tu equipo y vamos a tu casa o negocio para instalar cámaras.</p>
         </div>
         <div ref={tarjetas} className="mt-8 grid gap-4 md:grid-cols-2">
@@ -718,7 +772,7 @@ function ComoComprar() {
   return (
     <section id="como-comprar" aria-labelledby="t-como" className="border-b border-linea bg-marca-suave">
       <div className="contenedor py-10 sm:py-12">
-        <h2 id="t-como" className="titulo-seccion">Cómo comprar</h2>
+        <h2 id="t-como" className="titulo-seccion titulo-trazo">Cómo comprar</h2>
         <ol ref={lista} data-visto={visto || undefined} className="pasos pasos-claros mt-7 grid gap-6 md:grid-cols-3 md:gap-8">
           {pasos.map(([icono, t, d], i) => (
             <li key={t} style={{ "--orden": i } as React.CSSProperties} className="relative flex gap-4 md:flex-col md:gap-3">

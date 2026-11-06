@@ -5,6 +5,7 @@ import { Aviso } from "./components/Aviso";
 import { Cabecera } from "./components/Cabecera";
 import { Carrito } from "./components/Carrito";
 import { PiePagina } from "./components/PiePagina";
+import { activa } from "./lib/animaciones";
 import { leerRegresoBold } from "./lib/bold";
 import { claveRuta, tomarPosicion, useRuta } from "./lib/rutas";
 import { waLink } from "./lib/whatsapp";
@@ -21,6 +22,27 @@ import type { Ruta } from "./types";
 
 // La página de producto (con las 963 descripciones) se carga aparte, cuando se abre el primer producto
 const Producto = lazy(() => import("./paginas/Producto"));
+// Panel para revisar las animaciones en prueba: solo existe al trabajar en local (no llega a la página publicada)
+const PanelAnimaciones = import.meta.env.DEV ? lazy(() => import("./components/PanelAnimaciones")) : null;
+
+/** Mientras se carga la página del producto: un esqueleto con su forma (foto, nombre, precio) y un brillo que lo recorre
+    (animación 23). Ocupa toda la pantalla para que el pie de página no se alcance a ver y luego salte */
+function CargandoProducto() {
+  if (!activa(23)) return <div className="contenedor min-h-[100svh] py-16 text-tinta-3">Cargando producto…</div>;
+  return (
+    <div role="status" className="contenedor grid min-h-[100svh] content-start gap-8 pb-10 pt-[3.25rem] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-12">
+      <span className="sr-only">Cargando producto…</span>
+      <div aria-hidden="true" className="esqueleto aspect-square" />
+      <div aria-hidden="true" className="grid content-start gap-3">
+        <div className="esqueleto h-4 w-32" />
+        <div className="esqueleto h-9 w-[85%]" />
+        <div className="esqueleto h-9 w-[55%]" />
+        <div className="mt-3 flex gap-1.5"><div className="esqueleto h-7 w-24" /><div className="esqueleto h-7 w-20" /><div className="esqueleto h-7 w-28" /></div>
+        <div className="esqueleto mt-4 h-44 w-full" />
+      </div>
+    </div>
+  );
+}
 
 function tituloDe(r: Ruta) {
   const base = `${CONFIG.nombre} · Tecnología a domicilio en Bogotá y Colombia`;
@@ -57,8 +79,7 @@ function Contenido({ ruta }: { ruta: Ruta }) {
   switch (ruta.tipo) {
     case "inicio": return <Inicio ancla={ruta.ancla} />;
     case "tienda": return <Tienda key={ruta.tienda} vista={ruta.vista} tienda={ruta.tienda} />;
-    // (el aviso ocupa toda la pantalla para que el pie de página no se alcance a ver y luego salte al cargar el producto)
-    case "producto": return <Suspense fallback={<div className="contenedor min-h-[100svh] py-16 text-tinta-3">Cargando producto…</div>}><Producto id={ruta.id} /></Suspense>;
+    case "producto": return <Suspense fallback={<CargandoProducto />}><Producto id={ruta.id} /></Suspense>;
     case "buscar": return <Buscar key={ruta.q} q={ruta.q} />;
     case "marca": return <Marca key={ruta.marca} marca={ruta.marca} />;
     case "blog": return <Blog />;
@@ -104,6 +125,7 @@ function Marco() {
       </div>
       <Carrito />
       <Aviso />
+      {PanelAnimaciones && <Suspense fallback={null}><PanelAnimaciones /></Suspense>}
     </>
   );
 }

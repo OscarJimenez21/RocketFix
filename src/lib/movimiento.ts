@@ -5,6 +5,18 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProp
     animaciones iguales, el temblor se repite en cada intento (ver .temblar-1 y .temblar-2 en index.css) */
 export const temblor = (marcado: boolean, intento: number) => (marcado && intento ? (intento % 2 ? " temblar-1" : " temblar-2") : "");
 
+/** Hacia dónde cambió un número la última vez: 1 si subió, -1 si bajó, 0 si no ha cambiado desde que se montó
+    (para que el precio nuevo ruede hacia arriba o hacia abajo) */
+export function useDireccion(valor: number) {
+  const [paso, setPaso] = useState({ valor, dir: 0 });
+  if (paso.valor !== valor) {
+    const dir = valor > paso.valor ? 1 : -1;
+    setPaso({ valor, dir });
+    return dir;
+  }
+  return paso.dir;
+}
+
 /** Marco que se desliza hasta la opción elegida dentro de un contenedor con position: relative. Las opciones llevan
     data-opcion, en orden. Devuelve el estilo del marco, o null mientras no se ha medido (hasta entonces la opción elegida
     lleva su propio borde). La primera medida y los cambios de tamaño no se animan: el marco aparece ya en su lugar. */

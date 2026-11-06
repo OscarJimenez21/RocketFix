@@ -4,6 +4,7 @@
    Con «reducir movimiento» (o en navegadores que no mueven cosas por una curva) la estela aparece ya dibujada, sin cohete.
    Todo va detrás del contenido, no se puede tocar y los lectores de pantalla no lo leen. */
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEnPantalla } from "../lib/enPantalla";
 import { Cohete } from "./Logo";
 
 let yaDespego = false;
@@ -29,6 +30,9 @@ const ESTRELLAS: [number, number, number, number][] = [
   [55, 96, 1, 0.3], [61, 4, 1, 0.4], [67, 52, 1.3, 0.3], [79, 7, 1.1, 0.4], [86, 95, 1, 0.3], [93, 24, 1.3, 0.4],
   [97, 64, 1, 0.35], [2, 46, 1, 0.3], [49, 48, 0.9, 0.2], [74, 88, 1.2, 0.3], [16, 34, 1, 0.2], [99, 4, 1.2, 0.4]
 ];
+
+/** Animación 3: estrellas que titilan, cada una a su ritmo (posición en %, retraso en segundos) */
+const TITILAN: [number, number, number][] = [[8, 22, 0], [33, 4, 1.2], [57, 14, 2.3], [71, 30, 0.6], [89, 12, 1.7], [95, 46, 2.8], [24, 58, 3.1]];
 
 export function Despegue() {
   const caja = useRef<HTMLDivElement>(null);
@@ -70,11 +74,14 @@ export function Despegue() {
     return () => { vuelo.cancel(); trazos.forEach(a => a.cancel()); };
   }, [vuela, medido]);
 
+  // Las estrellas que titilan se detienen mientras la portada no se ve (data-fuera)
+  const visible = useEnPantalla(caja);
   const c = t && t.w > 0 ? curva(t) : null;
   return (
-    <div ref={caja} aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+    <div ref={caja} aria-hidden="true" data-fuera={!visible || undefined} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
       {/* Luz suave detrás de la vitrina (abajo en celular, a la derecha en computador) */}
       <span className="absolute inset-0 bg-[radial-gradient(70%_38%_at_50%_80%,rgba(91,224,169,0.14),transparent_72%)] lg:bg-[radial-gradient(40%_62%_at_80%_50%,rgba(91,224,169,0.16),transparent_72%)]" />
+      {TITILAN.map(([x, y, s]) => <span key={`${x}-${y}`} className="estrella-titila" style={{ left: `${x}%`, top: `${y}%`, "--t": `${s}s` } as React.CSSProperties} />)}
       {t && c && (
         <svg width={t.w} height={t.h} viewBox={`0 0 ${t.w} ${t.h}`} className="absolute inset-0">
           <defs>

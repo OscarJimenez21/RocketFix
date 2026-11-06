@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ARTICULOS, CONFIG, PAGOS } from "../data/catalogo";
 import { TIENDAS } from "../data/tiendas";
+import { useVisto } from "../lib/enPantalla";
 import { recurso } from "../lib/formato";
 import { filasHorario } from "../lib/horario";
 import { waLink } from "../lib/whatsapp";
@@ -32,6 +33,9 @@ export function PiePagina() {
   const atencion = useAtencion();
   const redes = Object.entries(CONFIG.redes).filter(([, url]) => url);
   const enlace = "hover:text-white hover:underline underline-offset-4";
+  // Animación 40: la primera vez que se ve el botón de WhatsApp del pie, lanza dos ondas
+  const botonesWa = useRef<HTMLDivElement>(null);
+  const waVisto = useVisto(botonesWa);
   return (
     <footer id="contacto" aria-labelledby="t-contacto" className="bg-marca-noche text-white/75">
       <div className="border-b border-white/10">
@@ -41,8 +45,8 @@ export function PiePagina() {
             <p className="mt-1.5 text-[15px] leading-relaxed">Escríbenos por WhatsApp: te asesoramos, confirmamos disponibilidad y coordinamos la entrega o el servicio.</p>
             <a href="#como-comprar" className="mt-1 inline-flex min-h-[44px] items-center text-[15px] font-semibold text-marca-menta underline-offset-4 hover:underline">Mira cómo comprar en 3 pasos</a>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="btn btn-wa"><IconoWhatsApp />Escribir por WhatsApp</a>
+          <div ref={botonesWa} className="flex flex-wrap items-center gap-3">
+            <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className={`btn btn-wa relative${waVisto ? " onda-wa" : ""}`}><IconoWhatsApp />Escribir por WhatsApp</a>
             <BotonCopiar texto={CONFIG.whatsappVisible} className="btn-claro" />
           </div>
         </div>
@@ -51,7 +55,8 @@ export function PiePagina() {
       <div className="contenedor grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.25fr_1.4fr_1.1fr_1fr]">
         <div>
           <Logo claro />
-          <p className="mt-4 max-w-xs text-sm leading-relaxed">Venta de celulares, computadores, tablets y accesorios. Reparación de equipos e instalación de cámaras de seguridad.</p>
+          {/* Eslogan de la marca (antes iba una frase larga con todo lo que vende la tienda) */}
+          <p className="mt-4 max-w-xs font-display text-[19px] font-extrabold leading-snug text-white ancho-108">Hacemos despegar tu tecnología</p>
           <p className="mt-4 text-sm">
             <span className="block text-xs text-white/55">WhatsApp</span>
             <a href={waLink()} target="_blank" rel="noopener" className="font-semibold text-white hover:underline">{CONFIG.whatsappVisible}</a>

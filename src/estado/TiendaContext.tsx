@@ -44,6 +44,8 @@ interface Ctx {
   abrirCarrito: () => void;
   cerrarCarrito: () => void;
   aviso: string;
+  /** Cuántos avisos se han dado (cambia aunque el texto se repita: así la línea del aviso vuelve a empezar) */
+  avisoVez: number;
   avisar: (texto: string) => void;
 }
 const TiendaCtx = createContext<Ctx | null>(null);
@@ -53,6 +55,7 @@ export function TiendaProvider({ children }: { children: ReactNode }) {
   const [versiones, setVersiones] = useState<Record<string, number>>({});
   const [carritoAbierto, setAbierto] = useState(false);
   const [aviso, setAviso] = useState("");
+  const [avisoVez, setAvisoVez] = useState(0);
   const reloj = useRef<number>();
 
   useEffect(() => {
@@ -68,6 +71,7 @@ export function TiendaProvider({ children }: { children: ReactNode }) {
 
   const avisar = useCallback((texto: string) => {
     setAviso(texto);
+    if (texto) setAvisoVez(n => n + 1);
     window.clearTimeout(reloj.current);
     reloj.current = window.setTimeout(() => setAviso(""), 4200);
   }, []);
@@ -116,6 +120,7 @@ export function TiendaProvider({ children }: { children: ReactNode }) {
     abrirCarrito: () => setAbierto(true),
     cerrarCarrito: () => setAbierto(false),
     aviso,
+    avisoVez,
     avisar
   };
   return <TiendaCtx.Provider value={valor}>{children}</TiendaCtx.Provider>;
