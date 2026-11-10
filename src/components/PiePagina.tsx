@@ -59,7 +59,8 @@ export function PiePagina() {
           <p className="mt-4 max-w-xs font-display text-[19px] font-extrabold leading-snug text-white ancho-108">Hacemos despegar tu tecnología</p>
           <p className="mt-4 text-sm">
             <span className="block text-xs text-white/55">WhatsApp</span>
-            <a href={waLink()} target="_blank" rel="noopener" className="font-semibold text-white hover:underline">{CONFIG.whatsappVisible}</a>
+            {/* El mismo destino que el número de la portada (dos enlaces con el mismo texto deben llevar al mismo lugar) */}
+            <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="font-semibold text-white hover:underline">{CONFIG.whatsappVisible}</a>
           </p>
           {redes.length > 0 && (
             <p className="mt-3 flex gap-4 text-sm">{redes.map(([red, url]) => <a key={red} href={url} target="_blank" rel="noopener" className={`capitalize ${enlace}`}>{red}</a>)}</p>

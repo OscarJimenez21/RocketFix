@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import { CONFIG, LOGOS_MARCAS, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
+import { CONFIG, LOGOS_MARCAS, MAS_VENDIDOS, PAQUETES, PRODUCTOS, SERVICIOS, VITRINA, deTienda, desde, etiquetaDe, porId } from "../data/catalogo";
 import { camposServicio } from "../data/formularios";
 import { Calificaciones, ResumenCalificaciones } from "../components/Calificaciones";
 import { Despegue } from "../components/Despegue";
@@ -18,8 +18,7 @@ import { hrefMarca, hrefProducto } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
 import type { Producto, Servicio, TiendaId } from "../types";
 
-/** Productos de la vitrina de la portada, en este orden */
-const VITRINA = ["ip18pm", "ss26u", "p45585", "mbairm5", "awultra4", "appro3"];
+// Los productos de la vitrina y su orden están en src/data/contenido.json («vitrina»)
 const ESPERA_VITRINA = 6000;
 
 /** Vitrina: un producto grande y los demás en miniatura. Cambia sola con un fundido; se detiene con el mouse encima o
@@ -194,8 +193,10 @@ function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: st
 /** Fila de productos de la portada (tarjetas grandes solo con foto, nombre y precio). Avanza sola; se detiene con el
     mouse encima, al usar el teclado o mientras la persona la desliza con el dedo, y no se mueve si la persona pidió
     menos movimiento. Al llegar al final vuelve al principio. */
-function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris = false }: {
+function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris = false, final }: {
   id: string; etiqueta: React.ReactNode; titulo: string; productos: Producto[]; enlaces?: { texto: string; href: string }[]; cinta?: string; gris?: boolean;
+  /** Última tarjeta de la fila: lleva a la sección completa cuando la fila solo muestra una parte */
+  final?: { cantidad: number; texto: string; href: string };
 }) {
   const fila = useRef<HTMLUListElement>(null);
   const [quieta, setQuieta] = useState(false);
@@ -254,6 +255,15 @@ function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris =
               <TarjetaVitrina producto={p} cinta={cinta} />
             </li>
           ))}
+          {final && (
+            <li className="w-[74%] shrink-0 snap-start sm:w-[44%] lg:w-[calc(25%-15px)]">
+              <a href={final.href} className="tarjeta-eleva group flex h-full min-h-[260px] flex-col items-center justify-center gap-2 rounded-lg border border-linea-fuerte bg-white p-6 text-center transition-[border-color,box-shadow] duration-200 hover:border-marca hover:shadow-tarjeta">
+                <span className="font-display text-[44px] font-extrabold leading-none tabular-nums text-marca-texto">{final.cantidad}</span>
+                <span className="text-[15px] font-semibold text-tinta-2">{final.texto}</span>
+                <span className="btn btn-borde mt-3">Ver todos<FlechaMovil /></span>
+              </a>
+            </li>
+          )}
         </ul>
       </div>
     </section>
@@ -375,13 +385,22 @@ function variados(tiendas: TiendaId[]) {
 }
 
 /** Fila con todos los productos de una sección, con enlace a la sección */
+/** Cuántos productos muestra cada fila de sección en la portada. Antes iban todos (hasta 275 tarjetas en una sola fila):
+    nadie desliza tantas, y la portada pesaba el triple. El resto se ve en la sección, a la que lleva la última tarjeta */
+const TOPE_FILA = 16;
+
 function Coleccion({ id, etiqueta, titulo, tiendas, gris = false }: { id: string; etiqueta: string; titulo: string; tiendas: TiendaId[]; gris?: boolean }) {
-  const productos = useMemo(() => variados(tiendas), [tiendas]);
-  const enlaces = tiendas.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t))
-    // El número es el de la sección completa (la fila no muestra los de «Preguntar disponibilidad»)
-    .map(t => ({ texto: tiendas.length > 1 ? `Ver ${t.menu.toLowerCase()}` : `Ver todo (${deTienda(t.id).length})`, href: `#${t.vista}` }));
-  if (!productos.length) return null;
-  return <Carrusel id={id} etiqueta={etiqueta} titulo={titulo} productos={productos} enlaces={enlaces} gris={gris} />;
+  const todos = useMemo(() => variados(tiendas), [tiendas]);
+  const secciones = tiendas.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t));
+  // El número es el de la sección completa (la fila no muestra los de «Preguntar disponibilidad»)
+  const total = secciones.reduce((n, t) => n + deTienda(t.id).length, 0);
+  const enlaces = secciones.map(t => ({ texto: tiendas.length > 1 ? `Ver ${t.menu.toLowerCase()}` : `Ver todo (${deTienda(t.id).length})`, href: `#${t.vista}` }));
+  if (!todos.length) return null;
+  const primera = secciones[0];
+  const final = todos.length > TOPE_FILA && primera
+    ? { cantidad: total, texto: secciones.length > 1 ? "productos en estas secciones" : `productos en ${primera.menu.toLowerCase()}`, href: `#${primera.vista}` }
+    : undefined;
+  return <Carrusel id={id} etiqueta={etiqueta} titulo={titulo} productos={final ? todos.slice(0, TOPE_FILA) : todos} enlaces={enlaces} gris={gris} final={final} />;
 }
 
 /** Banda grande de gaming: invita a armar el escritorio completo (consola, monitor, teclado, mouse y diadema) */
@@ -443,7 +462,7 @@ function BandaCelulares() {
     <section aria-labelledby="t-banda-cel" className="contenedor pt-12">
       <div className="banda-cel relative isolate overflow-hidden rounded-xl bg-marca-medio text-white lg:grid lg:min-h-[480px] lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
         <div className="relative z-10 p-7 sm:p-10 lg:self-center lg:p-14">
-          <p className="text-[15px] font-semibold text-marca-menta">iPhone, Samsung, Xiaomi y Motorola</p>
+          <p className="text-[15px] font-semibold text-marca-menta-clara">iPhone, Samsung, Xiaomi y Motorola</p>
           <h2 id="t-banda-cel" className="mt-3 font-display text-[40px] font-extrabold leading-[0.95] text-white ancho-108 sm:text-[58px]">
             Tu próximo celular te está esperando
           </h2>

@@ -30,6 +30,7 @@ const contenido = contenidoJson as {
   incluye: Record<string, string>;
   estados: Record<string, string>;
   masVendidos: string[];
+  vitrina: string[];
   busquedasPopulares: string[];
   sinonimos: Record<string, string[]>;
   tiendaVista: Record<TiendaId, string>;
@@ -42,6 +43,9 @@ export const SERVICIOS = contenido.servicios;
 export const INCLUYE = contenido.incluye;
 export const ESTADOS = contenido.estados;
 export const MAS_VENDIDOS = contenido.masVendidos;
+/** Productos de la vitrina de la portada, en orden. Están en contenido.json porque la página estática de la portada
+    (scripts/paginas-estaticas.mjs) también los lee: así el navegador empieza a bajar la primera foto antes de que cargue la tienda */
+export const VITRINA = contenido.vitrina;
 export const BUSQUEDAS_POPULARES = contenido.busquedasPopulares;
 export const SINONIMOS = contenido.sinonimos;
 export const VISTAS = contenido.vistas;

@@ -9,7 +9,7 @@
      Con JavaScript se oculta y la tienda se carga encima, igual que siempre (main.tsx lleva la dirección a su #).
    También escribe sitemap.xml. Solo usa datos reales del catálogo: no declara disponibilidad, garantías ni calificaciones.
    Uso: node scripts/paginas-estaticas.mjs  (lo corre `npm run build`) */
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const RAIZ = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
@@ -80,7 +80,23 @@ const PLANTILLA = readFileSync(join(DIST, "index.html"), "utf8");
 const OCULTAR = `<script>document.documentElement.classList.add("js")</script><style>.js #estatico{display:none}</style>`;
 const ORGANIZACION = SITIO + "#tienda";
 
-function pagina({ ruta, titulo, descripcion, imagen, altImagen, jsonld, cuerpo }) {
+// ---------- Lo primero que se ve se pide desde el HTML ----------
+// La foto más grande de la página (la del producto, o la primera de la vitrina en la portada) antes solo se pedía cuando
+// la tienda terminaba de cargar y armarse. Pedirla desde el HTML la adelanta cerca de un segundo en una red lenta.
+const precargaFoto = ruta => `<link rel="preload" as="image" href="${BASE}${ruta}" fetchpriority="high">`;
+// La página de producto va en un archivo aparte (Producto-….js): también se pide de una vez
+const ARCHIVO_PRODUCTO = readdirSync(join(DIST, "assets")).find(f => /^Producto-.+\.js$/.test(f));
+const precargaProducto = ARCHIVO_PRODUCTO ? `<link rel="modulepreload" href="${BASE}assets/${ARCHIVO_PRODUCTO}">` : "";
+// Las direcciones con # (las que usa la tienda por dentro) abren todas index.html: ahí se decide con un guion corto.
+// Solo adivina la foto de un producto si todas siguen la regla fotos/<id>.jpg (si un día cambia, deja de hacerlo)
+const FOTOS_POR_REGLA = PRODUCTOS.every(p => p.imagen === `fotos/${p.id}.jpg` && /^[\w-]+$/.test(p.id));
+const primeraVitrina = (CONTENIDO.vitrina ?? []).map(id => PRODUCTOS.find(p => p.id === id)).find(p => p?.imagen && !p.consultar);
+const AL_ABRIR = `<script>(function(){var h=location.hash.replace(/^#\\/?/,""),m=${FOTOS_POR_REGLA ? "/^p\\/([\\w-]+)$/.exec(h)" : "null"},` +
+  `f=!h||h=="inicio"?${JSON.stringify(primeraVitrina?.imagen ?? "")}:m?"fotos/"+m[1]+".jpg":"";` +
+  `function pedir(rel,ruta,foto){var l=document.createElement("link");l.rel=rel;l.href=${JSON.stringify(BASE)}+ruta;if(foto){l.as="image";l.setAttribute("fetchpriority","high")}document.head.appendChild(l)}` +
+  `if(f)pedir("preload",f,1);${ARCHIVO_PRODUCTO ? `if(m)pedir("modulepreload",${JSON.stringify("assets/" + ARCHIVO_PRODUCTO)})` : ""}})()</script>`;
+
+function pagina({ ruta, titulo, descripcion, imagen, altImagen, jsonld, cuerpo, precarga = "" }) {
   const url = SITIO + ruta;
   let h = PLANTILLA
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(titulo)}</title>`)
@@ -98,7 +114,7 @@ function pagina({ ruta, titulo, descripcion, imagen, altImagen, jsonld, cuerpo }
       .replace(/(<meta property="og:image:alt" content=")[^"]*/, `$1${esc(altImagen)}`);
   }
   const ld = `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": jsonld }).replace(/</g, "\\u003c")}</script>`;
-  h = h.replace("</head>", `${OCULTAR}${ld}</head>`)
+  h = h.replace("</head>", `${precarga}${OCULTAR}${ld}</head>`)
     .replace(/(<div id="root"><\/div>)/, `$1<div id="estatico" class="contenedor py-8">${cuerpo}</div>`);
   if (h.includes("{{")) throw new Error(`Plantilla sin reemplazar en ${ruta}`);
   mkdirSync(join(DIST, ruta), { recursive: true });
@@ -170,7 +186,7 @@ for (const p of PRODUCTOS) {
   ].join("");
   // Sin precio publicado no hay oferta que declarar: Google pide precio en Product, así que solo van las migas
   const jsonld = consultar ? [migas(camino)] : [producto, migas(camino)];
-  urls.push(pagina({ ruta, titulo: tituloProducto(p), descripcion, imagen: fotos[0], altImagen: p.nombre, jsonld, cuerpo }));
+  urls.push(pagina({ ruta, titulo: tituloProducto(p), descripcion, imagen: fotos[0], altImagen: p.nombre, jsonld, cuerpo, precarga: (fotos[0] ? precargaFoto(fotos[0]) : "") + precargaProducto }));
 }
 
 // ---------- Secciones ----------
@@ -239,7 +255,7 @@ for (const a of ARTICULOS) {
     `<h2>Marcas</h2><ul>${MARCAS.map(m => `<li><a href="${BASE}${rutaMarca(m)}">${esc(m)}</a></li>`).join("")}</ul>` +
     `<h2>Servicio técnico</h2><ul>${ARTICULOS.map(a => `<li><a href="${BASE}${a.id}/">${esc(a.titulo)}</a></li>`).join("")}</ul>` + contacto;
   // La portada conserva su título, descripción e imagen; solo se agregan los datos estructurados y el contenido
-  const h = PLANTILLA.replace("</head>", `${OCULTAR}<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": [tiendaLd, sitioLd] }).replace(/</g, "\\u003c")}</script></head>`)
+  const h = PLANTILLA.replace("</head>", `${AL_ABRIR}${OCULTAR}<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": [tiendaLd, sitioLd] }).replace(/</g, "\\u003c")}</script></head>`)
     .replace(/(<div id="root"><\/div>)/, `$1<div id="estatico" class="contenedor py-8">${cuerpo}</div>`);
   writeFileSync(join(DIST, "index.html"), h);
   urls.unshift(SITIO);

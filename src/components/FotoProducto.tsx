@@ -15,6 +15,8 @@ export function Imagen({ src, prioridad = false, className = "", ...resto }: Img
   useLayoutEffect(() => { const el = ref.current; setCargada(Boolean(el?.complete && el.naturalWidth)); }, [src]);
   return (
     <img ref={ref} src={src} loading={prioridad ? "eager" : "lazy"} decoding="async" {...resto} onLoad={() => setCargada(true)}
+      // La foto principal se pide antes que las demás (en minúsculas: React 18 todavía no conoce fetchPriority)
+      {...(prioridad ? { fetchpriority: "high" } : null)}
       className={`transition-[opacity,transform] duration-300 ease-salida ${prioridad || cargada ? "" : "opacity-0"} ${className}`} />
   );
 }

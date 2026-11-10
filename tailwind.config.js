@@ -14,6 +14,8 @@ export default {
           texto: "#097049",
           claro: "#3DD598",
           menta: "#5BE0A9",
+          // Menta más clara (la del eslogan de la tarjeta): para textos pequeños sobre el verde medio, donde la menta solo da 3,9:1
+          "menta-clara": "#9FE9C9",
           medio: "#0A6B4B",
           oscuro: "#053D2B",
           noche: "#03241B",

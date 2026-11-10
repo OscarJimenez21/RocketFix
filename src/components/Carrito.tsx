@@ -223,6 +223,20 @@ export function Carrito() {
   // Animación 26: cuando el nombre y la dirección ya están escritos, un destello cruza el botón de enviar
   const listo = Boolean(d.nombre.trim() && d.dir.trim());
 
+  // Notas antes de enviar: que el pedido no es un pago, el derecho de retracto (arts. 46 y 50, Ley 1480) y la política de datos.
+  // Se muestran en uno de dos lugares según el alto de la pantalla (ver más abajo)
+  const notas = (
+    <>
+      <p className="text-center text-xs leading-relaxed text-tinta-3">
+        Enviar el pedido no es un pago: se abre WhatsApp con el pedido escrito, lo envías y te confirmamos disponibilidad y total.
+        {boldActivo() && " Si prefieres pagar ya, Bold acepta tarjeta, PSE y más."}
+      </p>
+      <p className="mt-1.5 text-center text-xs leading-relaxed text-tinta-3">
+        Tienes <a href="#cambios-y-devoluciones" className="enlace">derecho de retracto</a> por 5 días hábiles desde la entrega. Al enviar el pedido aceptas el <a href="#datos-personales" className="enlace">tratamiento de tus datos</a>.
+      </p>
+    </>
+  );
+
   // El contenedor mide lo mismo que la pantalla y recorta el panel cerrado: si sobresaliera, Chrome en celular alejaría toda la página
   return (
     <div className={`fixed inset-0 z-50 overflow-hidden ${carritoAbierto ? "" : "pointer-events-none"}`}>
@@ -250,8 +264,10 @@ export function Carrito() {
           </div>
         ) : (
           <>
-            <GuiaPasos vez={aperturas} />
+            {/* La guía de pasos va dentro de lo que se desliza: en un celular, con la guía y el pie fijos, al formulario
+                le quedaban unos 100 px de alto y había que llenarlo por una rendija */}
             <div className="flex-1 overflow-y-auto overscroll-contain">
+              <GuiaPasos vez={aperturas} />
               <ul className="divide-y divide-linea px-5">
                 {lineas.map(({ producto: p, opcion: o, clave, cantidad }, k) => {
                   const nombre = nombreItem(p, o.nombre);
@@ -313,6 +329,8 @@ export function Carrito() {
                   <pre className="whitespace-pre-wrap border-t border-linea px-3 py-3 font-mono text-xs leading-relaxed text-tinta-2">{mensaje}</pre>
                 </details>
               </form>
+              {/* En celular las notas van aquí, al final del formulario, y el pie fijo queda solo con el total y los botones */}
+              <div className="bg-fondo px-5 pb-5 sm:[@media(min-height:780px)]:hidden">{notas}</div>
             </div>
 
             <footer className="border-t border-linea px-5 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pt-4">
@@ -356,14 +374,8 @@ export function Carrito() {
                   <button type="button" onClick={pagarConBold} className="btn btn-borde w-full"><IconoTarjeta />Pagar en línea con Bold</button>
                 )}
               </div>
-              <p className="mt-2 text-center text-xs leading-relaxed text-tinta-3">
-                Enviar el pedido no es un pago: se abre WhatsApp con el pedido escrito, lo envías y te confirmamos disponibilidad y total.
-                {boldActivo() && " Si prefieres pagar ya, Bold acepta tarjeta, PSE y más."}
-              </p>
-              {/* Antes de comprar: el derecho de retracto (arts. 46 y 50, Ley 1480) y la política de datos */}
-              <p className="mt-1.5 text-center text-xs leading-relaxed text-tinta-3">
-                Tienes <a href="#cambios-y-devoluciones" className="enlace">derecho de retracto</a> por 5 días hábiles desde la entrega. Al enviar el pedido aceptas el <a href="#datos-personales" className="enlace">tratamiento de tus datos</a>.
-              </p>
+              {/* En pantallas anchas y altas (computador, tablet) las notas siguen bajo los botones */}
+              <div className="mt-2 hidden sm:[@media(min-height:780px)]:block">{notas}</div>
             </footer>
           </>
         )}
