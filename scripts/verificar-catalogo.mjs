@@ -72,6 +72,19 @@ Object.entries(galerias).forEach(([id, fotos]) => {
 const tiendas = readFileSync("src/data/tiendas.ts", "utf8");
 for (const [, id] of tiendas.matchAll(/foto: "([^"]+)"/g)) if (!ids.includes(id)) fallar("Portada", `la foto de categoría usa ${id}, que no existe`);
 (contenido.masVendidos || []).filter(id => !ids.includes(id)).forEach(id => fallar("Más vendidos", `${id} no existe`));
+(contenido.vitrina || []).filter(id => !ids.includes(id)).forEach(id => fallar("Vitrina", `${id} no existe`));
+
+// 5a. El HTML que la página inserta tal cual (artículos, dibujos e íconos de pago) no puede traer nada que se ejecute.
+// Hoy ese contenido es propio; esta revisión evita publicar por descuido un texto pegado de otra parte con un guion adentro
+const PELIGRO = /<\s*(script|iframe|object|embed|link|meta|base|form)\b|\son[a-z]+\s*=|javascript:|data:text\/html/i;
+const htmlInsertado = [
+  ["articulos-texto.json", Object.values(leer("articulos-texto"))],
+  ["ilustraciones.json", Object.values(leer("ilustraciones"))],
+  ["pagos.json", (leer("pagos").lista || []).map(f => f.icono ?? "")]
+];
+for (const [archivo, trozos] of htmlInsertado) {
+  trozos.forEach((t, k) => { if (typeof t === "string" && PELIGRO.test(t)) fallar("HTML", `${archivo}: el trozo ${k + 1} trae contenido que se puede ejecutar`); });
+}
 
 // 5b. Calificaciones de clientes: completas y sin datos de contacto (solo nombre e inicial del apellido)
 const resenas = leer("resenas");

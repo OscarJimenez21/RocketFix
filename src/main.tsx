@@ -1,7 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
+import { Limite } from "./components/Limite";
 import { PRODUCTOS } from "./data/catalogo";
+import { slug } from "./lib/formato";
 import "./index.css";
 
 // Páginas para buscadores (scripts/paginas-estaticas.mjs): /RocketFix/p/sa07/, /RocketFix/celulares/, /RocketFix/marca/cooler-master/…
@@ -11,7 +13,6 @@ if (!location.hash && location.pathname.startsWith(base) && location.pathname !=
   let ruta = location.pathname.slice(base.length).replace(/\/(index\.html)?$/, "");
   const marca = ruta.match(/^marca\/(.+)$/);
   if (marca) {
-    const slug = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     const nombre = PRODUCTOS.map(p => p.marca).find(m => m && slug(m) === marca[1]);
     ruta = nombre ? `marca/${encodeURIComponent(nombre)}` : ruta;
   }
@@ -27,8 +28,13 @@ if (import.meta.env.DEV) {
   } catch { /* sin almacenamiento */ }
 }
 
-createRoot(document.getElementById("root")!).render(
+const raiz = document.getElementById("root");
+if (!raiz) throw new Error("Falta #root en index.html");
+createRoot(raiz).render(
   <StrictMode>
-    <App />
+    {/* Último recurso: si falla algo fuera de la página (cabecera, carrito), al menos queda el aviso con WhatsApp */}
+    <Limite>
+      <App />
+    </Limite>
   </StrictMode>
 );

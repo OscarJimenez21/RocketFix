@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react";
-import descripcionesJson from "../data/descripciones.json";
+import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 import { CONFIG, TIENDA_VISTA, VISTAS, conPrecioPrimero, deTienda, etiquetaDe, nombreCat, nombreItem, porId, textoConsulta } from "../data/catalogo";
 import { useTienda } from "../estado/TiendaContext";
 import { Migas } from "../components/EncabezadoVista";
@@ -7,17 +6,14 @@ import { Galeria } from "../components/Galeria";
 import { IconoCamion, IconoCheck, IconoCompartir, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { EtiquetaAgregar, NotaProducto, TarjetaProducto, useAgregado } from "../components/TarjetaProducto";
 import { activa } from "../lib/animaciones";
-import { armarDescripcion } from "../lib/descripcion";
+import { armarDescripcion, useDescripcion } from "../lib/descripcion";
 import { useVisto } from "../lib/enPantalla";
 import { dinero, recurso } from "../lib/formato";
 import { useDireccion, useMarco } from "../lib/movimiento";
 import { volarAlCarrito } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
-import type { Descripcion, Producto as TipoProducto } from "../types";
+import type { Producto as TipoProducto } from "../types";
 import { NoEncontrada } from "./NoEncontrada";
-
-// TypeScript lee cada fila de la ficha como string[]; scripts/verificar-catalogo.mjs comprueba que todas tengan exactamente 2 textos
-const DESCRIPCIONES = descripcionesJson as unknown as Record<string, Descripcion>;
 
 /** Versiones del producto: al elegir otra, el marco verde se desliza hasta ella en vez de saltar */
 function Versiones({ producto: p, elegida, elegir }: { producto: TipoProducto; elegida: number; elegir: (j: number) => void }) {
@@ -97,24 +93,31 @@ export default function Producto({ id }: { id: string }) {
   // Animación 22: los íconos de entrega se mueven la primera vez que se ven
   const entregaLista = useRef<HTMLUListElement>(null);
   const entregaVista = useVisto(entregaLista);
+  // La descripción del proveedor llega aparte (un archivo por producto); null mientras llega
+  const descripcion = useDescripcion(id);
 
   useEffect(() => {
     if (p) document.title = `${p.nombre} · ${CONFIG.nombre}`;
   }, [p]);
 
+  // Primero los de la misma categoría y marca, luego el resto de la sección; los que tienen precio antes que los de
+  // «Preguntar disponibilidad». Se calcula una vez por producto (antes se filtraba y ordenaba la sección entera en cada
+  // dibujo, por ejemplo cada vez que se agregaba algo al carrito)
+  const relacionados = useMemo(() => {
+    if (!p) return [];
+    const puntos = (r: TipoProducto) => (r.categoria === p.categoria ? 2 : 0) + (r.marca && r.marca === p.marca ? 1 : 0);
+    return deTienda(p.tienda).filter(r => r.id !== p.id).sort((a, b) => conPrecioPrimero(a, b) || puntos(b) - puntos(a)).slice(0, 4);
+  }, [p]);
+
   if (!p) return <NoEncontrada texto="Este producto ya no está en la tienda." />;
 
   const i = Math.min(version(p.id), p.opciones.length - 1);
-  const o = p.opciones[i] ?? p.opciones[0]!;
+  const o = p.opciones[i] ?? p.opciones[0];
   const q = cantidadDe(p.id, i);
   const tope = p.stock != null && q >= p.stock;
   const vista = TIENDA_VISTA[p.tienda];
-  const d = armarDescripcion(p, DESCRIPCIONES[p.id]);
+  const d = armarDescripcion(p, descripcion ?? {});
   const cat = p.tienda !== "cel" && p.categoria ? nombreCat[p.categoria] : null;
-
-  // Primero los de la misma categoría y marca, luego el resto de la sección; los que tienen precio antes que los de «Preguntar disponibilidad»
-  const puntos = (r: typeof p) => (r.categoria === p.categoria ? 2 : 0) + (r.marca && r.marca === p.marca ? 1 : 0);
-  const relacionados = deTienda(p.tienda).filter(r => r.id !== p.id).sort((a, b) => conPrecioPrimero(a, b) || puntos(b) - puntos(a)).slice(0, 4);
 
   const alAgregar = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!agregar(p.id, i)) return;
@@ -204,7 +207,14 @@ export default function Producto({ id }: { id: string }) {
           etiqueta={<EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} />} />
       )}
 
-      <section aria-labelledby="h-desc" className="border-t border-linea bg-fondo">
+      <section aria-labelledby="h-desc" aria-busy={descripcion === null} className="border-t border-linea bg-fondo">
+        {descripcion === null ? (
+          // Mientras llega la descripción: la forma de la sección, para que no aparezca de golpe (suele tardar milésimas)
+          <div className="contenedor grid min-h-[320px] gap-8 py-10 lg:grid-cols-2 lg:gap-12">
+            <div><h2 id="h-desc" className="text-xl font-extrabold">Descripción</h2><div aria-hidden="true" className="esqueleto mt-3 h-24 w-full" /></div>
+            <div aria-hidden="true" className="esqueleto h-48 w-full" />
+          </div>
+        ) : (
         <div className="contenedor grid gap-8 py-10 lg:grid-cols-2 lg:gap-12">
           <div className="min-w-0">
             <h2 id="h-desc" className="text-xl font-extrabold">Descripción</h2>
@@ -224,6 +234,7 @@ export default function Producto({ id }: { id: string }) {
             </dl>
           </div>
         </div>
+        )}
       </section>
 
       {relacionados.length > 0 && (

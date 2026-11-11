@@ -1,4 +1,21 @@
-﻿node_modules
+node_modules
 dist
 *.local
 .vite
+
+# Nada privado en el repositorio (es público): llaves, hojas de cálculo de costos, respaldos
+.env
+.env.*
+*.pem
+*.key
+*.xlsx
+*.xls
+*.xlsm
+*.csv
+.trabajo/
+
+# Resultados de las pruebas
+coverage
+
+# Copias livianas de las fotos (las hace scripts/fotos-livianas.mjs al compilar y al abrir la tienda en local)
+public/fotos/liviana/

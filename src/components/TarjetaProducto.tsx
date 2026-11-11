@@ -54,7 +54,7 @@ export function EtiquetaAgregar({ vez, recien, cantidad, tope, sufijo = "" }: { 
 export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { producto: Producto; prioridad?: boolean; cinta?: string }) {
   const { version, elegirVersion, cantidadDe, agregar, avisar } = useTienda();
   const i = Math.min(version(p.id), p.opciones.length - 1);
-  const o = p.opciones[i] ?? p.opciones[0]!;
+  const o = p.opciones[i] ?? p.opciones[0];
   const q = cantidadDe(p.id, i);
   const tope = p.stock != null && q >= p.stock;
   const foto = useRef<HTMLAnchorElement>(null);
@@ -73,7 +73,8 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
     <article className="tarjeta tarjeta-eleva group relative flex h-full flex-col overflow-hidden transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
       {/* Con el mouse encima de la tarjeta, la foto se acerca un poco (solo con mouse; en celular no queda pegado) */}
       <a ref={foto} href={hrefProducto(p.id)} tabIndex={-1} aria-hidden="true" className="relative block aspect-square bg-white p-4">
-        <FotoProducto producto={p} alt="" prioridad={prioridad} className="motion-safe:group-hover:scale-[1.05]" />
+        {/* Ancho de la tarjeta: 2 por fila en celular, 3 en tableta y 4 (unos 290 px) en computador */}
+        <FotoProducto producto={p} alt="" prioridad={prioridad} tamanos="(min-width: 1024px) 290px, (min-width: 768px) 32vw, 48vw" className="motion-safe:group-hover:scale-[1.05]" />
         <Insignia producto={p} />
         {cinta && <span className="absolute right-2 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-[12.5px] font-semibold text-acento-texto">{cinta}</span>}
       </a>
@@ -110,7 +111,8 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
               <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-sm btn-suave mt-3 w-full">
                 <EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} />
               </button>
-              <p className="mt-1.5 h-4 text-xs font-semibold text-marca" aria-live="polite">
+              {/* Sin aria-live: el aviso general (Aviso.tsx) ya dice «Agregaste … al carrito»; antes hablaban dos a la vez */}
+              <p className="mt-1.5 h-4 text-xs font-semibold text-marca">
                 {q > 0 && <span key={q} className="inline-block motion-safe:animate-entrar">{q} en el carrito</span>}
               </p>
             </>

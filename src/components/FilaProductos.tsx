@@ -28,6 +28,7 @@ export function FilaProductos({ productos, etiqueta, encabezado, cinta }: { prod
           <button type="button" onClick={() => mover(1)} aria-label="Ver productos siguientes" className={flecha}><FlechaMovil /></button>
         </div>
       </div>
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- una fila que se desliza debe poder enfocarse para moverla con las flechas del teclado */}
       <ul ref={fila} aria-label={etiqueta} tabIndex={0}
         className="sin-barra -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-1 sm:-mx-6 sm:scroll-px-6 sm:px-6">
         {productos.map(p => (

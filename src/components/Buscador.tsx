@@ -37,8 +37,10 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
   }, [rueda, q, enfocado, visible]);
 
   const palabras = palabrasDe(q);
-  const productos = useMemo(() => (palabras.length ? buscarProductos(q).slice(0, 6) : []), [q]); // eslint-disable-line react-hooks/exhaustive-deps
-  const total = useMemo(() => (palabras.length ? buscarProductos(q).length : 0), [q]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Una sola búsqueda por texto (antes se hacían dos: una para los 6 primeros y otra para contar)
+  const encontrados = useMemo(() => buscarProductos(q), [q]);
+  const productos = encontrados.slice(0, 6);
+  const total = encontrados.length;
   const secciones = palabras.length
     ? TIENDAS.filter(t => palabras.every(w => norm(t.titulo + " " + t.menu).includes(w))).slice(0, 3)
     : [];
@@ -75,6 +77,8 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
   };
 
   const idOpcion = (i: number) => `${idLista}-${i}`;
+  // Hay lista de opciones abierta (sin resultados solo se muestra el aviso, que no es una lista)
+  const hayLista = abierto && opciones.length > 0;
   let n = -1;
   const claseOpcion = (i: number) => `flex items-center gap-3 rounded px-2.5 py-2 ${i === activo ? "bg-marca-suave" : "hover:bg-fondo"}`;
 
@@ -86,7 +90,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
         <IconoBuscar className="lupa pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-tinta-3" />
         <input
           type="search" value={q} placeholder={rueda ? "" : TEXTO_CAMPO} autoComplete="off" enterKeyHint="search"
-          role="combobox" aria-expanded={abierto} aria-controls={idLista} aria-autocomplete="list"
+          role="combobox" aria-expanded={hayLista} aria-controls={hayLista ? idLista : undefined} aria-autocomplete="list"
           aria-activedescendant={activo >= 0 ? idOpcion(activo) : undefined}
           onChange={e => { setQ(e.target.value); setAbierto(true); }} onFocus={() => { setAbierto(true); setEnfocado(true); }} onBlur={() => setEnfocado(false)} onKeyDown={alTecla}
           className="h-11 w-full rounded border border-linea-fuerte bg-fondo pl-10 pr-3 text-[15px] placeholder:text-tinta-3 focus:border-marca focus:bg-white focus:outline-none focus:ring-2 focus:ring-marca/20"
@@ -98,13 +102,15 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
           </span>
         )}
       </label>
+      {/* La lista (role="listbox") lleva solo opciones: el título de las populares y el aviso de «no encontramos» van
+          fuera de ella, como pide el patrón de combobox (antes un <p> y un <div> quedaban dentro de la lista) */}
       {abierto && (
-        <div id={idLista} role="listbox" aria-label="Sugerencias de búsqueda"
+        <div
           className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[70dvh] origin-top overflow-y-auto overscroll-contain rounded-md border border-linea bg-white p-2 shadow-flota motion-safe:animate-desplegar">
           {!palabras.length && (
             <>
-              <p className="etiqueta px-2.5 pb-1.5 pt-1">Búsquedas populares</p>
-              <div className="flex flex-wrap gap-1.5 px-1.5 pb-1.5">
+              <p id={`${idLista}-titulo`} className="etiqueta px-2.5 pb-1.5 pt-1">Búsquedas populares</p>
+              <div id={idLista} role="listbox" aria-labelledby={`${idLista}-titulo`} className="flex flex-wrap gap-1.5 px-1.5 pb-1.5">
                 {/* sugerencia: entran una tras otra al abrir el buscador (animación 10) */}
                 {BUSQUEDAS_POPULARES.map((b, i) => (
                   <a key={b} id={idOpcion(i)} role="option" aria-selected={i === activo} href={hrefBusqueda(b)} style={{ "--i": i } as React.CSSProperties}
@@ -113,7 +119,9 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
               </div>
             </>
           )}
-          {palabras.length > 0 && secciones.map(t => {
+          {palabras.length > 0 && opciones.length > 0 && (
+          <div id={idLista} role="listbox" aria-label="Sugerencias de búsqueda">
+          {secciones.map(t => {
             n++;
             return (
               <a key={t.vista} id={idOpcion(n)} role="option" aria-selected={n === activo} href={`#${t.vista}`} className={claseOpcion(n)}>
@@ -123,11 +131,11 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
               </a>
             );
           })}
-          {palabras.length > 0 && productos.map(p => {
+          {productos.map(p => {
             n++;
             return (
               <a key={p.id} id={idOpcion(n)} role="option" aria-selected={n === activo} href={hrefProducto(p.id)} style={{ "--i": n } as React.CSSProperties} className={`sugerencia ${claseOpcion(n)}`}>
-                <span className="h-11 w-11 shrink-0 rounded border border-linea bg-white p-0.5"><FotoProducto producto={p} alt="" /></span>
+                <span className="h-11 w-11 shrink-0 rounded border border-linea bg-white p-0.5"><FotoProducto producto={p} alt="" tamanos="44px" /></span>
                 <span className="min-w-0 flex-1">
                   <span className="line-clamp-1 text-[14.5px] font-semibold">
                     {resaltar(p.nombre, palabras).map((t, k) => t.marcado ? <mark key={k} className="bg-transparent font-bold text-marca">{t.t}</mark> : <span key={k}>{t.t}</span>)}
@@ -145,7 +153,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
               </a>
             );
           })}
-          {palabras.length > 0 && total > 0 && (() => {
+          {total > 0 && (() => {
             n++;
             return (
               <a id={idOpcion(n)} role="option" aria-selected={n === activo} href={hrefBusqueda(q)}
@@ -154,8 +162,10 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
               </a>
             );
           })()}
+          </div>
+          )}
           {palabras.length > 0 && total === 0 && (
-            <p className="px-2.5 py-3 text-sm text-tinta-2">No encontramos “{q.trim()}”. Escríbenos y te decimos si lo conseguimos.</p>
+            <p role="status" className="px-2.5 py-3 text-sm text-tinta-2">No encontramos “{q.trim()}”. Escríbenos y te decimos si lo conseguimos.</p>
           )}
         </div>
       )}

@@ -21,6 +21,22 @@ export interface DatosPedido {
   nota: string;
 }
 
+/** Datos del pedido guardados en el navegador (para no volver a escribirlos al reabrir el carrito). Se leen campo por
+    campo. Antes se usaban tal cual: si venían dañados o con otra forma (por ejemplo, de una versión anterior de la tienda),
+    el carrito fallaba al dibujarse y la página quedaba en blanco */
+const texto = (v: unknown, max: number) => (typeof v === "string" ? v.slice(0, max) : "");
+export function leerDatosPedido(guardado: string | null): DatosPedido {
+  const vacio: DatosPedido = { nombre: "", entrega: "bogota", dir: "", pago: CONFIG.pagos.bogota[0] ?? "", nota: "" };
+  try {
+    const d: unknown = JSON.parse(guardado || "null");
+    if (!d || typeof d !== "object") return vacio;
+    const x = d as Record<string, unknown>;
+    return { nombre: texto(x.nombre, 120), entrega: x.entrega === "nacional" ? "nacional" : "bogota", dir: texto(x.dir, 240), pago: texto(x.pago, 120) || vacio.pago, nota: texto(x.nota, 500) };
+  } catch {
+    return vacio;
+  }
+}
+
 export const subtotalDe = (lineas: LineaCarrito[]) => lineas.reduce((s, l) => s + l.opcion.precio * l.cantidad, 0);
 
 /** pagoEnLinea reemplaza el medio de pago cuando el cliente paga con Bold (incluye la referencia) */

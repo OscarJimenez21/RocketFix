@@ -65,26 +65,29 @@ export function FormularioWhatsApp({ asunto, campos, boton = "Enviar por WhatsAp
     <form className="grid gap-4 sm:grid-cols-2" noValidate onSubmit={e => e.preventDefault()}>
       {campos.map(c => {
         const id = `${base}-${c.id}`;
-        const clase = `campo ${malos.includes(c.id) ? "campo-invalido" : ""}${temblor(malos.includes(c.id), intento)}`;
+        const malo = malos.includes(c.id);
+        const clase = `campo ${malo ? "campo-invalido" : ""}${temblor(malo, intento)}`;
+        // Los obligatorios lo dicen al lector de pantalla desde el principio, y el campo marcado apunta al aviso de error
+        const accesible = { name: c.id, "aria-required": c.obligatorio || undefined, "aria-invalid": malo || undefined, "aria-describedby": malo ? `${base}-error` : undefined };
         return (
           <div key={c.id} className={c.ancho === "completo" || c.tipo === "area" ? "sm:col-span-2" : ""}>
             <label htmlFor={id} className="rotulo">{c.rotulo}{c.opcional && <span className="opcional"> (opcional)</span>}</label>
             {c.tipo === "lista" ? (
-              <select id={id} className={clase} value={valor(c)} onChange={e => poner(c.id, e.target.value)}>
+              <select id={id} {...accesible} className={clase} value={valor(c)} onChange={e => poner(c.id, e.target.value)}>
                 {c.opciones?.map(o => <option key={o}>{o}</option>)}
               </select>
             ) : c.tipo === "area" ? (
-              <textarea id={id} rows={3} className={clase} placeholder={c.placeholder} value={valor(c)} aria-invalid={malos.includes(c.id) || undefined}
+              <textarea id={id} {...accesible} rows={3} className={clase} placeholder={c.placeholder} value={valor(c)}
                 onChange={e => poner(c.id, e.target.value)} />
             ) : (
-              <input id={id} className={clase} placeholder={c.placeholder} autoComplete={c.autocompletar ?? "off"} value={valor(c)} aria-invalid={malos.includes(c.id) || undefined}
+              <input id={id} {...accesible} className={clase} placeholder={c.placeholder} autoComplete={c.autocompletar ?? "off"} value={valor(c)}
                 onChange={e => poner(c.id, e.target.value)} />
             )}
           </div>
         );
       })}
       <div className="sm:col-span-2">
-        {error && <p className="alerta mb-3" role="alert">{error}</p>}
+        {error && <p id={`${base}-error`} className="alerta mb-3" role="alert">{error}</p>}
         <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); }} className="btn btn-wa w-full sm:w-auto">
           <IconoWhatsApp />{boton}
         </a>

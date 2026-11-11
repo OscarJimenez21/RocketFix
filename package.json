@@ -4,10 +4,14 @@
   "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/paginas-estaticas.mjs",
+    "dev": "node scripts/fotos-livianas.mjs && vite",
+    "build": "tsc -b && node scripts/fotos-livianas.mjs && vite build && node scripts/paginas-estaticas.mjs",
+    "fotos": "node scripts/fotos-livianas.mjs",
     "preview": "vite preview",
     "typecheck": "tsc -b",
+    "lint": "eslint .",
+    "probar": "vitest run",
+    "revisar": "npm run lint && npm run typecheck && npm run probar && npm run verificar",
     "catalogo": "node scripts/extraer-catalogo.mjs",
     "auditoria": "node scripts/auditoria.mjs",
     "verificar": "node scripts/verificar-catalogo.mjs"
@@ -17,14 +21,32 @@
     "react-dom": "18.3.1"
   },
   "devDependencies": {
+    "@eslint/js": "9.39.5",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.9",
     "@types/node": "22.9.0",
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
     "@vitejs/plugin-react": "4.3.4",
     "autoprefixer": "10.4.20",
-    "postcss": "8.4.49",
+    "eslint": "9.39.5",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "globals": "16.5.0",
+    "jsdom": "26.1.0",
+    "postcss": "8.5.32",
+    "sharp": "0.35.5",
     "tailwindcss": "3.4.17",
     "typescript": "5.6.3",
-    "vite": "5.4.11"
+    "typescript-eslint": "8.72.2",
+    "vite": "6.4.6",
+    "vitest": "4.1.12"
+  },
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.7"
+    }
   }
 }

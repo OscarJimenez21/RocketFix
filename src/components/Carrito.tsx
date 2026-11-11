@@ -3,9 +3,10 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { CONFIG, nombreItem } from "../data/catalogo";
 import { useTienda } from "../estado/TiendaContext";
-import { abrirBold, boldActivo, nuevaReferencia } from "../lib/bold";
+import { abrirBold, boldActivo, clavePago, nuevaReferencia } from "../lib/bold";
 import { dinero, lista } from "../lib/formato";
-import { envioDe, mensajePedido, reglaEnvio, subtotalDe, type DatosPedido } from "../lib/pedido";
+import { usePanelModal } from "../lib/panel";
+import { envioDe, leerDatosPedido, mensajePedido, reglaEnvio, subtotalDe, type DatosPedido } from "../lib/pedido";
 import { hrefProducto } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
 import type { ZonaEntrega } from "../types";
@@ -16,12 +17,12 @@ import { IconoCerrar, IconoCheck, IconoTarjeta, IconoWhatsApp } from "./Iconos";
 import { Cohete } from "./Logo";
 
 /** Cantidad de un producto en el carrito: al sumar, el número nuevo entra desde arriba; al restar, desde abajo */
-function Cantidad({ valor }: { valor: number }) {
+function Cantidad({ valor, vivo }: { valor: number; vivo: boolean }) {
   const [paso, setPaso] = useState({ valor, dir: 0 });
   if (paso.valor !== valor) setPaso({ valor, dir: valor > paso.valor ? 1 : -1 });
   const dir = paso.valor !== valor ? (valor > paso.valor ? 1 : -1) : paso.dir;
   return (
-    <output className="block h-5 w-7 overflow-hidden text-center font-mono text-sm leading-5" aria-live="polite">
+    <output className="block h-5 w-7 overflow-hidden text-center font-mono text-sm leading-5" aria-live={vivo ? "polite" : "off"}>
       <span key={valor} className={`block ${dir > 0 ? "motion-safe:animate-rodar-arriba" : dir < 0 ? "motion-safe:animate-rodar-abajo" : ""}`}>{valor}</span>
     </output>
   );
@@ -69,11 +70,7 @@ function OpcionesEntrega({ zona, nombre, elegir }: { zona: ZonaEntrega; nombre: 
 
 const GUARDADO = "rocketfix-datos-pedido";
 const datosIniciales = (): DatosPedido => {
-  try {
-    const d = JSON.parse(sessionStorage.getItem(GUARDADO) || "null") as DatosPedido | null;
-    if (d) return d;
-  } catch { /* sin almacenamiento */ }
-  return { nombre: "", entrega: "bogota", dir: "", pago: CONFIG.pagos.bogota[0] ?? "", nota: "" };
+  try { return leerDatosPedido(sessionStorage.getItem(GUARDADO)); } catch { return leerDatosPedido(null); }
 };
 
 export function Carrito() {
@@ -84,33 +81,12 @@ export function Carrito() {
   const [intento, setIntento] = useState(0);
   const panel = useRef<HTMLDivElement>(null);
   const cerrar = useRef<HTMLButtonElement>(null);
-  const foco = useRef<Element | null>(null);
   const id = useId();
 
   useEffect(() => { try { sessionStorage.setItem(GUARDADO, JSON.stringify(d)); } catch { /* sin almacenamiento */ } }, [d]);
 
-  // Al abrir: bloquea el fondo, enfoca "cerrar" y recuerda dónde estaba el foco; Esc cierra
-  useEffect(() => {
-    if (!carritoAbierto) return;
-    foco.current = document.activeElement;
-    document.documentElement.style.overflow = "hidden";
-    const pagina = document.getElementById("pagina");
-    if (pagina) pagina.inert = true;
-    setTimeout(() => cerrar.current?.focus(), 30);
-    const alTecla = (e: KeyboardEvent) => { if (e.key === "Escape") cerrarCarrito(); };
-    document.addEventListener("keydown", alTecla);
-    return () => {
-      document.documentElement.style.overflow = "";
-      if (pagina) pagina.inert = false;
-      document.removeEventListener("keydown", alTecla);
-      // Safari no enfoca los botones al hacer clic: si no había foco previo, se suelta el del panel que se cierra
-      if (foco.current instanceof HTMLElement && foco.current !== document.body) foco.current.focus();
-      else if (document.activeElement instanceof HTMLElement && panel.current?.contains(document.activeElement)) document.activeElement.blur();
-    };
-  }, [carritoAbierto, cerrarCarrito]);
-
-  // Cerrado, el panel no se puede enfocar ni lo leen los lectores de pantalla
-  useEffect(() => { if (panel.current) panel.current.inert = !carritoAbierto; }, [carritoAbierto]);
+  // Abierto: bloquea el fondo, enfoca «cerrar» y Esc cierra; al cerrar, el foco vuelve a donde estaba (ver lib/panel.ts)
+  usePanelModal(carritoAbierto, cerrarCarrito, panel, cerrar);
 
   // Cerrar al navegar (ej.: al tocar el nombre de un producto)
   useEffect(() => {
@@ -196,7 +172,7 @@ export function Carrito() {
     if (!validar()) return;
     const ref = nuevaReferencia();
     // El pedido queda guardado para enviarlo por WhatsApp cuando Bold devuelva al cliente a la tienda
-    try { localStorage.setItem("rf-pago-" + ref, mensajePedido(lineas, datos, `Pagado en línea con Bold · referencia ${ref}`)); } catch { /* sin almacenamiento */ }
+    try { localStorage.setItem(clavePago(ref), mensajePedido(lineas, datos, `Pagado en línea con Bold · referencia ${ref}`)); } catch { /* sin almacenamiento */ }
     try {
       const modo = await abrirBold(ref, total, `Pedido ${ref} · Total ${dinero(total)}`);
       if (modo === "copiado") avisar(`En Bold escribe el total: ${dinero(total)}. Ya lo copiamos para que lo pegues.`);
@@ -277,7 +253,7 @@ export function Carrito() {
                       className={`relative isolate grid grid-cols-[64px_1fr] gap-3 py-4 transition-[opacity,transform] duration-[180ms] ease-salida ${saliendo.includes(clave) ? "pointer-events-none translate-x-3 opacity-0" : ""}${lineasEntran ? " linea-entra" : ""}`}>
                       {/* El último producto agregado: fondo verde claro que se desvanece al abrir el carrito */}
                       {resaltada?.clave === clave && <span key={resaltada.vez} aria-hidden="true" className="absolute inset-y-0 -left-5 -right-5 -z-10 bg-marca-suave opacity-0 motion-safe:animate-desvanecer" />}
-                      <a href={hrefProducto(p.id)} className="h-16 w-16 rounded border border-linea bg-white p-1" tabIndex={-1} aria-hidden="true"><FotoProducto producto={p} alt="" /></a>
+                      <a href={hrefProducto(p.id)} className="h-16 w-16 rounded border border-linea bg-white p-1" tabIndex={-1} aria-hidden="true"><FotoProducto producto={p} alt="" tamanos="64px" /></a>
                       <div className="min-w-0">
                         <a href={hrefProducto(p.id)} className="line-clamp-2 text-[14.5px] font-semibold leading-snug hover:text-marca">{nombre}</a>
                         <p className="mt-0.5 text-xs text-tinta-2">{dinero(o.precio)} c/u</p>
@@ -285,7 +261,7 @@ export function Carrito() {
                         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
                           <div className="inline-flex items-center rounded border border-linea-fuerte" role="group" aria-label={`Cantidad de ${nombre}`}>
                             <button type="button" onClick={() => (cantidad === 1 ? sacar(clave) : cambiar(clave, -1))} aria-label="Quitar una unidad" className="presionable h-11 w-11 text-lg leading-none hover:bg-fondo">−</button>
-                            <Cantidad valor={cantidad} />
+                            <Cantidad valor={cantidad} vivo={carritoAbierto} />
                             <button type="button" onClick={() => cambiar(clave, 1)} disabled={tope} aria-label="Agregar una unidad" className="presionable h-11 w-11 text-lg leading-none hover:bg-fondo disabled:opacity-40">+</button>
                           </div>
                           <button type="button" onClick={() => sacar(clave)} className="min-h-[44px] px-1 text-[13px] font-semibold text-tinta-2 underline-offset-2 hover:text-red-700 hover:underline">Quitar</button>
@@ -300,8 +276,8 @@ export function Carrito() {
               <form className="grid gap-4 border-t border-linea bg-fondo px-5 py-5" noValidate onSubmit={e => e.preventDefault()}>
                 <div>
                   <label htmlFor={`${id}-nombre`} className="rotulo">Tu nombre</label>
-                  <input id={`${id}-nombre`} className={campo("nombre")} autoComplete="name" placeholder="Nombre y apellido" value={d.nombre}
-                    aria-invalid={errores.nombre || undefined} onChange={e => poner("nombre", e.target.value)} />
+                  <input id={`${id}-nombre`} name="nombre" className={campo("nombre")} autoComplete="name" placeholder="Nombre y apellido" value={d.nombre}
+                    aria-required="true" aria-invalid={errores.nombre || undefined} aria-describedby={errores.nombre ? `${id}-error` : undefined} onChange={e => poner("nombre", e.target.value)} />
                 </div>
                 <fieldset>
                   <legend className="rotulo">Entrega</legend>
@@ -309,20 +285,20 @@ export function Carrito() {
                 </fieldset>
                 <div>
                   <label htmlFor={`${id}-dir`} className="rotulo">{nacional ? "Ciudad, dirección y barrio" : "Dirección y barrio"}</label>
-                  <input id={`${id}-dir`} className={campo("dir")} autoComplete="street-address" value={d.dir}
+                  <input id={`${id}-dir`} name="direccion" className={campo("dir")} autoComplete="street-address" value={d.dir} aria-required="true"
                     placeholder={nacional ? "Ciudad, calle, número y barrio" : "Calle, número y barrio"}
-                    aria-invalid={errores.dir || undefined} onChange={e => poner("dir", e.target.value)} />
-                  <p className="mt-1.5 text-xs text-tinta-2">{nacional ? CONFIG.envio : CONFIG.domicilio} {reglaEnvio(zona)}</p>
+                    aria-invalid={errores.dir || undefined} aria-describedby={[errores.dir && `${id}-error`, `${id}-dir-ayuda`].filter(Boolean).join(" ")} onChange={e => poner("dir", e.target.value)} />
+                  <p id={`${id}-dir-ayuda`} className="mt-1.5 text-xs text-tinta-2">{nacional ? CONFIG.envio : CONFIG.domicilio} {reglaEnvio(zona)}</p>
                 </div>
                 <div>
                   <label htmlFor={`${id}-pago`} className="rotulo">Cómo vas a pagar</label>
-                  <select id={`${id}-pago`} className="campo" value={pago} onChange={e => poner("pago", e.target.value)}>
+                  <select id={`${id}-pago`} name="pago" className="campo" value={pago} onChange={e => poner("pago", e.target.value)}>
                     {pagos.map(p => <option key={p}>{p}</option>)}
                   </select>
                 </div>
                 <div>
                   <label htmlFor={`${id}-nota`} className="rotulo">Nota <span className="opcional">(opcional)</span></label>
-                  <input id={`${id}-nota`} className="campo" placeholder="Color, si necesitas factura u otra indicación" value={d.nota} onChange={e => poner("nota", e.target.value)} />
+                  <input id={`${id}-nota`} name="nota" autoComplete="off" className="campo" placeholder="Color, si necesitas factura u otra indicación" value={d.nota} onChange={e => poner("nota", e.target.value)} />
                 </div>
                 <details className="rounded border border-linea bg-white">
                   <summary className="cursor-pointer px-3 py-2.5 text-sm font-semibold text-tinta-2">Ver el mensaje que se va a enviar</summary>
@@ -364,7 +340,7 @@ export function Carrito() {
                 {/* La clave cambia con el total: así se ilumina en verde cada vez que cambia */}
                 <strong key={vezTotal} className={`font-display text-2xl tabular-nums ${vezTotal ? "motion-safe:animate-resaltar" : ""}`}>{dinero(total)}</strong>
               </div>
-              {errores.texto && <p className="alerta mt-2" role="alert">{errores.texto}</p>}
+              {errores.texto && <p id={`${id}-error`} className="alerta mt-2" role="alert">{errores.texto}</p>}
               {/* El pedido por WhatsApp es el camino principal: ahí se confirma la disponibilidad antes de cobrar */}
               <div className="mt-3 grid gap-2">
                 <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); }} className={`btn btn-wa barrido w-full${listo ? " barrido-enviar" : ""}`}>

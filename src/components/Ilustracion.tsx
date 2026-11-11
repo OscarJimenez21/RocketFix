@@ -6,6 +6,7 @@ const ILUS = ilustraciones as Record<string, string>;
 export function Ilustracion({ nombre, className = "" }: { nombre: string; className?: string }) {
   return (
     <svg className={`ilus ${className}`} viewBox="0 0 120 90" aria-hidden="true" focusable="false"
+      // eslint-disable-next-line no-restricted-syntax -- dibujos propios (ilustraciones.json); scripts/verificar-catalogo.mjs no deja publicar si traen algo que se ejecute
       dangerouslySetInnerHTML={{ __html: ILUS[nombre] ?? ILUS.celular ?? "" }} />
   );
 }

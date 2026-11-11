@@ -8,21 +8,31 @@ export const palabrasDe = (q: string) => norm(q).split(/\s+/).filter(Boolean);
 const variantes = (w: string) => SINONIMOS[w] ?? [w];
 const escRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+// Se preparan una sola vez (antes se recalculaban por cada producto en cada letra que se escribía)
+const VENDIDOS = new Set(MAS_VENDIDOS);
+const NOMBRE = new Map(PRODUCTOS.map(p => [p.id, norm(p.nombre)]));
+const MARCA = new Map(PRODUCTOS.map(p => [p.id, p.marca ? norm(p.marca) : ""]));
+
 export function buscarProductos(q: string): Producto[] {
   const palabras = palabrasDe(q);
   if (!palabras.length) return [];
+  // Las variantes y sus expresiones se arman una vez por búsqueda, no una vez por cada uno de los productos
+  const grupos = palabras.map(w => {
+    const vs = variantes(w);
+    return { vs, inicioDePalabra: vs.map(v => new RegExp(`\\b${escRegex(v)}`)) };
+  });
   const resultados: { p: Producto; puntos: number }[] = [];
   for (const p of PRODUCTOS) {
     const texto = TEXTO_BUSQUEDA[p.id] ?? "";
-    if (!palabras.every(w => variantes(w).some(v => texto.includes(v)))) continue;
-    const n = norm(p.nombre);
-    let puntos = MAS_VENDIDOS.includes(p.id) ? 2 : 0;
-    for (const w of palabras) {
-      const vs = variantes(w);
-      if (vs.some(v => n.startsWith(v))) puntos += 6;
-      else if (vs.some(v => new RegExp(`\\b${escRegex(v)}`).test(n))) puntos += 4;
-      else if (vs.some(v => n.includes(v))) puntos += 2;
-      if (p.marca && vs.includes(norm(p.marca))) puntos += 3;
+    if (!grupos.every(g => g.vs.some(v => texto.includes(v)))) continue;
+    const n = NOMBRE.get(p.id) ?? "";
+    const marca = MARCA.get(p.id) ?? "";
+    let puntos = VENDIDOS.has(p.id) ? 2 : 0;
+    for (const g of grupos) {
+      if (g.vs.some(v => n.startsWith(v))) puntos += 6;
+      else if (g.inicioDePalabra.some(r => r.test(n))) puntos += 4;
+      else if (g.vs.some(v => n.includes(v))) puntos += 2;
+      if (marca && g.vs.includes(marca)) puntos += 3;
     }
     resultados.push({ p, puntos });
   }

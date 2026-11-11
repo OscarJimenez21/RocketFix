@@ -1,6 +1,9 @@
 # Publica la tienda en GitHub Pages cada vez que se suben cambios a main (como antes: Push origin = página actualizada).
 # También se puede iniciar a mano en GitHub → Actions → "Publicar la tienda" → Run workflow.
-# Antes de compilar comprueba que el catálogo sea el mismo de la tienda original; si no coincide, no publica.
+# Antes de compilar revisa el código (lint), corre las pruebas automáticas y comprueba el catálogo:
+# si algo de eso falla, no publica y la página sigue como estaba.
+# Las acciones de GitHub van fijadas por su código exacto (SHA), no por la etiqueta v4: una etiqueta se puede mover a
+# otro código sin aviso; el SHA no. Al lado va la versión, para saber cuál es.
 name: Publicar la tienda
 
 on:
@@ -21,18 +24,27 @@ jobs:
   compilar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # Historial completo: el mapa del sitio usa la fecha del último cambio de los datos de cada página
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Avisos de seguridad de las herramientas: se muestran, pero no frenan la publicación de precios
+      - run: npm audit --audit-level=high
+        continue-on-error: true
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run probar
       - run: npm run verificar
       - run: npm run build
         env:
           BASE_PATH: /RocketFix/
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
         with:
           path: dist
 
@@ -44,4 +56,4 @@ jobs:
       url: ${{ steps.despliegue.outputs.page_url }}
     steps:
       - id: despliegue
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

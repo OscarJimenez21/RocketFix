@@ -22,7 +22,8 @@ function cargar(): Record<string, number> {
     const limpio: Record<string, number> = {};
     for (const [k, q] of Object.entries(datos)) {
       const d = deClave(k);
-      if (d && q > 0) limpio[k] = Math.min(q, d.producto.stock ?? MAX);
+      // Solo cantidades enteras (lo guardado puede venir dañado o alterado)
+      if (d && Number.isInteger(q) && q > 0) limpio[k] = Math.min(q, d.producto.stock ?? MAX);
     }
     return limpio;
   } catch {
@@ -106,23 +107,32 @@ export function TiendaProvider({ children }: { children: ReactNode }) {
       return d ? [{ ...d, clave, cantidad }] : [];
     }), [carrito]);
 
-  const valor: Ctx = {
+  // Estas funciones no cambian nunca. Antes se creaban de nuevo en cada cambio de estado, y el carrito (que depende de
+  // cerrarCarrito para cerrarse con Esc y devolver el foco) reiniciaba su efecto cada vez: al sumar o restar una unidad
+  // con el teclado, el foco saltaba al botón «Cerrar carrito»
+  const quitar = useCallback((k: string) => setCarrito(c => { const sig = { ...c }; delete sig[k]; return sig; }), []);
+  const vaciar = useCallback(() => setCarrito({}), []);
+  const elegirVersion = useCallback((id: string, i: number) => setVersiones(v => ({ ...v, [id]: i })), []);
+  const abrirCarrito = useCallback(() => setAbierto(true), []);
+  const cerrarCarrito = useCallback(() => setAbierto(false), []);
+
+  const valor = useMemo<Ctx>(() => ({
     lineas,
     unidades: lineas.reduce((s, l) => s + l.cantidad, 0),
     cantidadDe: (id, i) => carrito[claveLinea(id, i)] ?? 0,
     agregar,
     cambiar,
-    quitar: k => setCarrito(c => { const sig = { ...c }; delete sig[k]; return sig; }),
-    vaciar: () => setCarrito({}),
+    quitar,
+    vaciar,
     version: id => versiones[id] ?? 0,
-    elegirVersion: (id, i) => setVersiones(v => ({ ...v, [id]: i })),
+    elegirVersion,
     carritoAbierto,
-    abrirCarrito: () => setAbierto(true),
-    cerrarCarrito: () => setAbierto(false),
+    abrirCarrito,
+    cerrarCarrito,
     aviso,
     avisoVez,
     avisar
-  };
+  }), [lineas, carrito, versiones, carritoAbierto, aviso, avisoVez, agregar, cambiar, quitar, vaciar, elegirVersion, abrirCarrito, cerrarCarrito, avisar]);
   return <TiendaCtx.Provider value={valor}>{children}</TiendaCtx.Provider>;
 }
 

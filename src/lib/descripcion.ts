@@ -1,8 +1,37 @@
 /* Descripción de la página del producto: misma regla que la tienda original (resumen y ficha del proveedor,
    características propias del producto y lo que trae la caja según su tipo). */
+import { useEffect, useState } from "react";
 import { ESTADOS, INCLUYE, nombreCat } from "../data/catalogo";
 import type { Descripcion, Producto } from "../types";
-import { lista, norm } from "./formato";
+import { lista, norm, recurso } from "./formato";
+
+/** Solo lo que tiene la forma de una descripción: resumen de texto y ficha de pares [característica, valor] */
+export function leerDescripcion(dato: unknown): Descripcion {
+  if (!dato || typeof dato !== "object") return {};
+  const { resumen, ficha } = dato as Record<string, unknown>;
+  const d: Descripcion = {};
+  if (typeof resumen === "string") d.resumen = resumen;
+  if (Array.isArray(ficha)) {
+    d.ficha = ficha.filter((f): f is [string, string] => Array.isArray(f) && f.length === 2 && typeof f[0] === "string" && typeof f[1] === "string");
+  }
+  return d;
+}
+
+/** Descripción del proveedor de un producto. Cada una está en su propio archivo (descripciones/<id>.json, ver
+    vite.config.ts): la página baja solo la suya. Mientras llega devuelve null; si no hay (o falla la red), una vacía,
+    y la página arma la descripción general con los datos del producto, como antes. */
+export function useDescripcion(id: string): Descripcion | null {
+  const [cargada, setCargada] = useState<{ id: string; d: Descripcion } | null>(null);
+  useEffect(() => {
+    let vigente = true;
+    fetch(recurso(`descripciones/${id}.json`))
+      .then(r => (r.ok ? r.json() : {}))
+      .catch(() => ({}))
+      .then(dato => { if (vigente) setCargada({ id, d: leerDescripcion(dato) }); });
+    return () => { vigente = false; };
+  }, [id]);
+  return cargada?.id === id ? cargada.d : null;
+}
 
 export interface DescripcionArmada {
   resumen: string;

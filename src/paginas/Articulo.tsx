@@ -64,8 +64,11 @@ export function Articulo({ id }: { id: string }) {
         extra={<p className="mt-3 text-sm text-tinta-3">Por {CONFIG.nombre} · Lectura de {a.minutos} min</p>} />
       <div className="contenedor grid grid-cols-1 gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_300px]">
         {/* El texto del artículo es contenido propio de la tienda original */}
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- no es un control: solo escucha los clics de los enlaces del texto (que ya funcionan con el teclado) */}
         <article className="prosa min-w-0 max-w-3xl" onClick={alClicTexto}>
+          {/* eslint-disable-next-line no-restricted-syntax -- texto propio (articulos-texto.json); scripts/verificar-catalogo.mjs no deja publicar si trae algo que se ejecute */}
           <div dangerouslySetInnerHTML={{ __html: antes ?? "" }} />
+          {/* eslint-disable-next-line no-restricted-syntax -- el mismo texto propio, segunda parte */}
           {despues !== null && <><div className="mt-4"><Paquetes cotizar={n => { setPaquete(n); irAlFormulario(); }} /></div><div className="mt-4" dangerouslySetInnerHTML={{ __html: despues ?? "" }} /></>}
         </article>
         <aside className="lg:sticky lg:top-36 lg:self-start">

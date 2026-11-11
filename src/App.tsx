@@ -4,24 +4,27 @@ import { TiendaProvider, useTienda } from "./estado/TiendaContext";
 import { Aviso } from "./components/Aviso";
 import { Cabecera } from "./components/Cabecera";
 import { Carrito } from "./components/Carrito";
+import { Limite } from "./components/Limite";
 import { PiePagina } from "./components/PiePagina";
 import { activa } from "./lib/animaciones";
-import { leerRegresoBold } from "./lib/bold";
+import { clavePago, leerRegresoBold } from "./lib/bold";
 import { claveRuta, tomarPosicion, useRuta } from "./lib/rutas";
 import { waLink } from "./lib/whatsapp";
-import { Articulo } from "./paginas/Articulo";
-import { Blog } from "./paginas/Blog";
-import { Buscar } from "./paginas/Buscar";
 import { Inicio } from "./paginas/Inicio";
-import { Marca } from "./paginas/Marca";
 import { NoEncontrada } from "./paginas/NoEncontrada";
-import { Politica } from "./paginas/Politica";
 import { POLITICAS } from "./components/TextoLegal";
 import { Tienda } from "./paginas/Tienda";
 import type { Ruta } from "./types";
 
-// La página de producto (con las 963 descripciones) se carga aparte, cuando se abre el primer producto
+// La página de producto se carga aparte, cuando se abre el primer producto (y cada producto baja solo su descripción)
 const Producto = lazy(() => import("./paginas/Producto"));
+// Las páginas que se abren menos (búsqueda, marca, blog, artículos y políticas) también van aparte: así el programa que
+// baja todo el que entra a la tienda pesa menos. La portada y las secciones siguen dentro, porque son las más visitadas
+const Buscar = lazy(() => import("./paginas/Buscar").then(m => ({ default: m.Buscar })));
+const Marca = lazy(() => import("./paginas/Marca").then(m => ({ default: m.Marca })));
+const Blog = lazy(() => import("./paginas/Blog").then(m => ({ default: m.Blog })));
+const Articulo = lazy(() => import("./paginas/Articulo").then(m => ({ default: m.Articulo })));
+const Politica = lazy(() => import("./paginas/Politica").then(m => ({ default: m.Politica })));
 // Panel para revisar las animaciones en prueba: solo existe al trabajar en local (no llega a la página publicada)
 const PanelAnimaciones = import.meta.env.DEV ? lazy(() => import("./components/PanelAnimaciones")) : null;
 
@@ -44,6 +47,11 @@ function CargandoProducto() {
   );
 }
 
+/** Mientras llega una página secundaria: espacio en blanco del alto de la pantalla (así el pie no aparece y luego salta) */
+function Cargando() {
+  return <div role="status" className="contenedor min-h-[100svh] py-16"><span className="sr-only">Cargando…</span></div>;
+}
+
 function tituloDe(r: Ruta) {
   const base = `${CONFIG.nombre} · Tecnología a domicilio en Bogotá y Colombia`;
   if (r.tipo === "tienda") return `${VISTAS[r.vista]} · ${CONFIG.nombre}`;
@@ -63,7 +71,7 @@ function RegresoBold() {
   useEffect(() => { if (regreso?.estado === "approved") vaciar(); }, [regreso, vaciar]);
   if (!regreso) return null;
   let msg = "";
-  try { msg = localStorage.getItem("rf-pago-" + regreso.ref) || ""; } catch { /* sin almacenamiento */ }
+  try { msg = localStorage.getItem(clavePago(regreso.ref)) || ""; } catch { /* sin almacenamiento */ }
   const aprobado = regreso.estado === "approved";
   const titulo = aprobado ? "Bold reportó tu pago como aprobado." : regreso.estado === "pending" ? "Tu pago está en proceso." : "El pago no se completó.";
   const texto = aprobado ? "Envíanos el pedido por WhatsApp: verificamos el pago y coordinamos la entrega." : regreso.estado === "pending" ? "Te avisamos por WhatsApp cuando Bold lo confirme." : "Puedes intentarlo de nuevo desde el carrito o enviarnos el pedido por WhatsApp.";
@@ -80,11 +88,11 @@ function Contenido({ ruta }: { ruta: Ruta }) {
     case "inicio": return <Inicio ancla={ruta.ancla} />;
     case "tienda": return <Tienda key={ruta.tienda} vista={ruta.vista} tienda={ruta.tienda} />;
     case "producto": return <Suspense fallback={<CargandoProducto />}><Producto id={ruta.id} /></Suspense>;
-    case "buscar": return <Buscar key={ruta.q} q={ruta.q} />;
-    case "marca": return <Marca key={ruta.marca} marca={ruta.marca} />;
-    case "blog": return <Blog />;
-    case "articulo": return <Articulo key={ruta.id} id={ruta.id} />;
-    case "politica": return <Politica key={ruta.id} id={ruta.id} />;
+    case "buscar": return <Suspense fallback={<Cargando />}><Buscar key={ruta.q} q={ruta.q} /></Suspense>;
+    case "marca": return <Suspense fallback={<Cargando />}><Marca key={ruta.marca} marca={ruta.marca} /></Suspense>;
+    case "blog": return <Suspense fallback={<Cargando />}><Blog /></Suspense>;
+    case "articulo": return <Suspense fallback={<Cargando />}><Articulo key={ruta.id} id={ruta.id} /></Suspense>;
+    case "politica": return <Suspense fallback={<Cargando />}><Politica key={ruta.id} id={ruta.id} /></Suspense>;
     case "no-encontrada": return <NoEncontrada />;
   }
 }
@@ -119,7 +127,8 @@ function Marco() {
         {/* La clave es la de la página: al ir a otra, se vuelve a montar y corre la animación (en la portada, ir a
             #categorias o #servicios no cuenta como otra página: solo baja) */}
         <main key={clave} className={navego.current ? "motion-safe:animate-entrar" : undefined}>
-          <Contenido ruta={ruta} />
+          {/* Si esta página falla al dibujarse, se muestra un aviso en su lugar (y se reinicia al ir a otra página) */}
+          <Limite><Contenido ruta={ruta} /></Limite>
         </main>
         <PiePagina />
       </div>

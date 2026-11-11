@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { CONFIG, deTienda } from "../data/catalogo";
 import { GRUPOS, TIENDAS, tiendaPorId } from "../data/tiendas";
 import { useTienda } from "../estado/TiendaContext";
+import { usePanelModal } from "../lib/panel";
 import { claveRuta } from "../lib/rutas";
 import { ATERRIZAJE, hayVuelo } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
@@ -44,26 +45,8 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
   const botonCerrar = useRef<HTMLButtonElement>(null);
   const atencion = useAtencion();
 
-  // Cerrado, el panel no se puede enfocar ni lo leen los lectores de pantalla
-  useEffect(() => { if (panel.current) panel.current.inert = !abierto; }, [abierto]);
-  // Abierto: bloquea el fondo, enfoca "cerrar" y al cerrar devuelve el foco; Esc cierra
-  useEffect(() => {
-    if (!abierto) return;
-    const previo = document.activeElement;
-    const pagina = document.getElementById("pagina");
-    document.documentElement.style.overflow = "hidden";
-    if (pagina) pagina.inert = true;
-    const t = window.setTimeout(() => botonCerrar.current?.focus(), 30);
-    const tecla = (e: KeyboardEvent) => { if (e.key === "Escape") cerrar(); };
-    document.addEventListener("keydown", tecla);
-    return () => {
-      window.clearTimeout(t);
-      document.documentElement.style.overflow = "";
-      if (pagina) pagina.inert = false;
-      document.removeEventListener("keydown", tecla);
-      if (previo instanceof HTMLElement && previo !== document.body) previo.focus();
-    };
-  }, [abierto, cerrar]);
+  // Abierto: bloquea el fondo, enfoca «cerrar» y Esc cierra; al cerrar, el foco vuelve a donde estaba (ver lib/panel.ts)
+  usePanelModal(abierto, cerrar, panel, botonCerrar);
 
   const fila = (activo: boolean) => `flex items-center justify-between gap-3 rounded px-2 py-2.5 transition-colors duration-150 ${activo ? "bg-marca-suave font-semibold text-marca-oscuro" : "hover:bg-fondo active:bg-fondo"}`;
   // Al abrir el menú, sus grupos entran uno tras otro desde la izquierda (45 ms entre cada uno)
@@ -78,6 +61,7 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
           <Logo />
           <button ref={botonCerrar} type="button" onClick={cerrar} aria-label="Cerrar menú" className="cerrar-gira presionable flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo"><IconoCerrar /></button>
         </div>
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- no es un control: solo escucha los clics de sus enlaces (que ya funcionan con el teclado) para cerrar el menú */}
         <nav aria-label="Menú principal" onClick={cerrarAlElegir(cerrar)} className="flex-1 overflow-y-auto overscroll-contain px-3 py-3">
           {GRUPOS.map((g, n) => (
             <div key={g.titulo} className={`border-b border-linea py-3 first:pt-1${entra(n).className}`} style={entra(n).style}>

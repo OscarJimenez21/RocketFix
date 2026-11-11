@@ -23,7 +23,7 @@ export function volarAlCarrito(desde: (Element | null | undefined)[], foto: stri
   // Se ve entera: ni tapada por la cabecera fija ni cortada abajo
   const tope = document.querySelector("header")?.getBoundingClientRect().bottom ?? 0;
   const enVista = (r: DOMRect) => r.width > 0 && r.top >= tope && r.bottom <= window.innerHeight;
-  const a = desde.map(e => e?.getBoundingClientRect()).find((r): r is DOMRect => Boolean(r) && enVista(r!));
+  const a = desde.map(e => e?.getBoundingClientRect()).find((r): r is DOMRect => r !== undefined && enVista(r));
   if (!a) return;
 
   const x0 = a.left + a.width / 2, y0 = a.top + a.height / 2;

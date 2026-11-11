@@ -19,7 +19,8 @@ export interface Producto {
   marca?: string;
   nombre: string;
   specs: string[];
-  opciones: Opcion[];
+  /** Siempre hay al menos una versión (scripts/verificar-catalogo.mjs lo comprueba): por eso opciones[0] existe sin tener que jurarlo con «!» */
+  opciones: [Opcion, ...Opcion[]];
   estado: EstadoProducto | string;
   /** No sale en las listas de precios de los proveedores: la página muestra «Preguntar disponibilidad» en vez del
       precio y no deja agregarlo al carrito. El precio se conserva para cuando vuelva a estar en una lista. */

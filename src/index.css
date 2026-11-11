@@ -28,7 +28,9 @@
 /* Base: letras de la marca, fondo y foco visible para teclado */
 @layer base {
   /* Espacio para la cabecera fija al saltar a una sección (en celular la cabecera incluye el buscador) */
-  html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; scroll-padding-top: 8.5rem; }
+  /* Abajo, el alto de la barra fija de «Agregar» de la página de producto (--barra-abajo): al pasar con Tab, el elemento
+     enfocado no queda escondido detrás de ella (WCAG 2.4.11) */
+  html { -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; scroll-padding-top: 8.5rem; scroll-padding-bottom: var(--barra-abajo, 0px); }
   /* Celular: toque inmediato (sin la espera del doble toque) y los controles no seleccionan su texto al mantener presionado */
   a, button, label, summary, [role="button"] { touch-action: manipulation; }
   button, [role="button"] { -webkit-user-select: none; user-select: none; }

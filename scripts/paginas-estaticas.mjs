@@ -9,6 +9,7 @@
      Con JavaScript se oculta y la tienda se carga encima, igual que siempre (main.tsx lleva la dirección a su #).
    También escribe sitemap.xml. Solo usa datos reales del catálogo: no declara disponibilidad, garantías ni calificaciones.
    Uso: node scripts/paginas-estaticas.mjs  (lo corre `npm run build`) */
+import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -87,6 +88,8 @@ const precargaFoto = ruta => `<link rel="preload" as="image" href="${BASE}${ruta
 // La página de producto va en un archivo aparte (Producto-….js): también se pide de una vez
 const ARCHIVO_PRODUCTO = readdirSync(join(DIST, "assets")).find(f => /^Producto-.+\.js$/.test(f));
 const precargaProducto = ARCHIVO_PRODUCTO ? `<link rel="modulepreload" href="${BASE}assets/${ARCHIVO_PRODUCTO}">` : "";
+// Cada producto baja solo su descripción (descripciones/<id>.json, ver vite.config.ts): también se pide de una vez
+const precargaDescripcion = p => DESCRIPCIONES[p.id] ? `<link rel="preload" as="fetch" crossorigin="anonymous" href="${BASE}descripciones/${p.id}.json">` : "";
 // Las direcciones con # (las que usa la tienda por dentro) abren todas index.html: ahí se decide con un guion corto.
 // Solo adivina la foto de un producto si todas siguen la regla fotos/<id>.jpg (si un día cambia, deja de hacerlo)
 const FOTOS_POR_REGLA = PRODUCTOS.every(p => p.imagen === `fotos/${p.id}.jpg` && /^[\w-]+$/.test(p.id));
@@ -94,7 +97,8 @@ const primeraVitrina = (CONTENIDO.vitrina ?? []).map(id => PRODUCTOS.find(p => p
 const AL_ABRIR = `<script>(function(){var h=location.hash.replace(/^#\\/?/,""),m=${FOTOS_POR_REGLA ? "/^p\\/([\\w-]+)$/.exec(h)" : "null"},` +
   `f=!h||h=="inicio"?${JSON.stringify(primeraVitrina?.imagen ?? "")}:m?"fotos/"+m[1]+".jpg":"";` +
   `function pedir(rel,ruta,foto){var l=document.createElement("link");l.rel=rel;l.href=${JSON.stringify(BASE)}+ruta;if(foto){l.as="image";l.setAttribute("fetchpriority","high")}document.head.appendChild(l)}` +
-  `if(f)pedir("preload",f,1);${ARCHIVO_PRODUCTO ? `if(m)pedir("modulepreload",${JSON.stringify("assets/" + ARCHIVO_PRODUCTO)})` : ""}})()</script>`;
+  `if(f)pedir("preload",f,1);${ARCHIVO_PRODUCTO ? `if(m)pedir("modulepreload",${JSON.stringify("assets/" + ARCHIVO_PRODUCTO)});` : ""}` +
+  `if(m&&${FOTOS_POR_REGLA}){var d=document.createElement("link");d.rel="preload";d.as="fetch";d.crossOrigin="anonymous";d.href=${JSON.stringify(BASE)}+"descripciones/"+m[1]+".json";document.head.appendChild(d)}})()</script>`;
 
 function pagina({ ruta, titulo, descripcion, imagen, altImagen, jsonld, cuerpo, precarga = "" }) {
   const url = SITIO + ruta;
@@ -104,14 +108,18 @@ function pagina({ ruta, titulo, descripcion, imagen, altImagen, jsonld, cuerpo, 
     .replace(/(<link rel="canonical" href=")[^"]*/, `$1${url}`)
     .replace(/(<meta property="og:url" content=")[^"]*/, `$1${url}`)
     .replace(/(<meta property="og:title" content=")[^"]*/, `$1${esc(titulo)}`)
-    .replace(/(<meta property="og:description" content=")[^"]*/, `$1${esc(descripcion)}`);
+    .replace(/(<meta property="og:description" content=")[^"]*/, `$1${esc(descripcion)}`)
+    // Las de X (twitter:…) van iguales a las de Open Graph: si no, X mostraría las de la portada
+    .replace(/(<meta name="twitter:title" content=")[^"]*/, `$1${esc(titulo)}`)
+    .replace(/(<meta name="twitter:description" content=")[^"]*/, `$1${esc(descripcion)}`);
   if (imagen) {
     // Fotos de producto: cuadradas de 800 x 800
     h = h.replace(/(<meta property="og:image" content=")[^"]*/, `$1${abs(imagen)}`)
       .replace(/(<meta property="og:image:type" content=")[^"]*/, "$1image/jpeg")
       .replace(/(<meta property="og:image:width" content=")[^"]*/, "$1800")
       .replace(/(<meta property="og:image:height" content=")[^"]*/, "$1800")
-      .replace(/(<meta property="og:image:alt" content=")[^"]*/, `$1${esc(altImagen)}`);
+      .replace(/(<meta property="og:image:alt" content=")[^"]*/, `$1${esc(altImagen)}`)
+      .replace(/(<meta name="twitter:image" content=")[^"]*/, `$1${abs(imagen)}`);
   }
   const ld = `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": jsonld }).replace(/</g, "\\u003c")}</script>`;
   h = h.replace("</head>", `${precarga}${OCULTAR}${ld}</head>`)
@@ -131,6 +139,22 @@ const contacto = `<p>Pedidos y asesoría por WhatsApp: <a href="${wa(`Hola ${CON
 const precioLista = p => p.consultar ? "preguntar disponibilidad" : `${p.opciones.length > 1 ? "desde " : ""}${dinero(desde(p))}`;
 const listaProductos = ps => `<ul>${ps.map(p => `<li><a href="${BASE}${rutaProducto(p)}">${esc(p.nombre)}</a> · ${esc(precioLista(p))}</li>`).join("")}</ul>`;
 const CONDICION = { Nuevo: "https://schema.org/NewCondition", CPO: "https://schema.org/RefurbishedCondition", Usado: "https://schema.org/UsedCondition" };
+
+// ---------- Envío y devoluciones en los datos estructurados (Google los pide para las fichas de comerciante) ----------
+// Solo datos que ya publica la tienda: el costo de envío y desde cuánto es gratis (config.json → envios), y el derecho de
+// retracto de la página «Cambios y devoluciones» (5 días hábiles desde la entrega, envío de vuelta a cargo del cliente,
+// artículo 47 de la Ley 1480). Se declaran 5 días aunque 5 hábiles son más: así nunca se promete más de lo que dice la página.
+const envioLd = (zona, precio) => ({
+  "@type": "OfferShippingDetails",
+  shippingRate: { "@type": "MonetaryAmount", value: precio >= CONFIG.envios[zona].gratisDesde ? 0 : CONFIG.envios[zona].costo, currency: "COP" },
+  shippingDestination: { "@type": "DefinedRegion", addressCountry: "CO", ...(zona === "bogota" ? { addressRegion: "DC" } : {}) }
+});
+const devolucionLd = {
+  "@type": "MerchantReturnPolicy", applicableCountry: "CO",
+  returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow", merchantReturnDays: 5,
+  returnMethod: "https://schema.org/ReturnByMail", returnFees: "https://schema.org/ReturnShippingFees",
+  merchantReturnLink: SITIO + "cambios-y-devoluciones/"
+};
 
 const urls = [];
 
@@ -155,7 +179,8 @@ for (const p of PRODUCTOS) {
   const condicion = CONDICION[p.estado];
   const oferta = varias
     ? { "@type": "AggregateOffer", priceCurrency: "COP", lowPrice: precio, highPrice: hasta(p), offerCount: p.opciones.length, url: SITIO + ruta }
-    : { "@type": "Offer", priceCurrency: "COP", price: precio, url: SITIO + ruta, seller: { "@id": ORGANIZACION } };
+    : { "@type": "Offer", priceCurrency: "COP", price: precio, url: SITIO + ruta, seller: { "@id": ORGANIZACION },
+        shippingDetails: [envioLd("bogota", precio), envioLd("nacional", precio)], hasMerchantReturnPolicy: devolucionLd };
   if (condicion) oferta.itemCondition = condicion;
   const producto = {
     "@type": "Product", "@id": SITIO + ruta + "#producto", name: p.nombre, sku: p.id, description: d.resumen,
@@ -186,7 +211,7 @@ for (const p of PRODUCTOS) {
   ].join("");
   // Sin precio publicado no hay oferta que declarar: Google pide precio en Product, así que solo van las migas
   const jsonld = consultar ? [migas(camino)] : [producto, migas(camino)];
-  urls.push(pagina({ ruta, titulo: tituloProducto(p), descripcion, imagen: fotos[0], altImagen: p.nombre, jsonld, cuerpo, precarga: (fotos[0] ? precargaFoto(fotos[0]) : "") + precargaProducto }));
+  urls.push(pagina({ ruta, titulo: tituloProducto(p), descripcion, imagen: fotos[0], altImagen: p.nombre, jsonld, cuerpo, precarga: (fotos[0] ? precargaFoto(fotos[0]) : "") + precargaProducto + precargaDescripcion(p) }));
 }
 
 // ---------- Secciones ----------
@@ -245,7 +270,8 @@ for (const a of ARTICULOS) {
   const tiendaLd = {
     "@type": "OnlineStore", "@id": ORGANIZACION, name: CONFIG.nombre, url: SITIO, logo: abs("apple-touch-icon.png"),
     telephone: CONFIG.whatsappVisible, areaServed: { "@type": "Country", name: "Colombia" },
-    contactPoint: { "@type": "ContactPoint", telephone: CONFIG.whatsappVisible, contactType: "customer service", availableLanguage: "es", areaServed: "CO" }
+    contactPoint: { "@type": "ContactPoint", telephone: CONFIG.whatsappVisible, contactType: "customer service", availableLanguage: "es", areaServed: "CO" },
+    hasMerchantReturnPolicy: devolucionLd
   };
   const sitioLd = { "@type": "WebSite", "@id": SITIO + "#sitio", name: CONFIG.nombre, url: SITIO, inLanguage: "es-CO", publisher: { "@id": ORGANIZACION } };
   const secciones = Object.entries(TIENDA_VISTA).filter(([t]) => PRODUCTOS.some(p => p.tienda === t));
@@ -262,7 +288,29 @@ for (const a of ARTICULOS) {
 }
 
 // ---------- Mapa del sitio ----------
-const hoy = new Date().toISOString().slice(0, 10);
+// lastmod honesto: la fecha del último cambio guardado (commit) de los datos de cada página. Antes iba la fecha del día
+// en las 1.131 direcciones en cada publicación, y Google deja de creerle a un mapa que dice que todo cambió siempre.
+// Necesita el historial de git (en publicar.yml, checkout con fetch-depth: 0); si no lo hay, la fecha simplemente no va.
+const fechaDe = (...archivos) => {
+  try { return execFileSync("git", ["log", "-1", "--format=%cs", "--", ...archivos.map(a => `src/data/${a}`)], { cwd: RAIZ, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim() || null; }
+  catch { return null; }
+};
+const masNueva = (...fechas) => fechas.filter(Boolean).sort().at(-1) ?? null;
+const FECHAS = {
+  catalogo: fechaDe("productos.json", "descripciones.json", "galerias.json", "categorias.json", "cabeceras.json"),
+  textos: fechaDe("articulos-texto.json", "contenido.json"),
+  politicas: fechaDe("politicas.json", "config.json")
+};
+const POLITICAS_IDS = new Set(leer("politicas.json").paginas.map(p => `${p.id}/`));
+const ARTICULOS_IDS = new Set(["blog/", ...ARTICULOS.map(a => `${a.id}/`)]);
+const fechaUrl = u => {
+  const ruta = u.slice(SITIO.length);
+  if (!ruta) return masNueva(...Object.values(FECHAS));
+  if (POLITICAS_IDS.has(ruta)) return FECHAS.politicas;
+  if (ARTICULOS_IDS.has(ruta)) return FECHAS.textos;
+  return FECHAS.catalogo;
+};
 writeFileSync(join(DIST, "sitemap.xml"),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${u}</loc><lastmod>${hoy}</lastmod></url>`).join("\n")}\n</urlset>\n`);
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => { const f = fechaUrl(u); return `  <url><loc>${u}</loc>${f ? `<lastmod>${f}</lastmod>` : ""}</url>`; }).join("\n")}\n</urlset>\n`);
+if (!FECHAS.catalogo) console.warn("sitemap.xml sin lastmod: no se encontró el historial de git");
 console.log(`Páginas estáticas: ${urls.length} (productos ${PRODUCTOS.length}, marcas ${MARCAS.length}) · sitemap.xml listo`);

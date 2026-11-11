@@ -48,6 +48,13 @@ export const IconoEstrella = ({ className = "h-5 w-5" }: P) => (
     <path d="M12 2.8l2.84 5.76 6.36.92-4.6 4.48 1.09 6.33L12 17.3l-5.69 2.99 1.09-6.33-4.6-4.48 6.36-.92z" />
   </svg>
 );
+/** Pausa y reproducir de los carruseles que avanzan solos */
+export const IconoPausa = ({ className = "h-4 w-4" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1" /><rect x="14" y="5" width="4" height="14" rx="1" /></svg>
+);
+export const IconoReproducir = ({ className = "h-4 w-4" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} aria-hidden="true" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" /></svg>
+);
 export const IconoMoto =({ className = "h-5 w-5" }: P) => (
   <svg viewBox="0 0 24 24" className={className} {...base}><circle cx="5.5" cy="17" r="3" /><circle cx="18.5" cy="17" r="3" /><path d="M8.5 17h6.5l2-7h2.5M15 5h3l1.5 5M5.5 17l3-6h6" /></svg>
 );

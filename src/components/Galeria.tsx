@@ -2,7 +2,7 @@
    Con una sola foto no hay carrusel. Una foto extra que no carga se quita. */
 import { useEffect, useRef, useState } from "react";
 import { galeriaDe } from "../data/catalogo";
-import { recurso } from "../lib/formato";
+import { recurso, srcsetFoto } from "../lib/formato";
 import { useMarco } from "../lib/movimiento";
 import type { Producto } from "../types";
 import { FotoProducto, Imagen } from "./FotoProducto";
@@ -48,11 +48,14 @@ export function Galeria({ producto }: { producto: Producto }) {
     <div>
       {/* data-foto-principal: de aquí despega la foto hacia el carrito al agregar */}
       <div data-foto-principal onMouseMove={seguir} className="zoom-foto relative aspect-square overflow-hidden rounded-md border border-linea bg-white">
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- las fotos se deslizan: deben poder enfocarse para pasarlas con las flechas del teclado */}
         <div ref={pista} onScroll={alDeslizar} tabIndex={0} role="group" aria-roledescription="carrusel" aria-label={`Fotos de ${producto.nombre}`}
           className="sin-barra flex h-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain">
           {fotos.map((f, i) => (
             <div key={f} className="h-full w-full shrink-0 snap-center p-6">
+              {/* La primera ya la pidió el HTML en su tamaño original; las demás traen copias livianas para pantallas pequeñas */}
               <Imagen src={recurso(f)} alt={`${producto.nombre}, foto ${i + 1} de ${fotos.length}`} width={800} height={800}
+                {...(i > 0 ? { srcSet: srcsetFoto(f), sizes: "(min-width: 1024px) 560px, 100vw" } : null)}
                 prioridad={i === 0} className="h-full w-full object-contain"
                 onError={() => i > 0 && setFotos(fs => fs.filter(x => x !== f))} />
             </div>
@@ -72,7 +75,7 @@ export function Galeria({ producto }: { producto: Producto }) {
         {fotos.map((f, i) => (
           <button key={f} data-opcion type="button" onClick={() => ir(i)} aria-label={`Ver foto ${i + 1}`} aria-current={i === actual || undefined}
             className={`presionable h-16 w-16 shrink-0 rounded border bg-white p-1 ${i === actual && !marco ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
-            <Imagen src={recurso(f)} alt="" className="h-full w-full object-contain" />
+            <Imagen src={recurso(f)} srcSet={srcsetFoto(f)} sizes="64px" alt="" className="h-full w-full object-contain" />
           </button>
         ))}
         {marco && <span aria-hidden="true" className="pointer-events-none absolute left-0 top-0 rounded border border-marca ring-1 ring-marca" style={marco} />}
