@@ -58,7 +58,7 @@ export function Vitrina() {
         <span className="absolute left-3 top-3 rounded-sm bg-fondo px-2 py-1 text-[13px] font-semibold text-tinta-2">{etiquetaDe(p)}</span>
         {seMueve && (
           <BotonPausa pausado={pausada} alternar={() => setPausada(v => !v)} que="los productos destacados"
-            className="presionable absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full border border-linea bg-white/95 text-tinta-2 hover:border-linea-fuerte hover:text-tinta" />
+            className="presionable absolute right-3 top-3 flex h-10 w-10 items-center justify-center claro-siempre rounded-full border border-linea bg-white/95 text-tinta-2 hover:border-linea-fuerte hover:text-tinta" />
         )}
       </div>
       <div className="flex items-center justify-between gap-3 border-t border-linea px-4 py-3.5 sm:px-5" aria-live={quieta || elegida || pausada ? "polite" : "off"}>

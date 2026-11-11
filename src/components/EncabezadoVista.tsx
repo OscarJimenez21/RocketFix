@@ -1,8 +1,18 @@
 import type { ReactNode } from "react";
+import { RECORTE, TIENDAS } from "../data/tiendas";
+import { recurso } from "../lib/formato";
 import { conNombre, waLink } from "../lib/whatsapp";
 import type { NotaCabecera } from "../types";
+import { IconoCasa } from "./Iconos";
 
 export interface Miga { texto: string; href?: string }
+
+/** Idea 4: «Inicio» lleva una casita y cada sección su producto recortado (el mismo del menú) */
+function iconoMiga(m: Miga) {
+  if (m.texto === "Inicio") return <IconoCasa className="h-3.5 w-3.5" />;
+  const t = TIENDAS.find(s => m.href === `#${s.vista}`);
+  return t ? <img src={recurso(`fotos/recortes/${RECORTE[t.id]}.webp`)} alt="" decoding="async" width={18} height={18} className="h-[18px] w-[18px] object-contain" /> : null;
+}
 
 /** Ruta de navegación (Inicio › Celulares › …) */
 export function Migas({ migas, className = "" }: { migas: Miga[]; className?: string }) {
@@ -11,7 +21,9 @@ export function Migas({ migas, className = "" }: { migas: Miga[]; className?: st
       {migas.map((m, i) => (
         <span key={i} className="flex items-center gap-1.5">
           {i > 0 && <span aria-hidden="true" className="text-tinta-3">›</span>}
-          {m.href ? <a href={m.href} className="toque hover:text-tinta hover:underline">{m.texto}</a> : <span aria-current="page" className="text-tinta">{m.texto}</span>}
+          {m.href
+            ? <a href={m.href} className="toque inline-flex items-center gap-1 hover:text-tinta hover:underline">{iconoMiga(m)}{m.texto}</a>
+            : <span aria-current="page" className="text-tinta">{m.texto}</span>}
         </span>
       ))}
     </nav>

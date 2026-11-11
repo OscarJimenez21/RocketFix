@@ -11,7 +11,7 @@ export default {
           DEFAULT: "#0B8457", // verde principal
           hover: "#097049",
           // Verde para textos y enlaces sobre blanco o sobre el fondo claro (5,7:1); el verde principal ahí solo da 4,4:1
-          texto: "#097049",
+          texto: "rgb(var(--c-marca-texto) / <alpha-value>)",
           claro: "#3DD598",
           menta: "#5BE0A9",
           // Menta más clara (la del eslogan de la tarjeta): para textos pequeños sobre el verde medio, donde la menta solo da 3,9:1
@@ -19,15 +19,22 @@ export default {
           medio: "#0A6B4B",
           oscuro: "#053D2B",
           noche: "#03241B",
-          suave: "#E7F3EC"
+          // Cambia en el modo noche (ver --c-… en index.css): verde muy claro de día, verde oscuro de noche
+          suave: "rgb(var(--c-marca-suave) / <alpha-value>)"
         },
         // Naranja del cohete: solo para la acción principal y detalles puntuales. "texto" se lee sobre fondos claros (7:1)
         // "tinta": texto sobre el naranja (el mismo de la tienda original), 6,7:1; el blanco sobre naranja solo da 2,8:1
-        acento: { DEFAULT: "#FF6B2C", hover: "#E85A1D", suave: "#FFF0E8", texto: "#9A3412", tinta: "#1F0B00" },
+        // suave y texto cambian en el modo noche (naranja muy oscuro de fondo y naranja claro de texto)
+      acento: { DEFAULT: "#FF6B2C", hover: "#E85A1D", suave: "rgb(var(--c-acento-suave) / <alpha-value>)", texto: "rgb(var(--c-acento-texto) / <alpha-value>)", tinta: "#1F0B00" },
         // tinta-3 cumple contraste 4,5:1 sobre blanco y sobre el fondo claro para textos pequeños
-        tinta: { DEFAULT: "#0F1F18", 2: "#4A5D53", 3: "#5F6F66" },
-        fondo: "#F4F8F6",
-        linea: { DEFAULT: "#DCE6E0", fuerte: "#C5D3CA" },
+        // Los neutros salen de variables (index.css): así el modo noche (idea 30) los cambia todos a la vez sin tocar cada
+        // componente. «superficie» es el blanco de las tarjetas y paneles (de noche, verde muy oscuro); «oscuro» es el casi
+        // negro de los avisos y etiquetas oscuras, que no cambia de noche
+        tinta: { DEFAULT: "rgb(var(--c-tinta) / <alpha-value>)", 2: "rgb(var(--c-tinta-2) / <alpha-value>)", 3: "rgb(var(--c-tinta-3) / <alpha-value>)" },
+        fondo: "rgb(var(--c-fondo) / <alpha-value>)",
+        linea: { DEFAULT: "rgb(var(--c-linea) / <alpha-value>)", fuerte: "rgb(var(--c-linea-fuerte) / <alpha-value>)" },
+        superficie: "rgb(var(--c-superficie) / <alpha-value>)",
+        oscuro: "#0F1F18",
         // Verde WhatsApp un poco más oscuro para que el texto blanco se lea bien (contraste 4,7:1)
         wa: { DEFAULT: "#168540", hover: "#116B33", vivo: "#25D366" }
       },

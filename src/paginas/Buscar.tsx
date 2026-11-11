@@ -9,7 +9,7 @@ import { TarjetaProducto } from "../components/TarjetaProducto";
 import { buscarProductos } from "../lib/busqueda";
 import { hrefBusqueda } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
-import { CohetePerdido } from "./NoEncontrada";
+import { Astronauta } from "../components/Astronauta";
 
 const PAGINA = 24;
 interface Vista { orden: "rel" | "menor" | "mayor"; limite: number }
@@ -58,7 +58,7 @@ export function Buscar({ q }: { q: string }) {
           </>
         ) : (
           <div className="mx-auto max-w-2xl rounded-md border border-dashed border-linea-fuerte px-6 py-10 text-center">
-            {texto && <CohetePerdido className="mb-5" />}
+            {texto && <Astronauta className="mb-5" />}
             {texto && <p className="font-semibold">Ningún producto del catálogo coincide con “{texto}”.</p>}
             <p className="mt-1 text-sm text-tinta-2">Revisa cómo está escrito o prueba con una palabra más corta (por ejemplo, la marca o el modelo). Si no está en la tienda, pregúntanos: puede que lo consigamos por pedido.</p>
             <a href={waLink(texto ? `Hola, estoy buscando: ${texto}` : undefined)} target="_blank" rel="noopener" className="btn btn-wa mt-5"><IconoWhatsApp />Preguntar por WhatsApp</a>

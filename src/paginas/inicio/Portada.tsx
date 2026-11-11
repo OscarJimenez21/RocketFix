@@ -102,7 +102,7 @@ function Horizonte() {
       </defs>
       {/* Resplandor ancho (la mitad de abajo queda tapada por el blanco), el planeta y la línea fina encima */}
       <path d={curva} fill="none" stroke="url(#rf-atmosfera)" strokeOpacity="0.22" strokeWidth="14" vectorEffect="non-scaling-stroke" />
-      <path d={`${curva} Z`} fill="#fff" />
+      <path d={`${curva} Z`} className="fill-superficie" />
       <path d={curva} fill="none" stroke="url(#rf-atmosfera)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
     </svg>
   );
@@ -204,7 +204,7 @@ export function ComoComprar() {
   const lista = useRef<HTMLOListElement>(null);
   const visto = useVisto(lista);
   return (
-    <section id="como-comprar" aria-labelledby="t-como" className="border-b border-linea bg-marca-suave">
+    <section id="como-comprar" aria-labelledby="t-como" className="curva-abajo bg-marca-suave">
       <div className="contenedor py-10 sm:py-12">
         <h2 id="t-como" className="titulo-seccion titulo-trazo">Cómo comprar</h2>
         <ol ref={lista} data-visto={visto || undefined} className="pasos pasos-claros mt-7 grid gap-6 md:grid-cols-3 md:gap-8">

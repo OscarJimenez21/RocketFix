@@ -14,6 +14,11 @@ import { Servicios } from "./inicio/Servicios";
 import { Confianza } from "./inicio/Confianza";
 import { IdeasParaRegalar, RegalosPorPresupuesto } from "./inicio/Regalos";
 import { REGALOS } from "../lib/temporada";
+import { useVistos } from "../lib/vistos";
+import { Recientes } from "../components/ProductoExtras";
+import { BarraSecciones } from "./inicio/BarraSecciones";
+import { Envios } from "./inicio/Envios";
+import { TuCelular } from "./inicio/TuCelular";
 
 // Las secciones de cada fila son siempre las mismas listas: así la fila no se vuelve a calcular en cada dibujo
 // (con tiendas={["cel"]} llegaba una lista nueva cada vez y el useMemo de Coleccion nunca servía)
@@ -22,6 +27,8 @@ const SOLO_PC: TiendaId[] = ["pc"];
 const SOLO_COMP: TiendaId[] = ["comp"];
 
 export function Inicio({ ancla }: { ancla?: string }) {
+  // Idea 15: los productos que la persona vio hace poco (en este navegador), si son 2 o más
+  const vistos = useVistos();
   const vendidos = MAS_VENDIDOS.map(id => porId[id]).filter((p): p is Producto => Boolean(p) && !p?.consultar);
 
   // #categorias, #servicios, #calificaciones, #contacto, #orden y #como-comprar llevan a su sección de la portada
@@ -37,12 +44,15 @@ export function Inicio({ ancla }: { ancla?: string }) {
       {/* Solo en diciembre (se encienden y se apagan solas por fecha) */}
       {REGALOS && <RegalosPorPresupuesto />}
       <ComoComprar />
+      <Envios />
       <Marcas />
       <Categorias />
+      <div id="recientes"><Recientes productos={vistos} /></div>
       {REGALOS && <IdeasParaRegalar />}
       <BandaGamer />
       <Carrusel id="vendidos" etiqueta={<><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</>} titulo="Los que todos quieren" productos={vendidos} cinta="Top ventas" gris />
       <BandaCelulares />
+      <TuCelular />
       <Coleccion id="celulares" etiqueta="Celulares" titulo="Estrena celular" tiendas={SOLO_CEL} />
       <BandaComputadores />
       <Coleccion id="computadores" etiqueta="Computadores" titulo="Portátiles y PC para cada necesidad" tiendas={SOLO_PC} gris />
@@ -50,6 +60,7 @@ export function Inicio({ ancla }: { ancla?: string }) {
       <Servicios />
       <Confianza />
       <Calificaciones />
+      <BarraSecciones />
     </>
   );
 }

@@ -12,8 +12,10 @@ import { waLink } from "../lib/whatsapp";
 import type { ZonaEntrega } from "../types";
 import { activa } from "../lib/animaciones";
 import { temblor, useMarco } from "../lib/movimiento";
+import { Cotizacion, Enviado, Sugerencias } from "./CarritoExtras";
 import { FotoProducto } from "./FotoProducto";
-import { IconoCerrar, IconoCheck, IconoTarjeta, IconoWhatsApp } from "./Iconos";
+import { Pesos } from "./Pesos";
+import { IconoCerrar, IconoCheck, IconoImprimir, IconoTarjeta, IconoWhatsApp } from "./Iconos";
 import { Cohete } from "./Logo";
 
 /** Cantidad de un producto en el carrito: al sumar, el número nuevo entra desde arriba; al restar, desde abajo */
@@ -40,7 +42,7 @@ function GuiaPasos({ vez }: { vez: number }) {
           {i < pasos.length - 1 && (
             <span aria-hidden="true" className={`absolute left-[calc(50%+16px)] top-[11px] w-[calc(100%-24px)] border-t-2 border-dotted ${i === 0 ? "border-marca/60" : "border-linea-fuerte"}`} />
           )}
-          <span className={`relative flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${i === 0 ? "bg-marca text-white" : i === 1 ? "bg-white text-marca ring-2 ring-marca" : "bg-white text-tinta-3 ring-1 ring-linea-fuerte"}`}>
+          <span className={`relative flex h-6 w-6 items-center justify-center rounded-full text-xs font-bold ${i === 0 ? "bg-marca text-white" : i === 1 ? "bg-superficie text-marca ring-2 ring-marca" : "bg-superficie text-tinta-3 ring-1 ring-linea-fuerte"}`}>
             {i === 0 ? <IconoCheck key={vez} className="dibujar h-3.5 w-3.5 [--retraso:280ms]" /> : i + 1}
           </span>
           <span className={`text-[12px] leading-tight ${i === 1 ? "font-semibold text-tinta" : "text-tinta-2"}`}>{t}{i === 0 && <span className="sr-only"> (hecho)</span>}</span>
@@ -59,7 +61,7 @@ function OpcionesEntrega({ zona, nombre, elegir }: { zona: ZonaEntrega; nombre: 
   return (
     <div ref={caja} className="relative grid grid-cols-2 gap-2">
       {opciones.map(([v, t]) => (
-        <label key={v} data-opcion className={`flex cursor-pointer items-center gap-2 rounded border bg-white px-3 py-2.5 text-sm font-semibold ${zona === v && !marco ? "border-marca ring-1 ring-marca" : "border-linea-fuerte"}`}>
+        <label key={v} data-opcion className={`flex cursor-pointer items-center gap-2 rounded border bg-superficie px-3 py-2.5 text-sm font-semibold ${zona === v && !marco ? "border-marca ring-1 ring-marca" : "border-linea-fuerte"}`}>
           <input type="radio" name={nombre} value={v} checked={zona === v} onChange={() => elegir(v)} className="accent-[#0B8457]" />{t}
         </label>
       ))}
@@ -82,6 +84,10 @@ export function Carrito() {
   const panel = useRef<HTMLDivElement>(null);
   const cerrar = useRef<HTMLButtonElement>(null);
   const id = useId();
+  // Idea 21: pantalla de «listo» después de abrir WhatsApp con el pedido (se quita al cerrar el carrito o al cambiarlo)
+  const [enviado, setEnviado] = useState(false);
+  useEffect(() => { if (!carritoAbierto) setEnviado(false); }, [carritoAbierto]);
+  useEffect(() => { setEnviado(false); }, [lineas]);
 
   useEffect(() => { try { sessionStorage.setItem(GUARDADO, JSON.stringify(d)); } catch { /* sin almacenamiento */ } }, [d]);
 
@@ -219,7 +225,7 @@ export function Carrito() {
       <div onClick={cerrarCarrito} aria-hidden="true"
         className={`absolute inset-0 bg-marca-noche/40 transition-opacity duration-300 ${carritoAbierto ? "opacity-100" : "opacity-0"}`} />
       <div ref={panel} role="dialog" aria-modal="true" aria-labelledby={`${id}-titulo`}
-        className={`absolute inset-y-0 right-0 flex w-full max-w-[440px] flex-col bg-white shadow-flota transition-transform duration-300 ease-cajon ${carritoAbierto ? "translate-x-0" : "translate-x-full"}`}>
+        className={`absolute inset-y-0 right-0 flex w-full max-w-[440px] flex-col overflow-hidden bg-superficie shadow-flota transition-transform duration-300 ease-cajon ${carritoAbierto ? "translate-x-0" : "translate-x-full"}`}>
         <header className="flex items-center justify-between border-b border-linea px-5 py-4">
           <h2 id={`${id}-titulo`} className="text-xl font-extrabold">Tu pedido</h2>
           <button ref={cerrar} type="button" onClick={cerrarCarrito} aria-label="Cerrar carrito" className="cerrar-gira presionable -my-1 -mr-2 flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo hover:text-tinta"><IconoCerrar /></button>
@@ -237,6 +243,8 @@ export function Carrito() {
             <p className="text-lg font-semibold">Tu carrito está vacío</p>
             <p className="text-sm text-tinta-2">Agrega celulares, computadores o accesorios y aquí armamos el mensaje para WhatsApp.</p>
             <button type="button" onClick={cerrarCarrito} className="btn btn-borde mt-2">Seguir viendo productos</button>
+            {/* Idea 20: tres de los más vendidos para empezar */}
+            <Sugerencias />
           </div>
         ) : (
           <>
@@ -300,10 +308,12 @@ export function Carrito() {
                   <label htmlFor={`${id}-nota`} className="rotulo">Nota <span className="opcional">(opcional)</span></label>
                   <input id={`${id}-nota`} name="nota" autoComplete="off" className="campo" placeholder="Color, si necesitas factura u otra indicación" value={d.nota} onChange={e => poner("nota", e.target.value)} />
                 </div>
-                <details className="rounded border border-linea bg-white">
+                <details className="rounded border border-linea bg-superficie">
                   <summary className="cursor-pointer px-3 py-2.5 text-sm font-semibold text-tinta-2">Ver el mensaje que se va a enviar</summary>
                   <pre className="whitespace-pre-wrap border-t border-linea px-3 py-3 font-mono text-xs leading-relaxed text-tinta-2">{mensaje}</pre>
                 </details>
+                {/* Idea 22: la cotización en una hoja para imprimir o guardar en PDF (con los productos, el envío y el total) */}
+                <button type="button" onClick={() => window.print()} className="btn btn-borde btn-sm justify-self-start"><IconoImprimir className="h-4 w-4" />Imprimir o guardar cotización en PDF</button>
               </form>
               {/* En celular las notas van aquí, al final del formulario, y el pie fijo queda solo con el total y los botones */}
               <div className="bg-fondo px-5 pb-5 sm:[@media(min-height:780px)]:hidden">{notas}</div>
@@ -328,7 +338,7 @@ export function Carrito() {
                       de la parte llena sin salirse por los lados. Al llegar al envío gratis da un salto (la clave lo repite) */}
                   <div className="pointer-events-none absolute top-1/2 h-0 w-0 transition-[left] duration-300 ease-salida" style={{ left: `calc(${avance} * (100% - 1.5rem))` }}>
                     <span className="absolute left-0 top-0 block -translate-y-1/2">
-                      <span key={festejo} className={`flex h-6 w-6 items-center justify-center rounded-full transition-colors duration-300 ${envio ? "bg-white text-marca ring-1 ring-linea-fuerte" : "bg-marca text-white"} ${festejo ? "motion-safe:animate-brinco" : ""}`}>
+                      <span key={festejo} className={`flex h-6 w-6 items-center justify-center rounded-full transition-colors duration-300 ${envio ? "bg-superficie text-marca ring-1 ring-linea-fuerte" : "bg-marca text-white"} ${festejo ? "motion-safe:animate-brinco" : ""}`}>
                         <Cohete className="h-4 w-4 rotate-90" />
                       </span>
                     </span>
@@ -338,12 +348,12 @@ export function Carrito() {
               <div className="mt-3 flex items-baseline justify-between border-t border-linea pt-3">
                 <span className="font-semibold">Total</span>
                 {/* La clave cambia con el total: así se ilumina en verde cada vez que cambia */}
-                <strong key={vezTotal} className={`font-display text-2xl tabular-nums ${vezTotal ? "motion-safe:animate-resaltar" : ""}`}>{dinero(total)}</strong>
+                <strong key={vezTotal} className={`font-display text-2xl tabular-nums ${vezTotal ? "motion-safe:animate-resaltar" : ""}`}><Pesos valor={total} /></strong>
               </div>
               {errores.texto && <p id={`${id}-error`} className="alerta mt-2" role="alert">{errores.texto}</p>}
               {/* El pedido por WhatsApp es el camino principal: ahí se confirma la disponibilidad antes de cobrar */}
               <div className="mt-3 grid gap-2">
-                <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); }} className={`btn btn-wa barrido w-full${listo ? " barrido-enviar" : ""}`}>
+                <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); else setEnviado(true); }} className={`btn btn-wa barrido w-full${listo ? " barrido-enviar" : ""}`}>
                   <IconoWhatsApp />Enviar pedido por WhatsApp
                 </a>
                 {boldActivo() && (
@@ -353,6 +363,8 @@ export function Carrito() {
               {/* En pantallas anchas y altas (computador, tablet) las notas siguen bajo los botones */}
               <div className="mt-2 hidden sm:[@media(min-height:780px)]:block">{notas}</div>
             </footer>
+            {enviado && <Enviado enlace={waLink(mensaje)} volver={() => setEnviado(false)} seguir={cerrarCarrito} />}
+            <Cotizacion lineas={lineas} subtotal={subtotal} envio={envio} total={total} entrega={nacional ? "Envío a otra ciudad" : "Envío en Bogotá"} />
           </>
         )}
       </div>

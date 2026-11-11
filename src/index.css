@@ -25,6 +25,37 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+/* Colores neutros de la página (tailwind.config.js los toma de aquí). De día son los de siempre; con el modo noche
+   (idea 30, data-tema="noche" en <html>, ver lib/tema.ts) pasan a los verdes oscuros de la marca. Van como «R G B» para
+   que Tailwind les pueda poner transparencia (bg-fondo/50…) */
+:root {
+  --c-tinta: 15 31 24; --c-tinta-2: 74 93 83; --c-tinta-3: 95 111 102;
+  --c-fondo: 244 248 246; --c-linea: 220 230 224; --c-linea-fuerte: 197 211 202;
+  --c-superficie: 255 255 255; --c-marca-suave: 231 243 236; --c-marca-texto: 9 112 73;
+}
+/* Partes que siempre van claras, también de noche: la foto de cada producto (su «escenario»), los logos de las marcas
+   y de los medios de pago. Adentro, los textos y bordes vuelven a los colores de día */
+.escenario, .claro-siempre {
+  --c-tinta: 15 31 24; --c-tinta-2: 74 93 83; --c-tinta-3: 95 111 102;
+  --c-fondo: 244 248 246; --c-linea: 220 230 224; --c-linea-fuerte: 197 211 202;
+  --c-superficie: 255 255 255; --c-marca-suave: 231 243 236; --c-marca-texto: 9 112 73;
+}
+:root { --c-acento-suave: 255 240 232; --c-acento-texto: 154 52 18; }
+.escenario, .claro-siempre { --c-acento-suave: 255 240 232; --c-acento-texto: 154 52 18; }
+:root[data-tema="noche"] {
+  color-scheme: dark;
+  --c-tinta: 228 240 233; --c-tinta-2: 172 194 183; --c-tinta-3: 146 170 158;
+  --c-fondo: 8 24 18; --c-linea: 34 60 49; --c-linea-fuerte: 52 84 70;
+  --c-superficie: 13 32 25; --c-marca-suave: 17 56 41; --c-marca-texto: 91 224 169;
+  --c-acento-suave: 74 34 16; --c-acento-texto: 255 176 137;
+}
+/* De noche, los textos en verde oscuro (sobre el verde suave, en etiquetas y botones «Agregar») pasan a la menta clara;
+   los que van sobre un botón blanco, la foto del producto o un logo se quedan como de día */
+:root[data-tema="noche"] :is(.text-marca-oscuro, .text-marca-medio):not(.bg-white, .claro-siempre *, .escenario *),
+:root[data-tema="noche"] .btn-suave, :root[data-tema="noche"] .paso-num { color: #9FE9C9; }
+:root[data-tema="noche"] .btn-suave:hover { color: #fff; }
+:root[data-tema="noche"] .pasos[data-visto] .paso-num { color: #fff; }
+
 /* Base: letras de la marca, fondo y foco visible para teclado */
 @layer base {
   /* Espacio para la cabecera fija al saltar a una sección (en celular la cabecera incluye el buscador) */
@@ -37,10 +68,23 @@
   /* iPhone agranda la página al escribir en campos con letra menor a 16 px y no la devuelve */
   @media (pointer: coarse) { input, select, textarea { font-size: 16px !important; } }
   @media (min-width: 1024px) { html { scroll-padding-top: 5.5rem; } }
-  body { @apply bg-white font-sans text-tinta antialiased; font-size: 16px; line-height: 1.5; }
+  body { @apply bg-superficie font-sans text-tinta antialiased; font-size: 16px; line-height: 1.5; }
   h1, h2, h3 { @apply font-display text-tinta; font-stretch: 104%; letter-spacing: -0.01em; text-wrap: balance; }
-  :focus-visible { outline: 2px solid theme("colors.marca.DEFAULT"); outline-offset: 2px; }
-  ::selection { background: theme("colors.marca.suave"); }
+  /* Idea 33: anillo de foco en dos tonos, el verde de la marca y un halo menta alrededor (se ve sobre fondos claros y
+     oscuros; el verde solo da el contraste que pide WCAG y el menta lo hace más visible) */
+  :focus-visible { outline: 2px solid theme("colors.marca.DEFAULT"); outline-offset: 2px; box-shadow: 0 0 0 5px rgb(91 224 169 / 0.45); }
+  /* Los títulos que reciben el foco al cambiar de página (tabindex -1) no se enmarcan: no son botones */
+  :is(h1, h2, main)[tabindex="-1"]:focus-visible { outline: none; box-shadow: none; }
+  /* Idea 31: el texto que se selecciona se pinta de menta (en vez del azul del navegador) */
+  ::selection { background: rgb(91 224 169 / 0.55); color: theme("colors.marca.noche"); }
+  /* Idea 32: barra de desplazamiento de la página con los colores de la marca (en computador; en celular no se ve) */
+  html { scrollbar-color: rgb(11 132 87 / 0.55) rgb(var(--c-fondo)); }
+  @media (hover: hover) and (pointer: fine) {
+    html::-webkit-scrollbar { width: 12px; }
+    html::-webkit-scrollbar-track { background: rgb(var(--c-fondo)); }
+    html::-webkit-scrollbar-thumb { background: rgb(11 132 87 / 0.55); border-radius: 9999px; border: 3px solid rgb(var(--c-fondo)); }
+    html::-webkit-scrollbar-thumb:hover { background: theme("colors.marca.DEFAULT"); }
+  }
   [hidden] { display: none !important; }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
@@ -69,19 +113,19 @@
   .btn-primario { @apply bg-acento text-acento-tinta hover:bg-acento-hover; }
   .btn-marca { @apply bg-marca text-white hover:bg-marca-hover; }
   .btn-wa { @apply bg-wa text-white hover:bg-wa-hover; }
-  .btn-borde { @apply border border-linea-fuerte bg-white text-tinta hover:border-tinta-2; }
+  .btn-borde { @apply border border-linea-fuerte bg-superficie text-tinta hover:border-tinta-2; }
   .btn-suave { @apply bg-marca-suave text-marca-oscuro hover:bg-marca hover:text-white; }
   .btn-claro { @apply border border-white/35 bg-transparent text-white hover:bg-white/10; }
   .enlace { @apply font-semibold text-marca-texto underline-offset-4 hover:underline; }
   /* Enlace que va solo en su renglón (no dentro de un párrafo): con alto táctil de 44 px */
   .enlace-suelto { @apply enlace inline-flex min-h-[44px] items-center; }
 
-  .tarjeta { @apply rounded-md border border-linea bg-white; }
+  .tarjeta { @apply rounded-md border border-linea bg-superficie; }
   /* En celular las pastillas miden 44 px de alto; con mouse (desde 640 px) basta con 36 */
-  .chip { @apply inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full border border-linea-fuerte bg-white px-3.5 py-1.5 text-sm text-tinta transition-[color,background-color,border-color,transform] duration-150 ease-salida hover:border-tinta-2 active:scale-[0.97] sm:min-h-[36px]; }
+  .chip { @apply inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full border border-linea-fuerte bg-superficie px-3.5 py-1.5 text-sm text-tinta transition-[color,background-color,border-color,transform] duration-150 ease-salida hover:border-tinta-2 active:scale-[0.97] sm:min-h-[36px]; }
   .chip[aria-pressed="true"], .chip[aria-current="page"] { @apply border-marca bg-marca text-white; }
 
-  .campo { @apply block min-h-[44px] w-full rounded border border-linea-fuerte bg-white px-3 py-2.5 text-[15px] text-tinta placeholder:text-tinta-3 focus:border-marca focus:outline-none focus:ring-2 focus:ring-marca/20; }
+  .campo { @apply block min-h-[44px] w-full rounded border border-linea-fuerte bg-superficie px-3 py-2.5 text-[15px] text-tinta placeholder:text-tinta-3 focus:border-marca focus:outline-none focus:ring-2 focus:ring-marca/20; }
   .campo-invalido { @apply border-red-600 focus:border-red-600 focus:ring-red-600/20; }
   .rotulo { @apply mb-1.5 block text-sm font-semibold text-tinta; }
   .opcional { @apply font-normal text-tinta-3; }
@@ -131,7 +175,7 @@
   }
   @keyframes paso { 40% { transform: scale(1.25); } }
   /* En la franja verde clara de la portada, los círculos sin encender son blancos (el verde claro no se vería sobre ella) */
-  .pasos-claros .paso-num { @apply bg-white text-marca ring-1 ring-marca/25; }
+  .pasos-claros .paso-num { @apply bg-superficie text-marca ring-1 ring-marca/25; }
   .pasos-claros[data-visto] .paso-num { @apply bg-marca text-white ring-marca; }
 
   /* Grupos que aparecen por partes (mosaico de categorías, tarjetas de servicio): cada pieza se marca con data-visto al entrar
@@ -315,7 +359,7 @@
   /* 55 · WhatsApp flotante (WhatsAppFlotante.tsx): el mensaje entra desde el botón, el botón lanza ondas mientras el
      mensaje está abierto y, con el mouse encima, el cohetico de la esquina despega un poco */
   .wa-fondo { background-color: #EFEAE2; background-image: radial-gradient(rgb(15 61 46 / 0.07) 1px, transparent 1px); background-size: 14px 14px; }
-  .wa-burbuja::before { content: ""; position: absolute; left: -7px; top: 0; border-width: 0 8px 9px 0; border-style: solid; border-color: transparent #fff transparent transparent; }
+  .wa-burbuja::before { content: ""; position: absolute; left: -7px; top: 0; border-width: 0 8px 9px 0; border-style: solid; border-color: transparent rgb(var(--c-superficie)) transparent transparent; }
   .wa-cohete { transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }
   @media (prefers-reduced-motion: no-preference) {
     :root:not(.sin-a55) .wa-aviso { transform-origin: 100% 100%; animation: wa-aviso 360ms cubic-bezier(0.23, 1, 0.32, 1) both; }
@@ -384,6 +428,66 @@
     }
   }
   @keyframes sombra-cabecera { from { opacity: 0; } to { opacity: 1; } }
+  /* 60 · Cabecera compacta: al bajar, el logo se achica un poco y el fondo se vuelve translúcido con desenfoque (se ve
+     pasar la página por debajo). Sigue al desplazamiento, sin mover nada de lugar */
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      :root:not(.sin-a60) .cabecera { animation: cabecera-compacta linear both; animation-timeline: scroll(root); animation-range: 0 160px; }
+      :root:not(.sin-a60) .cabecera-logo { transform-origin: left center; animation: logo-compacto linear both; animation-timeline: scroll(root); animation-range: 0 160px; }
+    }
+  }
+  @keyframes cabecera-compacta { to { background-color: rgb(var(--c-superficie) / 0.84); -webkit-backdrop-filter: saturate(1.6) blur(14px); backdrop-filter: saturate(1.6) blur(14px); } }
+  @keyframes logo-compacto { to { transform: scale(0.9); } }
+  /* 61 · Mientras llega una foto de producto, un brillo suave recorre su escenario (en vez de un cuadro blanco quieto) */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a61) .escenario:has(> img[data-cargando]), :root:not(.sin-a61) .escenario:has(> * > img[data-cargando]) {
+      background-image: linear-gradient(100deg, transparent 35%, rgb(255 255 255 / 0.85) 50%, transparent 65%), radial-gradient(120% 95% at 50% 40%, #F3F7F5 48%, #E6EFEA 100%);
+      background-size: 250% 100%, 100% 100%; background-repeat: no-repeat; animation: brillo-carga 1.3s linear infinite;
+    }
+  }
+  @keyframes brillo-carga { from { background-position: 120% 0, 0 0; } to { background-position: -120% 0, 0 0; } }
+
+  /* 64 · La foto vuela de la tarjeta a la página del producto (ver lib/transicion.ts). El resto de la página cambia con
+     un fundido corto */
+  :root.vuelo-foto [data-foto-principal] { view-transition-name: foto-producto; }
+  ::view-transition-group(foto-producto) { animation-duration: 420ms; animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1); }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 180ms; }
+  /* 65 · Carrito: al enviar el pedido por WhatsApp, el cohete tiembla un instante en su plataforma y despega */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a65) .pedido-despega { display: block; animation: pedido-despega 1300ms cubic-bezier(0.55, 0, 1, 0.45) 250ms forwards; }
+  }
+  @keyframes pedido-despega {
+    0%, 30% { transform: translate(0, 0); }
+    8%, 22% { transform: translate(-1px, 1px); } 15% { transform: translate(1px, 0); }
+    100% { transform: translate(0, -120px); opacity: 0; }
+  }
+
+  /* Idea 22: la cotización del carrito solo aparece al imprimir; al imprimir, el resto de la página se esconde */
+  .solo-imprimir { display: none; }
+  @media print {
+    body > *:not(.solo-imprimir) { display: none !important; }
+    .solo-imprimir { display: block; padding: 8px; background: #fff; color: rgb(15 31 24); }
+    @page { margin: 14mm; }
+  }
+  /* 66 · Logos de marcas: en computador van en gris y se pintan con su color al pasar el mouse (en celular, siempre a color) */
+  @media (hover: hover) and (pointer: fine) {
+    :root:not(.sin-a66) .logo-gris { filter: grayscale(1); opacity: 0.72; transition: filter 220ms cubic-bezier(0.23, 1, 0.32, 1), opacity 220ms; }
+    :root:not(.sin-a66) .marca-logo:hover .logo-gris, :root:not(.sin-a66) .marca-logo:focus-visible .logo-gris { filter: none; opacity: 1; }
+  }
+  /* 67 · Mapa de envíos: la primera vez que se ve, las rutas se dibujan desde Bogotá y las ciudades laten una vez */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a67) .mapa-envios .mapa-pulso { transform-box: fill-box; transform-origin: center; opacity: 0; }
+    :root:not(.sin-a67) .mapa-envios[data-visto] .mapa-pulso { animation: mapa-pulso 1600ms cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: calc(var(--orden, 0) * 120ms + 500ms); }
+    :root:not(.sin-a67) .mapa-envios:not([data-visto]) .mapa-ruta { opacity: 0; }
+    :root:not(.sin-a67) .mapa-envios .mapa-ruta { transition: opacity 900ms cubic-bezier(0.23, 1, 0.32, 1); }
+  }
+  @keyframes mapa-pulso { 0% { opacity: 0.9; transform: scale(0.4); } 100% { opacity: 0; transform: scale(2.4); } }
+  /* 62 · Tarjeta de producto: con el mouse encima, la segunda foto de la galería aparece sobre la primera */
+  .segunda-foto { opacity: 0; }
+  @media (hover: hover) and (pointer: fine) {
+    :root:not(.sin-a62) .group:hover .segunda-foto:not([data-cargando]) { opacity: 1; }
+    :root:not(.sin-a62) .group:hover:has(.segunda-foto:not([data-cargando])) .foto-principal { opacity: 0; }
+  }
 
   /* 8 · Botón de WhatsApp de la cabecera: saluda una vez a los 4 segundos (solo en la primera página de la visita) */
   @media (prefers-reduced-motion: no-preference) {
@@ -457,7 +561,7 @@
   :root.sin-a22 .entrega-iconos .icono-ventaja { animation: none !important; opacity: 1 !important; }
 
   /* 23 · Producto: mientras carga, un esqueleto de la página con un brillo que lo recorre */
-  .esqueleto { position: relative; overflow: hidden; border-radius: 6px; background: theme("colors.fondo"); }
+  .esqueleto { position: relative; overflow: hidden; border-radius: 6px; background: rgb(var(--c-fondo)); }
   @media (prefers-reduced-motion: no-preference) {
     .esqueleto::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); animation: esqueleto 1.3s ease-in-out infinite;
       background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.8), transparent); }
@@ -537,7 +641,7 @@
   /* 37 · Formularios: el borde y el anillo del campo aparecen suave al escribir, y su rótulo se pinta de verde */
   .rotulo { transition: color 160ms; }
   :root:not(.sin-a37) .campo { transition: border-color 160ms, box-shadow 220ms cubic-bezier(0.23, 1, 0.32, 1); }
-  :root:not(.sin-a37) div:has(> .campo:focus) > .rotulo { color: theme("colors.marca.texto"); }
+  :root:not(.sin-a37) div:has(> .campo:focus) > .rotulo { color: rgb(var(--c-marca-texto)); }
 
   /* 38 · Blog: el dibujo de la tarjeta se mece con el mouse encima */
   @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
@@ -598,7 +702,7 @@
   /* Dibujos de producto (se usan para servicios y cuando falta una foto) */
   .ilus { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
   .ilus * { fill: theme("colors.white"); }
-  .ilus .a { fill: theme("colors.marca.suave"); }
+  .ilus .a { fill: #E7F3EC; }
   .ilus .n { fill: none; }
   .ilus .k { fill: currentColor; stroke: none; }
   .ilus .r { fill: theme("colors.acento.DEFAULT"); stroke: none; }
@@ -659,3 +763,27 @@
   .ancho-108 { font-stretch: 108%; }
   .ancho-122 { font-stretch: 122%; }
 }
+
+/* Idea 28: bordes curvos entre algunas franjas de la portada. La franja dibuja una curva suave de su mismo fondo que entra
+   en la siguiente (curva-abajo) o en la anterior (curva-arriba). Las franjas vecinas tienen espacio arriba y abajo para ella */
+.curva-abajo, .curva-arriba { position: relative; z-index: 1; }
+.curva-abajo::after, .curva-arriba::before {
+  content: ""; position: absolute; left: 0; right: 0; height: 26px; pointer-events: none; background: inherit; background-image: none;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 26' preserveAspectRatio='none'%3E%3Cpath d='M0 0h1440C1080 34 360 34 0 0z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 26' preserveAspectRatio='none'%3E%3Cpath d='M0 0h1440C1080 34 360 34 0 0z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.curva-abajo::after { top: 100%; }
+.curva-arriba::before { bottom: 100%; transform: scaleY(-1); }
+
+/* Idea 29: textura de órbitas y estrellas muy suave en las franjas claras (como el cielo de la portada, pero en verde
+   casi transparente). Es una sola imagen arriba a la derecha; no se repite */
+.textura-orbitas {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 520 360' fill='none' stroke='%230B8457' stroke-opacity='.13' stroke-width='1.5'%3E%3Cellipse cx='380' cy='120' rx='300' ry='92' transform='rotate(-14 380 120)' stroke-dasharray='2 9' stroke-linecap='round'/%3E%3Cellipse cx='380' cy='120' rx='190' ry='58' transform='rotate(-14 380 120)'/%3E%3Cg fill='%230B8457' fill-opacity='.18' stroke='none'%3E%3Ccircle cx='120' cy='60' r='2'/%3E%3Ccircle cx='470' cy='40' r='2.5'/%3E%3Ccircle cx='300' cy='250' r='1.6'/%3E%3Ccircle cx='510' cy='210' r='2'/%3E%3Ccircle cx='210' cy='160' r='1.4'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right -60px top -30px; background-size: min(620px, 110%) auto;
+}
+
+/* 63 apagada: el subrayado de la barra de secciones salta en vez de deslizarse */
+:root.sin-a63 .subrayado-seccion { transition: none !important; }
+
+/* Idea 37: control de precio máximo de cada sección, con el verde de la marca */
+.rango-precio { accent-color: #0B8457; height: 44px; cursor: pointer; }

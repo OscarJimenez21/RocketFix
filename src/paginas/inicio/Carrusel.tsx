@@ -3,9 +3,9 @@ import { deTienda, desde, etiquetaDe, rotuloPrecio } from "../../data/catalogo";
 import { tiendaPorId } from "../../data/tiendas";
 import { FlechaMovil } from "../../components/FilaProductos";
 import { FotoProducto } from "../../components/FotoProducto";
+import { Pesos } from "../../components/Pesos";
 import { Insignia } from "../../components/TarjetaProducto";
 import { useEnPantalla, useVisto } from "../../lib/enPantalla";
-import { dinero } from "../../lib/formato";
 import { hrefProducto } from "../../lib/rutas";
 import type { Producto, TiendaId } from "../../types";
 import { BotonPausa } from "./BotonPausa";
@@ -16,7 +16,7 @@ const PASO_CARRUSEL = 3500;
     Las filas van debajo de la portada: sus fotos cargan cuando la persona se acerca a ellas */
 function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: string }) {
   return (
-    <a href={hrefProducto(p.id)} className="tarjeta-eleva group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-white transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
+    <a href={hrefProducto(p.id)} className="tarjeta-eleva group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-superficie transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
       <div className="escenario relative aspect-square p-7 sm:p-8">
         {/* Ancho de la tarjeta: 74 % de la pantalla en celular, 44 % en tableta y unos 290 px en computador */}
         <FotoProducto producto={p} alt={p.nombre} tamanos="(min-width: 1024px) 290px, (min-width: 640px) 44vw, 74vw" className="motion-safe:group-hover:scale-[1.05]" />
@@ -34,7 +34,7 @@ function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: st
         <p className="mt-2 text-xs leading-none text-tinta-3">{p.consultar ? "Precio" : rotuloPrecio(p)}</p>
         {p.consultar
           ? <p className="mt-1 font-display text-[17px] font-bold leading-tight text-tinta-2">Preguntar disponibilidad</p>
-          : <p className="mt-1 font-display text-[22px] font-bold leading-tight tabular-nums text-tinta">{dinero(desde(p))}</p>}
+          : <p className="mt-1 font-display text-[22px] font-bold leading-tight tabular-nums text-tinta"><Pesos valor={desde(p)} /></p>}
       </div>
     </a>
   );
@@ -80,9 +80,9 @@ export function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta,
   };
   useEffect(() => () => window.clearTimeout(reanudar.current), []);
 
-  const flecha = "presionable group flex h-11 w-11 items-center justify-center rounded-full border border-linea-fuerte bg-white hover:border-tinta-2";
+  const flecha = "presionable group flex h-11 w-11 items-center justify-center rounded-full border border-linea-fuerte bg-superficie hover:border-tinta-2";
   return (
-    <section aria-labelledby={`t-${id}`} className={gris ? "border-y border-linea bg-fondo" : ""}>
+    <section aria-labelledby={`t-${id}`} className={gris ? "textura-orbitas border-y border-linea bg-fondo" : ""}>
       <div className="contenedor py-12 sm:py-14">
         <div className="mb-6 flex items-end justify-between gap-4">
           <div className="min-w-0">
@@ -111,7 +111,7 @@ export function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta,
           ))}
           {final && (
             <li className="w-[74%] shrink-0 snap-start sm:w-[44%] lg:w-[calc(25%-15px)]">
-              <a href={final.href} className="tarjeta-eleva group flex h-full min-h-[260px] flex-col items-center justify-center gap-2 rounded-lg border border-linea-fuerte bg-white p-6 text-center transition-[border-color,box-shadow] duration-200 hover:border-marca hover:shadow-tarjeta">
+              <a href={final.href} className="tarjeta-eleva group flex h-full min-h-[260px] flex-col items-center justify-center gap-2 rounded-lg border border-linea-fuerte bg-superficie p-6 text-center transition-[border-color,box-shadow] duration-200 hover:border-marca hover:shadow-tarjeta">
                 <span className="font-display text-[44px] font-extrabold leading-none tabular-nums text-marca-texto">{final.cantidad}</span>
                 <span className="text-[15px] font-semibold text-tinta-2">{final.texto}</span>
                 <span className="btn btn-borde mt-3">Ver todos<FlechaMovil /></span>

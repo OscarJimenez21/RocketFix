@@ -9,8 +9,9 @@ export const FlechaMovil = ({ dir = 1 }: { dir?: 1 | -1 }) => (
 );
 
 /** Fila de productos que se desliza de lado (con el dedo, la rueda o las flechas). No avanza sola.
-    `encabezado` va a la izquierda de las flechas; `cinta` se muestra sobre la foto de cada tarjeta. */
-export function FilaProductos({ productos, etiqueta, encabezado, cinta }: { productos: Producto[]; etiqueta: string; encabezado?: ReactNode; cinta?: string }) {
+    `encabezado` va a la izquierda de las flechas; `cinta` se muestra sobre la foto de cada tarjeta.
+    `verTodo` (idea 9): al final de la fila, una tarjeta más que lleva a la sección completa. */
+export function FilaProductos({ productos, etiqueta, encabezado, cinta, verTodo }: { productos: Producto[]; etiqueta: string; encabezado?: ReactNode; cinta?: string; verTodo?: { href: string; texto: string } }) {
   const fila = useRef<HTMLUListElement>(null);
   const mover = (dir: 1 | -1) => {
     const el = fila.current;
@@ -19,7 +20,7 @@ export function FilaProductos({ productos, etiqueta, encabezado, cinta }: { prod
     el.scrollBy({ left: dir * ((tarjeta?.getBoundingClientRect().width ?? 260) + 16) * 2, behavior: "smooth" });
   };
   // text-tinta: la flecha es oscura aunque la fila vaya sobre un fondo oscuro (la de regalos, en diciembre)
-  const flecha = "presionable group flex h-10 w-10 items-center justify-center rounded-full border border-linea-fuerte bg-white text-tinta hover:border-tinta-2";
+  const flecha = "presionable group flex h-10 w-10 items-center justify-center rounded-full border border-linea-fuerte bg-superficie text-tinta hover:border-tinta-2";
   return (
     <div>
       <div className="mb-5 flex items-end justify-between gap-4">
@@ -35,6 +36,14 @@ export function FilaProductos({ productos, etiqueta, encabezado, cinta }: { prod
         {productos.map(p => (
           <li key={p.id} className="w-[46%] shrink-0 snap-start sm:w-[31%] lg:w-[calc(20%-13px)]"><TarjetaProducto producto={p} cinta={cinta} /></li>
         ))}
+        {verTodo && (
+          <li className="w-[46%] shrink-0 snap-start sm:w-[31%] lg:w-[calc(20%-13px)]">
+            <a href={verTodo.href} className="tarjeta group flex h-full min-h-[260px] flex-col items-center justify-center gap-3 border-dashed p-4 text-center font-semibold text-marca-texto hover:border-marca">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-marca-suave"><FlechaMovil /></span>
+              {verTodo.texto}
+            </a>
+          </li>
+        )}
       </ul>
     </div>
   );

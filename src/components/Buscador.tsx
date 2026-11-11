@@ -1,11 +1,11 @@
 /* Buscador general de la cabecera: sugerencias al escribir (productos y secciones) y búsquedas populares al tocarlo */
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { BUSQUEDAS_POPULARES, TIENDA_VISTA, VISTAS, deTienda, desde } from "../data/catalogo";
-import { TIENDAS } from "../data/tiendas";
+import { RECORTE, TIENDAS } from "../data/tiendas";
 import { activa, reducirMovimiento } from "../lib/animaciones";
 import { buscarProductos, palabrasDe, resaltar } from "../lib/busqueda";
 import { useEnPantalla } from "../lib/enPantalla";
-import { dinero, norm } from "../lib/formato";
+import { dinero, norm, recurso } from "../lib/formato";
 import { hrefBusqueda, hrefProducto } from "../lib/rutas";
 import { FotoProducto } from "./FotoProducto";
 import { IconoBuscar } from "./Iconos";
@@ -93,7 +93,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
           role="combobox" aria-expanded={hayLista} aria-controls={hayLista ? idLista : undefined} aria-autocomplete="list"
           aria-activedescendant={activo >= 0 ? idOpcion(activo) : undefined}
           onChange={e => { setQ(e.target.value); setAbierto(true); }} onFocus={() => { setAbierto(true); setEnfocado(true); }} onBlur={() => setEnfocado(false)} onKeyDown={alTecla}
-          className="h-11 w-full rounded border border-linea-fuerte bg-fondo pl-10 pr-3 text-[15px] placeholder:text-tinta-3 focus:border-marca focus:bg-white focus:outline-none focus:ring-2 focus:ring-marca/20"
+          className="h-11 w-full rounded border border-linea-fuerte bg-fondo pl-10 pr-3 text-[15px] placeholder:text-tinta-3 focus:border-marca focus:bg-superficie focus:outline-none focus:ring-2 focus:ring-marca/20"
         />
         {/* Texto de ayuda que rueda (los lectores de pantalla ya tienen el rótulo «Buscar en toda la tienda») */}
         {rueda && !q && (
@@ -106,7 +106,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
           fuera de ella, como pide el patrón de combobox (antes un <p> y un <div> quedaban dentro de la lista) */}
       {abierto && (
         <div
-          className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[70dvh] origin-top overflow-y-auto overscroll-contain rounded-md border border-linea bg-white p-2 shadow-flota motion-safe:animate-desplegar">
+          className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[70dvh] origin-top overflow-y-auto overscroll-contain rounded-md border border-linea bg-superficie p-2 shadow-flota motion-safe:animate-desplegar">
           {!palabras.length && (
             <>
               <p id={`${idLista}-titulo`} className="etiqueta px-2.5 pb-1.5 pt-1">Búsquedas populares</p>
@@ -117,6 +117,19 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
                     className={`sugerencia rounded-full border px-3 py-1 text-sm ${i === activo ? "border-marca bg-marca-suave" : "border-linea hover:border-linea-fuerte"}`}>{b}</a>
                 ))}
               </div>
+              {/* Idea 3: debajo, las secciones con su producto recortado, para explorar sin escribir */}
+              <p className="etiqueta border-t border-linea px-2.5 pb-1.5 pt-3">Explorar secciones</p>
+              <ul className="grid grid-cols-3 gap-1 px-1 pb-1 sm:grid-cols-4">
+                {TIENDAS.map(t => (
+                  <li key={t.id}>
+                    <a href={`#${t.vista}`} onClick={() => setAbierto(false)}
+                      className="presionable flex flex-col items-center gap-1 rounded-md px-1 py-2 text-center text-[12.5px] font-semibold leading-tight text-tinta-2 hover:bg-fondo hover:text-tinta">
+                      <img src={recurso(`fotos/recortes/${RECORTE[t.id]}.webp`)} alt="" loading="lazy" decoding="async" width={40} height={40} className="h-10 w-10 object-contain" />
+                      {t.menu}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </>
           )}
           {palabras.length > 0 && opciones.length > 0 && (
@@ -125,6 +138,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
             n++;
             return (
               <a key={t.vista} id={idOpcion(n)} role="option" aria-selected={n === activo} href={`#${t.vista}`} className={claseOpcion(n)}>
+                <img src={recurso(`fotos/recortes/${RECORTE[t.id]}.webp`)} alt="" decoding="async" width={32} height={32} className="h-8 w-8 shrink-0 object-contain" />
                 <span className="etiqueta">Sección</span>
                 <span className="font-semibold">{VISTAS[TIENDA_VISTA[t.id]]}</span>
                 <span className="ml-auto text-sm text-tinta-3">{deTienda(t.id).length}</span>

@@ -3,16 +3,22 @@ import { CONFIG, TIENDA_VISTA, VISTAS, conPrecioPrimero, deTienda, etiquetaDe, n
 import { useTienda } from "../estado/TiendaContext";
 import { Migas } from "../components/EncabezadoVista";
 import { IconoCaracteristica, LoPrincipal, tipoDe } from "../components/Destacados";
+import { FilaProductos } from "../components/FilaProductos";
+import { FotoProducto } from "../components/FotoProducto";
 import { Galeria } from "../components/Galeria";
 import { IconoCamion, IconoCheck, IconoCompartir, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
+import { Comparador, EnvioGratis, FichaTecnica, Recientes } from "../components/ProductoExtras";
+import { Pesos } from "../components/Pesos";
 import { EtiquetaAgregar, NotaProducto, TarjetaProducto, useAgregado } from "../components/TarjetaProducto";
 import { activa } from "../lib/animaciones";
+import { complementosDe } from "../lib/complementos";
 import { armarDescripcion, useDescripcion } from "../lib/descripcion";
 import { useVisto } from "../lib/enPantalla";
 import { dinero, recurso } from "../lib/formato";
 import { useDireccion, useMarco } from "../lib/movimiento";
 import { tinteDe } from "../lib/tinte";
 import { volarAlCarrito } from "../lib/vuelo";
+import { anotarVisto, useVistos } from "../lib/vistos";
 import { waLink } from "../lib/whatsapp";
 import type { Producto as TipoProducto } from "../types";
 import { NoEncontrada } from "./NoEncontrada";
@@ -27,7 +33,18 @@ function Versiones({ producto: p, elegida, elegir }: { producto: TipoProducto; e
       {p.opciones.map((op, j) => (
         <button key={j} data-opcion type="button" aria-pressed={j === elegida} onClick={() => elegir(j)}
           className={`presionable relative flex min-h-[44px] items-center justify-between gap-3 rounded border px-3.5 py-2.5 text-left text-sm ${j === elegida ? (marco ? "border-transparent" : "border-marca bg-marca-suave ring-1 ring-marca") : "border-linea-fuerte hover:border-tinta-2"}`}>
-          <span>{op.nombre}</span>{!p.consultar && <b className="whitespace-nowrap font-display tabular-nums">{dinero(op.precio)}</b>}
+          <span>{op.nombre}</span>
+          {!p.consultar && (
+            <span className="text-right">
+              <b className="block whitespace-nowrap font-display tabular-nums">{dinero(op.precio)}</b>
+              {/* Idea 12: en las otras versiones, cuánto más (o menos) cuestan que la elegida */}
+              {j !== elegida && op.precio !== (p.opciones[elegida]?.precio ?? op.precio) && (
+                <small className={`block whitespace-nowrap text-[12px] tabular-nums ${op.precio > (p.opciones[elegida]?.precio ?? 0) ? "text-tinta-3" : "font-semibold text-marca-texto"}`}>
+                  {op.precio > (p.opciones[elegida]?.precio ?? 0) ? "+" : "−"}{dinero(Math.abs(op.precio - (p.opciones[elegida]?.precio ?? 0)))}
+                </small>
+              )}
+            </span>
+          )}
         </button>
       ))}
     </div>
@@ -37,10 +54,11 @@ function Versiones({ producto: p, elegida, elegir }: { producto: TipoProducto; e
 /** Celular y tableta: cuando el botón «Agregar al carrito» de la ficha sale por arriba de la pantalla, sube una barra fija
     abajo con el precio y el botón. Baja cuando el botón vuelve a verse o cuando aparece el pie de página.
     Mientras se ve, el aviso «Agregaste…» sale encima de ella (--barra-abajo) */
-function BarraAgregar({ boton, nombre, precio, tope, alAgregar, etiqueta }: {
-  boton: RefObject<HTMLButtonElement>; nombre: string; precio: number; tope: boolean; alAgregar: (e: React.MouseEvent<HTMLButtonElement>) => void; etiqueta: ReactNode;
+function BarraAgregar({ boton, producto, nombre, precio, tope, alAgregar, etiqueta }: {
+  boton: RefObject<HTMLButtonElement>; producto: TipoProducto; nombre: string; precio: number; tope: boolean; alAgregar: (e: React.MouseEvent<HTMLButtonElement>) => void; etiqueta: ReactNode;
 }) {
   const barra = useRef<HTMLDivElement>(null);
+  const arriba = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   // Se revisa al mover la página (una vez por cuadro). Con IntersectionObserver no bastaba: si la página baja de golpe
   // (un salto o un deslizamiento muy rápido), el botón pasa de abajo a arriba sin «verse» y no avisaba.
@@ -63,19 +81,31 @@ function BarraAgregar({ boton, nombre, precio, tope, alAgregar, etiqueta }: {
   }, [boton]);
   useEffect(() => {
     if (barra.current) barra.current.inert = !visible;
+    if (arriba.current) arriba.current.inert = !visible;
     document.documentElement.style.setProperty("--barra-abajo", visible && barra.current ? `${barra.current.offsetHeight}px` : "0px");
   }, [visible]);
   useEffect(() => () => { document.documentElement.style.removeProperty("--barra-abajo"); }, []);
   return (
-    <div ref={barra} className={`fixed inset-x-0 bottom-0 z-30 border-t border-linea bg-white px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] pt-3 shadow-flota transition-transform duration-300 ease-salida lg:hidden ${visible ? "translate-y-0" : "translate-y-[calc(100%+24px)]"}`}>
+    <>
+    {/* Idea 13: en computador, la misma barra va arriba, debajo de la cabecera, con la foto del producto */}
+    <div ref={arriba} className={`fixed inset-x-0 top-[69px] z-30 hidden border-b border-linea bg-superficie/95 shadow-flota backdrop-blur transition-[transform,opacity] duration-300 ease-salida lg:block ${visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}>
+      <div className="contenedor flex h-16 items-center gap-4">
+        <span className="escenario h-12 w-12 shrink-0 rounded border border-linea p-1"><FotoProducto producto={producto} alt="" tamanos="48px" /></span>
+        <p className="min-w-0 flex-1 truncate font-semibold">{nombre}</p>
+        <p key={precio} className="shrink-0 font-display text-xl font-extrabold tabular-nums motion-safe:animate-entrar"><Pesos valor={precio} /></p>
+        <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario shrink-0">{etiqueta}</button>
+      </div>
+    </div>
+    <div ref={barra} className={`fixed inset-x-0 bottom-0 z-30 border-t border-linea bg-superficie px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] pt-3 shadow-flota transition-transform duration-300 ease-salida lg:hidden ${visible ? "translate-y-0" : "translate-y-[calc(100%+24px)]"}`}>
       <div className="mx-auto flex max-w-pagina items-center gap-3">
         <div className="min-w-0 flex-1">
           <p className="truncate text-[13px] text-tinta-2">{nombre}</p>
-          <p key={precio} className="font-display text-lg font-extrabold leading-tight tabular-nums motion-safe:animate-entrar">{dinero(precio)}</p>
+          <p key={precio} className="font-display text-lg font-extrabold leading-tight tabular-nums motion-safe:animate-entrar"><Pesos valor={precio} /></p>
         </div>
         <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario shrink-0">{etiqueta}</button>
       </div>
     </div>
+    </>
   );
 }
 
@@ -83,7 +113,7 @@ function BarraAgregar({ boton, nombre, precio, tope, alAgregar, etiqueta }: {
 function Precio({ valor }: { valor: number }) {
   const dir = useDireccion(valor);
   const clase = !activa(20) || !dir ? "motion-safe:animate-entrar" : dir > 0 ? "precio-sube" : "precio-baja";
-  return <p key={valor} className={`font-display text-[34px] font-extrabold leading-none tabular-nums ${clase}`}>{dinero(valor)}</p>;
+  return <p key={valor} className={`font-display text-[34px] font-extrabold leading-none tabular-nums ${clase}`}><Pesos valor={valor} /></p>;
 }
 
 export default function Producto({ id }: { id: string }) {
@@ -100,7 +130,11 @@ export default function Producto({ id }: { id: string }) {
 
   useEffect(() => {
     if (p) document.title = `${p.nombre} · ${CONFIG.nombre}`;
+    if (p) anotarVisto(p.id);
   }, [p]);
+  const vistos = useVistos(id);
+  // Idea 14: accesorios y complementos para este producto
+  const complementos = useMemo(() => (p ? complementosDe(p) : []), [p]);
 
   // Primero los de la misma categoría y marca, luego el resto de la sección; los que tienen precio antes que los de
   // «Preguntar disponibilidad». Se calcula una vez por producto (antes se filtraba y ordenaba la sección entera en cada
@@ -188,6 +222,7 @@ export default function Producto({ id }: { id: string }) {
               {/* Al cambiar de versión, el precio nuevo entra rodando (la clave lo vuelve a montar) */}
               <Precio valor={o.precio} />
               <p className="mt-2 text-[13px] text-tinta-3">Precio en pesos colombianos. Antes de cualquier pago te confirmamos disponibilidad por WhatsApp.</p>
+              <EnvioGratis precio={o.precio} />
               <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
                 {/* barrido-agregar: un destello lo cruza una vez al abrir el producto (animación 21) */}
                 <button ref={boton} type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario barrido barrido-agregar w-full"><EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" /></button>
@@ -215,7 +250,7 @@ export default function Producto({ id }: { id: string }) {
         </div>
       </div>
       {!p.consultar && (
-        <BarraAgregar boton={boton} nombre={nombreItem(p, o.nombre)} precio={o.precio} tope={tope} alAgregar={alAgregar}
+        <BarraAgregar boton={boton} producto={p} nombre={nombreItem(p, o.nombre)} precio={o.precio} tope={tope} alAgregar={alAgregar}
           etiqueta={<EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} />} />
       )}
 
@@ -239,18 +274,20 @@ export default function Producto({ id }: { id: string }) {
           </div>
           <div className="min-w-0">
             <h2 className="text-xl font-extrabold">Características</h2>
-            <dl className="mt-3 overflow-hidden rounded-md border border-linea bg-white text-sm">
-              {d.filas.map(([k, v], n) => (
-                <div key={`${k}-${n}`} className={`grid grid-cols-[minmax(110px,38%)_1fr] gap-3 px-4 py-2.5 ${n ? "border-t border-linea" : ""}`}>
-                  <dt className="font-semibold text-tinta-2">{k}</dt><dd className="break-words">{v}</dd>
-                </div>
-              ))}
-            </dl>
+            <FichaTecnica filas={d.filas} />
           </div>
         </div>
         </div>
         )}
       </section>
+
+      {complementos.length > 0 && (
+        <section aria-labelledby="t-completa" className="contenedor pt-10">
+          <FilaProductos productos={complementos} etiqueta="Completa tu compra"
+            encabezado={<><h2 id="t-completa" className="text-xl font-extrabold">Completa tu compra</h2><p className="mt-1 text-sm text-tinta-2">Accesorios que suelen ir con este producto.</p></>}
+            verTodo={complementos[0] && { href: `#${TIENDA_VISTA[complementos[0].tienda]}`, texto: `Ver más en ${VISTAS[TIENDA_VISTA[complementos[0].tienda]]?.toLowerCase() ?? "la tienda"}` }} />
+        </section>
+      )}
 
       {relacionados.length > 0 && (
         <section aria-labelledby="t-relacionados" className="contenedor py-10">
@@ -261,6 +298,9 @@ export default function Producto({ id }: { id: string }) {
           <ul className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">{relacionados.map(r => <li key={r.id}><TarjetaProducto producto={r} /></li>)}</ul>
         </section>
       )}
+
+      {!p.consultar && <Comparador producto={p} />}
+      <Recientes productos={vistos} fondo />
     </>
   );
 }

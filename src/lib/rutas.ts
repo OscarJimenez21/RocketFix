@@ -13,7 +13,7 @@ const decodificar = (s: string) => {
 };
 
 /** Anclas de la portada que no son páginas aparte */
-const ANCLAS_INICIO = ["servicios", "contacto", "orden", "categorias", "calificaciones", "como-comprar", "regalos", "ideas-regalo"];
+const ANCLAS_INICIO = ["servicios", "contacto", "orden", "categorias", "calificaciones", "como-comprar", "regalos", "ideas-regalo", "marcas", "envios", "tu-celular", "recientes"];
 
 export function leerRuta(hash: string): Ruta {
   const h = hash.replace(/^#\/?/, "");

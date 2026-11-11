@@ -2,12 +2,13 @@ import { useRef, useState } from "react";
 import { ARTICULOS, CONFIG, PAGOS } from "../data/catalogo";
 import { TIENDAS } from "../data/tiendas";
 import { useEnPantalla, useVisto } from "../lib/enPantalla";
-import { recurso } from "../lib/formato";
+import { dinero, recurso } from "../lib/formato";
 import { filasHorario } from "../lib/horario";
 import { waLink } from "../lib/whatsapp";
 import { BotonCopiar, PuntoEstado, useAtencion } from "./Contacto";
-import { IconoWhatsApp } from "./Iconos";
+import { IconoCamion, IconoMoto, IconoWhatsApp } from "./Iconos";
 import { Cohete, Logo } from "./Logo";
+import { SelectorTema } from "./SelectorTema";
 import { POLITICAS, TextoLegal } from "./TextoLegal";
 
 /** «Volver arriba»: el cohete despega hacia arriba mientras la página sube. Con «reducir movimiento» la página salta
@@ -89,6 +90,16 @@ function RutaCohete() {
   );
 }
 
+/** Grupos de las formas de pago del pie (idea 40), por nombre en pagos.json. Una forma que no esté en ningún grupo va en «Otras» */
+const GRUPOS_PAGO: { titulo: string; nombres: string[] }[] = [
+  { titulo: "Tarjetas", nombres: ["Visa", "Mastercard", "Bold, pago en línea"] },
+  { titulo: "Transferencias y billeteras", nombres: ["PSE", "Bre-B", "DaviPlata", "Nu", "Grupo Aval"] },
+  { titulo: "Contra entrega", nombres: ["Efectivo"] }
+];
+const AGRUPADAS = GRUPOS_PAGO.flatMap(g => g.nombres);
+const OTRAS = PAGOS.lista.filter(f => !AGRUPADAS.includes(f.nombre)).map(f => f.nombre);
+if (OTRAS.length) GRUPOS_PAGO.push({ titulo: "Otras", nombres: OTRAS });
+
 /** Pie de todas las páginas. Incluye el contacto (#contacto): WhatsApp, horario y estado de atención. */
 export function PiePagina() {
   const atencion = useAtencion();
@@ -146,25 +157,56 @@ export function PiePagina() {
           <p className="flex items-center gap-2 text-sm font-semibold text-white"><PuntoEstado abierto={atencion.abierto} claro />{atencion.texto}</p>
           <ul className="mt-2 grid gap-1 text-sm">{filasHorario().map(([d, h]) => <li key={d}>{d}: {h}</li>)}</ul>
           <p className="mt-3 text-xs leading-relaxed text-white/60">{CONFIG.atencion}</p>
+          {/* Idea 30: colores de día o de noche */}
+          <h3 className="etiqueta mb-2 mt-6 text-white/60">Colores de la página</h3>
+          <SelectorTema oscuro />
         </div>
       </div>
 
-      <section aria-labelledby="t-pagos" className="border-t border-white/10">
-        <div className="contenedor py-8">
-          <h2 id="t-pagos" className="etiqueta mb-4 text-white/60">Formas de pago</h2>
-          <ul className="flex flex-wrap gap-2">
-            {PAGOS.lista.map(f => (
-              <li key={f.nombre} className="flex h-11 items-center gap-2 rounded bg-white px-3 text-[13px] font-semibold text-tinta">
-                {f.archivo
-                  ? <img src={recurso(f.archivo)} alt={f.alt ?? f.nombre} className="h-6 w-auto max-w-[96px] object-contain" loading="lazy" decoding="async" />
-                  // eslint-disable-next-line no-restricted-syntax -- íconos propios (pagos.json); scripts/verificar-catalogo.mjs no deja publicar si traen algo que se ejecute
-                  : <><span className="h-5 w-5 text-marca-medio [&>svg]:h-full [&>svg]:w-full" dangerouslySetInnerHTML={{ __html: f.icono ?? "" }} />{f.nombre}</>}
+      {/* Idea 40: envíos y formas de pago lado a lado. Los pagos van agrupados y más grandes; son los mismos de pagos.json
+          (no se agregó ninguno). Sin redes sociales hasta que existan */}
+      <div className="border-t border-white/10">
+        <div className="contenedor grid gap-10 py-9 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.6fr)] lg:gap-14">
+          <section aria-labelledby="t-envios-pie">
+            <h2 id="t-envios-pie" className="etiqueta mb-4 text-white/60">Envíos</h2>
+            <ul className="grid gap-4 text-sm">
+              <li className="flex gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 text-marca-menta"><IconoMoto /></span>
+                <span><b className="block text-white">Bogotá y alrededores</b>Despacho el mismo día con motorizado. Gratis desde {dinero(CONFIG.envios.bogota.gratisDesde)}.</span>
               </li>
-            ))}
-          </ul>
-          {PAGOS.nota && <p className="mt-4 max-w-3xl text-sm">{PAGOS.nota}</p>}
+              <li className="flex gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 text-marca-menta"><IconoCamion /></span>
+                <span><b className="block text-white">Resto de Colombia</b>Por transportadora: Envía, Interrapidísimo o Servientrega. Gratis desde {dinero(CONFIG.envios.nacional.gratisDesde)}.</span>
+              </li>
+            </ul>
+          </section>
+          <section aria-labelledby="t-pagos">
+            <h2 id="t-pagos" className="etiqueta mb-4 text-white/60">Formas de pago</h2>
+            <div className="grid gap-5 sm:grid-cols-3">
+              {GRUPOS_PAGO.map(g => {
+                const formas = PAGOS.lista.filter(f => g.nombres.includes(f.nombre));
+                if (!formas.length) return null;
+                return (
+                  <div key={g.titulo}>
+                    <h3 className="mb-2 text-[13px] font-semibold text-white">{g.titulo}</h3>
+                    <ul className="flex flex-wrap gap-2">
+                      {formas.map(f => (
+                        <li key={f.nombre} className="claro-siempre flex h-14 min-w-[88px] items-center justify-center gap-2 rounded-md bg-white px-3.5 text-sm font-semibold text-tinta">
+                          {f.archivo
+                            ? <img src={recurso(f.archivo)} alt={f.alt ?? f.nombre} className="h-8 w-auto max-w-[120px] object-contain" loading="lazy" decoding="async" />
+                            // eslint-disable-next-line no-restricted-syntax -- íconos propios (pagos.json); scripts/verificar-catalogo.mjs no deja publicar si traen algo que se ejecute
+                            : <><span className="h-6 w-6 text-marca-medio [&>svg]:h-full [&>svg]:w-full" dangerouslySetInnerHTML={{ __html: f.icono ?? "" }} />{f.nombre}</>}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+            {PAGOS.nota && <p className="mt-5 max-w-3xl text-sm">{PAGOS.nota}</p>}
+          </section>
         </div>
-      </section>
+      </div>
       {/* Identidad del vendedor (art. 50, Ley 1480) y enlaces a las políticas */}
       <div className="border-t border-white/10">
         <div className="contenedor flex flex-col gap-3 py-5 text-xs text-white/55 md:flex-row md:items-start md:justify-between md:gap-8">

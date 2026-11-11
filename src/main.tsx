@@ -4,6 +4,7 @@ import { App } from "./App";
 import { Limite } from "./components/Limite";
 import { PRODUCTOS } from "./data/catalogo";
 import { slug } from "./lib/formato";
+import { aplicarTema } from "./lib/tema";
 import "./index.css";
 
 // Páginas para buscadores (scripts/paginas-estaticas.mjs): /RocketFix/p/sa07/, /RocketFix/celulares/, /RocketFix/marca/cooler-master/…
@@ -33,6 +34,9 @@ if (import.meta.env.DEV) {
     for (const n of JSON.parse(localStorage.getItem("rf-animaciones-apagadas") || "[]") as number[]) document.documentElement.classList.add(`sin-a${n}`);
   } catch { /* sin almacenamiento */ }
 }
+
+// Modo noche (idea 30): solo si el visitante lo eligió; se aplica antes de pintar la tienda
+aplicarTema();
 
 const raiz = document.getElementById("root");
 if (!raiz) throw new Error("Falta #root en index.html");

@@ -2,8 +2,9 @@
    las categorías y el servicio técnico viven en el menú lateral que abre el botón de tres líneas. */
 import { useCallback, useEffect, useRef, useState } from "react";
 import { CONFIG, deTienda } from "../data/catalogo";
-import { GRUPOS, TIENDAS, tiendaPorId } from "../data/tiendas";
+import { GRUPOS, RECORTE, TIENDAS, tiendaPorId } from "../data/tiendas";
 import { useTienda } from "../estado/TiendaContext";
+import { recurso, srcsetFoto } from "../lib/formato";
 import { usePanelModal } from "../lib/panel";
 import { usePestanaViva } from "../lib/pestana";
 import { claveRuta } from "../lib/rutas";
@@ -14,6 +15,7 @@ import { Buscador } from "./Buscador";
 import { PuntoEstado, useAtencion } from "./Contacto";
 import { IconoBolsa, IconoCerrar, IconoMenu, IconoWhatsApp } from "./Iconos";
 import { Cohete, Logo } from "./Logo";
+import { BotonTema, SelectorTema } from "./SelectorTema";
 
 const CANTIDAD = Object.fromEntries(TIENDAS.map(t => [t.id, deTienda(t.id).length])) as Record<TiendaId, number>;
 const secciones = (ids: TiendaId[]) => ids.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t));
@@ -62,7 +64,7 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
     <div className={`fixed inset-0 z-50 overflow-hidden ${abierto ? "" : "pointer-events-none"}`}>
       <div onClick={cerrar} aria-hidden="true" className={`absolute inset-0 bg-marca-noche/40 transition-opacity duration-300 ${abierto ? "opacity-100" : "opacity-0"}`} />
       <div ref={panel} id="menu-lateral" role="dialog" aria-modal="true" aria-label="Menú"
-        className={`absolute inset-y-0 left-0 flex w-[88%] max-w-[380px] flex-col bg-white shadow-flota transition-transform duration-300 ease-cajon ${abierto ? "translate-x-0" : "-translate-x-full"}`}>
+        className={`absolute inset-y-0 left-0 flex w-[88%] max-w-[380px] flex-col bg-superficie shadow-flota transition-transform duration-300 ease-cajon ${abierto ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex h-14 shrink-0 items-center justify-between border-b border-linea pl-4 pr-2 lg:h-[68px]">
           <Logo />
           <button ref={botonCerrar} type="button" onClick={cerrar} aria-label="Cerrar menú" className="cerrar-gira presionable flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo"><IconoCerrar /></button>
@@ -76,7 +78,14 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
                 {secciones(g.tiendas).map(t => (
                   <li key={t.id}>
                     <a href={`#${t.vista}`} aria-current={actual === t.vista ? "page" : undefined} className={fila(actual === t.vista)}>
-                      {t.titulo}<span className="text-xs tabular-nums text-tinta-3">{CANTIDAD[t.id]}</span>
+                      {/* Idea 1: cada sección con su producto recortado (sin fondo), el mismo del mosaico de la portada */}
+                      <span className="flex min-w-0 items-center gap-3">
+                        <span aria-hidden="true" className="claro-siempre flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-fondo">
+                          <img src={recurso(`fotos/recortes/${RECORTE[t.id]}.webp`)} alt="" loading="lazy" decoding="async" width={32} height={32} className="h-8 w-8 object-contain" />
+                        </span>
+                        {t.titulo}
+                      </span>
+                      <span className="text-xs tabular-nums text-tinta-3">{CANTIDAD[t.id]}</span>
                     </a>
                   </li>
                 ))}
@@ -102,6 +111,8 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
         </nav>
         <div className="shrink-0 border-t border-linea p-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))]">
           <p className="mb-3 flex items-center gap-2 text-sm text-tinta-2"><PuntoEstado abierto={atencion.abierto} />{atencion.texto}</p>
+          {/* Idea 30: colores de día o de noche */}
+          <div className="mb-3 flex flex-wrap items-center justify-between gap-2"><span className="text-sm font-semibold text-tinta-2">Colores</span><SelectorTema /></div>
           <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="btn btn-wa w-full"><IconoWhatsApp />Escríbenos por WhatsApp</a>
         </div>
       </div>
@@ -110,7 +121,7 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
 }
 
 export function Cabecera({ ruta }: { ruta: Ruta }) {
-  const { unidades, abrirCarrito } = useTienda();
+  const { unidades, lineas, abrirCarrito } = useTienda();
   const [menu, setMenu] = useState(false);
   // Título e ícono de la pestaña con el carrito, y el saludo del logo al volver (animaciones 44, 45 y 54)
   usePestanaViva(unidades);
@@ -141,14 +152,14 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
   return (
     <>
       {/* cabecera: al bajar aparece una sombra suave debajo (animación 7) */}
-      <header className="cabecera sticky top-0 z-40 border-b border-linea bg-white">
+      <header className="cabecera sticky top-0 z-40 border-b border-linea bg-superficie">
         <div className="contenedor flex h-14 items-center gap-1.5 sm:gap-3 lg:h-[68px] lg:gap-6">
           <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
             <button type="button" onClick={() => setMenu(true)} aria-label="Abrir menú" aria-expanded={menu} aria-controls="menu-lateral"
               className="presionable -ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded text-tinta hover:bg-fondo">
               <IconoMenu />
             </button>
-            <a href={INICIO} className="flex h-11 shrink-0 items-center" aria-label="Rocket Fix, ir al inicio"><Logo /></a>
+            <a href={INICIO} className="cabecera-logo flex h-11 shrink-0 items-center" aria-label="Rocket Fix, ir al inicio"><Logo /></a>
           </div>
           <div className="hidden min-w-0 flex-1 lg:block lg:max-w-[560px]"><Buscador inicial={q} /></div>
           <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
@@ -157,10 +168,21 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
               className={`presionable inline-flex h-11 min-w-[44px] items-center justify-center gap-2 rounded bg-wa px-3 text-sm font-semibold text-white hover:bg-wa-hover max-[359px]:hidden${saluda ? " saludo-wa" : ""}`}>
               <IconoWhatsApp className="h-5 w-5" /><span className="hidden xl:inline">Escríbenos por WhatsApp</span>
             </a>
+            <BotonTema />
             <button type="button" onClick={abrirCarrito} aria-label={`Abrir carrito, ${unidades} ${unidades === 1 ? "producto" : "productos"}`}
               className="presionable inline-flex h-11 items-center gap-1.5 rounded border border-linea-fuerte px-2.5 text-sm font-semibold hover:border-tinta-2 sm:gap-2 sm:px-3">
               <IconoBolsa />
               <span className="hidden sm:inline">Carrito</span>
+              {/* Idea 23: con productos, sus fotos pequeñas apiladas (hasta 3), desde 640 px */}
+              {lineas.length > 0 && (
+                <span aria-hidden="true" className="hidden items-center sm:flex">
+                  {lineas.filter(l => l.producto.imagen).slice(-3).reverse().map((l, i) => (
+                    <span key={l.clave} className="claro-siempre -ml-2 flex h-7 w-7 items-center justify-center overflow-hidden rounded-full border-2 border-superficie bg-white first:ml-0" style={{ zIndex: 3 - i }}>
+                      <img src={recurso(l.producto.imagen ?? "")} srcSet={srcsetFoto(l.producto.imagen ?? "")} sizes="24px" alt="" width={24} height={24} decoding="async" className="h-6 w-6 object-contain" />
+                    </span>
+                  ))}
+                </span>
+              )}
               {/* La clave cambia con cada producto agregado: así la animación vuelve a empezar */}
               <span key={saltos} data-destino-carrito className={`min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-xs font-bold tabular-nums transition-colors duration-200 ${unidades ? "bg-acento text-acento-tinta" : "bg-fondo text-tinta-2"} ${saltos ? "motion-safe:animate-latido" : ""}`}>{unidades}</span>
             </button>

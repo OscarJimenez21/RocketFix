@@ -43,7 +43,7 @@ export function SubirFlotante() {
 
   return (
     <button type="button" onClick={subir} aria-label="Volver arriba" tabIndex={ver ? 0 : -1} aria-hidden={!ver || undefined}
-      className={`presionable fixed bottom-[calc(5.25rem+max(var(--barra-abajo,0px),env(safe-area-inset-bottom,0px)))] right-[22px] z-40 flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-linea bg-white text-marca shadow-flota transition-[opacity,transform] duration-300 ease-salida hover:border-marca sm:right-[30px] ${ver ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"} ${despega ? "subir-despega" : ""}`}>
+      className={`presionable fixed bottom-[calc(5.25rem+max(var(--barra-abajo,0px),env(safe-area-inset-bottom,0px)))] right-[22px] z-40 flex h-11 w-11 items-center justify-center overflow-hidden rounded-full border border-linea bg-superficie text-marca shadow-flota transition-[opacity,transform] duration-300 ease-salida hover:border-marca sm:right-[30px] ${ver ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"} ${despega ? "subir-despega" : ""}`}>
       <Cohete className="h-6 w-6" />
     </button>
   );

@@ -22,7 +22,7 @@
   ]
  },
  "domicilio": "Entrega el mismo día en Bogotá y alrededores.",
- "envio": "Enviamos a todo Colombia con pago anticipado. Te confirmamos el tiempo de entrega por WhatsApp.",
+ "envio": "Enviamos a todo Colombia por transportadora (Envía, Interrapidísimo o Servientrega) con pago anticipado. Te confirmamos el tiempo de entrega por WhatsApp.",
  "envios": {
   "bogota": {
    "costo": 15000,

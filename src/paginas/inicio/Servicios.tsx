@@ -2,7 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { PAQUETES, SERVICIOS } from "../../data/catalogo";
 import { camposServicio } from "../../data/formularios";
 import { FormularioWhatsApp } from "../../components/FormularioWhatsApp";
-import { IconoCheck } from "../../components/Iconos";
+import { IconoTrabajo } from "../../components/IconoTrabajo";
 import { Ilustracion } from "../../components/Ilustracion";
 import { useRevelarHijos, useVisto } from "../../lib/enPantalla";
 import { dinero, recurso } from "../../lib/formato";
@@ -23,7 +23,7 @@ function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => voi
         <h3 id="t-camaras" className="mt-1 text-[22px] font-extrabold text-white sm:text-2xl">Instalación de cámaras de seguridad</h3>
         <p className="mt-2 text-white/80">{servicio.texto}</p>
         <ul className="mt-4 grid gap-2 text-sm text-white/90">
-          {servicio.trabajos.map(t => <li key={t} className="flex gap-2"><IconoCheck className="mt-0.5 h-4 w-4 shrink-0 text-marca-menta" />{t}</li>)}
+          {servicio.trabajos.map(t => <li key={t} className="flex gap-2.5"><IconoTrabajo texto={t} className="mt-0.5 h-[18px] w-[18px] shrink-0 text-marca-menta" />{t}</li>)}
         </ul>
         <div className="mt-6 flex flex-wrap gap-3">
           <button type="button" onClick={cotizar} className="btn btn-primario">Cotizar instalación</button>
@@ -36,7 +36,7 @@ function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => voi
           {PAQUETES.map(pk => (
             <li key={pk.nombre} className="flex items-center justify-between gap-4 py-3.5">
               <div className="flex min-w-0 items-center gap-3">
-                <span className="flex h-11 w-12 shrink-0 items-center justify-center rounded bg-white"><Ilustracion nombre={pk.ilustracion} className="h-8 w-10 text-marca-medio" /></span>
+                <span className="flex h-11 w-12 shrink-0 items-center justify-center claro-siempre rounded bg-white"><Ilustracion nombre={pk.ilustracion} className="h-8 w-10 text-marca-medio" /></span>
                 <div className="min-w-0"><p className="font-semibold">{pk.nombre}</p><p className="text-xs text-white/70">{pk.specs.join(" · ")}</p></div>
               </div>
               <p className="shrink-0 text-right"><span className="block text-xs text-white/60">Desde</span><b className="font-display tabular-nums">{dinero(pk.desde)}</b></p>
@@ -77,7 +77,7 @@ export function Servicios() {
   const pasosOrden = useRef<HTMLOListElement>(null);
   const ordenVisto = useVisto(pasosOrden);
   return (
-    <section id="servicios" aria-labelledby="t-servicios" className="border-y border-linea bg-fondo">
+    <section id="servicios" aria-labelledby="t-servicios" className="curva-arriba textura-orbitas border-b border-linea bg-fondo">
       <div className="contenedor py-12 sm:py-14">
         <div className="max-w-2xl">
           <h2 id="t-servicios" className="titulo-seccion titulo-trazo">Reparamos tus equipos e instalamos cámaras de seguridad</h2>
@@ -87,7 +87,7 @@ export function Servicios() {
           {reparacion.map(s => {
             const e = ESTILO_SERVICIO[s.id] ?? ESTILO_SERVICIO.pc;
             return (
-              <article key={s.id} className="flex flex-col overflow-hidden rounded-xl border border-linea bg-white shadow-tarjeta">
+              <article key={s.id} className="flex flex-col overflow-hidden rounded-xl border border-linea bg-superficie shadow-tarjeta">
                 {/* Encabezado de color: texto a la izquierda y el equipo recortado en su propia columna (no se montan).
                     Las tarjetas son angostas en celular y en md (dos columnas), y anchas en sm y lg. */}
                 <div data-revelar className={`revelar relative isolate flex min-h-[210px] gap-2 overflow-hidden ${e.caja}`}>
@@ -105,7 +105,7 @@ export function Servicios() {
                   <ul data-revelar className="revelar mt-3 grid gap-2 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
                     {s.trabajos.map((t, k) => (
                       <li key={t} style={{ "--i": k } as React.CSSProperties} className="flex items-start gap-2.5 rounded-md bg-fondo px-3 py-2.5 text-sm leading-snug">
-                        <span className="check-paso mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-marca text-white"><IconoCheck className="h-3 w-3" /></span>{t}
+                        <span className="check-paso flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-marca text-white"><IconoTrabajo texto={t} className="h-4 w-4" /></span><span className="self-center">{t}</span>
                       </li>
                     ))}
                   </ul>

@@ -95,9 +95,9 @@ export function Marcas() {
     if (a?.movio) { bloquearClic.current = true; window.setTimeout(() => { bloquearClic.current = false; }, 80); pausar(); }
   };
 
-  const flecha = "presionable group flex h-11 w-11 items-center justify-center rounded-full border border-linea-fuerte bg-white hover:border-tinta-2";
+  const flecha = "presionable group flex h-11 w-11 items-center justify-center rounded-full border border-linea-fuerte bg-superficie hover:border-tinta-2";
   return (
-    <section aria-labelledby="t-marcas" className="overflow-hidden border-b border-linea py-9">
+    <section id="marcas" aria-labelledby="t-marcas" className="overflow-hidden border-b border-linea py-9">
       <div className="contenedor flex items-end justify-between gap-4">
         <h2 id="t-marcas" className="titulo-seccion titulo-trazo min-w-0">Las marcas que buscas</h2>
         <div className="flex shrink-0 gap-2">
@@ -120,9 +120,9 @@ export function Marcas() {
             <li key={`${m}-${i}`} aria-hidden={copia || undefined} className="shrink-0">
               {/* marca-eleva: animación 35 (el py-1 de la fila le deja espacio para subir sin recortarse) */}
               <a href={hrefMarca(m)} tabIndex={copia ? -1 : undefined} draggable={false}
-                className="marca-eleva flex h-14 w-36 items-center justify-center whitespace-nowrap rounded-lg border border-linea bg-white px-4 font-display text-lg font-extrabold tracking-tight text-tinta-2 transition-colors ancho-108 hover:border-marca hover:text-marca">
+                className="marca-eleva marca-logo claro-siempre flex h-14 w-36 items-center justify-center whitespace-nowrap rounded-lg border border-linea bg-white px-4 font-display text-lg font-extrabold tracking-tight text-tinta-2 transition-colors ancho-108 hover:border-marca hover:text-marca">
                 {LOGOS_MARCAS[m]
-                  ? <img src={recurso(LOGOS_MARCAS[m])} alt={m} draggable={false} loading="lazy" decoding="async" className="max-h-7 max-w-full object-contain" />
+                  ? <img src={recurso(LOGOS_MARCAS[m])} alt={m} draggable={false} loading="lazy" decoding="async" className="logo-gris max-h-7 max-w-full object-contain" />
                   : m}
               </a>
             </li>

@@ -23,7 +23,7 @@ export function Aviso() {
       <div ref={caja}
         className={`fixed bottom-[calc(1rem+max(var(--barra-abajo,0px),env(safe-area-inset-bottom,0px)))] left-1/2 z-[60] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 transition-[opacity,transform] duration-200 ease-salida ${visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"}`}>
         {texto && (
-          <div className="relative flex items-center gap-3 overflow-hidden rounded-md bg-tinta px-4 py-3 text-sm text-white shadow-flota">
+          <div className="relative flex items-center gap-3 overflow-hidden rounded-md bg-oscuro px-4 py-3 text-sm text-white shadow-flota">
             {conLinea && agregado && <IconoCheck key={`ok-${avisoVez}`} className="dibujar h-4 w-4 shrink-0 text-marca-menta [--retraso:120ms]" />}
             <span aria-hidden="true" className="flex-1">{texto}</span>
             {agregado && <button type="button" onClick={() => { avisar(""); abrirCarrito(); }} className="shrink-0 font-semibold text-marca-menta hover:underline">Ver carrito</button>}

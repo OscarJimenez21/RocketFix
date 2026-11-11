@@ -66,7 +66,16 @@ const LISTA: Fila[] = [
   { n: 56, grupo: "Pie de página", nombre: "Cielo del pie: la estela del cohete se dibuja al verlo", como: "Baja hasta el pie de página (en computador)", ir: "#contacto", recargar: true },
   { n: 57, grupo: "Portada", nombre: "El producto de cada categoría se sale del cuadro", como: "Pasa el mouse por «Compra por categoría»", ir: "#categorias" },
   { n: 58, grupo: "Todas", nombre: "El cohete avanza por el borde de la cabecera al bajar (reemplaza a la 39)", como: "Baja por cualquier página", ir: "#inicio" },
-  { n: 59, grupo: "Portada", nombre: "Las estrellas del fondo se corren con el mouse (profundidad)", como: "Mueve el mouse por la portada", ir: "#inicio" }
+  { n: 59, grupo: "Portada", nombre: "Las estrellas del fondo se corren con el mouse (profundidad)", como: "Mueve el mouse por la portada", ir: "#inicio" },
+  // 11/11/2026: las de las 40 ideas de diseño
+  { n: 60, grupo: "Cabecera", nombre: "La cabecera se compacta al bajar (logo más pequeño, fondo translúcido)", como: "Baja por cualquier página", ir: "#inicio" },
+  { n: 61, grupo: "Todas", nombre: "Brillo que recorre la foto mientras carga", como: "Abre una sección con la red lenta", ir: "#celulares" },
+  { n: 62, grupo: "Secciones", nombre: "Segunda foto del producto al pasar el mouse por la tarjeta", como: "Pasa el mouse por un celular o portátil", ir: "#celulares" },
+  { n: 63, grupo: "Portada", nombre: "Barra de secciones con subrayado que se desliza (computador)", como: "Baja por la portada", ir: "#inicio" },
+  { n: 64, grupo: "Secciones", nombre: "La foto vuela de la tarjeta a la página del producto", como: "Toca un producto (Chrome, Edge o Safari 18)", ir: "#celulares" },
+  { n: 65, grupo: "Carrito", nombre: "El cohete despega al enviar el pedido por WhatsApp", como: "Envía un pedido desde el carrito", ir: "#celulares" },
+  { n: 66, grupo: "Portada", nombre: "Logos de marcas en gris que se pintan al pasar el mouse", como: "Pasa el mouse por las marcas", ir: "#marcas" },
+  { n: 67, grupo: "Portada", nombre: "Las ciudades del mapa de envíos laten", como: "Baja hasta «Envíos a toda Colombia»", ir: "#envios" }
 ];
 
 function leer(): number[] {
@@ -93,7 +102,7 @@ export default function PanelAnimaciones() {
   return (
     <div className="fixed bottom-3 left-3 z-[80] text-tinta">
       {abierto && (
-        <div className="mb-2 flex max-h-[min(78vh,640px)] w-[min(380px,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-md border border-linea bg-white shadow-flota">
+        <div className="mb-2 flex max-h-[min(78vh,640px)] w-[min(380px,calc(100vw-1.5rem))] flex-col overflow-hidden rounded-md border border-linea bg-superficie shadow-flota">
           <div className="border-b border-linea px-4 py-3">
             <p className="font-display text-base font-extrabold">Animaciones en prueba</p>
             <p className="mt-0.5 text-xs text-tinta-2">Desmarca las que no te gusten. Las que cambian con JavaScript se actualizan al recargar. Este panel solo existe en local.</p>
@@ -118,7 +127,7 @@ export default function PanelAnimaciones() {
         </div>
       )}
       <button type="button" onClick={() => setAbierto(a => !a)} aria-expanded={abierto}
-        className="presionable inline-flex h-10 items-center gap-2 rounded-full bg-tinta px-4 text-[13px] font-semibold text-white shadow-flota">
+        className="presionable inline-flex h-10 items-center gap-2 rounded-full bg-oscuro px-4 text-[13px] font-semibold text-white shadow-flota">
         Animaciones <span className="rounded-full bg-white/15 px-1.5 text-xs tabular-nums">{encendidas}/{LISTA.length}</span>
       </button>
     </div>

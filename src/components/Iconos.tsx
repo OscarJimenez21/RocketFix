@@ -62,3 +62,39 @@ export const IconoRegalo = ({ className = "h-5 w-5" }: P) => (
 export const IconoMoto =({ className = "h-5 w-5" }: P) => (
   <svg viewBox="0 0 24 24" className={className} {...base}><circle cx="5.5" cy="17" r="3" /><circle cx="18.5" cy="17" r="3" /><path d="M8.5 17h6.5l2-7h2.5M15 5h3l1.5 5M5.5 17l3-6h6" /></svg>
 );
+
+/* Modo noche (idea 30), migas (idea 4), vista de la sección (idea 38), cotización (idea 22), visor de fotos (idea 11) y
+   comparador (idea 16): mismo trazo de 1,8 y puntas redondas que los demás */
+export const IconoLuna = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" /></svg>
+);
+export const IconoSol = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><circle cx="12" cy="12" r="4" /><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4" /></svg>
+);
+export const IconoTelefono = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" /><path d="M10.5 18.5h3" /></svg>
+);
+export const IconoCasa = ({ className = "h-4 w-4" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z" /></svg>
+);
+export const IconoCuadricula = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><rect x="4" y="4" width="6.5" height="6.5" rx="1" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="1" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="1" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1" /></svg>
+);
+export const IconoLista = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><rect x="4" y="4.5" width="5" height="5" rx="1" /><rect x="4" y="14.5" width="5" height="5" rx="1" /><path d="M12.5 6h7.5M12.5 8.5h4.5M12.5 16h7.5M12.5 18.5h4.5" /></svg>
+);
+export const IconoImprimir = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><path d="M7 8V3.5h10V8M7 17H4.5a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1H17" /><rect x="7" y="13.5" width="10" height="7" rx="1" /></svg>
+);
+export const IconoAmpliar = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><path d="M14.5 4H20v5.5M9.5 20H4v-5.5M20 4l-6.5 6.5M4 20l6.5-6.5" /></svg>
+);
+export const IconoComparar = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><rect x="3" y="5" width="7.5" height="14" rx="1.5" /><rect x="13.5" y="5" width="7.5" height="14" rx="1.5" /><path d="M6.75 2.5v2.5M17.25 2.5v2.5" /></svg>
+);
+export const IconoReloj = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></svg>
+);
+export const IconoMapa = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z" /><circle cx="12" cy="10" r="2.3" /></svg>
+);

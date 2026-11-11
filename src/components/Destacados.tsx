@@ -76,7 +76,7 @@ export function LoPrincipal({ filas }: { filas: [string, string][] }) {
           // En celular (2 columnas), si son 3 la última ocupa la fila completa en vez de quedar sola a la izquierda
           const sola = lista.length === 3 && i === 2 ? "col-span-2 lg:col-span-1" : "";
           return (
-            <li key={t} className={`rounded-md border border-linea bg-white p-4 ${sola}`}>
+            <li key={t} className={`rounded-md border border-linea bg-superficie p-4 ${sola}`}>
               <span className="flex h-9 w-9 items-center justify-center rounded-full bg-marca-suave text-marca"><IconoCaracteristica tipo={t} className="h-5 w-5" /></span>
               <p className="mt-3 text-[12.5px] font-semibold text-tinta-3">{k}</p>
               <p className="mt-0.5 line-clamp-3 text-sm font-semibold leading-snug text-tinta">{v}</p>

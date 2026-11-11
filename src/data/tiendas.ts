@@ -29,6 +29,13 @@ export const TIENDAS: InfoTienda[] = [
   { id: "mov", vista: "patinetas", menu: "Patinetas", titulo: "Patinetas", texto: "Patinetas eléctricas Xiaomi para moverte por la ciudad.", foto: "xpatineta", ejemploBusqueda: "Xiaomi…" }
 ];
 
+/** Producto recortado (sin fondo, public/fotos/recortes) que representa cada sección en el menú, el buscador y las migas
+    (ideas 1, 3 y 4): los mismos del mosaico de categorías de la portada */
+export const RECORTE: Record<TiendaId, string> = {
+  cel: "ip17pm", pc: "p52396", comp: "p3789", per: "p31252", con: "p45585", tab: "ipadpro",
+  rel: "gw8c", aud: "gbuds3fe", par: "jblflip7", tv: "tvs43u", acc: "p45648", mov: "xpatineta"
+};
+
 export const tiendaPorVista = (vista: string) => TIENDAS.find(t => t.vista === vista);
 export const tiendaPorId = (id: TiendaId) => TIENDAS.find(t => t.id === id);
 

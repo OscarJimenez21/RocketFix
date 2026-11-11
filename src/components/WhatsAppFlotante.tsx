@@ -60,7 +60,7 @@ export function WhatsAppFlotante() {
         <>
           {/* Computador: tarjeta tipo chat */}
           <div role="dialog" aria-label="Escríbenos por WhatsApp"
-            className="wa-aviso fixed bottom-[calc(1rem+max(var(--barra-abajo,0px),env(safe-area-inset-bottom,0px)))] right-[92px] z-40 hidden w-[330px] overflow-hidden rounded-xl border border-linea bg-white text-tinta shadow-flota md:block">
+            className="wa-aviso fixed bottom-[calc(1rem+max(var(--barra-abajo,0px),env(safe-area-inset-bottom,0px)))] right-[92px] z-40 hidden w-[330px] overflow-hidden rounded-xl border border-linea bg-superficie text-tinta shadow-flota md:block">
             <div className="flex items-center gap-3 bg-[#0F3D2E] px-4 py-3 text-white">
               <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10">
                 <Cohete className="h-6 w-6 text-marca-menta" />
@@ -76,7 +76,7 @@ export function WhatsAppFlotante() {
               </button>
             </div>
             <div className="wa-fondo px-4 pb-4 pt-4">
-              <p className="wa-burbuja relative max-w-[88%] rounded-lg rounded-tl-none bg-white px-3.5 py-2.5 text-[14px] leading-snug shadow-sm">
+              <p className="wa-burbuja relative max-w-[88%] rounded-lg rounded-tl-none bg-superficie px-3.5 py-2.5 text-[14px] leading-snug shadow-sm">
                 ¡Hola! 👋 {MENSAJE}
               </p>
               <a href={enlace} target="_blank" rel="noopener" onClick={() => setAviso(false)} className="btn btn-wa mt-4 w-full">
@@ -86,7 +86,7 @@ export function WhatsAppFlotante() {
           </div>
 
           {/* Celular: burbuja corta */}
-          <div className="wa-aviso fixed bottom-[calc(1.5rem+max(var(--barra-abajo,0px),env(safe-area-inset-bottom,0px)))] right-[84px] z-40 flex max-w-[calc(100vw-100px)] items-center rounded-full border border-linea bg-white pl-4 text-[13px] font-semibold text-tinta shadow-flota md:hidden">
+          <div className="wa-aviso fixed bottom-[calc(1.5rem+max(var(--barra-abajo,0px),env(safe-area-inset-bottom,0px)))] right-[84px] z-40 flex max-w-[calc(100vw-100px)] items-center rounded-full border border-linea bg-superficie pl-4 text-[13px] font-semibold text-tinta shadow-flota md:hidden">
             <a href={enlace} target="_blank" rel="noopener" onClick={() => setAviso(false)} className="py-2.5 leading-tight">
               ¿Hablamos? Inicia tu chat aquí
             </a>

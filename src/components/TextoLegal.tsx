@@ -17,6 +17,6 @@ export function TextoLegal({ t }: { t: string }) {
   // Las posiciones impares de la división son los nombres de los datos
   return <>{t.split(/\{(\w+)\}/).map((parte, i) => {
     if (i % 2 === 0) return parte;
-    return datoLegal(parte) ?? <mark key={i} className="rounded bg-acento-suave px-1 font-semibold text-tinta">[{DATOS[parte]?.etiqueta ?? parte}]</mark>;
+    return datoLegal(parte) ?? <mark key={i} className="rounded bg-acento-suave px-1 font-semibold text-acento-texto">[{DATOS[parte]?.etiqueta ?? parte}]</mark>;
   })}</>;
 }

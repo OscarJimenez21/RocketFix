@@ -20,6 +20,8 @@ export function Imagen({ src, srcSet, sizes, alt, prioridad = false, className =
     <img ref={ref} alt={alt} loading={prioridad ? "eager" : "lazy"} decoding="async" {...(srcSet ? { srcSet, sizes } : null)} {...resto}
       // La foto principal se pide antes que las demás (en minúsculas: React 18 todavía no conoce fetchPriority)
       {...(prioridad ? { fetchpriority: "high" } : null)}
+      // data-cargando: mientras llega, su escenario muestra un brillo que lo recorre (idea 10, animación 61, en index.css)
+      data-cargando={prioridad || cargada ? undefined : ""}
       src={src} onLoad={() => setCargada(true)}
       className={`transition-[opacity,transform] duration-300 ease-salida ${prioridad || cargada ? "" : "opacity-0"} ${className}`} />
   );

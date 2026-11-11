@@ -6,8 +6,9 @@ import { recurso, srcsetFoto } from "../lib/formato";
 import { useMarco } from "../lib/movimiento";
 import type { Producto } from "../types";
 import { FotoProducto, Imagen } from "./FotoProducto";
-import { IconoFlecha } from "./Iconos";
+import { IconoAmpliar, IconoFlecha } from "./Iconos";
 import { Insignia } from "./TarjetaProducto";
+import { Visor } from "./Visor";
 
 /** Animación 49: brillo suave del color de la versión elegida en el borde de la foto (encima de la foto, sin tocarla) */
 function Tinte({ color }: { color: string | null }) {
@@ -40,18 +41,31 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
     e.currentTarget.style.setProperty("--zy", `${(((e.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
   };
 
+  // Idea 11: visor a pantalla completa (se monta solo al abrirlo)
+  const [visor, setVisor] = useState(false);
+  const ampliar = fotos.length > 0 && (
+    <button type="button" onClick={() => setVisor(true)} aria-label="Ver las fotos en grande" title="Ampliar"
+      className="presionable claro-siempre absolute right-2 top-2 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-linea bg-white/95 text-tinta-2 hover:border-linea-fuerte hover:text-tinta">
+      <IconoAmpliar />
+    </button>
+  );
+  const visorAbierto = visor && <Visor fotos={fotos} inicial={actual} nombre={producto.nombre} cerrar={() => setVisor(false)} />;
+
   if (fotos.length < 2) {
     return (
       <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-square overflow-hidden rounded-md border border-linea p-6">
         <FotoProducto producto={producto} prioridad />
         <Tinte color={tinte} />
         <Insignia producto={producto} />
+        {ampliar}
+        {visorAbierto}
       </div>
     );
   }
 
   return (
     <div>
+      {visorAbierto}
       {/* data-foto-principal: de aquí despega la foto hacia el carrito al agregar */}
       <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-square overflow-hidden rounded-md border border-linea">
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- las fotos se deslizan: deben poder enfocarse para pasarlas con las flechas del teclado */}
@@ -69,13 +83,14 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
         </div>
         <Tinte color={tinte} />
         <Insignia producto={producto} />
+        {ampliar}
         <button type="button" onClick={() => ir(actual - 1)} disabled={actual <= 0} aria-label="Foto anterior"
-          className="presionable group absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-linea bg-white/95 hover:border-linea-fuerte disabled:opacity-0">
+          className="presionable group absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center claro-siempre rounded-full border border-linea bg-white/95 hover:border-linea-fuerte disabled:opacity-0">
           <IconoFlecha dir={-1} className="h-5 w-5 transition-transform duration-200 ease-salida group-hover:-translate-x-0.5" /></button>
         <button type="button" onClick={() => ir(actual + 1)} disabled={actual >= fotos.length - 1} aria-label="Foto siguiente"
-          className="presionable group absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-linea bg-white/95 hover:border-linea-fuerte disabled:opacity-0">
+          className="presionable group absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center claro-siempre rounded-full border border-linea bg-white/95 hover:border-linea-fuerte disabled:opacity-0">
           <IconoFlecha className="h-5 w-5 transition-transform duration-200 ease-salida group-hover:translate-x-0.5" /></button>
-        <span className="absolute bottom-2 right-2 rounded-sm bg-tinta/75 px-2 py-0.5 font-mono text-xs text-white" aria-hidden="true">{actual + 1} / {fotos.length}</span>
+        <span className="absolute bottom-2 right-2 rounded-sm bg-oscuro/75 px-2 py-0.5 font-mono text-xs text-white" aria-hidden="true">{actual + 1} / {fotos.length}</span>
       </div>
       {/* Al pasar de foto, el marco verde se desliza de una miniatura a la otra (va encima de las miniaturas, solo es el borde) */}
       <div ref={tira} className="sin-barra mt-3 flex gap-2 overflow-x-auto pb-1 pt-px">
