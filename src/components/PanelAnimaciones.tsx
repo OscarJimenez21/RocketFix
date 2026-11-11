@@ -62,7 +62,8 @@ const LISTA: Fila[] = [
   { n: 51, grupo: "Portada", nombre: "Sorpresa: el cohete del eslogan gira y suelta chispas", como: "Toca 5 veces seguidas el cohete del eslogan", ir: "#inicio" },
   { n: 52, grupo: "Temporadas", nombre: "Navidad, fiestas patrias, amor y amistad, Halloween", como: "Prueba con ?temporada=navidad en la dirección", ir: "#inicio", recargar: true },
   { n: 53, grupo: "Portada", nombre: "Un satélite cruza el cielo", como: "Espera en la portada (cada 35 a 70 s)", ir: "#inicio" },
-  { n: 54, grupo: "Cabecera", nombre: "El cohete del logo saluda al volver", como: "Ve a otra pestaña 10 s y vuelve", ir: "#inicio" }
+  { n: 54, grupo: "Cabecera", nombre: "El cohete del logo saluda al volver", como: "Ve a otra pestaña 10 s y vuelve", ir: "#inicio" },
+  { n: 55, grupo: "Todas", nombre: "WhatsApp flotante: el mensaje entra, el botón lanza ondas y el cohetico despega", como: "Espera 6 s en cualquier página (sale una vez por visita)", ir: "#inicio" }
 ];
 
 function leer(): number[] {

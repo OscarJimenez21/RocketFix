@@ -7,6 +7,7 @@ import { Carrito } from "./components/Carrito";
 import { Limite } from "./components/Limite";
 import { PiePagina } from "./components/PiePagina";
 import { SubirFlotante } from "./components/SubirFlotante";
+import { WhatsAppFlotante } from "./components/WhatsAppFlotante";
 import { activa } from "./lib/animaciones";
 import { clavePago, leerRegresoBold } from "./lib/bold";
 import { claveRuta, tomarPosicion, useRuta } from "./lib/rutas";
@@ -138,6 +139,7 @@ function Marco() {
         <PiePagina />
       </div>
       <SubirFlotante />
+      <WhatsAppFlotante />
       <Carrito />
       <Aviso />
       {PanelAnimaciones && <Suspense fallback={null}><PanelAnimaciones /></Suspense>}

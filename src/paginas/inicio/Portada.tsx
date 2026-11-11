@@ -88,7 +88,7 @@ export function Portada() {
   // Cada pieza del texto entra 60 ms después de la anterior; el título solo sube (ver .entrada en index.css)
   const en = (orden: number) => (entra ? { extra: " entrada", style: { "--orden": orden } as React.CSSProperties } : { extra: "", style: undefined });
   return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- solo mueve una luz decorativa; no es un control
+    // onMouseMove / onMouseLeave: solo mueven una luz decorativa (animación 48); no es un control
     <section onMouseMove={mover} onMouseLeave={salir} className="relative isolate overflow-hidden bg-marca-oscuro text-white">
       <Despegue />
       <span ref={luz} aria-hidden="true" className="luz-portada pointer-events-none absolute inset-0 -z-10" />
