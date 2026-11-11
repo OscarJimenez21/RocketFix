@@ -50,7 +50,7 @@ const LISTA: Fila[] = [
   { n: 39, grupo: "Artículos", nombre: "Línea de progreso de lectura arriba", como: "Baja por el artículo", ir: "#blog-camaras" },
   { n: 40, grupo: "Pie de página", nombre: "El botón de WhatsApp lanza dos ondas", como: "Baja hasta el pie de página", ir: "#inicio", recargar: true },
   { n: 41, grupo: "Portada", nombre: "El cielo de estrellas baja despacio todo el tiempo (dos capas a distinta velocidad)", como: "Mira el fondo de la portada unos segundos", ir: "#inicio" },
-  { n: 42, grupo: "Portada", nombre: "Estrellas fugaces que cruzan la portada de vez en cuando", como: "Espera en la portada (cada 6 a 14 s)", ir: "#inicio" }
+  { n: 42, grupo: "Portada", nombre: "Estrellas fugaces que cruzan la portada de vez en cuando", como: "Espera en la portada (de 1 a 5 a la vez, cada 1,5 a 6 s)", ir: "#inicio" }
 ];
 
 function leer(): number[] {

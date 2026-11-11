@@ -46,56 +46,91 @@ function Capa({ clase, children }: { clase: string; children: React.ReactNode })
   );
 }
 
-/** Animación 42: de vez en cuando (cada 6 a 14 s, al azar) una estrella fugaz cruza la portada en diagonal, bajando hacia
-    la izquierda (al revés del cohete, que sube a la derecha). Solo mientras la portada se ve, nunca con «reducir
-    movimiento» y nunca con la pestaña en segundo plano. Cada una se crea al lanzarla y se borra al terminar. */
+/** Animación 42: estrellas fugaces en tandas al azar (de 1 a 5 a la vez, cada 1,5 a 6 s), por cualquier parte de la
+    portada y con distinto largo, grosor, ángulo, dirección y velocidad. Solo mientras la portada se ve, nunca con «reducir movimiento» y nunca con la
+    pestaña en segundo plano. Cada una se crea al lanzarla y se borra al terminar. */
 function Fugaces({ visible }: { visible: boolean }) {
   const caja = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!visible || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let reloj = 0;
+    const relojes = new Set<number>();
+    const esperar = (fn: () => void, ms: number) => { const id = window.setTimeout(() => { relojes.delete(id); fn(); }, ms); relojes.add(id); };
     const vivas = new Set<Animation>();
+    const azar = (a: number, b: number) => a + Math.random() * (b - a);
+
+    /** Una estrella: nace en (x, y) y recorre `recorre` px con un ángulo `ang` (grados en sentido del reloj desde la
+        derecha: 20 baja hacia la derecha, 160 baja hacia la izquierda) */
+    const una = (el: HTMLDivElement, x: number, y: number, ang: number, recorre: number, chica: boolean) => {
+      const largo = chica ? azar(45, 85) : azar(80, 150); // la cola
+      const rad = (ang * Math.PI) / 180;
+      const s = document.createElement("span");
+      s.className = "fugaz";
+      s.style.cssText = `left:${x - largo}px;top:${y}px;width:${largo}px;height:${chica ? 1.5 : 2}px`;
+      el.appendChild(s);
+      const giro = `rotate(${ang}deg)`;
+      const a = s.animate(
+        [
+          { transform: `translate(0, 0) ${giro} scaleX(0.3)`, opacity: 0 },
+          { opacity: 1, offset: 0.15 },
+          { opacity: 1, offset: 0.7 },
+          { transform: `translate(${recorre * Math.cos(rad)}px, ${recorre * Math.sin(rad)}px) ${giro} scaleX(1)`, opacity: 0 }
+        ],
+        { duration: azar(650, 1300), easing: "cubic-bezier(0.4, 0, 0.7, 1)" }
+      );
+      vivas.add(a);
+      a.onfinish = a.oncancel = () => { vivas.delete(a); s.remove(); };
+    };
+
+    /** Elige por dónde pasa. La tarjeta de la vitrina es blanca y tapa lo que va detrás: ninguna nace debajo de ella.
+        En computador (vitrina a la derecha) unas cruzan el lado del texto en diagonal y otras pasan casi horizontales
+        por las franjas verdes de arriba y de abajo de la vitrina, para que ese lado también tenga. En celular (vitrina
+        abajo) todas nacen y terminan encima de la vitrina */
     const lanzar = () => {
       const el = caja.current;
-      if (el && activa(42) && !document.hidden && el.clientWidth > 0) {
-        const w = el.clientWidth, h = el.clientHeight;
-        const largo = w < 640 ? 70 : 120; // la cola
-        const angulo = 18 + Math.random() * 14; // grados por debajo de la horizontal
-        const recorre = Math.max(260, w * (0.4 + Math.random() * 0.25));
-        const rad = (angulo * Math.PI) / 180;
-        const dx = -recorre * Math.cos(rad), dy = recorre * Math.sin(rad);
-        // Nace arriba y siempre por el verde: la tarjeta de la vitrina es blanca y la taparía. En computador la vitrina va
-        // a la derecha, así que nace a su izquierda (y como baja hacia la izquierda, no la alcanza); en celular la vitrina
-        // va abajo, así que nace y muere encima de ella
-        const caja0 = el.getBoundingClientRect();
-        const v = el.parentElement?.parentElement?.querySelector("[role=region]")?.getBoundingClientRect();
-        const ladoV = v && v.left - caja0.left > w * 0.5 ? v.left - caja0.left - 16 : w;
-        const techoV = v && !(v.left - caja0.left > w * 0.5) ? v.top - caja0.top - Math.abs(dy) - 24 : h * 0.35;
-        const xMin = Math.min(w * 0.35, ladoV * 0.6);
-        const x = xMin + Math.random() * Math.max(0, ladoV - xMin);
-        const y = Math.random() * Math.max(0, Math.min(h * 0.35, techoV));
-        const s = document.createElement("span");
-        s.className = "fugaz";
-        s.style.cssText = `left:${x - largo}px;top:${y}px;width:${largo}px`;
-        el.appendChild(s);
-        const giro = `rotate(${180 - angulo}deg)`;
-        const a = s.animate(
-          [
-            { transform: `translate(0, 0) ${giro} scaleX(0.3)`, opacity: 0 },
-            { opacity: 1, offset: 0.15 },
-            { opacity: 1, offset: 0.7 },
-            { transform: `translate(${dx}px, ${dy}px) ${giro} scaleX(1)`, opacity: 0 }
-          ],
-          { duration: 900 + Math.random() * 500, easing: "cubic-bezier(0.4, 0, 0.7, 1)" }
-        );
-        vivas.add(a);
-        a.onfinish = a.oncancel = () => { vivas.delete(a); s.remove(); };
+      if (!el || !activa(42) || document.hidden || el.clientWidth === 0) return;
+      const w = el.clientWidth, h = el.clientHeight;
+      const c0 = el.getBoundingClientRect();
+      const r = el.parentElement?.parentElement?.querySelector("[role=region]")?.getBoundingClientRect();
+      const v = r ? { izq: r.left - c0.left, der: r.right - c0.left, arriba: r.top - c0.top, abajo: r.bottom - c0.top } : null;
+      const hacia = (izquierda: boolean, a: number) => (izquierda ? 180 - a : a);
+
+      if (v && v.izq > w * 0.5) {
+        const franjas = [{ y0: 6, y1: v.arriba - 10 }, { y0: v.abajo + 10, y1: h - 6 }].filter(f => f.y1 - f.y0 >= 24);
+        const franja = franjas[Math.floor(Math.random() * franjas.length)];
+        const dentro = (x: number, y: number) => x > v.izq - 8 && x < v.der + 8 && y > v.arriba - 8 && y < v.abajo + 8;
+        if (franja && Math.random() < 0.35) {
+          // Lado de la vitrina: casi horizontal por una franja verde, hacia un lado o el otro
+          const izq = Math.random() < 0.6;
+          una(el, izq ? azar(v.izq + 80, w + 30) : azar(v.izq - 120, v.der - 160), azar(franja.y0, franja.y1), hacia(izq, azar(1, 8)), azar(240, 520), Math.random() < 0.4);
+        } else {
+          // Cualquier otro punto del verde (también a la derecha y debajo de la vitrina), en cualquier diagonal hacia abajo;
+          // si al pasar se mete detrás de la vitrina, se ve entrar y salir, como si pasara por detrás
+          let x = 0, y = 0;
+          for (let i = 0; i < 8; i++) { x = azar(w * 0.04, w); y = azar(0, h * 0.75); if (!dentro(x, y)) break; }
+          if (dentro(x, y)) return;
+          una(el, x, y, hacia(Math.random() < 0.65, azar(8, 55)), azar(180, w * 0.42), Math.random() < 0.45);
+        }
+      } else {
+        const ang = azar(15, 38), recorre = azar(170, 300);
+        const techo = (v ? v.arriba : h) - recorre * Math.sin((ang * Math.PI) / 180) - 20;
+        una(el, azar(w * 0.1, w), azar(0, Math.max(0, techo)), hacia(Math.random() < 0.7, ang), recorre, Math.random() < 0.5);
       }
-      reloj = window.setTimeout(lanzar, 6000 + Math.random() * 8000);
+    };
+
+    // Tandas al azar: casi siempre 1 o 2 estrellas, a veces 3, y de vez en cuando una lluvia de 4 o 5, cada una con su
+    // propio retraso dentro de la tanda. Entre tanda y tanda pasan de 1,5 a 6 s, también al azar
+    const cuantas = () => {
+      const n = Math.random();
+      return n < 0.4 ? 1 : n < 0.68 ? 2 : n < 0.85 ? 3 : n < 0.94 ? 4 : 5;
+    };
+    const ciclo = () => {
+      const n = cuantas();
+      for (let i = 0; i < n; i++) esperar(lanzar, i === 0 ? 0 : azar(80, 1100));
+      esperar(ciclo, azar(1500, 6000) + (n >= 4 ? 1500 : 0));
     };
     // La primera espera a que termine el despegue del cohete
-    reloj = window.setTimeout(lanzar, 3800);
-    return () => { window.clearTimeout(reloj); vivas.forEach(a => a.cancel()); };
+    esperar(ciclo, 3400);
+    return () => { relojes.forEach(id => window.clearTimeout(id)); vivas.forEach(a => a.cancel()); };
   }, [visible]);
   return <div ref={caja} className="absolute inset-0" />;
 }
