@@ -26,9 +26,14 @@ const SERVICIO = [
   { texto: "Blog", href: "#blog" }
 ];
 
+/** El logo y «Inicio» del menú llevan a la dirección de la tienda sin #: el navegador carga la portada de nuevo,
+    desde arriba y con todas sus animaciones de entrada (con #inicio era un cambio de página interno, y si la persona
+    venía de la portada, la devolvía al punto donde estaba). El carrito queda guardado en el navegador. */
+const INICIO = import.meta.env.BASE_URL;
+
 /** Accesos generales al final del menú */
 const AYUDA = [
-  { texto: "Inicio", href: "#inicio" },
+  { texto: "Inicio", href: INICIO },
   { texto: "Cómo comprar", href: "#como-comprar" },
   { texto: "Todas las categorías", href: "#categorias" },
   { texto: "Calificaciones de clientes", href: "#calificaciones" },
@@ -140,7 +145,7 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
               className="presionable -ml-2 flex h-11 w-11 shrink-0 items-center justify-center rounded text-tinta hover:bg-fondo">
               <IconoMenu />
             </button>
-            <a href="#inicio" className="flex h-11 shrink-0 items-center" aria-label="Rocket Fix, ir al inicio"><Logo /></a>
+            <a href={INICIO} className="flex h-11 shrink-0 items-center" aria-label="Rocket Fix, ir al inicio"><Logo /></a>
           </div>
           <div className="hidden min-w-0 flex-1 lg:block lg:max-w-[560px]"><Buscador inicial={q} /></div>
           <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">

@@ -100,7 +100,10 @@ function Contenido({ ruta }: { ruta: Ruta }) {
 function Marco() {
   const ruta = useRuta();
   const clave = claveRuta(ruta);
-  const primera = useRef(true);
+  // Página en la que estaba la persona. Se compara la clave (y no "¿es la primera vez?") porque React, al trabajar en
+  // local, corre cada efecto dos veces al abrir: con una simple marca, la segunda vuelta creía que era un cambio de
+  // página y enfocaba el título, que aparecía con el recuadro de foco al recargar
+  const anterior = useRef(clave);
   // La primera página que abre la persona aparece de una vez (así no se retrasa lo primero que ve); desde la segunda,
   // cada página nueva entra con un fundido corto en vez de cambiar de golpe
   const navego = useRef(false);
@@ -109,7 +112,8 @@ function Marco() {
   // Al cambiar de página: vuelve a la posición anterior si la persona regresó, o sube al inicio; y lleva el foco al título
   useLayoutEffect(() => {
     document.title = tituloDe(ruta);
-    if (primera.current) { primera.current = false; return; }
+    if (anterior.current === clave) return;
+    anterior.current = clave;
     const y = tomarPosicion();
     if (ruta.tipo === "inicio" && ruta.ancla) return;
     window.scrollTo({ top: y ?? 0, behavior: "instant" as ScrollBehavior });

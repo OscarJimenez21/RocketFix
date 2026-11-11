@@ -1,9 +1,10 @@
 /* Fondo de la portada: el cohete del logo despega por el verde y deja una estela.
    La primera vez que se abre la página en la visita, el cohete sube por la curva y la estela se dibuja detrás de él; después
-   queda solo la estela, quieta, con su trayectoria punteada y unas pocas estrellas.
+   queda solo la estela, quieta, con su trayectoria punteada, y un cielo de estrellas que baja despacio (animación 41).
    Con «reducir movimiento» (o en navegadores que no mueven cosas por una curva) la estela aparece ya dibujada, sin cohete.
    Todo va detrás del contenido, no se puede tocar y los lectores de pantalla no lo leen. */
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { activa } from "../lib/animaciones";
 import { useEnPantalla } from "../lib/enPantalla";
 import { Cohete } from "./Logo";
 
@@ -33,6 +34,71 @@ const ESTRELLAS: [number, number, number, number][] = [
 
 /** Animación 3: estrellas que titilan, cada una a su ritmo (posición en %, retraso en segundos) */
 const TITILAN: [number, number, number][] = [[8, 22, 0], [33, 4, 1.2], [57, 14, 2.3], [71, 30, 0.6], [89, 12, 1.7], [95, 46, 2.8], [24, 58, 3.1]];
+
+/** Capa de cielo que baja sin cortes: lleva sus estrellas dos veces, una encima de la otra, y se desplaza exactamente un
+    alto de la portada antes de volver a empezar (en ese punto la copia de arriba quedó donde estaba la original) */
+function Capa({ clase, children }: { clase: string; children: React.ReactNode }) {
+  return (
+    <div className={`${clase} absolute inset-0`}>
+      <div className="absolute inset-0">{children}</div>
+      <div className="absolute inset-0 -translate-y-full">{children}</div>
+    </div>
+  );
+}
+
+/** Animación 42: de vez en cuando (cada 6 a 14 s, al azar) una estrella fugaz cruza la portada en diagonal, bajando hacia
+    la izquierda (al revés del cohete, que sube a la derecha). Solo mientras la portada se ve, nunca con «reducir
+    movimiento» y nunca con la pestaña en segundo plano. Cada una se crea al lanzarla y se borra al terminar. */
+function Fugaces({ visible }: { visible: boolean }) {
+  const caja = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!visible || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let reloj = 0;
+    const vivas = new Set<Animation>();
+    const lanzar = () => {
+      const el = caja.current;
+      if (el && activa(42) && !document.hidden && el.clientWidth > 0) {
+        const w = el.clientWidth, h = el.clientHeight;
+        const largo = w < 640 ? 70 : 120; // la cola
+        const angulo = 18 + Math.random() * 14; // grados por debajo de la horizontal
+        const recorre = Math.max(260, w * (0.4 + Math.random() * 0.25));
+        const rad = (angulo * Math.PI) / 180;
+        const dx = -recorre * Math.cos(rad), dy = recorre * Math.sin(rad);
+        // Nace arriba y siempre por el verde: la tarjeta de la vitrina es blanca y la taparía. En computador la vitrina va
+        // a la derecha, así que nace a su izquierda (y como baja hacia la izquierda, no la alcanza); en celular la vitrina
+        // va abajo, así que nace y muere encima de ella
+        const caja0 = el.getBoundingClientRect();
+        const v = el.parentElement?.parentElement?.querySelector("[role=region]")?.getBoundingClientRect();
+        const ladoV = v && v.left - caja0.left > w * 0.5 ? v.left - caja0.left - 16 : w;
+        const techoV = v && !(v.left - caja0.left > w * 0.5) ? v.top - caja0.top - Math.abs(dy) - 24 : h * 0.35;
+        const xMin = Math.min(w * 0.35, ladoV * 0.6);
+        const x = xMin + Math.random() * Math.max(0, ladoV - xMin);
+        const y = Math.random() * Math.max(0, Math.min(h * 0.35, techoV));
+        const s = document.createElement("span");
+        s.className = "fugaz";
+        s.style.cssText = `left:${x - largo}px;top:${y}px;width:${largo}px`;
+        el.appendChild(s);
+        const giro = `rotate(${180 - angulo}deg)`;
+        const a = s.animate(
+          [
+            { transform: `translate(0, 0) ${giro} scaleX(0.3)`, opacity: 0 },
+            { opacity: 1, offset: 0.15 },
+            { opacity: 1, offset: 0.7 },
+            { transform: `translate(${dx}px, ${dy}px) ${giro} scaleX(1)`, opacity: 0 }
+          ],
+          { duration: 900 + Math.random() * 500, easing: "cubic-bezier(0.4, 0, 0.7, 1)" }
+        );
+        vivas.add(a);
+        a.onfinish = a.oncancel = () => { vivas.delete(a); s.remove(); };
+      }
+      reloj = window.setTimeout(lanzar, 6000 + Math.random() * 8000);
+    };
+    // La primera espera a que termine el despegue del cohete
+    reloj = window.setTimeout(lanzar, 3800);
+    return () => { window.clearTimeout(reloj); vivas.forEach(a => a.cancel()); };
+  }, [visible]);
+  return <div ref={caja} className="absolute inset-0" />;
+}
 
 export function Despegue() {
   const caja = useRef<HTMLDivElement>(null);
@@ -74,14 +140,24 @@ export function Despegue() {
     return () => { vuelo.cancel(); trazos.forEach(a => a.cancel()); };
   }, [vuela, medido]);
 
-  // Las estrellas que titilan se detienen mientras la portada no se ve (data-fuera)
+  // Las estrellas se detienen mientras la portada no se ve (data-fuera)
   const visible = useEnPantalla(caja);
   const c = t && t.w > 0 ? curva(t) : null;
   return (
     <div ref={caja} aria-hidden="true" data-fuera={!visible || undefined} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
       {/* Luz suave detrás de la vitrina (abajo en celular, a la derecha en computador) */}
       <span className="absolute inset-0 bg-[radial-gradient(70%_38%_at_50%_80%,rgba(91,224,169,0.14),transparent_72%)] lg:bg-[radial-gradient(40%_62%_at_80%_50%,rgba(91,224,169,0.16),transparent_72%)]" />
-      {TITILAN.map(([x, y, s]) => <span key={`${x}-${y}`} className="estrella-titila" style={{ left: `${x}%`, top: `${y}%`, "--t": `${s}s` } as React.CSSProperties} />)}
+      {/* Animación 41: el cielo baja despacio, como si la portada fuera subiendo con el cohete. Las estrellas tenues van
+          lejos y lentas; las que titilan, más cerca y un poco más rápido */}
+      <Capa clase="cielo-lejos">
+        {ESTRELLAS.map(([x, y, r, o], i) => (
+          <span key={i} className="absolute rounded-full bg-white" style={{ left: `${x}%`, top: `${y}%`, width: r * 2.4, height: r * 2.4, opacity: Math.min(1, o * 1.5) }} />
+        ))}
+      </Capa>
+      <Capa clase="cielo-cerca">
+        {TITILAN.map(([x, y, s]) => <span key={`${x}-${y}`} className="estrella-titila" style={{ left: `${x}%`, top: `${y}%`, "--t": `${s}s` } as React.CSSProperties} />)}
+      </Capa>
+      <Fugaces visible={visible} />
       {t && c && (
         <svg width={t.w} height={t.h} viewBox={`0 0 ${t.w} ${t.h}`} className="absolute inset-0">
           <defs>
@@ -91,7 +167,6 @@ export function Despegue() {
               <stop offset="1" stopColor="#5BE0A9" stopOpacity="0.9" />
             </linearGradient>
           </defs>
-          {ESTRELLAS.map(([x, y, r, o], i) => <circle key={i} cx={(x / 100) * t.w} cy={(y / 100) * t.h} r={r * 1.2} fill="#fff" opacity={Math.min(1, o * 1.5)} />)}
           {/* Trayectoria punteada, la estela con un halo ancho y la línea fina encima */}
           <path d={c.d} fill="none" stroke="#fff" strokeOpacity="0.18" strokeWidth="1.5" strokeLinecap="round" strokeDasharray="0.5 9" />
           {[{ ancho: 16, opacidad: 0.14 }, { ancho: 2.5, opacidad: 1 }].map((e, i) => (
