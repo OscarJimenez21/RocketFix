@@ -4,6 +4,7 @@ import { TiendaProvider, useTienda } from "./estado/TiendaContext";
 import { Aviso } from "./components/Aviso";
 import { Cabecera } from "./components/Cabecera";
 import { Carrito } from "./components/Carrito";
+import { FranjaRegalos } from "./components/FranjaRegalos";
 import { Limite } from "./components/Limite";
 import { PiePagina } from "./components/PiePagina";
 import { SubirFlotante } from "./components/SubirFlotante";
@@ -126,6 +127,7 @@ function Marco() {
     <>
       <a href="#pagina" onClick={e => { e.preventDefault(); document.querySelector<HTMLElement>("#pagina h1")?.focus(); }}
         className="sr-only z-[70] rounded bg-marca px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-3 focus:top-3">Saltar al contenido</a>
+      <FranjaRegalos />
       <Cabecera ruta={ruta} />
       <div id="pagina">
         <RegresoBold />

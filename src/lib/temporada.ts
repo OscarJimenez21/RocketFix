@@ -34,3 +34,18 @@ export function temporadaActual(fecha = new Date()): Temporada | null {
 }
 
 export const TEMPORADA = temporadaActual();
+
+/** Temporada de regalos: del 1 al 31 de diciembre (hora de Bogotá) la portada muestra «Regalos por presupuesto» e «Ideas
+    para regalar», y arriba de todas las páginas sale una franja que lleva a ellos. Hasta el 24 la franja habla de Navidad;
+    del 25 al 31, de fin de año. Se enciende y se apaga sola, sin publicar nada. No anuncia descuentos ni promociones.
+    Al trabajar en local se puede ver antes de tiempo con ?temporada=navidad */
+export type Regalos = { navidad: boolean };
+export function regalosActuales(fecha = new Date()): Regalos | null {
+  if (import.meta.env.DEV && new URLSearchParams(location.search).get("temporada") === "navidad") return { navidad: true };
+  const [mes, dia] = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Bogota", month: "numeric", day: "numeric" })
+    .formatToParts(fecha).filter(p => p.type === "month" || p.type === "day").map(p => Number(p.value));
+  if (mes !== 12) return null;
+  return { navidad: (dia ?? 0) <= 24 };
+}
+
+export const REGALOS = regalosActuales();

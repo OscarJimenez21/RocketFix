@@ -55,6 +55,10 @@ export const IconoPausa = ({ className = "h-4 w-4" }: P) => (
 export const IconoReproducir = ({ className = "h-4 w-4" }: P) => (
   <svg viewBox="0 0 24 24" className={className} aria-hidden="true" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" /></svg>
 );
+/** Caja de regalo con moño (temporada de regalos) */
+export const IconoRegalo = ({ className = "h-5 w-5" }: P) => (
+  <svg viewBox="0 0 24 24" className={className} {...base}><rect x="3.5" y="8.5" width="17" height="4" rx="1" /><path d="M5 12.5V20h14v-7.5M12 8.5V20M12 8.5C10.5 5 7 4.6 7 6.6S10 8.5 12 8.5zM12 8.5c1.5-3.5 5-3.9 5-1.9S14 8.5 12 8.5z" /></svg>
+);
 export const IconoMoto =({ className = "h-5 w-5" }: P) => (
   <svg viewBox="0 0 24 24" className={className} {...base}><circle cx="5.5" cy="17" r="3" /><circle cx="18.5" cy="17" r="3" /><path d="M8.5 17h6.5l2-7h2.5M15 5h3l1.5 5M5.5 17l3-6h6" /></svg>
 );

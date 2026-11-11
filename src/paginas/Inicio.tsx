@@ -11,6 +11,9 @@ import { Categorias } from "./inicio/Categorias";
 import { Marcas } from "./inicio/Marcas";
 import { ComoComprar, Portada, Ventajas } from "./inicio/Portada";
 import { Servicios } from "./inicio/Servicios";
+import { Confianza } from "./inicio/Confianza";
+import { IdeasParaRegalar, RegalosPorPresupuesto } from "./inicio/Regalos";
+import { REGALOS } from "../lib/temporada";
 
 // Las secciones de cada fila son siempre las mismas listas: así la fila no se vuelve a calcular en cada dibujo
 // (con tiendas={["cel"]} llegaba una lista nueva cada vez y el useMemo de Coleccion nunca servía)
@@ -31,9 +34,12 @@ export function Inicio({ ancla }: { ancla?: string }) {
     <>
       <Portada />
       <Ventajas />
+      {/* Solo en diciembre (se encienden y se apagan solas por fecha) */}
+      {REGALOS && <RegalosPorPresupuesto />}
       <ComoComprar />
       <Marcas />
       <Categorias />
+      {REGALOS && <IdeasParaRegalar />}
       <BandaGamer />
       <Carrusel id="vendidos" etiqueta={<><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</>} titulo="Los que todos quieren" productos={vendidos} cinta="Top ventas" gris />
       <BandaCelulares />
@@ -42,6 +48,7 @@ export function Inicio({ ancla }: { ancla?: string }) {
       <Coleccion id="computadores" etiqueta="Computadores" titulo="Portátiles y PC para cada necesidad" tiendas={SOLO_PC} gris />
       <Coleccion id="componentes" etiqueta="Componentes" titulo="Arma o mejora tu PC" tiendas={SOLO_COMP} />
       <Servicios />
+      <Confianza />
       <Calificaciones />
     </>
   );

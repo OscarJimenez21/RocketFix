@@ -8,7 +8,7 @@ import { recurso } from "../../lib/formato";
 import type { TiendaId } from "../../types";
 
 /** Colores de las tarjetas de categoría (todos de la marca, planos: sin luces de adorno) */
-const TEMAS = {
+export const TEMAS = {
   oscuro: { caja: "bg-marca-oscuro text-white", frase: "text-marca-menta", boton: "bg-white text-marca-oscuro" },
   noche: { caja: "bg-marca-noche text-white", frase: "text-marca-menta", boton: "bg-marca-menta text-marca-noche" },
   marca: { caja: "bg-marca text-white", frase: "text-white", boton: "bg-white text-marca-oscuro" },
@@ -68,7 +68,8 @@ export function Categorias() {
   const mosaico = useRef<HTMLUListElement>(null);
   useRevelarHijos(mosaico);
   return (
-    <section id="categorias" aria-labelledby="t-categorias" className="contenedor py-12">
+    // overflow-x-clip: el producto que se sale de su tarjeta (animación 57) nunca hace que la página se corra de lado
+    <section id="categorias" aria-labelledby="t-categorias" className="contenedor overflow-x-clip py-12">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
         <h2 id="t-categorias" className="titulo-seccion titulo-trazo">Compra por categoría</h2>
       </div>
@@ -79,7 +80,8 @@ export function Categorias() {
           const tema = TEMAS[m.tema], forma = FORMAS[m.forma];
           return (
             <li key={m.tienda} data-revelar className={`revelar ${forma.caja}`}>
-              <a href={`#${t.vista}`} className={`group relative isolate flex h-full overflow-hidden rounded-lg p-4 transition-transform duration-150 ease-salida active:scale-[0.98] sm:p-6 ${tema.caja}`}>
+              {/* mosaico-tarjeta: con el mouse encima, el producto se levanta y se sale un poco del cuadro (animación 57) */}
+              <a href={`#${t.vista}`} data-forma={m.forma} className={`mosaico-tarjeta group relative isolate flex h-full overflow-hidden rounded-lg p-4 transition-transform duration-150 ease-salida active:scale-[0.98] sm:p-6 ${tema.caja}`}>
                 <span className={`relative z-10 flex min-w-0 flex-col ${forma.texto}`}>
                   <span className={`text-[12.5px] font-semibold leading-snug sm:text-sm ${tema.frase}`}>{m.frase}</span>
                   <span className={`mt-1 font-display font-extrabold leading-[0.98] tracking-tight ancho-108 ${forma.titulo}`}>{t.titulo}</span>

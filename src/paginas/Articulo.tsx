@@ -58,8 +58,8 @@ export function Articulo({ id }: { id: string }) {
 
   return (
     <>
-      {/* Línea verde arriba de la pantalla que muestra cuánto se ha leído (animación 39; la mueve el navegador al bajar) */}
-      <div aria-hidden="true" className="progreso-lectura fixed inset-x-0 top-0 z-[45] h-[3px] bg-marca" />
+      {/* (La línea de lectura de los artículos, animación 39, se reemplazó el 11/11/2026 por el cohete de la cabecera,
+          animación 58, que muestra lo mismo en todas las páginas) */}
       <EncabezadoVista migas={[{ texto: "Inicio", href: "#inicio" }, { texto: "Blog", href: "#blog" }, { texto: a.etiqueta }]} titulo={a.titulo} lead={cab?.lead ?? a.resumen}
         extra={<p className="mt-3 text-sm text-tinta-3">Por {CONFIG.nombre} · Lectura de {a.minutos} min</p>} />
       <div className="contenedor grid grid-cols-1 gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_300px]">

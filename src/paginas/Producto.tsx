@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } 
 import { CONFIG, TIENDA_VISTA, VISTAS, conPrecioPrimero, deTienda, etiquetaDe, nombreCat, nombreItem, porId, textoConsulta } from "../data/catalogo";
 import { useTienda } from "../estado/TiendaContext";
 import { Migas } from "../components/EncabezadoVista";
+import { IconoCaracteristica, LoPrincipal, tipoDe } from "../components/Destacados";
 import { Galeria } from "../components/Galeria";
 import { IconoCamion, IconoCheck, IconoCompartir, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { EtiquetaAgregar, NotaProducto, TarjetaProducto, useAgregado } from "../components/TarjetaProducto";
@@ -153,7 +154,17 @@ export default function Producto({ id }: { id: string }) {
           <h1 tabIndex={-1} className="mt-1.5 text-[26px] font-extrabold leading-tight md:text-[32px]">{p.nombre}</h1>
           {p.specs.length > 0 && (
             // specs-cascada: las características cortas aparecen una por una (animación 19)
-            <ul className="specs-cascada mt-3 flex flex-wrap gap-1.5">{p.specs.map((s, k) => <li key={s} style={{ "--i": k } as React.CSSProperties} className="rounded-sm bg-fondo px-2 py-1 text-[13px] text-tinta-2">{s}</li>)}</ul>
+            // Cada característica lleva su ícono cuando se reconoce (pantalla, procesador, memoria…; ver Destacados.tsx)
+            <ul className="specs-cascada mt-3 flex flex-wrap gap-1.5">
+              {p.specs.map((s, k) => {
+                const tipo = tipoDe(s);
+                return (
+                  <li key={s} style={{ "--i": k } as React.CSSProperties} className="inline-flex items-center gap-1.5 rounded-sm bg-fondo px-2 py-1 text-[13px] text-tinta-2">
+                    {tipo && <IconoCaracteristica tipo={tipo} className="h-3.5 w-3.5 shrink-0 text-marca" />}{s}
+                  </li>
+                );
+              })}
+            </ul>
           )}
           {p.nota && <NotaProducto nota={p.nota} className="mt-3" />}
 
@@ -216,7 +227,9 @@ export default function Producto({ id }: { id: string }) {
             <div aria-hidden="true" className="esqueleto h-48 w-full" />
           </div>
         ) : (
-        <div className="contenedor grid gap-8 py-10 lg:grid-cols-2 lg:gap-12">
+        <div className="contenedor py-10">
+          <LoPrincipal filas={descripcion.ficha ?? []} />
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="min-w-0">
             <h2 id="h-desc" className="text-xl font-extrabold">Descripción</h2>
             <p className="mt-3 leading-relaxed text-tinta-2">{d.resumen}</p>
@@ -234,6 +247,7 @@ export default function Producto({ id }: { id: string }) {
               ))}
             </dl>
           </div>
+        </div>
         </div>
         )}
       </section>

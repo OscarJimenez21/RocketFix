@@ -1,4 +1,4 @@
-/* Panel para revisar las animaciones en prueba (40 el 05/11/2026; 56 desde el 11/11/2026). Solo existe al trabajar en local (npm run dev): App lo
+/* Panel para revisar las animaciones en prueba (40 el 05/11/2026; 58 desde el 11/11/2026: la 39 se quitó y llegaron la 57, la 58 y la 59). Solo existe al trabajar en local (npm run dev): App lo
    carga con import.meta.env.DEV, así que no llega a la página publicada.
    Cada casilla enciende o apaga una animación (pone o quita la clase sin-aN en <html>, ver lib/animaciones.ts) y se
    recuerda en este navegador. «Ver» lleva a donde se ve cada una; las que solo pasan al cargar la página recargan. */
@@ -47,7 +47,6 @@ const LISTA: Fila[] = [
   { n: 36, grupo: "Portada", nombre: "Punto rojo «REC» que parpadea", como: "Mira «Instalación de cámaras»", ir: "#servicios" },
   { n: 37, grupo: "Formularios", nombre: "El campo y su rótulo se pintan de verde al escribir", como: "Toca un campo del formulario", ir: "#orden" },
   { n: 38, grupo: "Blog", nombre: "El dibujo de la tarjeta se mece", como: "Pasa el mouse por una tarjeta", ir: "#blog" },
-  { n: 39, grupo: "Artículos", nombre: "Línea de progreso de lectura arriba", como: "Baja por el artículo", ir: "#blog-camaras" },
   { n: 40, grupo: "Pie de página", nombre: "El botón de WhatsApp lanza dos ondas", como: "Baja hasta el pie de página", ir: "#inicio", recargar: true },
   { n: 41, grupo: "Portada", nombre: "El cielo de estrellas baja despacio todo el tiempo (dos capas a distinta velocidad)", como: "Mira el fondo de la portada unos segundos", ir: "#inicio" },
   { n: 42, grupo: "Portada", nombre: "Estrellas fugaces que cruzan la portada de vez en cuando", como: "Espera en la portada (de 1 a 5 a la vez, cada 1,5 a 6 s)", ir: "#inicio" },
@@ -64,7 +63,10 @@ const LISTA: Fila[] = [
   { n: 53, grupo: "Portada", nombre: "Un satélite cruza el cielo", como: "Espera en la portada (cada 35 a 70 s)", ir: "#inicio" },
   { n: 54, grupo: "Cabecera", nombre: "El cohete del logo saluda al volver", como: "Ve a otra pestaña 10 s y vuelve", ir: "#inicio" },
   { n: 55, grupo: "Todas", nombre: "WhatsApp flotante: el mensaje entra, el botón lanza ondas y el cohetico despega", como: "Espera 6 s en cualquier página (sale una vez por visita)", ir: "#inicio" },
-  { n: 56, grupo: "Pie de página", nombre: "Cielo del pie: la estela del cohete se dibuja al verlo", como: "Baja hasta el pie de página (en computador)", ir: "#contacto", recargar: true }
+  { n: 56, grupo: "Pie de página", nombre: "Cielo del pie: la estela del cohete se dibuja al verlo", como: "Baja hasta el pie de página (en computador)", ir: "#contacto", recargar: true },
+  { n: 57, grupo: "Portada", nombre: "El producto de cada categoría se sale del cuadro", como: "Pasa el mouse por «Compra por categoría»", ir: "#categorias" },
+  { n: 58, grupo: "Todas", nombre: "El cohete avanza por el borde de la cabecera al bajar (reemplaza a la 39)", como: "Baja por cualquier página", ir: "#inicio" },
+  { n: 59, grupo: "Portada", nombre: "Las estrellas del fondo se corren con el mouse (profundidad)", como: "Mueve el mouse por la portada", ir: "#inicio" }
 ];
 
 function leer(): number[] {

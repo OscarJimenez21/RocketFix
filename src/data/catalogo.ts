@@ -9,6 +9,7 @@ import cabecerasJson from "./cabeceras.json";
 import pagosJson from "./pagos.json";
 import resenasJson from "./resenas.json";
 import logosMarcasJson from "./logos-marcas.json";
+import llegadasJson from "./llegadas.json";
 import type { Articulo, Cabecera, Categoria, Config, FormaPago, Paquete, Producto, Resena, Servicio, TiendaId } from "../types";
 import { norm } from "../lib/formato";
 
@@ -63,6 +64,16 @@ export const deTienda = (t: TiendaId) => PRODUCTOS.filter(p => p.tienda === t);
 export const desde = (p: Producto) => Math.min(...p.opciones.map(o => o.precio));
 /** Rótulo del precio (igual que en el catálogo en PDF): «Desde» solo si las versiones cambian de precio; si no, «Precio» */
 export const rotuloPrecio = (p: Producto) => (new Set(p.opciones.map(o => o.precio)).size > 1 ? "Desde" : "Precio");
+/** Fecha en que cada producto entró al catálogo (AAAA-MM-DD), sacada del historial de productos.json. Solo están los que
+    llegaron después del 28/10/2026; al agregar productos nuevos, se agregan aquí con la fecha del día */
+const LLEGADAS = llegadasJson as Record<string, string>;
+/** Cuántos días lleva la etiqueta «Recién llegado» un producto después de entrar al catálogo */
+export const DIAS_RECIEN_LLEGADO = 45;
+/** «Recién llegado» (no «Nuevo»: «Nuevo» es el estado del equipo, frente a usado o CPO) */
+export const recienLlegado = (p: Producto, hoy = Date.now()) => {
+  const f = LLEGADAS[p.id];
+  return Boolean(f) && !p.consultar && hoy - Date.parse(`${f}T00:00:00-05:00`) < DIAS_RECIEN_LLEGADO * 864e5;
+};
 /** Para ordenar: primero los productos con precio, al final los de «Preguntar disponibilidad» (el resto del orden se mantiene) */
 export const conPrecioPrimero = (a: Producto, b: Producto) => Number(Boolean(a.consultar)) - Number(Boolean(b.consultar));
 /** Mensaje de WhatsApp para un producto sin precio publicado */

@@ -24,17 +24,26 @@ function useLuzMouse() {
   const cuadro = useRef(0);
   const mover = (e: React.MouseEvent<HTMLElement>) => {
     const el = luz.current;
-    if (!el || cuadro.current || !activa(48)) return;
+    if (!el || cuadro.current) return;
     const { clientX, clientY, currentTarget } = e;
     cuadro.current = requestAnimationFrame(() => {
       cuadro.current = 0;
       const r = currentTarget.getBoundingClientRect();
+      // Animación 59: dónde está el puntero, de -1 a 1 (las capas de estrellas se corren al lado contrario; ver index.css)
+      currentTarget.style.setProperty("--px", (((clientX - r.left) / r.width) * 2 - 1).toFixed(3));
+      currentTarget.style.setProperty("--py", (((clientY - r.top) / r.height) * 2 - 1).toFixed(3));
+      if (!activa(48)) return;
       el.style.setProperty("--lx", `${clientX - r.left}px`);
       el.style.setProperty("--ly", `${clientY - r.top}px`);
       el.dataset.on = "";
     });
   };
-  const salir = () => { if (luz.current) delete luz.current.dataset.on; };
+  const salir = (e: React.MouseEvent<HTMLElement>) => {
+    // Al salir, las estrellas vuelven despacio a su lugar
+    e.currentTarget.style.setProperty("--px", "0");
+    e.currentTarget.style.setProperty("--py", "0");
+    if (luz.current) delete luz.current.dataset.on;
+  };
   useEffect(() => () => cancelAnimationFrame(cuadro.current), []);
   return { luz, mover, salir };
 }

@@ -13,7 +13,7 @@ import type { Ruta, TiendaId } from "../types";
 import { Buscador } from "./Buscador";
 import { PuntoEstado, useAtencion } from "./Contacto";
 import { IconoBolsa, IconoCerrar, IconoMenu, IconoWhatsApp } from "./Iconos";
-import { Logo } from "./Logo";
+import { Cohete, Logo } from "./Logo";
 
 const CANTIDAD = Object.fromEntries(TIENDAS.map(t => [t.id, deTienda(t.id).length])) as Record<TiendaId, number>;
 const secciones = (ids: TiendaId[]) => ids.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t));
@@ -167,6 +167,9 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
           </div>
         </div>
         <div className="contenedor pb-2.5 lg:hidden"><Buscador inicial={q} /></div>
+        {/* Animación 58: el cohete del logo avanza por el borde de abajo de la cabecera a medida que se baja por la página,
+            dejando su estela (en todas las páginas; ver .rumbo en index.css) */}
+        <span aria-hidden="true" className="rumbo"><Cohete className="rumbo-cohete" /></span>
       </header>
       <MenuLateral abierto={menu} cerrar={cerrarMenu} actual={actual} />
     </>

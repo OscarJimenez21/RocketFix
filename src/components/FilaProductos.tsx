@@ -18,7 +18,8 @@ export function FilaProductos({ productos, etiqueta, encabezado, cinta }: { prod
     const tarjeta = el.querySelector("li");
     el.scrollBy({ left: dir * ((tarjeta?.getBoundingClientRect().width ?? 260) + 16) * 2, behavior: "smooth" });
   };
-  const flecha = "presionable group flex h-10 w-10 items-center justify-center rounded-full border border-linea-fuerte bg-white hover:border-tinta-2";
+  // text-tinta: la flecha es oscura aunque la fila vaya sobre un fondo oscuro (la de regalos, en diciembre)
+  const flecha = "presionable group flex h-10 w-10 items-center justify-center rounded-full border border-linea-fuerte bg-white text-tinta hover:border-tinta-2";
   return (
     <div>
       <div className="mb-5 flex items-end justify-between gap-4">

@@ -3,6 +3,7 @@ import { deTienda, desde, etiquetaDe, rotuloPrecio } from "../../data/catalogo";
 import { tiendaPorId } from "../../data/tiendas";
 import { FlechaMovil } from "../../components/FilaProductos";
 import { FotoProducto } from "../../components/FotoProducto";
+import { Insignia } from "../../components/TarjetaProducto";
 import { useEnPantalla, useVisto } from "../../lib/enPantalla";
 import { dinero } from "../../lib/formato";
 import { hrefProducto } from "../../lib/rutas";
@@ -22,7 +23,9 @@ function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: st
         {/* Animación 46: reflejo de vidrio que cruza la foto una vez al pasar el mouse */}
         <span aria-hidden="true" className="reflejo" />
         {/* brillo: la cinta tiene un destello que la cruza una vez cuando la fila aparece (ver .brillo en index.css) */}
-        {cinta && <span className="brillo absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-[13px] font-bold text-acento-texto">{cinta}</span>}
+        {cinta
+          ? <span className="brillo absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-[13px] font-bold text-acento-texto">{cinta}</span>
+          : <Insignia producto={p} className="left-3 top-3" />}
       </div>
       <div className="mt-auto border-t border-linea px-5 py-4">
         <p className="truncate text-[13px] font-semibold text-tinta-3">{etiquetaDe(p)}</p>

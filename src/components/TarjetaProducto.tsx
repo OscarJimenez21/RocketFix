@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { etiquetaDe, textoConsulta } from "../data/catalogo";
+import { etiquetaDe, recienLlegado, textoConsulta } from "../data/catalogo";
 import { useTienda } from "../estado/TiendaContext";
 import { dinero, recurso } from "../lib/formato";
 import { hrefProducto } from "../lib/rutas";
@@ -9,10 +9,18 @@ import type { Producto } from "../types";
 import { FotoProducto } from "./FotoProducto";
 import { IconoCheck, IconoWhatsApp } from "./Iconos";
 
-/** Etiqueta del estado cuando no es nuevo (CPO, Usado, Open box) */
-export function Insignia({ producto }: { producto: Producto }) {
-  if (producto.estado === "Nuevo") return null;
-  return <span className="absolute left-2 top-2 rounded-sm bg-tinta px-1.5 py-0.5 text-[12.5px] font-semibold text-white">{producto.estado}</span>;
+/** Etiquetas sobre la foto, arriba a la izquierda: el estado cuando no es nuevo (CPO, Usado, Open box) y «Recién llegado»
+    los primeros días después de que el producto entra al catálogo (ver recienLlegado en data/catalogo.ts) */
+export function Insignia({ producto, className = "left-2 top-2" }: { producto: Producto; className?: string }) {
+  const estado = producto.estado !== "Nuevo";
+  const recien = recienLlegado(producto);
+  if (!estado && !recien) return null;
+  return (
+    <span className={`absolute flex flex-col items-start gap-1 ${className}`}>
+      {estado && <span className="rounded-sm bg-tinta px-1.5 py-0.5 text-[12.5px] font-semibold text-white">{producto.estado}</span>}
+      {recien && <span className="inline-flex items-center gap-1 rounded-sm bg-marca-menta px-1.5 py-0.5 text-[12.5px] font-semibold text-marca-noche"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-marca-noche" />Recién llegado</span>}
+    </span>
+  );
 }
 
 /** Nota del producto ("Obsequio: audífonos", "Sobre pedido"…): la disponibilidad va en gris, los regalos en verde */

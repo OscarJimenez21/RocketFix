@@ -545,14 +545,48 @@
   }
   @keyframes mecer { 20% { transform: rotate(-7deg); } 45% { transform: rotate(6deg); } 70% { transform: rotate(-3deg); } }
 
-  /* 39 · Artículos: una línea verde arriba de la pantalla muestra cuánto se ha leído */
-  .progreso-lectura { display: none; }
+  /* 57 · Categorías de la portada: con el mouse encima, el producto recortado se levanta, gira un poco y se sale del borde
+     de su tarjeta, con la sombra más lejos (como si saliera de la caja). La tarjeta deja de recortarlo solo mientras tanto,
+     y queda por encima de las vecinas */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a57) .mosaico-tarjeta:hover { overflow: visible; }
+    :root:not(.sin-a57) li:has(> .mosaico-tarjeta:hover) { position: relative; z-index: 10; }
+    :root:not(.sin-a57) .mosaico-tarjeta .aparece-mosaico {
+      transition-property: opacity, translate, transform, filter;
+      transition-delay: calc(var(--orden, 0) * 80ms), calc(var(--orden, 0) * 80ms), 0ms, 0ms;
+    }
+    :root:not(.sin-a57) .mosaico-tarjeta:hover .aparece-mosaico {
+      transform: translate(10%, -18%) rotate(-6deg) scale(1.15);
+      filter: drop-shadow(0 30px 24px rgb(0 0 0 / 0.38));
+    }
+    /* En la tarjeta grande (celulares) la foto ya es enorme: sube menos, para no tocar el título de la sección */
+    :root:not(.sin-a57) .mosaico-tarjeta[data-forma="grande"]:hover .aparece-mosaico { transform: translate(3%, -7%) rotate(-4deg) scale(1.07); }
+  }
+
+  /* 59 · Portada: con el mouse, las estrellas se corren un poco al lado contrario del puntero, las lejanas menos que las
+     cercanas, como si el cielo tuviera fondo. La posición la escribe la portada en --px y --py (de -1 a 1) */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a59) .paralaje-lejos, :root:not(.sin-a59) .paralaje-cerca { transition: transform 900ms cubic-bezier(0.23, 1, 0.32, 1); }
+    :root:not(.sin-a59) .paralaje-lejos { transform: translate3d(calc(var(--px, 0) * -7px), calc(var(--py, 0) * -5px), 0); }
+    :root:not(.sin-a59) .paralaje-cerca { transform: translate3d(calc(var(--px, 0) * -18px), calc(var(--py, 0) * -12px), 0); }
+  }
+
+  /* 58 · Cabecera (todas las páginas): el cohete del logo avanza por el borde de abajo de la cabecera según cuánto se ha
+     bajado, con su estela detrás. Reemplaza a la 39 (línea de lectura, que solo estaba en los artículos). Lo mueve el
+     navegador con el desplazamiento (sin código que corra en cada cuadro); donde no se puede, o con «reducir movimiento»,
+     no aparece. La pieza mide todo el ancho y entra desde la izquierda: el cohete va en su punta */
+  .rumbo { display: none; }
   @supports (animation-timeline: scroll()) {
     @media (prefers-reduced-motion: no-preference) {
-      :root:not(.sin-a39) .progreso-lectura { display: block; transform-origin: left; animation: progreso-lectura linear both; animation-timeline: scroll(root); }
+      :root:not(.sin-a58) .rumbo {
+        display: block; position: absolute; inset-inline: 0; bottom: -1px; height: 2px; pointer-events: none;
+        background: linear-gradient(90deg, rgb(91 224 169 / 0) 0%, rgb(91 224 169 / 0.55) 55%, theme("colors.marca.DEFAULT") 100%);
+        animation: rumbo linear both; animation-timeline: scroll(root);
+      }
     }
   }
-  @keyframes progreso-lectura { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .rumbo-cohete { position: absolute; right: 0; top: 50%; width: 18px; height: 18px; color: theme("colors.marca.DEFAULT"); transform: translateY(-50%) rotate(90deg); }
+  @keyframes rumbo { from { transform: translateX(-100%); } to { transform: translateX(0); } }
 
   /* 40 · Pie de página: el botón de WhatsApp lanza dos ondas la primera vez que se ve */
   @media (prefers-reduced-motion: no-preference) {
