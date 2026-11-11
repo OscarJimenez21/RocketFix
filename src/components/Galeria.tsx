@@ -42,7 +42,7 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
 
   if (fotos.length < 2) {
     return (
-      <div data-foto-principal onMouseMove={seguir} className="zoom-foto relative aspect-square overflow-hidden rounded-md border border-linea bg-white p-6">
+      <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-square overflow-hidden rounded-md border border-linea p-6">
         <FotoProducto producto={producto} prioridad />
         <Tinte color={tinte} />
         <Insignia producto={producto} />
@@ -53,7 +53,7 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
   return (
     <div>
       {/* data-foto-principal: de aquí despega la foto hacia el carrito al agregar */}
-      <div data-foto-principal onMouseMove={seguir} className="zoom-foto relative aspect-square overflow-hidden rounded-md border border-linea bg-white">
+      <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-square overflow-hidden rounded-md border border-linea">
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- las fotos se deslizan: deben poder enfocarse para pasarlas con las flechas del teclado */}
         <div ref={pista} onScroll={alDeslizar} tabIndex={0} role="group" aria-roledescription="carrusel" aria-label={`Fotos de ${producto.nombre}`}
           className="sin-barra flex h-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain">
@@ -81,7 +81,7 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
       <div ref={tira} className="sin-barra mt-3 flex gap-2 overflow-x-auto pb-1 pt-px">
         {fotos.map((f, i) => (
           <button key={f} data-opcion type="button" onClick={() => ir(i)} aria-label={`Ver foto ${i + 1}`} aria-current={i === actual || undefined}
-            className={`presionable h-16 w-16 shrink-0 rounded border bg-white p-1 ${i === actual && !marco ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
+            className={`presionable escenario h-16 w-16 shrink-0 rounded border p-1 ${i === actual && !marco ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
             <Imagen src={recurso(f)} srcSet={srcsetFoto(f)} sizes="64px" alt="" className="h-full w-full object-contain" />
           </button>
         ))}

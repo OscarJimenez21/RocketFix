@@ -61,6 +61,8 @@ export const ORDEN_CAT: Record<string, number> = Object.fromEntries(Object.value
 
 export const deTienda = (t: TiendaId) => PRODUCTOS.filter(p => p.tienda === t);
 export const desde = (p: Producto) => Math.min(...p.opciones.map(o => o.precio));
+/** Rótulo del precio (igual que en el catálogo en PDF): «Desde» solo si las versiones cambian de precio; si no, «Precio» */
+export const rotuloPrecio = (p: Producto) => (new Set(p.opciones.map(o => o.precio)).size > 1 ? "Desde" : "Precio");
 /** Para ordenar: primero los productos con precio, al final los de «Preguntar disponibilidad» (el resto del orden se mantiene) */
 export const conPrecioPrimero = (a: Producto, b: Producto) => Number(Boolean(a.consultar)) - Number(Boolean(b.consultar));
 /** Mensaje de WhatsApp para un producto sin precio publicado */

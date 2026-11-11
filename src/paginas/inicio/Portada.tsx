@@ -75,6 +75,30 @@ function useSorpresa() {
   return cohete;
 }
 
+/** Borde de abajo de la portada: la página blanca sube en curva, como el horizonte de un planeta visto desde el cohete,
+    con una línea menta de atmósfera que se apaga hacia los lados. Va encima del cielo (las fugaces pasan por detrás del
+    planeta) y debajo del contenido. Con preserveAspectRatio="none" se estira a lo ancho; las líneas no se deforman
+    (vector-effect) */
+function Horizonte() {
+  const curva = "M0 60 Q720 -60 1440 60";
+  return (
+    <svg aria-hidden="true" viewBox="0 0 1440 60" preserveAspectRatio="none"
+      className="pointer-events-none absolute inset-x-0 -bottom-px h-[26px] w-full sm:h-[38px] lg:h-[52px]">
+      <defs>
+        <linearGradient id="rf-atmosfera" x1="0" x2="1">
+          <stop offset="0" stopColor="#5BE0A9" stopOpacity="0" />
+          <stop offset="0.5" stopColor="#5BE0A9" stopOpacity="0.9" />
+          <stop offset="1" stopColor="#5BE0A9" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      {/* Resplandor ancho (la mitad de abajo queda tapada por el blanco), el planeta y la línea fina encima */}
+      <path d={curva} fill="none" stroke="url(#rf-atmosfera)" strokeOpacity="0.22" strokeWidth="14" vectorEffect="non-scaling-stroke" />
+      <path d={`${curva} Z`} fill="#fff" />
+      <path d={curva} fill="none" stroke="url(#rf-atmosfera)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+    </svg>
+  );
+}
+
 /** Portada: el eslogan grande, una línea que dice qué es la tienda, los dos botones y el estado de atención; a la derecha
     (abajo en celular), la vitrina. El cohete del logo cierra el eslogan en lugar del punto */
 export function Portada() {
@@ -92,7 +116,9 @@ export function Portada() {
     <section onMouseMove={mover} onMouseLeave={salir} className="relative isolate overflow-hidden bg-marca-oscuro text-white">
       <Despegue />
       <span ref={luz} aria-hidden="true" className="luz-portada pointer-events-none absolute inset-0 -z-10" />
-      <div className="contenedor grid items-center gap-8 py-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:py-16 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
+      <Horizonte />
+      {/* Abajo deja espacio para la curva del horizonte (pb un poco más alto que pt) */}
+      <div className="contenedor grid items-center gap-8 pb-14 pt-10 sm:pb-20 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:pb-24 lg:pt-16 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
         <div>
           <h1 tabIndex={-1} style={porPalabras ? undefined : en(0).style}
             className={`eslogan titulo-portada text-[clamp(2.25rem,10.4vw,3rem)] text-white sm:text-[64px] lg:text-[60px] xl:text-[74px]${porPalabras ? " eslogan-entra" : entra ? " entrada entrada-titulo" : ""}`}>

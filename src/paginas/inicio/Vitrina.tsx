@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { VITRINA, desde, etiquetaDe, porId } from "../../data/catalogo";
+import { VITRINA, desde, etiquetaDe, porId, rotuloPrecio } from "../../data/catalogo";
 import { FotoProducto } from "../../components/FotoProducto";
 import { activa } from "../../lib/animaciones";
 import { useEnPantalla } from "../../lib/enPantalla";
@@ -44,10 +44,12 @@ export function Vitrina() {
     <div ref={caja} role="region" aria-roledescription="carrusel" aria-label="Productos destacados" data-quieta={quieta || !visible || undefined}
       className="vitrina-flota tarjeta w-full overflow-hidden border-0 text-tinta"
       onMouseEnter={() => setQuieta(true)} onMouseLeave={() => setQuieta(false)} onFocus={() => setQuieta(true)} onBlur={() => setQuieta(false)}>
-      <div className="relative aspect-[4/3]">
+      <div className="escenario relative aspect-[4/3]">
         {productos.map((x, j) => (
           <a key={x.id} href={hrefProducto(x.id)} tabIndex={j === i ? 0 : -1} aria-hidden={j !== i}
-            className={`absolute inset-0 p-6 transition-[opacity,transform] duration-500 ease-salida sm:p-8 ${j === i ? "opacity-100" : "pointer-events-none scale-[0.96] opacity-0"}${
+            // escenario también en cada foto: mientras entra o sale se mueve sola (queda aparte del fondo de la caja) y la foto
+            // se funde con el fondo que lleva consigo
+            className={`escenario absolute inset-0 p-6 transition-[opacity,transform] duration-500 ease-salida sm:p-8 ${j === i ? "opacity-100" : "pointer-events-none scale-[0.96] opacity-0"}${
               lados && j === i ? (mov.dir > 0 ? " vitrina-entra-der" : " vitrina-entra-izq") : lados && j === mov.de ? (mov.dir > 0 ? " vitrina-sale-izq" : " vitrina-sale-der") : ""}`}>
             {/* La primera ya la pidió el HTML en su tamaño original: va sin copias livianas para no bajarla dos veces */}
             <FotoProducto producto={x} alt={x.nombre} prioridad={j === 0} tamanos={j === 0 ? undefined : "(min-width: 1280px) 480px, (min-width: 1024px) 420px, 92vw"} />
@@ -63,7 +65,7 @@ export function Vitrina() {
         {/* El nombre y el precio cambian junto con la foto (entran con un fundido corto) */}
         <div key={p.id} className={`min-w-0 ${cambios ? "motion-safe:animate-entrar" : ""}`}>
           <p className="truncate font-display text-[17px] font-bold">{p.nombre}</p>
-          <p className="text-sm text-tinta-2">{p.opciones.length > 1 && "Desde "}<b className="font-display text-[15px] tabular-nums text-tinta">{dinero(desde(p))}</b></p>
+          <p className="text-sm text-tinta-2">{rotuloPrecio(p) === "Desde" && "Desde "}<b className="font-display text-[15px] tabular-nums text-tinta">{dinero(desde(p))}</b></p>
         </div>
         <a href={hrefProducto(p.id)} className="btn btn-sm btn-marca shrink-0">Ver producto</a>
       </div>
@@ -72,7 +74,7 @@ export function Vitrina() {
         style={{ gridTemplateColumns: `repeat(${productos.length}, calc((100% - 5 * var(--hueco)) / 6))` }}>
         {productos.map((x, j) => (
           <button key={x.id} type="button" onClick={() => { if (j !== i) ir(j); setElegida(true); }} aria-label={`Ver ${x.nombre}`} aria-current={j === i || undefined}
-            className={`presionable relative aspect-square overflow-hidden rounded border bg-white p-1 ${j === i ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
+            className={`presionable escenario relative aspect-square overflow-hidden rounded border p-1 ${j === i ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
             <FotoProducto producto={x} alt="" tamanos="80px" />
             {/* Línea que se llena en 6 s: cuenta el tiempo hasta el siguiente producto (la clave la reinicia en cada cambio) */}
             {seMueve && j === i && (

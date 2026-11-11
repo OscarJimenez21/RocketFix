@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { deTienda, desde, etiquetaDe } from "../../data/catalogo";
+import { deTienda, desde, etiquetaDe, rotuloPrecio } from "../../data/catalogo";
 import { tiendaPorId } from "../../data/tiendas";
 import { FlechaMovil } from "../../components/FilaProductos";
 import { FotoProducto } from "../../components/FotoProducto";
@@ -16,7 +16,7 @@ const PASO_CARRUSEL = 3500;
 function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: string }) {
   return (
     <a href={hrefProducto(p.id)} className="tarjeta-eleva group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-white transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
-      <div className="relative aspect-square p-7 sm:p-8">
+      <div className="escenario relative aspect-square p-7 sm:p-8">
         {/* Ancho de la tarjeta: 74 % de la pantalla en celular, 44 % en tableta y unos 290 px en computador */}
         <FotoProducto producto={p} alt={p.nombre} tamanos="(min-width: 1024px) 290px, (min-width: 640px) 44vw, 74vw" className="motion-safe:group-hover:scale-[1.05]" />
         {/* Animación 46: reflejo de vidrio que cruza la foto una vez al pasar el mouse */}
@@ -27,9 +27,11 @@ function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: st
       <div className="mt-auto border-t border-linea px-5 py-4">
         <p className="truncate text-[13px] font-semibold text-tinta-3">{etiquetaDe(p)}</p>
         <p className="mt-1 line-clamp-2 min-h-[2.75em] font-display text-[18px] font-bold leading-snug text-tinta">{p.nombre}</p>
+        {/* Rótulo pequeño encima del precio, como en el catálogo en PDF: «Precio», o «Desde» si las versiones cambian de precio */}
+        <p className="mt-2 text-xs leading-none text-tinta-3">{p.consultar ? "Precio" : rotuloPrecio(p)}</p>
         {p.consultar
-          ? <p className="mt-2 font-display text-[17px] font-bold text-tinta-2">Preguntar disponibilidad</p>
-          : <p className="mt-2 text-sm text-tinta-2">{p.opciones.length > 1 && "Desde "}<b className="font-display text-[22px] tabular-nums text-tinta">{dinero(desde(p))}</b></p>}
+          ? <p className="mt-1 font-display text-[17px] font-bold leading-tight text-tinta-2">Preguntar disponibilidad</p>
+          : <p className="mt-1 font-display text-[22px] font-bold leading-tight tabular-nums text-tinta">{dinero(desde(p))}</p>}
       </div>
     </a>
   );

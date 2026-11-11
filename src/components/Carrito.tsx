@@ -253,7 +253,7 @@ export function Carrito() {
                       className={`relative isolate grid grid-cols-[64px_1fr] gap-3 py-4 transition-[opacity,transform] duration-[180ms] ease-salida ${saliendo.includes(clave) ? "pointer-events-none translate-x-3 opacity-0" : ""}${lineasEntran ? " linea-entra" : ""}`}>
                       {/* El último producto agregado: fondo verde claro que se desvanece al abrir el carrito */}
                       {resaltada?.clave === clave && <span key={resaltada.vez} aria-hidden="true" className="absolute inset-y-0 -left-5 -right-5 -z-10 bg-marca-suave opacity-0 motion-safe:animate-desvanecer" />}
-                      <a href={hrefProducto(p.id)} className="h-16 w-16 rounded border border-linea bg-white p-1" tabIndex={-1} aria-hidden="true"><FotoProducto producto={p} alt="" tamanos="64px" /></a>
+                      <a href={hrefProducto(p.id)} className="escenario h-16 w-16 rounded border border-linea p-1" tabIndex={-1} aria-hidden="true"><FotoProducto producto={p} alt="" tamanos="64px" /></a>
                       <div className="min-w-0">
                         <a href={hrefProducto(p.id)} className="line-clamp-2 text-[14.5px] font-semibold leading-snug hover:text-marca">{nombre}</a>
                         <p className="mt-0.5 text-xs text-tinta-2">{dinero(o.precio)} c/u</p>

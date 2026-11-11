@@ -135,7 +135,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
             n++;
             return (
               <a key={p.id} id={idOpcion(n)} role="option" aria-selected={n === activo} href={hrefProducto(p.id)} style={{ "--i": n } as React.CSSProperties} className={`sugerencia ${claseOpcion(n)}`}>
-                <span className="h-11 w-11 shrink-0 rounded border border-linea bg-white p-0.5"><FotoProducto producto={p} alt="" tamanos="44px" /></span>
+                <span className="escenario h-11 w-11 shrink-0 rounded border border-linea p-0.5"><FotoProducto producto={p} alt="" tamanos="44px" /></span>
                 <span className="min-w-0 flex-1">
                   <span className="line-clamp-1 text-[14.5px] font-semibold">
                     {resaltar(p.nombre, palabras).map((t, k) => t.marcado ? <mark key={k} className="bg-transparent font-bold text-marca">{t.t}</mark> : <span key={k}>{t.t}</span>)}

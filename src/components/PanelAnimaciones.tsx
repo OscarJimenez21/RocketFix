@@ -1,4 +1,4 @@
-/* Panel para revisar las animaciones en prueba (40 el 05/11/2026; 54 desde el 11/11/2026). Solo existe al trabajar en local (npm run dev): App lo
+/* Panel para revisar las animaciones en prueba (40 el 05/11/2026; 56 desde el 11/11/2026). Solo existe al trabajar en local (npm run dev): App lo
    carga con import.meta.env.DEV, así que no llega a la página publicada.
    Cada casilla enciende o apaga una animación (pone o quita la clase sin-aN en <html>, ver lib/animaciones.ts) y se
    recuerda en este navegador. «Ver» lleva a donde se ve cada una; las que solo pasan al cargar la página recargan. */
@@ -63,7 +63,8 @@ const LISTA: Fila[] = [
   { n: 52, grupo: "Temporadas", nombre: "Navidad, fiestas patrias, amor y amistad, Halloween", como: "Prueba con ?temporada=navidad en la dirección", ir: "#inicio", recargar: true },
   { n: 53, grupo: "Portada", nombre: "Un satélite cruza el cielo", como: "Espera en la portada (cada 35 a 70 s)", ir: "#inicio" },
   { n: 54, grupo: "Cabecera", nombre: "El cohete del logo saluda al volver", como: "Ve a otra pestaña 10 s y vuelve", ir: "#inicio" },
-  { n: 55, grupo: "Todas", nombre: "WhatsApp flotante: el mensaje entra, el botón lanza ondas y el cohetico despega", como: "Espera 6 s en cualquier página (sale una vez por visita)", ir: "#inicio" }
+  { n: 55, grupo: "Todas", nombre: "WhatsApp flotante: el mensaje entra, el botón lanza ondas y el cohetico despega", como: "Espera 6 s en cualquier página (sale una vez por visita)", ir: "#inicio" },
+  { n: 56, grupo: "Pie de página", nombre: "Cielo del pie: la estela del cohete se dibuja al verlo", como: "Baja hasta el pie de página (en computador)", ir: "#contacto", recargar: true }
 ];
 
 function leer(): number[] {

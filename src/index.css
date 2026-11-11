@@ -330,6 +330,22 @@
   @keyframes wa-aviso { from { opacity: 0; transform: translateY(8px) scale(0.96); } to { opacity: 1; transform: none; } }
   @keyframes wa-onda { 0% { transform: scale(1); opacity: 0.7; } 70%, 100% { transform: scale(1.45); opacity: 0; } }
 
+  /* Todas las fotos de producto sobre el mismo fondo: blanco al centro y un menta muy suave hacia los bordes. La foto se
+     multiplica sobre él, así el blanco de cada foto (que no es igual en todos los proveedores) se funde con el fondo y
+     todas se ven del mismo estilo. El fondo va en la caja de la foto (escenario); la foto no cambia */
+  .escenario { background: radial-gradient(120% 95% at 50% 40%, #fff 48%, #EBF4EF 100%); }
+  .escenario img { mix-blend-mode: multiply; }
+
+  /* 56 · Pie de página con cielo: estrellas quietas, unas pocas que titilan (animación 3) y, en computador, el cohete con su
+     estela. La primera vez que se ve el pie, la estela se dibuja hasta el cohete y el cohete aparece al final */
+  .pie-estela { stroke-dasharray: 1 1; stroke-dashoffset: 0; }
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a56) .pie-cielo .pie-estela { transition: stroke-dashoffset 1.8s cubic-bezier(0.55, 0, 0.25, 1); }
+    :root:not(.sin-a56) .pie-cielo .pie-cohete { transition: opacity 300ms ease 1.5s, transform 700ms cubic-bezier(0.23, 1, 0.32, 1) 1.5s; }
+    :root:not(.sin-a56) .pie-cielo:not([data-visto]) .pie-estela { stroke-dashoffset: 1; }
+    :root:not(.sin-a56) .pie-cielo:not([data-visto]) .pie-cohete { opacity: 0; transform: translate(-10px, 8px); }
+  }
+
   /* 4 · Vitrina: el producto nuevo entra por el lado hacia donde se avanza y el anterior sale por el otro */
   @media (prefers-reduced-motion: no-preference) {
     .vitrina-entra-der, .vitrina-entra-izq { animation: vitrina-entra 560ms cubic-bezier(0.23, 1, 0.32, 1) both; }
