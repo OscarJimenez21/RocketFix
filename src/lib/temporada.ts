@@ -24,12 +24,15 @@ function deFecha(fecha: Date): Temporada | null {
   return null;
 }
 
-/** Temporada de hoy (o null). Al trabajar en local se puede probar con ?temporada=navidad (o patria, amistad, halloween) */
+/** Vista previa con un enlace: ?temporada=navidad (como del 1 al 24 de diciembre), ?temporada=findeano (del 25 al 31),
+    o patria, amistad, halloween. Funciona también en la página publicada, pero solo para quien abre ese enlace: los demás
+    visitantes ven la página según la fecha de hoy. No cambia precios ni anuncia promociones */
+const PREVIA = typeof location === "undefined" ? null : new URLSearchParams(location.search).get("temporada");
+
+/** Temporada de hoy (o null), o la de la vista previa */
 export function temporadaActual(fecha = new Date()): Temporada | null {
-  if (import.meta.env.DEV) {
-    const t = new URLSearchParams(location.search).get("temporada");
-    if (t && TEMPORADAS[t]) return TEMPORADAS[t] ?? null;
-  }
+  if (PREVIA === "findeano") return TEMPORADAS.navidad ?? null;
+  if (PREVIA && TEMPORADAS[PREVIA]) return TEMPORADAS[PREVIA] ?? null;
   return deFecha(fecha);
 }
 
@@ -38,10 +41,11 @@ export const TEMPORADA = temporadaActual();
 /** Temporada de regalos: del 1 al 31 de diciembre (hora de Bogotá) la portada muestra «Regalos por presupuesto» e «Ideas
     para regalar», y arriba de todas las páginas sale una franja que lleva a ellos. Hasta el 24 la franja habla de Navidad;
     del 25 al 31, de fin de año. Se enciende y se apaga sola, sin publicar nada. No anuncia descuentos ni promociones.
-    Al trabajar en local se puede ver antes de tiempo con ?temporada=navidad */
+    Se ve antes de tiempo con ?temporada=navidad (1 al 24) o ?temporada=findeano (25 al 31) */
 export type Regalos = { navidad: boolean };
 export function regalosActuales(fecha = new Date()): Regalos | null {
-  if (import.meta.env.DEV && new URLSearchParams(location.search).get("temporada") === "navidad") return { navidad: true };
+  if (PREVIA === "navidad") return { navidad: true };
+  if (PREVIA === "findeano") return { navidad: false };
   const [mes, dia] = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Bogota", month: "numeric", day: "numeric" })
     .formatToParts(fecha).filter(p => p.type === "month" || p.type === "day").map(p => Number(p.value));
   if (mes !== 12) return null;
