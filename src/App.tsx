@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState } from "re
 import { ARTICULOS, CONFIG, VISTAS } from "./data/catalogo";
 import { TiendaProvider, useTienda } from "./estado/TiendaContext";
 import { Aviso } from "./components/Aviso";
+import { SinConexion } from "./components/SinConexion";
 import { Cabecera } from "./components/Cabecera";
 import { Carrito } from "./components/Carrito";
 import { FranjaRegalos } from "./components/FranjaRegalos";
@@ -11,6 +12,7 @@ import { SubirFlotante } from "./components/SubirFlotante";
 import { WhatsAppFlotante } from "./components/WhatsAppFlotante";
 import { activa } from "./lib/animaciones";
 import { clavePago, leerRegresoBold } from "./lib/bold";
+import { cargarProducto, conReintento, precargarEnReposo } from "./lib/carga";
 import { claveRuta, tomarPosicion, useRuta } from "./lib/rutas";
 import { waLink } from "./lib/whatsapp";
 import { Inicio } from "./paginas/Inicio";
@@ -20,14 +22,14 @@ import { Tienda } from "./paginas/Tienda";
 import type { Ruta } from "./types";
 
 // La página de producto se carga aparte, cuando se abre el primer producto (y cada producto baja solo su descripción)
-const Producto = lazy(() => import("./paginas/Producto"));
+const Producto = lazy(cargarProducto);
 // Las páginas que se abren menos (búsqueda, marca, blog, artículos y políticas) también van aparte: así el programa que
 // baja todo el que entra a la tienda pesa menos. La portada y las secciones siguen dentro, porque son las más visitadas
-const Buscar = lazy(() => import("./paginas/Buscar").then(m => ({ default: m.Buscar })));
-const Marca = lazy(() => import("./paginas/Marca").then(m => ({ default: m.Marca })));
-const Blog = lazy(() => import("./paginas/Blog").then(m => ({ default: m.Blog })));
-const Articulo = lazy(() => import("./paginas/Articulo").then(m => ({ default: m.Articulo })));
-const Politica = lazy(() => import("./paginas/Politica").then(m => ({ default: m.Politica })));
+const Buscar = lazy(conReintento(() => import("./paginas/Buscar").then(m => ({ default: m.Buscar }))));
+const Marca = lazy(conReintento(() => import("./paginas/Marca").then(m => ({ default: m.Marca }))));
+const Blog = lazy(conReintento(() => import("./paginas/Blog").then(m => ({ default: m.Blog }))));
+const Articulo = lazy(conReintento(() => import("./paginas/Articulo").then(m => ({ default: m.Articulo }))));
+const Politica = lazy(conReintento(() => import("./paginas/Politica").then(m => ({ default: m.Politica }))));
 // Panel para revisar las animaciones en prueba: solo existe al trabajar en local (no llega a la página publicada)
 const PanelAnimaciones = import.meta.env.DEV ? lazy(() => import("./components/PanelAnimaciones")) : null;
 
@@ -110,7 +112,7 @@ function Marco() {
   // La primera página que abre la persona aparece de una vez (así no se retrasa lo primero que ve); desde la segunda,
   // cada página nueva entra con un fundido corto en vez de cambiar de golpe
   const navego = useRef(false);
-  useEffect(() => { navego.current = true; }, []);
+  useEffect(() => { navego.current = true; precargarEnReposo(); }, []);
 
   // Al cambiar de página: vuelve a la posición anterior si la persona regresó, o sube al inicio; y lleva el foco al título
   useLayoutEffect(() => {
@@ -127,6 +129,7 @@ function Marco() {
     <>
       <a href="#pagina" onClick={e => { e.preventDefault(); document.querySelector<HTMLElement>("#pagina h1")?.focus(); }}
         className="sr-only z-[70] rounded bg-marca px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-3 focus:top-3">Saltar al contenido</a>
+      <SinConexion />
       <FranjaRegalos />
       <Cabecera ruta={ruta} />
       <div id="pagina">

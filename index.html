@@ -2,15 +2,32 @@
 <html lang="es-CO">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
     <title>Rocket Fix · Tecnología a domicilio en Bogotá y Colombia</title>
     <meta name="description" content="Rocket Fix: venta de celulares, computadores, consolas, tablets, relojes, audífonos, parlantes y accesorios. Reparación de celulares y computadores e instalación de cámaras de seguridad." />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <!-- Mejora: «Agregar a la pantalla de inicio» deja la tienda como una app, con su nombre y su ícono -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="Rocket Fix" />
+    <!-- Mejora: en iPhone, los precios largos (1.234.567) no se convierten en enlaces de llamada -->
+    <meta name="format-detection" content="telephone=no" />
     <!-- Mismo color de la cabecera, así la barra del navegador en celular se funde con la página -->
     <meta name="theme-color" content="#FFFFFF" />
     <meta name="color-scheme" content="light" />
+    <!-- Mejora: el modo noche se pone aquí, antes de pintar nada. Las páginas de producto ya llegan armadas en el HTML y,
+         sin esto, quien eligió «Noche» veía un instante la página blanca. Misma regla que src/lib/tema.ts -->
+    <script>
+      try {
+        var t = localStorage.getItem("rf-tema");
+        if (t === "noche" || (t === "auto" && matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.dataset.tema = "noche";
+          document.querySelector('meta[name="theme-color"]').setAttribute("content", "#0D2019");
+          document.querySelector('meta[name="color-scheme"]').setAttribute("content", "dark");
+        }
+      } catch (e) {}
+    </script>
     <link rel="canonical" href="https://oscarjimenez21.github.io/RocketFix/" />
     <!-- Vista previa al compartir el enlace (WhatsApp, Facebook, Instagram, X). Si cambia el dominio, actualiza estas direcciones. -->
     <meta property="og:type" content="website" />

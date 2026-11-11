@@ -1,6 +1,6 @@
 /* Página de una sección de la tienda: filtros por tipo (o marca en celulares), marca, estado, búsqueda y orden.
    Los filtros de cada sección se recuerdan mientras la persona navega (ej.: al volver de un producto). */
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CABECERAS, CATEGORIAS, LOGOS_MARCAS, ORDEN_CAT, TEXTO_BUSQUEDA, VISTAS, conPrecioPrimero, deTienda, desde, marcasDe } from "../data/catalogo";
 import { tiendaPorVista } from "../data/tiendas";
 import { EncabezadoVista } from "../components/EncabezadoVista";
@@ -63,7 +63,9 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
       return sig;
     });
   };
-  const verMas = () => {
+  const enfocarNuevo = useRef<number | null>(null);
+  const verMas = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (e.detail === 0) enfocarNuevo.current = f.limite;
     setNuevos({ tienda, desde: f.limite });
     setF(x => { const sig = { ...x, limite: x.limite + PAGINA }; recordados[tienda] = sig; return sig; });
   };
@@ -81,6 +83,17 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
   const maximo = precios.length ? redondear(Math.max(...precios), paso, true) : 0;
   const tope = f.tope != null && f.tope < maximo ? f.tope : null;
   const [vistaLista, setVistaLista] = useState<Vista>(vistaGuardada);
+  // Mejora: en celular la fila de pastillas se desliza de lado; la elegida se trae a la vista (también al volver a la sección)
+  const pastillas = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const fila = pastillas.current;
+    const el = fila?.querySelector<HTMLElement>("[aria-pressed=true]");
+    if (!fila || !el || fila.scrollWidth <= fila.clientWidth) return;
+    const izq = el.offsetLeft - (fila.clientWidth - el.offsetWidth) / 2;
+    fila.scrollTo({ left: Math.max(0, izq), behavior: reducirMovimiento() ? "auto" : "smooth" });
+  }, [f.marca, f.cat]);
+  // Mejora: «Quitar filtros» se ofrece en cuanto hay alguno puesto (antes solo cuando no quedaba ningún producto)
+  const conFiltros = f.cat !== inicial.cat || f.marca !== inicial.marca || f.cond !== inicial.cond || f.q.trim() !== "" || f.tope != null || f.orden !== inicial.orden;
   const elegirVista = (v: Vista) => { setVistaLista(v); try { localStorage.setItem(CLAVE_VISTA, v); } catch { /* sin almacenamiento */ } };
 
   const visibles = useMemo(() => {
@@ -99,6 +112,13 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
   }, [base, f, esCel]);
 
   const mostrados = visibles.slice(0, f.limite);
+  const lista = useRef<HTMLUListElement>(null);
+  useEffect(() => {
+    const n = enfocarNuevo.current;
+    if (n == null) return;
+    enfocarNuevo.current = null;
+    lista.current?.children[n]?.querySelector<HTMLElement>("a[href]")?.focus();
+  }, [f.limite]);
   const quedan = visibles.length - mostrados.length;
 
   // Animación 15: en Todos / Nuevos / CPO, la pastilla oscura se desliza hasta la opción elegida
@@ -116,7 +136,7 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
       <div className="contenedor py-6">
         {/* Tipo de producto (o marca, en celulares) */}
         {(esCel ? marcas.length > 1 : cats.length > 1) && (
-          <div role="group" aria-label={esCel ? "Marca" : "Tipo de producto"} className="sin-barra -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
+          <div ref={pastillas} role="group" aria-label={esCel ? "Marca" : "Tipo de producto"} className="sin-barra -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
             {esCel ? (
               <>
                 <Chip activo={f.marca === "todas"} n={base.length} onClick={() => poner({ marca: "todas" })}>Todas</Chip>
@@ -136,6 +156,8 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
             <span className="sr-only">Buscar en {info?.titulo ?? "esta sección"}</span>
             <IconoBuscar className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-tinta-3" />
             <input type="search" value={f.q} onChange={e => poner({ q: e.target.value })} placeholder={`Buscar: ${info?.ejemploBusqueda ?? ""}`}
+              enterKeyHint="search" autoCapitalize="none" autoCorrect="off" spellCheck={false}
+              onKeyDown={e => { if (e.key === "Escape" && f.q) { e.preventDefault(); poner({ q: "" }); } }}
               className="campo h-10 py-0 pl-9 text-sm" />
           </label>
           {esCel && (
@@ -180,13 +202,14 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
 
         <p className="mt-4 text-sm text-tinta-2" aria-live="polite">
           Mostrando <span key={mostrados.length} className={`inline-block tabular-nums${rodar ? " rueda" : ""}`}>{mostrados.length}</span> de {visibles.length} {visibles.length === 1 ? "producto" : "productos"}
+          {conFiltros && visibles.length > 0 && <span className="quitar-filtros"> · <button type="button" onClick={() => poner({ ...inicial })} className="enlace-suelto -my-3 inline-flex min-h-[44px] items-center">Quitar filtros</button></span>}
         </p>
 
         {visibles.length ? (
           <>
             {/* Para lectores de pantalla: el título de la lista va entre el de la página y los de cada producto */}
             <h2 className="sr-only">Productos</h2>
-            <ul key={vueltas} className={`mt-4 grid gap-3 sm:gap-4 ${vistaLista === "lista" ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"}`}>
+            <ul ref={lista} key={vueltas} className={`mt-4 grid gap-3 sm:gap-4 ${vistaLista === "lista" ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"}`}>
               {mostrados.map((p, i) => {
                 // Las tarjetas nuevas entran una tras otra (30 ms entre cada una; desde la novena, todas juntas)
                 const k = nuevos && nuevos.tienda === tienda && i >= nuevos.desde ? i - nuevos.desde : -1;

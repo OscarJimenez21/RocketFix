@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { etiquetaDe, galeriaDe, recienLlegado, textoConsulta } from "../data/catalogo";
 import { useTienda } from "../estado/TiendaContext";
 import { activa } from "../lib/animaciones";
+import { precargarFoto, precargarProducto } from "../lib/carga";
 import { dinero, recurso, srcsetFoto } from "../lib/formato";
 import { hrefProducto } from "../lib/rutas";
 import { tinteDe } from "../lib/tinte";
@@ -22,7 +23,7 @@ export function Insignia({ producto, className = "left-2 top-2" }: { producto: P
   return (
     <span className={`absolute flex flex-col items-start gap-1 ${className}`}>
       {estado && <span className="rounded-sm bg-oscuro px-1.5 py-0.5 text-[12.5px] font-semibold text-white">{producto.estado}</span>}
-      {recien && <span className="inline-flex items-center gap-1 rounded-sm bg-marca-menta px-1.5 py-0.5 text-[12.5px] font-semibold text-marca-noche"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-marca-noche" />Recién llegado</span>}
+      {recien && <span className="insignia-nueva relative inline-flex items-center gap-1 overflow-hidden rounded-sm bg-marca-menta px-1.5 py-0.5 text-[12.5px] font-semibold text-marca-noche"><span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-marca-noche" />Recién llegado</span>}
     </span>
   );
 }
@@ -92,7 +93,7 @@ function ElegirVersion({ producto: p, i, elegir }: { producto: Producto; i: numb
         {p.opciones.map((op, j) => (
           <button key={j} type="button" role="radio" aria-checked={j === i} aria-label={op.nombre} title={op.nombre} onClick={() => elegir(j)}
             className="presionable flex h-11 w-8 shrink-0 items-center justify-center sm:h-9">
-            <span className={`h-5 w-5 rounded-full border border-black/15 ${j === i ? "ring-2 ring-marca ring-offset-2 ring-offset-superficie" : ""}`} style={{ background: tinteDe(op.nombre) ?? undefined }} />
+            <span className={`punto-color h-5 w-5 rounded-full border border-black/15 ${j === i ? "elegido ring-2 ring-marca ring-offset-2 ring-offset-superficie" : ""}`} style={{ background: tinteDe(op.nombre) ?? undefined }} />
           </button>
         ))}
         <span className="ml-1 min-w-0 truncate text-[12.5px] text-tinta-2">{p.opciones[i]?.nombre}</span>
@@ -103,7 +104,7 @@ function ElegirVersion({ producto: p, i, elegir }: { producto: Producto; i: numb
     <div role="radiogroup" aria-label={rotulo} className="mb-2.5 flex h-11 gap-1 sm:h-9">
       {p.opciones.map((op, j) => (
         <button key={j} type="button" role="radio" aria-checked={j === i} onClick={() => elegir(j)}
-          className={`presionable min-w-0 flex-1 truncate rounded border px-1 text-[12.5px] font-semibold ${j === i ? "border-marca bg-marca-suave text-marca-texto" : "border-linea bg-fondo text-tinta-2 hover:border-linea-fuerte"}`}>
+          className={`presionable min-w-0 flex-1 truncate rounded border px-1 text-[12.5px] font-semibold transition-colors duration-150 ${j === i ? "border-marca bg-marca-suave text-marca-texto" : "border-linea bg-fondo text-tinta-2 hover:border-linea-fuerte"}`}>
           {op.nombre}
         </button>
       ))}
@@ -144,7 +145,9 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta, fila = 
 
   return (
     // tarjeta-eleva: con el mouse encima, la tarjeta sube un poco (animación 13)
-    <article onPointerEnter={e => { if (e.pointerType === "mouse" && !verSegunda && activa(62)) setVerSegunda(true); }}
+    // Mejora 15: con el mouse encima, el dedo sobre la tarjeta o el foco del teclado, se baja la página de producto (ver lib/carga.ts)
+    <article onPointerEnter={e => { precargarProducto(); if (e.pointerType === "mouse") precargarFoto(p.imagen); if (e.pointerType === "mouse" && !verSegunda && activa(62)) setVerSegunda(true); }}
+      onTouchStart={precargarProducto} onFocus={precargarProducto}
       className={`tarjeta tarjeta-eleva group relative flex h-full overflow-hidden transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta ${fila ? "flex-row" : "flex-col"}`}>
       {/* Con el mouse encima de la tarjeta, la foto se acerca un poco (solo con mouse; en celular no queda pegado) */}
       <a ref={foto} href={hrefProducto(p.id)} onClick={e => abrirConVuelo(e, foto.current)} tabIndex={-1} aria-hidden="true" className={`escenario relative block aspect-square ${fila ? "w-32 shrink-0 self-start p-2.5 sm:w-44 sm:p-3" : "p-4"}`}>
@@ -159,7 +162,7 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta, fila = 
       <div className={`flex min-w-0 flex-1 flex-col gap-1.5 border-linea/70 p-3.5 sm:p-4 ${fila ? "border-l" : "border-t"}`}>
         <p className="etiqueta truncate text-tinta-3">{etiquetaDe(p) || " "}</p>
         <h3 className="font-sans text-[15px] font-semibold leading-snug tracking-normal">
-          <a href={hrefProducto(p.id)} onClick={e => abrirConVuelo(e, foto.current)} className="line-clamp-2 hover:text-marca">{p.nombre}</a>
+          <a href={hrefProducto(p.id)} onClick={e => abrirConVuelo(e, foto.current)} title={p.nombre} className="line-clamp-2 hover:text-marca">{p.nombre}</a>
         </h3>
         {p.specs.length > 0 && <p className="line-clamp-1 text-[13px] text-tinta-2">{p.specs.join(" · ")}</p>}
         {p.nota && <p><NotaProducto nota={p.nota} /></p>}

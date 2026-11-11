@@ -20,11 +20,32 @@ export function Visor({ fotos, inicial, nombre, cerrar }: { fotos: string[]; ini
   usePanelModal(true, cerrar, panel, botonCerrar);
 
   const pasar = (d: number) => { setCerca(false); setI(n => (n + d + fotos.length) % fotos.length); };
+  // Mejora: con la foto acercada, Esc primero la aleja (otro Esc cierra el visor) y las flechas recorren la foto
+  const cercaRef = useRef(cerca);
+  cercaRef.current = cerca;
+  useEffect(() => {
+    const alejar = (e: KeyboardEvent) => {
+      if (!cercaRef.current) return;
+      const mover: Record<string, [number, number]> = { ArrowLeft: [-12, 0], ArrowRight: [12, 0], ArrowUp: [0, -12], ArrowDown: [0, 12] };
+      if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); setCerca(false); }
+      else if (mover[e.key]) {
+        e.preventDefault(); e.stopPropagation();
+        const [dx, dy] = mover[e.key] ?? [0, 0];
+        setPunto(p => ({ x: Math.min(100, Math.max(0, p.x + dx)), y: Math.min(100, Math.max(0, p.y + dy)) }));
+      }
+    };
+    window.addEventListener("keydown", alejar, true);
+    return () => window.removeEventListener("keydown", alejar, true);
+  }, []);
   useEffect(() => {
     const tecla = (e: KeyboardEvent) => {
-      if (fotos.length < 2) return;
+      // Acercada, las flechas recorren la foto (ver arriba) en vez de pasar a otra
+      if (fotos.length < 2 || cercaRef.current) return;
       if (e.key === "ArrowRight") pasar(1);
       else if (e.key === "ArrowLeft") pasar(-1);
+      // Mejora: Inicio y Fin van a la primera y a la última foto
+      else if (e.key === "Home") { setCerca(false); setI(0); }
+      else if (e.key === "End") { setCerca(false); setI(fotos.length - 1); }
     };
     window.addEventListener("keydown", tecla);
     return () => window.removeEventListener("keydown", tecla);
@@ -36,7 +57,8 @@ export function Visor({ fotos, inicial, nombre, cerrar }: { fotos: string[]; ini
     return { x: Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100)), y: Math.min(100, Math.max(0, ((e.clientY - r.top) / r.height) * 100)) };
   };
   const alBajar = (e: React.PointerEvent<HTMLButtonElement>) => {
-    if (cerca && e.pointerType !== "mouse") arrastre.current = { x: e.clientX, y: e.clientY, px: punto.x, py: punto.y };
+    // Con el dedo se anota dónde empezó: acercada, para recorrerla; alejada, para pasar de foto deslizando
+    if (e.pointerType !== "mouse") arrastre.current = { x: e.clientX, y: e.clientY, px: punto.x, py: punto.y };
   };
   const alMover = (e: React.PointerEvent<HTMLButtonElement>) => {
     if (!cerca) return;
@@ -51,42 +73,57 @@ export function Visor({ fotos, inicial, nombre, cerrar }: { fotos: string[]; ini
   const alSoltar = (e: React.PointerEvent<HTMLButtonElement>) => {
     const a = arrastre.current;
     arrastre.current = null;
+    // Mejora: con la foto alejada, deslizar el dedo a un lado pasa a la foto siguiente o a la anterior
+    if (a && !cerca && fotos.length > 1) {
+      const dx = e.clientX - a.x;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(e.clientY - a.y)) { pasar(dx < 0 ? 1 : -1); return; }
+    }
     // Si el dedo se movió, fue un arrastre y no un toque: la foto sigue acercada
     if (a && Math.hypot(e.clientX - a.x, e.clientY - a.y) > 8) return;
     if (cerca) setCerca(false);
     else { setPunto(enPorcentaje(e)); setCerca(true); }
   };
 
+  // Mejora: la foto siguiente y la anterior se piden por adelantado, así al pasar ya están listas
+  useEffect(() => {
+    if (fotos.length < 2) return;
+    for (const d of [1, -1]) { const f = fotos[(i + d + fotos.length) % fotos.length]; if (f) new Image().src = recurso(f); }
+  }, [i, fotos]);
+
   const foto = fotos[i] ?? fotos[0] ?? "";
   // Va directo en <body>: dentro de la foto (que recorta lo que sobresale) no podría cubrir la pantalla
   return createPortal(
     <div ref={panel} role="dialog" aria-modal="true" aria-label={`Fotos de ${nombre}`}
-      className="fixed inset-0 z-[60] flex flex-col bg-oscuro/95 text-white motion-safe:animate-entrar">
+      className="visor fixed inset-0 z-[60] flex flex-col bg-oscuro/95 text-white motion-safe:animate-entrar">
       <div className="flex shrink-0 items-center justify-between gap-3 px-4 py-3">
-        <p className="min-w-0 truncate text-sm text-white/80">{nombre}{fotos.length > 1 && <span className="ml-2 tabular-nums text-white/60">{i + 1} / {fotos.length}</span>}</p>
+        <p className="min-w-0 truncate text-sm text-white/80">{nombre}{fotos.length > 1 && <span className="ml-2 tabular-nums text-white/60" aria-hidden="true">{i + 1} / {fotos.length}</span>}</p>
+        {fotos.length > 1 && <p className="sr-only" aria-live="polite">Foto {i + 1} de {fotos.length}</p>}
         <button ref={botonCerrar} type="button" onClick={cerrar} aria-label="Cerrar fotos"
-          className="presionable flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white/85 hover:bg-white/10 hover:text-white"><IconoCerrar /></button>
+          className="cerrar-gira presionable flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white/85 hover:bg-white/10 hover:text-white"><IconoCerrar /></button>
       </div>
-      <div className="relative min-h-0 flex-1 px-2 pb-4 sm:px-16">
+      {/* Mejora: tocar el fondo oscuro, fuera de la foto, también cierra */}
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- atajo con el mouse; Esc y la X cierran con el teclado */}
+      <div className="relative min-h-0 flex-1 px-2 pb-4 sm:px-16" onClick={e => { if (e.target === e.currentTarget) cerrar(); }}>
         <button type="button" aria-label={cerca ? "Alejar la foto" : "Acercar la foto"}
           onPointerDown={alBajar} onPointerMove={alMover} onPointerUp={alSoltar}
           // Con el teclado (Enter o espacio) también acerca y aleja, al centro
           onClick={e => { if (e.detail === 0) { setPunto({ x: 50, y: 50 }); setCerca(c => !c); } }}
-          className={`claro-siempre relative h-full w-full overflow-hidden rounded-lg bg-white ${cerca ? "cursor-zoom-out touch-none" : "cursor-zoom-in"}`}>
+          className={`claro-siempre relative h-full w-full overflow-hidden rounded-lg bg-white ${cerca ? "cursor-zoom-out touch-none" : "cursor-zoom-in touch-pan-y"}`}>
           <img key={foto} src={recurso(foto)} alt={`${nombre}, foto ${i + 1} de ${fotos.length}`} draggable={false}
-            className="h-full w-full select-none object-contain p-4 transition-transform duration-200 ease-salida motion-safe:animate-entrar"
+            className="visor-foto h-full w-full select-none object-contain p-4 transition-transform duration-200 ease-salida"
             style={{ transform: cerca ? `scale(${ZOOM})` : undefined, transformOrigin: `${punto.x}% ${punto.y}%` }} />
         </button>
         {fotos.length > 1 && (
           <>
+            {/* Animación 89: la flecha se asoma hacia su lado al pasar el mouse */}
             <button type="button" onClick={() => pasar(-1)} aria-label="Foto anterior"
-              className="presionable absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-oscuro/70 text-white hover:bg-oscuro sm:left-3"><IconoFlecha dir={-1} /></button>
+              className="presionable group absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-oscuro/70 text-white hover:bg-oscuro sm:left-3"><IconoFlecha dir={-1} className="flecha-visor h-5 w-5 [--hacia:-3px]" /></button>
             <button type="button" onClick={() => pasar(1)} aria-label="Foto siguiente"
-              className="presionable absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-oscuro/70 text-white hover:bg-oscuro sm:right-3"><IconoFlecha /></button>
+              className="presionable group absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-oscuro/70 text-white hover:bg-oscuro sm:right-3"><IconoFlecha className="flecha-visor h-5 w-5 [--hacia:3px]" /></button>
           </>
         )}
       </div>
-      <p className="shrink-0 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] text-center text-xs text-white/60">{cerca ? "Toca otra vez para alejar" : "Toca la foto para acercarla"}</p>
+      <p className="shrink-0 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] text-center text-xs text-white/60">{cerca ? "Toca otra vez para alejar" : fotos.length > 1 ? "Toca la foto para acercarla o desliza para pasarla" : "Toca la foto para acercarla"}</p>
     </div>,
     document.body
   );

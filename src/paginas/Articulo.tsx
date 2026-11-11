@@ -5,13 +5,14 @@ import { FORMULARIOS_ARTICULO } from "../data/formularios";
 import { BotonCopiar, PuntoEstado, useAtencion } from "../components/Contacto";
 import { EncabezadoVista } from "../components/EncabezadoVista";
 import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
-import { IconoWhatsApp } from "../components/Iconos";
+import { IconoCheck, IconoWhatsApp } from "../components/Iconos";
 import { Ilustracion } from "../components/Ilustracion";
 import { dinero } from "../lib/formato";
 import { waLink } from "../lib/whatsapp";
 import type { TiendaId } from "../types";
 import { NoEncontrada } from "./NoEncontrada";
 import { abrirTiendaEn } from "./Tienda";
+import { suave } from "../lib/animaciones";
 
 const TEXTOS = textos as Record<string, string>;
 
@@ -23,9 +24,24 @@ const alClicTexto = (e: React.MouseEvent) => {
 };
 const HUECO_PAQUETES = '<div class="pkgs" id="paquetes"></div>';
 
+/** Mejora: compartir el artículo. En celular abre el menú de compartir; donde no existe, copia el enlace */
+function BotonCompartir({ titulo }: { titulo: string }) {
+  const [copiado, setCopiado] = useState(false);
+  const compartir = async () => {
+    const url = location.href;
+    if (navigator.share) { navigator.share({ title: titulo, url }).catch(() => {}); return; }
+    try { await navigator.clipboard.writeText(url); setCopiado(true); setTimeout(() => setCopiado(false), 2200); } catch { window.prompt("Copia el enlace del artículo:", url); }
+  };
+  return (
+    <button type="button" onClick={compartir} aria-live="polite" className="enlace-suelto ml-3 inline-flex min-h-[44px] items-center gap-1.5 text-sm">
+      {copiado ? <span className="inline-flex items-center gap-1.5 motion-safe:animate-entrar"><IconoCheck className="dibujar h-4 w-4" />Enlace copiado</span> : "Compartir"}
+    </button>
+  );
+}
+
 const irAlFormulario = () => {
   const caja = document.getElementById("form-articulo");
-  caja?.scrollIntoView({ behavior: "smooth", block: "start" });
+  caja?.scrollIntoView({ behavior: suave(), block: "start" });
   caja?.querySelector<HTMLElement>("input, select, textarea")?.focus({ preventScroll: true });
 };
 
@@ -61,7 +77,7 @@ export function Articulo({ id }: { id: string }) {
       {/* (La línea de lectura de los artículos, animación 39, se reemplazó el 11/11/2026 por el cohete de la cabecera,
           animación 58, que muestra lo mismo en todas las páginas) */}
       <EncabezadoVista migas={[{ texto: "Inicio", href: "#inicio" }, { texto: "Blog", href: "#blog" }, { texto: a.etiqueta }]} titulo={a.titulo} lead={cab?.lead ?? a.resumen}
-        extra={<p className="mt-3 text-sm text-tinta-3">Por {CONFIG.nombre} · Lectura de {a.minutos} min</p>} />
+        extra={<p className="mt-2 flex flex-wrap items-center text-sm text-tinta-3">Por {CONFIG.nombre} · Lectura de {a.minutos} min<BotonCompartir titulo={a.titulo} /></p>} />
       <div className="contenedor grid grid-cols-1 gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_300px]">
         {/* El texto del artículo es contenido propio de la tienda original */}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions -- no es un control: solo escucha los clics de los enlaces del texto (que ya funcionan con el teclado) */}

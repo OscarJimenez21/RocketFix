@@ -76,7 +76,7 @@ const datosIniciales = (): DatosPedido => {
 };
 
 export function Carrito() {
-  const { lineas, carritoAbierto, cerrarCarrito, cambiar, quitar, avisar } = useTienda();
+  const { lineas, unidades, carritoAbierto, cerrarCarrito, cambiar, quitar, vaciar, reponer, avisar } = useTienda();
   const [d, setD] = useState<DatosPedido>(datosIniciales);
   const [errores, setErrores] = useState<{ nombre?: boolean; dir?: boolean; texto?: string }>({});
   // Envíos con datos faltantes: en cada uno, los campos marcados tiemblan
@@ -113,10 +113,40 @@ export function Carrito() {
 
   // Al quitar un producto, su línea se desvanece hacia la derecha (180 ms) antes de salir; con «reducir movimiento» sale de una vez
   const [saliendo, setSaliendo] = useState<string[]>([]);
+  // Mejora 8: al quitar un producto sale un aviso con «Deshacer» (6 s) que lo vuelve a poner con la misma cantidad
   const sacar = (clave: string) => {
+    const l = lineas.find(x => x.clave === clave);
+    const deshacer = () => {
+      if (!l) return;
+      reponer({ [clave]: l.cantidad });
+      avisar(`Volviste a poner ${nombreItem(l.producto, l.opcion.nombre)}`);
+    };
+    if (l) avisar(`Quitaste ${nombreItem(l.producto, l.opcion.nombre)}`, { texto: "Deshacer", hacer: deshacer });
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { quitar(clave); return; }
     setSaliendo(s => (s.includes(clave) ? s : [...s, clave]));
     window.setTimeout(() => { quitar(clave); setSaliendo(s => s.filter(x => x !== clave)); }, 180);
+  };
+  // Mejora 9: vaciar el carrito de una vez, también con «Deshacer»
+  const vaciarTodo = () => {
+    const antes = Object.fromEntries(lineas.map(l => [l.clave, l.cantidad]));
+    vaciar();
+    avisar("Vaciaste el carrito", { texto: "Deshacer", hacer: () => { reponer(antes); avisar("Volviste a poner tus productos"); } });
+  };
+  // Mejora 10: copiar el pedido (para pegarlo en WhatsApp Web en otro equipo, o en un correo)
+  const [copiado, setCopiado] = useState(0);
+  const copiarPedido = async () => {
+    try { await navigator.clipboard.writeText(mensaje); setCopiado(n => n + 1); window.setTimeout(() => setCopiado(0), 2200); }
+    catch { avisar("No se pudo copiar. Abre «Ver el mensaje» y cópialo a mano."); }
+  };
+  // Mejora 11: la cotización solo se imprime con su botón. Antes, imprimir cualquier página con productos en el carrito
+  // (Ctrl+P) sacaba la cotización en vez de la página
+  const imprimirCotizacion = () => {
+    const raiz = document.documentElement;
+    raiz.classList.add("imprimir-cotizacion");
+    const quitarClase = () => { raiz.classList.remove("imprimir-cotizacion"); window.removeEventListener("afterprint", quitarClase); };
+    window.addEventListener("afterprint", quitarClase);
+    window.print();
+    window.setTimeout(quitarClase, 1500);
   };
 
   // Cuando el pedido llega al envío gratis, «Gratis» da un salto y el aviso cambia. Si pasa con el carrito cerrado
@@ -227,7 +257,7 @@ export function Carrito() {
       <div ref={panel} role="dialog" aria-modal="true" aria-labelledby={`${id}-titulo`}
         className={`absolute inset-y-0 right-0 flex w-full max-w-[440px] flex-col overflow-hidden bg-superficie shadow-flota transition-transform duration-300 ease-cajon ${carritoAbierto ? "translate-x-0" : "translate-x-full"}`}>
         <header className="flex items-center justify-between border-b border-linea px-5 py-4">
-          <h2 id={`${id}-titulo`} className="text-xl font-extrabold">Tu pedido</h2>
+          <h2 id={`${id}-titulo`} className="text-xl font-extrabold">Tu pedido{unidades > 0 && <span className="ml-1.5 align-middle text-sm font-semibold text-tinta-3">({unidades} {unidades === 1 ? "producto" : "productos"})</span>}</h2>
           <button ref={cerrar} type="button" onClick={cerrarCarrito} aria-label="Cerrar carrito" className="cerrar-gira presionable -my-1 -mr-2 flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo hover:text-tinta"><IconoCerrar /></button>
         </header>
 
@@ -263,7 +293,7 @@ export function Carrito() {
                       {resaltada?.clave === clave && <span key={resaltada.vez} aria-hidden="true" className="absolute inset-y-0 -left-5 -right-5 -z-10 bg-marca-suave opacity-0 motion-safe:animate-desvanecer" />}
                       <a href={hrefProducto(p.id)} className="escenario h-16 w-16 rounded border border-linea p-1" tabIndex={-1} aria-hidden="true"><FotoProducto producto={p} alt="" tamanos="64px" /></a>
                       <div className="min-w-0">
-                        <a href={hrefProducto(p.id)} className="line-clamp-2 text-[14.5px] font-semibold leading-snug hover:text-marca">{nombre}</a>
+                        <a href={hrefProducto(p.id)} title={nombre} className="line-clamp-2 text-[14.5px] font-semibold leading-snug hover:text-marca">{nombre}</a>
                         <p className="mt-0.5 text-xs text-tinta-2">{dinero(o.precio)} c/u</p>
                         {/* Con montos grandes o en pantallas angostas, el total baja a su propio renglón (antes se salía de la pantalla) */}
                         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
@@ -275,16 +305,21 @@ export function Carrito() {
                           <button type="button" onClick={() => sacar(clave)} className="min-h-[44px] px-1 text-[13px] font-semibold text-tinta-2 underline-offset-2 hover:text-red-700 hover:underline">Quitar</button>
                           <span className="ml-auto whitespace-nowrap font-semibold tabular-nums">{dinero(o.precio * cantidad)}</span>
                         </div>
+                        {/* Mejora 12: si ya llegó al máximo disponible, se dice (antes el + solo se apagaba, sin explicar por qué) */}
+                        {tope && <p className="mt-1 text-xs text-tinta-2">Es todo lo que hay disponible de este producto.</p>}
                       </div>
                     </li>
                   );
                 })}
               </ul>
+              <div className="flex justify-end px-5 pb-2">
+                <button type="button" onClick={vaciarTodo} className="min-h-[40px] px-1 text-[13px] font-semibold text-tinta-2 underline-offset-2 hover:text-red-700 hover:underline">Vaciar carrito</button>
+              </div>
 
               <form className="grid gap-4 border-t border-linea bg-fondo px-5 py-5" noValidate onSubmit={e => e.preventDefault()}>
                 <div>
                   <label htmlFor={`${id}-nombre`} className="rotulo">Tu nombre</label>
-                  <input id={`${id}-nombre`} name="nombre" className={campo("nombre")} autoComplete="name" placeholder="Nombre y apellido" value={d.nombre}
+                  <input id={`${id}-nombre`} name="nombre" className={campo("nombre")} autoComplete="name" autoCapitalize="words" enterKeyHint="next" placeholder="Nombre y apellido" value={d.nombre}
                     aria-required="true" aria-invalid={errores.nombre || undefined} aria-describedby={errores.nombre ? `${id}-error` : undefined} onChange={e => poner("nombre", e.target.value)} />
                 </div>
                 <fieldset>
@@ -293,7 +328,7 @@ export function Carrito() {
                 </fieldset>
                 <div>
                   <label htmlFor={`${id}-dir`} className="rotulo">{nacional ? "Ciudad, dirección y barrio" : "Dirección y barrio"}</label>
-                  <input id={`${id}-dir`} name="direccion" className={campo("dir")} autoComplete="street-address" value={d.dir} aria-required="true"
+                  <input id={`${id}-dir`} name="direccion" className={campo("dir")} autoComplete="street-address" enterKeyHint="next" value={d.dir} aria-required="true"
                     placeholder={nacional ? "Ciudad, calle, número y barrio" : "Calle, número y barrio"}
                     aria-invalid={errores.dir || undefined} aria-describedby={[errores.dir && `${id}-error`, `${id}-dir-ayuda`].filter(Boolean).join(" ")} onChange={e => poner("dir", e.target.value)} />
                   <p id={`${id}-dir-ayuda`} className="mt-1.5 text-xs text-tinta-2">{nacional ? CONFIG.envio : CONFIG.domicilio} {reglaEnvio(zona)}</p>
@@ -306,14 +341,19 @@ export function Carrito() {
                 </div>
                 <div>
                   <label htmlFor={`${id}-nota`} className="rotulo">Nota <span className="opcional">(opcional)</span></label>
-                  <input id={`${id}-nota`} name="nota" autoComplete="off" className="campo" placeholder="Color, si necesitas factura u otra indicación" value={d.nota} onChange={e => poner("nota", e.target.value)} />
+                  <input id={`${id}-nota`} name="nota" autoComplete="off" enterKeyHint="done" className="campo" placeholder="Color, si necesitas factura u otra indicación" value={d.nota} onChange={e => poner("nota", e.target.value)} />
                 </div>
-                <details className="rounded border border-linea bg-superficie">
+                <details className="desplegable rounded border border-linea bg-superficie">
                   <summary className="cursor-pointer px-3 py-2.5 text-sm font-semibold text-tinta-2">Ver el mensaje que se va a enviar</summary>
                   <pre className="whitespace-pre-wrap border-t border-linea px-3 py-3 font-mono text-xs leading-relaxed text-tinta-2">{mensaje}</pre>
                 </details>
-                {/* Idea 22: la cotización en una hoja para imprimir o guardar en PDF (con los productos, el envío y el total) */}
-                <button type="button" onClick={() => window.print()} className="btn btn-borde btn-sm justify-self-start"><IconoImprimir className="h-4 w-4" />Imprimir o guardar cotización en PDF</button>
+                <div className="flex flex-wrap gap-2">
+                  {/* Idea 22: la cotización en una hoja para imprimir o guardar en PDF (con los productos, el envío y el total) */}
+                  <button type="button" onClick={imprimirCotizacion} className="btn btn-borde btn-sm"><IconoImprimir className="h-4 w-4" />Imprimir o guardar cotización en PDF</button>
+                  <button type="button" onClick={copiarPedido} className="btn btn-borde btn-sm" aria-live="polite">
+                    {copiado ? <><IconoCheck key={copiado} className="dibujar h-4 w-4 text-marca" />Pedido copiado</> : "Copiar el pedido"}
+                  </button>
+                </div>
               </form>
               {/* En celular las notas van aquí, al final del formulario, y el pie fijo queda solo con el total y los botones */}
               <div className="bg-fondo px-5 pb-5 sm:[@media(min-height:780px)]:hidden">{notas}</div>

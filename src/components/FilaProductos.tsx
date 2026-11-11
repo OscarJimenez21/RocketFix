@@ -2,6 +2,7 @@ import { useRef, type ReactNode } from "react";
 import type { Producto } from "../types";
 import { IconoFlecha } from "./Iconos";
 import { TarjetaProducto } from "./TarjetaProducto";
+import { suave } from "../lib/animaciones";
 
 /** Flecha de los botones redondos: con el mouse encima se corre un poco hacia donde lleva (el botón debe tener `group`) */
 export const FlechaMovil = ({ dir = 1 }: { dir?: 1 | -1 }) => (
@@ -17,7 +18,7 @@ export function FilaProductos({ productos, etiqueta, encabezado, cinta, verTodo 
     const el = fila.current;
     if (!el) return;
     const tarjeta = el.querySelector("li");
-    el.scrollBy({ left: dir * ((tarjeta?.getBoundingClientRect().width ?? 260) + 16) * 2, behavior: "smooth" });
+    el.scrollBy({ left: dir * ((tarjeta?.getBoundingClientRect().width ?? 260) + 16) * 2, behavior: suave() });
   };
   // text-tinta: la flecha es oscura aunque la fila vaya sobre un fondo oscuro (la de regalos, en diciembre)
   const flecha = "presionable group flex h-10 w-10 items-center justify-center rounded-full border border-linea-fuerte bg-superficie text-tinta hover:border-tinta-2";

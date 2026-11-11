@@ -4,7 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { CONFIG, deTienda } from "../data/catalogo";
 import { GRUPOS, RECORTE, TIENDAS, tiendaPorId } from "../data/tiendas";
 import { useTienda } from "../estado/TiendaContext";
-import { recurso, srcsetFoto } from "../lib/formato";
+import { dinero, recurso, srcsetFoto } from "../lib/formato";
+import { subtotalDe } from "../lib/pedido";
 import { usePanelModal } from "../lib/panel";
 import { usePestanaViva } from "../lib/pestana";
 import { claveRuta } from "../lib/rutas";
@@ -56,7 +57,7 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
   // Abierto: bloquea el fondo, enfoca «cerrar» y Esc cierra; al cerrar, el foco vuelve a donde estaba (ver lib/panel.ts)
   usePanelModal(abierto, cerrar, panel, botonCerrar);
 
-  const fila = (activo: boolean) => `flex items-center justify-between gap-3 rounded px-2 py-2.5 transition-colors duration-150 ${activo ? "bg-marca-suave font-semibold text-marca-oscuro" : "hover:bg-fondo active:bg-fondo"}`;
+  const fila = (activo: boolean) => `flex items-center justify-between gap-3 rounded px-2 py-2.5 transition-colors duration-150 ${activo ? "fila-actual relative bg-marca-suave font-semibold text-marca-oscuro" : "hover:bg-fondo active:bg-fondo"}`;
   // Al abrir el menú, sus grupos entran uno tras otro desde la izquierda (45 ms entre cada uno)
   const entra = (n: number) => (abierto ? { className: " motion-safe:animate-entrar-lado", style: { animationDelay: `${90 + n * 45}ms` } } : { className: "", style: undefined });
   return (
@@ -170,14 +171,15 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
             </a>
             <BotonTema />
             <button type="button" onClick={abrirCarrito} aria-label={`Abrir carrito, ${unidades} ${unidades === 1 ? "producto" : "productos"}`}
-              className="presionable inline-flex h-11 items-center gap-1.5 rounded border border-linea-fuerte px-2.5 text-sm font-semibold hover:border-tinta-2 sm:gap-2 sm:px-3">
+              title={unidades ? `Ver tu pedido: ${dinero(subtotalDe(lineas))} en productos` : "Tu carrito está vacío"}
+              className="boton-carrito presionable inline-flex h-11 items-center gap-1.5 rounded border border-linea-fuerte px-2.5 text-sm font-semibold hover:border-tinta-2 sm:gap-2 sm:px-3">
               <IconoBolsa />
               <span className="hidden sm:inline">Carrito</span>
               {/* Idea 23: con productos, sus fotos pequeñas apiladas (hasta 3), desde 640 px */}
               {lineas.length > 0 && (
-                <span aria-hidden="true" className="hidden items-center sm:flex">
+                <span aria-hidden="true" className="fotos-carrito hidden items-center sm:flex">
                   {lineas.filter(l => l.producto.imagen).slice(-3).reverse().map((l, i) => (
-                    <span key={l.clave} className="claro-siempre -ml-2 flex h-7 w-7 items-center justify-center overflow-hidden rounded-full border-2 border-superficie bg-white first:ml-0" style={{ zIndex: 3 - i }}>
+                    <span key={l.clave} className="claro-siempre -ml-2 flex h-7 w-7 items-center justify-center overflow-hidden rounded-full border-2 border-superficie bg-white first:ml-0" style={{ zIndex: 3 - i, "--i": i } as React.CSSProperties}>
                       <img src={recurso(l.producto.imagen ?? "")} srcSet={srcsetFoto(l.producto.imagen ?? "")} sizes="24px" alt="" width={24} height={24} decoding="async" className="h-6 w-6 object-contain" />
                     </span>
                   ))}

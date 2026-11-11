@@ -1,0 +1,16 @@
+{
+  "name": "Rocket Fix",
+  "short_name": "Rocket Fix",
+  "description": "Celulares, computadores, gaming y accesorios con entrega a domicilio en Bogotá y envíos a todo Colombia.",
+  "lang": "es-CO",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "icons": [
+    { "src": "icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icono-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icono-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -7,6 +7,7 @@ import { Ilustracion } from "../../components/Ilustracion";
 import { useRevelarHijos, useVisto } from "../../lib/enPantalla";
 import { dinero, recurso } from "../../lib/formato";
 import type { Servicio } from "../../types";
+import { suave } from "../../lib/animaciones";
 
 /** Instalación de cámaras: línea de negocio propia, con sus paquetes de referencia (los mismos del artículo) */
 function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => void }) {
@@ -65,7 +66,7 @@ export function Servicios() {
   const solicitar = (titulo: string) => {
     setElegido(titulo);
     const caja = document.getElementById("orden");
-    caja?.scrollIntoView({ behavior: "smooth", block: "start" });
+    caja?.scrollIntoView({ behavior: suave(), block: "start" });
     caja?.querySelector<HTMLElement>("input")?.focus({ preventScroll: true });
   };
   const reparacion = SERVICIOS.filter(s => !s.camaras);

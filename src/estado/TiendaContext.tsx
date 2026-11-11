@@ -39,6 +39,8 @@ interface Ctx {
   cambiar: (clave: string, delta: number) => void;
   quitar: (clave: string) => void;
   vaciar: () => void;
+  /** Vuelve a poner líneas quitadas (para «Deshacer»): suma esas cantidades a lo que ya haya */
+  reponer: (lineas: Record<string, number>) => void;
   version: (id: string) => number;
   elegirVersion: (id: string, i: number) => void;
   carritoAbierto: boolean;
@@ -47,7 +49,11 @@ interface Ctx {
   aviso: string;
   /** Cuántos avisos se han dado (cambia aunque el texto se repita: así la línea del aviso vuelve a empezar) */
   avisoVez: number;
-  avisar: (texto: string) => void;
+  /** Botón del aviso (ej.: «Deshacer»). Con botón, el aviso se ve aunque el carrito esté abierto y dura más (6 s) */
+  avisoAccion: { texto: string; hacer: () => void } | null;
+  avisar: (texto: string, accion?: { texto: string; hacer: () => void }) => void;
+  /** Mejora: con el mouse o el foco encima, el aviso no se va (y sigue al soltarlo con el tiempo que le quedaba) */
+  pausarAviso: (pausa: boolean) => void;
 }
 const TiendaCtx = createContext<Ctx | null>(null);
 
@@ -57,7 +63,10 @@ export function TiendaProvider({ children }: { children: ReactNode }) {
   const [carritoAbierto, setAbierto] = useState(false);
   const [aviso, setAviso] = useState("");
   const [avisoVez, setAvisoVez] = useState(0);
+  const [avisoAccion, setAvisoAccion] = useState<Ctx["avisoAccion"]>(null);
   const reloj = useRef<number>();
+  const fin = useRef(0);
+  const resta = useRef(0);
 
   useEffect(() => {
     try { localStorage.setItem(CLAVE, JSON.stringify(carrito)); } catch { /* navegador sin almacenamiento */ }
@@ -70,11 +79,29 @@ export function TiendaProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("storage", alGuardar);
   }, []);
 
-  const avisar = useCallback((texto: string) => {
+  const avisar = useCallback((texto: string, accion?: Ctx["avisoAccion"]) => {
     setAviso(texto);
+    setAvisoAccion(accion ?? null);
     if (texto) setAvisoVez(n => n + 1);
     window.clearTimeout(reloj.current);
-    reloj.current = window.setTimeout(() => setAviso(""), 4200);
+    const dura = accion ? 6000 : 4200;
+    fin.current = Date.now() + dura;
+    resta.current = 0;
+    reloj.current = window.setTimeout(() => { setAviso(""); setAvisoAccion(null); }, dura);
+  }, []);
+
+  const pausarAviso = useCallback((pausa: boolean) => {
+    if (pausa) {
+      if (!fin.current) return;
+      window.clearTimeout(reloj.current);
+      resta.current = Math.max(0, fin.current - Date.now());
+      fin.current = 0;
+    } else if (resta.current) {
+      const dura = Math.max(1200, resta.current);
+      fin.current = Date.now() + dura;
+      resta.current = 0;
+      reloj.current = window.setTimeout(() => { setAviso(""); setAvisoAccion(null); fin.current = 0; }, dura);
+    }
   }, []);
 
   const cambiar = useCallback((k: string, delta: number) => {
@@ -112,6 +139,14 @@ export function TiendaProvider({ children }: { children: ReactNode }) {
   // con el teclado, el foco saltaba al botón «Cerrar carrito»
   const quitar = useCallback((k: string) => setCarrito(c => { const sig = { ...c }; delete sig[k]; return sig; }), []);
   const vaciar = useCallback(() => setCarrito({}), []);
+  const reponer = useCallback((l: Record<string, number>) => setCarrito(c => {
+    const sig = { ...c };
+    for (const [k, q] of Object.entries(l)) {
+      const d = deClave(k);
+      if (d && q > 0) sig[k] = Math.min(d.producto.stock ?? MAX, (sig[k] ?? 0) + q);
+    }
+    return sig;
+  }), []);
   const elegirVersion = useCallback((id: string, i: number) => setVersiones(v => ({ ...v, [id]: i })), []);
   const abrirCarrito = useCallback(() => setAbierto(true), []);
   const cerrarCarrito = useCallback(() => setAbierto(false), []);
@@ -124,6 +159,7 @@ export function TiendaProvider({ children }: { children: ReactNode }) {
     cambiar,
     quitar,
     vaciar,
+    reponer,
     version: id => versiones[id] ?? 0,
     elegirVersion,
     carritoAbierto,
@@ -131,8 +167,10 @@ export function TiendaProvider({ children }: { children: ReactNode }) {
     cerrarCarrito,
     aviso,
     avisoVez,
-    avisar
-  }), [lineas, carrito, versiones, carritoAbierto, aviso, avisoVez, agregar, cambiar, quitar, vaciar, elegirVersion, abrirCarrito, cerrarCarrito, avisar]);
+    avisoAccion,
+    avisar,
+    pausarAviso
+  }), [lineas, carrito, versiones, carritoAbierto, aviso, avisoVez, avisoAccion, agregar, cambiar, quitar, vaciar, reponer, elegirVersion, abrirCarrito, cerrarCarrito, avisar, pausarAviso]);
   return <TiendaCtx.Provider value={valor}>{children}</TiendaCtx.Provider>;
 }
 

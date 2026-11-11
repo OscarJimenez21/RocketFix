@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { PRODUCTOS, TEXTO_BUSQUEDA } from "../data/catalogo";
-import { buscarProductos, palabrasDe, resaltar } from "./busqueda";
+import { buscarProductos, distancia, palabrasDe, resaltar, sugerirCorreccion } from "./busqueda";
 import { norm } from "./formato";
 
 describe("palabras de la búsqueda", () => {
@@ -48,6 +48,22 @@ describe("buscador", () => {
 
   it("un signo raro no rompe el buscador", () => {
     expect(() => buscarProductos("c++ (a) [b] $ ^ *")).not.toThrow();
+  });
+});
+
+describe("¿quisiste decir…?", () => {
+  it("cuenta las letras distintas", () => {
+    expect(distancia("samsung", "samsung")).toBe(0);
+    expect(distancia("samsnug", "samsung")).toBe(2);
+    expect(distancia("iphnoe", "iphone", 1)).toBe(2);
+  });
+  it("corrige una marca mal escrita", () => {
+    expect(sugerirCorreccion("samsumg")).toBe("samsung");
+    expect(sugerirCorreccion("xiomi")).toBe("xiaomi");
+  });
+  it("no sugiere nada si la búsqueda ya encuentra productos o si no hay nada parecido", () => {
+    expect(sugerirCorreccion("samsung")).toBeNull();
+    expect(sugerirCorreccion("zzzxqwy")).toBeNull();
   });
 });
 

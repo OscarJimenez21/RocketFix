@@ -465,9 +465,22 @@
   /* Idea 22: la cotización del carrito solo aparece al imprimir; al imprimir, el resto de la página se esconde */
   .solo-imprimir { display: none; }
   @media print {
-    body > *:not(.solo-imprimir) { display: none !important; }
-    .solo-imprimir { display: block; padding: 8px; background: #fff; color: rgb(15 31 24); }
+    /* Mejora 11: la cotización solo sale con su botón del carrito (que pone la clase imprimir-cotizacion un momento) */
+    :root.imprimir-cotizacion body > *:not(.solo-imprimir) { display: none !important; }
+    :root.imprimir-cotizacion .solo-imprimir { display: block; padding: 8px; background: #fff; color: rgb(15 31 24); }
     @page { margin: 14mm; }
+    /* Mejora 13: al imprimir cualquier otra página (Ctrl+P en un producto, por ejemplo) sale solo el contenido, en claro,
+       sin la cabecera, el pie, los botones flotantes ni las filas que se deslizan; los enlaces muestran su texto completo */
+    :root:not(.imprimir-cotizacion) {
+      --c-tinta: 15 31 24; --c-tinta-2: 60 75 68; --c-tinta-3: 90 104 97; --c-fondo: 255 255 255; --c-superficie: 255 255 255;
+      --c-linea: 220 228 223; --c-linea-fuerte: 190 202 195; --c-marca-suave: 231 243 236; --c-marca-texto: 9 112 73;
+      --c-acento-suave: 255 240 232; --c-acento-texto: 154 52 18; color-scheme: light;
+    }
+    :root:not(.imprimir-cotizacion) :is(header.cabecera, footer, .no-imprimir, [role="dialog"], nav[aria-label="Secciones de la portada"]) { display: none !important; }
+    :root:not(.imprimir-cotizacion) .fixed { display: none !important; }
+    :root:not(.imprimir-cotizacion) body { background: #fff; }
+    :root:not(.imprimir-cotizacion) main * { animation: none !important; transition: none !important; box-shadow: none !important; }
+    :root:not(.imprimir-cotizacion) .tarjeta, :root:not(.imprimir-cotizacion) table, :root:not(.imprimir-cotizacion) li { break-inside: avoid; }
   }
   /* 66 · Logos de marcas: en computador van en gris y se pintan con su color al pasar el mouse (en celular, siempre a color) */
   @media (hover: hover) and (pointer: fine) {
@@ -787,3 +800,134 @@
 
 /* Idea 37: control de precio máximo de cada sección, con el verde de la marca */
 .rango-precio { accent-color: #0B8457; height: 44px; cursor: pointer; }
+
+/* ===================== Lote «100 mejoras» (11/11/2026). Animaciones 68 a 82 y ajustes generales ===================== */
+
+/* Mejoras generales (no son animaciones) */
+:root { accent-color: #0B8457; }                                   /* casillas y botones de opción con el verde de la marca */
+input, textarea { caret-color: #0B8457; }                          /* el cursor de escritura, verde */
+p, li, dd { text-wrap: pretty; }                                   /* sin palabras sueltas al final de los párrafos */
+input[type="search"][role="combobox"]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; } /* el buscador general ya tiene su ✕ */
+button, [role="button"], .btn { -webkit-touch-callout: none; }     /* mantener el dedo en un botón no abre el menú de copiar */
+.selector-tema button { transition: background-color 200ms, color 200ms, box-shadow 200ms; }
+/* Quien pidió más contraste en su equipo: bordes y textos suaves más marcados */
+@media (prefers-contrast: more) {
+  :root { --c-linea: 150 168 158; --c-linea-fuerte: 110 130 119; --c-tinta-3: 60 75 68; }
+  :root[data-tema="noche"] { --c-linea: 90 125 110; --c-linea-fuerte: 120 156 140; --c-tinta-3: 190 210 200; }
+}
+/* Quien pidió menos transparencias: la cabecera compacta va sólida, sin desenfoque */
+@media (prefers-reduced-transparency: reduce) {
+  .cabecera { animation: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+}
+/* Colores forzados (alto contraste de Windows): los botones y campos conservan su borde */
+@media (forced-colors: active) {
+  .btn, .campo, .tarjeta, [role="radio"][aria-checked="true"] { border: 1px solid CanvasText; }
+  .presionable:focus-visible { outline: 2px solid Highlight; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* 68 · La ✕ para borrar la búsqueda aparece con un pequeño crecimiento */
+  :root:not(.sin-a68) .limpiar-busqueda { animation: aparece-x 160ms cubic-bezier(0.23, 1, 0.32, 1); }
+  /* 69 · Los desplegables (datos de entrega en el carrito) se abren y cierran deslizando, no de golpe (Chrome y Edge) */
+  :root:not(.sin-a69) details.desplegable { interpolate-size: allow-keywords; }
+  :root:not(.sin-a69) details.desplegable::details-content {
+    block-size: 0; overflow-y: clip; transition: block-size 260ms cubic-bezier(0.23, 1, 0.32, 1), content-visibility 260ms allow-discrete;
+  }
+  :root:not(.sin-a69) details.desplegable[open]::details-content { block-size: auto; }
+  /* 70 · Al elegir un color en la tarjeta, el punto da un pequeño salto */
+  :root:not(.sin-a70) .punto-color.elegido { animation: punto-salto 280ms cubic-bezier(0.23, 1, 0.32, 1); }
+  /* 71 · La insignia «Recién llegado» brilla una sola vez al aparecer */
+  :root:not(.sin-a71) .insignia-nueva::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.65) 50%, transparent 70%);
+    transform: translateX(-120%); animation: insignia-brillo 900ms ease-out 700ms 1 forwards;
+  }
+  /* 73 · Al cambiar entre día y noche, los colores nuevos se abren en círculo desde el botón tocado */
+  :root.cambio-tema::view-transition-old(root) { animation: none; }
+  :root.cambio-tema::view-transition-new(root) { animation: tema-circulo 560ms cubic-bezier(0.23, 1, 0.32, 1); }
+  /* 74 · El sol y la luna del selector entran girando */
+  :root:not(.sin-a74) .icono-tema { display: inline-flex; animation: icono-tema 360ms cubic-bezier(0.23, 1, 0.32, 1); }
+  /* 78 · Visor de fotos: cada foto entra con un acercamiento suave */
+  :root:not(.sin-a78) .visor .visor-foto { animation: visor-foto 260ms cubic-bezier(0.23, 1, 0.32, 1); }
+  /* 80 · El número de foto de la galería sube al cambiar */
+  :root:not(.sin-a80) .contador-foto { animation: contador-sube 220ms cubic-bezier(0.23, 1, 0.32, 1); }
+  /* 81 · La miniatura elegida se acerca un poco */
+  :root:not(.sin-a81) .miniatura { transition: scale 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+  :root:not(.sin-a81) .miniatura.elegida { scale: 1.08; }
+  /* 82 · Comparador: las filas entran una tras otra al elegir el otro producto */
+  :root:not(.sin-a82) .fila-comparar { animation: fila-entra 320ms cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: calc(var(--orden, 0) * 30ms); }
+}
+/* 79 apagada: la barra de envío gratis aparece ya llena */
+:root.sin-a79 .barra-envio { transition: none !important; }
+/* Comparador: las filas donde los dos productos son distintos llevan fondo verde suave y una raya verde a la izquierda */
+.fila-distinta { background-color: rgb(var(--c-marca-suave) / 0.55); }
+.fila-distinta > th { box-shadow: inset 3px 0 0 #0B8457; }
+
+@media (hover: hover) and (pointer: fine) {
+  /* 76 · Pie de página: el subrayado crece de izquierda a derecha */
+  :root:not(.sin-a76) .enlace-pie {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; padding-bottom: 1px;
+    transition: background-size 240ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms;
+  }
+  :root:not(.sin-a76) .enlace-pie:hover { background-size: 100% 1px; }
+  :root.sin-a76 .enlace-pie:hover { text-decoration: underline; text-underline-offset: 4px; }
+  /* 77 · Carrito de la cabecera: sus fotos pequeñas se abren en abanico al pasar el mouse */
+  :root:not(.sin-a77) .fotos-carrito > span { transition: transform 220ms cubic-bezier(0.23, 1, 0.32, 1); }
+  :root:not(.sin-a77) .boton-carrito:hover .fotos-carrito > span { transform: translateX(calc(var(--i, 0) * 5px)) rotate(calc(var(--i, 0) * 5deg)); }
+}
+/* Sin mouse (celular) o con 76 apagada fuera de computador, los enlaces del pie se subrayan al tocarlos */
+@media not ((hover: hover) and (pointer: fine)) { .enlace-pie:active { text-decoration: underline; text-underline-offset: 4px; } }
+
+@keyframes aparece-x { from { opacity: 0; transform: translateY(-50%) scale(0.6); } }
+@keyframes punto-salto { 40% { transform: scale(1.25); } }
+@keyframes insignia-brillo { to { transform: translateX(120%); } }
+@keyframes tema-circulo { from { clip-path: circle(0 at var(--tx, 50%) var(--ty, 0)); } to { clip-path: circle(var(--tr, 150vmax) at var(--tx, 50%) var(--ty, 0)); } }
+@keyframes icono-tema { from { opacity: 0; transform: rotate(-90deg) scale(0.6); } }
+@keyframes visor-foto { from { opacity: 0; scale: 0.96; } }
+@keyframes contador-sube { from { opacity: 0; transform: translateY(70%); } }
+@keyframes fila-entra { from { opacity: 0; transform: translateY(6px); } }
+/* El aviso de abajo, en pausa (mouse encima o botón enfocado): su línea de tiempo se detiene */
+.aviso-pausado .aviso-cuenta { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: no-preference) {
+  /* 75 · El número de resultados de la búsqueda sube al cambiar de sección */
+  :root:not(.sin-a75) .cuenta-cambia { animation: contador-sube 220ms cubic-bezier(0.23, 1, 0.32, 1); }
+  /* 83 · «¿Quisiste decir…?» entra con un fundido corto */
+  :root:not(.sin-a83) .correccion-entra { animation: fila-entra 320ms cubic-bezier(0.23, 1, 0.32, 1) 120ms backwards; }
+  /* 84 · Al filtrar o reordenar la búsqueda, los resultados entran con un fundido */
+  :root:not(.sin-a84) .resultados-entran { animation: resultados-entran 240ms cubic-bezier(0.23, 1, 0.32, 1); }
+  /* 85 · Las búsquedas recientes entran una tras otra al abrir el buscador */
+  :root:not(.sin-a85) .reciente { animation: fila-entra 240ms cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: calc(var(--i, 0) * 35ms); }
+  /* 86 · El aviso de «sin internet» baja desde arriba */
+  :root:not(.sin-a86) .sin-conexion { animation: baja-franja 280ms cubic-bezier(0.23, 1, 0.32, 1); }
+  /* 87 · Menú: la sección donde estás lleva una raya verde que crece al abrirlo */
+  :root:not(.sin-a87) .fila-actual::before { animation: raya-crece 360ms cubic-bezier(0.23, 1, 0.32, 1) 220ms backwards; }
+}
+.fila-actual::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 2px; background: #0B8457; transform-origin: center; }
+@media (hover: hover) and (pointer: fine) {
+  /* 72 · Comparador: la fila bajo el mouse se resalta, para seguirla de un lado al otro */
+  :root:not(.sin-a72) .fila-comparar { transition: background-color 150ms; }
+  :root:not(.sin-a72) .fila-comparar:hover { background-color: rgb(var(--c-fondo)); }
+}
+@keyframes resultados-entran { from { opacity: 0; } }
+@keyframes baja-franja { from { transform: translateY(-100%); } }
+@keyframes raya-crece { from { transform: scaleY(0); } }
+/* Artículos en celular: las palabras muy largas se parten con guion y los enlaces largos no se salen de la pantalla */
+.prosa { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: break-word; }
+.prosa a { overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: no-preference) {
+  /* 88 · Preguntas frecuentes de los artículos: se abren y cierran deslizando (Chrome y Edge) */
+  :root:not(.sin-a88) .prosa details { interpolate-size: allow-keywords; }
+  :root:not(.sin-a88) .prosa details::details-content {
+    block-size: 0; overflow-y: clip; transition: block-size 260ms cubic-bezier(0.23, 1, 0.32, 1), content-visibility 260ms allow-discrete;
+  }
+  :root:not(.sin-a88) .prosa details[open]::details-content { block-size: auto; }
+}
+@media (hover: hover) and (pointer: fine) {
+  /* 89 · Visor de fotos: la flecha se asoma hacia su lado al pasar el mouse */
+  :root:not(.sin-a89) .flecha-visor { transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+  :root:not(.sin-a89) .group:hover .flecha-visor { transform: translateX(var(--hacia, 0)); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* 90 · «Quitar filtros» aparece con un fundido corto al poner el primer filtro */
+  :root:not(.sin-a90) .quitar-filtros { animation: resultados-entran 260ms cubic-bezier(0.23, 1, 0.32, 1); }
+}

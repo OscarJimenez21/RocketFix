@@ -104,7 +104,8 @@ if (OTRAS.length) GRUPOS_PAGO.push({ titulo: "Otras", nombres: OTRAS });
 export function PiePagina() {
   const atencion = useAtencion();
   const redes = Object.entries(CONFIG.redes).filter(([, url]) => url);
-  const enlace = "hover:text-white hover:underline underline-offset-4";
+  // Animación 76: en computador, el subrayado crece de izquierda a derecha al pasar el mouse (ver .enlace-pie en index.css)
+const enlace = "enlace-pie hover:text-white";
   // Animación 40: la primera vez que se ve el botón de WhatsApp del pie, lanza dos ondas
   const botonesWa = useRef<HTMLDivElement>(null);
   const waVisto = useVisto(botonesWa);

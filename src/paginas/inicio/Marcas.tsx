@@ -5,6 +5,7 @@ import { useEnPantalla } from "../../lib/enPantalla";
 import { recurso } from "../../lib/formato";
 import { hrefMarca } from "../../lib/rutas";
 import { BotonPausa } from "./BotonPausa";
+import { suave } from "../../lib/animaciones";
 
 /** Marcas con 5 productos o más, de la que más tiene a la que menos, con su logo (o su nombre si no hay logo); cada una
     lleva a su página (#marca/…), que muestra solo los productos guardados con esa marca. La fila avanza sola y también se mueve
@@ -75,7 +76,7 @@ export function Marcas() {
     if (v && el.scrollLeft + paso < v * 0.5) el.scrollLeft += v;
     else if (v && el.scrollLeft + paso >= v * 1.5) el.scrollLeft -= v;
     pausar(5000);
-    el.scrollBy({ left: paso, behavior: "smooth" });
+    el.scrollBy({ left: paso, behavior: suave() });
   };
   // Arrastrar con el mouse (con el dedo la fila se desliza sola, como cualquier lista)
   const bajar = (e: React.PointerEvent) => {

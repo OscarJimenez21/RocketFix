@@ -226,7 +226,7 @@ export default function Producto({ id }: { id: string }) {
               <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
                 {/* barrido-agregar: un destello lo cruza una vez al abrir el producto (animación 21) */}
                 <button ref={boton} type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario barrido barrido-agregar w-full"><EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" /></button>
-                <a href={waLink(`Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, o.nombre)} (${dinero(o.precio)}). ¿Está disponible?`)} target="_blank" rel="noopener"
+                <a href={waLink(`Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, o.nombre)} (${dinero(o.precio)}). ¿Está disponible?${typeof location === "undefined" ? "" : `\n${location.origin}${import.meta.env.BASE_URL}p/${p.id}/`}`)} target="_blank" rel="noopener"
                   className="btn btn-borde w-full"><IconoWhatsApp className="h-[18px] w-[18px] text-wa" />Preguntar por WhatsApp</a>
               </div>
               {q > 0 && <p className="mt-3 text-sm font-semibold text-marca"><span key={q} className="inline-block motion-safe:animate-entrar">{q} en el carrito</span> ·<button type="button" onClick={abrirCarrito} className="underline underline-offset-2">Ver carrito</button></p>}
@@ -241,7 +241,7 @@ export default function Producto({ id }: { id: string }) {
               </li>
             ))}
           </ul>
-          <button type="button" onClick={compartir} className="mt-3 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-tinta-2 hover:text-tinta">
+          <button type="button" onClick={compartir} aria-live="polite" className="mt-3 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-tinta-2 hover:text-tinta">
             {/* Al copiar el enlace, la flecha se cambia por un ✓ que se dibuja */}
             {copiado
               ? <><IconoCheck className="dibujar h-4 w-4 text-marca" /><span className="inline-block motion-safe:animate-entrar">Enlace copiado</span></>

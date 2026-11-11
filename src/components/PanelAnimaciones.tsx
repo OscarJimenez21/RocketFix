@@ -75,7 +75,31 @@ const LISTA: Fila[] = [
   { n: 64, grupo: "Secciones", nombre: "La foto vuela de la tarjeta a la página del producto", como: "Toca un producto (Chrome, Edge o Safari 18)", ir: "#celulares" },
   { n: 65, grupo: "Carrito", nombre: "El cohete despega al enviar el pedido por WhatsApp", como: "Envía un pedido desde el carrito", ir: "#celulares" },
   { n: 66, grupo: "Portada", nombre: "Logos de marcas en gris que se pintan al pasar el mouse", como: "Pasa el mouse por las marcas", ir: "#marcas" },
-  { n: 67, grupo: "Portada", nombre: "Las ciudades del mapa de envíos laten", como: "Baja hasta «Envíos a toda Colombia»", ir: "#envios" }
+  { n: 67, grupo: "Portada", nombre: "Las ciudades del mapa de envíos laten", como: "Baja hasta «Envíos a toda Colombia»", ir: "#envios" },
+  // Lote «100 mejoras» (11/11/2026)
+  { n: 68, grupo: "Buscador", nombre: "La ✕ para borrar la búsqueda aparece creciendo", como: "Escribe algo en el buscador", ir: "#inicio" },
+  { n: 69, grupo: "Carrito", nombre: "«Ver el mensaje que se va a enviar» se abre deslizando", como: "Abre el carrito con productos y toca ese texto (Chrome o Edge)", ir: "#celulares" },
+  { n: 70, grupo: "Secciones", nombre: "El punto de color de la tarjeta da un salto al elegirlo", como: "Toca un color en una tarjeta que tenga varios", ir: "#celulares" },
+  { n: 71, grupo: "Secciones", nombre: "La insignia «Recién llegado» brilla una vez", como: "Mira una tarjeta con esa insignia", ir: "#celulares" },
+  { n: 72, grupo: "Producto", nombre: "Comparador: la fila bajo el mouse se resalta", como: "Elige un producto en «Compáralo con otro» y pasa el mouse", ir: "#celulares" },
+  { n: 73, grupo: "General", nombre: "Día/noche: los colores nuevos se abren en círculo desde el botón", como: "Cambia a Noche en el menú o en la cabecera (Chrome, Edge o Safari 18)", ir: "#inicio" },
+  { n: 74, grupo: "General", nombre: "El sol y la luna del selector entran girando", como: "Cambia entre Día y Noche", ir: "#inicio" },
+  { n: 75, grupo: "Buscador", nombre: "El número de resultados sube al filtrar por sección", como: "Busca «cargador» y toca una sección", ir: "#buscar/cargador" },
+  { n: 76, grupo: "General", nombre: "Pie de página: el subrayado crece de izquierda a derecha", como: "Pasa el mouse por los enlaces del pie (computador)", ir: "#contacto" },
+  { n: 77, grupo: "Carrito", nombre: "Las fotos pequeñas del carrito de la cabecera se abren en abanico", como: "Con 2 o más productos, pasa el mouse por el carrito (computador)", ir: "#celulares" },
+  { n: 78, grupo: "Producto", nombre: "Visor de fotos: cada foto entra con un acercamiento suave", como: "Abre las fotos en grande y pasa de foto", ir: "#celulares" },
+  { n: 79, grupo: "Producto", nombre: "La barra de envío gratis se llena al verla", como: "Abre un producto de menos de $400.000", ir: "#accesorios" },
+  { n: 80, grupo: "Producto", nombre: "El número de foto de la galería sube al cambiar", como: "Pasa las fotos de un producto con varias", ir: "#celulares" },
+  { n: 81, grupo: "Producto", nombre: "La miniatura elegida se acerca un poco", como: "Toca las miniaturas debajo de la foto", ir: "#celulares" },
+  { n: 82, grupo: "Producto", nombre: "Comparador: las filas entran una tras otra", como: "Elige un producto en «Compáralo con otro»", ir: "#celulares" },
+  { n: 83, grupo: "Buscador", nombre: "«¿Quisiste decir…?» entra con un fundido", como: "Busca «samsumg»", ir: "#buscar/samsumg" },
+  { n: 84, grupo: "Buscador", nombre: "Los resultados entran con un fundido al filtrar o reordenar", como: "Busca «cargador» y cambia el orden", ir: "#buscar/cargador" },
+  { n: 85, grupo: "Buscador", nombre: "Las búsquedas recientes entran una tras otra", como: "Haz dos búsquedas y vuelve a tocar el buscador vacío", ir: "#inicio" },
+  { n: 86, grupo: "General", nombre: "El aviso de «sin internet» baja desde arriba", como: "Desconecta el internet con la tienda abierta", ir: "#inicio" },
+  { n: 87, grupo: "General", nombre: "Menú: la sección donde estás lleva una raya verde que crece", como: "Entra a una sección y abre el menú", ir: "#celulares" },
+  { n: 88, grupo: "General", nombre: "Preguntas de los artículos se abren deslizando", como: "Abre un artículo con preguntas frecuentes (Chrome o Edge)", ir: "#blog" },
+  { n: 89, grupo: "Producto", nombre: "Visor de fotos: la flecha se asoma hacia su lado", como: "En el visor, pasa el mouse por las flechas (computador)", ir: "#celulares" },
+  { n: 90, grupo: "Secciones", nombre: "«Quitar filtros» aparece con un fundido", como: "Elige una marca o un tipo de producto", ir: "#celulares" }
 ];
 
 function leer(): number[] {

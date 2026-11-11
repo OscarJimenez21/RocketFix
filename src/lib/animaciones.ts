@@ -7,3 +7,7 @@ export const activa = (n: number) => !document.documentElement.classList.contain
 
 /** Si la persona pidió menos movimiento en su equipo */
 export const reducirMovimiento = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/** Mejora: los desplazamientos «suaves» de la página (carruseles, ir al formulario…) son instantáneos para quien pidió
+    menos movimiento en su equipo (el navegador no lo hace solo cuando el desplazamiento lo pide el código) */
+export const suave = (): ScrollBehavior => (reducirMovimiento() ? "auto" : "smooth");

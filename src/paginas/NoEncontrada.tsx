@@ -1,3 +1,4 @@
+import { Buscador } from "../components/Buscador";
 import { Cohete } from "../components/Logo";
 import { waLink } from "../lib/whatsapp";
 
@@ -31,6 +32,8 @@ export function NoEncontrada({ texto = "Esta página no existe o cambió de dire
       <CohetePerdido />
       <h1 tabIndex={-1} className="mt-6 text-3xl font-extrabold">No la encontramos</h1>
       <p className="mt-3 text-tinta-2">{texto}</p>
+      {/* Mejora: buscar desde aquí mismo, sin volver al inicio */}
+      <div className="mx-auto mt-6 max-w-md text-left"><Buscador /></div>
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <a href="#inicio" className="btn btn-marca">Ir al inicio</a>
         <a href={waLink()} target="_blank" rel="noopener" className="btn btn-borde">Preguntar por WhatsApp</a>

@@ -3,12 +3,15 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { BUSQUEDAS_POPULARES, TIENDA_VISTA, VISTAS, deTienda, desde } from "../data/catalogo";
 import { RECORTE, TIENDAS } from "../data/tiendas";
 import { activa, reducirMovimiento } from "../lib/animaciones";
-import { buscarProductos, palabrasDe, resaltar } from "../lib/busqueda";
+import { buscarProductos, palabrasDe, resaltar, sugerirCorreccion } from "../lib/busqueda";
+import { precargarBuscar } from "../lib/carga";
+import { anotarBusqueda, borrarBusquedas, useBusquedasRecientes } from "../lib/busquedasRecientes";
 import { useEnPantalla } from "../lib/enPantalla";
 import { dinero, norm, recurso } from "../lib/formato";
 import { hrefBusqueda, hrefProducto } from "../lib/rutas";
 import { FotoProducto } from "./FotoProducto";
-import { IconoBuscar } from "./Iconos";
+import { IconoBuscar, IconoCerrar, IconoReloj, IconoWhatsApp } from "./Iconos";
+import { waLink } from "../lib/whatsapp";
 
 type Opcion = { href: string; clave: string };
 
@@ -21,7 +24,25 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
   const [abierto, setAbierto] = useState(false);
   const [activo, setActivo] = useState(-1);
   const caja = useRef<HTMLDivElement>(null);
+  const campoRef = useRef<HTMLInputElement>(null);
   const idLista = useId();
+  const recientes = useBusquedasRecientes();
+
+  // Mejora 3: en computador, la tecla «/» (o Ctrl+K) lleva al buscador desde cualquier página, como en las tiendas grandes.
+  // Solo responde el buscador que se ve (hay uno para computador y otro para celular) y no mientras se escribe en otro campo
+  useEffect(() => {
+    const alTecla = (e: KeyboardEvent) => {
+      const atajo = (e.key === "/" && !e.ctrlKey && !e.metaKey && !e.altKey) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k");
+      if (!atajo || !campoRef.current || campoRef.current.offsetParent === null) return;
+      const en = document.activeElement as HTMLElement | null;
+      if (e.key === "/" && en && (en.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(en.tagName))) return;
+      e.preventDefault();
+      campoRef.current.focus();
+      campoRef.current.select();
+    };
+    document.addEventListener("keydown", alTecla);
+    return () => document.removeEventListener("keydown", alTecla);
+  }, []);
 
   useEffect(() => setQ(inicial), [inicial]);
 
@@ -45,10 +66,12 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
     ? TIENDAS.filter(t => palabras.every(w => norm(t.titulo + " " + t.menu).includes(w))).slice(0, 3)
     : [];
 
+  // Mejora 5: si no hay nada, se propone la palabra más parecida del catálogo (ver sugerirCorreccion)
+  const correccion = useMemo(() => (palabras.length && !total ? sugerirCorreccion(q) : null), [q, palabras.length, total]);
   const opciones: Opcion[] = palabras.length
     ? [...secciones.map(t => ({ href: `#${t.vista}`, clave: t.vista })), ...productos.map(p => ({ href: hrefProducto(p.id), clave: p.id })),
-       ...(total ? [{ href: hrefBusqueda(q), clave: "todos" }] : [])]
-    : BUSQUEDAS_POPULARES.map(b => ({ href: hrefBusqueda(b), clave: b }));
+       ...(total ? [{ href: hrefBusqueda(q), clave: "todos" }] : []), ...(correccion ? [{ href: hrefBusqueda(correccion), clave: "correccion" }] : [])]
+    : [...recientes.map(b => ({ href: hrefBusqueda(b), clave: `r-${b}` })), ...BUSQUEDAS_POPULARES.map(b => ({ href: hrefBusqueda(b), clave: b }))];
 
   useEffect(() => {
     const fuera = (e: PointerEvent) => { if (!caja.current?.contains(e.target as Node)) setAbierto(false); };
@@ -63,15 +86,19 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
   useEffect(() => setActivo(-1), [q]);
 
   const ir = (href: string) => { location.hash = href; setAbierto(false); };
+  // Mejora 4: borrar lo escrito con la ✕ (igual en todos los navegadores; la ✕ propia de Chrome se esconde en el CSS)
+  const limpiar = () => { setQ(""); setAbierto(true); campoRef.current?.focus(); };
 
   const alTecla = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "ArrowDown") { e.preventDefault(); setAbierto(true); setActivo(a => Math.min(opciones.length - 1, a + 1)); }
     else if (e.key === "ArrowUp") { e.preventDefault(); setActivo(a => Math.max(-1, a - 1)); }
-    else if (e.key === "Escape") { setAbierto(false); setActivo(-1); }
+    // Esc cierra la lista; con la lista ya cerrada, un segundo Esc borra lo escrito
+    else if (e.key === "Escape") { if (!abierto && q) setQ(""); setAbierto(false); setActivo(-1); }
     else if (e.key === "Enter") {
       e.preventDefault();
       const elegida = opciones[activo];
       if (elegida) ir(elegida.href);
+      // (la página de resultados la anota en «recientes» si encuentra algo)
       else if (q.trim()) ir(hrefBusqueda(q));
     }
   };
@@ -89,15 +116,24 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
         {/* lupa: al escribir se inclina y se pinta de verde (animación 11) */}
         <IconoBuscar className="lupa pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-tinta-3" />
         <input
-          type="search" value={q} placeholder={rueda ? "" : TEXTO_CAMPO} autoComplete="off" enterKeyHint="search"
-          role="combobox" aria-expanded={hayLista} aria-controls={hayLista ? idLista : undefined} aria-autocomplete="list"
+          ref={campoRef} type="search" value={q} placeholder={rueda ? "" : TEXTO_CAMPO} autoComplete="off" enterKeyHint="search" autoCapitalize="none" autoCorrect="off" spellCheck={false}
+          role="combobox" aria-keyshortcuts="/ Control+K" aria-expanded={hayLista} aria-controls={hayLista ? idLista : undefined} aria-autocomplete="list"
           aria-activedescendant={activo >= 0 ? idOpcion(activo) : undefined}
-          onChange={e => { setQ(e.target.value); setAbierto(true); }} onFocus={() => { setAbierto(true); setEnfocado(true); }} onBlur={() => setEnfocado(false)} onKeyDown={alTecla}
-          className="h-11 w-full rounded border border-linea-fuerte bg-fondo pl-10 pr-3 text-[15px] placeholder:text-tinta-3 focus:border-marca focus:bg-superficie focus:outline-none focus:ring-2 focus:ring-marca/20"
+          onChange={e => { setQ(e.target.value); setAbierto(true); }} onFocus={() => { setAbierto(true); setEnfocado(true); precargarBuscar(); }} onBlur={() => setEnfocado(false)} onKeyDown={alTecla}
+          className="h-11 w-full rounded border border-linea-fuerte bg-fondo pl-10 pr-11 text-[15px] placeholder:text-tinta-3 focus:border-marca focus:bg-superficie focus:outline-none focus:ring-2 focus:ring-marca/20"
         />
+        {q ? (
+          <button type="button" onClick={limpiar} aria-label="Borrar la búsqueda"
+            className="limpiar-busqueda presionable absolute right-0 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded text-tinta-3 hover:bg-linea hover:text-tinta">
+            <IconoCerrar className="h-4 w-4" />
+          </button>
+        ) : (
+          // En computador, la pista del atajo «/» (ver arriba)
+          <kbd aria-hidden="true" className="pointer-events-none absolute right-2.5 top-1/2 hidden h-6 min-w-6 -translate-y-1/2 items-center justify-center rounded border border-linea-fuerte bg-superficie px-1.5 font-sans text-xs text-tinta-3 [@media(hover:hover)_and_(pointer:fine)]:flex">/</kbd>
+        )}
         {/* Texto de ayuda que rueda (los lectores de pantalla ya tienen el rótulo «Buscar en toda la tienda») */}
         {rueda && !q && (
-          <span aria-hidden="true" className="ayuda-campo pointer-events-none absolute inset-y-0 left-10 right-3 flex items-center overflow-hidden text-[15px] text-tinta-3">
+          <span aria-hidden="true" className="ayuda-campo pointer-events-none absolute inset-y-0 left-10 right-11 flex items-center overflow-hidden text-[15px] text-tinta-3">
             <span key={ejemplo} className={`truncate${ejemplo ? " rueda" : ""}`}>{EJEMPLOS[ejemplo]}</span>
           </span>
         )}
@@ -109,13 +145,30 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
           className="absolute left-0 right-0 top-full z-50 mt-1.5 max-h-[70dvh] origin-top overflow-y-auto overscroll-contain rounded-md border border-linea bg-superficie p-2 shadow-flota motion-safe:animate-desplegar">
           {!palabras.length && (
             <>
+              {recientes.length > 0 && (
+                <>
+                  <div className="flex items-center justify-between px-2.5 pb-1 pt-1">
+                    <p id={`${idLista}-recientes`} className="etiqueta">Tus búsquedas recientes</p>
+                    <button type="button" onClick={borrarBusquedas} className="-my-3 min-h-[44px] px-2 text-xs font-semibold text-tinta-2 hover:text-tinta hover:underline">Borrar</button>
+                  </div>
+                  <div role="listbox" aria-labelledby={`${idLista}-recientes`} className="mb-1.5 grid">
+                    {recientes.map((b, i) => (
+                      <a key={b} id={idOpcion(i)} role="option" aria-selected={i === activo} href={hrefBusqueda(b)} onClick={() => anotarBusqueda(b)}
+                        style={{ "--i": i } as React.CSSProperties}
+                        className={`reciente flex items-center gap-2.5 rounded px-2.5 py-2 text-[14.5px] ${i === activo ? "bg-marca-suave" : "hover:bg-fondo"}`}>
+                        <IconoReloj className="h-4 w-4 shrink-0 text-tinta-3" /><span className="truncate">{b}</span>
+                      </a>
+                    ))}
+                  </div>
+                </>
+              )}
               <p id={`${idLista}-titulo`} className="etiqueta px-2.5 pb-1.5 pt-1">Búsquedas populares</p>
               <div id={idLista} role="listbox" aria-labelledby={`${idLista}-titulo`} className="flex flex-wrap gap-1.5 px-1.5 pb-1.5">
                 {/* sugerencia: entran una tras otra al abrir el buscador (animación 10) */}
-                {BUSQUEDAS_POPULARES.map((b, i) => (
+                {BUSQUEDAS_POPULARES.map((b, k) => { const i = k + recientes.length; return (
                   <a key={b} id={idOpcion(i)} role="option" aria-selected={i === activo} href={hrefBusqueda(b)} style={{ "--i": i } as React.CSSProperties}
                     className={`sugerencia rounded-full border px-3 py-1 text-sm ${i === activo ? "border-marca bg-marca-suave" : "border-linea hover:border-linea-fuerte"}`}>{b}</a>
-                ))}
+                ); })}
               </div>
               {/* Idea 3: debajo, las secciones con su producto recortado, para explorar sin escribir */}
               <p className="etiqueta border-t border-linea px-2.5 pb-1.5 pt-3">Explorar secciones</p>
@@ -176,10 +229,23 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
               </a>
             );
           })()}
+          {correccion && (() => {
+            n++;
+            return (
+              <a id={idOpcion(n)} role="option" aria-selected={n === activo} href={hrefBusqueda(correccion)} onClick={() => anotarBusqueda(correccion)}
+                className={`block rounded px-2.5 py-2.5 text-sm ${n === activo ? "bg-marca-suave" : "hover:bg-fondo"}`}>
+                No encontramos “{q.trim()}”. ¿Quisiste decir <b className="font-semibold text-marca-texto">{correccion}</b>?
+              </a>
+            );
+          })()}
           </div>
           )}
-          {palabras.length > 0 && total === 0 && (
-            <p role="status" className="px-2.5 py-3 text-sm text-tinta-2">No encontramos “{q.trim()}”. Escríbenos y te decimos si lo conseguimos.</p>
+          {palabras.length > 0 && total === 0 && !correccion && (
+            <div role="status" className="px-2.5 py-3 text-sm text-tinta-2">
+              <p>No encontramos “{q.trim()}”. Escríbenos y te decimos si lo conseguimos.</p>
+              {/* Mejora 6: el botón para preguntar va ahí mismo, sin tener que buscarlo */}
+              <a href={waLink(`Hola, estoy buscando: ${q.trim()}`)} target="_blank" rel="noopener" className="btn btn-wa btn-sm mt-2.5"><IconoWhatsApp />Preguntar por WhatsApp</a>
+            </div>
           )}
         </div>
       )}

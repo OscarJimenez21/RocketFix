@@ -40,6 +40,49 @@ export function buscarProductos(q: string): Producto[] {
   return resultados.sort((a, b) => b.puntos - a.puntos || conPrecioPrimero(a.p, b.p) || desde(a.p) - desde(b.p)).map(r => r.p);
 }
 
+/* Mejora 5: «¿Quisiste decir…?». Cuando una búsqueda no encuentra nada, cada palabra que no aparece en ningún producto
+   se cambia por la palabra más parecida de los nombres y marcas del catálogo (1 letra de diferencia en palabras cortas,
+   2 en las largas). Solo se sugiere si con el cambio sí hay productos */
+let vocabulario: string[] | null = null;
+const palabrasCatalogo = () => (vocabulario ??= [...new Set(PRODUCTOS.flatMap(p => palabrasDe(`${p.nombre} ${p.marca ?? ""}`)).filter(w => w.length >= 3 && !/^\d+$/.test(w)))]);
+
+/** Distancia de edición (letras que hay que cambiar, quitar o poner), cortando en cuanto pasa de `tope` */
+export function distancia(a: string, b: string, tope = 2): number {
+  if (Math.abs(a.length - b.length) > tope) return tope + 1;
+  let fila = Array.from({ length: b.length + 1 }, (_, j) => j);
+  for (let i = 1; i <= a.length; i++) {
+    const sig = [i];
+    let menor = i;
+    for (let j = 1; j <= b.length; j++) {
+      const v = Math.min((fila[j] ?? 0) + 1, (sig[j - 1] ?? 0) + 1, (fila[j - 1] ?? 0) + (a[i - 1] === b[j - 1] ? 0 : 1));
+      sig.push(v);
+      if (v < menor) menor = v;
+    }
+    if (menor > tope) return tope + 1;
+    fila = sig;
+  }
+  return fila[b.length] ?? tope + 1;
+}
+
+export function sugerirCorreccion(q: string): string | null {
+  const palabras = palabrasDe(q);
+  if (!palabras.length || buscarProductos(q).length) return null;
+  let cambio = false;
+  const nuevas = palabras.map(w => {
+    if (w.length < 3 || PRODUCTOS.some(p => (TEXTO_BUSQUEDA[p.id] ?? "").includes(w))) return w;
+    const tope = w.length <= 5 ? 1 : 2;
+    let mejor = w, d = tope + 1;
+    for (const v of palabrasCatalogo()) {
+      const x = distancia(w, v, tope);
+      if (x < d) { d = x; mejor = v; if (x === 1 && tope === 1) break; }
+    }
+    if (mejor !== w) cambio = true;
+    return mejor;
+  });
+  const texto = nuevas.join(" ");
+  return cambio && buscarProductos(texto).length ? texto : null;
+}
+
 /** Parte un texto en trozos marcando las letras que coinciden con lo escrito (sin importar tildes) */
 export function resaltar(texto: string, palabras: string[]): { t: string; marcado: boolean }[] {
   const n = norm(texto);

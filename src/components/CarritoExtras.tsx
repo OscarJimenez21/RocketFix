@@ -12,13 +12,16 @@ import type { LineaCarrito, Producto } from "../types";
 import { FotoProducto } from "./FotoProducto";
 import { IconoWhatsApp } from "./Iconos";
 import { Cohete, Logo } from "./Logo";
+import { useVistos } from "../lib/vistos";
 
 export function Sugerencias() {
-  const lista = MAS_VENDIDOS.map(id => porId[id]).filter((p): p is Producto => Boolean(p && !p.consultar)).slice(0, 3);
+  const vistos = useVistos().filter(p => !p.consultar);
+  const conVistos = vistos.length >= 2;
+  const lista = conVistos ? vistos.slice(0, 3) : MAS_VENDIDOS.map(id => porId[id]).filter((p): p is Producto => Boolean(p && !p.consultar)).slice(0, 3);
   if (!lista.length) return null;
   return (
     <div className="mt-4 w-full text-left">
-      <p className="etiqueta mb-2 text-center">Para empezar, lo más vendido</p>
+      <p className="etiqueta mb-2 text-center">{conVistos ? "Lo que viste hace poco" : "Para empezar, lo más vendido"}</p>
       <ul className="grid gap-2">
         {lista.map(p => (
           <li key={p.id}>

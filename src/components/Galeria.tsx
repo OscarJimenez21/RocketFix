@@ -9,6 +9,7 @@ import { FotoProducto, Imagen } from "./FotoProducto";
 import { IconoAmpliar, IconoFlecha } from "./Iconos";
 import { Insignia } from "./TarjetaProducto";
 import { Visor } from "./Visor";
+import { suave } from "../lib/animaciones";
 
 /** Animación 49: brillo suave del color de la versión elegida en el borde de la foto (encima de la foto, sin tocarla) */
 function Tinte({ color }: { color: string | null }) {
@@ -22,12 +23,19 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
   const tira = useRef<HTMLDivElement>(null);
   const marco = useMarco(tira, actual);
   useEffect(() => { setFotos(galeriaDe(producto)); setActual(0); pista.current?.scrollTo({ left: 0 }); }, [producto]);
+  useEffect(() => {
+    const fila = tira.current;
+    const el = fila?.children[actual] as HTMLElement | undefined;
+    if (!fila || !el || fila.scrollWidth <= fila.clientWidth) return;
+    if (el.offsetLeft < fila.scrollLeft || el.offsetLeft + el.offsetWidth > fila.scrollLeft + fila.clientWidth)
+      fila.scrollTo({ left: el.offsetLeft - 8, behavior: suave() });
+  }, [actual]);
 
   const ir = (i: number) => {
     const el = pista.current;
     if (!el) return;
     const k = Math.max(0, Math.min(fotos.length - 1, i));
-    el.scrollTo({ left: k * el.clientWidth, behavior: "smooth" });
+    el.scrollTo({ left: k * el.clientWidth, behavior: suave() });
   };
   const alDeslizar = () => {
     const el = pista.current;
@@ -53,8 +61,10 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
 
   if (fotos.length < 2) {
     return (
-      <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-square overflow-hidden rounded-md border border-linea p-6">
-        <FotoProducto producto={producto} prioridad />
+      <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-square cursor-zoom-in overflow-hidden rounded-md border border-linea p-6">
+        {/* Mejora: tocar la foto la abre en grande (el botón «Ampliar» sigue siendo el camino con teclado) */}
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- atajo con el mouse o el dedo; el botón «Ampliar» hace lo mismo con el teclado */}
+        <div className="h-full w-full" onClick={() => fotos.length > 0 && setVisor(true)}><FotoProducto producto={producto} prioridad /></div>
         <Tinte color={tinte} />
         <Insignia producto={producto} />
         {ampliar}
@@ -68,9 +78,13 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
       {visorAbierto}
       {/* data-foto-principal: de aquí despega la foto hacia el carrito al agregar */}
       <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-square overflow-hidden rounded-md border border-linea">
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- las fotos se deslizan: deben poder enfocarse para pasarlas con las flechas del teclado */}
+        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex, jsx-a11y/no-noninteractive-element-interactions -- las fotos se deslizan: deben poder enfocarse para pasarlas con las flechas del teclado (Inicio/Fin incluidos); el clic es un atajo para ampliar, que el botón «Ampliar» también ofrece */}
         <div ref={pista} onScroll={alDeslizar} tabIndex={0} role="group" aria-roledescription="carrusel" aria-label={`Fotos de ${producto.nombre}`}
-          className="sin-barra flex h-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain">
+          // Mejora: Inicio y Fin van a la primera y a la última foto
+          onKeyDown={e => { if (e.key === "Home") { e.preventDefault(); ir(0); } else if (e.key === "End") { e.preventDefault(); ir(fotos.length - 1); } }}
+          // Mejora: tocar la foto la abre en grande (deslizar sigue pasando de foto: el navegador no cuenta el deslizamiento como clic)
+          onClick={() => setVisor(true)}
+          className="sin-barra flex h-full cursor-zoom-in snap-x snap-mandatory overflow-x-auto overscroll-x-contain">
           {fotos.map((f, i) => (
             <div key={f} className="h-full w-full shrink-0 snap-center p-6">
               {/* La primera ya la pidió el HTML en su tamaño original; las demás traen copias livianas para pantallas pequeñas */}
@@ -90,14 +104,14 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
         <button type="button" onClick={() => ir(actual + 1)} disabled={actual >= fotos.length - 1} aria-label="Foto siguiente"
           className="presionable group absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center claro-siempre rounded-full border border-linea bg-white/95 hover:border-linea-fuerte disabled:opacity-0">
           <IconoFlecha className="h-5 w-5 transition-transform duration-200 ease-salida group-hover:translate-x-0.5" /></button>
-        <span className="absolute bottom-2 right-2 rounded-sm bg-oscuro/75 px-2 py-0.5 font-mono text-xs text-white" aria-hidden="true">{actual + 1} / {fotos.length}</span>
+        <span className="absolute bottom-2 right-2 overflow-hidden rounded-sm bg-oscuro/75 px-2 py-0.5 font-mono text-xs text-white" aria-hidden="true"><span key={actual} className="contador-foto inline-block">{actual + 1}</span> / {fotos.length}</span>
       </div>
       {/* Al pasar de foto, el marco verde se desliza de una miniatura a la otra (va encima de las miniaturas, solo es el borde) */}
       <div ref={tira} className="sin-barra mt-3 flex gap-2 overflow-x-auto pb-1 pt-px">
         {fotos.map((f, i) => (
           <button key={f} data-opcion type="button" onClick={() => ir(i)} aria-label={`Ver foto ${i + 1}`} aria-current={i === actual || undefined}
             className={`presionable escenario h-16 w-16 shrink-0 rounded border p-1 ${i === actual && !marco ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>
-            <Imagen src={recurso(f)} srcSet={srcsetFoto(f)} sizes="64px" alt="" className="h-full w-full object-contain" />
+            <Imagen src={recurso(f)} srcSet={srcsetFoto(f)} sizes="64px" alt="" className={`miniatura h-full w-full object-contain ${i === actual ? "elegida" : ""}`} />
           </button>
         ))}
         {marco && <span aria-hidden="true" className="pointer-events-none absolute left-0 top-0 rounded border border-marca ring-1 ring-marca" style={marco} />}

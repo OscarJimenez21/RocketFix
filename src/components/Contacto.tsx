@@ -25,15 +25,17 @@ export function PuntoEstado({ abierto, claro = false }: { abierto: boolean; clar
 }
 
 /** Copia el número de WhatsApp. `className`: variante del botón (btn-borde sobre fondo claro, btn-claro sobre oscuro) */
-export function BotonCopiar({ texto, className = "btn-borde" }: { texto: string; className?: string }) {
+export function BotonCopiar({ texto, className = "btn-borde", etiqueta = "Copiar número" }: { texto: string; className?: string; etiqueta?: string }) {
   const [copiado, setCopiado] = useState(false);
+  const [fallo, setFallo] = useState(false);
   const copiar = async () => {
-    try { await navigator.clipboard.writeText(texto); setCopiado(true); setTimeout(() => setCopiado(false), 2000); } catch { /* sin permiso */ }
+    try { await navigator.clipboard.writeText(texto); setCopiado(true); setTimeout(() => setCopiado(false), 2000); }
+    catch { setFallo(true); setTimeout(() => setFallo(false), 3000); }
   };
   // «Copiado» entra con un fundido corto y un ✓ que se dibuja, para que se note que funcionó
   return (
-    <button type="button" onClick={copiar} className={`btn btn-sm ${className}`}>
-      {copiado ? <span className="inline-flex items-center gap-1.5 motion-safe:animate-entrar"><IconoCheck className="dibujar h-4 w-4" />Copiado</span> : "Copiar número"}
+    <button type="button" onClick={copiar} aria-live="polite" className={`btn btn-sm ${className}`}>
+      {copiado ? <span className="inline-flex items-center gap-1.5 motion-safe:animate-entrar"><IconoCheck className="dibujar h-4 w-4" />Copiado</span> : fallo ? "No se pudo copiar" : etiqueta}
     </button>
   );
 }

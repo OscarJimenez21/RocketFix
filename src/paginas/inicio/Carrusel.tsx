@@ -9,6 +9,7 @@ import { useEnPantalla, useVisto } from "../../lib/enPantalla";
 import { hrefProducto } from "../../lib/rutas";
 import type { Producto, TiendaId } from "../../types";
 import { BotonPausa } from "./BotonPausa";
+import { suave } from "../../lib/animaciones";
 
 const PASO_CARRUSEL = 3500;
 
@@ -58,9 +59,9 @@ export function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta,
     const el = fila.current;
     if (!el) return;
     const paso = (el.querySelector("li")?.getBoundingClientRect().width ?? 280) + 20;
-    if (dir > 0 && el.scrollLeft + el.clientWidth >= el.scrollWidth - 8) el.scrollTo({ left: 0, behavior: "smooth" });
-    else if (dir < 0 && el.scrollLeft <= 8) el.scrollTo({ left: el.scrollWidth, behavior: "smooth" });
-    else el.scrollBy({ left: dir * paso, behavior: "smooth" });
+    if (dir > 0 && el.scrollLeft + el.clientWidth >= el.scrollWidth - 8) el.scrollTo({ left: 0, behavior: suave() });
+    else if (dir < 0 && el.scrollLeft <= 8) el.scrollTo({ left: el.scrollWidth, behavior: suave() });
+    else el.scrollBy({ left: dir * paso, behavior: suave() });
   };
   // Avanza solo mientras la fila se ve en pantalla
   const visible = useEnPantalla(fila);

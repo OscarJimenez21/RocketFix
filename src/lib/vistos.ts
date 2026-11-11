@@ -6,6 +6,7 @@ import type { Producto } from "../types";
 
 const CLAVE = "rf-vistos";
 const MAXIMO = 12;
+const EVENTO = "rf-vistos";
 
 function leer(): string[] {
   try {
@@ -22,9 +23,20 @@ export function anotarVisto(id: string) {
   try { localStorage.setItem(CLAVE, JSON.stringify(lista)); } catch { /* sin almacenamiento */ }
 }
 
+/** Mejora: «Borrar la lista» en «Vistos recientemente» (la lista es solo de este navegador) */
+export function borrarVistos() {
+  try { localStorage.removeItem(CLAVE); } catch { /* sin almacenamiento */ }
+  window.dispatchEvent(new Event(EVENTO));
+}
+
 /** Productos vistos (que sigan en la tienda), sin el que se indique */
 export function useVistos(sin?: string): Producto[] {
   const [ids, setIds] = useState<string[]>(leer);
   useEffect(() => { setIds(leer()); }, [sin]);
+  useEffect(() => {
+    const alBorrar = () => setIds(leer());
+    window.addEventListener(EVENTO, alBorrar);
+    return () => window.removeEventListener(EVENTO, alBorrar);
+  }, []);
   return ids.filter(id => id !== sin).map(id => porId[id]).filter((p): p is Producto => Boolean(p));
 }
