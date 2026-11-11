@@ -21,6 +21,12 @@ if (!location.hash && location.pathname.startsWith(base) && location.pathname !=
 // El contenido estático (para quien no ejecuta JavaScript) ya no hace falta
 document.getElementById("estatico")?.remove();
 
+// Al recargar, la página empieza arriba (en la portada, en un producto o en cualquier sección) en vez de que el navegador
+// la devuelva al punto donde estaba. Volver con «atrás» dentro de la tienda sigue regresando al mismo punto: eso lo
+// maneja la tienda misma (lib/rutas.ts). Las anclas como #categorias también, al montar la portada
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+window.scrollTo(0, 0);
+
 // Solo al trabajar en local: las animaciones en prueba que se apagaron en el panel de revisión siguen apagadas al recargar
 if (import.meta.env.DEV) {
   try {
