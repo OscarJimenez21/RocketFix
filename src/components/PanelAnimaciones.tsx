@@ -1,4 +1,4 @@
-/* Panel para revisar las 40 animaciones en prueba (05/11/2026). Solo existe al trabajar en local (npm run dev): App lo
+/* Panel para revisar las animaciones en prueba (40 el 05/11/2026; 54 desde el 11/11/2026). Solo existe al trabajar en local (npm run dev): App lo
    carga con import.meta.env.DEV, así que no llega a la página publicada.
    Cada casilla enciende o apaga una animación (pone o quita la clase sin-aN en <html>, ver lib/animaciones.ts) y se
    recuerda en este navegador. «Ver» lleva a donde se ve cada una; las que solo pasan al cargar la página recargan. */
@@ -50,7 +50,19 @@ const LISTA: Fila[] = [
   { n: 39, grupo: "Artículos", nombre: "Línea de progreso de lectura arriba", como: "Baja por el artículo", ir: "#blog-camaras" },
   { n: 40, grupo: "Pie de página", nombre: "El botón de WhatsApp lanza dos ondas", como: "Baja hasta el pie de página", ir: "#inicio", recargar: true },
   { n: 41, grupo: "Portada", nombre: "El cielo de estrellas baja despacio todo el tiempo (dos capas a distinta velocidad)", como: "Mira el fondo de la portada unos segundos", ir: "#inicio" },
-  { n: 42, grupo: "Portada", nombre: "Estrellas fugaces que cruzan la portada de vez en cuando", como: "Espera en la portada (de 1 a 5 a la vez, cada 1,5 a 6 s)", ir: "#inicio" }
+  { n: 42, grupo: "Portada", nombre: "Estrellas fugaces que cruzan la portada de vez en cuando", como: "Espera en la portada (de 1 a 5 a la vez, cada 1,5 a 6 s)", ir: "#inicio" },
+  { n: 43, grupo: "Portada", nombre: "El cielo cambia con la hora (día, atardecer, noche)", como: "Prueba con ?cielo=noche, dia, amanecer o atardecer en la dirección", ir: "#inicio", recargar: true },
+  { n: 44, grupo: "Pestaña", nombre: "«🚀 Tu carrito te espera» en el título de la pestaña", como: "Con algo en el carrito, cambia a otra pestaña", ir: "#celulares" },
+  { n: 45, grupo: "Pestaña", nombre: "Número del carrito en el ícono de la pestaña", como: "Agrega un producto y mira el ícono de la pestaña", ir: "#celulares" },
+  { n: 46, grupo: "Tienda", nombre: "Reflejo de vidrio que cruza la foto", como: "Pasa el mouse por una tarjeta", ir: "#celulares" },
+  { n: 47, grupo: "Portada", nombre: "La vitrina flota despacio", como: "Mira la vitrina de 6 productos", ir: "#inicio" },
+  { n: 48, grupo: "Portada", nombre: "Luz suave que sigue al mouse", como: "Mueve el mouse por la portada", ir: "#inicio" },
+  { n: 49, grupo: "Producto", nombre: "El borde de la foto toma el color de la versión", como: "En un producto con colores, cambia de versión", ir: "#p/sa07" },
+  { n: 50, grupo: "Todas", nombre: "Botón flotante «Volver arriba»: el cohete despega", como: "Baja por la página y tócalo", ir: "#celulares" },
+  { n: 51, grupo: "Portada", nombre: "Sorpresa: el cohete del eslogan gira y suelta chispas", como: "Toca 5 veces seguidas el cohete del eslogan", ir: "#inicio" },
+  { n: 52, grupo: "Temporadas", nombre: "Navidad, fiestas patrias, amor y amistad, Halloween", como: "Prueba con ?temporada=navidad en la dirección", ir: "#inicio", recargar: true },
+  { n: 53, grupo: "Portada", nombre: "Un satélite cruza el cielo", como: "Espera en la portada (cada 35 a 70 s)", ir: "#inicio" },
+  { n: 54, grupo: "Cabecera", nombre: "El cohete del logo saluda al volver", como: "Ve a otra pestaña 10 s y vuelve", ir: "#inicio" }
 ];
 
 function leer(): number[] {

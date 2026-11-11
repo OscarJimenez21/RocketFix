@@ -236,10 +236,81 @@
 
   /* 42 · Estrella fugaz (la crea y la mueve Despegue.tsx): cola que se desvanece y cabeza con un brillo. El giro se hace
      desde la cabeza, que es el extremo derecho */
+  /* En temporada (animación 52) cada estrella trae su color en --fugaz; si no, son blancas */
   .fugaz { position: absolute; height: 2px; border-radius: 9999px; opacity: 0; transform-origin: 100% 50%;
-    background: linear-gradient(to right, rgb(255 255 255 / 0), rgb(255 255 255 / 0.85)); }
+    background: linear-gradient(to right, transparent, var(--fugaz, rgb(255 255 255 / 0.85))); }
   .fugaz::after { content: ""; position: absolute; right: -1px; top: 50%; width: 4px; height: 4px; margin-top: -2px; border-radius: 9999px;
-    background: #fff; box-shadow: 0 0 8px 2px rgb(255 255 255 / 0.7), 0 0 14px 4px rgb(91 224 169 / 0.35); }
+    background: var(--fugaz, #fff); box-shadow: 0 0 8px 2px var(--fugaz, rgb(255 255 255 / 0.7)), 0 0 14px 4px rgb(91 224 169 / 0.35); }
+
+  /* 43 · El cielo cambia con la hora de Colombia: de día un poco más claro y con menos estrellas, al amanecer y al
+     atardecer un resplandor cálido abajo, de noche más oscuro y con todas las estrellas. Cambia suave (cada 5 min se revisa) */
+  .tono-cielo { opacity: 0; transition: opacity 2s ease, background 2s ease; }
+  [data-cielo] .tono-cielo { opacity: 1; }
+  [data-cielo="dia"] .tono-cielo { background: linear-gradient(to bottom, rgb(91 224 169 / 0.09), transparent 60%); }
+  [data-cielo="amanecer"] .tono-cielo { background: radial-gradient(90% 55% at 50% 100%, rgb(255 193 94 / 0.13), transparent 70%); }
+  [data-cielo="atardecer"] .tono-cielo { background: radial-gradient(90% 55% at 50% 100%, rgb(255 122 61 / 0.16), transparent 70%); }
+  [data-cielo="noche"] .tono-cielo, [data-cielo="madrugada"] .tono-cielo { background: rgb(2 20 14 / 0.3); }
+  .cielo-lejos, .cielo-cerca { transition: opacity 2s ease; }
+  [data-cielo="dia"] .cielo-lejos { opacity: 0.55; }
+  [data-cielo="dia"] .cielo-cerca { opacity: 0.7; }
+  [data-cielo="amanecer"] .cielo-lejos, [data-cielo="atardecer"] .cielo-lejos { opacity: 0.8; }
+
+  /* 53 · Satélite: un punto que cruza despacio la parte alta de la portada con una luz roja y verde que parpadea */
+  .satelite { position: absolute; left: 0; width: 3px; height: 3px; border-radius: 9999px; background: rgb(255 255 255 / 0.9); opacity: 0;
+    box-shadow: 0 0 4px 1px rgb(255 255 255 / 0.45); }
+  .satelite::after { content: ""; position: absolute; left: 4px; top: -1px; width: 2px; height: 2px; border-radius: 9999px; background: #FF5A4E; }
+  @media (prefers-reduced-motion: no-preference) {
+    .satelite::after { animation: satelite-luz 1.4s steps(1, end) infinite; }
+  }
+  @keyframes satelite-luz { 0% { background: #FF5A4E; opacity: 1; } 35% { opacity: 0; } 50% { background: #5BE0A9; opacity: 1; } 85% { opacity: 0; } }
+
+  /* 48 · Luz suave que sigue al mouse por la portada (solo con mouse; en celular no existe) */
+  .luz-portada { opacity: 0; transition: opacity 400ms ease;
+    background: radial-gradient(420px circle at var(--lx, 50%) var(--ly, 50%), rgb(91 224 169 / 0.1), transparent 70%); }
+  @media (hover: hover) and (pointer: fine) {
+    :root:not(.sin-a48) .luz-portada[data-on] { opacity: 1; }
+  }
+
+  /* 51 · Sorpresa: chispas que salen del cohete del eslogan al tocarlo 5 veces seguidas (las crea Portada.tsx) */
+  .chispa { position: fixed; z-index: 90; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 9999px; pointer-events: none;
+    background: #FFD27A; box-shadow: 0 0 6px 2px rgb(255 210 122 / 0.7); }
+  .chispa:nth-child(3n) { background: #fff; box-shadow: 0 0 6px 2px rgb(255 255 255 / 0.7); }
+  .chispa:nth-child(3n+1) { background: #FF8A4C; box-shadow: 0 0 6px 2px rgb(255 107 44 / 0.6); }
+
+  /* 47 · La vitrina de la portada flota muy despacio (sube y baja 4 px). Se queda quieta con el mouse encima o fuera de pantalla */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a47) .vitrina-flota { animation: flotar-vitrina 7s ease-in-out infinite; }
+    :root:not(.sin-a47) .vitrina-flota[data-quieta] { animation-play-state: paused; }
+  }
+  @keyframes flotar-vitrina { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+  /* 46 · Reflejo de vidrio: con el mouse encima de una tarjeta, una franja de luz cruza la foto una vez */
+  .reflejo { position: absolute; inset: 0; overflow: hidden; pointer-events: none; border-radius: inherit; }
+  .reflejo::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 45%; transform: translateX(-160%) skewX(-18deg);
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent); }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a46) .group:hover .reflejo::before { transform: translateX(330%) skewX(-18deg); transition: transform 800ms cubic-bezier(0.45, 0, 0.55, 1); }
+  }
+
+  /* 49 · Color de la versión: el borde de la foto del producto toma un brillo suave del color elegido */
+  .tinte-version { position: absolute; inset: 0; pointer-events: none; border-radius: inherit; box-shadow: inset 0 0 0 0 transparent;
+    transition: box-shadow 500ms ease; }
+  .tinte-version[data-on] { box-shadow: inset 0 0 70px -10px var(--tinte); }
+
+  /* 52 · Gorrito de Navidad sobre la punta del cohete del logo */
+  .gorrito { position: absolute; left: 22%; top: -24%; width: 62%; height: auto; transform: rotate(-12deg); pointer-events: none; }
+
+  /* 54 · Al volver a la pestaña después de un rato, el cohete del logo da un saltito de saludo */
+  @media (prefers-reduced-motion: no-preference) {
+    :root:not(.sin-a54).logo-saluda .cabecera .cohete-caja { animation: saludo-logo 1s cubic-bezier(0.23, 1, 0.32, 1); }
+  }
+  @keyframes saludo-logo { 0% { transform: none; } 30% { transform: translateY(-6px) rotate(-12deg); } 60% { transform: translateY(-2px) rotate(10deg); } 100% { transform: none; } }
+
+  /* 50 · Botón flotante para volver arriba: el cohete despega al tocarlo */
+  @media (prefers-reduced-motion: no-preference) {
+    .subir-despega svg { animation: subir-despega 650ms cubic-bezier(0.55, 0, 1, 0.45) forwards; }
+  }
+  @keyframes subir-despega { 0% { transform: none; opacity: 1; } 25% { transform: translateY(3px); } 100% { transform: translateY(-46px); opacity: 0; } }
 
   /* 4 · Vitrina: el producto nuevo entra por el lado hacia donde se avanza y el anterior sale por el otro */
   @media (prefers-reduced-motion: no-preference) {
@@ -266,9 +337,9 @@
   @keyframes barrido { from { transform: translateX(-120%) skewX(-20deg); } to { transform: translateX(120%) skewX(-20deg); } }
 
   /* 6 · Logo de la cabecera: con el mouse encima, el cohete se eleva un poco */
-  .logo-cohete { transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }
+  .cohete-caja { transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }
   @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    :root:not(.sin-a6) a:hover > .logo .logo-cohete { transform: translate(2px, -3px) rotate(10deg); }
+    :root:not(.sin-a6) a:hover > .logo .cohete-caja { transform: translate(2px, -3px) rotate(10deg); }
   }
 
   /* 7 · Cabecera: al bajar por la página aparece una sombra suave debajo (sigue al desplazamiento) */

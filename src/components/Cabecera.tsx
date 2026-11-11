@@ -5,6 +5,7 @@ import { CONFIG, deTienda } from "../data/catalogo";
 import { GRUPOS, TIENDAS, tiendaPorId } from "../data/tiendas";
 import { useTienda } from "../estado/TiendaContext";
 import { usePanelModal } from "../lib/panel";
+import { usePestanaViva } from "../lib/pestana";
 import { claveRuta } from "../lib/rutas";
 import { ATERRIZAJE, hayVuelo } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
@@ -111,6 +112,8 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
 export function Cabecera({ ruta }: { ruta: Ruta }) {
   const { unidades, abrirCarrito } = useTienda();
   const [menu, setMenu] = useState(false);
+  // Título e ícono de la pestaña con el carrito, y el saludo del logo al volver (animaciones 44, 45 y 54)
+  usePestanaViva(unidades);
   // Cada vez que se agrega algo al carrito, el contador da un pequeño salto (no al cargar la página ni al quitar).
   // Si la foto del producto va volando hacia el carrito, el salto espera a que aterrice
   const antes = useRef(unidades);

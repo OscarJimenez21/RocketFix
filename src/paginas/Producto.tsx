@@ -10,6 +10,7 @@ import { armarDescripcion, useDescripcion } from "../lib/descripcion";
 import { useVisto } from "../lib/enPantalla";
 import { dinero, recurso } from "../lib/formato";
 import { useDireccion, useMarco } from "../lib/movimiento";
+import { tinteDe } from "../lib/tinte";
 import { volarAlCarrito } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
 import type { Producto as TipoProducto } from "../types";
@@ -144,7 +145,7 @@ export default function Producto({ id }: { id: string }) {
         <Migas migas={[{ texto: "Inicio", href: "#inicio" }, { texto: VISTAS[vista] ?? "", href: `#${vista}` }, ...(cat ? [{ texto: cat }] : [])]} />
       </div>
       <div className="contenedor grid gap-8 pb-10 pt-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-12">
-        <Galeria producto={p} />
+        <Galeria producto={p} tinte={p.opciones.length > 1 && activa(49) ? tinteDe(o.nombre) : null} />
 
         {/* cascada-info: al abrir el producto, cada bloque de esta columna entra 50 ms después del anterior (animación 18) */}
         <div className="cascada-info min-w-0">

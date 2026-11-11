@@ -5,7 +5,9 @@
    Todo va detrás del contenido, no se puede tocar y los lectores de pantalla no lo leen. */
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { activa } from "../lib/animaciones";
+import { RITMO_FUGACES, useFaseCielo } from "../lib/cielo";
 import { useEnPantalla } from "../lib/enPantalla";
+import { TEMPORADA } from "../lib/temporada";
 import { Cohete } from "./Logo";
 
 let yaDespego = false;
@@ -49,8 +51,11 @@ function Capa({ clase, children }: { clase: string; children: React.ReactNode })
 /** Animación 42: estrellas fugaces en tandas al azar (de 1 a 5 a la vez, cada 1,5 a 6 s), por cualquier parte de la
     portada y con distinto largo, grosor, ángulo, dirección y velocidad. Solo mientras la portada se ve, nunca con «reducir movimiento» y nunca con la
     pestaña en segundo plano. Cada una se crea al lanzarla y se borra al terminar. */
-function Fugaces({ visible }: { visible: boolean }) {
+function Fugaces({ visible, ritmo }: { visible: boolean; ritmo: number }) {
   const caja = useRef<HTMLDivElement>(null);
+  // El ritmo cambia con la hora (animación 43) sin reiniciar las tandas
+  const ritmoRef = useRef(ritmo);
+  ritmoRef.current = ritmo;
   useEffect(() => {
     if (!visible || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const relojes = new Set<number>();
@@ -66,6 +71,9 @@ function Fugaces({ visible }: { visible: boolean }) {
       const s = document.createElement("span");
       s.className = "fugaz";
       s.style.cssText = `left:${x - largo}px;top:${y}px;width:${largo}px;height:${chica ? 1.5 : 2}px`;
+      // Animación 52: en temporada, las fugaces toman los colores de la fecha (doradas en Navidad, etc.)
+      const colores = TEMPORADA && activa(52) ? TEMPORADA.fugaces : null;
+      if (colores?.length) s.style.setProperty("--fugaz", colores[Math.floor(Math.random() * colores.length)] ?? "#fff");
       el.appendChild(s);
       const giro = `rotate(${ang}deg)`;
       const a = s.animate(
@@ -126,11 +134,47 @@ function Fugaces({ visible }: { visible: boolean }) {
     const ciclo = () => {
       const n = cuantas();
       for (let i = 0; i < n; i++) esperar(lanzar, i === 0 ? 0 : azar(80, 1100));
-      esperar(ciclo, azar(1500, 6000) + (n >= 4 ? 1500 : 0));
+      esperar(ciclo, (azar(1500, 6000) + (n >= 4 ? 1500 : 0)) * ritmoRef.current);
     };
     // La primera espera a que termine el despegue del cohete
     esperar(ciclo, 3400);
     return () => { relojes.forEach(id => window.clearTimeout(id)); vivas.forEach(a => a.cancel()); };
+  }, [visible]);
+  return <div ref={caja} className="absolute inset-0" />;
+}
+
+/** Animación 53: cada 35 a 70 s un satélite (un puntico con luces que parpadean en rojo y verde) cruza despacio la parte
+    de arriba de la portada en línea recta, de un borde al otro, en unos 22 a 30 s */
+function Satelite({ visible }: { visible: boolean }) {
+  const caja = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!visible || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let reloj = 0;
+    let vuelo: Animation | null = null;
+    const pasar = () => {
+      const el = caja.current;
+      if (el && activa(53) && !document.hidden && el.clientWidth > 0) {
+        const w = el.clientWidth, h = el.clientHeight;
+        const izq = Math.random() < 0.5;
+        const y0 = h * (0.04 + Math.random() * 0.14), y1 = y0 + h * (Math.random() * 0.16 - 0.04);
+        const s = document.createElement("span");
+        s.className = "satelite";
+        el.appendChild(s);
+        vuelo = s.animate(
+          [
+            { transform: `translate(${izq ? w + 20 : -20}px, ${y0}px)`, opacity: 0 },
+            { opacity: 1, offset: 0.06 },
+            { opacity: 1, offset: 0.94 },
+            { transform: `translate(${izq ? -20 : w + 20}px, ${y1}px)`, opacity: 0 }
+          ],
+          { duration: 22000 + Math.random() * 8000, easing: "linear" }
+        );
+        vuelo.onfinish = vuelo.oncancel = () => s.remove();
+      }
+      reloj = window.setTimeout(pasar, 35000 + Math.random() * 35000);
+    };
+    reloj = window.setTimeout(pasar, 9000 + Math.random() * 8000);
+    return () => { window.clearTimeout(reloj); vuelo?.cancel(); };
   }, [visible]);
   return <div ref={caja} className="absolute inset-0" />;
 }
@@ -177,9 +221,14 @@ export function Despegue() {
 
   // Las estrellas se detienen mientras la portada no se ve (data-fuera)
   const visible = useEnPantalla(caja);
+  // Animación 43: el cielo según la hora de Bogotá (tono del fondo, cuántas estrellas se ven y el ritmo de las fugaces)
+  const fase = useFaseCielo();
+  const conHora = activa(43);
   const c = t && t.w > 0 ? curva(t) : null;
   return (
-    <div ref={caja} aria-hidden="true" data-fuera={!visible || undefined} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+    <div ref={caja} aria-hidden="true" data-fuera={!visible || undefined} data-cielo={conHora ? fase : undefined} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      {/* Tono del cielo según la hora (ver [data-cielo] en index.css) */}
+      <span className="tono-cielo absolute inset-0" />
       {/* Luz suave detrás de la vitrina (abajo en celular, a la derecha en computador) */}
       <span className="absolute inset-0 bg-[radial-gradient(70%_38%_at_50%_80%,rgba(91,224,169,0.14),transparent_72%)] lg:bg-[radial-gradient(40%_62%_at_80%_50%,rgba(91,224,169,0.16),transparent_72%)]" />
       {/* Animación 41: el cielo baja despacio, como si la portada fuera subiendo con el cohete. Las estrellas tenues van
@@ -192,7 +241,8 @@ export function Despegue() {
       <Capa clase="cielo-cerca">
         {TITILAN.map(([x, y, s]) => <span key={`${x}-${y}`} className="estrella-titila" style={{ left: `${x}%`, top: `${y}%`, "--t": `${s}s` } as React.CSSProperties} />)}
       </Capa>
-      <Fugaces visible={visible} />
+      <Satelite visible={visible} />
+      <Fugaces visible={visible} ritmo={conHora ? RITMO_FUGACES[fase] : 1} />
       {t && c && (
         <svg width={t.w} height={t.h} viewBox={`0 0 ${t.w} ${t.h}`} className="absolute inset-0">
           <defs>

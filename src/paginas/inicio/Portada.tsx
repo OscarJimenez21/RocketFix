@@ -17,10 +17,70 @@ let portadaVista = false;
 /** Eslogan de la marca (manual de marca, aprobado el 04/11/2026). Cada palabra va aparte para que entren una tras otra */
 const ESLOGAN = ["Hacemos", "despegar", "tu", "tecnología"];
 
+/** Animación 48: con mouse, un resplandor menta muy tenue sigue al puntero por el fondo verde (detrás del texto).
+    Se escribe directo en el estilo (sin volver a dibujar la portada) y una sola vez por cuadro */
+function useLuzMouse() {
+  const luz = useRef<HTMLSpanElement>(null);
+  const cuadro = useRef(0);
+  const mover = (e: React.MouseEvent<HTMLElement>) => {
+    const el = luz.current;
+    if (!el || cuadro.current || !activa(48)) return;
+    const { clientX, clientY, currentTarget } = e;
+    cuadro.current = requestAnimationFrame(() => {
+      cuadro.current = 0;
+      const r = currentTarget.getBoundingClientRect();
+      el.style.setProperty("--lx", `${clientX - r.left}px`);
+      el.style.setProperty("--ly", `${clientY - r.top}px`);
+      el.dataset.on = "";
+    });
+  };
+  const salir = () => { if (luz.current) delete luz.current.dataset.on; };
+  useEffect(() => () => cancelAnimationFrame(cuadro.current), []);
+  return { luz, mover, salir };
+}
+
+/** Animación 51 (sorpresa): si alguien toca 5 veces seguidas el cohete del eslogan, el cohete da una vuelta completa y
+    suelta una lluvia de estrellitas. No hace nada más: es un detalle escondido para quien lo encuentre */
+function useSorpresa() {
+  const cohete = useRef<HTMLSpanElement>(null);
+  useEffect(() => {
+    const el = cohete.current;
+    if (!el) return;
+    let toques: number[] = [];
+    const tocar = () => {
+      const ahora = Date.now();
+      toques = [...toques.filter(t => ahora - t < 2000), ahora];
+      if (toques.length < 5 || !activa(51) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      toques = [];
+      el.animate([{ transform: "rotate(0deg) scale(1)" }, { transform: "rotate(200deg) scale(1.35)", offset: 0.5 }, { transform: "rotate(360deg) scale(1)" }],
+        { duration: 900, easing: "cubic-bezier(0.65, 0, 0.35, 1)" });
+      const r = el.getBoundingClientRect();
+      for (let k = 0; k < 14; k++) {
+        const s = document.createElement("span");
+        s.className = "chispa";
+        s.style.cssText = `left:${r.left + r.width / 2}px;top:${r.top + r.height / 2}px`;
+        document.body.appendChild(s);
+        const ang = (k / 14) * Math.PI * 2 + Math.random() * 0.4, d = 50 + Math.random() * 70;
+        const a = s.animate(
+          [{ transform: "translate(-50%, -50%) scale(1)", opacity: 1 },
+            { transform: `translate(calc(-50% + ${Math.cos(ang) * d}px), calc(-50% + ${Math.sin(ang) * d + 30}px)) scale(0.3)`, opacity: 0 }],
+          { duration: 900 + Math.random() * 400, easing: "cubic-bezier(0.2, 0.7, 0.4, 1)" }
+        );
+        a.onfinish = () => s.remove();
+      }
+    };
+    el.addEventListener("pointerdown", tocar);
+    return () => el.removeEventListener("pointerdown", tocar);
+  }, []);
+  return cohete;
+}
+
 /** Portada: el eslogan grande, una línea que dice qué es la tienda, los dos botones y el estado de atención; a la derecha
     (abajo en celular), la vitrina. El cohete del logo cierra el eslogan en lugar del punto */
 export function Portada() {
   const atencion = useAtencion();
+  const { luz, mover, salir } = useLuzMouse();
+  const sorpresa = useSorpresa();
   const [entra] = useState(() => !portadaVista);
   // Animación 1: el eslogan entra palabra por palabra (si está apagada, el título sube entero, como antes)
   const [porPalabras] = useState(() => !portadaVista && activa(1));
@@ -28,8 +88,10 @@ export function Portada() {
   // Cada pieza del texto entra 60 ms después de la anterior; el título solo sube (ver .entrada en index.css)
   const en = (orden: number) => (entra ? { extra: " entrada", style: { "--orden": orden } as React.CSSProperties } : { extra: "", style: undefined });
   return (
-    <section className="relative isolate overflow-hidden bg-marca-oscuro text-white">
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions -- solo mueve una luz decorativa; no es un control
+    <section onMouseMove={mover} onMouseLeave={salir} className="relative isolate overflow-hidden bg-marca-oscuro text-white">
       <Despegue />
+      <span ref={luz} aria-hidden="true" className="luz-portada pointer-events-none absolute inset-0 -z-10" />
       <div className="contenedor grid items-center gap-8 py-10 sm:py-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:py-16 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
         <div>
           <h1 tabIndex={-1} style={porPalabras ? undefined : en(0).style}
@@ -41,7 +103,7 @@ export function Portada() {
                   {k > 0 && " "}
                   {/* La última palabra y el cohete no se separan de renglón */}
                   <span className={`palabra${ultima ? " whitespace-nowrap" : ""}`} style={{ "--p": k } as React.CSSProperties}>
-                    {w}{ultima && <span aria-hidden="true" className={`cohete-eslogan${entra ? " cohete-llega" : ""}`}><Cohete /></span>}
+                    {w}{ultima && <span ref={sorpresa} aria-hidden="true" className={`cohete-eslogan${entra ? " cohete-llega" : ""}`}><Cohete /></span>}
                   </span>
                 </Fragment>
               );

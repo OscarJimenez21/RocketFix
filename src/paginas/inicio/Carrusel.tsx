@@ -19,6 +19,8 @@ function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: st
       <div className="relative aspect-square p-7 sm:p-8">
         {/* Ancho de la tarjeta: 74 % de la pantalla en celular, 44 % en tableta y unos 290 px en computador */}
         <FotoProducto producto={p} alt={p.nombre} tamanos="(min-width: 1024px) 290px, (min-width: 640px) 44vw, 74vw" className="motion-safe:group-hover:scale-[1.05]" />
+        {/* Animación 46: reflejo de vidrio que cruza la foto una vez al pasar el mouse */}
+        <span aria-hidden="true" className="reflejo" />
         {/* brillo: la cinta tiene un destello que la cruza una vez cuando la fila aparece (ver .brillo en index.css) */}
         {cinta && <span className="brillo absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-[13px] font-bold text-acento-texto">{cinta}</span>}
       </div>

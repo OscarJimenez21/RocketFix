@@ -6,6 +6,7 @@ import { Cabecera } from "./components/Cabecera";
 import { Carrito } from "./components/Carrito";
 import { Limite } from "./components/Limite";
 import { PiePagina } from "./components/PiePagina";
+import { SubirFlotante } from "./components/SubirFlotante";
 import { activa } from "./lib/animaciones";
 import { clavePago, leerRegresoBold } from "./lib/bold";
 import { claveRuta, tomarPosicion, useRuta } from "./lib/rutas";
@@ -136,6 +137,7 @@ function Marco() {
         </main>
         <PiePagina />
       </div>
+      <SubirFlotante />
       <Carrito />
       <Aviso />
       {PanelAnimaciones && <Suspense fallback={null}><PanelAnimaciones /></Suspense>}

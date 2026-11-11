@@ -75,6 +75,8 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta }: { pro
       <a ref={foto} href={hrefProducto(p.id)} tabIndex={-1} aria-hidden="true" className="relative block aspect-square bg-white p-4">
         {/* Ancho de la tarjeta: 2 por fila en celular, 3 en tableta y 4 (unos 290 px) en computador */}
         <FotoProducto producto={p} alt="" prioridad={prioridad} tamanos="(min-width: 1024px) 290px, (min-width: 768px) 32vw, 48vw" className="motion-safe:group-hover:scale-[1.05]" />
+        {/* Animación 46: reflejo de vidrio que cruza la foto una vez al pasar el mouse */}
+        <span aria-hidden="true" className="reflejo" />
         <Insignia producto={p} />
         {cinta && <span className="absolute right-2 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-[12.5px] font-semibold text-acento-texto">{cinta}</span>}
       </a>

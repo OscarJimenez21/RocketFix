@@ -9,7 +9,12 @@ import { FotoProducto, Imagen } from "./FotoProducto";
 import { IconoFlecha } from "./Iconos";
 import { Insignia } from "./TarjetaProducto";
 
-export function Galeria({ producto }: { producto: Producto }) {
+/** Animación 49: brillo suave del color de la versión elegida en el borde de la foto (encima de la foto, sin tocarla) */
+function Tinte({ color }: { color: string | null }) {
+  return <span aria-hidden="true" className="tinte-version" style={color ? ({ "--tinte": color } as React.CSSProperties) : undefined} data-on={color ? "" : undefined} />;
+}
+
+export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?: string | null }) {
   const [fotos, setFotos] = useState(() => galeriaDe(producto));
   const [actual, setActual] = useState(0);
   const pista = useRef<HTMLDivElement>(null);
@@ -39,6 +44,7 @@ export function Galeria({ producto }: { producto: Producto }) {
     return (
       <div data-foto-principal onMouseMove={seguir} className="zoom-foto relative aspect-square overflow-hidden rounded-md border border-linea bg-white p-6">
         <FotoProducto producto={producto} prioridad />
+        <Tinte color={tinte} />
         <Insignia producto={producto} />
       </div>
     );
@@ -61,6 +67,7 @@ export function Galeria({ producto }: { producto: Producto }) {
             </div>
           ))}
         </div>
+        <Tinte color={tinte} />
         <Insignia producto={producto} />
         <button type="button" onClick={() => ir(actual - 1)} disabled={actual <= 0} aria-label="Foto anterior"
           className="presionable group absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-linea bg-white/95 hover:border-linea-fuerte disabled:opacity-0">
