@@ -12,11 +12,11 @@
   "opciones": [
    {
     "nombre": "512 GB",
-    "precio": 4900000
+    "precio": 4850000
    },
    {
     "nombre": "1 TB",
-    "precio": 5550000
+    "precio": 5650000
    }
   ]
  },
@@ -56,15 +56,15 @@
   "opciones": [
    {
     "nombre": "256 GB · negro",
-    "precio": 9350000
+    "precio": 9250000
    },
    {
     "nombre": "512 GB · negro",
-    "precio": 10350000
+    "precio": 10150000
    },
    {
     "nombre": "512 GB · blanco",
-    "precio": 10350000
+    "precio": 9950000
    }
   ]
  },
@@ -73,28 +73,34 @@
   "tienda": "cel",
   "marca": "Apple",
   "nombre": "iPhone 18 Pro Max",
-  "specs": [
-   "eSIM"
-  ],
+  "specs": [],
   "destacado": true,
   "imagen": "fotos/ip18pm.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 5400000
+    "precio": 5300000
    },
    {
     "nombre": "256 GB · morado",
-    "precio": 5700000
+    "precio": 5500000
    },
    {
     "nombre": "512 GB",
-    "precio": 6550000
+    "precio": 6450000
    },
    {
     "nombre": "1 TB",
     "precio": 8100000
+   },
+   {
+    "nombre": "256 GB · SIM física · azul",
+    "precio": 5750000
+   },
+   {
+    "nombre": "256 GB · SIM física · vino tinto",
+    "precio": 6300000
    }
   ]
  },
@@ -111,15 +117,19 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 4800000
+    "precio": 4650000
    },
    {
     "nombre": "256 GB · morado",
-    "precio": 4900000
+    "precio": 4650000
    },
    {
     "nombre": "512 GB",
     "precio": 5800000
+   },
+   {
+    "nombre": "1 TB · vino tinto",
+    "precio": 7300000
    }
   ]
  },
@@ -143,6 +153,10 @@
    {
     "nombre": "512 GB · eSIM",
     "precio": 5300000
+   },
+   {
+    "nombre": "1 TB · eSIM",
+    "precio": 6300000
    }
   ]
  },
@@ -157,7 +171,7 @@
   "opciones": [
    {
     "nombre": "256 GB · eSIM",
-    "precio": 4300000
+    "precio": 4450000
    },
    {
     "nombre": "256 GB · SIM física",
@@ -165,7 +179,7 @@
    },
    {
     "nombre": "512 GB · eSIM",
-    "precio": 5250000
+    "precio": 5100000
    }
   ]
  },
@@ -218,15 +232,33 @@
   "opciones": [
    {
     "nombre": "64 GB",
-    "precio": 420000
+    "precio": 430000
    },
    {
     "nombre": "128 GB · 6 GB RAM",
-    "precio": 480000
+    "precio": 490000
    },
    {
     "nombre": "128 GB · 4 GB RAM",
     "precio": 460000
+   }
+  ]
+ },
+ {
+  "id": "sa07s",
+  "tienda": "cel",
+  "marca": "Samsung",
+  "nombre": "Samsung Galaxy A07s",
+  "imagen": "fotos/sa07s.jpg",
+  "specs": [
+   "64 GB",
+   "4 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 490000
    }
   ]
  },
@@ -241,7 +273,7 @@
   "opciones": [
    {
     "nombre": "128 GB · Duos",
-    "precio": 540000
+    "precio": 560000
    },
    {
     "nombre": "256 GB · 4G · Duos",
@@ -249,7 +281,7 @@
    },
    {
     "nombre": "256 GB · 5G · 1 SIM",
-    "precio": 850000
+    "precio": 870000
    }
   ]
  },
@@ -268,7 +300,7 @@
    },
    {
     "nombre": "256 GB",
-    "precio": 1150000
+    "precio": 1200000
    }
   ]
  },
@@ -321,7 +353,7 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 3050000
+    "precio": 3100000
    },
    {
     "nombre": "512 GB",
@@ -375,6 +407,24 @@
   ]
  },
  {
+  "id": "ss26",
+  "tienda": "cel",
+  "marca": "Samsung",
+  "nombre": "Samsung Galaxy S26",
+  "imagen": "fotos/ss26.jpg",
+  "specs": [
+   "256 GB",
+   "12 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2750000
+   }
+  ]
+ },
+ {
   "id": "szflip8",
   "tienda": "cel",
   "marca": "Samsung",
@@ -388,27 +438,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4100000
-   }
-  ]
- },
- {
-  "id": "sa56",
-  "tienda": "cel",
-  "marca": "Samsung",
-  "nombre": "Samsung Galaxy A56 5G",
-  "specs": [
-   "256 GB",
-   "12 GB RAM",
-   "5G",
-   "Rosado, verde o negro"
-  ],
-  "imagen": "fotos/sa56.jpg",
-  "estado": "Nuevo",
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1550000
+    "precio": 4250000
    }
   ]
  },
@@ -443,10 +473,6 @@
    {
     "nombre": "128 GB",
     "precio": 480000
-   },
-   {
-    "nombre": "256 GB",
-    "precio": 520000
    }
   ]
  },
@@ -486,7 +512,7 @@
    },
    {
     "nombre": "256 GB · 8 + 8 GB RAM",
-    "precio": 650000
+    "precio": 660000
    }
   ]
  },
@@ -503,7 +529,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 700000
+    "precio": 710000
    }
   ]
  },
@@ -518,7 +544,7 @@
   "opciones": [
    {
     "nombre": "128 GB",
-    "precio": 560000
+    "precio": 570000
    },
    {
     "nombre": "256 GB · 4 + 4 GB RAM",
@@ -544,12 +570,29 @@
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "256 GB · 4G",
-    "precio": 860000
+    "nombre": "512 GB",
+    "precio": 930000
+   }
+  ]
+ },
+ {
+  "id": "xrn15pro",
+  "tienda": "cel",
+  "marca": "Xiaomi",
+  "nombre": "Redmi Note 15 Pro",
+  "specs": [
+   "5G"
+  ],
+  "imagen": "fotos/xrn15pro.jpg",
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "256 GB",
+    "precio": 1150000
    },
    {
     "nombre": "512 GB",
-    "precio": 930000
+    "precio": 1300000
    }
   ]
  },
@@ -585,6 +628,10 @@
    {
     "nombre": "256 GB · 4 + 4 GB RAM",
     "precio": 810000
+   },
+   {
+    "nombre": "256 GB · 6 + 6 GB RAM · 5G",
+    "precio": 950000
    }
   ]
  },
@@ -622,7 +669,7 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 1200000
+    "precio": 1150000
    },
    {
     "nombre": "512 GB",
@@ -631,25 +678,6 @@
    {
     "nombre": "128 GB · 6 GB RAM",
     "precio": 1050000
-   }
-  ]
- },
- {
-  "id": "xrn17pm",
-  "tienda": "cel",
-  "marca": "Xiaomi",
-  "nombre": "Redmi Note 17 Pro Max",
-  "imagen": "fotos/xrn17pm.jpg",
-  "estado": "Nuevo",
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "256 GB",
-    "precio": 1600000
-   },
-   {
-    "nombre": "512 GB",
-    "precio": 1750000
    }
   ]
  },
@@ -666,7 +694,43 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3050000
+    "precio": 2800000
+   }
+  ]
+ },
+ {
+  "id": "x17t",
+  "tienda": "cel",
+  "marca": "Xiaomi",
+  "nombre": "Xiaomi 17T",
+  "imagen": "fotos/x17t.jpg",
+  "specs": [
+   "512 GB"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2200000
+   }
+  ]
+ },
+ {
+  "id": "x17u",
+  "tienda": "cel",
+  "marca": "Xiaomi",
+  "nombre": "Xiaomi 17 Ultra",
+  "imagen": "fotos/x17u.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "512 GB",
+    "precio": 4700000
+   },
+   {
+    "nombre": "1 TB",
+    "precio": 5150000
    }
   ]
  },
@@ -692,16 +756,35 @@
   "tienda": "cel",
   "marca": "Xiaomi",
   "nombre": "POCO X8 Pro",
-  "specs": [
-   "512 GB",
-   "12 GB RAM"
-  ],
+  "specs": [],
   "imagen": "fotos/pocox8pro.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
+    "nombre": "256 GB · 8 GB RAM",
+    "precio": 1600000
+   },
+   {
+    "nombre": "512 GB · 12 GB RAM",
     "precio": 1700000
+   }
+  ]
+ },
+ {
+  "id": "pocof8pro",
+  "tienda": "cel",
+  "marca": "Xiaomi",
+  "nombre": "POCO F8 Pro",
+  "specs": [
+   "256 GB",
+   "12 GB RAM"
+  ],
+  "imagen": "fotos/pocof8pro.jpg",
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2050000
    }
   ]
  },
@@ -793,7 +876,7 @@
    },
    {
     "nombre": "256 GB",
-    "precio": 1100000
+    "precio": 1150000
    }
   ]
  },
@@ -808,7 +891,7 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 910000
+    "precio": 890000
    },
    {
     "nombre": "512 GB",
@@ -844,7 +927,7 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 510000
+    "precio": 520000
    },
    {
     "nombre": "128 GB",
@@ -885,7 +968,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 690000
+    "precio": 680000
    }
   ]
  },
@@ -1081,7 +1164,25 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1100000
+    "precio": 1200000
+   }
+  ]
+ },
+ {
+  "id": "tpova8p",
+  "tienda": "cel",
+  "marca": "Tecno",
+  "nombre": "Tecno Pova 8 Pro Tonino Lamborghini",
+  "specs": [
+   "256 GB",
+   "16 GB RAM",
+   "5G"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1600000
    }
   ]
  },
@@ -1117,11 +1218,11 @@
   "opciones": [
    {
     "nombre": "64 GB",
-    "precio": 430000
+    "precio": 450000
    },
    {
     "nombre": "128 GB",
-    "precio": 480000
+    "precio": 510000
    }
   ]
  },
@@ -1306,7 +1407,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1300000
+    "precio": 1250000
    }
   ]
  },
@@ -1365,6 +1466,25 @@
    {
     "nombre": "Edición Pininfarina",
     "precio": 1500000
+   }
+  ]
+ },
+ {
+  "id": "inote60",
+  "tienda": "cel",
+  "marca": "Infinix",
+  "nombre": "Infinix Note 60",
+  "imagen": "fotos/inote60.jpg",
+  "specs": [
+   "256 GB",
+   "16 GB RAM",
+   "5G"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1350000
    }
   ]
  },
@@ -1540,7 +1660,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 730000
+    "precio": 720000
    }
   ]
  },
@@ -1701,7 +1821,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 680000
+    "precio": 750000
    }
   ]
  },
@@ -1937,11 +2057,64 @@
   "opciones": [
    {
     "nombre": "256 GB · eSIM",
-    "precio": 3550000
+    "precio": 3600000
    },
    {
     "nombre": "256 GB · SIM física",
-    "precio": 3600000
+    "precio": 3550000
+   }
+  ]
+ },
+ {
+  "id": "ip16",
+  "tienda": "cel",
+  "marca": "Apple",
+  "nombre": "iPhone 16",
+  "specs": [
+   "128 GB"
+  ],
+  "imagen": "fotos/ip16.jpg",
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2900000
+   }
+  ]
+ },
+ {
+  "id": "ip16cpo",
+  "tienda": "cel",
+  "marca": "Apple",
+  "nombre": "iPhone 16 CPO",
+  "specs": [],
+  "imagen": "fotos/ip16.jpg",
+  "estado": "CPO",
+  "opciones": [
+   {
+    "nombre": "128 GB",
+    "precio": 2750000
+   },
+   {
+    "nombre": "256 GB",
+    "precio": 3150000
+   }
+  ]
+ },
+ {
+  "id": "ip16ecpo",
+  "tienda": "cel",
+  "marca": "Apple",
+  "nombre": "iPhone 16e CPO",
+  "imagen": "fotos/ip16ecpo.jpg",
+  "specs": [
+   "128 GB"
+  ],
+  "estado": "CPO",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2050000
    }
   ]
  },
@@ -1980,7 +2153,25 @@
    },
    {
     "nombre": "512 GB",
-    "precio": 5950000
+    "precio": 6150000
+   }
+  ]
+ },
+ {
+  "id": "szfold8u",
+  "tienda": "cel",
+  "marca": "Samsung",
+  "nombre": "Samsung Galaxy Z Fold 8 Ultra",
+  "imagen": "fotos/szfold8u.jpg",
+  "specs": [
+   "512 GB",
+   "12 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 7300000
    }
   ]
  },
@@ -2002,23 +2193,6 @@
   ]
  },
  {
-  "id": "xra5",
-  "tienda": "cel",
-  "marca": "Xiaomi",
-  "nombre": "Redmi A5",
-  "imagen": "fotos/xra5.jpg",
-  "specs": [
-   "128 GB"
-  ],
-  "estado": "Nuevo",
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 410000
-   }
-  ]
- },
- {
   "id": "xra7",
   "tienda": "cel",
   "marca": "Xiaomi",
@@ -2032,25 +2206,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 430000
-   }
-  ]
- },
- {
-  "id": "pocox8",
-  "tienda": "cel",
-  "marca": "Xiaomi",
-  "nombre": "POCO X8 5G",
-  "imagen": "fotos/pocox8.jpg",
-  "specs": [
-   "256 GB",
-   "8 GB RAM"
-  ],
-  "estado": "Nuevo",
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1100000
+    "precio": 440000
    }
   ]
  },
@@ -2086,7 +2242,25 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 940000
+    "precio": 930000
+   }
+  ]
+ },
+ {
+  "id": "mgmax",
+  "tienda": "cel",
+  "marca": "Motorola",
+  "nombre": "Moto G Max",
+  "imagen": "fotos/mgmax.jpg",
+  "specs": [
+   "256 GB",
+   "8 GB RAM"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1200000
    }
   ]
  },
@@ -2104,7 +2278,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1000000
+    "precio": 1100000
    }
   ]
  },
@@ -2162,24 +2336,6 @@
    {
     "nombre": "",
     "precio": 330000
-   }
-  ]
- },
- {
-  "id": "kblacke2",
-  "tienda": "cel",
-  "marca": "Kalley",
-  "nombre": "Kalley Black E2",
-  "imagen": "fotos/kblacke2.jpg",
-  "specs": [
-   "128 GB",
-   "4 + 4 GB RAM"
-  ],
-  "estado": "Nuevo",
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 390000
    }
   ]
  },
@@ -2372,7 +2528,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4150000
+    "precio": 4300000
    }
   ]
  },
@@ -2392,7 +2548,7 @@
    },
    {
     "nombre": "256 GB",
-    "precio": 3250000
+    "precio": 3400000
    }
   ]
  },
@@ -2504,7 +2660,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 520000
+    "precio": 540000
    }
   ]
  },
@@ -2538,7 +2694,7 @@
   "opciones": [
    {
     "nombre": "128 GB",
-    "precio": 690000
+    "precio": 600000
    },
    {
     "nombre": "64 GB",
@@ -2573,6 +2729,26 @@
   ]
  },
  {
+  "id": "tmegapad",
+  "tienda": "tab",
+  "categoria": "tablets",
+  "marca": "Tecno",
+  "nombre": "Tablet Tecno Megapad",
+  "imagen": "fotos/tmegapad.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "WiFi",
+    "precio": 620000
+   },
+   {
+    "nombre": "SE 2 · 4G LTE con SIM",
+    "precio": 750000
+   }
+  ]
+ },
+ {
   "id": "tcltab11fe",
   "tienda": "tab",
   "categoria": "tablets",
@@ -2587,7 +2763,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 690000
+    "precio": 670000
    }
   ]
  },
@@ -2606,7 +2782,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 920000
+    "precio": 910000
    }
   ]
  },
@@ -2624,7 +2800,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 520000
+    "precio": 530000
    }
   ]
  },
@@ -2670,26 +2846,6 @@
   ]
  },
  {
-  "id": "ktab10",
-  "tienda": "tab",
-  "categoria": "tablets",
-  "marca": "Kalley",
-  "nombre": "Tablet Kalley 10\"",
-  "imagen": "fotos/ktab10.jpg",
-  "specs": [
-   "128 GB",
-   "4 GB RAM",
-   "WiFi"
-  ],
-  "estado": "Nuevo",
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 380000
-   }
-  ]
- },
- {
   "id": "lentab",
   "tienda": "tab",
   "categoria": "tablets",
@@ -2706,7 +2862,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 750000
+    "precio": 740000
    }
   ]
  },
@@ -2740,29 +2896,7 @@
   "opciones": [
    {
     "nombre": "42 mm",
-    "precio": 1750000
-   },
-   {
-    "nombre": "46 mm",
-    "precio": 1950000
-   }
-  ]
- },
- {
-  "id": "aws11",
-  "tienda": "rel",
-  "categoria": "relojes",
-  "marca": "Apple",
-  "nombre": "Apple Watch Series 11",
-  "specs": [
-   "46 mm"
-  ],
-  "imagen": "fotos/aws11.jpg",
-  "estado": "Nuevo",
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1500000
+    "precio": 1800000
    }
   ]
  },
@@ -2781,6 +2915,44 @@
    {
     "nombre": "",
     "precio": 1100000
+   }
+  ]
+ },
+ {
+  "id": "gw8",
+  "tienda": "rel",
+  "categoria": "relojes",
+  "marca": "Samsung",
+  "nombre": "Samsung Galaxy Watch 8",
+  "imagen": "fotos/gw8.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "40 mm",
+    "precio": 950000
+   },
+   {
+    "nombre": "44 mm",
+    "precio": 1050000
+   }
+  ]
+ },
+ {
+  "id": "gwultra",
+  "tienda": "rel",
+  "categoria": "relojes",
+  "marca": "Samsung",
+  "nombre": "Samsung Galaxy Watch Ultra (2025)",
+  "imagen": "fotos/gwultra.jpg",
+  "specs": [
+   "47 mm"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1400000
    }
   ]
  },
@@ -2881,6 +3053,54 @@
    {
     "nombre": "",
     "precio": 1950000
+   }
+  ]
+ },
+ {
+  "id": "hdiadema",
+  "tienda": "aud",
+  "categoria": "audio-diadema",
+  "marca": "Honor",
+  "nombre": "Audífonos de diadema Honor",
+  "imagen": "fotos/hdiadema.jpg",
+  "estado": "Nuevo",
+  "specs": [],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 220000
+   }
+  ]
+ },
+ {
+  "id": "jbltune780",
+  "tienda": "aud",
+  "categoria": "audio-diadema",
+  "marca": "JBL",
+  "nombre": "Audífonos JBL Tune 780",
+  "imagen": "fotos/jbltune780.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 300000
+   }
+  ]
+ },
+ {
+  "id": "jbltune730",
+  "tienda": "aud",
+  "categoria": "audio-diadema",
+  "marca": "JBL",
+  "nombre": "Audífonos JBL Tune 730",
+  "imagen": "fotos/jbltune730.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 220000
    }
   ]
  },
@@ -3007,7 +3227,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 490000
+    "precio": 460000
    }
   ]
  },
@@ -3023,7 +3243,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 370000
+    "precio": 340000
    }
   ]
  },
@@ -3170,6 +3390,38 @@
    {
     "nombre": "",
     "precio": 380000
+   }
+  ]
+ },
+ {
+  "id": "jblbb4",
+  "tienda": "par",
+  "categoria": "parlantes",
+  "marca": "JBL",
+  "nombre": "JBL Boombox 4",
+  "imagen": "fotos/jblbb4.jpg",
+  "estado": "Nuevo",
+  "specs": [],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1750000
+   }
+  ]
+ },
+ {
+  "id": "boses1pp",
+  "tienda": "par",
+  "categoria": "parlantes",
+  "marca": "Bose",
+  "nombre": "Bose S1 Pro+",
+  "imagen": "fotos/boses1pp.jpg",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 2950000
    }
   ]
  },
@@ -3512,6 +3764,83 @@
   ]
  },
  {
+  "id": "acc2m",
+  "tienda": "acc",
+  "categoria": "cables-carga",
+  "marca": "Apple",
+  "nombre": "Cable USB-C a USB-C de 2 m",
+  "specs": [
+   "Trenzado"
+  ],
+  "ilustracion": "cable",
+  "imagen": "fotos/acc2m.jpg",
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 120000
+   }
+  ]
+ },
+ {
+  "id": "acc1m",
+  "tienda": "acc",
+  "categoria": "cables-carga",
+  "marca": "Apple",
+  "nombre": "Cable USB-C a USB-C de 1 m",
+  "specs": [
+   "Trenzado",
+   "En caja"
+  ],
+  "ilustracion": "cable",
+  "imagen": "fotos/acc1m.jpg",
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 75000
+   }
+  ]
+ },
+ {
+  "id": "acclight",
+  "tienda": "acc",
+  "categoria": "cables-carga",
+  "marca": "Apple",
+  "nombre": "Cable USB-C a Lightning",
+  "specs": [
+   "Sin caja"
+  ],
+  "ilustracion": "cable",
+  "imagen": "fotos/acclight.jpg",
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 55000
+   }
+  ]
+ },
+ {
+  "id": "accwatch",
+  "tienda": "acc",
+  "categoria": "cables-carga",
+  "marca": "Apple",
+  "nombre": "Cable de carga para Apple Watch",
+  "ilustracion": "cable",
+  "imagen": "fotos/accwatch.jpg",
+  "estado": "Nuevo",
+  "specs": [
+   "Sin caja"
+  ],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 100000
+   }
+  ]
+ },
+ {
   "id": "xpbmag",
   "tienda": "acc",
   "categoria": "powerbank",
@@ -3574,7 +3903,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 440000
+    "precio": 460000
    }
   ]
  },
@@ -3730,7 +4059,26 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 740000
+    "precio": 750000
+   }
+  ]
+ },
+ {
+  "id": "tvs40f6",
+  "tienda": "tv",
+  "categoria": "televisores",
+  "marca": "Samsung",
+  "nombre": "Televisor Samsung 40\" F600",
+  "imagen": "fotos/tvs40f6.jpg",
+  "specs": [
+   "40\"",
+   "Smart TV"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 950000
    }
   ]
  },
@@ -6181,6 +6529,25 @@
    {
     "nombre": "512 GB",
     "precio": 5800000
+   }
+  ]
+ },
+ {
+  "id": "mbpro14m5",
+  "tienda": "pc",
+  "categoria": "portatiles",
+  "marca": "Apple",
+  "nombre": "MacBook Pro 14\" chip M5",
+  "imagen": "fotos/mbpro14m5.jpg",
+  "specs": [
+   "1 TB",
+   "16 GB de memoria"
+  ],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 7700000
    }
   ]
  },
@@ -18712,6 +19079,22 @@
   ]
  },
  {
+  "id": "ztebafle",
+  "tienda": "par",
+  "categoria": "parlantes",
+  "marca": "ZTE",
+  "nombre": "Parlante ZTE",
+  "imagen": "fotos/ztebafle.jpg",
+  "estado": "Nuevo",
+  "specs": [],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 39000
+   }
+  ]
+ },
+ {
   "id": "p45530",
   "tienda": "mov",
   "categoria": "movilidad",
@@ -18728,22 +19111,6 @@
   ]
  },
  {
-  "id": "xsc6pro",
-  "tienda": "mov",
-  "categoria": "movilidad",
-  "marca": "Xiaomi",
-  "nombre": "Patineta eléctrica Xiaomi 6 Pro",
-  "imagen": "fotos/xsc6pro.jpg",
-  "specs": [],
-  "estado": "Nuevo",
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 2250000
-   }
-  ]
- },
- {
   "id": "xsc6u",
   "tienda": "mov",
   "categoria": "movilidad",
@@ -18755,7 +19122,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3250000
+    "precio": 3400000
    }
   ]
  },
@@ -18771,7 +19138,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1100000
+    "precio": 1150000
    }
   ]
  },
@@ -18917,7 +19284,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3300000
+    "precio": 3200000
    }
   ]
  },
@@ -18949,7 +19316,22 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 120000
+    "precio": 130000
+   }
+  ]
+ },
+ {
+  "id": "ixwatchpods",
+  "tienda": "rel",
+  "categoria": "relojes",
+  "marca": "Infinix",
+  "nombre": "Reloj inteligente Infinix XWatch Pods",
+  "specs": [],
+  "estado": "Nuevo",
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 380000
    }
   ]
  },
@@ -19222,6 +19604,22 @@
    {
     "nombre": "",
     "precio": 470000
+   }
+  ]
+ },
+ {
+  "id": "ztebuds",
+  "tienda": "aud",
+  "categoria": "audio",
+  "marca": "ZTE",
+  "nombre": "Audífonos ZTE",
+  "imagen": "fotos/ztebuds.jpg",
+  "estado": "Nuevo",
+  "specs": [],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 39000
    }
   ]
  },

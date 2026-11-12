@@ -32,6 +32,14 @@
   "fotos/galeria/acanv155258ht-3.jpg",
   "fotos/galeria/acanv155258ht-4.jpg"
  ],
+ "acc1m": [
+  "fotos/galeria/acc1m-2.jpg",
+  "fotos/galeria/acc1m-3.jpg"
+ ],
+ "acc2m": [
+  "fotos/galeria/acc2m-2.jpg",
+  "fotos/galeria/acc2m-3.jpg"
+ ],
  "acnl1671g5616": [
   "fotos/galeria/acnl1671g5616-2.jpg",
   "fotos/galeria/acnl1671g5616-3.jpg",
@@ -143,10 +151,6 @@
   "fotos/galeria/asx1605vapbfmb239-3.jpg",
   "fotos/galeria/asx1605vapbfmb239-4.jpg"
  ],
- "aws11": [
-  "fotos/galeria/aws11-2.jpg",
-  "fotos/galeria/aws11-3.jpg"
- ],
  "aws12": [
   "fotos/galeria/aws12-2.jpg",
   "fotos/galeria/aws12-3.jpg"
@@ -154,12 +158,11 @@
  "awultra3": [
   "fotos/galeria/awultra3-2.jpg"
  ],
- "p45518": [
-  "fotos/galeria/p45518-1.jpg",
-  "fotos/galeria/p45518-2.jpg"
- ],
  "awultra4": [
   "fotos/galeria/awultra4-2.jpg"
+ ],
+ "boses1pp": [
+  "fotos/galeria/boses1pp-2.jpg"
  ],
  "corngt50": [
   "fotos/galeria/corngt50-2.jpg"
@@ -203,6 +206,13 @@
   "fotos/galeria/gbudsfe-2.jpg",
   "fotos/galeria/gbudsfe-3.jpg"
  ],
+ "gw8": [
+  "fotos/galeria/gw8-2.jpg",
+  "fotos/galeria/gw8-3.jpg"
+ ],
+ "gwultra": [
+  "fotos/galeria/gwultra-2.jpg"
+ ],
  "h400s": [
   "fotos/galeria/h400s-2.jpg",
   "fotos/galeria/h400s-3.jpg",
@@ -217,6 +227,9 @@
  ],
  "hclip": [
   "fotos/galeria/hclip-4.jpg"
+ ],
+ "hdiadema": [
+  "fotos/galeria/hdiadema-2.jpg"
  ],
  "hfbse4": [
   "fotos/galeria/hfbse4-2.jpg"
@@ -363,6 +376,9 @@
  "ihot70p": [
   "fotos/galeria/ihot70p-2.jpg"
  ],
+ "inote60": [
+  "fotos/galeria/inote60-2.jpg"
+ ],
  "inote60u": [
   "fotos/galeria/inote60u-2.jpg",
   "fotos/galeria/inote60u-3.jpg",
@@ -375,6 +391,20 @@
  "ip15pm": [
   "fotos/galeria/ip15pm-2.jpg",
   "fotos/galeria/ip15pm-3.jpg"
+ ],
+ "ip16": [
+  "fotos/galeria/ip16-2.jpg",
+  "fotos/galeria/ip16-3.jpg",
+  "fotos/galeria/ip16-4.jpg"
+ ],
+ "ip16cpo": [
+  "fotos/galeria/ip16-2.jpg",
+  "fotos/galeria/ip16-3.jpg",
+  "fotos/galeria/ip16-4.jpg"
+ ],
+ "ip16ecpo": [
+  "fotos/galeria/ip16ecpo-2.jpg",
+  "fotos/galeria/ip16ecpo-3.jpg"
  ],
  "ip17": [
   "fotos/galeria/ip17-2.jpg",
@@ -411,6 +441,9 @@
   "fotos/galeria/ipair-3.jpg",
   "fotos/galeria/ipair-4.jpg"
  ],
+ "ipduo": [
+  "fotos/galeria/ipduo-2.jpg"
+ ],
  "ismart20": [
   "fotos/galeria/ismart20-4.jpg"
  ],
@@ -424,6 +457,11 @@
   "fotos/galeria/ixpad30e-2.jpg",
   "fotos/galeria/ixpad30e-3.jpg"
  ],
+ "jblbb4": [
+  "fotos/galeria/jblbb4-2.jpg",
+  "fotos/galeria/jblbb4-3.jpg",
+  "fotos/galeria/jblbb4-4.jpg"
+ ],
  "jblclip4": [
   "fotos/galeria/jblclip4-2.jpg",
   "fotos/galeria/jblclip4-3.jpg",
@@ -434,9 +472,12 @@
   "fotos/galeria/jblgrip-3.jpg",
   "fotos/galeria/jblgrip-4.jpg"
  ],
- "kblacke2": [
-  "fotos/galeria/kblacke2-2.jpg",
-  "fotos/galeria/kblacke2-3.jpg"
+ "jbltune730": [
+  "fotos/galeria/jbltune730-2.jpg"
+ ],
+ "jbltune780": [
+  "fotos/galeria/jbltune780-2.jpg",
+  "fotos/galeria/jbltune780-3.jpg"
  ],
  "kblacks": [
   "fotos/galeria/kblacks-2.jpg"
@@ -450,12 +491,6 @@
   "fotos/galeria/kblackz2-2.jpg",
   "fotos/galeria/kblackz2-3.jpg",
   "fotos/galeria/kblackz2-4.jpg"
- ],
- "ktab10": [
-  "fotos/galeria/ktab10-2.jpg",
-  "fotos/galeria/ktab10-3.jpg",
-  "fotos/galeria/ktab10-4.jpg",
-  "fotos/galeria/ktab10-5.jpg"
  ],
  "lentabone": [
   "fotos/galeria/lentabone-3.jpg",
@@ -589,6 +624,9 @@
  ],
  "mg67": [
   "fotos/galeria/mg67-3.jpg"
+ ],
+ "mgmax": [
+  "fotos/galeria/mgmax-2.jpg"
  ],
  "mkbpro11": [
   "fotos/galeria/mkbpro11-3.jpg"
@@ -2314,6 +2352,10 @@
   "fotos/galeria/p45511-2.jpg",
   "fotos/galeria/p45511-3.jpg"
  ],
+ "p45518": [
+  "fotos/galeria/p45518-1.jpg",
+  "fotos/galeria/p45518-2.jpg"
+ ],
  "p45529": [
   "fotos/galeria/p45529-2.jpg",
   "fotos/galeria/p45529-3.jpg",
@@ -2912,14 +2954,13 @@
   "fotos/galeria/pococ81p-3.jpg",
   "fotos/galeria/pococ81p-4.jpg"
  ],
+ "pocof8pro": [
+  "fotos/galeria/pocof8pro-2.jpg"
+ ],
  "pocom8pro": [
   "fotos/galeria/pocom8pro-2.jpg",
   "fotos/galeria/pocom8pro-3.jpg",
   "fotos/galeria/pocom8pro-4.jpg"
- ],
- "pocox8": [
-  "fotos/galeria/pocox8-2.jpg",
-  "fotos/galeria/pocox8-3.jpg"
  ],
  "pocox8pm": [
   "fotos/galeria/pocox8pm-2.jpg"
@@ -2969,10 +3010,6 @@
   "fotos/galeria/sa37-3.jpg",
   "fotos/galeria/sa37-4.jpg"
  ],
- "sa56": [
-  "fotos/galeria/sa56-3.jpg",
-  "fotos/galeria/sa56-4.jpg"
- ],
  "sa57": [
   "fotos/galeria/sa57-2.jpg",
   "fotos/galeria/sa57-3.jpg",
@@ -2993,6 +3030,9 @@
  "ss25u": [
   "fotos/galeria/ss25u-3.jpg",
   "fotos/galeria/ss25u-4.jpg"
+ ],
+ "ss26": [
+  "fotos/galeria/ss26-2.jpg"
  ],
  "ss26fe": [
   "fotos/galeria/ss26fe-2.jpg",
@@ -3049,6 +3089,9 @@
  "tecipad11": [
   "fotos/galeria/tecipad11-2.jpg"
  ],
+ "tmegapad": [
+  "fotos/galeria/tmegapad-2.jpg"
+ ],
  "tpova6": [
   "fotos/galeria/tpova6-2.jpg"
  ],
@@ -3101,6 +3144,10 @@
  "vy31": [
   "fotos/galeria/vy31-4.jpg"
  ],
+ "x17t": [
+  "fotos/galeria/x17t-2.jpg",
+  "fotos/galeria/x17t-3.jpg"
+ ],
  "x17tpro": [
   "fotos/galeria/x17tpro-2.jpg"
  ],
@@ -3135,10 +3182,6 @@
   "fotos/galeria/xr17-3.jpg",
   "fotos/galeria/xr17-4.jpg"
  ],
- "xra5": [
-  "fotos/galeria/xra5-2.jpg",
-  "fotos/galeria/xra5-3.jpg"
- ],
  "xra7": [
   "fotos/galeria/xra7-2.jpg",
   "fotos/galeria/xra7-3.jpg"
@@ -3163,12 +3206,13 @@
  "xrn15pp": [
   "fotos/galeria/xrn15pp-2.jpg"
  ],
+ "xrn15pro": [
+  "fotos/galeria/xrn15pro-2.jpg",
+  "fotos/galeria/xrn15pro-3.jpg"
+ ],
  "xrn17": [
   "fotos/galeria/xrn17-3.jpg",
   "fotos/galeria/xrn17-4.jpg"
- ],
- "xrn17pm": [
-  "fotos/galeria/xrn17pm-2.jpg"
  ],
  "xrn17pro": [
   "fotos/galeria/xrn17pro-2.jpg",
@@ -3184,11 +3228,6 @@
  ],
  "xsc6m": [
   "fotos/galeria/xsc6m-2.jpg"
- ],
- "xsc6pro": [
-  "fotos/galeria/xsc6pro-2.jpg",
-  "fotos/galeria/xsc6pro-3.jpg",
-  "fotos/galeria/xsc6pro-4.jpg"
  ],
  "xsc6u": [
   "fotos/galeria/xsc6u-2.jpg"
@@ -3208,8 +3247,5 @@
  "zta57pro": [
   "fotos/galeria/zta57pro-2.jpg",
   "fotos/galeria/zta57pro-3.jpg"
- ],
- "ipduo": [
-  "fotos/galeria/ipduo-2.jpg"
  ]
 }

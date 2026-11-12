@@ -3392,7 +3392,7 @@
   "resumen": "MacBook Neo de Apple en color plata, con macOS y la integración con iPhone de siempre. Disponible en 256 GB y 512 GB."
  },
  "ip18pm": {
-  "resumen": "iPhone 18 Pro Max, el modelo más grande de la línea Pro de Apple, con pantalla OLED de 6,9\" a 120 Hz, chip A20 Pro y triple cámara trasera de 48 MP. Funciona con eSIM.",
+  "resumen": "iPhone 18 Pro Max, el modelo más grande de la línea Pro de Apple, con pantalla OLED de 6,9\" a 120 Hz, chip A20 Pro y triple cámara trasera de 48 MP. Funciona con eSIM; también hay versión con SIM física.",
   "ficha": [
    [
     "Pantalla",
@@ -3412,7 +3412,7 @@
    ],
    [
     "SIM",
-    "eSIM"
+    "eSIM (también hay versión con SIM física)"
    ],
    [
     "Seguridad",
@@ -3732,39 +3732,6 @@
  "szflip8": {
   "resumen": "Samsung Galaxy Z Flip 8 de 512 GB, el plegable compacto de Samsung: se dobla a la mitad para caber en cualquier bolsillo y su pantalla exterior te deja ver notificaciones y tomar selfies sin abrirlo."
  },
- "sa56": {
-  "resumen": "Samsung Galaxy A56 5G de 256 GB y 12 GB de RAM, con pantalla Super AMOLED de 6,7\" a 120 Hz, triple cámara de 50 MP, carga de 45 W y resistencia IP67. Disponible en rosado, verde o negro.",
-  "ficha": [
-   [
-    "Pantalla",
-    "6,7\" Super AMOLED FHD+ a 120 Hz"
-   ],
-   [
-    "Procesador",
-    "Samsung Exynos 1580"
-   ],
-   [
-    "Cámaras traseras",
-    "50 MP principal, 12 MP ultra gran angular y 5 MP macro"
-   ],
-   [
-    "Cámara frontal",
-    "12 MP"
-   ],
-   [
-    "Batería",
-    "5000 mAh, carga de 45 W"
-   ],
-   [
-    "Resistencia",
-    "IP67"
-   ],
-   [
-    "Seguridad",
-    "Huella en la pantalla"
-   ]
-  ]
- },
  "xra7pro": {
   "resumen": "Xiaomi Redmi A7 Pro con pantalla grande de 6,9\", cámara de 13 MP y doble SIM: un celular sencillo y rendidor para llamadas, WhatsApp y redes.",
   "ficha": [
@@ -3991,15 +3958,6 @@
    ]
   ]
  },
- "xrn17pm": {
-  "resumen": "Xiaomi Redmi Note 17 Pro Max, el modelo más completo de la serie Note. Disponible en 256 GB y 512 GB.",
-  "ficha": [
-   [
-    "Seguridad",
-    "Huella en la pantalla"
-   ]
-  ]
- },
  "x17tpro": {
   "resumen": "Xiaomi 17T Pro de 512 GB, el gama alta de la serie T de Xiaomi, pensado para fotografía y alto rendimiento.",
   "ficha": [
@@ -4019,7 +3977,7 @@
   ]
  },
  "pocox8pro": {
-  "resumen": "POCO X8 Pro de 512 GB y 12 GB de RAM, de la línea de POCO pensada para juegos y alto rendimiento.",
+  "resumen": "POCO X8 Pro, de la línea de POCO pensada para juegos y alto rendimiento. Disponible en 256 GB con 8 GB de RAM y en 512 GB con 12 GB de RAM.",
   "ficha": [
    [
     "Seguridad",
@@ -4884,9 +4842,6 @@
  },
  "aws12": {
   "resumen": "Apple Watch Series 12 con funciones de salud, actividad y seguridad como detección de caídas y SOS de emergencia. Disponible en 42 mm y 46 mm."
- },
- "aws11": {
-  "resumen": "Apple Watch Series 11 de 46 mm con pantalla siempre activa, electrocardiograma, seguimiento del sueño y hasta 24 horas de batería."
  },
  "gw8c": {
   "resumen": "Samsung Galaxy Watch 8 Classic de 46 mm con el clásico bisel giratorio, Wear OS y funciones avanzadas de salud y sueño."
@@ -7838,14 +7793,6 @@
    ]
   ]
  },
- "xra5": {
-  "ficha": [
-   [
-    "Seguridad",
-    "Huella lateral y reconocimiento facial"
-   ]
-  ]
- },
  "xra7": {
   "ficha": [
    [
@@ -7855,14 +7802,6 @@
   ]
  },
  "xrn15pp": {
-  "ficha": [
-   [
-    "Seguridad",
-    "Huella en la pantalla y reconocimiento facial"
-   ]
-  ]
- },
- "pocox8": {
   "ficha": [
    [
     "Seguridad",
@@ -7907,14 +7846,6 @@
    [
     "Seguridad",
     "Huella en la pantalla"
-   ]
-  ]
- },
- "kblacke2": {
-  "ficha": [
-   [
-    "Seguridad",
-    "Huella lateral"
    ]
   ]
  },
@@ -7981,5 +7912,167 @@
     "Reconocimiento facial"
    ]
   ]
+ },
+ "ip16": {
+  "resumen": "iPhone 16 de 128 GB con chip A18, cámara Fusion de 48 MP, botón de Acción y el botón Control de Cámara para tomar fotos y videos al instante. Conector USB-C.",
+  "ficha": [
+   [
+    "Pantalla",
+    "6,1\" Super Retina XDR (OLED)"
+   ],
+   [
+    "Procesador",
+    "Apple A18"
+   ],
+   [
+    "Cámaras traseras",
+    "48 MP Fusion y 12 MP ultra gran angular"
+   ],
+   [
+    "Cámara frontal",
+    "12 MP"
+   ],
+   [
+    "Botones",
+    "Acción y Control de Cámara"
+   ],
+   [
+    "Conector",
+    "USB-C"
+   ],
+   [
+    "Seguridad",
+    "Face ID"
+   ]
+  ]
+ },
+ "xrn15pro": {
+  "resumen": "Xiaomi Redmi Note 15 Pro 5G, de la serie Note, con pantalla AMOLED y cámara de alta resolución. Disponible en 256 GB y 512 GB.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella en la pantalla y reconocimiento facial"
+   ]
+  ]
+ },
+ "pocof8pro": {
+  "resumen": "POCO F8 Pro de 256 GB y 12 GB de RAM, de la serie F, la más potente de POCO, pensada para juegos exigentes.",
+  "ficha": [
+   [
+    "Seguridad",
+    "Huella ultrasónica en la pantalla y reconocimiento facial"
+   ]
+  ]
+ },
+ "jblbb4": {
+  "resumen": "JBL Boombox 4, el parlante portátil más potente de JBL, con bajos profundos, resistencia IP68 al agua y al polvo y batería para todo el día."
+ },
+ "acc2m": {
+  "resumen": "Cable original Apple USB-C a USB-C trenzado de 2 m, para cargar iPhone, iPad y Mac."
+ },
+ "acc1m": {
+  "resumen": "Cable Apple USB-C a USB-C trenzado de 1 m. Viene en caja."
+ },
+ "acclight": {
+  "resumen": "Cable Apple USB-C a Lightning para cargar y sincronizar iPhone con puerto Lightning, compatible con carga rápida. Se entrega sin caja."
+ },
+ "accwatch": {
+  "resumen": "Cable de carga magnético para Apple Watch. Se entrega sin caja."
+ },
+ "hdiadema": {
+  "resumen": "Audífonos de diadema Honor, inalámbricos y cómodos para música y llamadas."
+ },
+ "ztebafle": {
+  "resumen": "Parlante Bluetooth ZTE, portátil y práctico."
+ },
+ "ztebuds": {
+  "resumen": "Audífonos inalámbricos ZTE con estuche de carga."
+ },
+ "ip16cpo": {
+  "resumen": "iPhone 16 reacondicionado certificado (CPO), en 128 GB o 256 GB: revisado para funcionar como nuevo. Tiene chip A18, cámara Fusion de 48 MP, botón de Acción, Control de Cámara y conector USB-C.",
+  "ficha": [
+   [
+    "Pantalla",
+    "6,1\" Super Retina XDR (OLED)"
+   ],
+   [
+    "Procesador",
+    "Apple A18"
+   ],
+   [
+    "Cámaras traseras",
+    "48 MP Fusion y 12 MP ultra gran angular"
+   ],
+   [
+    "Cámara frontal",
+    "12 MP"
+   ],
+   [
+    "Botones",
+    "Acción y Control de Cámara"
+   ],
+   [
+    "Conector",
+    "USB-C"
+   ],
+   [
+    "Seguridad",
+    "Face ID"
+   ]
+  ]
+ },
+ "ip16ecpo": {
+  "resumen": "iPhone 16e reacondicionado certificado (CPO) de 128 GB: revisado para funcionar como nuevo."
+ },
+ "mbpro14m5": {
+  "resumen": "MacBook Pro de 14\" con chip M5 de Apple, 1 TB de almacenamiento y 16 GB de memoria unificada."
+ },
+ "ss26": {
+  "resumen": "Samsung Galaxy S26 de 256 GB y 12 GB de RAM, de la serie S26 de Samsung, con las funciones de Galaxy AI."
+ },
+ "szfold8u": {
+  "resumen": "Samsung Galaxy Z Fold 8 Ultra de 512 GB y 12 GB de RAM, la versión Ultra del plegable Galaxy Z Fold 8."
+ },
+ "gw8": {
+  "resumen": "Samsung Galaxy Watch 8 con Wear OS y funciones de salud y sueño. Disponible en 40 mm y 44 mm."
+ },
+ "gwultra": {
+  "resumen": "Samsung Galaxy Watch Ultra 2025 de 47 mm, pensado para deporte y aventura."
+ },
+ "x17t": {
+  "resumen": "Xiaomi 17T de 512 GB, de la serie T de Xiaomi, pensado para fotografía y buen rendimiento."
+ },
+ "x17u": {
+  "resumen": "Xiaomi 17 Ultra, el modelo más alto de la serie 17 de Xiaomi, pensado para fotografía. Disponible en 512 GB y 1 TB."
+ },
+ "mgmax": {
+  "resumen": "Motorola Moto G Max de 256 GB y 8 GB de RAM."
+ },
+ "inote60": {
+  "resumen": "Infinix Note 60 5G de 256 GB y 16 GB de RAM."
+ },
+ "tmegapad": {
+  "resumen": "Tablet Tecno Megapad, en versión WiFi o en la versión SE 2 con 4G LTE para SIM."
+ },
+ "tpova8p": {
+  "resumen": "Tecno Pova 8 Pro 5G en edición especial Tonino Lamborghini, de 256 GB y 16 GB de RAM."
+ },
+ "tvs40f6": {
+  "resumen": "Televisor Samsung de 40\" serie F600 con Smart TV."
+ },
+ "boses1pp": {
+  "resumen": "Bose S1 Pro+, parlante portátil profesional de Bose para eventos, música en vivo y presentaciones."
+ },
+ "jbltune780": {
+  "resumen": "Audífonos inalámbricos JBL Tune 780, de la línea Tune de JBL."
+ },
+ "jbltune730": {
+  "resumen": "Audífonos inalámbricos JBL Tune 730, de la línea Tune de JBL."
+ },
+ "ixwatchpods": {
+  "resumen": "Reloj inteligente Infinix XWatch Pods."
+ },
+ "sa07s": {
+  "resumen": "Samsung Galaxy A07s de 64 GB y 4 GB de RAM."
  }
 }

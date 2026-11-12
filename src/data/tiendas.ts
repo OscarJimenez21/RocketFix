@@ -21,7 +21,7 @@ export const TIENDAS: InfoTienda[] = [
   { id: "per", vista: "perifericos", menu: "Periféricos", titulo: "Periféricos y gaming", texto: "Monitores, teclados, mouse, diademas, sillas gamer, redes y cables.", foto: "p15412", ejemploBusqueda: "Monitor 27, teclado, Logitech…" },
   { id: "con", vista: "consolas", menu: "Consolas", titulo: "Consolas", texto: "ROG Xbox Ally, controles para PlayStation, Xbox y Switch, realidad virtual y timones.", foto: "p45585", ejemploBusqueda: "DualSense, timón, Meta Quest…" },
   { id: "tab", vista: "tablets", menu: "Tablets", titulo: "Tablets", texto: "iPad, Samsung Galaxy Tab, Redmi Pad y Tecno.", foto: "ipad11", ejemploBusqueda: "iPad, Galaxy Tab…" },
-  { id: "rel", vista: "relojes", menu: "Relojes", titulo: "Relojes", texto: "Apple Watch, Galaxy Watch, Huawei y Xiaomi. Relojes y manillas inteligentes.", foto: "aws11", ejemploBusqueda: "Apple Watch, Band…" },
+  { id: "rel", vista: "relojes", menu: "Relojes", titulo: "Relojes", texto: "Apple Watch, Galaxy Watch, Huawei y Xiaomi. Relojes y manillas inteligentes.", foto: "aws12", ejemploBusqueda: "Apple Watch, Band…" },
   { id: "aud", vista: "audifonos", menu: "Audífonos", titulo: "Audífonos", texto: "AirPods, Galaxy Buds, Redmi Buds, Huawei FreeBuds y audífonos con cable.", foto: "appro3", ejemploBusqueda: "AirPods, Buds…" },
   { id: "par", vista: "parlantes", menu: "Parlantes", titulo: "Parlantes", texto: "Parlantes JBL y Xiaomi para llevar, y parlantes para computador.", foto: "jblflip7", ejemploBusqueda: "JBL, Xiaomi…" },
   { id: "tv", vista: "televisores", menu: "TV y hogar", titulo: "TV y hogar", texto: "Smart TV Samsung, Xiaomi, Fly y Corn, y aspiradoras.", foto: "tvs43u", ejemploBusqueda: "Samsung 43, Smart TV…" },
