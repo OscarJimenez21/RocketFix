@@ -1169,24 +1169,6 @@
   ]
  },
  {
-  "id": "tpova8p",
-  "tienda": "cel",
-  "marca": "Tecno",
-  "nombre": "Tecno Pova 8 Pro Tonino Lamborghini",
-  "specs": [
-   "256 GB",
-   "16 GB RAM",
-   "5G"
-  ],
-  "estado": "Nuevo",
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 1600000
-   }
-  ]
- },
- {
   "id": "tspark50",
   "tienda": "cel",
   "marca": "Tecno",
@@ -19317,21 +19299,6 @@
    {
     "nombre": "",
     "precio": 130000
-   }
-  ]
- },
- {
-  "id": "ixwatchpods",
-  "tienda": "rel",
-  "categoria": "relojes",
-  "marca": "Infinix",
-  "nombre": "Reloj inteligente Infinix XWatch Pods",
-  "specs": [],
-  "estado": "Nuevo",
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 380000
    }
   ]
  },
