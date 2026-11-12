@@ -6,7 +6,7 @@ import { FotoProducto } from "../../components/FotoProducto";
 import { Pesos } from "../../components/Pesos";
 import { Insignia } from "../../components/TarjetaProducto";
 import { useEnPantalla, useVisto } from "../../lib/enPantalla";
-import { hrefProducto } from "../../lib/rutas";
+import { hrefProducto, hrefDe } from "../../lib/rutas";
 import type { Producto, TiendaId } from "../../types";
 import { BotonPausa } from "./BotonPausa";
 import { suave } from "../../lib/animaciones";
@@ -21,8 +21,6 @@ function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: st
       <div className="escenario relative aspect-square p-7 sm:p-8">
         {/* Ancho de la tarjeta: 74 % de la pantalla en celular, 44 % en tableta y unos 290 px en computador */}
         <FotoProducto producto={p} alt={p.nombre} tamanos="(min-width: 1024px) 290px, (min-width: 640px) 44vw, 74vw" className="motion-safe:group-hover:scale-[1.05]" />
-        {/* Animación 46: reflejo de vidrio que cruza la foto una vez al pasar el mouse */}
-        <span aria-hidden="true" className="reflejo" />
         {/* brillo: la cinta tiene un destello que la cruza una vez cuando la fila aparece (ver .brillo en index.css) */}
         {cinta
           ? <span className="brillo absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-[13px] font-bold text-acento-texto">{cinta}</span>
@@ -155,11 +153,11 @@ export function Coleccion({ id, etiqueta, titulo, tiendas, gris = false }: { id:
   const secciones = tiendas.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t));
   // El número es el de la sección completa (la fila no muestra los de «Preguntar disponibilidad»)
   const total = secciones.reduce((n, t) => n + deTienda(t.id).length, 0);
-  const enlaces = secciones.map(t => ({ texto: tiendas.length > 1 ? `Ver ${t.menu.toLowerCase()}` : `Ver todo (${deTienda(t.id).length})`, href: `#${t.vista}` }));
+  const enlaces = secciones.map(t => ({ texto: tiendas.length > 1 ? `Ver ${t.menu.toLowerCase()}` : `Ver todo (${deTienda(t.id).length})`, href: hrefDe(t.vista) }));
   if (!todos.length) return null;
   const primera = secciones[0];
   const final = todos.length > TOPE_FILA && primera
-    ? { cantidad: total, texto: secciones.length > 1 ? "productos en estas secciones" : `productos en ${primera.menu.toLowerCase()}`, href: `#${primera.vista}` }
+    ? { cantidad: total, texto: secciones.length > 1 ? "productos en estas secciones" : `productos en ${primera.menu.toLowerCase()}`, href: hrefDe(primera.vista) }
     : undefined;
   return <Carrusel id={id} etiqueta={etiqueta} titulo={titulo} productos={final ? todos.slice(0, TOPE_FILA) : todos} enlaces={enlaces} gris={gris} final={final} />;
 }

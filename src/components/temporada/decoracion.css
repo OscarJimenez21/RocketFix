@@ -1,0 +1,132 @@
+/* Decoración de temporada (ver Decoracion.tsx). Este archivo se baja junto con la decoración, solo en temporada.
+   Todo lo que se mueve usa transform u opacity. Con «reducir movimiento» las piezas quedan quietas. */
+
+.deco { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.deco-portada, .deco-seccion { z-index: -1; }
+.deco-pie { inset: 0 0 auto 0; height: 64px; z-index: 1; }
+.deco-franja { overflow: visible; }
+
+/* En pantallas angostas va la mitad de las piezas */
+@media (max-width: 639px) { .deco .solo-ancho { display: none; } }
+
+/* ---------- Carriles: piezas que caen o suben por todo el alto ----------
+   El carril mide lo mismo que la caja; al moverlo en % de su propio alto, la pieza recorre la caja entera */
+.carril { position: absolute; top: 0; height: 100%; width: 0; transform: translateY(var(--y, -50%)); }
+.carril.cae > span { position: absolute; bottom: 0; left: 0; display: block; }
+.carril.sube > span { position: absolute; top: 0; left: 0; display: block; }
+.carril.sube { transform: translateY(calc(var(--y, -50%) * -1)); }
+.punto-nieve { display: block; border-radius: 9999px; background: #fff; opacity: .85; box-shadow: 0 0 6px rgb(255 255 255 / .6); }
+
+.cruce { position: absolute; left: 0; width: 100%; height: 0; transform: translateX(var(--x, -50%)); }
+.cruce > span { position: absolute; right: 0; top: 0; display: block; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .carril.cae { animation: rf-cae var(--d, 12s) linear var(--r, 0s) infinite; }
+  .carril.sube { animation: rf-sube var(--d, 12s) linear var(--r, 0s) infinite; }
+  .carril .vaiven { animation: rf-vaiven var(--v, 4s) ease-in-out infinite alternate; }
+  .cruce { animation: rf-cruza var(--d, 18s) linear var(--r, 0s) infinite; }
+}
+@keyframes rf-cae { 0% { transform: translateY(-100%); opacity: 0; } 8% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateY(4%); opacity: 0; } }
+@keyframes rf-sube { 0% { transform: translateY(100%); opacity: 0; } 10% { opacity: .95; } 85% { opacity: .9; } 100% { transform: translateY(-4%); opacity: 0; } }
+@keyframes rf-vaiven { from { transform: translateX(-10px) rotate(-12deg); } to { transform: translateX(10px) rotate(12deg); } }
+@keyframes rf-cruza { 0% { transform: translateX(-100%); } 100% { transform: translateX(8%); } }
+
+/* ---------- Guirnaldas ---------- */
+.guirnalda { position: absolute; inset: 0 0 auto 0; }
+.guirnalda > svg { position: absolute; inset: 0 0 auto 0; width: 100%; overflow: visible; }
+.colgante { position: absolute; transform: translateX(-50%); display: block; line-height: 0; transform-origin: 50% 0; }
+.bombillo { display: block; width: 9px; height: 13px; border-radius: 45% 45% 50% 50% / 40% 40% 60% 60%; background: var(--c);
+  box-shadow: 0 0 8px 2px color-mix(in srgb, var(--c) 70%, transparent); position: relative; margin-top: 3px; }
+.bombillo::before { content: ""; position: absolute; left: 2px; top: -4px; width: 5px; height: 5px; border-radius: 1px; background: #3D4A3F; }
+@media (prefers-reduced-motion: no-preference) {
+  .bombillo { animation: rf-titila 2.4s ease-in-out infinite; animation-delay: calc(var(--k, 0) * -0.37s); }
+  .colgante { animation: rf-columpio 3.6s ease-in-out infinite alternate; animation-delay: calc(var(--k, 0) * -0.29s); }
+}
+@keyframes rf-titila { 0%, 100% { opacity: 1; } 50% { opacity: .35; box-shadow: none; } }
+@keyframes rf-columpio { from { transform: translateX(-50%) rotate(-5deg); } to { transform: translateX(-50%) rotate(5deg); } }
+
+/* Esferas colgadas de un hilo (Navidad) */
+.colgado { position: absolute; top: 0; display: flex; flex-direction: column; align-items: center; transform-origin: 50% 0; }
+.colgado.izq { left: 3%; }
+.colgado.der { right: 4%; }
+.colgado.der2 { right: 11%; }
+.colgado .hilo, .arana .hilo { display: block; width: 1px; background: rgb(255 255 255 / .45); }
+@media (prefers-reduced-motion: no-preference) {
+  .colgado { animation: rf-pendulo 4.5s ease-in-out infinite alternate; }
+  .colgado.der { animation-duration: 5.2s; animation-delay: -1.2s; }
+  .colgado.der2 { animation-duration: 3.9s; animation-delay: -2.4s; }
+}
+@keyframes rf-pendulo { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+
+/* ---------- Fuegos artificiales (fin de año) ---------- */
+.fuego { position: absolute; width: 0; height: 0; transform: scale(var(--t, 1)); }
+.rayo { position: absolute; left: -1px; bottom: 0; width: 2px; height: 34px; border-radius: 2px; transform-origin: 50% 100%;
+  transform: rotate(var(--g)) translateY(-10px); opacity: .9; }
+@media (prefers-reduced-motion: no-preference) {
+  .rayo { animation: rf-estalla 3.6s cubic-bezier(0.23, 1, 0.32, 1) var(--r, 0s) infinite; }
+}
+@keyframes rf-estalla {
+  0% { transform: rotate(var(--g)) translateY(0) scaleY(.1); opacity: 0; }
+  6% { opacity: 1; }
+  35% { transform: rotate(var(--g)) translateY(-26px) scaleY(1); opacity: .95; }
+  60%, 100% { transform: rotate(var(--g)) translateY(-40px) scaleY(.2); opacity: 0; }
+}
+.confeti { display: block; border-radius: 1px; transform: rotate(var(--g, 0deg)); }
+
+/* ---------- Bandera de Colombia (fiestas patrias) ---------- */
+.bandera { position: relative; }
+.bandera-asta { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: 2px; background: linear-gradient(#F5F7FA, #9AA3AF); }
+.bandera-asta::before { content: ""; position: absolute; left: -3px; top: -6px; width: 10px; height: 10px; border-radius: 9999px; background: #FFD36B; }
+.bandera-tela { position: absolute; left: 4px; top: 3px; }
+.bandera-tira { position: absolute; top: 0; height: 100%;
+  background: linear-gradient(#FCD116 0 50%, #003893 50% 75%, #CE1126 75% 100%); }
+.bandera-tira::after { content: ""; position: absolute; inset: 0; background: rgb(0 0 0 / max(0, var(--sombra, 0))); }
+@media (prefers-reduced-motion: no-preference) {
+  .bandera-tira { animation: rf-ondea 1.6s ease-in-out infinite alternate; animation-delay: calc(var(--k) * -0.11s); }
+}
+@keyframes rf-ondea { from { transform: translateY(-3px); } to { transform: translateY(3px); } }
+.bandera-portada { position: absolute; right: 3%; top: 64px; opacity: .95; }
+@media (min-width: 1024px) { .bandera-portada { right: auto; left: 46%; top: 54px; } }
+.bandera-seccion { position: absolute; right: 4%; top: 30px; }
+
+/* ---------- Halloween ---------- */
+.esquina { position: absolute; top: 0; line-height: 0; }
+.esquina.izq { left: 0; }
+.esquina.der { right: 0; }
+.arana { position: absolute; left: 22%; top: 0; display: flex; flex-direction: column; align-items: center; }
+.arana .hilo { height: 70px; }
+.calabaza-suelo { position: absolute; bottom: 14px; line-height: 0; filter: drop-shadow(0 0 10px rgb(255 138 61 / .45)); }
+@media (min-width: 1024px) { .calabaza-suelo { bottom: 22px; } }
+.cara-calabaza { filter: drop-shadow(0 0 2px #FFD36B); }
+.murcielago { filter: drop-shadow(0 0 3px rgb(180 140 255 / .7)); }
+@media (prefers-reduced-motion: no-preference) {
+  .arana { animation: rf-arana 5s ease-in-out infinite alternate; }
+  .murcielago .alas { transform-origin: 50% 45%; animation: rf-aletea .32s ease-in-out infinite alternate; }
+  .cara-calabaza { animation: rf-vela 2.2s ease-in-out infinite; }
+}
+@keyframes rf-arana { from { transform: translateY(-24px); } to { transform: translateY(6px); } }
+@keyframes rf-aletea { from { transform: scaleY(1); } to { transform: scaleY(.35); } }
+@keyframes rf-vela { 0%, 100% { opacity: 1; } 40% { opacity: .65; } 55% { opacity: .9; } 70% { opacity: .55; } }
+
+/* ---------- Día de la Madre ---------- */
+.ramo { position: absolute; bottom: 18px; display: flex; align-items: flex-end; gap: 2px; }
+.ramo.izq { left: 2%; }
+
+/* ---------- Regreso a clases ---------- */
+.a-mas { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 9999px;
+  border: 2px solid #FF5A5A; color: #FF5A5A; font: 800 13px/1 system-ui, sans-serif; transform: rotate(-12deg); background: rgb(255 255 255 / .9); }
+.a-mas.pequeno { width: 20px; height: 20px; font-size: 9px; border-width: 1.5px; }
+
+/* ---------- Franja de arriba ---------- */
+.franja-lado { position: absolute; top: 50%; transform: translateY(-50%); display: none; align-items: center; gap: 6px; line-height: 0; }
+.franja-lado.izq { left: 12px; }
+.franja-lado.der { right: 12px; }
+@media (min-width: 900px) { .franja-lado { display: flex; } }
+.franja-lado .bandera { height: 26px !important; }
+.cinta { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; }
+.cinta.baston { background: repeating-linear-gradient(-45deg, #E5484D 0 8px, #fff 8px 16px); }
+.cinta.tricolor { background: linear-gradient(90deg, #FCD116 0 50%, #003893 50% 75%, #CE1126 75%); }
+.cinta.halloween { background: repeating-linear-gradient(90deg, #FF8A3D 0 14px, #2A1747 14px 28px); }
+@media (prefers-reduced-motion: no-preference) {
+  .deco-franja .bombillo, .deco-franja .colgante { animation: none; }
+}

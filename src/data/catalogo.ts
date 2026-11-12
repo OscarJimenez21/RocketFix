@@ -1,10 +1,11 @@
 /* Acceso tipado al catálogo extraído de la tienda original (los JSON los genera scripts/extraer-catalogo.mjs).
-   Aquí no se cambian datos: solo se agregan índices y textos derivados para buscar y mostrar. */
+   Aquí no se cambian datos: solo se agregan índices y textos derivados para buscar y mostrar.
+   La lista de productos llega aparte (datos/productos.json, ver datosAparte en vite.config.ts): al compilar, este import
+   se cambia por lo que src/main.tsx dejó en globalThis.__RF_PRODUCTOS. Las galerías están en src/lib/galerias.ts */
 import productosJson from "./productos.json";
 import categoriasJson from "./categorias.json";
 import configJson from "./config.json";
 import contenidoJson from "./contenido.json";
-import galeriasJson from "./galerias.json";
 import cabecerasJson from "./cabeceras.json";
 import pagosJson from "./pagos.json";
 import resenasJson from "./resenas.json";
@@ -16,7 +17,6 @@ import { norm } from "../lib/formato";
 export const CONFIG = configJson as Config;
 export const PRODUCTOS = productosJson as Producto[];
 export const CATEGORIAS = categoriasJson as Record<Exclude<TiendaId, "cel">, Categoria[]>;
-export const GALERIAS = galeriasJson as Record<string, string[]>;
 export const CABECERAS = cabecerasJson as Record<string, Cabecera>;
 export const PAGOS = pagosJson as { lista: FormaPago[]; nota: string };
 /** Calificaciones de clientes que autorizaron publicarlas (las agrega Rocket Fix; la página no recibe datos) */
@@ -78,7 +78,6 @@ export const recienLlegado = (p: Producto, hoy = Date.now()) => {
 export const conPrecioPrimero = (a: Producto, b: Producto) => Number(Boolean(a.consultar)) - Number(Boolean(b.consultar));
 /** Mensaje de WhatsApp para un producto sin precio publicado */
 export const textoConsulta = (p: Producto, nombreOpcion = "") => `Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, nombreOpcion)}. ¿Está disponible y qué precio tiene?`;
-export const galeriaDe = (p: Producto): string[] => (p.imagen ? [p.imagen, ...(GALERIAS[p.id] ?? [])] : []);
 
 /** "Memoria RAM · Corsair" (los celulares solo muestran la marca) */
 export const etiquetaDe = (p: Producto) => [p.tienda === "cel" ? null : p.categoria ? nombreCat[p.categoria] : null, p.marca].filter(Boolean).join(" · ");

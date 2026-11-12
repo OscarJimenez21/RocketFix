@@ -1,50 +1,35 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { App } from "./App";
-import { Limite } from "./components/Limite";
-import { PRODUCTOS } from "./data/catalogo";
-import { slug } from "./lib/formato";
-import { aplicarTema } from "./lib/tema";
+/* Entrada de la tienda.
+   Mejora de rendimiento 1 (12/11/2026): la lista de productos ya no va dentro del programa. Llega aparte
+   (datos/productos.json, que index.html ya empezó a pedir desde el principio) y la tienda arranca cuando está.
+   Así, cambiar un precio solo cambia ese archivo: quien vuelve a la tienda no tiene que bajar otra vez todo el programa. */
 import "./index.css";
+import config from "./data/config.json";
 
-// Páginas para buscadores (scripts/paginas-estaticas.mjs): /RocketFix/p/sa07/, /RocketFix/celulares/, /RocketFix/marca/cooler-master/…
-// Al abrirlas, la dirección pasa a su forma con # (la que usa la tienda) y la tienda se carga encima, como siempre.
+declare global {
+  // Así se declara una variable global en TypeScript
+  var __RF_PRODUCTOS: unknown;
+}
+
 const base = import.meta.env.BASE_URL;
-if (!location.hash && location.pathname.startsWith(base) && location.pathname !== base) {
-  let ruta = location.pathname.slice(base.length).replace(/\/(index\.html)?$/, "");
-  const marca = ruta.match(/^marca\/(.+)$/);
-  if (marca) {
-    const nombre = PRODUCTOS.map(p => p.marca).find(m => m && slug(m) === marca[1]);
-    ruta = nombre ? `marca/${encodeURIComponent(nombre)}` : ruta;
-  }
-  history.replaceState(null, "", `${base}#${ruta}`);
-}
-// El contenido estático (para quien no ejecuta JavaScript) ya no hace falta
-document.getElementById("estatico")?.remove();
 
-// Al recargar, la página empieza arriba (en la portada, en un producto o en cualquier sección) en vez de que el navegador
-// la devuelva al punto donde estaba. Volver con «atrás» dentro de la tienda sigue regresando al mismo punto: eso lo
-// maneja la tienda misma (lib/rutas.ts). Las anclas como #categorias también, al montar la portada
-if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-window.scrollTo(0, 0);
-
-// Solo al trabajar en local: las animaciones en prueba que se apagaron en el panel de revisión siguen apagadas al recargar
-if (import.meta.env.DEV) {
-  try {
-    for (const n of JSON.parse(localStorage.getItem("rf-animaciones-apagadas") || "[]") as number[]) document.documentElement.classList.add(`sin-a${n}`);
-  } catch { /* sin almacenamiento */ }
+/** Si no hay forma de cargar la tienda (sin internet la primera vez, por ejemplo), al menos queda cómo pedir por WhatsApp */
+function sinTienda() {
+  const raiz = document.getElementById("root");
+  if (!raiz || raiz.childElementCount) return;
+  raiz.innerHTML = `<div class="contenedor py-16 text-center"><p class="text-lg font-semibold">No pudimos cargar la tienda.</p>
+    <p class="mt-2 text-tinta-2">Revisa tu conexión y vuelve a intentarlo, o escríbenos por WhatsApp.</p>
+    <p class="mt-6 flex flex-wrap justify-center gap-3"><button type="button" class="btn btn-marca" onclick="location.reload()">Volver a intentar</button>
+    <a class="btn btn-borde" href="https://wa.me/${encodeURIComponent(config.whatsapp)}">Escribir por WhatsApp</a></p></div>`;
 }
 
-// Modo noche (idea 30): solo si el visitante lo eligió; se aplica antes de pintar la tienda
-aplicarTema();
+async function arrancar() {
+  const r = await fetch(`${base}datos/productos.json`);
+  if (!r.ok) throw new Error(`productos.json: ${r.status}`);
+  globalThis.__RF_PRODUCTOS = await r.json();
+  await import("./arranque");
+}
 
-const raiz = document.getElementById("root");
-if (!raiz) throw new Error("Falta #root en index.html");
-createRoot(raiz).render(
-  <StrictMode>
-    {/* Último recurso: si falla algo fuera de la página (cabecera, carrito), al menos queda el aviso con WhatsApp */}
-    <Limite>
-      <App />
-    </Limite>
-  </StrictMode>
-);
+arrancar().catch(() => {
+  // Un segundo intento (por ejemplo, justo después de publicar una versión nueva) y, si tampoco, el aviso
+  window.setTimeout(() => { arrancar().catch(sinTienda); }, 1500);
+});

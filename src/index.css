@@ -308,33 +308,11 @@
   }
   @keyframes satelite-luz { 0% { background: #FF5A4E; opacity: 1; } 35% { opacity: 0; } 50% { background: #5BE0A9; opacity: 1; } 85% { opacity: 0; } }
 
-  /* 48 · Luz suave que sigue al mouse por la portada (solo con mouse; en celular no existe) */
-  .luz-portada { opacity: 0; transition: opacity 400ms ease;
-    background: radial-gradient(420px circle at var(--lx, 50%) var(--ly, 50%), rgb(91 224 169 / 0.1), transparent 70%); }
-  @media (hover: hover) and (pointer: fine) {
-    :root:not(.sin-a48) .luz-portada[data-on] { opacity: 1; }
-  }
-
   /* 51 · Sorpresa: chispas que salen del cohete del eslogan al tocarlo 5 veces seguidas (las crea Portada.tsx) */
   .chispa { position: fixed; z-index: 90; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 9999px; pointer-events: none;
     background: #FFD27A; box-shadow: 0 0 6px 2px rgb(255 210 122 / 0.7); }
   .chispa:nth-child(3n) { background: #fff; box-shadow: 0 0 6px 2px rgb(255 255 255 / 0.7); }
   .chispa:nth-child(3n+1) { background: #FF8A4C; box-shadow: 0 0 6px 2px rgb(255 107 44 / 0.6); }
-
-  /* 47 · La vitrina de la portada flota muy despacio (sube y baja 4 px). Se queda quieta con el mouse encima o fuera de pantalla */
-  @media (prefers-reduced-motion: no-preference) {
-    :root:not(.sin-a47) .vitrina-flota { animation: flotar-vitrina 7s ease-in-out infinite; }
-    :root:not(.sin-a47) .vitrina-flota[data-quieta] { animation-play-state: paused; }
-  }
-  @keyframes flotar-vitrina { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-
-  /* 46 · Reflejo de vidrio: con el mouse encima de una tarjeta, una franja de luz cruza la foto una vez */
-  .reflejo { position: absolute; inset: 0; overflow: hidden; pointer-events: none; border-radius: inherit; }
-  .reflejo::before { content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 45%; transform: translateX(-160%) skewX(-18deg);
-    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.55), transparent); }
-  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    :root:not(.sin-a46) .group:hover .reflejo::before { transform: translateX(330%) skewX(-18deg); transition: transform 800ms cubic-bezier(0.45, 0, 0.55, 1); }
-  }
 
   /* 49 · Color de la versión: el borde de la foto del producto toma un brillo suave del color elegido */
   .tinte-version { position: absolute; inset: 0; pointer-events: none; border-radius: inherit; box-shadow: inset 0 0 0 0 transparent;
@@ -342,7 +320,23 @@
   .tinte-version[data-on] { box-shadow: inset 0 0 70px -10px var(--tinte); }
 
   /* 52 · Gorrito de Navidad sobre la punta del cohete del logo */
-  .gorrito { position: absolute; left: 22%; top: -24%; width: 62%; height: auto; transform: rotate(-12deg); pointer-events: none; }
+  /* 52 · Mejora 6: adorno del cohete del logo en cada temporada (ver components/temporada/AdornoLogo.tsx) */
+  .adorno-logo { position: absolute; pointer-events: none; line-height: 0; }
+  .adorno-logo > svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .adorno-logo.gorrito { left: 22%; top: -24%; width: 62%; transform: rotate(-12deg); }
+  .adorno-arriba { left: 27%; top: -36%; width: 46%; transform: rotate(-10deg); }
+  .adorno-lado { right: -18%; bottom: -6%; width: 44%; }
+  .adorno-globo { right: -20%; top: -40%; width: 34%; }
+  .adorno-corbatin { left: 31%; bottom: 36%; width: 38%; }
+  .adorno-bandera { right: -36%; top: -22%; width: 52%; }
+  @media (prefers-reduced-motion: no-preference) {
+    .adorno-late { animation: adorno-late 1.8s ease-in-out infinite; }
+    .adorno-globo { animation: adorno-flota 2.8s ease-in-out infinite alternate; }
+    .adorno-bandera .tela-adorno { transform-origin: 0 50%; animation: adorno-ondea 1.4s ease-in-out infinite alternate; }
+  }
+  @keyframes adorno-late { 0%, 60%, 100% { transform: scale(1); } 20% { transform: scale(1.22); } 35% { transform: scale(0.95); } }
+  @keyframes adorno-flota { from { transform: translateY(1px) rotate(-4deg); } to { transform: translateY(-2px) rotate(5deg); } }
+  @keyframes adorno-ondea { from { transform: skewY(-4deg) scaleX(1); } to { transform: skewY(4deg) scaleX(0.94); } }
 
   /* 54 · Al volver a la pestaña después de un rato, el cohete del logo da un saltito de saludo */
   @media (prefers-reduced-motion: no-preference) {
@@ -508,7 +502,7 @@
   }
   @keyframes saludo { 15% { transform: rotate(-14deg) scale(1.12); } 30% { transform: rotate(12deg) scale(1.12); } 45% { transform: rotate(-9deg) scale(1.08); } 60% { transform: rotate(6deg); } 75% { transform: rotate(-3deg); } }
 
-  /* 9 y 16 · Texto que rueda desde abajo al cambiar (ejemplos del buscador, «Mostrando N de M») */
+  /* 9 · Texto que rueda desde abajo al cambiar (ejemplos del buscador) */
   @media (prefers-reduced-motion: no-preference) {
     .rueda { animation: rueda 360ms cubic-bezier(0.23, 1, 0.32, 1) backwards; }
   }
@@ -516,21 +510,12 @@
   /* En celular los campos usan letra de 16 px (ver arriba): el texto de ayuda que rueda también */
   @media (pointer: coarse) { .ayuda-campo { font-size: 16px; } }
 
-  /* 10 · Sugerencias del buscador: entran una tras otra al abrirlo */
-  @media (prefers-reduced-motion: no-preference) {
-    :root:not(.sin-a10) .sugerencia { animation: sugerencia 260ms cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: calc(var(--i, 0) * 30ms + 40ms); }
-  }
+  /* (La 10, sugerencias del buscador en cascada, se quitó el 12/11: el buscador se abre muchas veces al día) */
   @keyframes sugerencia { from { opacity: 0; transform: translateY(6px); } }
 
   /* 11 · Buscador: al escribir, la lupa se inclina y se pinta de verde */
   .lupa { transition: rotate 220ms cubic-bezier(0.23, 1, 0.32, 1), scale 220ms cubic-bezier(0.23, 1, 0.32, 1), color 150ms; }
   :root:not(.sin-a11) label:focus-within > .lupa { rotate: -14deg; scale: 1.12; color: theme("colors.marca.DEFAULT"); }
-
-  /* 12 · Secciones de la tienda: al cambiar un filtro, las tarjetas entran en cascada */
-  @media (prefers-reduced-motion: no-preference) {
-    :root:not(.sin-a12) .cascada-filtro { animation: tarjeta-entra 420ms cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: calc(var(--i, 0) * 35ms); }
-  }
-  @keyframes tarjeta-entra { from { opacity: 0; transform: translateY(12px) scale(0.98); } }
 
   /* 13 · Tarjetas de producto: se elevan un poco con el mouse encima */
   @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
@@ -678,14 +663,6 @@
     }
     /* En la tarjeta grande (celulares) la foto ya es enorme: sube menos, para no tocar el título de la sección */
     :root:not(.sin-a57) .mosaico-tarjeta[data-forma="grande"]:hover .aparece-mosaico { transform: translate(3%, -7%) rotate(-4deg) scale(1.07); }
-  }
-
-  /* 59 · Portada: con el mouse, las estrellas se corren un poco al lado contrario del puntero, las lejanas menos que las
-     cercanas, como si el cielo tuviera fondo. La posición la escribe la portada en --px y --py (de -1 a 1) */
-  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    :root:not(.sin-a59) .paralaje-lejos, :root:not(.sin-a59) .paralaje-cerca { transition: transform 900ms cubic-bezier(0.23, 1, 0.32, 1); }
-    :root:not(.sin-a59) .paralaje-lejos { transform: translate3d(calc(var(--px, 0) * -7px), calc(var(--py, 0) * -5px), 0); }
-    :root:not(.sin-a59) .paralaje-cerca { transform: translate3d(calc(var(--px, 0) * -18px), calc(var(--py, 0) * -12px), 0); }
   }
 
   /* 58 · Cabecera (todas las páginas): el cohete del logo avanza por el borde de abajo de la cabecera según cuánto se ha
@@ -893,10 +870,6 @@ button, [role="button"], .btn { -webkit-touch-callout: none; }     /* mantener e
   :root:not(.sin-a75) .cuenta-cambia { animation: contador-sube 220ms cubic-bezier(0.23, 1, 0.32, 1); }
   /* 83 · «¿Quisiste decir…?» entra con un fundido corto */
   :root:not(.sin-a83) .correccion-entra { animation: fila-entra 320ms cubic-bezier(0.23, 1, 0.32, 1) 120ms backwards; }
-  /* 84 · Al filtrar o reordenar la búsqueda, los resultados entran con un fundido */
-  :root:not(.sin-a84) .resultados-entran { animation: resultados-entran 240ms cubic-bezier(0.23, 1, 0.32, 1); }
-  /* 85 · Las búsquedas recientes entran una tras otra al abrir el buscador */
-  :root:not(.sin-a85) .reciente { animation: fila-entra 240ms cubic-bezier(0.23, 1, 0.32, 1) backwards; animation-delay: calc(var(--i, 0) * 35ms); }
   /* 86 · El aviso de «sin internet» baja desde arriba */
   :root:not(.sin-a86) .sin-conexion { animation: baja-franja 280ms cubic-bezier(0.23, 1, 0.32, 1); }
   /* 87 · Menú: la sección donde estás lleva una raya verde que crece al abrirlo */
@@ -931,3 +904,9 @@ button, [role="button"], .btn { -webkit-touch-callout: none; }     /* mantener e
   /* 90 · «Quitar filtros» aparece con un fundido corto al poner el primer filtro */
   :root:not(.sin-a90) .quitar-filtros { animation: resultados-entran 260ms cubic-bezier(0.23, 1, 0.32, 1); }
 }
+
+/* Mejora 7 (12/11/2026): al guardar un producto en favoritos, el corazón late una vez (con «reducir movimiento» solo se llena) */
+@media (prefers-reduced-motion: no-preference) {
+  .latido-corazon { animation: latido-corazon 560ms cubic-bezier(0.23, 1, 0.32, 1); }
+}
+@keyframes latido-corazon { 0% { transform: scale(1); } 22% { transform: scale(1.34); } 42% { transform: scale(0.9); } 62% { transform: scale(1.12); } 100% { transform: scale(1); } }

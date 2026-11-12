@@ -5,7 +5,7 @@ import { Aviso } from "./components/Aviso";
 import { SinConexion } from "./components/SinConexion";
 import { Cabecera } from "./components/Cabecera";
 import { Carrito } from "./components/Carrito";
-import { FranjaRegalos } from "./components/FranjaRegalos";
+import { FranjaTemporada } from "./components/FranjaTemporada";
 import { Limite } from "./components/Limite";
 import { PiePagina } from "./components/PiePagina";
 import { SubirFlotante } from "./components/SubirFlotante";
@@ -29,6 +29,7 @@ const Buscar = lazy(conReintento(() => import("./paginas/Buscar").then(m => ({ d
 const Marca = lazy(conReintento(() => import("./paginas/Marca").then(m => ({ default: m.Marca }))));
 const Blog = lazy(conReintento(() => import("./paginas/Blog").then(m => ({ default: m.Blog }))));
 const Articulo = lazy(conReintento(() => import("./paginas/Articulo").then(m => ({ default: m.Articulo }))));
+const Favoritos = lazy(conReintento(() => import("./paginas/Favoritos").then(m => ({ default: m.Favoritos }))));
 const Politica = lazy(conReintento(() => import("./paginas/Politica").then(m => ({ default: m.Politica }))));
 // Panel para revisar las animaciones en prueba: solo existe al trabajar en local (no llega a la página publicada)
 const PanelAnimaciones = import.meta.env.DEV ? lazy(() => import("./components/PanelAnimaciones")) : null;
@@ -61,6 +62,7 @@ function tituloDe(r: Ruta) {
   const base = `${CONFIG.nombre} · Tecnología a domicilio en Bogotá y Colombia`;
   if (r.tipo === "tienda") return `${VISTAS[r.vista]} · ${CONFIG.nombre}`;
   if (r.tipo === "blog") return `Blog y servicio técnico · ${CONFIG.nombre}`;
+  if (r.tipo === "favoritos") return `Tus favoritos · ${CONFIG.nombre}`;
   if (r.tipo === "articulo") return `${ARTICULOS.find(a => a.id === r.id)?.titulo ?? ""} · ${CONFIG.nombre}`;
   if (r.tipo === "buscar") return `Buscar ${r.q} · ${CONFIG.nombre}`;
   if (r.tipo === "marca") return `${r.marca} · ${CONFIG.nombre}`;
@@ -96,6 +98,7 @@ function Contenido({ ruta }: { ruta: Ruta }) {
     case "buscar": return <Suspense fallback={<Cargando />}><Buscar key={ruta.q} q={ruta.q} /></Suspense>;
     case "marca": return <Suspense fallback={<Cargando />}><Marca key={ruta.marca} marca={ruta.marca} /></Suspense>;
     case "blog": return <Suspense fallback={<Cargando />}><Blog /></Suspense>;
+    case "favoritos": return <Suspense fallback={<Cargando />}><Favoritos /></Suspense>;
     case "articulo": return <Suspense fallback={<Cargando />}><Articulo key={ruta.id} id={ruta.id} /></Suspense>;
     case "politica": return <Suspense fallback={<Cargando />}><Politica key={ruta.id} id={ruta.id} /></Suspense>;
     case "no-encontrada": return <NoEncontrada />;
@@ -130,7 +133,7 @@ function Marco() {
       <a href="#pagina" onClick={e => { e.preventDefault(); document.querySelector<HTMLElement>("#pagina h1")?.focus(); }}
         className="sr-only z-[70] rounded bg-marca px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-3 focus:top-3">Saltar al contenido</a>
       <SinConexion />
-      <FranjaRegalos />
+      <FranjaTemporada />
       <Cabecera ruta={ruta} />
       <div id="pagina">
         <RegresoBold />

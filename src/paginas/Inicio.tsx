@@ -12,8 +12,8 @@ import { Marcas } from "./inicio/Marcas";
 import { ComoComprar, Portada, Ventajas } from "./inicio/Portada";
 import { Servicios } from "./inicio/Servicios";
 import { Confianza } from "./inicio/Confianza";
-import { IdeasParaRegalar, RegalosPorPresupuesto } from "./inicio/Regalos";
-import { REGALOS } from "../lib/temporada";
+import { IdeasParaRegalar, PorPresupuesto } from "./inicio/Regalos";
+import { TEMPORADA } from "../lib/temporada";
 import { useVistos } from "../lib/vistos";
 import { Recientes } from "../components/ProductoExtras";
 import { BarraSecciones } from "./inicio/BarraSecciones";
@@ -41,14 +41,15 @@ export function Inicio({ ancla }: { ancla?: string }) {
     <>
       <Portada />
       <Ventajas />
-      {/* Solo en diciembre (se encienden y se apagan solas por fecha) */}
-      {REGALOS && <RegalosPorPresupuesto />}
+      {/* Por presupuesto: todo el año. En temporada (se encienden y se apagan solas por fecha) sube y cambia de textos */}
+      {TEMPORADA && <PorPresupuesto />}
       <ComoComprar />
       <Envios />
       <Marcas />
       <Categorias />
+      {!TEMPORADA && <PorPresupuesto />}
       <div id="recientes"><Recientes productos={vistos} /></div>
-      {REGALOS && <IdeasParaRegalar />}
+      {TEMPORADA?.ideas && <IdeasParaRegalar />}
       <BandaGamer />
       <Carrusel id="vendidos" etiqueta={<><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</>} titulo="Los que todos quieren" productos={vendidos} cinta="Top ventas" gris />
       <BandaCelulares />

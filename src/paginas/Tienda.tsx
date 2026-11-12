@@ -12,6 +12,7 @@ import { useMarco } from "../lib/movimiento";
 import { waLink } from "../lib/whatsapp";
 import { CohetePerdido } from "./NoEncontrada";
 import type { Producto, TiendaId } from "../types";
+import { hrefDe } from "../lib/rutas";
 
 const PAGINA = 24;
 interface Filtros { cat: string; marca: string; cond: string; q: string; orden: "rel" | "menor" | "mayor"; limite: number; tope: number | null }
@@ -51,12 +52,8 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
   const [f, setF] = useState<Filtros>(() => recordados[tienda] ?? inicial);
   // Desde qué posición están las tarjetas que trajo «Ver más productos» (entran en cascada); se olvida al cambiar un filtro
   const [nuevos, setNuevos] = useState<{ tienda: TiendaId; desde: number } | null>(null);
-  // Animación 12: veces que se cambió un filtro (marca, tipo, estado u orden; no la búsqueda, que cambia con cada letra).
-  // La lista se vuelve a montar con cada cambio y sus tarjetas entran en cascada
-  const [vueltas, setVueltas] = useState(0);
   const poner = (cambio: Partial<Filtros>) => {
     setNuevos(null);
-    if (!("q" in cambio) && activa(12)) setVueltas(n => n + 1);
     setF(x => {
       const sig = { ...x, limite: PAGINA, ...cambio };
       recordados[tienda] = sig;
@@ -126,13 +123,10 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
   const segmento = useRef<HTMLDivElement>(null);
   const marcoEstado = useMarco(segmento, Math.max(0, estados.findIndex(([v]) => v === f.cond)));
   const pastilla = activa(15) ? marcoEstado : null;
-  // Animación 16: «Mostrando N»: el número rueda cuando cambia (no al abrir la sección)
-  const [cuentaInicial] = useState(mostrados.length);
-  const rodar = activa(16) && mostrados.length !== cuentaInicial;
 
   return (
     <>
-      <EncabezadoVista migas={[{ texto: "Inicio", href: "#inicio" }, { texto: info?.titulo ?? VISTAS[vista] ?? "" }]} titulo={cab?.titulo ?? VISTAS[vista] ?? ""} lead={cab?.lead} nota={cab?.nota} />
+      <EncabezadoVista migas={[{ texto: "Inicio", href: hrefDe("inicio") }, { texto: info?.titulo ?? VISTAS[vista] ?? "" }]} titulo={cab?.titulo ?? VISTAS[vista] ?? ""} lead={cab?.lead} nota={cab?.nota} />
       <div className="contenedor py-6">
         {/* Tipo de producto (o marca, en celulares) */}
         {(esCel ? marcas.length > 1 : cats.length > 1) && (
@@ -201,7 +195,7 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
         </div>
 
         <p className="mt-4 text-sm text-tinta-2" aria-live="polite">
-          Mostrando <span key={mostrados.length} className={`inline-block tabular-nums${rodar ? " rueda" : ""}`}>{mostrados.length}</span> de {visibles.length} {visibles.length === 1 ? "producto" : "productos"}
+          Mostrando <span className="tabular-nums">{mostrados.length}</span> de {visibles.length} {visibles.length === 1 ? "producto" : "productos"}
           {conFiltros && visibles.length > 0 && <span className="quitar-filtros"> · <button type="button" onClick={() => poner({ ...inicial })} className="enlace-suelto -my-3 inline-flex min-h-[44px] items-center">Quitar filtros</button></span>}
         </p>
 
@@ -209,12 +203,10 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
           <>
             {/* Para lectores de pantalla: el título de la lista va entre el de la página y los de cada producto */}
             <h2 className="sr-only">Productos</h2>
-            <ul ref={lista} key={vueltas} className={`mt-4 grid gap-3 sm:gap-4 ${vistaLista === "lista" ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"}`}>
+            <ul ref={lista} className={`mt-4 grid gap-3 sm:gap-4 ${vistaLista === "lista" ? "grid-cols-1 lg:grid-cols-2" : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"}`}>
               {mostrados.map((p, i) => {
                 // Las tarjetas nuevas entran una tras otra (30 ms entre cada una; desde la novena, todas juntas)
                 const k = nuevos && nuevos.tienda === tienda && i >= nuevos.desde ? i - nuevos.desde : -1;
-                // Después de cambiar un filtro, las primeras 12 entran en cascada (animación 12)
-                if (k < 0 && vueltas && i < 12) return <li key={p.id} className="cascada-filtro" style={{ "--i": i } as React.CSSProperties}><TarjetaProducto producto={p} prioridad={i < 4} fila={vistaLista === "lista"} /></li>;
                 return (
                   <li key={p.id} className={k >= 0 ? "motion-safe:animate-entrar" : undefined} style={k >= 0 ? { animationDelay: `${Math.min(k, 8) * 30}ms` } : undefined}>
                     <TarjetaProducto producto={p} prioridad={i < 4} fila={vistaLista === "lista"} />

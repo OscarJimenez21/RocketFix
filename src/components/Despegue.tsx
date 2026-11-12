@@ -233,19 +233,14 @@ export function Despegue() {
       <span className="absolute inset-0 bg-[radial-gradient(70%_38%_at_50%_80%,rgba(91,224,169,0.14),transparent_72%)] lg:bg-[radial-gradient(40%_62%_at_80%_50%,rgba(91,224,169,0.16),transparent_72%)]" />
       {/* Animación 41: el cielo baja despacio, como si la portada fuera subiendo con el cohete. Las estrellas tenues van
           lejos y lentas; las que titilan, más cerca y un poco más rápido */}
-      {/* Animación 59: cada capa va dentro de otra que se corre con el mouse (la de adentro sigue bajando sola) */}
-      <div className="paralaje-lejos absolute inset-0">
-        <Capa clase="cielo-lejos">
-          {ESTRELLAS.map(([x, y, r, o], i) => (
-            <span key={i} className="absolute rounded-full bg-white" style={{ left: `${x}%`, top: `${y}%`, width: r * 2.4, height: r * 2.4, opacity: Math.min(1, o * 1.5) }} />
-          ))}
-        </Capa>
-      </div>
-      <div className="paralaje-cerca absolute inset-0">
-        <Capa clase="cielo-cerca">
-          {TITILAN.map(([x, y, s]) => <span key={`${x}-${y}`} className="estrella-titila" style={{ left: `${x}%`, top: `${y}%`, "--t": `${s}s` } as React.CSSProperties} />)}
-        </Capa>
-      </div>
+      <Capa clase="cielo-lejos">
+        {ESTRELLAS.map(([x, y, r, o], i) => (
+          <span key={i} className="absolute rounded-full bg-white" style={{ left: `${x}%`, top: `${y}%`, width: r * 2.4, height: r * 2.4, opacity: Math.min(1, o * 1.5) }} />
+        ))}
+      </Capa>
+      <Capa clase="cielo-cerca">
+        {TITILAN.map(([x, y, s]) => <span key={`${x}-${y}`} className="estrella-titila" style={{ left: `${x}%`, top: `${y}%`, "--t": `${s}s` } as React.CSSProperties} />)}
+      </Capa>
       <Satelite visible={visible} />
       <Fugaces visible={visible} ritmo={conHora ? RITMO_FUGACES[fase] : 1} />
       {t && c && (

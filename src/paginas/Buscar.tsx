@@ -9,7 +9,7 @@ import { TarjetaProducto } from "../components/TarjetaProducto";
 import { buscarProductos, sugerirCorreccion } from "../lib/busqueda";
 import { anotarBusqueda } from "../lib/busquedasRecientes";
 import type { TiendaId } from "../types";
-import { hrefBusqueda } from "../lib/rutas";
+import { hrefBusqueda, hrefDe } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
 import { Astronauta } from "../components/Astronauta";
 
@@ -51,7 +51,7 @@ export function Buscar({ q }: { q: string }) {
 
   return (
     <>
-      <EncabezadoVista migas={[{ texto: "Inicio", href: "#inicio" }, { texto: "Buscar" }]} titulo={texto ? `Resultados para “${texto}”` : "Buscar"} lead={lead} />
+      <EncabezadoVista migas={[{ texto: "Inicio", href: hrefDe("inicio") }, { texto: "Buscar" }]} titulo={texto ? `Resultados para “${texto}”` : "Buscar"} lead={lead} />
       <div className="contenedor py-8">
         {resultados.length > 0 ? (
           <>
@@ -77,7 +77,7 @@ export function Buscar({ q }: { q: string }) {
             )}
             <h2 className="sr-only">Productos encontrados</h2>
             {/* Animación 84: al filtrar por sección o cambiar el orden, los resultados entran con un fundido corto */}
-            <ul key={`${v.seccion ?? "todo"}-${v.orden}`} className="resultados-entran grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+            <ul key={`${v.seccion ?? "todo"}-${v.orden}`} className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
               {resultados.slice(0, v.limite).map((p, i) => <li key={p.id}><TarjetaProducto producto={p} prioridad={i < 4} /></li>)}
             </ul>
             {quedan > 0 && <div className="mt-8 text-center"><button type="button" onClick={() => poner({ limite: v.limite + PAGINA })} className="btn btn-borde">Ver más resultados (quedan {quedan})</button></div>}
@@ -88,7 +88,7 @@ export function Buscar({ q }: { q: string }) {
             {texto && <p className="font-semibold">Ningún producto del catálogo coincide con “{texto}”.</p>}
             {correccion && <p className="correccion-entra mt-2 text-[15px]">¿Quisiste decir <a href={hrefBusqueda(correccion)} className="enlace font-semibold">{correccion}</a>?</p>}
             {deCorreccion.length > 0 && (
-              <ul className="resultados-entran mt-5 grid grid-cols-2 gap-3 text-left sm:grid-cols-4">
+              <ul className="mt-5 grid grid-cols-2 gap-3 text-left sm:grid-cols-4">
                 {deCorreccion.slice(0, 4).map(p => <li key={p.id}><TarjetaProducto producto={p} /></li>)}
               </ul>
             )}
@@ -101,7 +101,7 @@ export function Buscar({ q }: { q: string }) {
             </div>
             <p className="etiqueta mt-6">O explora una categoría</p>
             <div className="mt-3 flex flex-wrap justify-center gap-2">
-              {TIENDAS.map(t => <a key={t.id} href={`#${t.vista}`} className="chip">{t.menu}</a>)}
+              {TIENDAS.map(t => <a key={t.id} href={hrefDe(t.vista)} className="chip">{t.menu}</a>)}
             </div>
           </div>
         )}

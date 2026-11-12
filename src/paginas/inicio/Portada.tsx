@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, lazy, Suspense, useEffect, useRef, useState } from "react";
 import { CONFIG } from "../../data/catalogo";
 import { ResumenCalificaciones } from "../../components/Calificaciones";
 import { PuntoEstado, useAtencion } from "../../components/Contacto";
@@ -10,43 +10,17 @@ import { useVisto } from "../../lib/enPantalla";
 import { dinero } from "../../lib/formato";
 import { waLink } from "../../lib/whatsapp";
 import { Vitrina } from "./Vitrina";
+import { hrefDe } from "../../lib/rutas";
+import { TEMPORADA } from "../../lib/temporada";
+
+// Mejora 6: decoración de la temporada (se baja aparte y solo en temporada)
+const DecoracionPortada = TEMPORADA ? lazy(() => import("../../components/temporada/Decoracion")) : null;
 
 /** La portada entra en cascada solo la primera vez que se abre en la visita (al volver a Inicio ya está quieta) */
 let portadaVista = false;
 
 /** Eslogan de la marca (manual de marca, aprobado el 04/11/2026). Cada palabra va aparte para que entren una tras otra */
 const ESLOGAN = ["Hacemos", "despegar", "tu", "tecnología"];
-
-/** Animación 48: con mouse, un resplandor menta muy tenue sigue al puntero por el fondo verde (detrás del texto).
-    Se escribe directo en el estilo (sin volver a dibujar la portada) y una sola vez por cuadro */
-function useLuzMouse() {
-  const luz = useRef<HTMLSpanElement>(null);
-  const cuadro = useRef(0);
-  const mover = (e: React.MouseEvent<HTMLElement>) => {
-    const el = luz.current;
-    if (!el || cuadro.current) return;
-    const { clientX, clientY, currentTarget } = e;
-    cuadro.current = requestAnimationFrame(() => {
-      cuadro.current = 0;
-      const r = currentTarget.getBoundingClientRect();
-      // Animación 59: dónde está el puntero, de -1 a 1 (las capas de estrellas se corren al lado contrario; ver index.css)
-      currentTarget.style.setProperty("--px", (((clientX - r.left) / r.width) * 2 - 1).toFixed(3));
-      currentTarget.style.setProperty("--py", (((clientY - r.top) / r.height) * 2 - 1).toFixed(3));
-      if (!activa(48)) return;
-      el.style.setProperty("--lx", `${clientX - r.left}px`);
-      el.style.setProperty("--ly", `${clientY - r.top}px`);
-      el.dataset.on = "";
-    });
-  };
-  const salir = (e: React.MouseEvent<HTMLElement>) => {
-    // Al salir, las estrellas vuelven despacio a su lugar
-    e.currentTarget.style.setProperty("--px", "0");
-    e.currentTarget.style.setProperty("--py", "0");
-    if (luz.current) delete luz.current.dataset.on;
-  };
-  useEffect(() => () => cancelAnimationFrame(cuadro.current), []);
-  return { luz, mover, salir };
-}
 
 /** Animación 51 (sorpresa): si alguien toca 5 veces seguidas el cohete del eslogan, el cohete da una vuelta completa y
     suelta una lluvia de estrellitas. No hace nada más: es un detalle escondido para quien lo encuentre */
@@ -112,7 +86,6 @@ function Horizonte() {
     (abajo en celular), la vitrina. El cohete del logo cierra el eslogan en lugar del punto */
 export function Portada() {
   const atencion = useAtencion();
-  const { luz, mover, salir } = useLuzMouse();
   const sorpresa = useSorpresa();
   const [entra] = useState(() => !portadaVista);
   // Animación 1: el eslogan entra palabra por palabra (si está apagada, el título sube entero, como antes)
@@ -121,10 +94,9 @@ export function Portada() {
   // Cada pieza del texto entra 60 ms después de la anterior; el título solo sube (ver .entrada en index.css)
   const en = (orden: number) => (entra ? { extra: " entrada", style: { "--orden": orden } as React.CSSProperties } : { extra: "", style: undefined });
   return (
-    // onMouseMove / onMouseLeave: solo mueven una luz decorativa (animación 48); no es un control
-    <section onMouseMove={mover} onMouseLeave={salir} className="relative isolate overflow-hidden bg-marca-oscuro text-white">
+    <section className="relative isolate overflow-hidden bg-marca-oscuro text-white">
       <Despegue />
-      <span ref={luz} aria-hidden="true" className="luz-portada pointer-events-none absolute inset-0 -z-10" />
+      {DecoracionPortada && <Suspense fallback={null}><DecoracionPortada donde="portada" /></Suspense>}
       <Horizonte />
       {/* Abajo deja espacio para la curva del horizonte (pb un poco más alto que pt) */}
       <div className="contenedor grid items-center gap-8 pb-14 pt-10 sm:pb-20 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:pb-24 lg:pt-16 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
@@ -150,8 +122,8 @@ export function Portada() {
               sistema cabían en un renglón y, al llegar la letra de la marca (más ancha), el segundo bajaba y todo lo de
               abajo saltaba 56 px (CLS 0,097 a 412 px de ancho, medido el 10/11/2026) */}
           <div data-despegue className={`mt-8 flex flex-col items-start gap-3 min-[480px]:flex-row min-[480px]:flex-wrap${en(2).extra}`} style={en(2).style}>
-            <a href="#categorias" className={`btn btn-primario${entra ? " barrido barrido-portada" : ""}`}>Comprar tecnología</a>
-            <a href="#servicios" className="btn btn-claro">Solicitar servicio técnico</a>
+            <a href={hrefDe("categorias")} className={`btn btn-primario${entra ? " barrido barrido-portada" : ""}`}>Comprar tecnología</a>
+            <a href={hrefDe("servicios")} className="btn btn-claro">Solicitar servicio técnico</a>
           </div>
           <div className={`mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/80${en(3).extra}`} style={en(3).style}>
             <p className="flex items-center gap-2"><PuntoEstado abierto={atencion.abierto} claro />{atencion.texto}</p>

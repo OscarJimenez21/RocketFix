@@ -7,7 +7,7 @@ import { abrirBold, boldActivo, clavePago, nuevaReferencia } from "../lib/bold";
 import { dinero, lista } from "../lib/formato";
 import { usePanelModal } from "../lib/panel";
 import { envioDe, leerDatosPedido, mensajePedido, reglaEnvio, subtotalDe, type DatosPedido } from "../lib/pedido";
-import { hrefProducto } from "../lib/rutas";
+import { alCambiarPagina, hrefProducto, hrefDe } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
 import type { ZonaEntrega } from "../types";
 import { activa } from "../lib/animaciones";
@@ -96,8 +96,7 @@ export function Carrito() {
 
   // Cerrar al navegar (ej.: al tocar el nombre de un producto)
   useEffect(() => {
-    window.addEventListener("hashchange", cerrarCarrito);
-    return () => window.removeEventListener("hashchange", cerrarCarrito);
+    return alCambiarPagina(cerrarCarrito);
   }, [cerrarCarrito]);
 
   const zona = d.entrega;
@@ -244,7 +243,7 @@ export function Carrito() {
         {boldActivo() && " Si prefieres pagar ya, Bold acepta tarjeta, PSE y más."}
       </p>
       <p className="mt-1.5 text-center text-xs leading-relaxed text-tinta-3">
-        Tienes <a href="#cambios-y-devoluciones" className="enlace">derecho de retracto</a> por 5 días hábiles desde la entrega. Al enviar el pedido aceptas el <a href="#datos-personales" className="enlace">tratamiento de tus datos</a>.
+        Tienes <a href={hrefDe("cambios-y-devoluciones")} className="enlace">derecho de retracto</a> por 5 días hábiles desde la entrega. Al enviar el pedido aceptas el <a href={hrefDe("datos-personales")} className="enlace">tratamiento de tus datos</a>.
       </p>
     </>
   );

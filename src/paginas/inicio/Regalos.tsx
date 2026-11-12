@@ -1,52 +1,67 @@
-/* Temporada de regalos (solo en diciembre, ver REGALOS en lib/temporada.ts): dos secciones de la portada.
-   · «Regalos por presupuesto»: cuatro rangos de precio y una fila con productos de ese rango.
-   · «Ideas para regalar»: cuatro tarjetas (gamer, trabajo, estudio, casa) y una fila con productos para esa persona.
+/* Dos secciones de la portada:
+   · «Por presupuesto» (mejora 9: todo el año, antes solo en diciembre): cuatro rangos de precio y una fila con productos
+     de ese rango. En cada temporada (lib/temporada.ts) cambian sus textos, sus colores, su decoración y los productos
+     (en el Día de la Madre, regalos para mamá; en regreso a clases, lo de estudiar…).
+   · «Ideas para regalar» (diciembre): cuatro tarjetas (gamer, trabajo, estudio, casa) y una fila con productos para esa persona.
    Las filas usan la tarjeta normal de la tienda (con su botón «Agregar»), con los precios de siempre. */
-import { useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import { FilaProductos } from "../../components/FilaProductos";
 import { IconoCheck, IconoRegalo } from "../../components/Iconos";
 import { recurso } from "../../lib/formato";
 import { PERSONAS, RANGOS, porPersona, porRango } from "../../lib/regalos";
-import { REGALOS } from "../../lib/temporada";
+import { PRESUPUESTO_NORMAL, TEMPORADA } from "../../lib/temporada";
 import { TEMAS } from "./Categorias";
 
-/** Estrellas doradas y blancas de la franja de regalos: solo en los bordes, nunca detrás de los títulos ni de las tarjetas
+const Decoracion = TEMPORADA ? lazy(() => import("../../components/temporada/Decoracion")) : null;
+
+/** Estrellas de la sección sin temporada: solo en los bordes, nunca detrás de los títulos ni de las tarjetas
     (posición en %, tamaño en px y color) */
 const ESTRELLAS: [number, number, number, string][] = [
   [2, 10, 3, "#FFD36B"], [6, 34, 2, "#fff"], [97, 8, 3, "#FFE9A8"], [93, 22, 2, "#fff"], [99, 40, 2, "#FFD36B"],
   [1.5, 62, 2, "#FFE9A8"], [98.5, 70, 3, "#FFD36B"], [3, 88, 2, "#fff"], [96, 92, 2, "#FFE9A8"], [60, 4, 2, "#fff"], [78, 6, 2.5, "#FFD36B"]
 ];
 
-export function RegalosPorPresupuesto() {
-  const [rango, setRango] = useState<string>(RANGOS[1].id);
+/** Rangos que tienen productos (en algunas temporadas, por ejemplo, no hay regalos para niños de más de $1.000.000) */
+const RANGOS_CON = RANGOS.filter(r => porRango(r.id).length > 0);
+
+export function PorPresupuesto() {
+  const textos = TEMPORADA?.presupuesto ?? PRESUPUESTO_NORMAL;
+  const [rango, setRango] = useState<string>(() => (RANGOS_CON.find(r => r.id === "500") ?? RANGOS_CON[0])?.id ?? "500");
   const productos = useMemo(() => porRango(rango), [rango]);
   const actual = RANGOS.find(r => r.id === rango) ?? RANGOS[1];
+  const colores = { "--t-fondo": TEMPORADA?.fondo ?? "#062A22", "--t-acento": TEMPORADA?.acento ?? "#FFD36B" } as React.CSSProperties;
+  if (!RANGOS_CON.length) return null;
   return (
-    <section id="regalos" aria-labelledby="t-regalos" className="relative isolate overflow-hidden bg-marca-noche text-white">
+    <section id="presupuesto" aria-labelledby="t-presupuesto" style={colores} data-temporada={TEMPORADA?.id}
+      className="relative isolate overflow-hidden bg-[var(--t-fondo)] text-white">
+      {/* Enlaces de antes (#regalos) llegan aquí */}
+      <span id="regalos" aria-hidden="true" className="absolute top-0" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        {ESTRELLAS.map(([x, y, s, c], k) => (
-          <span key={k} className="absolute rounded-full" style={{ left: `${x}%`, top: `${y}%`, width: s, height: s, background: c, boxShadow: `0 0 ${s * 3}px ${c}` }} />
-        ))}
+        {Decoracion
+          ? <Suspense fallback={null}><Decoracion donde="seccion" /></Suspense>
+          : ESTRELLAS.map(([x, y, s, c], k) => (
+            <span key={k} className="absolute rounded-full" style={{ left: `${x}%`, top: `${y}%`, width: s, height: s, background: c, boxShadow: `0 0 ${s * 3}px ${c}` }} />
+          ))}
       </div>
       <div className="contenedor py-12 sm:py-14">
-        <p className="etiqueta flex items-center gap-1.5 text-[#FFD36B]"><IconoRegalo className="h-4 w-4" />{REGALOS?.navidad ? "Regalos de Navidad" : "Regalos de fin de año"}</p>
-        <h2 id="t-regalos" className="titulo-seccion mt-1 text-white">Regalos para cada presupuesto</h2>
-        <p className="mt-2 max-w-[60ch] text-[15px] text-white/75">Elige cuánto quieres gastar y te mostramos ideas en ese rango, con el precio de siempre.</p>
+        <p className="etiqueta flex items-center gap-1.5 text-[var(--t-acento)]"><IconoRegalo className="h-4 w-4" />{textos.etiqueta}</p>
+        <h2 id="t-presupuesto" className="titulo-seccion mt-1 text-white">{textos.titulo}</h2>
+        <p className="mt-2 max-w-[60ch] text-[15px] text-white/75">{textos.texto}</p>
         {/* Rangos: en celular se deslizan de lado */}
         <div role="group" aria-label="Presupuesto" className="sin-barra -mx-4 mt-6 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
-          {RANGOS.map(r => {
+          {RANGOS_CON.map(r => {
             const elegido = r.id === rango;
             return (
               <button key={r.id} type="button" aria-pressed={elegido} onClick={() => setRango(r.id)}
-                className={`presionable inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full border px-4 text-sm font-semibold transition-colors duration-150 ${elegido ? "border-[#FFD36B] bg-[#FFD36B] text-marca-noche" : "border-white/30 text-white hover:border-white/70"}`}>
+                className={`presionable inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full border px-4 text-sm font-semibold transition-colors duration-150 ${elegido ? "border-[var(--t-acento)] bg-[var(--t-acento)] text-marca-noche" : "border-white/30 text-white hover:border-white/70"}`}>
                 {elegido && <IconoCheck className="h-4 w-4" />}{r.texto}
               </button>
             );
           })}
         </div>
         <div key={rango} className="mt-6 motion-safe:animate-entrar">
-          <FilaProductos productos={productos} etiqueta={`Regalos de ${actual.texto.toLowerCase()}`}
-            encabezado={<p className="text-sm text-white/75"><span className="font-semibold tabular-nums text-white">{productos.length}</span> ideas · {actual.texto}</p>} />
+          <FilaProductos productos={productos} etiqueta={`${textos.titulo}: ${actual.texto.toLowerCase()}`}
+            encabezado={<p className="text-sm text-white/75"><span className="font-semibold tabular-nums text-white">{productos.length}</span> opciones · {actual.texto}</p>} />
         </div>
       </div>
     </section>

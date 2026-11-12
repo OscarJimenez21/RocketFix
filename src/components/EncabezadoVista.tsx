@@ -4,13 +4,14 @@ import { recurso } from "../lib/formato";
 import { conNombre, waLink } from "../lib/whatsapp";
 import type { NotaCabecera } from "../types";
 import { IconoCasa } from "./Iconos";
+import { hrefDe } from "../lib/rutas";
 
 export interface Miga { texto: string; href?: string }
 
 /** Idea 4: «Inicio» lleva una casita y cada sección su producto recortado (el mismo del menú) */
 function iconoMiga(m: Miga) {
   if (m.texto === "Inicio") return <IconoCasa className="h-3.5 w-3.5" />;
-  const t = TIENDAS.find(s => m.href === `#${s.vista}`);
+  const t = TIENDAS.find(s => m.href === hrefDe(s.vista));
   return t ? <img src={recurso(`fotos/recortes/${RECORTE[t.id]}.webp`)} alt="" decoding="async" width={18} height={18} className="h-[18px] w-[18px] object-contain" /> : null;
 }
 
@@ -46,7 +47,7 @@ export function EncabezadoVista({ migas, titulo, lead, nota, extra }: { migas: M
             <p className="font-semibold">{nota.titulo}</p>
             <p className="mt-1 text-tinta-2">{nota.texto}</p>
             <a className="enlace-suelto mt-0.5 text-sm"
-              href={nota.whatsapp !== null ? waLink(nota.whatsapp ? conNombre(nota.whatsapp) : undefined) : `#${nota.href ?? "inicio"}`}
+              href={nota.whatsapp !== null ? waLink(nota.whatsapp ? conNombre(nota.whatsapp) : undefined) : hrefDe(nota.href ?? "inicio")}
               {...(nota.whatsapp !== null ? { target: "_blank", rel: "noopener" } : {})}>
               {nota.enlace.replace(/\s*→$/, "")} →
             </a>

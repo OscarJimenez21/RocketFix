@@ -5,6 +5,7 @@ import { IconoWhatsApp } from "../../components/Iconos";
 import { useEnPantalla, useVisto } from "../../lib/enPantalla";
 import { recurso } from "../../lib/formato";
 import { waLink } from "../../lib/whatsapp";
+import { hrefDe } from "../../lib/rutas";
 
 /** Banda grande de gaming: invita a armar el escritorio completo (consola, monitor, teclado, mouse y diadema) */
 export function BandaGamer() {
@@ -32,8 +33,8 @@ export function BandaGamer() {
             Más FPS, más precisión y sonido que te mete en la partida. Arma tu combo con monitor, teclado, mouse y diadema, y te asesoramos por WhatsApp para que todo combine.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <a href="#perifericos" className="btn btn-primario">Ver periféricos</a>
-            <a href="#consolas" className="btn btn-claro">Ver consolas</a>
+            <a href={hrefDe("perifericos")} className="btn btn-primario">Ver periféricos</a>
+            <a href={hrefDe("consolas")} className="btn btn-claro">Ver consolas</a>
           </div>
         </div>
         <div ref={fotos} aria-hidden="true" data-visto={visto || undefined} className="revelar relative h-[300px] sm:h-[400px] lg:h-auto">
@@ -73,7 +74,7 @@ export function BandaCelulares() {
             Los modelos más buscados, en varias capacidades y colores. Elige el tuyo y te lo llevamos el mismo día en Bogotá.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <a href="#celulares" className="btn btn-primario">Ver celulares</a>
+            <a href={hrefDe("celulares")} className="btn btn-primario">Ver celulares</a>
             <a href={waLink("Hola Rocket Fix, quiero asesoría para comprar un celular")} target="_blank" rel="noopener" className="btn btn-claro"><IconoWhatsApp />Te asesoramos</a>
           </div>
         </div>
@@ -114,7 +115,7 @@ export function BandaComputadores() {
             Portátiles para estudiar y trabajar, equipos gamer y PC de escritorio listos para usar. Te ayudamos a escoger el tuyo por WhatsApp, sin enredos.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <a href="#computadores" className="btn btn-primario">Ver computadores</a>
+            <a href={hrefDe("computadores")} className="btn btn-primario">Ver computadores</a>
             <a href={waLink("Hola Rocket Fix, quiero asesoría para comprar un computador")} target="_blank" rel="noopener" className="btn btn-borde"><IconoWhatsApp className="h-5 w-5 text-wa" />Te asesoramos</a>
           </div>
         </div>

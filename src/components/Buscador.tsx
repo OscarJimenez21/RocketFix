@@ -8,7 +8,7 @@ import { precargarBuscar } from "../lib/carga";
 import { anotarBusqueda, borrarBusquedas, useBusquedasRecientes } from "../lib/busquedasRecientes";
 import { useEnPantalla } from "../lib/enPantalla";
 import { dinero, norm, recurso } from "../lib/formato";
-import { hrefBusqueda, hrefProducto } from "../lib/rutas";
+import { alCambiarPagina, hrefBusqueda, hrefProducto, hrefDe, navegar } from "../lib/rutas";
 import { FotoProducto } from "./FotoProducto";
 import { IconoBuscar, IconoCerrar, IconoReloj, IconoWhatsApp } from "./Iconos";
 import { waLink } from "../lib/whatsapp";
@@ -69,7 +69,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
   // Mejora 5: si no hay nada, se propone la palabra más parecida del catálogo (ver sugerirCorreccion)
   const correccion = useMemo(() => (palabras.length && !total ? sugerirCorreccion(q) : null), [q, palabras.length, total]);
   const opciones: Opcion[] = palabras.length
-    ? [...secciones.map(t => ({ href: `#${t.vista}`, clave: t.vista })), ...productos.map(p => ({ href: hrefProducto(p.id), clave: p.id })),
+    ? [...secciones.map(t => ({ href: hrefDe(t.vista), clave: t.vista })), ...productos.map(p => ({ href: hrefProducto(p.id), clave: p.id })),
        ...(total ? [{ href: hrefBusqueda(q), clave: "todos" }] : []), ...(correccion ? [{ href: hrefBusqueda(correccion), clave: "correccion" }] : [])]
     : [...recientes.map(b => ({ href: hrefBusqueda(b), clave: `r-${b}` })), ...BUSQUEDAS_POPULARES.map(b => ({ href: hrefBusqueda(b), clave: b }))];
 
@@ -80,12 +80,11 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
   }, []);
   useEffect(() => {
     const alNavegar = () => setAbierto(false);
-    window.addEventListener("hashchange", alNavegar);
-    return () => window.removeEventListener("hashchange", alNavegar);
+    return alCambiarPagina(alNavegar);
   }, []);
   useEffect(() => setActivo(-1), [q]);
 
-  const ir = (href: string) => { location.hash = href; setAbierto(false); };
+  const ir = (href: string) => { navegar(href); setAbierto(false); };
   // Mejora 4: borrar lo escrito con la ✕ (igual en todos los navegadores; la ✕ propia de Chrome se esconde en el CSS)
   const limpiar = () => { setQ(""); setAbierto(true); campoRef.current?.focus(); };
 
@@ -154,8 +153,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
                   <div role="listbox" aria-labelledby={`${idLista}-recientes`} className="mb-1.5 grid">
                     {recientes.map((b, i) => (
                       <a key={b} id={idOpcion(i)} role="option" aria-selected={i === activo} href={hrefBusqueda(b)} onClick={() => anotarBusqueda(b)}
-                        style={{ "--i": i } as React.CSSProperties}
-                        className={`reciente flex items-center gap-2.5 rounded px-2.5 py-2 text-[14.5px] ${i === activo ? "bg-marca-suave" : "hover:bg-fondo"}`}>
+                        className={`flex items-center gap-2.5 rounded px-2.5 py-2 text-[14.5px] ${i === activo ? "bg-marca-suave" : "hover:bg-fondo"}`}>
                         <IconoReloj className="h-4 w-4 shrink-0 text-tinta-3" /><span className="truncate">{b}</span>
                       </a>
                     ))}
@@ -164,10 +162,9 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
               )}
               <p id={`${idLista}-titulo`} className="etiqueta px-2.5 pb-1.5 pt-1">Búsquedas populares</p>
               <div id={idLista} role="listbox" aria-labelledby={`${idLista}-titulo`} className="flex flex-wrap gap-1.5 px-1.5 pb-1.5">
-                {/* sugerencia: entran una tras otra al abrir el buscador (animación 10) */}
                 {BUSQUEDAS_POPULARES.map((b, k) => { const i = k + recientes.length; return (
-                  <a key={b} id={idOpcion(i)} role="option" aria-selected={i === activo} href={hrefBusqueda(b)} style={{ "--i": i } as React.CSSProperties}
-                    className={`sugerencia rounded-full border px-3 py-1 text-sm ${i === activo ? "border-marca bg-marca-suave" : "border-linea hover:border-linea-fuerte"}`}>{b}</a>
+                  <a key={b} id={idOpcion(i)} role="option" aria-selected={i === activo} href={hrefBusqueda(b)}
+                    className={`rounded-full border px-3 py-1 text-sm ${i === activo ? "border-marca bg-marca-suave" : "border-linea hover:border-linea-fuerte"}`}>{b}</a>
                 ); })}
               </div>
               {/* Idea 3: debajo, las secciones con su producto recortado, para explorar sin escribir */}
@@ -175,7 +172,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
               <ul className="grid grid-cols-3 gap-1 px-1 pb-1 sm:grid-cols-4">
                 {TIENDAS.map(t => (
                   <li key={t.id}>
-                    <a href={`#${t.vista}`} onClick={() => setAbierto(false)}
+                    <a href={hrefDe(t.vista)} onClick={() => setAbierto(false)}
                       className="presionable flex flex-col items-center gap-1 rounded-md px-1 py-2 text-center text-[12.5px] font-semibold leading-tight text-tinta-2 hover:bg-fondo hover:text-tinta">
                       <img src={recurso(`fotos/recortes/${RECORTE[t.id]}.webp`)} alt="" loading="lazy" decoding="async" width={40} height={40} className="h-10 w-10 object-contain" />
                       {t.menu}
@@ -190,7 +187,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
           {secciones.map(t => {
             n++;
             return (
-              <a key={t.vista} id={idOpcion(n)} role="option" aria-selected={n === activo} href={`#${t.vista}`} className={claseOpcion(n)}>
+              <a key={t.vista} id={idOpcion(n)} role="option" aria-selected={n === activo} href={hrefDe(t.vista)} className={claseOpcion(n)}>
                 <img src={recurso(`fotos/recortes/${RECORTE[t.id]}.webp`)} alt="" decoding="async" width={32} height={32} className="h-8 w-8 shrink-0 object-contain" />
                 <span className="etiqueta">Sección</span>
                 <span className="font-semibold">{VISTAS[TIENDA_VISTA[t.id]]}</span>
@@ -201,7 +198,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
           {productos.map(p => {
             n++;
             return (
-              <a key={p.id} id={idOpcion(n)} role="option" aria-selected={n === activo} href={hrefProducto(p.id)} style={{ "--i": n } as React.CSSProperties} className={`sugerencia ${claseOpcion(n)}`}>
+              <a key={p.id} id={idOpcion(n)} role="option" aria-selected={n === activo} href={hrefProducto(p.id)} className={claseOpcion(n)}>
                 <span className="escenario h-11 w-11 shrink-0 rounded border border-linea p-0.5"><FotoProducto producto={p} alt="" tamanos="44px" /></span>
                 <span className="min-w-0 flex-1">
                   <span className="line-clamp-1 text-[14.5px] font-semibold">

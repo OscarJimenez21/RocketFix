@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { etiquetaDe, galeriaDe, recienLlegado, textoConsulta } from "../data/catalogo";
+import { etiquetaDe, recienLlegado, textoConsulta } from "../data/catalogo";
+import { useGaleria } from "../lib/galerias";
+import { BotonFavorito } from "./Favorito";
 import { useTienda } from "../estado/TiendaContext";
 import { activa } from "../lib/animaciones";
 import { precargarFoto, precargarProducto } from "../lib/carga";
@@ -115,7 +117,8 @@ function ElegirVersion({ producto: p, i, elegir }: { producto: Producto; i: numb
 /** Idea 7 (animación 62): con el mouse encima, la segunda foto de la galería aparece sobre la primera. No se pide hasta
     que el mouse entra por primera vez a la tarjeta (en celular nunca se baja) */
 function SegundaFoto({ producto: p, ver }: { producto: Producto; ver: boolean }) {
-  const otra = galeriaDe(p)[1];
+  // Las galerías se piden la primera vez que el mouse entra a una tarjeta (lib/galerias.ts)
+  const otra = useGaleria(p, ver)[1];
   if (!otra || !ver) return null;
   return (
     <Imagen src={recurso(otra)} srcSet={srcsetFoto(otra)} sizes="(min-width: 1024px) 290px, 32vw" alt="" width={800} height={800}
@@ -154,11 +157,11 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta, fila = 
         {/* Ancho de la tarjeta: 2 por fila en celular, 3 en tableta y 4 (unos 290 px) en computador */}
         <FotoProducto producto={p} alt="" prioridad={prioridad} tamanos="(min-width: 1024px) 290px, (min-width: 768px) 32vw, 48vw" className="foto-principal motion-safe:group-hover:scale-[1.05]" />
         <SegundaFoto producto={p} ver={verSegunda} />
-        {/* Animación 46: reflejo de vidrio que cruza la foto una vez al pasar el mouse */}
-        <span aria-hidden="true" className="reflejo" />
         <Insignia producto={p} />
-        {cinta && <span className="absolute right-2 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-[12.5px] font-semibold text-acento-texto">{cinta}</span>}
+        {cinta && <span className="absolute right-14 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-[12.5px] font-semibold text-acento-texto">{cinta}</span>}
       </a>
+      {/* Mejoras 7 y 8: guardar en favoritos (fuera del enlace de la foto: un botón no puede ir dentro de un enlace) */}
+      <BotonFavorito id={p.id} nombre={p.nombre} className={`absolute top-2 z-10 ${fila ? "left-[5.25rem] sm:left-[8.25rem]" : "right-2"}`} />
       <div className={`flex min-w-0 flex-1 flex-col gap-1.5 border-linea/70 p-3.5 sm:p-4 ${fila ? "border-l" : "border-t"}`}>
         <p className="etiqueta truncate text-tinta-3">{etiquetaDe(p) || " "}</p>
         <h3 className="font-sans text-[15px] font-semibold leading-snug tracking-normal">

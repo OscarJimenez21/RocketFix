@@ -6,6 +6,7 @@
      los ratos libres del navegador después de abrir la tienda (salvo con «ahorro de datos» activado). */
 
 import { recurso } from "./formato";
+import { cargarGalerias } from "./galerias";
 
 const CLAVE = "rf-recarga";
 const FALLO_DE_CARGA = /dynamically imported module|Importing a module script failed|error loading dynamically imported|Failed to fetch|Unable to preload/i;
@@ -31,6 +32,8 @@ export function precargarProducto() {
   if (pedido) return;
   pedido = true;
   cargarProducto().catch(() => { pedido = false; });
+  // Con la página de producto llegan también las fotos extra de cada producto (lib/galerias.ts)
+  void cargarGalerias();
 }
 
 /** En los ratos libres del navegador, unos segundos después de abrir la tienda */

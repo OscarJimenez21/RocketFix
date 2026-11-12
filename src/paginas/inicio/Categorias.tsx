@@ -6,6 +6,7 @@ import { activa, reducirMovimiento } from "../../lib/animaciones";
 import { useRevelarHijos, useVisto } from "../../lib/enPantalla";
 import { recurso } from "../../lib/formato";
 import type { TiendaId } from "../../types";
+import { hrefDe } from "../../lib/rutas";
 
 /** Colores de las tarjetas de categoría (todos de la marca, planos: sin luces de adorno) */
 export const TEMAS = {
@@ -81,7 +82,7 @@ export function Categorias() {
           return (
             <li key={m.tienda} data-revelar className={`revelar ${forma.caja}`}>
               {/* mosaico-tarjeta: con el mouse encima, el producto se levanta y se sale un poco del cuadro (animación 57) */}
-              <a href={`#${t.vista}`} data-forma={m.forma} className={`mosaico-tarjeta group relative isolate flex h-full overflow-hidden rounded-lg p-4 transition-transform duration-150 ease-salida active:scale-[0.98] sm:p-6 ${tema.caja}`}>
+              <a href={hrefDe(t.vista)} data-forma={m.forma} className={`mosaico-tarjeta group relative isolate flex h-full overflow-hidden rounded-lg p-4 transition-transform duration-150 ease-salida active:scale-[0.98] sm:p-6 ${tema.caja}`}>
                 <span className={`relative z-10 flex min-w-0 flex-col ${forma.texto}`}>
                   <span className={`text-[12.5px] font-semibold leading-snug sm:text-sm ${tema.frase}`}>{m.frase}</span>
                   <span className={`mt-1 font-display font-extrabold leading-[0.98] tracking-tight ancho-108 ${forma.titulo}`}>{t.titulo}</span>

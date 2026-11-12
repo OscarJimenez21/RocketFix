@@ -8,6 +8,7 @@ import { useRevelarHijos, useVisto } from "../../lib/enPantalla";
 import { dinero, recurso } from "../../lib/formato";
 import type { Servicio } from "../../types";
 import { suave } from "../../lib/animaciones";
+import { hrefDe } from "../../lib/rutas";
 
 /** Instalación de cámaras: línea de negocio propia, con sus paquetes de referencia (los mismos del artículo) */
 function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => void }) {
@@ -28,7 +29,7 @@ function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => voi
         </ul>
         <div className="mt-6 flex flex-wrap gap-3">
           <button type="button" onClick={cotizar} className="btn btn-primario">Cotizar instalación</button>
-          <a href="#blog-camaras" className="btn btn-claro">Paquetes y preguntas frecuentes</a>
+          <a href={hrefDe("blog-camaras")} className="btn btn-claro">Paquetes y preguntas frecuentes</a>
         </div>
       </div>
       <div className="border-t border-white/10 bg-marca-noche/40 p-6 sm:p-8 lg:border-l lg:border-t-0">
@@ -112,7 +113,7 @@ export function Servicios() {
                   </ul>
                   <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-2 pt-5">
                     <button type="button" onClick={() => solicitar(s.titulo)} className="btn btn-marca">Solicitar cotización</button>
-                    <a href={`#${s.articulo}`} className="enlace-suelto text-sm">Ver detalles y tiempos</a>
+                    <a href={hrefDe(s.articulo)} className="enlace-suelto text-sm">Ver detalles y tiempos</a>
                   </div>
                 </div>
               </article>

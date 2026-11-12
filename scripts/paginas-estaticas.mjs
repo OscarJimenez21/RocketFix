@@ -1,12 +1,14 @@
 /* Páginas estáticas para buscadores (se ejecuta después de `vite build`).
-   La tienda usa direcciones con # (/RocketFix/#p/sa07), y Google no indexa lo que va después del #: para él la tienda
-   entera era una sola página. Este script crea una página HTML real por producto, sección, marca y artículo
+   Desde el 12/11/2026 la tienda usa estas mismas direcciones limpias (antes usaba #, que Google no indexa). Este script
+   crea una página HTML real por producto, sección, marca y artículo
    (/RocketFix/p/sa07/, /RocketFix/celulares/…) a partir de dist/index.html, cada una con:
    - su título, descripción, dirección canónica e imagen para compartir (WhatsApp muestra la foto del producto);
    - datos estructurados (JSON-LD): Product con su precio en pesos, BreadcrumbList, y en la portada la tienda (OnlineStore);
      los productos de «Preguntar disponibilidad» (consultar: true) no llevan precio ni Product, solo BreadcrumbList;
    - el contenido básico en el HTML (#estatico), para los buscadores y asistentes de IA que no ejecutan JavaScript.
-     Con JavaScript se oculta y la tienda se carga encima, igual que siempre (main.tsx lleva la dirección a su #).
+     Con JavaScript se oculta y la tienda se carga encima, en la misma dirección.
+   404.html: copia de la tienda para las direcciones sin página propia (ej.: /RocketFix/buscar/iphone/); la tienda lee la
+   dirección y muestra esa página (o su «No la encontramos»).
    También escribe sitemap.xml. Solo usa datos reales del catálogo: no declara disponibilidad, garantías ni calificaciones.
    Uso: node scripts/paginas-estaticas.mjs  (lo corre `npm run build`) */
 import { execFileSync } from "node:child_process";
@@ -285,6 +287,10 @@ for (const a of ARTICULOS) {
     .replace(/(<div id="root"><\/div>)/, `$1<div id="estatico" class="contenedor py-8">${cuerpo}</div>`);
   writeFileSync(join(DIST, "index.html"), h);
   urls.unshift(SITIO);
+  // 404.html: la tienda sin contenido estático ni dirección canónica, y sin indexar
+  writeFileSync(join(DIST, "404.html"), PLANTILLA
+    .replace(/<link rel="canonical"[^>]*>\s*/, "")
+    .replace("</head>", `<meta name="robots" content="noindex">${OCULTAR}</head>`));
 }
 
 // ---------- Mapa del sitio ----------

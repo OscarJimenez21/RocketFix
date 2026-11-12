@@ -1,8 +1,11 @@
-/* Listas de «Regalos por presupuesto» e «Ideas para regalar» (portada, solo en diciembre: ver REGALOS en temporada.ts).
+/* Listas de la sección «por presupuesto» (portada, todo el año desde el 12/11/2026) y de «Ideas para regalar» (diciembre).
    Todo sale del catálogo con sus precios de siempre: aquí solo se eligen y se ordenan productos, no se cambia ningún precio
-   ni se inventa ninguna promoción. Quedan fuera los de «Preguntar disponibilidad» y los que no tienen foto. */
+   ni se inventa ninguna promoción. Quedan fuera los de «Preguntar disponibilidad» y los que no tienen foto.
+   En cada temporada (lib/temporada.ts) la sección muestra solo los tipos de producto de esa fecha: en el Día de la Madre,
+   regalos para mamá; en regreso a clases, lo de estudiar; sin temporada, de todo. */
 import { MAS_VENDIDOS, PRODUCTOS, VITRINA, desde } from "../data/catalogo";
 import type { Producto } from "../types";
+import { REGALABLES, TEMPORADA } from "./temporada";
 
 /** Rangos de precio (por el precio más bajo del producto). Cada uno empieza donde termina el anterior */
 export const RANGOS = [
@@ -12,19 +15,13 @@ export const RANGOS = [
   { id: "mas", texto: "Más de $1.000.000", min: 1_000_000, max: Infinity }
 ] as const;
 
-/** Tipos de producto que se regalan (sin repuestos ni cables: una fuente de poder o un cable no son un regalo de Navidad).
-    Por sección, o por sección:tipo cuando de la sección solo sirven algunos */
-const REGALABLES = new Set<string>([
-  "cel", "tab", "rel", "aud", "par", "con", "tv", "mov",
-  "pc:portatiles", "pc:portatiles-gamer", "pc:escritorio-gamer",
-  "per:monitores", "per:teclados", "per:mouse", "per:diademas", "per:combos", "per:sillas", "per:camaras-web", "per:streaming", "per:memorias",
-  "acc:powerbank", "acc:lapices",
-  "comp:video"
-]);
-const regalable = (p: Producto) => REGALABLES.has(p.tienda) || REGALABLES.has(`${p.tienda}:${p.categoria ?? ""}`);
+const de = (tipos: string[]) => (p: Producto) => tipos.includes(p.tienda) || tipos.includes(`${p.tienda}:${p.categoria ?? ""}`);
 
 /** Productos que se pueden mostrar en estas filas */
-const CANDIDATOS = PRODUCTOS.filter(p => !p.consultar && p.imagen && regalable(p));
+const CON_FOTO = PRODUCTOS.filter(p => !p.consultar && p.imagen);
+const tiposTemporada = TEMPORADA?.presupuesto.tipos;
+const DEL_PRESUPUESTO = tiposTemporada ? CON_FOTO.filter(de(tiposTemporada)) : CON_FOTO;
+const REGALOS_TODOS = CON_FOTO.filter(de(REGALABLES));
 
 /** Puntos para ordenar: primero lo más vendido y la vitrina de la portada, después los destacados */
 const PUNTOS: Record<string, number> = {};
@@ -57,7 +54,7 @@ function variada(lista: Producto[]): Producto[] {
 
 export const porRango = (id: string): Producto[] => {
   const r = RANGOS.find(x => x.id === id) ?? RANGOS[0];
-  return variada(CANDIDATOS.filter(p => desde(p) >= r.min && desde(p) < r.max));
+  return variada(DEL_PRESUPUESTO.filter(p => desde(p) >= r.min && desde(p) < r.max));
 };
 
 /** Ideas por persona: cada una con los tipos de producto que le sirven, su color (los de las tarjetas de categoría) y un
@@ -73,9 +70,7 @@ export const PERSONAS: { id: string; titulo: string; frase: string; tema: "oscur
     tipos: ["tv", "par", "rel", "mov"] }
 ];
 
-const de = (tipos: string[]) => (p: Producto) => tipos.includes(p.tienda) || tipos.includes(`${p.tienda}:${p.categoria ?? ""}`);
-
 export const porPersona = (id: string): Producto[] => {
   const persona = PERSONAS.find(x => x.id === id) ?? PERSONAS[0];
-  return persona ? variada(CANDIDATOS.filter(de(persona.tipos))) : [];
+  return persona ? variada(REGALOS_TODOS.filter(de(persona.tipos))) : [];
 };

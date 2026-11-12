@@ -13,6 +13,7 @@ import type { TiendaId } from "../types";
 import { NoEncontrada } from "./NoEncontrada";
 import { abrirTiendaEn } from "./Tienda";
 import { suave } from "../lib/animaciones";
+import { hrefDe } from "../lib/rutas";
 
 const TEXTOS = textos as Record<string, string>;
 
@@ -76,7 +77,7 @@ export function Articulo({ id }: { id: string }) {
     <>
       {/* (La línea de lectura de los artículos, animación 39, se reemplazó el 11/11/2026 por el cohete de la cabecera,
           animación 58, que muestra lo mismo en todas las páginas) */}
-      <EncabezadoVista migas={[{ texto: "Inicio", href: "#inicio" }, { texto: "Blog", href: "#blog" }, { texto: a.etiqueta }]} titulo={a.titulo} lead={cab?.lead ?? a.resumen}
+      <EncabezadoVista migas={[{ texto: "Inicio", href: hrefDe("inicio") }, { texto: "Blog", href: hrefDe("blog") }, { texto: a.etiqueta }]} titulo={a.titulo} lead={cab?.lead ?? a.resumen}
         extra={<p className="mt-2 flex flex-wrap items-center text-sm text-tinta-3">Por {CONFIG.nombre} · Lectura de {a.minutos} min<BotonCompartir titulo={a.titulo} /></p>} />
       <div className="contenedor grid grid-cols-1 gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_300px]">
         {/* El texto del artículo es contenido propio de la tienda original */}
@@ -100,7 +101,7 @@ export function Articulo({ id }: { id: string }) {
           </div>
           <nav aria-label="Otros artículos" className="mt-6">
             <p className="etiqueta mb-2">Otros artículos</p>
-            <ul className="grid text-sm">{ARTICULOS.filter(x => x.id !== id).map(x => <li key={x.id}><a href={`#${x.id}`} className="enlace-suelto py-1 font-medium">{x.titulo}</a></li>)}</ul>
+            <ul className="grid text-sm">{ARTICULOS.filter(x => x.id !== id).map(x => <li key={x.id}><a href={hrefDe(x.id)} className="enlace-suelto py-1 font-medium">{x.titulo}</a></li>)}</ul>
           </nav>
         </aside>
       </div>

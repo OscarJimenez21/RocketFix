@@ -4,6 +4,7 @@
    Cómo: la foto de la tarjeta tocada se nombra «foto-producto» antes de la foto de la pantalla vieja; en la pantalla nueva
    ese nombre lo tiene la foto principal del producto (clase vuelo-foto en <html>, ver index.css). */
 import { activa, reducirMovimiento } from "./animaciones";
+import { BASE, navegar } from "./rutas";
 
 type ConTransicion = Document & { startViewTransition?: (cb: () => Promise<void> | void) => { finished: Promise<void> } };
 
@@ -25,14 +26,14 @@ export function abrirConVuelo(e: React.MouseEvent<HTMLAnchorElement>, foto: HTML
   if (!doc.startViewTransition || !foto || !activa(64) || reducirMovimiento()) return;
   if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
   const href = e.currentTarget.getAttribute("href");
-  if (!href?.startsWith("#")) return;
+  if (!href?.startsWith(BASE)) return;
   e.preventDefault();
   foto.style.setProperty("view-transition-name", "foto-producto");
   const raiz = document.documentElement;
   const t = doc.startViewTransition(async () => {
     foto.style.removeProperty("view-transition-name");
     raiz.classList.add("vuelo-foto");
-    location.hash = href;
+    navegar(href);
     await esperarFoto();
   });
   t.finished.finally(() => raiz.classList.remove("vuelo-foto"));

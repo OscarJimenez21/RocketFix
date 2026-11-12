@@ -39,10 +39,8 @@ export function Vitrina() {
   const p = productos[i];
   if (!p) return null;
   return (
-    // vitrina-flota: sube y baja 4 px muy despacio, como sin gravedad; se queda quieta con el mouse encima o fuera de la
-    // pantalla (animación 47)
-    <div ref={caja} role="region" aria-roledescription="carrusel" aria-label="Productos destacados" data-quieta={quieta || !visible || undefined}
-      className="vitrina-flota tarjeta w-full overflow-hidden border-0 text-tinta"
+    <div ref={caja} role="region" aria-roledescription="carrusel" aria-label="Productos destacados"
+      className="tarjeta w-full overflow-hidden border-0 text-tinta"
       onMouseEnter={() => setQuieta(true)} onMouseLeave={() => setQuieta(false)} onFocus={() => setQuieta(true)} onBlur={() => setQuieta(false)}>
       <div className="escenario relative aspect-[4/3]">
         {productos.map((x, j) => (

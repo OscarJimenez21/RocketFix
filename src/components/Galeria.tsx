@@ -1,7 +1,7 @@
 /* Fotos de la página del producto: foto principal y las de su galería. Se pasan con las flechas, deslizando o con las miniaturas.
    Con una sola foto no hay carrusel. Una foto extra que no carga se quita. */
 import { useEffect, useRef, useState } from "react";
-import { galeriaDe } from "../data/catalogo";
+import { useGaleria } from "../lib/galerias";
 import { recurso, srcsetFoto } from "../lib/formato";
 import { useMarco } from "../lib/movimiento";
 import type { Producto } from "../types";
@@ -17,12 +17,16 @@ function Tinte({ color }: { color: string | null }) {
 }
 
 export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?: string | null }) {
-  const [fotos, setFotos] = useState(() => galeriaDe(producto));
+  // Las fotos extra llegan aparte (lib/galerias.ts): mientras tanto se ve la principal
+  const todas = useGaleria(producto);
+  const clave = todas.join("|");
+  const [fotos, setFotos] = useState(todas);
   const [actual, setActual] = useState(0);
   const pista = useRef<HTMLDivElement>(null);
   const tira = useRef<HTMLDivElement>(null);
   const marco = useMarco(tira, actual);
-  useEffect(() => { setFotos(galeriaDe(producto)); setActual(0); pista.current?.scrollTo({ left: 0 }); }, [producto]);
+  useEffect(() => { setActual(0); pista.current?.scrollTo({ left: 0 }); }, [producto]);
+  useEffect(() => { setFotos(clave ? clave.split("|") : []); }, [clave]);
   useEffect(() => {
     const fila = tira.current;
     const el = fila?.children[actual] as HTMLElement | undefined;

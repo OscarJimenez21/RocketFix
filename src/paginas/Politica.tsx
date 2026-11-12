@@ -6,6 +6,7 @@ import { DATOS_FALTANTES, POLITICAS, TextoLegal, datoLegal } from "../components
 import { lista } from "../lib/formato";
 import { waLink } from "../lib/whatsapp";
 import { NoEncontrada } from "./NoEncontrada";
+import { hrefDe } from "../lib/rutas";
 
 export function Politica({ id }: { id: string }) {
   const p = POLITICAS.find(x => x.id === id);
@@ -13,7 +14,7 @@ export function Politica({ id }: { id: string }) {
   const vigencia = datoLegal("vigencia");
   return (
     <>
-      <EncabezadoVista migas={[{ texto: "Inicio", href: "#inicio" }, { texto: p.titulo }]} titulo={p.titulo} lead={p.lead}
+      <EncabezadoVista migas={[{ texto: "Inicio", href: hrefDe("inicio") }, { texto: p.titulo }]} titulo={p.titulo} lead={p.lead}
         extra={vigencia ? <p className="mt-3 text-sm text-tinta-3">Vigente desde {vigencia}</p> : undefined} />
       <div className="contenedor grid grid-cols-1 gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_280px]">
         <article className="prosa min-w-0 max-w-3xl">
@@ -36,7 +37,7 @@ export function Politica({ id }: { id: string }) {
             <p className="etiqueta mb-2">Políticas</p>
             <ul className="grid text-sm">
               {POLITICAS.map(x => (
-                <li key={x.id}><a href={`#${x.id}`} aria-current={x.id === id ? "page" : undefined}
+                <li key={x.id}><a href={hrefDe(x.id)} aria-current={x.id === id ? "page" : undefined}
                   className={`enlace-suelto py-1 font-medium ${x.id === id ? "text-marca-texto" : ""}`}>{x.menu}</a></li>
               ))}
             </ul>

@@ -8,7 +8,7 @@ import { dinero, recurso, srcsetFoto } from "../lib/formato";
 import { subtotalDe } from "../lib/pedido";
 import { usePanelModal } from "../lib/panel";
 import { usePestanaViva } from "../lib/pestana";
-import { claveRuta } from "../lib/rutas";
+import { claveRuta, hrefDe } from "../lib/rutas";
 import { ATERRIZAJE, hayVuelo } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
 import type { Ruta, TiendaId } from "../types";
@@ -16,6 +16,7 @@ import { Buscador } from "./Buscador";
 import { PuntoEstado, useAtencion } from "./Contacto";
 import { IconoBolsa, IconoCerrar, IconoMenu, IconoWhatsApp } from "./Iconos";
 import { Cohete, Logo } from "./Logo";
+import { EnlaceFavoritos } from "./Favorito";
 import { BotonTema, SelectorTema } from "./SelectorTema";
 
 const CANTIDAD = Object.fromEntries(TIENDAS.map(t => [t.id, deTienda(t.id).length])) as Record<TiendaId, number>;
@@ -23,11 +24,11 @@ const secciones = (ids: TiendaId[]) => ids.map(tiendaPorId).filter((t): t is Non
 
 /** Servicio técnico en el menú lateral (con cada línea de servicio) */
 const SERVICIO = [
-  { texto: "Solicitar un servicio", href: "#servicios" },
-  { texto: "Reparación de computadores", href: "#blog-computadores" },
-  { texto: "Reparación de celulares", href: "#blog-celulares" },
-  { texto: "Instalación de cámaras", href: "#blog-camaras" },
-  { texto: "Blog", href: "#blog" }
+  { texto: "Solicitar un servicio", href: hrefDe("servicios") },
+  { texto: "Reparación de computadores", href: hrefDe("blog-computadores") },
+  { texto: "Reparación de celulares", href: hrefDe("blog-celulares") },
+  { texto: "Instalación de cámaras", href: hrefDe("blog-camaras") },
+  { texto: "Blog", href: hrefDe("blog") }
 ];
 
 /** El logo y «Inicio» del menú llevan a la dirección de la tienda sin #: el navegador carga la portada de nuevo,
@@ -38,10 +39,11 @@ const INICIO = import.meta.env.BASE_URL;
 /** Accesos generales al final del menú */
 const AYUDA = [
   { texto: "Inicio", href: INICIO },
-  { texto: "Cómo comprar", href: "#como-comprar" },
-  { texto: "Todas las categorías", href: "#categorias" },
-  { texto: "Calificaciones de clientes", href: "#calificaciones" },
-  { texto: "Contacto y horario", href: "#contacto" }
+  { texto: "Tus favoritos", href: hrefDe("favoritos") },
+  { texto: "Cómo comprar", href: hrefDe("como-comprar") },
+  { texto: "Todas las categorías", href: hrefDe("categorias") },
+  { texto: "Calificaciones de clientes", href: hrefDe("calificaciones") },
+  { texto: "Contacto y horario", href: hrefDe("contacto") }
 ];
 
 /** Al tocar un enlace dentro del menú, el menú se cierra (también si el enlace es la página actual) */
@@ -78,7 +80,7 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
               <ul className="mt-1.5">
                 {secciones(g.tiendas).map(t => (
                   <li key={t.id}>
-                    <a href={`#${t.vista}`} aria-current={actual === t.vista ? "page" : undefined} className={fila(actual === t.vista)}>
+                    <a href={hrefDe(t.vista)} aria-current={actual === t.vista ? "page" : undefined} className={fila(actual === t.vista)}>
                       {/* Idea 1: cada sección con su producto recortado (sin fondo), el mismo del mosaico de la portada */}
                       <span className="flex min-w-0 items-center gap-3">
                         <span aria-hidden="true" className="claro-siempre flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-fondo">
@@ -170,6 +172,7 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
               <IconoWhatsApp className="h-5 w-5" /><span className="hidden xl:inline">Escríbenos por WhatsApp</span>
             </a>
             <BotonTema />
+            <EnlaceFavoritos />
             <button type="button" onClick={abrirCarrito} aria-label={`Abrir carrito, ${unidades} ${unidades === 1 ? "producto" : "productos"}`}
               title={unidades ? `Ver tu pedido: ${dinero(subtotalDe(lineas))} en productos` : "Tu carrito está vacío"}
               className="boton-carrito presionable inline-flex h-11 items-center gap-1.5 rounded border border-linea-fuerte px-2.5 text-sm font-semibold hover:border-tinta-2 sm:gap-2 sm:px-3">

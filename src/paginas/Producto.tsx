@@ -22,6 +22,8 @@ import { anotarVisto, useVistos } from "../lib/vistos";
 import { waLink } from "../lib/whatsapp";
 import type { Producto as TipoProducto } from "../types";
 import { NoEncontrada } from "./NoEncontrada";
+import { hrefDe } from "../lib/rutas";
+import { BotonFavorito } from "../components/Favorito";
 
 /** Versiones del producto: al elegir otra, el marco verde se desliza hasta ella en vez de saltar */
 function Versiones({ producto: p, elegida, elegir }: { producto: TipoProducto; elegida: number; elegir: (j: number) => void }) {
@@ -177,7 +179,7 @@ export default function Producto({ id }: { id: string }) {
   return (
     <>
       <div className="contenedor pt-5">
-        <Migas migas={[{ texto: "Inicio", href: "#inicio" }, { texto: VISTAS[vista] ?? "", href: `#${vista}` }, ...(cat ? [{ texto: cat }] : [])]} />
+        <Migas migas={[{ texto: "Inicio", href: hrefDe("inicio") }, { texto: VISTAS[vista] ?? "", href: hrefDe(vista) }, ...(cat ? [{ texto: cat }] : [])]} />
       </div>
       <div className="contenedor grid gap-8 pb-10 pt-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-12">
         <Galeria producto={p} tinte={p.opciones.length > 1 && activa(49) ? tinteDe(o.nombre) : null} />
@@ -185,7 +187,11 @@ export default function Producto({ id }: { id: string }) {
         {/* cascada-info: al abrir el producto, cada bloque de esta columna entra 50 ms después del anterior (animación 18) */}
         <div className="cascada-info min-w-0">
           <p className="etiqueta text-tinta-3">{etiquetaDe(p)}</p>
-          <h1 tabIndex={-1} className="mt-1.5 text-[26px] font-extrabold leading-tight md:text-[32px]">{p.nombre}</h1>
+          <div className="mt-1.5 flex items-start gap-3">
+            <h1 tabIndex={-1} className="min-w-0 flex-1 text-[26px] font-extrabold leading-tight md:text-[32px]">{p.nombre}</h1>
+            {/* Mejoras 7 y 8: guardar en favoritos */}
+            <BotonFavorito id={p.id} nombre={p.nombre} className="mt-0.5 shrink-0" />
+          </div>
           {p.specs.length > 0 && (
             // specs-cascada: las características cortas aparecen una por una (animación 19)
             // Cada característica lleva su ícono cuando se reconoce (pantalla, procesador, memoria…; ver Destacados.tsx)
@@ -285,7 +291,7 @@ export default function Producto({ id }: { id: string }) {
         <section aria-labelledby="t-completa" className="contenedor pt-10">
           <FilaProductos productos={complementos} etiqueta="Completa tu compra"
             encabezado={<><h2 id="t-completa" className="text-xl font-extrabold">Completa tu compra</h2><p className="mt-1 text-sm text-tinta-2">Accesorios que suelen ir con este producto.</p></>}
-            verTodo={complementos[0] && { href: `#${TIENDA_VISTA[complementos[0].tienda]}`, texto: `Ver más en ${VISTAS[TIENDA_VISTA[complementos[0].tienda]]?.toLowerCase() ?? "la tienda"}` }} />
+            verTodo={complementos[0] && { href: hrefDe(TIENDA_VISTA[complementos[0].tienda]), texto: `Ver más en ${VISTAS[TIENDA_VISTA[complementos[0].tienda]]?.toLowerCase() ?? "la tienda"}` }} />
         </section>
       )}
 
@@ -293,7 +299,7 @@ export default function Producto({ id }: { id: string }) {
         <section aria-labelledby="t-relacionados" className="contenedor py-10">
           <div className="flex items-end justify-between gap-4">
             <h2 id="t-relacionados" className="text-xl font-extrabold">También te puede interesar</h2>
-            <a href={`#${vista}`} className="enlace-suelto shrink-0 text-sm">Ver {VISTAS[vista]?.toLowerCase()}</a>
+            <a href={hrefDe(vista)} className="enlace-suelto shrink-0 text-sm">Ver {VISTAS[vista]?.toLowerCase()}</a>
           </div>
           <ul className="mt-5 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">{relacionados.map(r => <li key={r.id}><TarjetaProducto producto={r} /></li>)}</ul>
         </section>

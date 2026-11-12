@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { deTienda, desde } from "../../data/catalogo";
 import { FilaProductos } from "../../components/FilaProductos";
 import { dinero } from "../../lib/formato";
-import { hrefMarca } from "../../lib/rutas";
+import { hrefMarca, hrefDe } from "../../lib/rutas";
 import type { Producto } from "../../types";
 
 const CELULARES = deTienda("cel").filter(p => !p.consultar).sort((a, b) => desde(a) - desde(b));
@@ -72,7 +72,7 @@ export function TuCelular() {
         <div className="mt-6">
           <FilaProductos key={`${modo}-${marca}-${rango}`} productos={lista.slice(0, 12)} etiqueta="Celulares encontrados"
             encabezado={<p className="text-sm text-tinta-2">{lista.length} {lista.length === 1 ? "celular" : "celulares"}, del más económico al más caro</p>}
-            verTodo={modo === "marca" ? { href: hrefMarca(marca), texto: `Ver todo ${marca}` } : { href: "#celulares", texto: "Ver todos los celulares" }} />
+            verTodo={modo === "marca" ? { href: hrefMarca(marca), texto: `Ver todo ${marca}` } : { href: hrefDe("celulares"), texto: "Ver todos los celulares" }} />
         </div>
       </div>
     </section>

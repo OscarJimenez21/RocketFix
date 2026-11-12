@@ -1,6 +1,7 @@
 import { Buscador } from "../components/Buscador";
 import { Cohete } from "../components/Logo";
 import { waLink } from "../lib/whatsapp";
+import { hrefDe } from "../lib/rutas";
 
 /** Estrellas alrededor del cohete perdido: posición en el dibujo (180×120), radio y opacidad */
 const ESTRELLAS: [number, number, number, number][] = [
@@ -35,7 +36,7 @@ export function NoEncontrada({ texto = "Esta página no existe o cambió de dire
       {/* Mejora: buscar desde aquí mismo, sin volver al inicio */}
       <div className="mx-auto mt-6 max-w-md text-left"><Buscador /></div>
       <div className="mt-6 flex flex-wrap justify-center gap-3">
-        <a href="#inicio" className="btn btn-marca">Ir al inicio</a>
+        <a href={hrefDe("inicio")} className="btn btn-marca">Ir al inicio</a>
         <a href={waLink()} target="_blank" rel="noopener" className="btn btn-borde">Preguntar por WhatsApp</a>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { lazy, Suspense, useRef, useState } from "react";
 import { ARTICULOS, CONFIG, PAGOS } from "../data/catalogo";
 import { TIENDAS } from "../data/tiendas";
 import { useEnPantalla, useVisto } from "../lib/enPantalla";
@@ -8,8 +8,14 @@ import { waLink } from "../lib/whatsapp";
 import { BotonCopiar, PuntoEstado, useAtencion } from "./Contacto";
 import { IconoCamion, IconoMoto, IconoWhatsApp } from "./Iconos";
 import { Cohete, Logo } from "./Logo";
+import { useInstalar } from "../lib/instalar";
 import { SelectorTema } from "./SelectorTema";
 import { POLITICAS, TextoLegal } from "./TextoLegal";
+import { hrefDe } from "../lib/rutas";
+import { TEMPORADA } from "../lib/temporada";
+
+// Mejora 6: guirnalda de la temporada en el borde de arriba (se baja aparte y solo en temporada)
+const DecoracionPie = TEMPORADA ? lazy(() => import("./temporada/Decoracion")) : null;
 
 /** «Volver arriba»: el cohete despega hacia arriba mientras la página sube. Con «reducir movimiento» la página salta
     arriba de una vez. El foco pasa al logo de la cabecera, para seguir con el teclado desde arriba */
@@ -100,6 +106,21 @@ const AGRUPADAS = GRUPOS_PAGO.flatMap(g => g.nombres);
 const OTRAS = PAGOS.lista.filter(f => !AGRUPADAS.includes(f.nombre)).map(f => f.nombre);
 if (OTRAS.length) GRUPOS_PAGO.push({ titulo: "Otras", nombres: OTRAS });
 
+/** Mejora 3: «Instalar la tienda» como aplicación. Solo aparece cuando el navegador lo ofrece (Chrome, Edge, Android) */
+function BotonInstalar() {
+  const instalar = useInstalar();
+  if (!instalar) return null;
+  return (
+    <>
+      <h3 className="etiqueta mb-2 mt-6 text-white/60">Aplicación</h3>
+      <button type="button" onClick={instalar} className="btn btn-claro">
+        <Cohete className="h-5 w-5" />Instalar la tienda
+      </button>
+      <p className="mt-2 text-xs text-white/55">Queda en tu pantalla de inicio y abre más rápido.</p>
+    </>
+  );
+}
+
 /** Pie de todas las páginas. Incluye el contacto (#contacto): WhatsApp, horario y estado de atención. */
 export function PiePagina() {
   const atencion = useAtencion();
@@ -112,12 +133,13 @@ const enlace = "enlace-pie hover:text-white";
   return (
     <footer id="contacto" aria-labelledby="t-contacto" className="relative isolate overflow-hidden bg-marca-noche text-white/75">
       <CieloPie />
+      {DecoracionPie && <Suspense fallback={null}><DecoracionPie donde="pie" /></Suspense>}
       <div className="border-b border-white/10">
         <div className="contenedor flex flex-col gap-5 py-8 md:flex-row md:items-center md:justify-between md:gap-10">
           <div className="max-w-xl">
             <h2 id="t-contacto" className="text-xl font-extrabold text-white sm:text-2xl">¿Necesitas ayuda para elegir?</h2>
             <p className="mt-1.5 text-[15px] leading-relaxed">Escríbenos por WhatsApp: te asesoramos, confirmamos disponibilidad y coordinamos la entrega o el servicio.</p>
-            <a href="#como-comprar" className="mt-1 inline-flex min-h-[44px] items-center text-[15px] font-semibold text-marca-menta underline-offset-4 hover:underline">Mira cómo comprar en 3 pasos</a>
+            <a href={hrefDe("como-comprar")} className="mt-1 inline-flex min-h-[44px] items-center text-[15px] font-semibold text-marca-menta underline-offset-4 hover:underline">Mira cómo comprar en 3 pasos</a>
           </div>
           <RutaCohete />
           <div ref={botonesWa} className="flex flex-wrap items-center gap-3">
@@ -143,14 +165,14 @@ const enlace = "enlace-pie hover:text-white";
         </div>
         <nav aria-label="Categorías de la tienda">
           <h3 className="etiqueta mb-3 text-white/60">Tienda</h3>
-          <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">{TIENDAS.map(t => <li key={t.id}><a href={`#${t.vista}`} className={enlace}>{t.menu}</a></li>)}</ul>
+          <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">{TIENDAS.map(t => <li key={t.id}><a href={hrefDe(t.vista)} className={enlace}>{t.menu}</a></li>)}</ul>
         </nav>
         <nav aria-label="Servicio técnico">
           <h3 className="etiqueta mb-3 text-white/60">Servicio técnico</h3>
           <ul className="grid gap-2 text-sm">
-            <li><a href="#servicios" className={enlace}>Solicitar un servicio</a></li>
-            {ARTICULOS.map(a => <li key={a.id}><a href={`#${a.id}`} className={enlace}>{a.titulo}</a></li>)}
-            <li><a href="#blog" className={enlace}>Blog</a></li>
+            <li><a href={hrefDe("servicios")} className={enlace}>Solicitar un servicio</a></li>
+            {ARTICULOS.map(a => <li key={a.id}><a href={hrefDe(a.id)} className={enlace}>{a.titulo}</a></li>)}
+            <li><a href={hrefDe("blog")} className={enlace}>Blog</a></li>
           </ul>
         </nav>
         <div>
@@ -161,6 +183,7 @@ const enlace = "enlace-pie hover:text-white";
           {/* Idea 30: colores de día o de noche */}
           <h3 className="etiqueta mb-2 mt-6 text-white/60">Colores de la página</h3>
           <SelectorTema oscuro />
+          <BotonInstalar />
         </div>
       </div>
 
@@ -217,7 +240,7 @@ const enlace = "enlace-pie hover:text-white";
           </div>
           <div className="flex shrink-0 flex-col items-start gap-3 md:items-end">
             <nav aria-label="Políticas de la tienda">
-              <ul className="flex flex-wrap gap-x-4 gap-y-1">{POLITICAS.map(p => <li key={p.id}><a href={`#${p.id}`} className={enlace}>{p.menu}</a></li>)}</ul>
+              <ul className="flex flex-wrap gap-x-4 gap-y-1">{POLITICAS.map(p => <li key={p.id}><a href={hrefDe(p.id)} className={enlace}>{p.menu}</a></li>)}</ul>
             </nav>
             <VolverArriba />
           </div>

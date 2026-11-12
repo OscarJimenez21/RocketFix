@@ -9,6 +9,7 @@ import { temblor } from "../lib/movimiento";
 import { waLink } from "../lib/whatsapp";
 import { IconoEstrella, IconoWhatsApp } from "./Iconos";
 import type { Resena } from "../types";
+import { hrefDe } from "../lib/rutas";
 
 const PALABRAS = ["", "Muy mala", "Mala", "Regular", "Buena", "Excelente"];
 const TIPOS = ["Compré un producto", "Reparación de computador", "Reparación de celular", "Instalación de cámaras", "Otro"];
@@ -42,7 +43,7 @@ export function ResumenCalificaciones() {
   const { total, promedio } = resumen(RESENAS);
   if (!total) return null;
   return (
-    <a href="#calificaciones" className="inline-flex items-center gap-2 font-semibold text-white hover:underline">
+    <a href={hrefDe("calificaciones")} className="inline-flex items-center gap-2 font-semibold text-white hover:underline">
       <Estrellas valor={promedio} vacia="text-white/25" />
       {numero(promedio)} · {total} {total === 1 ? "calificación" : "calificaciones"}
     </a>
@@ -155,7 +156,7 @@ function FormularioCalificacion() {
           </a>
           {enviado
             ? <p role="status" className="mt-3 rounded bg-marca-suave px-3 py-2 text-sm text-marca-oscuro motion-safe:animate-entrar"><strong>¡Gracias!</strong> Envía el mensaje que se abrió en WhatsApp para que nos llegue tu calificación.</p>
-            : <p className="mt-2 text-xs leading-relaxed text-tinta-3">Se abre WhatsApp con tu calificación escrita. Revisamos cada calificación y solo publicamos las que nos autorizas. Al enviarla aceptas el <a href="#datos-personales" className="enlace">tratamiento de tus datos personales</a>.</p>}
+            : <p className="mt-2 text-xs leading-relaxed text-tinta-3">Se abre WhatsApp con tu calificación escrita. Revisamos cada calificación y solo publicamos las que nos autorizas. Al enviarla aceptas el <a href={hrefDe("datos-personales")} className="enlace">tratamiento de tus datos personales</a>.</p>}
         </div>
       </form>
     </div>

@@ -7,7 +7,7 @@ import { TIENDAS } from "../data/tiendas";
 import { EncabezadoVista } from "../components/EncabezadoVista";
 import { TarjetaProducto } from "../components/TarjetaProducto";
 import { norm } from "../lib/formato";
-import { hrefBusqueda } from "../lib/rutas";
+import { hrefBusqueda, hrefDe } from "../lib/rutas";
 import type { TiendaId } from "../types";
 import { CohetePerdido } from "./NoEncontrada";
 
@@ -39,7 +39,7 @@ export function Marca({ marca }: { marca: string }) {
 
   return (
     <>
-      <EncabezadoVista migas={[{ texto: "Inicio", href: "#inicio" }, { texto: nombre }]} titulo={nombre}
+      <EncabezadoVista migas={[{ texto: "Inicio", href: hrefDe("inicio") }, { texto: nombre }]} titulo={nombre}
         lead={productos.length ? `${productos.length} ${productos.length === 1 ? "producto" : "productos"} ${nombre} en Rocket Fix.` : `Por ahora no tenemos productos ${nombre}.`} />
       <div className="contenedor py-6">
         {secciones.length > 1 && (
