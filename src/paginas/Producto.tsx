@@ -92,7 +92,7 @@ function BarraAgregar({ boton, producto, nombre, precio, tope, alAgregar, etique
   return (
     <>
     {/* Idea 13: en computador, la misma barra va arriba, debajo de la cabecera, con la foto del producto */}
-    <div ref={arriba} className={`fixed inset-x-0 top-[69px] z-30 hidden border-b border-linea bg-superficie/95 shadow-flota backdrop-blur transition-[transform,opacity] duration-300 ease-salida lg:block ${visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}>
+    <div ref={arriba} className={`fixed inset-x-0 top-[110px] z-30 hidden border-b border-linea bg-superficie/95 shadow-flota backdrop-blur transition-[transform,opacity] duration-300 ease-salida lg:block ${visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}>
       <div className="contenedor flex h-16 items-center gap-4">
         <span className="escenario h-12 w-12 shrink-0 rounded border border-linea p-1"><FotoProducto producto={producto} alt="" tamanos="48px" /></span>
         <p className="min-w-0 flex-1 truncate font-semibold">{nombre}</p>

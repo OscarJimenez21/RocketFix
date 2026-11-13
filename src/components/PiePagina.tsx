@@ -2,6 +2,7 @@ import { lazy, Suspense, useRef, useState } from "react";
 import { ARTICULOS, CONFIG, PAGOS } from "../data/catalogo";
 import { TIENDAS } from "../data/tiendas";
 import { useEnPantalla, useVisto } from "../lib/enPantalla";
+import { CATALOGO_PDF, pesoCatalogo } from "../lib/catalogoPdf";
 import { dinero, recurso } from "../lib/formato";
 import { filasHorario } from "../lib/horario";
 import { waLink } from "../lib/whatsapp";
@@ -181,6 +182,8 @@ const enlace = "enlace-pie hover:text-white";
               ["busca-por-uso", "Busca por uso"], ["todas-las-marcas", "Todas las marcas"], ["guia-de-originales", "Cómo saber si es original"],
               ["cuidado-de-tus-equipos", "Cuida tus equipos"], ["glosario", "Glosario"], ["empresas", "Compras para empresas"]]
               .map(([id, t]) => <li key={id}><a href={hrefDe(id ?? "")} className={enlace}>{t}</a></li>)}
+            {/* Idea 69 (13/11/2026): catálogo completo para descargar */}
+            <li><a href={CATALOGO_PDF.href} target="_blank" rel="noopener" className={enlace}>{CATALOGO_PDF.texto} <span className="text-white/60">({pesoCatalogo})</span></a></li>
           </ul>
         </nav>
         <div>

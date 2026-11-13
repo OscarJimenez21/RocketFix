@@ -62,7 +62,7 @@ export function BarraSecciones() {
 
   return (
     <nav ref={barra} aria-label="Secciones de la portada"
-      className={`fixed inset-x-0 top-[69px] z-30 hidden border-b border-linea bg-superficie/90 backdrop-blur transition-[transform,opacity] duration-300 ease-salida lg:block ${visible ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-full opacity-0"}`}>
+      className={`fixed inset-x-0 top-[110px] z-30 hidden border-b border-linea bg-superficie/90 backdrop-blur transition-[transform,opacity] duration-300 ease-salida lg:block ${visible ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-full opacity-0"}`}>
       <div ref={lista} className="contenedor relative flex h-11 items-stretch gap-1 overflow-x-auto sin-barra">
         {presentes.map(s => (
           <button key={s.id} data-opcion type="button" onClick={() => ir(s.id)} aria-current={actual === s.id ? "true" : undefined}
