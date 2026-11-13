@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { etiquetaDe, recienLlegado, textoConsulta } from "../data/catalogo";
 import { useGaleria } from "../lib/galerias";
 import { BotonFavorito } from "./Favorito";
 import { useTienda } from "../estado/TiendaContext";
 import { activa } from "../lib/animaciones";
 import { precargarFoto, precargarProducto } from "../lib/carga";
+import { precargarDescripcion } from "../lib/descripcion";
 import { dinero, recurso, srcsetFoto } from "../lib/formato";
 import { hrefProducto } from "../lib/rutas";
 import { tinteDe } from "../lib/tinte";
@@ -128,7 +129,9 @@ function SegundaFoto({ producto: p, ver }: { producto: Producto; ver: boolean })
 
 /** `cinta`: etiqueta opcional arriba a la derecha de la foto (ej.: "Top ventas") */
 /** `fila` (idea 38): en la vista de lista, la foto va a la izquierda y la información a la derecha */
-export function TarjetaProducto({ producto: p, prioridad = false, cinta, fila = false }: { producto: Producto; prioridad?: boolean; cinta?: string; fila?: boolean }) {
+/** memo (13/11/2026): si la página de alrededor se vuelve a dibujar (por ejemplo cuando llega la descripción del
+    producto), las tarjetas no se rehacen; sí se actualizan solas al cambiar el carrito o la versión elegida (useTienda) */
+export const TarjetaProducto = memo(function TarjetaProducto({ producto: p, prioridad = false, cinta, fila = false }: { producto: Producto; prioridad?: boolean; cinta?: string; fila?: boolean }) {
   const { version, elegirVersion, cantidadDe, agregar, avisar } = useTienda();
   const i = Math.min(version(p.id), p.opciones.length - 1);
   const o = p.opciones[i] ?? p.opciones[0];
@@ -149,7 +152,7 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta, fila = 
   return (
     // tarjeta-eleva: con el mouse encima, la tarjeta sube un poco (animación 13)
     // Mejora 15: con el mouse encima, el dedo sobre la tarjeta o el foco del teclado, se baja la página de producto (ver lib/carga.ts)
-    <article onPointerEnter={e => { precargarProducto(); if (e.pointerType === "mouse") precargarFoto(p.imagen); if (e.pointerType === "mouse" && !verSegunda && activa(62)) setVerSegunda(true); }}
+    <article onPointerEnter={e => { precargarProducto(); if (e.pointerType === "mouse") { precargarFoto(p.imagen); precargarDescripcion(p.id); } if (e.pointerType === "mouse" && !verSegunda && activa(62)) setVerSegunda(true); }}
       onTouchStart={precargarProducto} onFocus={precargarProducto}
       className={`tarjeta tarjeta-eleva group relative flex h-full overflow-hidden transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta ${fila ? "flex-row" : "flex-col"}`}>
       {/* Con el mouse encima de la tarjeta, la foto se acerca un poco (solo con mouse; en celular no queda pegado) */}
@@ -201,4 +204,4 @@ export function TarjetaProducto({ producto: p, prioridad = false, cinta, fila = 
       </div>
     </article>
   );
-}
+});

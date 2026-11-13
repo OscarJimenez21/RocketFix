@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef, useState } from "react";
+import { lazy, memo, Suspense, useRef, useState } from "react";
 import { ARTICULOS, CONFIG, PAGOS } from "../data/catalogo";
 import { TIENDAS } from "../data/tiendas";
 import { useEnPantalla, useVisto } from "../lib/enPantalla";
@@ -123,7 +123,8 @@ function BotonInstalar() {
 }
 
 /** Pie de todas las páginas. Incluye el contacto (#contacto): WhatsApp, horario y estado de atención. */
-export function PiePagina() {
+/** memo: el pie no depende de la página, así que no se vuelve a dibujar en cada cambio de página (13/11/2026) */
+export const PiePagina = memo(function PiePagina() {
   const atencion = useAtencion();
   const redes = Object.entries(CONFIG.redes).filter(([, url]) => url);
   // Animación 76: en computador, el subrayado crece de izquierda a derecha al pasar el mouse (ver .enlace-pie en index.css)
@@ -260,4 +261,4 @@ const enlace = "enlace-pie hover:text-white";
       </div>
     </footer>
   );
-}
+});

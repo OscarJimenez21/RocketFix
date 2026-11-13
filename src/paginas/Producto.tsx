@@ -24,7 +24,7 @@ import { anotarVisto, useVistos } from "../lib/vistos";
 import { waLink } from "../lib/whatsapp";
 import type { Producto as TipoProducto } from "../types";
 import { NoEncontrada } from "./NoEncontrada";
-import { hrefDe } from "../lib/rutas";
+import { hrefDe, useDespuesDePintar } from "../lib/rutas";
 import { BotonFavorito } from "../components/Favorito";
 
 /** Versiones del producto: al elegir otra, el marco verde se desliza hasta ella en vez de saltar */
@@ -148,6 +148,8 @@ export default function Producto({ id }: { id: string }) {
     const puntos = (r: TipoProducto) => (r.categoria === p.categoria ? 2 : 0) + (r.marca && r.marca === p.marca ? 1 : 0);
     return deTienda(p.tienda).filter(r => r.id !== p.id).sort((a, b) => conPrecioPrimero(a, b) || puntos(b) - puntos(a)).slice(0, 4);
   }, [p]);
+  // Las filas de productos de abajo se dibujan un instante después de la parte de arriba (ver lib/rutas.ts)
+  const abajo = useDespuesDePintar();
 
   if (!p) return <NoEncontrada texto="Este producto ya no está en la tienda." />;
 
@@ -335,7 +337,7 @@ export default function Producto({ id }: { id: string }) {
         )}
       </section>
 
-      {complementos.length > 0 && (
+      {abajo && complementos.length > 0 && (
         <section aria-labelledby="t-completa" className="contenedor pt-10">
           <FilaProductos productos={complementos} etiqueta="Completa tu compra"
             encabezado={<><h2 id="t-completa" className="text-xl font-extrabold">Completa tu compra</h2><p className="mt-1 text-sm text-tinta-2">Accesorios que suelen ir con este producto.</p></>}
@@ -343,7 +345,7 @@ export default function Producto({ id }: { id: string }) {
         </section>
       )}
 
-      {relacionados.length > 0 && (
+      {abajo && relacionados.length > 0 && (
         <section aria-labelledby="t-relacionados" className="contenedor py-10">
           <div className="flex items-end justify-between gap-4">
             <h2 id="t-relacionados" className="text-xl font-extrabold">También te puede interesar</h2>
@@ -353,8 +355,8 @@ export default function Producto({ id }: { id: string }) {
         </section>
       )}
 
-      {!p.consultar && <Comparador producto={p} />}
-      <Recientes productos={vistos} fondo />
+      {abajo && !p.consultar && <Comparador producto={p} />}
+      {abajo && <Recientes productos={vistos} fondo />}
     </>
   );
 }

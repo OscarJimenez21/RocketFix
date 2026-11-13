@@ -7,7 +7,7 @@
    · Los enlaces de la tienda no recargan la página: cambian la dirección y la tienda dibuja la nueva página (navegar).
    · Una dirección que no tiene página propia en GitHub Pages (ej.: /RocketFix/buscar/…) abre 404.html, que es la misma
      tienda (lo genera scripts/paginas-estaticas.mjs). */
-import { useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { ARTICULOS, PRODUCTOS, VISTA_TIENDA } from "../data/catalogo";
 import politicas from "../data/politicas.json";
 import { slug } from "./formato";
@@ -201,3 +201,23 @@ export const tomarPosicion = () => {
   volverA = null;
   return p;
 };
+/** ¿La página que se va a dibujar es una a la que la persona regresa (y hay que volver a un punto más abajo)? */
+export const vaARegresar = () => volverA !== null && volverA > 0;
+
+/** Partes de abajo de una página (filas de productos): se dibujan justo después de pintar la parte de arriba, y en
+    pedazos que no traban la página (startTransition). Así abrir un producto muestra de inmediato la foto, el precio y
+    los botones (13/11/2026: antes todo se dibujaba de una vez, 55–85 ms de página trabada en un buen computador).
+    Al regresar con «atrás» se dibuja todo de una vez, para poder volver al mismo punto de la página. */
+export function useDespuesDePintar(): boolean {
+  const [listo, setListo] = useState(vaARegresar);
+  useEffect(() => {
+    if (listo) return;
+    let hecho = false;
+    const ya = () => { if (!hecho) { hecho = true; startTransition(() => setListo(true)); } };
+    const cuadro = requestAnimationFrame(() => window.setTimeout(ya, 0));
+    // Por si el navegador no pinta (pestaña en segundo plano): igual se dibuja
+    const respaldo = window.setTimeout(ya, 400);
+    return () => { hecho = true; cancelAnimationFrame(cuadro); window.clearTimeout(respaldo); };
+  }, [listo]);
+  return listo;
+}

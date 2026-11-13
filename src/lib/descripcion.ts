@@ -21,16 +21,44 @@ export function leerDescripcion(dato: unknown): Descripcion {
     vite.config.ts): la página baja solo la suya. Mientras llega devuelve null; si no hay (o falla la red), una vacía,
     y la página arma la descripción general con los datos del producto, como antes. */
 export function useDescripcion(id: string): Descripcion | null {
-  const [cargada, setCargada] = useState<{ id: string; d: Descripcion } | null>(null);
+  const [cargada, setCargada] = useState<{ id: string; d: Descripcion } | null>(() => {
+    const d = guardadas.get(id);
+    return d ? { id, d } : null;
+  });
   useEffect(() => {
     let vigente = true;
-    fetch(recurso(`descripciones/${id}.json`))
-      .then(r => (r.ok ? r.json() : {}))
-      .catch(() => ({}))
-      .then(dato => { if (vigente) setCargada({ id, d: leerDescripcion(dato) }); });
+    void pedirDescripcion(id).then(d => { if (vigente) setCargada({ id, d }); });
     return () => { vigente = false; };
   }, [id]);
-  return cargada?.id === id ? cargada.d : null;
+  return cargada?.id === id ? cargada.d : (guardadas.get(id) ?? null);
+}
+
+/* 13/11/2026: las descripciones ya bajadas quedan en memoria mientras la pestaña está abierta. Al volver a un producto,
+   la descripción sale de una vez (antes llegaba un instante después y, al regresar con «atrás», la página quedaba
+   ~300 px más abajo de donde estaba la persona). Un pedido que falla no se guarda: se vuelve a intentar. */
+const guardadas = new Map<string, Descripcion>();
+const enCamino = new Map<string, Promise<Descripcion>>();
+export function pedirDescripcion(id: string): Promise<Descripcion> {
+  const ya = guardadas.get(id);
+  if (ya) return Promise.resolve(ya);
+  const pedido = enCamino.get(id);
+  if (pedido) return pedido;
+  const nuevo = fetch(recurso(`descripciones/${id}.json`))
+    .then(r => (r.ok ? r.json() : {}))
+    .then(dato => { const d = leerDescripcion(dato); guardadas.set(id, d); return d; })
+    .catch((): Descripcion => ({}))
+    .finally(() => enCamino.delete(id));
+  enCamino.set(id, nuevo);
+  return nuevo;
+}
+
+/** Al dejar el mouse 250 ms sobre una tarjeta, se pide su descripción (así la página del producto abre completa) */
+let espera = 0;
+export function precargarDescripcion(id: string) {
+  const red = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+  if (guardadas.has(id) || red?.saveData) return;
+  window.clearTimeout(espera);
+  espera = window.setTimeout(() => { void pedirDescripcion(id); }, 250);
 }
 
 export interface DescripcionArmada {

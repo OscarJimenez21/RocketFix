@@ -445,8 +445,9 @@
   /* 64 · La foto vuela de la tarjeta a la página del producto (ver lib/transicion.ts). El resto de la página cambia con
      un fundido corto */
   :root.vuelo-foto [data-foto-principal] { view-transition-name: foto-producto; }
-  ::view-transition-group(foto-producto) { animation-duration: 420ms; animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1); }
-  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 180ms; }
+  /* 13/11/2026: más corta (era 420 ms): mientras vuela, la página no responde a clics; abrir productos es frecuente */
+  ::view-transition-group(foto-producto) { animation-duration: 260ms; animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1); }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 140ms; }
   /* 65 · Carrito: al enviar el pedido por WhatsApp, el cohete tiembla un instante en su plataforma y despega */
   @media (prefers-reduced-motion: no-preference) {
     :root:not(.sin-a65) .pedido-despega { display: block; animation: pedido-despega 1300ms cubic-bezier(0.55, 0, 1, 0.45) 250ms forwards; }
