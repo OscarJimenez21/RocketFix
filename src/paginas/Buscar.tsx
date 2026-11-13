@@ -6,7 +6,7 @@ import { TIENDAS } from "../data/tiendas";
 import { EncabezadoVista } from "../components/EncabezadoVista";
 import { IconoWhatsApp } from "../components/Iconos";
 import { TarjetaProducto } from "../components/TarjetaProducto";
-import { buscarProductos, sugerirCorreccion } from "../lib/busqueda";
+import { buscarProductos, palabrasDe, sugerirCorreccion } from "../lib/busqueda";
 import { anotarBusqueda } from "../lib/busquedasRecientes";
 import type { TiendaId } from "../types";
 import { hrefBusqueda, hrefDe } from "../lib/rutas";
@@ -29,6 +29,13 @@ export function Buscar({ q }: { q: string }) {
   const correccion = useMemo(() => (encontrados.length ? null : sugerirCorreccion(q)), [q, encontrados.length]);
   // Mejora: los primeros productos de la búsqueda corregida, para no tener que tocar el enlace
   const deCorreccion = useMemo(() => (correccion ? buscarProductos(correccion).slice(0, 8) : []), [correccion]);
+  // Idea 14: si no hay nada ni corrección, los productos que coinciden con alguna de las palabras (la más precisa primero)
+  const parecidos = useMemo(() => {
+    if (encontrados.length || correccion) return [];
+    const vistos = new Set<string>();
+    const porPalabra = palabrasDe(q).filter(w => w.length >= 3).map(w => buscarProductos(w)).filter(r => r.length).sort((a, b) => a.length - b.length);
+    return porPalabra.flat().filter(p => !vistos.has(p.id) && Boolean(vistos.add(p.id))).slice(0, 4);
+  }, [q, encontrados.length, correccion]);
   // Mejora 7: cuántos resultados hay en cada sección, para filtrar con un toque (solo si hay de dos secciones o más)
   const porSeccion = useMemo(() => {
     const m = new Map<TiendaId, number>();
@@ -93,6 +100,14 @@ export function Buscar({ q }: { q: string }) {
               </ul>
             )}
             {deCorreccion.length > 4 && correccion && <a href={hrefBusqueda(correccion)} className="btn btn-borde mt-4">Ver todo lo de «{correccion}»</a>}
+            {parecidos.length > 0 && (
+              <>
+                <p className="etiqueta mt-6">Productos parecidos</p>
+                <ul className="mt-3 grid grid-cols-2 gap-3 text-left sm:grid-cols-4">
+                  {parecidos.map(p => <li key={p.id}><TarjetaProducto producto={p} /></li>)}
+                </ul>
+              </>
+            )}
             <p className="mt-1 text-sm text-tinta-2">Revisa cómo está escrito o prueba con una palabra más corta (por ejemplo, la marca o el modelo). Si no está en la tienda, pregúntanos: puede que lo consigamos por pedido.</p>
             <a href={waLink(texto ? `Hola, estoy buscando: ${texto}` : undefined)} target="_blank" rel="noopener" className="btn btn-wa mt-5"><IconoWhatsApp />Preguntar por WhatsApp</a>
             <p className="etiqueta mt-8">Búsquedas populares</p>

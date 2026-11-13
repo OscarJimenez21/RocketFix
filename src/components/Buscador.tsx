@@ -10,13 +10,26 @@ import { useEnPantalla } from "../lib/enPantalla";
 import { dinero, norm, recurso } from "../lib/formato";
 import { alCambiarPagina, hrefBusqueda, hrefProducto, hrefDe, navegar } from "../lib/rutas";
 import { FotoProducto } from "./FotoProducto";
-import { IconoBuscar, IconoCerrar, IconoReloj, IconoWhatsApp } from "./Iconos";
+import { IconoBuscar, IconoCerrar, IconoMicrofono, IconoReloj, IconoWhatsApp } from "./Iconos";
 import { waLink } from "../lib/whatsapp";
 
 type Opcion = { href: string; clave: string };
 
+/** Reconocimiento de voz del navegador (con prefijo en Chrome y Safari), o null si no existe */
+interface Reconocedor {
+  lang: string; interimResults: boolean; maxAlternatives: number;
+  onresult: (e: { results: ArrayLike<ArrayLike<{ transcript: string }>> }) => void;
+  onend: () => void; onerror: () => void; start: () => void; stop: () => void;
+}
+const reconocedor = (): (new () => Reconocedor) | null => {
+  const w = window as Window & { SpeechRecognition?: new () => Reconocedor; webkitSpeechRecognition?: new () => Reconocedor };
+  return w.SpeechRecognition ?? w.webkitSpeechRecognition ?? null;
+};
+
 const TEXTO_CAMPO = "Buscar celulares, portátiles, consolas…";
 /** Animación 9: con el campo vacío, el texto de ayuda va mostrando búsquedas de ejemplo, una cada 2,8 s */
+/** Usos de la página «Busca por uso» (los mismos id de data/ayuda.json; aquí escritos para no cargar esos textos con la tienda) */
+const USOS_RAPIDOS = [["estudiar", "Estudiar"], ["trabajar", "Trabajar"], ["jugar", "Jugar"], ["crear", "Crear contenido"], ["hogar", "La casa"], ["armar-pc", "Armar un PC"]] as const;
 const EJEMPLOS = [TEXTO_CAMPO, ...BUSQUEDAS_POPULARES.map(b => `Buscar «${b}»`)];
 
 export function Buscador({ inicial = "" }: { inicial?: string }) {
@@ -85,6 +98,33 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
   useEffect(() => setActivo(-1), [q]);
 
   const ir = (href: string) => { navegar(href); setAbierto(false); };
+
+  // Idea 1: búsqueda por voz. Lo dicho se escribe en el campo y se busca. La página no graba ni guarda nada: el navegador
+  // convierte la voz en texto (en Chrome lo hace el servicio de voz de Google, como en su buscador)
+  const [voz] = useState(() => typeof window !== "undefined" && Boolean(reconocedor()));
+  const [oyendo, setOyendo] = useState(false);
+  const oido = useRef<Reconocedor | null>(null);
+  const escuchar = () => {
+    if (oyendo) { oido.current?.stop(); return; }
+    const R = reconocedor();
+    if (!R) return;
+    const r = new R();
+    r.lang = "es-CO";
+    r.interimResults = false;
+    r.maxAlternatives = 1;
+    r.onresult = e => {
+      const dicho = e.results[0]?.[0]?.transcript?.trim() ?? "";
+      if (!dicho) return;
+      setQ(dicho);
+      ir(hrefBusqueda(dicho));
+    };
+    r.onend = () => { setOyendo(false); oido.current = null; };
+    r.onerror = () => { setOyendo(false); oido.current = null; };
+    oido.current = r;
+    setOyendo(true);
+    try { r.start(); } catch { setOyendo(false); }
+  };
+  useEffect(() => () => oido.current?.stop(), []);
   // Mejora 4: borrar lo escrito con la ✕ (igual en todos los navegadores; la ✕ propia de Chrome se esconde en el CSS)
   const limpiar = () => { setQ(""); setAbierto(true); campoRef.current?.focus(); };
 
@@ -125,6 +165,12 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
           <button type="button" onClick={limpiar} aria-label="Borrar la búsqueda"
             className="limpiar-busqueda presionable absolute right-0 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded text-tinta-3 hover:bg-linea hover:text-tinta">
             <IconoCerrar className="h-4 w-4" />
+          </button>
+        ) : voz ? (
+          // Idea 1: buscar hablando (solo en los navegadores que lo permiten: Chrome, Edge, Safari)
+          <button type="button" onClick={escuchar} aria-label={oyendo ? "Escuchando, toca para detener" : "Buscar por voz"} aria-pressed={oyendo}
+            className={`presionable absolute right-0 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded ${oyendo ? "text-acento" : "text-tinta-3 hover:bg-linea hover:text-tinta"}`}>
+            <IconoMicrofono className={`h-[18px] w-[18px] ${oyendo ? "motion-safe:animate-pulse" : ""}`} />
           </button>
         ) : (
           // En computador, la pista del atajo «/» (ver arriba)
@@ -180,6 +226,14 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
                   </li>
                 ))}
               </ul>
+              {/* Idea 9: para quien no sabe el nombre del producto, pero sí para qué lo quiere */}
+              <p className="etiqueta border-t border-linea px-2.5 pb-1.5 pt-3">¿Para qué lo necesitas?</p>
+              <div className="flex flex-wrap gap-1.5 px-1.5 pb-1.5">
+                {USOS_RAPIDOS.map(([id, t]) => (
+                  <a key={id} href={`${hrefDe("busca-por-uso")}#${id}`} onClick={() => setAbierto(false)}
+                    className="rounded-full border border-linea px-3 py-1 text-sm hover:border-linea-fuerte">{t}</a>
+                ))}
+              </div>
             </>
           )}
           {palabras.length > 0 && opciones.length > 0 && (

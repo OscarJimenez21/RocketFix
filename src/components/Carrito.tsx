@@ -6,7 +6,8 @@ import { useTienda } from "../estado/TiendaContext";
 import { abrirBold, boldActivo, clavePago, nuevaReferencia } from "../lib/bold";
 import { dinero, lista } from "../lib/formato";
 import { usePanelModal } from "../lib/panel";
-import { envioDe, leerDatosPedido, mensajePedido, reglaEnvio, subtotalDe, type DatosPedido } from "../lib/pedido";
+import { FRANJAS, envioDe, leerDatosPedido, mensajePedido, nuevoNumeroPedido, reglaEnvio, subtotalDe, type DatosPedido } from "../lib/pedido";
+import { enlaceCarrito, leerCarritoCompartido } from "../lib/carritoCompartido";
 import { alCambiarPagina, hrefProducto, hrefDe } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
 import type { ZonaEntrega } from "../types";
@@ -74,10 +75,47 @@ const GUARDADO = "rocketfix-datos-pedido";
 const datosIniciales = (): DatosPedido => {
   try { return leerDatosPedido(sessionStorage.getItem(GUARDADO)); } catch { return leerDatosPedido(null); }
 };
+/** Idea 35: el número del pedido se guarda en la sesión (al recargar sigue siendo el mismo) */
+const NUMERO = "rf-numero-pedido";
+const numeroInicial = () => {
+  try {
+    const n = sessionStorage.getItem(NUMERO);
+    if (n && /^RF-[2-9A-Z]{5}$/.test(n)) return n;
+  } catch { /* sin almacenamiento */ }
+  return nuevoNumeroPedido();
+};
+/** Los avisos al abrir la tienda (carrito compartido o carrito guardado) salen una sola vez */
+let avisoInicial = false;
 
 export function Carrito() {
-  const { lineas, unidades, carritoAbierto, cerrarCarrito, cambiar, quitar, vaciar, reponer, avisar } = useTienda();
+  const { lineas, unidades, carritoAbierto, cerrarCarrito, abrirCarrito, cambiar, quitar, vaciar, reponer, avisar } = useTienda();
   const [d, setD] = useState<DatosPedido>(datosIniciales);
+  const [numero, setNumero] = useState(numeroInicial);
+  useEffect(() => { try { sessionStorage.setItem(NUMERO, numero); } catch { /* sin almacenamiento */ } }, [numero]);
+  // Después de enviar un pedido, si el carrito cambia es otro pedido: otro número
+  const usado = useRef(false);
+  useEffect(() => { if (usado.current) { usado.current = false; setNumero(nuevoNumeroPedido()); } }, [lineas]);
+
+  // Idea 38: al abrir un enlace con ?carrito=, se pregunta antes de agregar esos productos.
+  // Idea 41: si no, y la persona vuelve con productos en el carrito, se le recuerda una vez por visita
+  useEffect(() => {
+    if (avisoInicial) return;
+    avisoInicial = true;
+    const compartido = leerCarritoCompartido(location.search);
+    const n = Object.values(compartido).reduce((s, q) => s + q, 0);
+    if (n) {
+      const url = new URL(location.href);
+      url.searchParams.delete("carrito");
+      history.replaceState(history.state, "", url.pathname + url.search + url.hash);
+      window.setTimeout(() => avisar(`Te compartieron un carrito con ${n} ${n === 1 ? "producto" : "productos"}`, { texto: "Agregarlos", hacer: () => { reponer(compartido); abrirCarrito(); } }), 900);
+      return;
+    }
+    let yaAvisado = false;
+    try { yaAvisado = sessionStorage.getItem("rf-aviso-carrito") === "1"; sessionStorage.setItem("rf-aviso-carrito", "1"); } catch { yaAvisado = true; }
+    if (!yaAvisado && unidades > 0) {
+      window.setTimeout(() => avisar(`Tienes ${unidades} ${unidades === 1 ? "producto" : "productos"} en tu carrito`, { texto: "Ver carrito", hacer: abrirCarrito }), 1500);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const [errores, setErrores] = useState<{ nombre?: boolean; dir?: boolean; texto?: string }>({});
   // Envíos con datos faltantes: en cada uno, los campos marcados tiemblan
   const [intento, setIntento] = useState(0);
@@ -107,7 +145,7 @@ export function Carrito() {
   const envio = envioDe(zona, subtotal);
   const meta = CONFIG.envios[zona].gratisDesde;
   const total = subtotal + envio;
-  const mensaje = mensajePedido(lineas, datos);
+  const mensaje = mensajePedido(lineas, datos, undefined, numero);
   const nacional = zona === "nacional";
 
   // Al quitar un producto, su línea se desvanece hacia la derecha (180 ms) antes de salir; con «reducir movimiento» sale de una vez
@@ -136,6 +174,12 @@ export function Carrito() {
   const copiarPedido = async () => {
     try { await navigator.clipboard.writeText(mensaje); setCopiado(n => n + 1); window.setTimeout(() => setCopiado(0), 2200); }
     catch { avisar("No se pudo copiar. Abre «Ver el mensaje» y cópialo a mano."); }
+  };
+  // Idea 38: enlace con los productos del carrito (sin datos personales: ni nombre ni dirección)
+  const compartirCarrito = async () => {
+    const url = enlaceCarrito(lineas);
+    if (navigator.share) { navigator.share({ title: `Carrito de ${CONFIG.nombre}`, url }).catch(() => {}); return; }
+    try { await navigator.clipboard.writeText(url); avisar("Copiamos el enlace de tu carrito"); } catch { avisar(url); }
   };
   // Mejora 11: la cotización solo se imprime con su botón. Antes, imprimir cualquier página con productos en el carrito
   // (Ctrl+P) sacaba la cotización en vez de la página
@@ -207,7 +251,8 @@ export function Carrito() {
     if (!validar()) return;
     const ref = nuevaReferencia();
     // El pedido queda guardado para enviarlo por WhatsApp cuando Bold devuelva al cliente a la tienda
-    try { localStorage.setItem(clavePago(ref), mensajePedido(lineas, datos, `Pagado en línea con Bold · referencia ${ref}`)); } catch { /* sin almacenamiento */ }
+    try { localStorage.setItem(clavePago(ref), mensajePedido(lineas, datos, `Pagado en línea con Bold · referencia ${ref}`, numero)); } catch { /* sin almacenamiento */ }
+    usado.current = true;
     try {
       const modo = await abrirBold(ref, total, `Pedido ${ref} · Total ${dinero(total)}`);
       if (modo === "copiado") avisar(`En Bold escribe el total: ${dinero(total)}. Ya lo copiamos para que lo pegues.`);
@@ -240,7 +285,8 @@ export function Carrito() {
     <>
       <p className="text-center text-xs leading-relaxed text-tinta-3">
         Enviar el pedido no es un pago: se abre WhatsApp con el pedido escrito, lo envías y te confirmamos disponibilidad y total.
-        {boldActivo() && " Si prefieres pagar ya, Bold acepta tarjeta, PSE y más."}
+        {/* Idea 47: quién procesa el pago en línea */}
+        {boldActivo() && " Si prefieres pagar ya, Bold acepta tarjeta, PSE y más; el pago lo procesa Bold en su propia ventana y la tienda no ve los datos de tu tarjeta."}
       </p>
       <p className="mt-1.5 text-center text-xs leading-relaxed text-tinta-3">
         Tienes <a href={hrefDe("cambios-y-devoluciones")} className="enlace">derecho de retracto</a> por 5 días hábiles desde la entrega. Al enviar el pedido aceptas el <a href={hrefDe("datos-personales")} className="enlace">tratamiento de tus datos</a>.
@@ -332,6 +378,16 @@ export function Carrito() {
                     aria-invalid={errores.dir || undefined} aria-describedby={[errores.dir && `${id}-error`, `${id}-dir-ayuda`].filter(Boolean).join(" ")} onChange={e => poner("dir", e.target.value)} />
                   <p id={`${id}-dir-ayuda`} className="mt-1.5 text-xs text-tinta-2">{nacional ? CONFIG.envio : CONFIG.domicilio} {reglaEnvio(zona)}</p>
                 </div>
+                {/* Idea 34: en Bogotá, a qué hora prefiere recibirlo (se confirma por WhatsApp) */}
+                {!nacional && (
+                  <div>
+                    <label htmlFor={`${id}-franja`} className="rotulo">Prefieres recibirlo <span className="opcional">(opcional)</span></label>
+                    <select id={`${id}-franja`} name="franja" className="campo" value={d.franja ?? ""} onChange={e => poner("franja", e.target.value)}>
+                      <option value="">Sin preferencia</option>
+                      {FRANJAS.map(f => <option key={f} value={f}>En la {f.toLowerCase()}</option>)}
+                    </select>
+                  </div>
+                )}
                 <div>
                   <label htmlFor={`${id}-pago`} className="rotulo">Cómo vas a pagar</label>
                   <select id={`${id}-pago`} name="pago" className="campo" value={pago} onChange={e => poner("pago", e.target.value)}>
@@ -352,6 +408,7 @@ export function Carrito() {
                   <button type="button" onClick={copiarPedido} className="btn btn-borde btn-sm" aria-live="polite">
                     {copiado ? <><IconoCheck key={copiado} className="dibujar h-4 w-4 text-marca" />Pedido copiado</> : "Copiar el pedido"}
                   </button>
+                  <button type="button" onClick={compartirCarrito} className="btn btn-borde btn-sm">Compartir este carrito</button>
                 </div>
               </form>
               {/* En celular las notas van aquí, al final del formulario, y el pie fijo queda solo con el total y los botones */}
@@ -392,7 +449,7 @@ export function Carrito() {
               {errores.texto && <p id={`${id}-error`} className="alerta mt-2" role="alert">{errores.texto}</p>}
               {/* El pedido por WhatsApp es el camino principal: ahí se confirma la disponibilidad antes de cobrar */}
               <div className="mt-3 grid gap-2">
-                <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); else setEnviado(true); }} className={`btn btn-wa barrido w-full${listo ? " barrido-enviar" : ""}`}>
+                <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); else { setEnviado(true); usado.current = true; } }} className={`btn btn-wa barrido w-full${listo ? " barrido-enviar" : ""}`}>
                   <IconoWhatsApp />Enviar pedido por WhatsApp
                 </a>
                 {boldActivo() && (

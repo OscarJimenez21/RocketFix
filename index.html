@@ -26,7 +26,12 @@
           document.querySelector('meta[name="theme-color"]').setAttribute("content", "#0D2019");
           document.querySelector('meta[name="color-scheme"]').setAttribute("content", "dark");
         }
+        // Ideas 84 y 85: letra más grande y más contraste (src/lib/accesibilidad.ts)
+        if (localStorage.getItem("rf-letra") === "grande") document.documentElement.dataset.letra = "grande";
+        if (localStorage.getItem("rf-contraste") === "alto") document.documentElement.dataset.contraste = "alto";
       } catch (e) {}
+      // Idea 82: el navegador pidió ahorrar datos
+      try { if (navigator.connection && navigator.connection.saveData) document.documentElement.dataset.ahorro = "si"; } catch (e) {}
     </script>
     <link rel="canonical" href="https://oscarjimenez21.github.io/RocketFix/" />
     <!-- Vista previa al compartir el enlace (WhatsApp, Facebook, Instagram, X). Si cambia el dominio, actualiza estas direcciones. -->

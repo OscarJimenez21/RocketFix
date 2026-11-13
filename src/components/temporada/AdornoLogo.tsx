@@ -52,6 +52,13 @@ const ADORNOS: Record<IdTemporada, { clase: string; dibujo: JSX.Element }> = {
         <rect x="12" y="5.5" width="6" height="7" rx="2" fill="#2F5BD3" /></svg>
     )
   },
+  // Estrella dorada (temporada de prima, idea 94)
+  prima: {
+    clase: "adorno-lado",
+    dibujo: (
+      <svg viewBox="0 0 20 20"><path d="M10 1.5l2.5 5.3 5.8.7-4.3 4 1.1 5.7L10 14.4l-5.1 2.8L6 11.5 1.7 7.5l5.8-.7z" fill="#FFC93C" stroke="#E0A400" strokeWidth=".8" strokeLinejoin="round" /></svg>
+    )
+  },
   // Bandera de Colombia en su asta
   patria: {
     clase: "adorno-bandera",

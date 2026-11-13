@@ -74,6 +74,12 @@ export const recienLlegado = (p: Producto, hoy = Date.now()) => {
   const f = LLEGADAS[p.id];
   return Boolean(f) && !p.consultar && hoy - Date.parse(`${f}T00:00:00-05:00`) < DIAS_RECIEN_LLEGADO * 864e5;
 };
+/** Idea 8: fecha de llegada al catálogo (AAAA-MM-DD), o "" si llegó antes del 28/10/2026. Sirve para ordenar por «Más nuevos» */
+export const fechaLlegada = (p: Producto) => LLEGADAS[p.id] ?? "";
+/** Productos que llegaron en los últimos `dias` días (con precio), del más reciente al más antiguo */
+export const recienLlegados = (dias = DIAS_RECIEN_LLEGADO, hoy = Date.now()) =>
+  PRODUCTOS.filter(p => !p.consultar && fechaLlegada(p) && hoy - Date.parse(`${fechaLlegada(p)}T00:00:00-05:00`) < dias * 864e5)
+    .sort((a, b) => fechaLlegada(b).localeCompare(fechaLlegada(a)));
 /** Para ordenar: primero los productos con precio, al final los de «Preguntar disponibilidad» (el resto del orden se mantiene) */
 export const conPrecioPrimero = (a: Producto, b: Producto) => Number(Boolean(a.consultar)) - Number(Boolean(b.consultar));
 /** Mensaje de WhatsApp para un producto sin precio publicado */

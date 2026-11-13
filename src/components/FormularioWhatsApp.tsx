@@ -2,18 +2,37 @@
    la persona revisa el mensaje en WhatsApp y lo envía. Mismo formato de mensaje que la tienda original. */
 import { useId, useState } from "react";
 import { CONFIG } from "../data/catalogo";
+import { festivo } from "../lib/festivos";
 import { lista } from "../lib/formato";
 import { temblor } from "../lib/movimiento";
 import { waLink } from "../lib/whatsapp";
 import { IconoWhatsApp } from "./Iconos";
 import { hrefDe } from "../lib/rutas";
 
+/** Hoy en Bogotá como AAAA-MM-DD (para no dejar elegir días pasados) */
+const hoyISO = () => new Intl.DateTimeFormat("en-CA", { timeZone: "America/Bogota" }).format(new Date());
+/** 2026-11-16 → «lunes 16 de noviembre» */
+function fechaEscrita(iso: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return "";
+  const d = new Date(`${iso}T12:00:00-05:00`);
+  return new Intl.DateTimeFormat("es-CO", { timeZone: "America/Bogota", weekday: "long", day: "numeric", month: "long" }).format(d).replace(",", "");
+}
+/** Si el día elegido es festivo o domingo, se dice (la tienda confirma si atiende) */
+function avisoFecha(iso: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return "";
+  const nombre = festivo(new Date(`${iso}T12:00:00-05:00`));
+  if (nombre) return `Ese día es festivo (${nombre}): te confirmamos si podemos atenderte.`;
+  if (new Date(`${iso}T12:00:00-05:00`).getUTCDay() === 0) return "Ese día es domingo: te confirmamos si podemos atenderte.";
+  return "";
+}
+
 export interface CampoForm {
   id: string;
   rotulo: string;
   /** Nombre del dato en el mensaje (ej.: "Nombre") */
   etiqueta: string;
-  tipo?: "texto" | "area" | "lista";
+  /** fecha (idea 54): calendario; en el mensaje va escrita («lunes 16 de noviembre») */
+  tipo?: "texto" | "area" | "lista" | "fecha";
   opciones?: string[];
   inicial?: string;
   obligatorio?: boolean;
@@ -51,7 +70,9 @@ export function FormularioWhatsApp({ asunto, campos, boton = "Enviar por WhatsAp
     if (malos.includes(id)) { setMalos(m => m.filter(x => x !== id)); setError(""); }
   };
 
-  const mensaje = [`Hola ${CONFIG.nombre}, quiero ${asunto}.`, "", ...campos.map(c => [c.etiqueta, valor(c).trim()]).filter(([, v]) => v).map(([e, v]) => `${e}: ${v}`)].join("\n");
+  // «Sin preferencia» no se escribe en el mensaje (es lo mismo que no decir nada)
+  const enMensaje = (c: CampoForm) => { const v = valor(c).trim(); return c.tipo === "fecha" ? fechaEscrita(v) : v === "Sin preferencia" ? "" : v; };
+  const mensaje = [`Hola ${CONFIG.nombre}, quiero ${asunto}.`, "", ...campos.map(c => [c.etiqueta, enMensaje(c)]).filter(([, v]) => v).map(([e, v]) => `${e}: ${v}`)].join("\n");
 
   const validar = () => {
     const faltan = campos.filter(c => c.obligatorio && !valor(c).trim());
@@ -80,6 +101,11 @@ export function FormularioWhatsApp({ asunto, campos, boton = "Enviar por WhatsAp
             ) : c.tipo === "area" ? (
               <textarea id={id} {...accesible} rows={3} className={clase} placeholder={c.placeholder} value={valor(c)}
                 onChange={e => poner(c.id, e.target.value)} />
+            ) : c.tipo === "fecha" ? (
+              <>
+                <input id={id} {...accesible} type="date" min={hoyISO()} className={clase} value={valor(c)} onChange={e => poner(c.id, e.target.value)} />
+                {avisoFecha(valor(c)) && <p className="mt-1.5 text-xs text-tinta-2">{avisoFecha(valor(c))}</p>}
+              </>
             ) : (
               <input id={id} {...accesible} className={clase} placeholder={c.placeholder} autoComplete={c.autocompletar ?? "off"} value={valor(c)}
                 onChange={e => poner(c.id, e.target.value)} />

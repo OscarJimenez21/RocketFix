@@ -16,6 +16,13 @@ const VISTO = "rf-wa-aviso-visto";
 const TRES_DIAS = 3 * 24 * 60 * 60 * 1000;
 const ESPERA = 6000;
 const MENSAJE = "Si quieres comunicarte con nosotros, inicia tu chat aquí.";
+/** Idea 95: preguntas rápidas (texto del botón, mensaje que se escribe en WhatsApp) */
+const RAPIDAS = [
+  ["Disponibilidad", "quiero saber si tienen disponible "],
+  ["Envíos", "quiero saber cuánto tarda y cuánto vale el envío a "],
+  ["Reparación", "quiero cotizar la reparación de mi "],
+  ["Mi pedido", "quiero saber en qué va mi pedido "]
+] as const;
 
 function puedeMostrar() {
   try {
@@ -79,6 +86,19 @@ export function WhatsAppFlotante() {
               <p className="wa-burbuja relative max-w-[88%] rounded-lg rounded-tl-none bg-superficie px-3.5 py-2.5 text-[14px] leading-snug shadow-sm">
                 ¡Hola! 👋 {MENSAJE}
               </p>
+              {/* Idea 96: fuera del horario, se dice cuándo respondemos (el mensaje se puede dejar escrito igual) */}
+              {!estado.abierto && (
+                <p className="wa-burbuja relative mt-2 max-w-[88%] rounded-lg rounded-tl-none bg-superficie px-3.5 py-2.5 text-[13px] leading-snug text-tinta-2 shadow-sm">
+                  Ahora estamos cerrados. Déjanos tu mensaje y te respondemos cuando volvamos a abrir.
+                </p>
+              )}
+              {/* Idea 95: preguntas rápidas que abren WhatsApp con el mensaje escrito */}
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {RAPIDAS.map(([t, m]) => (
+                  <a key={t} href={waLink(`Hola ${CONFIG.nombre}, ${m}`)} target="_blank" rel="noopener" onClick={() => setAviso(false)}
+                    className="rounded-full border border-wa/40 bg-superficie px-3 py-1.5 text-[13px] font-semibold text-tinta hover:border-wa">{t}</a>
+                ))}
+              </div>
               <a href={enlace} target="_blank" rel="noopener" onClick={() => setAviso(false)} className="btn btn-wa mt-4 w-full">
                 <IconoWhatsApp className="h-5 w-5" />Iniciar chat
               </a>

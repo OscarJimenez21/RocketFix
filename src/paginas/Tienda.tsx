@@ -1,7 +1,8 @@
 /* Página de una sección de la tienda: filtros por tipo (o marca en celulares), marca, estado, búsqueda y orden.
    Los filtros de cada sección se recuerdan mientras la persona navega (ej.: al volver de un producto). */
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CABECERAS, CATEGORIAS, LOGOS_MARCAS, ORDEN_CAT, TEXTO_BUSQUEDA, VISTAS, conPrecioPrimero, deTienda, desde, marcasDe } from "../data/catalogo";
+import { CABECERAS, CATEGORIAS, LOGOS_MARCAS, ORDEN_CAT, TEXTO_BUSQUEDA, VISTAS, conPrecioPrimero, deTienda, desde, fechaLlegada, marcasDe } from "../data/catalogo";
+import { FILTROS_VACIOS, capacidades, enGB, filtrosDeUrl, ordenPulgadas, procesadorDe, pulgadasDe, ramDe, rangoPulgadas, tiene5G, urlDeFiltros } from "../lib/filtros";
 import { tiendaPorVista } from "../data/tiendas";
 import { EncabezadoVista } from "../components/EncabezadoVista";
 import { IconoBuscar, IconoCuadricula, IconoLista, IconoWhatsApp } from "../components/Iconos";
@@ -15,9 +16,23 @@ import type { Producto, TiendaId } from "../types";
 import { hrefDe } from "../lib/rutas";
 
 const PAGINA = 24;
-interface Filtros { cat: string; marca: string; cond: string; q: string; orden: "rel" | "menor" | "mayor"; limite: number; tope: number | null }
+interface Filtros { cat: string; marca: string; cond: string; q: string; orden: "rel" | "menor" | "mayor" | "nuevos"; limite: number; tope: number | null; capacidad: string; ram: string; cpu: string; pantalla: string; red: string }
 const recordados: Partial<Record<TiendaId, Filtros>> = {};
-const inicial: Filtros = { cat: "todos", marca: "todas", cond: "todos", q: "", orden: "rel", limite: PAGINA, tope: null };
+const inicial: Filtros = { ...FILTROS_VACIOS, orden: "rel", limite: PAGINA };
+
+/** Idea 13: al abrir una sección con filtros en la dirección (?marca=Apple&capacidad=256+GB…), se aplican */
+function filtrosIniciales(tienda: TiendaId): Filtros {
+  const deUrl = typeof location === "undefined" ? {} : filtrosDeUrl(location.search);
+  if (Object.keys(deUrl).length) return { ...inicial, ...deUrl, limite: PAGINA } as Filtros;
+  return recordados[tienda] ?? inicial;
+}
+
+/** Valores de un filtro con su cantidad, ordenados; vacío si hay menos de dos (un filtro con una sola opción no filtra nada) */
+function valoresDe(ps: Producto[], f: (p: Producto) => string[], orden: (a: string, b: string) => number) {
+  const m = new Map<string, number>();
+  for (const p of ps) for (const v of new Set(f(p))) m.set(v, (m.get(v) ?? 0) + 1);
+  return m.size > 1 ? [...m.entries()].sort((a, b) => orden(a[0], b[0])) : [];
+}
 
 /** Idea 38: cuadrícula o lista. Se recuerda en este navegador */
 type Vista = "cuadricula" | "lista";
@@ -49,7 +64,12 @@ function Chip({ activo, onClick, children, n, logo }: { activo: boolean; onClick
 }
 
 export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
-  const [f, setF] = useState<Filtros>(() => recordados[tienda] ?? inicial);
+  const [f, setF] = useState<Filtros>(() => filtrosIniciales(tienda));
+  // Idea 13: la dirección lleva los filtros puestos (sin crear una entrada nueva en el historial por cada cambio)
+  useEffect(() => {
+    const busqueda = urlDeFiltros(f);
+    if (busqueda !== location.search) history.replaceState(history.state, "", location.pathname + busqueda + location.hash);
+  }, [f]);
   // Desde qué posición están las tarjetas que trajo «Ver más productos» (entran en cascada); se olvida al cambiar un filtro
   const [nuevos, setNuevos] = useState<{ tienda: TiendaId; desde: number } | null>(null);
   const poner = (cambio: Partial<Filtros>) => {
@@ -90,7 +110,19 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
     fila.scrollTo({ left: Math.max(0, izq), behavior: reducirMovimiento() ? "auto" : "smooth" });
   }, [f.marca, f.cat]);
   // Mejora: «Quitar filtros» se ofrece en cuanto hay alguno puesto (antes solo cuando no quedaba ningún producto)
-  const conFiltros = f.cat !== inicial.cat || f.marca !== inicial.marca || f.cond !== inicial.cond || f.q.trim() !== "" || f.tope != null || f.orden !== inicial.orden;
+  const conFiltros = f.cat !== inicial.cat || f.marca !== inicial.marca || f.cond !== inicial.cond || f.q.trim() !== "" || f.tope != null || f.orden !== inicial.orden ||
+    Boolean(f.capacidad || f.ram || f.cpu || f.pantalla || f.red);
+  // Ideas 4, 6, 7 y 29: filtros que salen de los datos de cada producto (solo los que tienen dos valores o más en la sección)
+  const extra = useMemo(() => {
+    const deCat = base.filter(p => esCel || f.cat === "todos" || p.categoria === f.cat);
+    return {
+      capacidad: valoresDe(deCat, capacidades, (a, b) => enGB(a) - enGB(b)),
+      ram: valoresDe(deCat, p => { const r = ramDe(p); return r && tienda === "pc" ? [`${r} GB`] : []; }, (a, b) => parseInt(a) - parseInt(b)),
+      cpu: valoresDe(deCat, p => { const c = procesadorDe(p); return c && tienda === "pc" ? [c] : []; }, (a, b) => a.localeCompare(b, "es", { numeric: true })),
+      pantalla: valoresDe(deCat, p => { const n = pulgadasDe(p); return n && (tienda === "tv" || tienda === "pc" || p.categoria === "monitores") ? [rangoPulgadas(n)] : []; }, ordenPulgadas),
+      red: esCel && base.some(tiene5G) ? base.filter(tiene5G).length : 0
+    };
+  }, [base, esCel, f.cat, tienda]);
   const elegirVista = (v: Vista) => { setVistaLista(v); try { localStorage.setItem(CLAVE_VISTA, v); } catch { /* sin almacenamiento */ } };
 
   const visibles = useMemo(() => {
@@ -100,10 +132,17 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
       (f.marca === "todas" || p.marca === f.marca) &&
       (!esCel || f.cond === "todos" || norm(p.estado) === f.cond) &&
       (!q || (TEXTO_BUSQUEDA[p.id] ?? "").includes(q)) &&
-      (f.tope == null || (!p.consultar && desde(p) <= f.tope)));
+      (f.tope == null || (!p.consultar && desde(p) <= f.tope)) &&
+      (!f.capacidad || capacidades(p).includes(f.capacidad)) &&
+      (!f.ram || `${ramDe(p) ?? ""} GB` === f.ram) &&
+      (!f.cpu || procesadorDe(p) === f.cpu) &&
+      (!f.pantalla || (pulgadasDe(p) != null && rangoPulgadas(pulgadasDe(p) ?? 0) === f.pantalla)) &&
+      (!f.red || tiene5G(p)));
     if (f.orden === "rel" && !esCel) vis = [...vis].sort((a, b) => (ORDEN_CAT[a.categoria ?? ""] ?? 999) - (ORDEN_CAT[b.categoria ?? ""] ?? 999));
     if (f.orden === "menor") vis = [...vis].sort((a, b) => desde(a) - desde(b));
     if (f.orden === "mayor") vis = [...vis].sort((a, b) => desde(b) - desde(a));
+    // Idea 8: los que llegaron hace poco primero (los que ya estaban antes del 28/10/2026 siguen en su orden de siempre)
+    if (f.orden === "nuevos") vis = [...vis].sort((a, b) => fechaLlegada(b).localeCompare(fechaLlegada(a)));
     // En cualquier orden, los de «Preguntar disponibilidad» van al final
     return [...vis].sort(conPrecioPrimero);
   }, [base, f, esCel]);
@@ -182,7 +221,7 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
           )}
           <label className="ml-auto flex items-center gap-2 text-sm text-tinta-2">Ordenar
             <select value={f.orden} onChange={e => poner({ orden: e.target.value as Filtros["orden"] })} className="campo h-10 w-auto py-0 text-sm">
-              <option value="rel">Recomendados</option><option value="menor">Menor precio</option><option value="mayor">Mayor precio</option>
+              <option value="rel">Recomendados</option><option value="menor">Menor precio</option><option value="mayor">Mayor precio</option><option value="nuevos">Más nuevos</option>
             </select>
           </label>
           {/* Idea 38: ver en cuadrícula o en lista */}
@@ -193,6 +232,27 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
             ))}
           </div>
         </div>
+
+        {/* Ideas 4, 6, 7 y 29: capacidad, RAM, procesador, pantalla y 5G (solo los que aplican en esta sección) */}
+        {(extra.capacidad.length > 0 || extra.ram.length > 0 || extra.cpu.length > 0 || extra.pantalla.length > 0 || extra.red > 0) && (
+          <div role="group" aria-label="Más filtros" className="mt-3 flex flex-wrap items-center gap-3 border-b border-linea pb-4">
+            {([["capacidad", "Capacidad", extra.capacidad], ["ram", "Memoria RAM", extra.ram], ["cpu", "Procesador", extra.cpu], ["pantalla", "Pantalla", extra.pantalla]] as const).map(([k, rotulo, valores]) =>
+              valores.length > 0 && (
+                <label key={k} className="flex items-center gap-2 text-sm text-tinta-2">{rotulo}
+                  <select value={f[k]} onChange={e => poner({ [k]: e.target.value })} className="campo h-10 w-auto py-0 text-sm">
+                    <option value="">Todas</option>
+                    {valores.map(([v, n]) => <option key={v} value={v}>{v} ({n})</option>)}
+                  </select>
+                </label>
+              ))}
+            {extra.red > 0 && (
+              <label className="flex min-h-[40px] cursor-pointer items-center gap-2 text-sm font-semibold text-tinta-2">
+                <input type="checkbox" checked={f.red === "5g"} onChange={e => poner({ red: e.target.checked ? "5g" : "" })} className="h-4 w-4 accent-[#0B8457]" />
+                Solo con 5G <span className="text-xs font-normal tabular-nums text-tinta-3">({extra.red})</span>
+              </label>
+            )}
+          </div>
+        )}
 
         <p className="mt-4 text-sm text-tinta-2" aria-live="polite">
           Mostrando <span className="tabular-nums">{mostrados.length}</span> de {visibles.length} {visibles.length === 1 ? "producto" : "productos"}

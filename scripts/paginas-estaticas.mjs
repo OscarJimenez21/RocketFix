@@ -159,6 +159,8 @@ const devolucionLd = {
 };
 
 const urls = [];
+/** Idea 65: fotos de cada página de producto, para el mapa del sitio (Google Imágenes) */
+const FOTOS_URL = {};
 
 // Productos con el mismo nombre (ej. dos «PC Core i7 14700» de distinta configuración): el título lleva el primer dato
 // que los diferencia (de sus características o de la ficha), para que Google no los tome como páginas repetidas
@@ -213,6 +215,7 @@ for (const p of PRODUCTOS) {
   ].join("");
   // Sin precio publicado no hay oferta que declarar: Google pide precio en Product, así que solo van las migas
   const jsonld = consultar ? [migas(camino)] : [producto, migas(camino)];
+  FOTOS_URL[SITIO + ruta] = fotos.slice(0, 10).map(abs);
   urls.push(pagina({ ruta, titulo: tituloProducto(p), descripcion, imagen: fotos[0], altImagen: p.nombre, jsonld, cuerpo, precarga: (fotos[0] ? precargaFoto(fotos[0]) : "") + precargaProducto + precargaDescripcion(p) }));
 }
 
@@ -267,6 +270,60 @@ for (const a of ARTICULOS) {
   }
 }
 
+// ---------- Páginas de ayuda (12/11/2026: src/data/ayuda.json) ----------
+// Mismos textos de la tienda; los datos ({envioBogota}, {horario}…) se llenan con config.json, igual que en src/lib/ayuda.ts
+const AYUDA = leer("ayuda.json");
+const ANCLAS_INICIO = ["servicios", "contacto", "orden", "categorias", "calificaciones", "como-comprar", "regalos", "ideas-regalo", "presupuesto", "marcas", "envios", "tu-celular", "recientes"];
+const horaTxt = hhmm => { const [h = 0, m = 0] = hhmm.split(":").map(Number); return new Date(2000, 0, 1, h, m).toLocaleTimeString(CONFIG.idioma, { hour: "numeric", minute: "2-digit" }); };
+const VALORES_AYUDA = {
+  envioBogota: dinero(CONFIG.envios.bogota.costo), gratisBogota: dinero(CONFIG.envios.bogota.gratisDesde),
+  envioNacional: dinero(CONFIG.envios.nacional.costo), gratisNacional: dinero(CONFIG.envios.nacional.gratisDesde),
+  pagosBogota: lista(CONFIG.pagos.bogota), pagosNacional: lista(CONFIG.pagos.nacional),
+  domicilio: CONFIG.domicilio, envio: CONFIG.envio, whatsapp: CONFIG.whatsappVisible,
+  horario: CONFIG.horario.filter(t => t.abre && t.cierra).map(t => `${t.etiqueta}, de ${horaTxt(t.abre)} – ${horaTxt(t.cierra)}`).join("; ")
+};
+const rellenar = t => t.replace(/\{(\w+)\}/g, (todo, k) => VALORES_AYUDA[k] ?? todo);
+const hrefRuta = r => /^https?:/.test(r) ? r : ANCLAS_INICIO.includes(r) ? `${BASE}#${r}` : `${BASE}${r}/`;
+/** Texto con [enlaces](ruta) a HTML (escapando todo lo demás) */
+const conEnlaces = t => {
+  const s = rellenar(t);
+  let out = "", i = 0;
+  for (const m of s.matchAll(/\[([^\]]+)\]\(([^)\s]+)\)/g)) {
+    out += esc(s.slice(i, m.index)) + `<a href="${esc(hrefRuta(m[2]))}">${esc(m[1])}</a>`;
+    i = m.index + m[0].length;
+  }
+  return out + esc(s.slice(i));
+};
+const planoAyuda = t => rellenar(t).replace(/\[([^\]]+)\]\([^)\s]+\)/g, "$1");
+const INFO_RUTAS = new Set();
+for (const pa of AYUDA.paginas) {
+  const camino = [["Inicio", ""], [pa.menu, null]];
+  let contenido = "";
+  if (pa.secciones) {
+    contenido = pa.secciones.map(s => `<h2>${esc(s.titulo)}</h2>` + (s.parrafos ?? []).map(t => `<p>${conEnlaces(t)}</p>`).join("") +
+      (s.lista ? `<ul>${s.lista.map(t => `<li>${conEnlaces(t)}</li>`).join("")}</ul>` : "")).join("");
+  } else if (pa.id === "preguntas-frecuentes") {
+    const temas = [...new Set(AYUDA.faq.map(x => x.tema))];
+    contenido = temas.map(t => `<h2>${esc(t)}</h2>` + AYUDA.faq.filter(x => x.tema === t).map(x => `<h3>${esc(x.p)}</h3><p>${conEnlaces(x.r)}</p>`).join("")).join("");
+  } else if (pa.id === "glosario") {
+    contenido = `<dl>${AYUDA.glosario.map(g => `<dt>${esc(g.t)}</dt><dd>${esc(g.d)}</dd>`).join("")}</dl>`;
+  } else if (pa.id === "busca-por-uso") {
+    contenido = AYUDA.usos.map(u => `<h2 id="${esc(u.id)}">${esc(u.titulo)}</h2><p>${esc(u.texto)}</p><ul>${u.tipos.map(tp => {
+      const [t, c] = tp.split(":");
+      const vista = TIENDA_VISTA[t];
+      return `<li><a href="${BASE}${rutaVista(vista)}${c ? `?tipo=${encodeURIComponent(c)}` : ""}">${esc(c ? nombreCat[c] ?? c : VISTAS[vista] ?? vista)}</a></li>`;
+    }).join("")}</ul>`).join("");
+  } else if (pa.id === "todas-las-marcas") {
+    const todas = Object.entries(PRODUCTOS.reduce((a, p) => (p.marca && (a[p.marca] = (a[p.marca] ?? 0) + 1), a), {})).sort((a, b) => a[0].localeCompare(b[0], "es"));
+    // Solo las marcas con página propia (3 productos o más) van con enlace: las demás abrirían 404.html
+    contenido = `<ul>${todas.map(([m, n]) => `<li>${MARCAS.includes(m) ? `<a href="${BASE}${rutaMarca(m)}">${esc(m)}</a>` : esc(m)} (${n})</li>`).join("")}</ul>`;
+  }
+  const ruta = `${pa.id}/`;
+  INFO_RUTAS.add(ruta);
+  const jsonld = [migas(camino)];
+  urls.push(pagina({ ruta, titulo: `${pa.titulo} · ${CONFIG.nombre}`, descripcion: recortar(planoAyuda(pa.lead), 160), jsonld, cuerpo: migasHtml(camino) + `<h1>${esc(pa.titulo)}</h1><p>${esc(planoAyuda(pa.lead))}</p>${contenido}` + contacto }));
+}
+
 // ---------- Portada: la tienda y el sitio, más enlaces a todo ----------
 {
   const tiendaLd = {
@@ -281,7 +338,8 @@ for (const a of ARTICULOS) {
     `<p>Celulares, computadores, gaming y accesorios con entrega a domicilio. Compra con asesoría por WhatsApp y solicita servicio técnico para tu hogar o negocio.</p>` +
     `<h2>Secciones</h2><ul>${secciones.map(([, v]) => `<li><a href="${BASE}${rutaVista(v)}">${esc(VISTAS[v] ?? v)}</a></li>`).join("")}</ul>` +
     `<h2>Marcas</h2><ul>${MARCAS.map(m => `<li><a href="${BASE}${rutaMarca(m)}">${esc(m)}</a></li>`).join("")}</ul>` +
-    `<h2>Servicio técnico</h2><ul>${ARTICULOS.map(a => `<li><a href="${BASE}${a.id}/">${esc(a.titulo)}</a></li>`).join("")}</ul>` + contacto;
+    `<h2>Servicio técnico</h2><ul>${ARTICULOS.map(a => `<li><a href="${BASE}${a.id}/">${esc(a.titulo)}</a></li>`).join("")}</ul>` +
+    `<h2>Ayuda</h2><ul>${AYUDA.paginas.map(pa => `<li><a href="${BASE}${pa.id}/">${esc(pa.menu)}</a></li>`).join("")}</ul>` + contacto;
   // La portada conserva su título, descripción e imagen; solo se agregan los datos estructurados y el contenido
   const h = PLANTILLA.replace("</head>", `${AL_ABRIR}${OCULTAR}<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@graph": [tiendaLd, sitioLd] }).replace(/</g, "\\u003c")}</script></head>`)
     .replace(/(<div id="root"><\/div>)/, `$1<div id="estatico" class="contenedor py-8">${cuerpo}</div>`);
@@ -304,7 +362,7 @@ const fechaDe = (...archivos) => {
 const masNueva = (...fechas) => fechas.filter(Boolean).sort().at(-1) ?? null;
 const FECHAS = {
   catalogo: fechaDe("productos.json", "descripciones.json", "galerias.json", "categorias.json", "cabeceras.json"),
-  textos: fechaDe("articulos-texto.json", "contenido.json"),
+  textos: fechaDe("articulos-texto.json", "contenido.json", "ayuda.json"),
   politicas: fechaDe("politicas.json", "config.json")
 };
 const POLITICAS_IDS = new Set(leer("politicas.json").paginas.map(p => `${p.id}/`));
@@ -313,10 +371,75 @@ const fechaUrl = u => {
   const ruta = u.slice(SITIO.length);
   if (!ruta) return masNueva(...Object.values(FECHAS));
   if (POLITICAS_IDS.has(ruta)) return FECHAS.politicas;
-  if (ARTICULOS_IDS.has(ruta)) return FECHAS.textos;
+  if (ARTICULOS_IDS.has(ruta) || INFO_RUTAS.has(ruta)) return FECHAS.textos;
   return FECHAS.catalogo;
 };
+const imagenesXml = u => (FOTOS_URL[u] ?? []).map(f => `<image:image><image:loc>${esc(f)}</image:loc></image:image>`).join("");
 writeFileSync(join(DIST, "sitemap.xml"),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => { const f = fechaUrl(u); return `  <url><loc>${u}</loc>${f ? `<lastmod>${f}</lastmod>` : ""}</url>`; }).join("\n")}\n</urlset>\n`);
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls.map(u => { const f = fechaUrl(u); return `  <url><loc>${u}</loc>${f ? `<lastmod>${f}</lastmod>` : ""}${imagenesXml(u)}</url>`; }).join("\n")}\n</urlset>\n`);
 if (!FECHAS.catalogo) console.warn("sitemap.xml sin lastmod: no se encontró el historial de git");
-console.log(`Páginas estáticas: ${urls.length} (productos ${PRODUCTOS.length}, marcas ${MARCAS.length}) · sitemap.xml listo`);
+
+// ---------- Idea 67: llms.txt (resumen de la tienda para asistentes de IA; https://llmstxt.org) ----------
+{
+  const secciones = Object.entries(TIENDA_VISTA).filter(([t]) => PRODUCTOS.some(p => p.tienda === t));
+  const politicas = leer("politicas.json").paginas;
+  const linea = (texto, ruta, nota = "") => `- [${texto}](${SITIO}${ruta})${nota ? `: ${nota}` : ""}`;
+  const txt = [
+    `# ${CONFIG.nombre}`, "",
+    `> Tienda de tecnología en Bogotá, Colombia: celulares, computadores, gaming, componentes y accesorios, con domicilio en Bogotá y envíos a todo Colombia. Pedidos y asesoría por WhatsApp (${CONFIG.whatsappVisible}). Precios en pesos colombianos (COP); la disponibilidad se confirma por WhatsApp antes de cualquier pago.`, "",
+    `Servicio técnico: reparación de celulares y computadores, e instalación de cámaras de seguridad.`, "",
+    "## Secciones de la tienda",
+    ...secciones.map(([t, v]) => linea(VISTAS[v] ?? v, rutaVista(v), `${PRODUCTOS.filter(p => p.tienda === t).length} productos`)), "",
+    "## Ayuda",
+    ...AYUDA.paginas.map(pa => linea(pa.menu, `${pa.id}/`, planoAyuda(pa.lead))), "",
+    "## Servicio técnico",
+    ...ARTICULOS.map(a => linea(a.titulo, `${a.id}/`, a.resumen)), "",
+    "## Políticas",
+    ...politicas.map(p => linea(p.titulo, `${p.id}/`)), "",
+    "## Optional",
+    linea("Mapa del sitio (todas las páginas de producto)", "sitemap.xml"),
+    ""
+  ].join("\n");
+  writeFileSync(join(DIST, "llms.txt"), txt);
+}
+
+// ---------- Idea 66: feed de productos para Google Merchant Center (apagado hasta que se active) ----------
+// Merchant Center pide declarar si cada producto está «en existencia». La tienda no lo publica (lo confirma por WhatsApp),
+// así que el feed solo se escribe con FEED_GOOGLE=1, cuando se decida abrir la cuenta y cómo declarar la disponibilidad.
+if (process.env.FEED_GOOGLE === "1") {
+  const COND_FEED = { Nuevo: "new", CPO: "refurbished", "Open box": "used", Usado: "used" };
+  const items = PRODUCTOS.filter(p => !p.consultar && p.imagen).map(p => {
+    const fotos = [p.imagen, ...(GALERIAS[p.id] ?? [])].map(abs);
+    return `<item><g:id>${esc(p.id)}</g:id><title>${esc(recortar(p.nombre, 150))}</title><description>${esc(recortar(armarDescripcion(p).resumen, 4900))}</description>` +
+      `<link>${SITIO}${rutaProducto(p)}</link><g:image_link>${esc(fotos[0])}</g:image_link>${fotos.slice(1, 10).map(f => `<g:additional_image_link>${esc(f)}</g:additional_image_link>`).join("")}` +
+      `<g:price>${desde(p)} COP</g:price><g:availability>in_stock</g:availability><g:condition>${COND_FEED[p.estado] ?? "new"}</g:condition>` +
+      `${p.marca ? `<g:brand>${esc(p.marca)}</g:brand>` : "<g:identifier_exists>no</g:identifier_exists>"}${p.categoria ? `<g:product_type>${esc(nombreCat[p.categoria] ?? p.categoria)}</g:product_type>` : ""}</item>`;
+  });
+  writeFileSync(join(DIST, "feed-google.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0"><channel><title>${esc(CONFIG.nombre)}</title><link>${SITIO}</link><description>Catálogo de ${esc(CONFIG.nombre)}</description>\n${items.join("\n")}\n</channel></rss>\n`);
+  console.log(`feed-google.xml: ${items.length} productos`);
+}
+
+// ---------- Idea 79: política de seguridad de contenido (CSP) en cada página ----------
+// GitHub Pages no deja poner encabezados, así que va como <meta>. Solo se ejecutan los scripts de la tienda, los de
+// https (Bold carga los suyos) y los scripts en línea de estas páginas (por su huella sha256): un script inyectado en la
+// página no corre. Las imágenes, estilos, marcos y conexiones quedan libres dentro de https (fotos de proveedores, Bold).
+{
+  const { createHash } = await import("node:crypto");
+  const todas = [];
+  const recorrer = dir => { for (const f of readdirSync(dir, { withFileTypes: true })) { const r = join(dir, f.name); if (f.isDirectory()) recorrer(r); else if (f.name.endsWith(".html")) todas.push(r); } };
+  recorrer(DIST);
+  for (const archivo of todas) {
+    let h = readFileSync(archivo, "utf8");
+    const huellas = [...h.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*type="application\/ld\+json")[^>]*>([\s\S]*?)<\/script>/g)]
+      .map(m => `'sha256-${createHash("sha256").update(m[1], "utf8").digest("base64")}'`);
+    const csp = [
+      "default-src 'self'", `script-src 'self' ${[...new Set(huellas)].join(" ")} https:`, "style-src 'self' 'unsafe-inline' https:",
+      "img-src 'self' data: blob: https:", "font-src 'self' data: https:", "connect-src 'self' https:", "frame-src https:",
+      "media-src 'self' https:", "worker-src 'self'", "manifest-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'self' https:"
+    ].join("; ");
+    h = h.replace(/(<meta charset="[^"]*"\s*\/?>)/i, `$1\n    <meta http-equiv="Content-Security-Policy" content="${csp}">`);
+    writeFileSync(archivo, h);
+  }
+  console.log(`CSP en ${todas.length} páginas`);
+}
+console.log(`Páginas estáticas: ${urls.length} (productos ${PRODUCTOS.length}, marcas ${MARCAS.length}, ayuda ${AYUDA.paginas.length}) · sitemap.xml y llms.txt listos`);

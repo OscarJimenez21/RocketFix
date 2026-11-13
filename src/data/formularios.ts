@@ -4,6 +4,11 @@ import type { Servicio } from "../types";
 import { PAQUETES } from "./catalogo";
 
 const CAMARAS = ["1 o 2", "3 o 4", "5 a 8", "Más de 8", "Aún no sé"];
+/** Idea 54: día y hora que prefiere la persona (opcionales; la tienda los confirma por WhatsApp) */
+const agenda: CampoForm[] = [
+  { id: "fecha", rotulo: "Día que prefieres", etiqueta: "Día preferido", tipo: "fecha", opcional: true },
+  { id: "franja", rotulo: "Hora que prefieres", etiqueta: "Hora preferida", tipo: "lista", opciones: ["Sin preferencia", "En la mañana", "En la tarde"] }
+];
 const nombre: CampoForm = { id: "nombre", rotulo: "Tu nombre", etiqueta: "Nombre", obligatorio: true, falta: "tu nombre", autocompletar: "name" };
 
 /** Formulario "Solicita un servicio" de la portada: cambia según el servicio elegido */
@@ -17,7 +22,8 @@ export function camposServicio(s: Servicio | undefined, titulos: string[]): Camp
       { id: "lugar", rotulo: "Dónde", etiqueta: "Lugar", tipo: "lista", opciones: ["Casa", "Apartamento", "Local o negocio", "Bodega o finca"] },
       { id: "detalle", rotulo: "Qué quieres vigilar", etiqueta: "Detalle", tipo: "area", opcional: true, placeholder: s?.detalle },
       nombre,
-      { id: "barrio", rotulo: "Barrio o dirección de la instalación", etiqueta: "Dirección", obligatorio: true, falta: "la dirección de la instalación", autocompletar: "street-address" }
+      { id: "barrio", rotulo: "Barrio o dirección de la instalación", etiqueta: "Dirección", obligatorio: true, falta: "la dirección de la instalación", autocompletar: "street-address" },
+      ...agenda
     ];
   }
   return [
@@ -26,7 +32,8 @@ export function camposServicio(s: Servicio | undefined, titulos: string[]): Camp
     { id: "detalle", rotulo: s ? "Qué le pasa al equipo" : "Qué necesitas", etiqueta: "Detalle", tipo: "area", obligatorio: true,
       falta: s ? "qué le pasa al equipo" : "qué necesitas", placeholder: s?.detalle ?? "Cuéntanos qué necesitas" },
     nombre,
-    { id: "barrio", rotulo: "Barrio", etiqueta: "Barrio", opcional: true, autocompletar: "street-address" }
+    { id: "barrio", rotulo: "Barrio", etiqueta: "Barrio", opcional: true, autocompletar: "street-address" },
+    ...agenda
   ];
 }
 
@@ -44,7 +51,8 @@ export const FORMULARIOS_ARTICULO: Record<string, { titulo: string; texto: strin
       { id: "cantidad", rotulo: "Cuántas cámaras", etiqueta: "Cámaras", tipo: "lista", opciones: CAMARAS, inicial: "3 o 4" },
       { id: "paquete", rotulo: "Paquete de interés", etiqueta: "Paquete", tipo: "lista", ancho: "completo",
         opciones: [...PAQUETES.map(p => p.nombre), "Aún no sé, quiero asesoría"], inicial: "Aún no sé, quiero asesoría" },
-      { id: "detalle", rotulo: "Qué quieres vigilar", etiqueta: "Detalle", tipo: "area", opcional: true, placeholder: "Qué zonas quieres vigilar y si ya tienes internet WiFi" }
+      { id: "detalle", rotulo: "Qué quieres vigilar", etiqueta: "Detalle", tipo: "area", opcional: true, placeholder: "Qué zonas quieres vigilar y si ya tienes internet WiFi" },
+      ...agenda
     ]
   },
   "blog-celulares": {

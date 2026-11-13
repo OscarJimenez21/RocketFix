@@ -8,14 +8,15 @@
      · Día del Niño ...... del 15 de abril al último sábado de abril: globos y confeti
      · Día de la Madre ... del 1 de mayo al segundo domingo de mayo: flores y pétalos
      · Día del Padre ..... del 1 de junio al tercer domingo de junio: corbatín y banderines
+     · Temporada de prima  del lunes siguiente al Día del Padre al 15 de julio: monedas doradas y estrellas (idea 94; sin descuentos)
      · Fiestas patrias ... 20 de julio y 7 de agosto: bandera de Colombia ondeando y banderines tricolor
      · Amor y amistad .... septiembre: corazones que flotan
      · Halloween ......... 24 al 31 de octubre: calabazas, murciélagos y telarañas
 
-   Vista previa con un enlace: ?temporada=<id> (navidad, findeano, clases, nino, madre, padre, patria, amistad, halloween).
+   Vista previa con un enlace: ?temporada=<id> (navidad, findeano, clases, nino, madre, padre, prima, patria, amistad, halloween).
    Funciona también en la página publicada, pero solo para quien abre ese enlace: los demás ven la de la fecha de hoy. */
 
-export type IdTemporada = "navidad" | "findeano" | "clases" | "nino" | "madre" | "padre" | "patria" | "amistad" | "halloween";
+export type IdTemporada = "navidad" | "findeano" | "clases" | "nino" | "madre" | "padre" | "prima" | "patria" | "amistad" | "halloween";
 
 export type Temporada = {
   id: IdTemporada;
@@ -80,6 +81,14 @@ const TEMPORADAS: Record<IdTemporada, Temporada> = {
       tipos: ["cel", "rel", "aud", "par", "tv", "con", "pc:portatiles", "per:monitores", "per:sillas", "per:teclados", "per:mouse"]
     }
   },
+  prima: {
+    id: "prima", fugaces: ["#FFD36B", "#FFF1B8", "#7FE3C4"], fondo: "#123A33", acento: "#FFD36B",
+    franja: { texto: "Temporada de prima", mas: ": ideas para invertirla en tecnología, por presupuesto", ver: "Ver opciones" },
+    presupuesto: {
+      etiqueta: "Temporada de prima", titulo: "Invierte tu prima en tecnología", texto: "Elige cuánto quieres invertir y te mostramos opciones en ese rango, con el precio de siempre.",
+      tipos: ["cel", "tab", "pc:portatiles", "pc:portatiles-gamer", "pc:escritorio-gamer", "tv", "con", "aud", "rel", "per:monitores", "per:sillas"]
+    }
+  },
   patria: {
     id: "patria", fugaces: ["#FFD23F", "#4D7CFE", "#FF5A5A"], fondo: "#0B2F7A", acento: "#FCD116",
     franja: { texto: "¡Feliz día, Colombia!", mas: " Celebramos con orgullo nuestra independencia" },
@@ -124,6 +133,7 @@ export function idDeFecha(fecha: Date): IdTemporada | null {
   if (mes === 4 && dia >= 15 && dia <= ultimoSabadoAbril(anio)) return "nino";
   if (mes === 5 && dia <= domingo(anio, 5, 2)) return "madre";
   if (mes === 6 && dia <= domingo(anio, 6, 3)) return "padre";
+  if ((mes === 6 && dia > domingo(anio, 6, 3)) || (mes === 7 && dia <= 15)) return "prima";
   if ((mes === 7 && dia === 20) || (mes === 8 && dia === 7)) return "patria";
   if (mes === 9) return "amistad";
   if (mes === 10 && dia >= 24) return "halloween";
@@ -152,6 +162,8 @@ export function temporadaActual(fecha = new Date()): Temporada | null {
 }
 
 export const TEMPORADA = temporadaActual();
+/** Idea 82: la decoración (dibujos que se mueven) solo se baja si el navegador no pidió ahorrar datos. Los textos de la temporada sí salen */
+export const DECORAR = Boolean(TEMPORADA) && !(typeof document !== "undefined" && document.documentElement.dataset.ahorro === "si");
 
 /** Temporada de regalos de diciembre (compatibilidad con el código de antes): navidad del 1 al 24, fin de año del 25 al 31 */
 export const REGALOS = TEMPORADA?.id === "navidad" ? { navidad: true } : TEMPORADA?.id === "findeano" ? { navidad: false } : null;

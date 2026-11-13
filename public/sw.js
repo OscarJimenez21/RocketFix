@@ -4,7 +4,7 @@
    · Páginas y datos (precios, productos, descripciones): siempre se piden primero a internet; la copia es solo para cuando
      no hay señal. Así un precio nuevo se ve de inmediato.
    · Nada de otros sitios (WhatsApp, Bold) pasa por aquí. */
-const VERSION = "rf-2026-11-12";
+const VERSION = "rf-2026-11-12-2";
 const FIJOS = `${VERSION}-fijos`;
 const FOTOS = `${VERSION}-fotos`;
 const PAGINAS = `${VERSION}-paginas`;

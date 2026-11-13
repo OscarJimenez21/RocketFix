@@ -19,6 +19,10 @@ export const BASE = import.meta.env.BASE_URL;
 
 /** Páginas de políticas (garantia, cambios-y-devoluciones, datos-personales) */
 const POLITICAS_IDS = politicas.paginas.map(p => p.id);
+/** Páginas de ayuda (las mismas de data/ayuda.json; rutas.test.ts revisa que coincidan). Van aquí escritas para no cargar
+    los textos de ayuda con la tienda: se bajan solo al abrir una de estas páginas */
+export const INFO_IDS = ["busca-por-uso", "todas-las-marcas", "sigue-tu-pedido", "preguntas-frecuentes", "glosario", "guia-de-originales",
+  "cuidado-de-tus-equipos", "antes-de-tu-reparacion", "diagnostico", "empresas"];
 
 const decodificar = (s: string) => {
   try { return decodeURIComponent(s); } catch { return s; }
@@ -47,6 +51,7 @@ export function leerRuta(direccion: string): Ruta {
   if (h === "favoritos") return { tipo: "favoritos" };
   if (ARTICULOS.some(a => a.id === h)) return { tipo: "articulo", id: h };
   if (POLITICAS_IDS.includes(h)) return { tipo: "politica", id: h };
+  if (INFO_IDS.includes(h)) return { tipo: "info", id: h };
   const tienda = VISTA_TIENDA[h];
   if (tienda) return { tipo: "tienda", vista: h, tienda };
   return { tipo: "no-encontrada", hash: h };
@@ -63,6 +68,7 @@ export const claveRuta = (r: Ruta) => {
     case "favoritos": return "favoritos";
     case "articulo": return r.id;
     case "politica": return r.id;
+    case "info": return r.id;
     case "no-encontrada": return r.hash;
   }
 };
@@ -77,7 +83,7 @@ export function direccionDe(r: Ruta): string {
     case "marca": return `${BASE}marca/${slug(r.marca) || encodeURIComponent(r.marca)}/`;
     case "blog": return `${BASE}blog/`;
     case "favoritos": return `${BASE}favoritos/`;
-    case "articulo": case "politica": return `${BASE}${r.id}/`;
+    case "articulo": case "politica": case "info": return `${BASE}${r.id}/`;
     case "no-encontrada": return `${BASE}${r.hash}/`;
   }
 }

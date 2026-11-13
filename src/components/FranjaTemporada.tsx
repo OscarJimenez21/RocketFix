@@ -2,11 +2,11 @@
    se va al bajar (la cabecera sigue fija). En las temporadas de regalos lleva a la sección «por presupuesto» de la portada;
    en fiestas patrias y Halloween solo saluda. No anuncia descuentos ni fechas de entrega. */
 import { lazy, Suspense } from "react";
-import { TEMPORADA } from "../lib/temporada";
+import { TEMPORADA, DECORAR } from "../lib/temporada";
 import { hrefDe } from "../lib/rutas";
 import { IconoFlecha, IconoRegalo } from "./Iconos";
 
-const Decoracion = TEMPORADA ? lazy(() => import("./temporada/Decoracion")) : null;
+const Decoracion = DECORAR ? lazy(() => import("./temporada/Decoracion")) : null;
 
 export function FranjaTemporada() {
   if (!TEMPORADA) return null;

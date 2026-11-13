@@ -9,10 +9,10 @@ import { FilaProductos } from "../../components/FilaProductos";
 import { IconoCheck, IconoRegalo } from "../../components/Iconos";
 import { recurso } from "../../lib/formato";
 import { PERSONAS, RANGOS, porPersona, porRango } from "../../lib/regalos";
-import { PRESUPUESTO_NORMAL, TEMPORADA } from "../../lib/temporada";
+import { PRESUPUESTO_NORMAL, TEMPORADA, DECORAR } from "../../lib/temporada";
 import { TEMAS } from "./Categorias";
 
-const Decoracion = TEMPORADA ? lazy(() => import("../../components/temporada/Decoracion")) : null;
+const Decoracion = DECORAR ? lazy(() => import("../../components/temporada/Decoracion")) : null;
 
 /** Estrellas de la sección sin temporada: solo en los bordes, nunca detrás de los títulos ni de las tarjetas
     (posición en %, tamaño en px y color) */

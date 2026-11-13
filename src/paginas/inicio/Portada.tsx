@@ -11,10 +11,10 @@ import { dinero } from "../../lib/formato";
 import { waLink } from "../../lib/whatsapp";
 import { Vitrina } from "./Vitrina";
 import { hrefDe } from "../../lib/rutas";
-import { TEMPORADA } from "../../lib/temporada";
+import { DECORAR } from "../../lib/temporada";
 
 // Mejora 6: decoración de la temporada (se baja aparte y solo en temporada)
-const DecoracionPortada = TEMPORADA ? lazy(() => import("../../components/temporada/Decoracion")) : null;
+const DecoracionPortada = DECORAR ? lazy(() => import("../../components/temporada/Decoracion")) : null;
 
 /** La portada entra en cascada solo la primera vez que se abre en la visita (al volver a Inicio ya está quieta) */
 let portadaVista = false;

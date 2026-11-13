@@ -14,7 +14,9 @@ import { activa } from "../lib/animaciones";
 import { complementosDe } from "../lib/complementos";
 import { armarDescripcion, useDescripcion } from "../lib/descripcion";
 import { useVisto } from "../lib/enPantalla";
-import { dinero, recurso } from "../lib/formato";
+import { dinero, lista, recurso } from "../lib/formato";
+import { explicarEstado } from "../lib/estados";
+import { tiene5G } from "../lib/filtros";
 import { useDireccion, useMarco } from "../lib/movimiento";
 import { tinteDe } from "../lib/tinte";
 import { volarAlCarrito } from "../lib/vuelo";
@@ -156,6 +158,8 @@ export default function Producto({ id }: { id: string }) {
   const vista = TIENDA_VISTA[p.tienda];
   const d = armarDescripcion(p, descripcion ?? {});
   const cat = p.tienda !== "cel" && p.categoria ? nombreCat[p.categoria] : null;
+  const estadoTexto = explicarEstado(p.estado);
+  const con5G = tiene5G(p) && !p.specs.some(s => /\b5g\b/i.test(s));
 
   const alAgregar = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!agregar(p.id, i)) return;
@@ -163,6 +167,11 @@ export default function Producto({ id }: { id: string }) {
     // La foto despega hacia el carrito (desde la foto grande o, si ya no se ve entera, desde el botón)
     volarAlCarrito([document.querySelector("[data-foto-principal]"), e.currentTarget], p.imagen && recurso(p.imagen));
     avisar(`Agregaste ${nombreItem(p, o.nombre)} al carrito`);
+  };
+  // Idea 37: «Comprar ahora» = lo agrega (si aún no está) y abre el carrito para cerrar el pedido
+  const comprarAhora = () => {
+    if (q === 0 && !agregar(p.id, i)) return;
+    abrirCarrito();
   };
   const compartir = async () => {
     // Se comparte la página propia del producto: al pegarla en WhatsApp sale con su foto, nombre y precio
@@ -206,7 +215,15 @@ export default function Producto({ id }: { id: string }) {
               })}
             </ul>
           )}
+          {/* Idea 29: «5G» a la vista cuando el producto lo dice en el nombre o una versión, pero no en las características */}
+          {con5G && <p className="mt-2 inline-flex items-center rounded-sm bg-marca-suave px-2 py-1 text-[13px] font-semibold text-marca">Compatible con 5G</p>}
           {p.nota && <NotaProducto nota={p.nota} className="mt-3" />}
+          {/* Idea 22: qué quiere decir CPO, Open box o Usado, sin salir del producto */}
+          {estadoTexto && (
+            <p className="mt-3 rounded bg-acento-suave px-3.5 py-2.5 text-[13.5px] leading-relaxed text-acento-texto">
+              <b>{p.estado}:</b> {estadoTexto} <a href={`${hrefDe("glosario")}`} className="underline underline-offset-2">Ver el glosario</a>
+            </p>
+          )}
 
           {p.opciones.length > 1 && (
             <fieldset className="mt-6">
@@ -232,8 +249,9 @@ export default function Producto({ id }: { id: string }) {
               <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
                 {/* barrido-agregar: un destello lo cruza una vez al abrir el producto (animación 21) */}
                 <button ref={boton} type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario barrido barrido-agregar w-full"><EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" /></button>
+                <button type="button" onClick={comprarAhora} className="btn btn-marca w-full">Comprar ahora</button>
                 <a href={waLink(`Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, o.nombre)} (${dinero(o.precio)}). ¿Está disponible?${typeof location === "undefined" ? "" : `\n${location.origin}${import.meta.env.BASE_URL}p/${p.id}/`}`)} target="_blank" rel="noopener"
-                  className="btn btn-borde w-full"><IconoWhatsApp className="h-[18px] w-[18px] text-wa" />Preguntar por WhatsApp</a>
+                  className="btn btn-borde w-full sm:col-span-2"><IconoWhatsApp className="h-[18px] w-[18px] text-wa" />Preguntar por WhatsApp</a>
               </div>
               {q > 0 && <p className="mt-3 text-sm font-semibold text-marca"><span key={q} className="inline-block motion-safe:animate-entrar">{q} en el carrito</span> ·<button type="button" onClick={abrirCarrito} className="underline underline-offset-2">Ver carrito</button></p>}
             </div>
@@ -247,6 +265,36 @@ export default function Producto({ id }: { id: string }) {
               </li>
             ))}
           </ul>
+          {/* Idea 23: las dudas de siempre, respondidas con los datos de config.json y las políticas (nada nuevo) */}
+          <div className="mt-5 grid gap-1.5 text-sm">
+            <details className="desplegable rounded border border-linea bg-superficie">
+              <summary className="cursor-pointer px-3.5 py-2.5 font-semibold">¿Cuánto vale el envío?</summary>
+              <p className="border-t border-linea px-3.5 py-2.5 leading-relaxed text-tinta-2">
+                Bogotá y alrededores: {dinero(CONFIG.envios.bogota.costo)}, gratis desde {dinero(CONFIG.envios.bogota.gratisDesde)}. Resto de Colombia: {dinero(CONFIG.envios.nacional.costo)}, gratis desde {dinero(CONFIG.envios.nacional.gratisDesde)}.
+              </p>
+            </details>
+            <details className="desplegable rounded border border-linea bg-superficie">
+              <summary className="cursor-pointer px-3.5 py-2.5 font-semibold">¿Cómo puedo pagar?</summary>
+              <p className="border-t border-linea px-3.5 py-2.5 leading-relaxed text-tinta-2">
+                En Bogotá: {lista(CONFIG.pagos.bogota)}. Resto de Colombia: {lista(CONFIG.pagos.nacional)}.
+              </p>
+            </details>
+            <details className="desplegable rounded border border-linea bg-superficie">
+              <summary className="cursor-pointer px-3.5 py-2.5 font-semibold">¿Qué garantía tiene y puedo devolverlo?</summary>
+              <p className="border-t border-linea px-3.5 py-2.5 leading-relaxed text-tinta-2">
+                Mira la <a href={hrefDe("garantia")} className="enlace">política de garantía</a> y la de <a href={hrefDe("cambios-y-devoluciones")} className="enlace">cambios y devoluciones</a>. Si tienes una duda puntual sobre este equipo, pregúntanos por WhatsApp.
+              </p>
+            </details>
+            {/* Idea 30: en celulares, cómo revisar que el IMEI no esté reportado */}
+            {p.tienda === "cel" && (
+              <details className="desplegable rounded border border-linea bg-superficie">
+                <summary className="cursor-pointer px-3.5 py-2.5 font-semibold">¿Cómo reviso el IMEI?</summary>
+                <p className="border-t border-linea px-3.5 py-2.5 leading-relaxed text-tinta-2">
+                  Marca *#06# en el celular para ver su IMEI y consúltalo en <a href="https://www.imeicolombia.com.co" target="_blank" rel="noopener" className="enlace">imeicolombia.com.co</a>, la consulta oficial de equipos reportados en Colombia.
+                </p>
+              </details>
+            )}
+          </div>
           <button type="button" onClick={compartir} aria-live="polite" className="mt-3 inline-flex min-h-[44px] items-center gap-2 text-sm font-semibold text-tinta-2 hover:text-tinta">
             {/* Al copiar el enlace, la flecha se cambia por un ✓ que se dibuja */}
             {copiado

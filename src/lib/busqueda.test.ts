@@ -58,8 +58,12 @@ describe("¿quisiste decir…?", () => {
     expect(distancia("iphnoe", "iphone", 1)).toBe(2);
   });
   it("corrige una marca mal escrita", () => {
-    expect(sugerirCorreccion("samsumg")).toBe("samsung");
-    expect(sugerirCorreccion("xiomi")).toBe("xiaomi");
+    expect(sugerirCorreccion("samsong")).toBe("samsung");
+    expect(sugerirCorreccion("xiaomy")).toBe("xiaomi");
+  });
+  it("los errores de siempre (sinónimos, idea 12/11) encuentran productos sin pasar por «¿quisiste decir?»", () => {
+    expect(buscarProductos("samsumg").length).toBeGreaterThan(0);
+    expect(buscarProductos("xiomi").length).toBeGreaterThan(0);
   });
   it("no sugiere nada si la búsqueda ya encuentra productos o si no hay nada parecido", () => {
     expect(sugerirCorreccion("samsung")).toBeNull();

@@ -1,5 +1,6 @@
 /* Idea 30: selector del modo noche. Tres opciones en una pastilla: Día, Noche y Automático (sigue el ajuste del
    equipo). Va en el menú lateral y en el pie de página; la cabecera en computador tiene un botón rápido (BotonTema) */
+import { useAjuste } from "../lib/accesibilidad";
 import { useTema, type Tema } from "../lib/tema";
 import { IconoLuna, IconoSol, IconoTelefono } from "./Iconos";
 
@@ -35,6 +36,26 @@ export function SelectorTema({ oscuro = false }: { oscuro?: boolean }) {
           </button>
         );
       })}
+    </div>
+  );
+}
+
+/** Ideas 84 y 85: «Letra más grande» y «Más contraste», como interruptores (en el menú lateral y en el pie) */
+export function AjustesLectura({ oscuro = false }: { oscuro?: boolean }) {
+  const [letra, setLetra] = useAjuste("letra");
+  const [contraste, setContraste] = useAjuste("contraste");
+  const boton = (activo: boolean) => `presionable inline-flex min-h-[40px] items-center gap-2 rounded-full border px-3 text-[13px] font-semibold ${
+    activo
+      ? oscuro ? "border-marca-menta bg-marca-menta text-marca-noche" : "border-marca bg-marca text-white"
+      : oscuro ? "border-white/20 text-white/80 hover:text-white" : "border-linea-fuerte text-tinta-2 hover:text-tinta"}`;
+  return (
+    <div role="group" aria-label="Ajustes de lectura" className="mt-2.5 flex flex-wrap gap-2">
+      <button type="button" aria-pressed={letra} onClick={() => setLetra(!letra)} className={boton(letra)}>
+        <span aria-hidden="true" className="font-display text-[15px] leading-none">A<span className="text-[11px]">A</span></span>Letra más grande
+      </button>
+      <button type="button" aria-pressed={contraste} onClick={() => setContraste(!contraste)} className={boton(contraste)}>
+        <span aria-hidden="true" className="h-3.5 w-3.5 rounded-full border-2 border-current [background:linear-gradient(90deg,currentColor_50%,transparent_50%)]" />Más contraste
+      </button>
     </div>
   );
 }

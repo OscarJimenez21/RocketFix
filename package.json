@@ -12,6 +12,7 @@
     "lint": "eslint .",
     "probar": "vitest run",
     "revisar": "npm run lint && npm run typecheck && npm run probar && npm run verificar",
+    "enlaces": "node scripts/revisar-enlaces.mjs",
     "catalogo": "node scripts/extraer-catalogo.mjs",
     "auditoria": "node scripts/auditoria.mjs",
     "verificar": "node scripts/verificar-catalogo.mjs"

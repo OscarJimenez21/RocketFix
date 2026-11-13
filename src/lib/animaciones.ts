@@ -5,8 +5,8 @@
 
 export const activa = (n: number) => !document.documentElement.classList.contains(`sin-a${n}`);
 
-/** Si la persona pidió menos movimiento en su equipo */
-export const reducirMovimiento = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+/** Si la persona pidió menos movimiento en su equipo (o el navegador pidió ahorrar datos, idea 82) */
+export const reducirMovimiento = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.dataset.ahorro === "si";
 
 /** Mejora: los desplazamientos «suaves» de la página (carruseles, ir al formulario…) son instantáneos para quien pidió
     menos movimiento en su equipo (el navegador no lo hace solo cuando el desplazamiento lo pide el código) */

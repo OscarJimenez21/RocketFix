@@ -169,4 +169,6 @@ export type Ruta =
   | { tipo: "favoritos" }
   | { tipo: "articulo"; id: string }
   | { tipo: "politica"; id: string }
+  /** Páginas de ayuda (data/ayuda.json): preguntas frecuentes, glosario, busca por uso, empresas… */
+  | { tipo: "info"; id: string }
   | { tipo: "no-encontrada"; hash: string };

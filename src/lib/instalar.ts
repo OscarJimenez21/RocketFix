@@ -22,9 +22,16 @@ if (typeof window !== "undefined") {
   });
 }
 
+/** Aviso interno de «hay una versión nueva de la tienda» (lo escucha App.tsx) */
+export const VERSION_NUEVA = "rf:version-nueva";
+
 /** Registra public/sw.js (solo en la página publicada: al trabajar en local estorbaría los cambios) */
 export function registrarTrabajador() {
   if (import.meta.env.DEV || !("serviceWorker" in navigator)) return;
+  // Idea 83: cuando se publica una versión nueva, el trabajador nuevo toma el control y se avisa (con «Actualizar»).
+  // Solo si ya había uno: en la primera visita también toma el control, pero ahí no hay nada que actualizar
+  const habia = Boolean(navigator.serviceWorker.controller);
+  navigator.serviceWorker.addEventListener("controllerchange", () => { if (habia) window.dispatchEvent(new Event(VERSION_NUEVA)); });
   const registrar = () => {
     navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`, { scope: import.meta.env.BASE_URL }).catch(() => { /* sin trabajador: la tienda funciona igual */ });
   };

@@ -44,3 +44,17 @@ export function alternarFavorito(id: string): boolean {
 }
 
 export const vaciarFavoritos = () => guardar([]);
+
+/** Idea 99: suma una lista compartida a los favoritos (sin repetir, los nuevos primero). Devuelve cuántos se agregaron */
+export function sumarFavoritos(ids: string[]): number {
+  const nuevos = ids.filter(id => !lista.includes(id));
+  if (nuevos.length) guardar([...nuevos, ...lista].slice(0, TOPE_FAVORITOS));
+  return nuevos.length;
+}
+
+/** Idea 99: ?lista=a,b,c de la dirección (solo ids con buena forma; el que no exista en la tienda se descarta al mostrar) */
+export function leerListaCompartida(busqueda: string): string[] {
+  const crudo = new URLSearchParams(busqueda).get("lista");
+  if (!crudo) return [];
+  return [...new Set(crudo.split(",").map(s => s.trim()).filter(s => /^[^~,\s]{1,60}$/.test(s)))].slice(0, TOPE_FAVORITOS);
+}

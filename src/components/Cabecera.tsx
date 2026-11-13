@@ -17,7 +17,7 @@ import { PuntoEstado, useAtencion } from "./Contacto";
 import { IconoBolsa, IconoCerrar, IconoMenu, IconoWhatsApp } from "./Iconos";
 import { Cohete, Logo } from "./Logo";
 import { EnlaceFavoritos } from "./Favorito";
-import { BotonTema, SelectorTema } from "./SelectorTema";
+import { AjustesLectura, BotonTema, SelectorTema } from "./SelectorTema";
 
 const CANTIDAD = Object.fromEntries(TIENDAS.map(t => [t.id, deTienda(t.id).length])) as Record<TiendaId, number>;
 const secciones = (ids: TiendaId[]) => ids.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t));
@@ -25,6 +25,7 @@ const secciones = (ids: TiendaId[]) => ids.map(tiendaPorId).filter((t): t is Non
 /** Servicio técnico en el menú lateral (con cada línea de servicio) */
 const SERVICIO = [
   { texto: "Solicitar un servicio", href: hrefDe("servicios") },
+  { texto: "¿Qué le pasa a tu equipo?", href: hrefDe("diagnostico") },
   { texto: "Reparación de computadores", href: hrefDe("blog-computadores") },
   { texto: "Reparación de celulares", href: hrefDe("blog-celulares") },
   { texto: "Instalación de cámaras", href: hrefDe("blog-camaras") },
@@ -41,7 +42,12 @@ const AYUDA = [
   { texto: "Inicio", href: INICIO },
   { texto: "Tus favoritos", href: hrefDe("favoritos") },
   { texto: "Cómo comprar", href: hrefDe("como-comprar") },
+  { texto: "Busca por uso", href: hrefDe("busca-por-uso") },
   { texto: "Todas las categorías", href: hrefDe("categorias") },
+  { texto: "Todas las marcas", href: hrefDe("todas-las-marcas") },
+  { texto: "Preguntas frecuentes", href: hrefDe("preguntas-frecuentes") },
+  { texto: "Sigue tu pedido", href: hrefDe("sigue-tu-pedido") },
+  { texto: "Compras para empresas", href: hrefDe("empresas") },
   { texto: "Calificaciones de clientes", href: hrefDe("calificaciones") },
   { texto: "Contacto y horario", href: hrefDe("contacto") }
 ];
@@ -116,6 +122,7 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
           <p className="mb-3 flex items-center gap-2 text-sm text-tinta-2"><PuntoEstado abierto={atencion.abierto} />{atencion.texto}</p>
           {/* Idea 30: colores de día o de noche */}
           <div className="mb-3 flex flex-wrap items-center justify-between gap-2"><span className="text-sm font-semibold text-tinta-2">Colores</span><SelectorTema /></div>
+          <div className="mb-3"><AjustesLectura /></div>
           <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="btn btn-wa w-full"><IconoWhatsApp />Escríbenos por WhatsApp</a>
         </div>
       </div>

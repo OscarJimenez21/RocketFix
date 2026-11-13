@@ -1,0 +1,126 @@
+{
+ "_nota": "Páginas de ayuda (ideas del 12/11/2026). Textos generales y datos que ya publica la tienda: los valores entre llaves ({envioBogota}, {pagosBogota}…) salen de config.json al mostrarse, y [texto](ruta) es un enlace. No van precios, promociones, plazos de garantía ni beneficios que la tienda no haya definido.",
+ "paginas": [
+  { "id": "busca-por-uso", "menu": "Busca por uso", "titulo": "Busca por uso", "lead": "¿No sabes qué modelo buscar? Empieza por lo que vas a hacer con el equipo y te mostramos por dónde mirar." },
+  { "id": "todas-las-marcas", "menu": "Todas las marcas", "titulo": "Todas las marcas", "lead": "Las marcas que tenemos en la tienda, de la A a la Z, con cuántos productos hay de cada una." },
+  { "id": "sigue-tu-pedido", "menu": "Sigue tu pedido o reparación", "titulo": "Sigue tu pedido o tu reparación", "lead": "Escríbenos el número que te dimos (o tu nombre) y te contamos por WhatsApp en qué va tu pedido o tu equipo." },
+  { "id": "preguntas-frecuentes", "menu": "Preguntas frecuentes", "titulo": "Preguntas frecuentes", "lead": "Envíos, pagos, estados de los equipos, garantía y servicio técnico. Escribe tu duda para encontrarla más rápido." },
+  { "id": "glosario", "menu": "Glosario", "titulo": "Glosario de tecnología", "lead": "Qué significan las palabras y siglas que ves en las fichas: CPO, eSIM, RAM, SSD, Hz y más, explicadas en corto." },
+  { "id": "guia-de-originales", "menu": "Cómo saber si un equipo es original", "titulo": "Cómo saber si un equipo es original", "lead": "Revisiones sencillas que puedes hacer tú mismo antes y después de comprar un celular o un computador, en cualquier tienda.",
+    "secciones": [
+     { "titulo": "Celulares: revisa el IMEI", "parrafos": [
+       "Marca *#06# en el teclado de llamadas: aparece el IMEI (si tiene dos SIM, aparecen dos). Debe ser el mismo que trae la caja y el que sale en Ajustes, en «Información del teléfono».",
+       "En Colombia puedes consultar si un IMEI está reportado como robado o perdido en [imeicolombia.com.co](https://www.imeicolombia.com.co/), el sitio oficial de la base de datos de equipos. Un equipo reportado se bloquea en las redes del país.",
+       "En iPhone, el número de serie (Ajustes → General → Información) se puede consultar en la página de cobertura de Apple, [checkcoverage.apple.com](https://checkcoverage.apple.com/)."
+     ] },
+     { "titulo": "La caja y los accesorios", "parrafos": [
+       "Un equipo nuevo llega en su caja sellada, con el modelo y los números de serie impresos en ella. Si el producto es open box, CPO o usado, la página lo dice en su estado y te contamos qué accesorios trae.",
+       "Desconfía de cajas con etiquetas despegadas, impresión borrosa o un número de serie que no coincide con el del equipo."
+     ] },
+     { "titulo": "El equipo por dentro", "parrafos": [
+       "Al encenderlo, el asistente de configuración debe ser el del fabricante, en español y sin aplicaciones extrañas ya instaladas.",
+       "En computadores, el modelo y el número de serie también aparecen en la etiqueta de abajo y en la configuración del sistema (en Windows: Configuración → Sistema → Información).",
+       "Un precio muy por debajo del de otras tiendas para el mismo modelo nuevo es una alerta."
+     ] },
+     { "titulo": "Si tienes dudas", "parrafos": [
+       "Escríbenos por WhatsApp antes de comprar: te enviamos los datos que necesites del equipo que te interesa."
+     ] }
+    ] },
+  { "id": "cuidado-de-tus-equipos", "menu": "Cuida tus equipos", "titulo": "Cómo cuidar tus equipos", "lead": "Hábitos sencillos para que la batería, la pantalla y el equipo en general te duren más.",
+    "secciones": [
+     { "titulo": "La batería", "parrafos": [
+       "No hace falta descargarla del todo: a las baterías de litio les va mejor cargarlas seguido que dejarlas llegar a 0 %.",
+       "El calor es lo que más las desgasta. Evita dejar el celular al sol o en el carro, y no lo uses para juegos pesados mientras carga.",
+       "Si tu equipo trae la opción de carga optimizada o de limitar la carga, actívala."
+     ] },
+     { "titulo": "Cargadores y cables", "parrafos": [
+       "Usa el cargador original o uno de marca reconocida con la potencia que pide el equipo. Los cargadores genéricos sin marca pueden dañar el puerto o la batería.",
+       "Revisa que el cable no esté pelado ni doblado en las puntas."
+     ] },
+     { "titulo": "Pantalla y cuerpo", "parrafos": [
+       "Un vidrio templado y un forro que cubra las esquinas ayudan mucho a que la pantalla no se rompa en una caída.",
+       "Limpia la pantalla con un paño de microfibra seco o apenas húmedo; nunca con alcohol puro ni limpiavidrios.",
+       "Ningún celular es del todo resistente al agua con el paso del tiempo: evita mojarlo aunque diga que resiste salpicaduras."
+     ] },
+     { "titulo": "Computadores", "parrafos": [
+       "Úsalo sobre una superficie firme: en la cama o en cojines se tapan las rejillas y se calienta.",
+       "Un mantenimiento preventivo (limpieza por dentro y cambio de pasta térmica) cada cierto tiempo ayuda a que no se caliente ni se ponga lento.",
+       "Mantén el sistema y los programas actualizados, y haz copias de seguridad de tus archivos."
+     ] }
+    ] },
+  { "id": "antes-de-tu-reparacion", "menu": "Antes de tu reparación", "titulo": "Antes de llevar tu equipo a reparar", "lead": "Una lista corta para que la reparación sea más rápida y tus datos queden a salvo.",
+    "secciones": [
+     { "titulo": "Lista para antes de entregarlo", "lista": [
+       "Haz una copia de seguridad de tus fotos, contactos y archivos (en la nube o en un computador), si el equipo todavía enciende.",
+       "Saca la SIM y la memoria microSD.",
+       "Ten a mano el cargador del equipo: a veces la falla está en el cargador o el cable.",
+       "Anota qué le pasa, desde cuándo y si se cayó o se mojó: nos ayuda a encontrar la falla.",
+       "Si el equipo tiene garantía del fabricante, guarda la factura de compra.",
+       "Si para probarlo necesitamos desbloquearlo, te lo pedimos en el momento; nunca compartas tus contraseñas por escrito."
+     ] },
+     { "titulo": "Computadores", "lista": [
+       "Si puedes, cierra tu sesión en las cuentas importantes y guarda tus archivos en una memoria o en la nube.",
+       "Cuéntanos si es por lentitud, por una falla o si quieres mejorarlo (SSD, RAM): así te decimos qué conviene."
+     ] }
+    ] },
+  { "id": "diagnostico", "menu": "Diagnóstico guiado", "titulo": "¿Qué le pasa a tu equipo?", "lead": "Responde dos preguntas y te decimos qué servicio corresponde y qué contarnos por WhatsApp para darte el valor aproximado." },
+  { "id": "empresas", "menu": "Empresas", "titulo": "Compras para empresas", "lead": "¿Necesitas varios equipos para tu empresa, colegio u oficina? Cuéntanos qué buscas y te enviamos la cotización por WhatsApp." }
+ ],
+ "faq": [
+  { "tema": "Compras", "p": "¿Cómo compro?", "r": "Agrega los productos al carrito, escribe tu nombre y la dirección, y toca «Enviar pedido por WhatsApp». Se abre WhatsApp con tu pedido escrito; lo envías y te confirmamos disponibilidad y total antes de cualquier pago. Mira [cómo comprar en 3 pasos](como-comprar)." },
+  { "tema": "Compras", "p": "¿Enviar el pedido ya es un pago?", "r": "No. Enviar el pedido por WhatsApp no cobra nada: primero te confirmamos disponibilidad y total. Si prefieres pagar de una vez, en el carrito puedes pagar en línea con Bold." },
+  { "tema": "Compras", "p": "¿Qué significa «Preguntar disponibilidad»?", "r": "Que por ahora no tenemos precio publicado para ese producto. Escríbenos por WhatsApp y te confirmamos si está disponible y su precio." },
+  { "tema": "Envíos", "p": "¿Cuánto cuesta el envío en Bogotá?", "r": "El domicilio en Bogotá y alrededores cuesta {envioBogota} y es gratis en compras desde {gratisBogota}. {domicilio}" },
+  { "tema": "Envíos", "p": "¿Envían a otras ciudades?", "r": "Sí. {envio} El envío a otra ciudad cuesta {envioNacional} y es gratis en compras desde {gratisNacional}." },
+  { "tema": "Pagos", "p": "¿Cómo puedo pagar en Bogotá?", "r": "{pagosBogota}." },
+  { "tema": "Pagos", "p": "¿Cómo pago si estoy en otra ciudad?", "r": "{pagosNacional}." },
+  { "tema": "Pagos", "p": "¿Puedo pagar en línea?", "r": "Sí, con Bold: desde el carrito toca «Pagar en línea con Bold» (acepta tarjeta, PSE y más). Después envíanos el pedido por WhatsApp para coordinar la entrega." },
+  { "tema": "Equipos", "p": "¿Qué diferencia hay entre nuevo, CPO, open box y usado?", "r": "Cada producto dice su estado en la ficha. Nuevo es de fábrica, en su caja; CPO es reacondicionado certificado; open box es un equipo cuya caja ya se abrió; usado es de segunda mano. Mira el [glosario](glosario) para más detalle." },
+  { "tema": "Equipos", "p": "¿Cómo sé si un celular es original?", "r": "Revisa el IMEI con *#06# y consúltalo en imeicolombia.com.co. Te lo explicamos paso a paso en [cómo saber si un equipo es original](guia-de-originales)." },
+  { "tema": "Garantía", "p": "¿Los productos tienen garantía?", "r": "Sí, todo lo que vendemos y reparamos tiene garantía legal. Los plazos y lo que cubre están en la página de [garantía](garantia)." },
+  { "tema": "Garantía", "p": "¿Puedo devolver un producto?", "r": "Tienes derecho de retracto por 5 días hábiles desde la entrega. Las condiciones están en [cambios y devoluciones](cambios-y-devoluciones)." },
+  { "tema": "Servicio técnico", "p": "¿Qué reparan?", "r": "Celulares, computadores (portátiles y de escritorio) e instalamos cámaras de seguridad. Cuéntanos qué le pasa al equipo y te damos el valor aproximado por WhatsApp: [solicitar un servicio](servicios)." },
+  { "tema": "Servicio técnico", "p": "¿Qué debo hacer antes de llevar mi equipo?", "r": "Haz una copia de tus datos, saca la SIM y la memoria, y ten el cargador a mano. La lista completa está en [antes de tu reparación](antes-de-tu-reparacion)." },
+  { "tema": "Atención", "p": "¿En qué horario atienden?", "r": "{horario}. Domingos y festivos no atendemos; si nos escribes, te respondemos cuando volvamos a abrir." },
+  { "tema": "Atención", "p": "¿Cómo sé en qué va mi pedido o mi reparación?", "r": "Escríbenos con tu número de pedido o tu nombre desde [sigue tu pedido](sigue-tu-pedido)." },
+  { "tema": "Datos", "p": "¿Qué hacen con mis datos?", "r": "Solo los usamos para atender tu pedido o tu solicitud. Lee la [política de datos personales](datos-personales)." }
+ ],
+ "glosario": [
+  { "t": "Nuevo", "d": "Equipo de fábrica, sin uso, en su caja original." },
+  { "t": "CPO (reacondicionado certificado)", "d": "Equipo que ya tuvo dueño o fue devuelto, y que se revisó, se reparó si hacía falta y se probó antes de volver a venderse. Te confirmamos su estado y accesorios por WhatsApp." },
+  { "t": "Open box (caja abierta)", "d": "Equipo cuya caja ya se abrió (por ejemplo, para exhibirlo o porque se devolvió sin usarse). Puede no traer todos los plásticos o accesorios originales; te contamos cuáles trae." },
+  { "t": "Usado", "d": "Equipo de segunda mano. Te contamos su estado antes de cualquier pago." },
+  { "t": "IMEI", "d": "Número único de cada celular (dos si tiene doble SIM). Se ve marcando *#06# y sirve para saber si el equipo está reportado." },
+  { "t": "eSIM", "d": "SIM digital que viene dentro del celular. Se activa con un código del operador, sin tarjeta física. Algunos modelos solo tienen eSIM." },
+  { "t": "SIM física", "d": "La tarjeta SIM de siempre, que se pone en la bandeja del celular." },
+  { "t": "Duos o doble SIM", "d": "El celular acepta dos líneas a la vez (dos SIM físicas, o una física y una eSIM)." },
+  { "t": "4G y 5G", "d": "Generaciones de la red móvil. El 5G es más rápido donde hay cobertura 5G; donde no la hay, el celular usa 4G." },
+  { "t": "RAM", "d": "Memoria de trabajo: la que usan las aplicaciones abiertas. Con más RAM se pueden tener más cosas abiertas sin que el equipo se ponga lento. Se mide en GB." },
+  { "t": "Almacenamiento (GB y TB)", "d": "Espacio para guardar fotos, aplicaciones y archivos. 1 TB son 1.024 GB." },
+  { "t": "SSD y NVMe", "d": "El SSD es un disco sin partes móviles, mucho más rápido que un disco duro (HDD). NVMe es un tipo de SSD aún más rápido." },
+  { "t": "Procesador", "d": "El «cerebro» del equipo (Intel Core, AMD Ryzen, Apple M, Snapdragon…). El número suele indicar la gama: un Core i7 o Ryzen 7 está por encima de un i5 o Ryzen 5 de la misma generación." },
+  { "t": "Tarjeta de video (GPU)", "d": "Se encarga de los gráficos. Es clave para juegos, edición de video y diseño (por ejemplo, NVIDIA RTX o AMD Radeon)." },
+  { "t": "DDR4 y DDR5", "d": "Generaciones de memoria RAM. DDR5 es la más reciente y rápida; no son intercambiables entre sí." },
+  { "t": "Hz (frecuencia de la pantalla)", "d": "Cuántas veces por segundo se actualiza la imagen. 120 Hz o 144 Hz se ven más fluidos que 60 Hz, sobre todo en juegos." },
+  { "t": "OLED y AMOLED", "d": "Pantallas en las que cada punto da su propia luz: negros más profundos y mejores colores que una pantalla LCD o IPS." },
+  { "t": "IPS", "d": "Tipo de pantalla LCD con buenos colores y ángulos de visión." },
+  { "t": "HD, FHD, QHD y 4K", "d": "Resolución de la pantalla, de menor a mayor: HD (1280 × 720), Full HD (1920 × 1080), QHD (2560 × 1440) y 4K UHD (3840 × 2160)." },
+  { "t": "mAh", "d": "Capacidad de la batería. A más mAh, más carga guarda, aunque lo que dura también depende del equipo." },
+  { "t": "Carga rápida (W)", "d": "La potencia de carga en vatios. Con más vatios el equipo carga más rápido, si el cargador y el cable la soportan." },
+  { "t": "Power bank", "d": "Batería portátil para cargar el celular u otros equipos fuera de casa." },
+  { "t": "Fuente de poder y 80 Plus", "d": "La fuente alimenta un PC de escritorio. El sello 80 Plus (Bronze, Gold…) indica qué tan eficiente es." },
+  { "t": "Wi-Fi 6 y Wi-Fi 7", "d": "Versiones recientes del Wi-Fi, más rápidas y estables cuando el router también las tiene." },
+  { "t": "Bre-B", "d": "Sistema de pagos inmediatos del Banco de la República: transfieres desde cualquier banco o billetera y el dinero llega al instante." },
+  { "t": "Smart TV", "d": "Televisor con internet y aplicaciones (YouTube, Netflix y otras) sin necesidad de otro aparato." }
+ ],
+ "usos": [
+  { "id": "estudiar", "titulo": "Para estudiar", "texto": "Portátiles y tabletas para clases, tareas y videollamadas, y lo que acompaña.", "tipos": ["pc:portatiles", "tab", "acc:lapices", "aud", "per:mouse", "per:memorias"] },
+  { "id": "trabajar", "titulo": "Para trabajar en casa u oficina", "texto": "Computadores, monitores, cámaras web y lo del escritorio.", "tipos": ["pc:portatiles", "pc:escritorio", "per:monitores", "per:combos", "per:camaras-web", "per:soportes", "per:energia", "per:impresoras"] },
+  { "id": "jugar", "titulo": "Para jugar", "texto": "Consolas, PC y portátiles gamer, tarjetas de video y periféricos.", "tipos": ["con", "pc:portatiles-gamer", "pc:escritorio-gamer", "comp:video", "per:diademas", "per:teclados", "per:mouse", "per:sillas"] },
+  { "id": "crear", "titulo": "Para crear contenido", "texto": "Micrófonos, cámaras web, monitores y equipos con buena tarjeta de video.", "tipos": ["per:streaming", "per:camaras-web", "per:monitores", "pc:portatiles-gamer", "comp:video", "aud:audio-diadema"] },
+  { "id": "celular", "titulo": "Para estar conectado", "texto": "Celulares, relojes, audífonos inalámbricos y baterías portátiles.", "tipos": ["cel", "rel", "aud:audio", "acc:powerbank", "acc:cargadores"] },
+  { "id": "hogar", "titulo": "Para la casa", "texto": "Televisores, parlantes y consolas para la sala.", "tipos": ["tv", "par", "con:consolas"] },
+  { "id": "moverse", "titulo": "Para moverte", "texto": "Patinetas eléctricas y lo que llevas contigo.", "tipos": ["mov", "rel", "aud:audio", "acc:powerbank"] },
+  { "id": "armar-pc", "titulo": "Para armar o mejorar tu PC", "texto": "Procesadores, tarjetas madre, RAM, discos, fuentes y cajas.", "tipos": ["comp"] }
+ ]
+}

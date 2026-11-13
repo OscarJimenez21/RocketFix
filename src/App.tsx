@@ -13,6 +13,7 @@ import { WhatsAppFlotante } from "./components/WhatsAppFlotante";
 import { activa } from "./lib/animaciones";
 import { clavePago, leerRegresoBold } from "./lib/bold";
 import { cargarProducto, conReintento, precargarEnReposo } from "./lib/carga";
+import { VERSION_NUEVA } from "./lib/instalar";
 import { claveRuta, tomarPosicion, useRuta } from "./lib/rutas";
 import { waLink } from "./lib/whatsapp";
 import { Inicio } from "./paginas/Inicio";
@@ -31,6 +32,8 @@ const Blog = lazy(conReintento(() => import("./paginas/Blog").then(m => ({ defau
 const Articulo = lazy(conReintento(() => import("./paginas/Articulo").then(m => ({ default: m.Articulo }))));
 const Favoritos = lazy(conReintento(() => import("./paginas/Favoritos").then(m => ({ default: m.Favoritos }))));
 const Politica = lazy(conReintento(() => import("./paginas/Politica").then(m => ({ default: m.Politica }))));
+// Páginas de ayuda (12/11): su título lo pone la propia página, así los textos de ayuda no viajan con la tienda
+const Info = lazy(conReintento(() => import("./paginas/Info").then(m => ({ default: m.Info }))));
 // Panel para revisar las animaciones en prueba: solo existe al trabajar en local (no llega a la página publicada)
 const PanelAnimaciones = import.meta.env.DEV ? lazy(() => import("./components/PanelAnimaciones")) : null;
 
@@ -72,6 +75,17 @@ function tituloDe(r: Ruta) {
 
 /** Aviso cuando Bold devuelve al cliente a la tienda. El estado viene en la dirección (?bold-tx-status=…) y la página
     no puede comprobarlo: por eso no afirma que el pago se recibió; Rocket Fix lo verifica en Bold antes de despachar. */
+/** Idea 83: aviso de versión nueva de la tienda (ver lib/instalar.ts), con «Actualizar» para recargar */
+function AvisoVersion() {
+  const { avisar } = useTienda();
+  useEffect(() => {
+    const f = () => avisar("Hay una versión nueva de la tienda", { texto: "Actualizar", hacer: () => location.reload() });
+    window.addEventListener(VERSION_NUEVA, f);
+    return () => window.removeEventListener(VERSION_NUEVA, f);
+  }, [avisar]);
+  return null;
+}
+
 function RegresoBold() {
   const { vaciar } = useTienda();
   const [regreso] = useState(leerRegresoBold);
@@ -101,6 +115,7 @@ function Contenido({ ruta }: { ruta: Ruta }) {
     case "favoritos": return <Suspense fallback={<Cargando />}><Favoritos /></Suspense>;
     case "articulo": return <Suspense fallback={<Cargando />}><Articulo key={ruta.id} id={ruta.id} /></Suspense>;
     case "politica": return <Suspense fallback={<Cargando />}><Politica key={ruta.id} id={ruta.id} /></Suspense>;
+    case "info": return <Suspense fallback={<Cargando />}><Info key={ruta.id} id={ruta.id} /></Suspense>;
     case "no-encontrada": return <NoEncontrada />;
   }
 }
@@ -137,6 +152,7 @@ function Marco() {
       <Cabecera ruta={ruta} />
       <div id="pagina">
         <RegresoBold />
+        <AvisoVersion />
         {CONFIG.ejemplo && <p className="bg-acento-suave py-2 text-center text-sm">Vista de ejemplo: los precios y productos son ilustrativos.</p>}
         {/* La clave es la de la página: al ir a otra, se vuelve a montar y corre la animación (en la portada, ir a
             #categorias o #servicios no cuenta como otra página: solo baja) */}

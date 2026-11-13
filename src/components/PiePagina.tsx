@@ -9,13 +9,13 @@ import { BotonCopiar, PuntoEstado, useAtencion } from "./Contacto";
 import { IconoCamion, IconoMoto, IconoWhatsApp } from "./Iconos";
 import { Cohete, Logo } from "./Logo";
 import { useInstalar } from "../lib/instalar";
-import { SelectorTema } from "./SelectorTema";
+import { AjustesLectura, SelectorTema } from "./SelectorTema";
 import { POLITICAS, TextoLegal } from "./TextoLegal";
 import { hrefDe } from "../lib/rutas";
-import { TEMPORADA } from "../lib/temporada";
+import { DECORAR } from "../lib/temporada";
 
 // Mejora 6: guirnalda de la temporada en el borde de arriba (se baja aparte y solo en temporada)
-const DecoracionPie = TEMPORADA ? lazy(() => import("./temporada/Decoracion")) : null;
+const DecoracionPie = DECORAR ? lazy(() => import("./temporada/Decoracion")) : null;
 
 /** «Volver arriba»: el cohete despega hacia arriba mientras la página sube. Con «reducir movimiento» la página salta
     arriba de una vez. El foco pasa al logo de la cabecera, para seguir con el teclado desde arriba */
@@ -174,6 +174,14 @@ const enlace = "enlace-pie hover:text-white";
             {ARTICULOS.map(a => <li key={a.id}><a href={hrefDe(a.id)} className={enlace}>{a.titulo}</a></li>)}
             <li><a href={hrefDe("blog")} className={enlace}>Blog</a></li>
           </ul>
+          {/* Páginas de ayuda (12/11) */}
+          <h3 className="etiqueta mb-3 mt-6 text-white/60">Ayuda</h3>
+          <ul className="grid gap-2 text-sm">
+            {[["preguntas-frecuentes", "Preguntas frecuentes"], ["sigue-tu-pedido", "Sigue tu pedido"], ["diagnostico", "¿Qué le pasa a tu equipo?"],
+              ["busca-por-uso", "Busca por uso"], ["todas-las-marcas", "Todas las marcas"], ["guia-de-originales", "Cómo saber si es original"],
+              ["cuidado-de-tus-equipos", "Cuida tus equipos"], ["glosario", "Glosario"], ["empresas", "Compras para empresas"]]
+              .map(([id, t]) => <li key={id}><a href={hrefDe(id ?? "")} className={enlace}>{t}</a></li>)}
+          </ul>
         </nav>
         <div>
           <h3 className="etiqueta mb-3 text-white/60">Horario</h3>
@@ -183,6 +191,7 @@ const enlace = "enlace-pie hover:text-white";
           {/* Idea 30: colores de día o de noche */}
           <h3 className="etiqueta mb-2 mt-6 text-white/60">Colores de la página</h3>
           <SelectorTema oscuro />
+          <AjustesLectura oscuro />
           <BotonInstalar />
         </div>
       </div>

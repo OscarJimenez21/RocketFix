@@ -68,7 +68,8 @@
   /* iPhone agranda la página al escribir en campos con letra menor a 16 px y no la devuelve */
   @media (pointer: coarse) { input, select, textarea { font-size: 16px !important; } }
   @media (min-width: 1024px) { html { scroll-padding-top: 5.5rem; } }
-  body { @apply bg-superficie font-sans text-tinta antialiased; font-size: 16px; line-height: 1.5; }
+  /* 1rem (16 px): con «Letra más grande» (idea 84) crece junto con todo lo que se mide en rem */
+  body { @apply bg-superficie font-sans text-tinta antialiased; font-size: 1rem; line-height: 1.5; }
   h1, h2, h3 { @apply font-display text-tinta; font-stretch: 104%; letter-spacing: -0.01em; text-wrap: balance; }
   /* Idea 33: anillo de foco en dos tonos, el verde de la marca y un halo menta alrededor (se ve sobre fondos claros y
      oscuros; el verde solo da el contraste que pide WCAG y el menta lo hace más visible) */
@@ -792,6 +793,22 @@ button, [role="button"], .btn { -webkit-touch-callout: none; }     /* mantener e
   :root { --c-linea: 150 168 158; --c-linea-fuerte: 110 130 119; --c-tinta-3: 60 75 68; }
   :root[data-tema="noche"] { --c-linea: 90 125 110; --c-linea-fuerte: 120 156 140; --c-tinta-3: 190 210 200; }
 }
+/* Ideas 84 y 85 (12/11): ajustes de lectura que elige la persona (lib/accesibilidad.ts; se aplican antes de dibujar,
+   en el script de index.html). «Letra más grande» sube la base de 16 a 18 px; «Más contraste» oscurece textos y bordes
+   (de noche, los aclara) y subraya los enlaces */
+:root[data-letra="grande"] { font-size: 112.5%; }
+:root[data-contraste="alto"] {
+  --c-tinta: 0 0 0; --c-tinta-2: 22 34 28; --c-tinta-3: 38 52 45;
+  --c-linea: 96 110 102; --c-linea-fuerte: 45 58 51; --c-marca-texto: 0 82 52; --c-acento-texto: 110 32 6;
+}
+:root[data-contraste="alto"][data-tema="noche"] {
+  --c-tinta: 255 255 255; --c-tinta-2: 228 242 235; --c-tinta-3: 208 226 216;
+  --c-linea: 120 160 140; --c-linea-fuerte: 178 206 192; --c-marca-texto: 150 255 210; --c-acento-texto: 255 205 180;
+}
+:root[data-contraste="alto"] main a:not(.btn, .chip, .tarjeta, [class*="tarjeta"]) { text-decoration-line: underline; text-underline-offset: 3px; }
+:root[data-contraste="alto"] .text-white\/55, :root[data-contraste="alto"] .text-white\/60 { color: rgb(255 255 255 / 0.85); }
+/* Idea 82: con «Ahorro de datos» del navegador, sin decoración de temporada (ni se descarga, ver lib/temporada.ts) */
+:root[data-ahorro="si"] .deco { display: none; }
 /* Quien pidió menos transparencias: la cabecera compacta va sólida, sin desenfoque */
 @media (prefers-reduced-transparency: reduce) {
   .cabecera { animation: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }

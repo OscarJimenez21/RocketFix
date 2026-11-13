@@ -89,6 +89,12 @@ const LUCES_NAVIDAD = ["#FF4D4D", "#FFD36B", "#4CD97B", "#5BA8FF", "#FF8AD8"];
 const LUCES_DORADAS = ["#FFD36B", "#FFF3C4", "#FFB938", "#FFFFFF"];
 const Bombillo = ({ c }: { c: string }) => <span className="bombillo" style={{ "--c": c } as React.CSSProperties} />;
 const Banderin = ({ c, s = 18 }: { c: string; s?: number }) => <svg width={s} height={s * 1.15} viewBox="0 0 20 23"><path d="M0 0h20L10 23z" fill={c} /></svg>;
+/** Moneda dorada (temporada de prima, idea 94) */
+const Moneda = ({ s = 18 }: { s?: number }) => (
+  <svg width={s} height={s} viewBox="0 0 20 20"><circle cx="10" cy="10" r="9" fill="#F5B921" /><circle cx="10" cy="10" r="6.6" fill="none" stroke="#FFE38A" strokeWidth="1.4" />
+    <path d="M10 5.6v8.8M12.2 7.6c-.5-.8-4.4-1-4.4.7 0 1.9 4.4 1.1 4.4 3.1 0 1.7-3.9 1.5-4.4.6" stroke="#9A6A00" strokeWidth="1.3" fill="none" strokeLinecap="round" /></svg>
+);
+const DORADOS = ["#FFD36B", "#FFF1B8", "#7FE3C4"];
 const COLOMBIA = ["#FCD116", "#003893", "#CE1126"];
 const CONFETI = ["#FFD23F", "#FF5A8A", "#5BC8FF", "#4CD97B", "#B48CFF", "#FF8A3D"];
 const Confeti = ({ r }: { r: () => number }) => (
@@ -170,6 +176,13 @@ function Portada({ id }: { id: IdTemporada }) {
           <Lluvia n={12} semilla={71} sube dur={[13, 20]} pieza={(r, k) => (k % 3 === 0 ? <Corbatin s={entre(r, 24, 34)} color={["#4D7CFE", "#7FC8FF", "#FFD36B"][k % 3]} /> : <Estrella s={entre(r, 8, 13)} color="#FFD36B" />)} />
         </>
       );
+    case "prima":
+      return (
+        <>
+          <Guirnalda arcos={6} porArco={5} alto={30} pieza={k => <Banderin c={tono(DORADOS, k)} />} hilo="#ffffff55" />
+          <Lluvia n={16} semilla={101} dur={[10, 16]} pieza={(r, k) => (k % 3 === 0 ? <Estrella s={entre(r, 8, 13)} color="#FFF1B8" /> : <Moneda s={entre(r, 14, 24)} />)} />
+        </>
+      );
     case "nino":
       return (
         <>
@@ -220,6 +233,8 @@ function Seccion({ id }: { id: IdTemporada }) {
       return <Lluvia n={14} semilla={63} dur={[12, 18]} pieza={(r, k) => <Petalo s={entre(r, 10, 15)} color={["#FFB3D1", "#FF8FB8", "#FFE1EC"][k % 3]} />} />;
     case "padre":
       return <Lluvia n={10} semilla={73} sube dur={[14, 20]} pieza={(r, k) => (k % 2 ? <Estrella s={entre(r, 8, 12)} color="#FFD36B" /> : <Corbatin s={entre(r, 22, 30)} color="#7FC8FF" />)} />;
+    case "prima":
+      return <Lluvia n={10} semilla={103} dur={[12, 18]} pieza={(r, k) => (k % 2 ? <Estrella s={entre(r, 8, 12)} color="#FFD36B" /> : <Moneda s={entre(r, 14, 20)} />)} />;
     case "nino":
       return <Lluvia n={8} semilla={85} sube dur={[13, 20]} pieza={(r, k) => <Globo s={entre(r, 20, 30)} color={["#FF5A8A", "#FFD23F", "#5BC8FF", "#4CD97B"][k % 4]} />} />;
     case "clases":
@@ -238,6 +253,7 @@ function Pie({ id }: { id: IdTemporada }) {
     case "halloween": return <Guirnalda {...comun} porArco={3} pieza={k => (k % 3 === 1 ? <Murcielago s={22} /> : <Calabaza s={20} cara={k % 2 === 0} />)} hilo="#ffffff40" />;
     case "madre": return <Guirnalda {...comun} pieza={k => <Flor s={15} petalo={["#FF8FB8", "#FFD1E3", "#C9A7FF"][k % 3]} />} hilo="#ffffff55" />;
     case "padre": return <Guirnalda {...comun} porArco={5} pieza={k => <Banderin c={tono(AZULES, k)} s={14} />} hilo="#ffffff55" />;
+    case "prima": return <Guirnalda {...comun} porArco={4} pieza={k => (k % 2 ? <Banderin c={tono(DORADOS, k)} s={14} /> : <Moneda s={14} />)} hilo="#ffffff55" />;
     case "nino": return <Guirnalda {...comun} porArco={5} pieza={k => <Banderin c={tono(CONFETI, k)} s={14} />} hilo="#ffffff55" />;
     case "clases": return <Guirnalda {...comun} porArco={3} pieza={k => (k % 2 ? <span className="a-mas pequeno">A+</span> : <Lapiz s={22} color={["#FFD23F", "#FF8A3D", "#5BC8FF"][k % 3]} />)} hilo="#ffffff55" />;
   }
@@ -259,6 +275,7 @@ function Franja({ id }: { id: IdTemporada }) {
     case "halloween": return <>{lados(<><Calabaza s={20} /><Murcielago s={22} /></>, <><Murcielago s={22} /><Calabaza s={20} /></>)}<span className="cinta halloween" /></>;
     case "madre": return lados(<><Flor s={16} /><Flor s={12} petalo="#C9A7FF" /></>);
     case "padre": return lados(<Corbatin s={22} color="#7FC8FF" />);
+    case "prima": return lados(<><Moneda s={14} /><Estrella s={10} color="#FFF1B8" /><Moneda s={12} /></>);
     case "nino": return lados(<><Globo s={11} color="#FF5A8A" /><Globo s={11} color="#FFD23F" /><Globo s={11} color="#5BC8FF" /></>);
     case "clases": return lados(<><Lapiz s={20} /><span className="a-mas pequeno">A+</span></>);
   }

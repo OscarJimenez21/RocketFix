@@ -1,7 +1,7 @@
 /* Portada de la tienda. Cada bloque está en su propio archivo de src/paginas/inicio/; aquí solo se arma el orden.
    (Antes todo vivía en este archivo, de 856 líneas.) */
 import { useEffect } from "react";
-import { MAS_VENDIDOS, porId } from "../data/catalogo";
+import { MAS_VENDIDOS, porId, recienLlegados } from "../data/catalogo";
 import { Calificaciones } from "../components/Calificaciones";
 import { IconoLlama } from "../components/Iconos";
 import type { Producto, TiendaId } from "../types";
@@ -25,6 +25,8 @@ import { TuCelular } from "./inicio/TuCelular";
 const SOLO_CEL: TiendaId[] = ["cel"];
 const SOLO_PC: TiendaId[] = ["pc"];
 const SOLO_COMP: TiendaId[] = ["comp"];
+// Idea 92: lo que llegó en los últimos días (con foto), lo más nuevo primero. Se calcula una vez al abrir la tienda
+const NUEVOS = recienLlegados().filter(p => p.imagen).slice(0, 12);
 
 export function Inicio({ ancla }: { ancla?: string }) {
   // Idea 15: los productos que la persona vio hace poco (en este navegador), si son 2 o más
@@ -52,6 +54,7 @@ export function Inicio({ ancla }: { ancla?: string }) {
       {TEMPORADA?.ideas && <IdeasParaRegalar />}
       <BandaGamer />
       <Carrusel id="vendidos" etiqueta={<><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</>} titulo="Los que todos quieren" productos={vendidos} cinta="Top ventas" gris />
+      {NUEVOS.length >= 4 && <Carrusel id="nuevos" etiqueta="Recién llegados" titulo="Lo último que llegó a la tienda" productos={NUEVOS} />}
       <BandaCelulares />
       <TuCelular />
       <Coleccion id="celulares" etiqueta="Celulares" titulo="Estrena celular" tiendas={SOLO_CEL} />
