@@ -84,6 +84,7 @@
   { "tema": "Servicio técnico", "p": "¿Qué reparan?", "r": "Celulares, computadores (portátiles y de escritorio) e instalamos cámaras de seguridad. Cuéntanos qué le pasa al equipo y te damos el valor aproximado por WhatsApp: [solicitar un servicio](servicios)." },
   { "tema": "Servicio técnico", "p": "¿Qué debo hacer antes de llevar mi equipo?", "r": "Haz una copia de tus datos, saca la SIM y la memoria, y ten el cargador a mano. La lista completa está en [antes de tu reparación](antes-de-tu-reparacion)." },
   { "tema": "Atención", "p": "¿En qué horario atienden?", "r": "{horario}. Domingos y festivos no atendemos; si nos escribes, te respondemos cuando volvamos a abrir." },
+  { "tema": "Atención", "p": "¿Cómo sé que estoy hablando con Rocket Fix?", "r": "Nuestro WhatsApp es el {whatsapp} y en Facebook e Instagram somos @rocketfixco. Si alguien te escribe desde otro número diciendo que es Rocket Fix, o te pide pagar por un medio distinto a los que te confirmamos en ese WhatsApp, no pagues: escríbenos primero al {whatsapp} para confirmarlo. Los pagos en línea se hacen solo con Bold, desde el carrito de esta tienda." },
   { "tema": "Atención", "p": "¿Cómo sé en qué va mi pedido o mi reparación?", "r": "Escríbenos con tu número de pedido o tu nombre desde [sigue tu pedido](sigue-tu-pedido)." },
   { "tema": "Datos", "p": "¿Qué hacen con mis datos?", "r": "Solo los usamos para atender tu pedido o tu solicitud. Lee la [política de datos personales](datos-personales)." }
  ],

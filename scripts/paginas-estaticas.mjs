@@ -422,11 +422,17 @@ if (process.env.FEED_GOOGLE === "1") {
 }
 
 // ---------- Idea 79: política de seguridad de contenido (CSP) en cada página ----------
-// GitHub Pages no deja poner encabezados, así que va como <meta>. Solo se ejecutan los scripts de la tienda, los de
-// https (Bold carga los suyos) y los scripts en línea de estas páginas (por su huella sha256): un script inyectado en la
-// página no corre. Las imágenes, estilos, marcos y conexiones quedan libres dentro de https (fotos de proveedores, Bold).
+// GitHub Pages no deja poner encabezados, así que va como <meta>. Solo se ejecutan los scripts de la tienda, los scripts en
+// línea de estas páginas (por su huella sha256) y los de dos servicios con nombre: la librería de pago de Bold y la medición
+// de visitas de Cloudflare. Antes valía cualquier script de https; un script inyectado que viniera de otro sitio ahora no corre.
+// Las conexiones también quedan con nombre (la tienda, Bold, el servicio de firma y Cloudflare): si algo lograra correr en la
+// página, no podría mandar datos del carrito a otro sitio. Imágenes, estilos y marcos siguen libres dentro de https: las fotos
+// vienen de varios proveedores y la pasarela de Bold puede llevar al banco (PSE) dentro de su propio marco.
 {
   const { createHash } = await import("node:crypto");
+  const firma = CONFIG.bold?.firmaUrl ? new URL(CONFIG.bold.firmaUrl).origin : "";
+  const SCRIPTS = ["https://checkout.bold.co", "https://static.cloudflareinsights.com"];
+  const CONEXIONES = ["https://payments.api.bold.co", "https://*.bold.co", firma, "https://cloudflareinsights.com"].filter(Boolean);
   const todas = [];
   const recorrer = dir => { for (const f of readdirSync(dir, { withFileTypes: true })) { const r = join(dir, f.name); if (f.isDirectory()) recorrer(r); else if (f.name.endsWith(".html")) todas.push(r); } };
   recorrer(DIST);
@@ -435,9 +441,9 @@ if (process.env.FEED_GOOGLE === "1") {
     const huellas = [...h.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*type="application\/ld\+json")[^>]*>([\s\S]*?)<\/script>/g)]
       .map(m => `'sha256-${createHash("sha256").update(m[1], "utf8").digest("base64")}'`);
     const csp = [
-      "default-src 'self'", `script-src 'self' ${[...new Set(huellas)].join(" ")} https:`, "style-src 'self' 'unsafe-inline' https:",
-      "img-src 'self' data: blob: https:", "font-src 'self' data: https:", "connect-src 'self' https:", "frame-src https:",
-      "media-src 'self' https:", "worker-src 'self'", "manifest-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'self' https:"
+      "default-src 'self'", `script-src 'self' ${[...new Set(huellas), ...SCRIPTS].join(" ")}`, "style-src 'self' 'unsafe-inline' https:",
+      "img-src 'self' data: blob: https:", "font-src 'self' data: https:", `connect-src 'self' ${CONEXIONES.join(" ")}`, "frame-src https:",
+      "media-src 'self' https:", "worker-src 'self'", "manifest-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'self' https://*.bold.co"
     ].join("; ");
     h = h.replace(/(<meta charset="[^"]*"\s*\/?>)/i, `$1\n    <meta http-equiv="Content-Security-Policy" content="${csp}">`);
     writeFileSync(archivo, h);

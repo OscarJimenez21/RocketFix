@@ -40,10 +40,39 @@ function medirVisitas() {
   s.setAttribute("data-cf-beacon", JSON.stringify({ token, spa: true }));
   document.head.appendChild(s);
 }
-if (document.readyState === "complete") medirVisitas();
-else window.addEventListener("load", medirVisitas, { once: true });
+/** Antifraude (14/11/2026): la tienda no se deja mostrar dentro de otra página. Un sitio falso podría ponerla en un marco
+    con su propio número de WhatsApp o sus datos de pago alrededor. GitHub Pages no permite el encabezado que lo prohíbe
+    (y la etiqueta <meta> no sirve para eso), así que se revisa aquí: si está dentro de un marco, en vez de la tienda
+    aparece un enlace para abrirla en su dirección real. */
+function dentroDeOtraPagina() {
+  try { return window.top !== window.self; } catch { return true; }
+}
+function mostrarSalida() {
+  const raiz = document.getElementById("root");
+  if (!raiz) return;
+  const caja = document.createElement("div");
+  caja.className = "contenedor py-16 text-center";
+  const p = document.createElement("p");
+  p.className = "text-lg font-semibold";
+  p.textContent = `Abre ${config.nombre} en su propia dirección para comprar con seguridad.`;
+  const a = document.createElement("a");
+  a.className = "btn btn-marca mt-6";
+  a.href = location.href;
+  a.target = "_top";
+  a.rel = "noopener";
+  a.textContent = `Ir a ${config.nombre}`;
+  caja.append(p, a);
+  raiz.replaceChildren(caja);
+}
 
-arrancar().catch(() => {
-  // Un segundo intento (por ejemplo, justo después de publicar una versión nueva) y, si tampoco, el aviso
-  window.setTimeout(() => { arrancar().catch(sinTienda); }, 1500);
-});
+if (dentroDeOtraPagina()) {
+  mostrarSalida();
+} else {
+  if (document.readyState === "complete") medirVisitas();
+  else window.addEventListener("load", medirVisitas, { once: true });
+
+  arrancar().catch(() => {
+    // Un segundo intento (por ejemplo, justo después de publicar una versión nueva) y, si tampoco, el aviso
+    window.setTimeout(() => { arrancar().catch(sinTienda); }, 1500);
+  });
+}
