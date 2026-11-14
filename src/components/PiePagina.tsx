@@ -201,7 +201,7 @@ const enlace = "enlace-pie hover:text-white";
       </div>
 
       {/* Idea 40: envíos y formas de pago lado a lado. Los pagos van agrupados y más grandes; son los mismos de pagos.json
-          (no se agregó ninguno). Sin redes sociales hasta que existan */}
+          (no se agregó ninguno). Las redes (14/11/2026: Instagram y Facebook) van debajo del WhatsApp, desde config.json */}
       <div className="border-t border-white/10">
         <div className="contenedor grid gap-10 py-9 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.6fr)] lg:gap-14">
           <section aria-labelledby="t-envios-pie">

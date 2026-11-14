@@ -330,7 +330,9 @@ for (const pa of AYUDA.paginas) {
     "@type": "OnlineStore", "@id": ORGANIZACION, name: CONFIG.nombre, url: SITIO, logo: abs("apple-touch-icon.png"),
     telephone: CONFIG.whatsappVisible, areaServed: { "@type": "Country", name: "Colombia" },
     contactPoint: { "@type": "ContactPoint", telephone: CONFIG.whatsappVisible, contactType: "customer service", availableLanguage: "es", areaServed: "CO" },
-    hasMerchantReturnPolicy: devolucionLd
+    hasMerchantReturnPolicy: devolucionLd,
+    // Perfiles oficiales en redes (config.json → redes); solo los que existen
+    ...(Object.values(CONFIG.redes).some(Boolean) ? { sameAs: Object.values(CONFIG.redes).filter(Boolean) } : {})
   };
   const sitioLd = { "@type": "WebSite", "@id": SITIO + "#sitio", name: CONFIG.nombre, url: SITIO, inLanguage: "es-CO", publisher: { "@id": ORGANIZACION } };
   const secciones = Object.entries(TIENDA_VISTA).filter(([t]) => PRODUCTOS.some(p => p.tienda === t));

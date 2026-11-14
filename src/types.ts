@@ -80,6 +80,8 @@ export interface Config {
   /** Bold: la "llave de identidad" es pública. firmaUrl es el servicio que firma el total (opcional). */
   bold: { llave: string; firmaUrl: string };
   redes: { instagram: string; facebook: string; tiktok: string };
+  /** Medición de visitas sin cookies (Cloudflare Web Analytics): token público; vacío = no se mide */
+  analitica: { cloudflare: string };
   horario: Turno[];
 }
 

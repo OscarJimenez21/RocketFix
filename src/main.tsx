@@ -29,6 +29,20 @@ async function arrancar() {
   await import("./arranque");
 }
 
+/** Visitas (14/11/2026): Cloudflare Web Analytics, sin cookies ni datos personales. Solo en la tienda publicada y
+    cuando config.json trae el token; se carga después de la página para no quitarle velocidad. */
+function medirVisitas() {
+  const token = config.analitica?.cloudflare;
+  if (!import.meta.env.PROD || !token) return;
+  const s = document.createElement("script");
+  s.defer = true;
+  s.src = "https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon", JSON.stringify({ token, spa: true }));
+  document.head.appendChild(s);
+}
+if (document.readyState === "complete") medirVisitas();
+else window.addEventListener("load", medirVisitas, { once: true });
+
 arrancar().catch(() => {
   // Un segundo intento (por ejemplo, justo después de publicar una versión nueva) y, si tampoco, el aviso
   window.setTimeout(() => { arrancar().catch(sinTienda); }, 1500);

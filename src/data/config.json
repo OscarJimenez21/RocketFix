@@ -38,9 +38,13 @@
   "firmaUrl": ""
  },
  "redes": {
-  "instagram": "",
-  "facebook": "",
+  "instagram": "https://www.instagram.com/rocketfixco/",
+  "facebook": "https://www.facebook.com/rocketfixco",
   "tiktok": ""
+ },
+ "analitica": {
+  "_nota": "Visitas con Cloudflare Web Analytics (sin cookies). Va vacío hasta que Óscar cree la cuenta; el token es público (no es la llave secreta de Bold). Al llenarlo, agregar el párrafo de estadísticas en la política de datos personales.",
+  "cloudflare": ""
  },
  "horario": [
   {
