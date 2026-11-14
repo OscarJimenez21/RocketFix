@@ -14,7 +14,7 @@
        "En iPhone, el número de serie (Ajustes → General → Información) se puede consultar en la página de cobertura de Apple, [checkcoverage.apple.com](https://checkcoverage.apple.com/)."
      ] },
      { "titulo": "La caja y los accesorios", "parrafos": [
-       "Un equipo nuevo llega en su caja sellada, con el modelo y los números de serie impresos en ella. Si el producto es open box, CPO o usado, la página lo dice en su estado y te contamos qué accesorios trae.",
+       "Un equipo nuevo llega en su caja sellada, con el modelo y los números de serie impresos en ella. Si el producto es open box, la página lo dice en su estado y te contamos qué accesorios trae. Los CPO y usados traen solo el equipo, sin caja ni accesorios; si es un celular, incluye forro y vidrio templado para la pantalla.",
        "Desconfía de cajas con etiquetas despegadas, impresión borrosa o un número de serie que no coincide con el del equipo."
      ] },
      { "titulo": "El equipo por dentro", "parrafos": [
@@ -72,14 +72,14 @@
   { "tema": "Compras", "p": "¿Qué significa «Preguntar disponibilidad»?", "r": "Que por ahora no tenemos precio publicado para ese producto. Escríbenos por WhatsApp y te confirmamos si está disponible y su precio." },
   { "tema": "Envíos", "p": "¿Cuánto cuesta el envío en Bogotá?", "r": "El domicilio en Bogotá y alrededores cuesta {envioBogota} y es gratis en compras desde {gratisBogota}. {domicilio}" },
   { "tema": "Envíos", "p": "¿Envían a otras ciudades?", "r": "Sí. {envio} El envío a otra ciudad cuesta {envioNacional} y es gratis en compras desde {gratisNacional}." },
-  { "tema": "Pagos", "p": "¿Cómo puedo pagar en Bogotá?", "r": "{pagosBogota}." },
+  { "tema": "Pagos", "p": "¿Cómo puedo pagar en Bogotá?", "r": "{pagosBogota}. El pago contra entrega es para pedidos de hasta {contraEntregaHasta}; en pedidos mayores el pago es anticipado." },
   { "tema": "Pagos", "p": "¿Cómo pago si estoy en otra ciudad?", "r": "{pagosNacional}." },
   { "tema": "Pagos", "p": "¿Puedo pagar en línea?", "r": "Sí, con Bold: desde el carrito toca «Pagar en línea con Bold» (acepta tarjeta, PSE y más). Después envíanos el pedido por WhatsApp para coordinar la entrega." },
   { "tema": "Pagos", "p": "¿Reciben mi equipo usado como parte de pago?", "r": "Sí, pero solo celulares, iPads y Mac. Escríbenos por WhatsApp con el modelo y cómo está: revisamos el equipo y te decimos cuánto te reconocemos por él. No recibimos otros equipos, como computadores que no sean Mac, televisores, consolas o accesorios." },
   { "tema": "Pagos", "p": "¿Puedo apartar un producto?", "r": "Sí, en productos desde $300.000. Lo apartas con mínimo el 40% de su precio y tienes un mes para pagar el resto; te damos una factura con el abono, el saldo y la fecha límite. Si no alcanzas, te damos una sola prórroga de 15 días. Si al final no completas el pago, el abono no se devuelve en dinero: queda como saldo a favor por 6 meses para comprar cualquier producto de la tienda." },
   { "tema": "Equipos", "p": "¿Qué diferencia hay entre nuevo, CPO, open box y usado?", "r": "Cada producto dice su estado en la ficha. Nuevo es de fábrica, en su caja; CPO es reacondicionado certificado; open box es un equipo cuya caja ya se abrió; usado es de segunda mano. Mira el [glosario](glosario) para más detalle." },
   { "tema": "Equipos", "p": "¿Cómo sé si un celular es original?", "r": "Revisa el IMEI con *#06# y consúltalo en imeicolombia.com.co. Te lo explicamos paso a paso en [cómo saber si un equipo es original](guia-de-originales)." },
-  { "tema": "Garantía", "p": "¿Los productos tienen garantía?", "r": "Sí, todo lo que vendemos y reparamos tiene garantía legal. Los plazos y lo que cubre están en la página de [garantía](garantia)." },
+  { "tema": "Garantía", "p": "¿Los productos tienen garantía?", "r": "Sí. Los productos nuevos tienen garantía de {plazoNuevos}: los primeros {plazoDirecto} la atiendes directamente con nosotros y después con el servicio técnico autorizado de la marca. Usados y open box: {plazoUsados}. CPO: {plazoCPO}. Reparaciones: {plazoReparaciones}. Lo que cubre está en la página de [garantía](garantia)." },
   { "tema": "Garantía", "p": "¿Puedo devolver un producto?", "r": "Tienes derecho de retracto por 5 días hábiles desde la entrega. Las condiciones están en [cambios y devoluciones](cambios-y-devoluciones)." },
   { "tema": "Servicio técnico", "p": "¿Qué reparan?", "r": "Celulares, computadores (portátiles y de escritorio) e instalamos cámaras de seguridad. Cuéntanos qué le pasa al equipo y te damos el valor aproximado por WhatsApp: [solicitar un servicio](servicios)." },
   { "tema": "Servicio técnico", "p": "¿Qué debo hacer antes de llevar mi equipo?", "r": "Haz una copia de tus datos, saca la SIM y la memoria, y ten el cargador a mano. La lista completa está en [antes de tu reparación](antes-de-tu-reparacion)." },
@@ -90,9 +90,9 @@
  ],
  "glosario": [
   { "t": "Nuevo", "d": "Equipo de fábrica, sin uso, en su caja original." },
-  { "t": "CPO (reacondicionado certificado)", "d": "Equipo que ya tuvo dueño o fue devuelto, y que se revisó, se reparó si hacía falta y se probó antes de volver a venderse. Te confirmamos su estado y accesorios por WhatsApp." },
+  { "t": "CPO (reacondicionado certificado)", "d": "Equipo que ya tuvo dueño o fue devuelto, y que se revisó, se reparó si hacía falta y se probó antes de volver a venderse. Viene solo el equipo, sin caja ni accesorios; los celulares incluyen forro y vidrio templado para la pantalla." },
   { "t": "Open box (caja abierta)", "d": "Equipo cuya caja ya se abrió (por ejemplo, para exhibirlo o porque se devolvió sin usarse). Puede no traer todos los plásticos o accesorios originales; te contamos cuáles trae." },
-  { "t": "Usado", "d": "Equipo de segunda mano. Te contamos su estado antes de cualquier pago." },
+  { "t": "Usado", "d": "Equipo de segunda mano. Te contamos su estado antes de cualquier pago. Viene solo el equipo, sin caja ni accesorios; los celulares incluyen forro y vidrio templado para la pantalla." },
   { "t": "IMEI", "d": "Número único de cada celular (dos si tiene doble SIM). Se ve marcando *#06# y sirve para saber si el equipo está reportado." },
   { "t": "eSIM", "d": "SIM digital que viene dentro del celular. Se activa con un código del operador, sin tarjeta física. Algunos modelos solo tienen eSIM." },
   { "t": "SIM física", "d": "La tarjeta SIM de siempre, que se pone en la bandeja del celular." },

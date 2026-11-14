@@ -138,13 +138,15 @@ export function Carrito() {
   }, [cerrarCarrito]);
 
   const zona = d.entrega;
-  const pagos = CONFIG.pagos[zona];
-  const pago = pagos.includes(d.pago) ? d.pago : pagos[0] ?? "";
-  const datos = { ...d, pago };
   const subtotal = subtotalDe(lineas);
   const envio = envioDe(zona, subtotal);
   const meta = CONFIG.envios[zona].gratisDesde;
   const total = subtotal + envio;
+  // 14/11/2026: el pago contra entrega es solo para pedidos de hasta CONFIG.contraEntregaHasta; por encima, el pago es anticipado
+  const sinContraEntrega = total > CONFIG.contraEntregaHasta;
+  const pagos = CONFIG.pagos[zona].filter(p => !(sinContraEntrega && /contra entrega/i.test(p)));
+  const pago = pagos.includes(d.pago) ? d.pago : pagos[0] ?? "";
+  const datos = { ...d, pago };
   const mensaje = mensajePedido(lineas, datos, undefined, numero);
   const nacional = zona === "nacional";
 
@@ -395,6 +397,9 @@ export function Carrito() {
                   <select id={`${id}-pago`} name="pago" className="campo" value={pago} onChange={e => poner("pago", e.target.value)}>
                     {pagos.map(p => <option key={p}>{p}</option>)}
                   </select>
+                  {!nacional && sinContraEntrega && (
+                    <p className="mt-1.5 text-xs text-tinta-2">El pago contra entrega es para pedidos de hasta {dinero(CONFIG.contraEntregaHasta)}. Para este pedido, el pago es anticipado.</p>
+                  )}
                 </div>
                 <div>
                   <label htmlFor={`${id}-nota`} className="rotulo">Nota <span className="opcional">(opcional)</span></label>

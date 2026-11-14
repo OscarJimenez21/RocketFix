@@ -6,6 +6,7 @@ import { useEnPantalla, useVisto } from "../../lib/enPantalla";
 import { recurso } from "../../lib/formato";
 import { waLink } from "../../lib/whatsapp";
 import { hrefDe } from "../../lib/rutas";
+import { CONFIG } from "../../data/catalogo";
 
 /** Banda grande de gaming: invita a armar el escritorio completo (consola, monitor, teclado, mouse y diadema) */
 export function BandaGamer() {
@@ -71,7 +72,7 @@ export function BandaCelulares() {
             Tu próximo celular te está esperando
           </h2>
           <p className="mt-4 max-w-md text-[17px] leading-relaxed text-white/85">
-            Los modelos más buscados, en varias capacidades y colores. Elige el tuyo y te lo llevamos el mismo día en Bogotá.
+            Los modelos más buscados, en varias capacidades y colores. Elige el tuyo y, si lo pides antes de las {CONFIG.corteMismoDia}, te lo llevamos el mismo día en Bogotá.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a href={hrefDe("celulares")} className="btn btn-primario">Ver celulares</a>

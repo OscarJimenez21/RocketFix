@@ -75,6 +75,10 @@ export interface Config {
   idioma: string;
   pagos: Record<ZonaEntrega, string[]>;
   domicilio: string;
+  /** Hora límite para la entrega el mismo día en Bogotá (texto, ej. «3:00 p. m.») */
+  corteMismoDia: string;
+  /** Valor máximo del pedido para pagar contra entrega en Bogotá; por encima, el pago es anticipado */
+  contraEntregaHasta: number;
   envio: string;
   envios: Record<ZonaEntrega, Envio>;
   /** Bold: la "llave de identidad" es pública. firmaUrl es el servicio que firma el total (opcional). */
@@ -111,6 +115,8 @@ export interface Servicio {
 export interface Paquete {
   nombre: string;
   ilustracion: string;
+  /** Foto de referencia en public/fotos (14/11/2026: fotos oficiales de Dahua); sin foto se usa la ilustración */
+  foto?: string;
   specs: string[];
   desde: number;
 }

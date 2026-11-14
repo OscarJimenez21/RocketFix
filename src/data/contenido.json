@@ -3,6 +3,7 @@
   {
    "nombre": "2 cámaras WiFi",
    "ilustracion": "domo",
+   "foto": "camaras/paquete-wifi.png",
    "specs": [
     "1080p",
     "Grabación en microSD",
@@ -13,6 +14,7 @@
   {
    "nombre": "Kit 4 cámaras + DVR",
    "ilustracion": "kit",
+   "foto": "camaras/paquete-kit4.png",
    "specs": [
     "1080p",
     "Disco 1 TB",
@@ -23,6 +25,7 @@
   {
    "nombre": "Kit 8 cámaras + DVR",
    "ilustracion": "kit",
+   "foto": "camaras/paquete-kit8.png",
    "specs": [
     "2K",
     "Disco 2 TB",
@@ -105,7 +108,7 @@
    "camaras": true,
    "texto": "Para casas, apartamentos y negocios. Ves tus cámaras desde el celular.",
    "trabajos": [
-    "Visita técnica para medir y cotizar",
+    "Visita técnica sin costo para medir y cotizar",
     "Kits de 2 a 16 cámaras con grabador",
     "Cámaras WiFi de interior y exterior",
     "Configuración de la app en tu celular",

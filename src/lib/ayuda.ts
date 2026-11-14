@@ -3,6 +3,7 @@
    quedan desactualizados. [texto](ruta) es un enlace (a una página de la tienda o, con https://, a otro sitio). */
 import ayudaJson from "../data/ayuda.json";
 import { CONFIG } from "../data/catalogo";
+import { PLAZOS } from "./estados";
 import { dinero, lista } from "./formato";
 import { filasHorario } from "./horario";
 
@@ -26,6 +27,13 @@ const VALORES: Record<string, () => string> = {
   pagosBogota: () => lista(CONFIG.pagos.bogota),
   pagosNacional: () => lista(CONFIG.pagos.nacional),
   domicilio: () => CONFIG.domicilio,
+  contraEntregaHasta: () => dinero(CONFIG.contraEntregaHasta),
+  corteMismoDia: () => CONFIG.corteMismoDia,
+  plazoNuevos: () => PLAZOS.nuevos,
+  plazoDirecto: () => PLAZOS.directo,
+  plazoUsados: () => PLAZOS.usados,
+  plazoCPO: () => PLAZOS.cpo,
+  plazoReparaciones: () => PLAZOS.reparaciones,
   envio: () => CONFIG.envio,
   whatsapp: () => CONFIG.whatsappVisible,
   horario: () => filasHorario().filter(([, h]) => h !== "Cerrado").map(([d, h]) => `${d}, de ${h}`).join("; ")

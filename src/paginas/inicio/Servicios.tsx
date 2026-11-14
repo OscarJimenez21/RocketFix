@@ -38,14 +38,16 @@ function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => voi
           {PAQUETES.map(pk => (
             <li key={pk.nombre} className="flex items-center justify-between gap-4 py-3.5">
               <div className="flex min-w-0 items-center gap-3">
-                <span className="flex h-11 w-12 shrink-0 items-center justify-center claro-siempre rounded bg-white"><Ilustracion nombre={pk.ilustracion} className="h-8 w-10 text-marca-medio" /></span>
+                {pk.foto
+                  ? <span className="flex h-16 w-16 shrink-0 items-center justify-center claro-siempre rounded bg-white p-1"><img src={recurso(`fotos/${pk.foto}`)} alt="" width={400} height={400} loading="lazy" decoding="async" className="h-full w-full object-contain" /></span>
+                  : <span className="flex h-11 w-12 shrink-0 items-center justify-center claro-siempre rounded bg-white"><Ilustracion nombre={pk.ilustracion} className="h-8 w-10 text-marca-medio" /></span>}
                 <div className="min-w-0"><p className="font-semibold">{pk.nombre}</p><p className="text-xs text-white/70">{pk.specs.join(" · ")}</p></div>
               </div>
               <p className="shrink-0 text-right"><span className="block text-xs text-white/60">Desde</span><b className="font-display tabular-nums">{dinero(pk.desde)}</b></p>
             </li>
           ))}
         </ul>
-        <p className="mt-3 text-xs leading-relaxed text-white/70">Valores de referencia con instalación incluida. El precio final depende de la distancia del cableado y de la altura de los puntos; te lo confirmamos en la visita técnica.</p>
+        <p className="mt-3 text-xs leading-relaxed text-white/70">Valores de referencia con instalación incluida; fotos de referencia de equipos Dahua. El precio final depende de la distancia del cableado y de la altura de los puntos; te lo confirmamos en la visita técnica, que no tiene costo.</p>
       </div>
     </article>
   );

@@ -58,7 +58,7 @@ export function Envios() {
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-acento-suave text-acento-texto"><IconoMoto className="h-6 w-6" /></span>
               <div>
                 <p className="font-bold">Bogotá y alrededores</p>
-                <p className="mt-1 text-sm text-tinta-2">Despacho el mismo día con motorizado.</p>
+                <p className="mt-1 text-sm text-tinta-2">Despacho el mismo día con motorizado en pedidos hechos antes de las {CONFIG.corteMismoDia}</p>
                 <p className="mt-2 text-sm"><b className="tabular-nums">{dinero(b.costo)}</b> <span className="text-tinta-2">· gratis desde</span> <b className="tabular-nums">{dinero(b.gratisDesde)}</b></p>
               </div>
             </li>

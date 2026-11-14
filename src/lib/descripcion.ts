@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ESTADOS, INCLUYE, nombreCat } from "../data/catalogo";
 import type { Descripcion, Producto } from "../types";
+import { incluyeSegunEstado } from "./estados";
 import { lista, norm, recurso } from "./formato";
 
 /** Solo lo que tiene la forma de una descripción: resumen de texto y ficha de pares [característica, valor] */
@@ -91,9 +92,11 @@ export function armarDescripcion(p: Producto, d: Descripcion = {}): DescripcionA
   for (const f of d.ficha ?? []) filas.push(f);
 
   let incluye = (p.categoria && INCLUYE[p.categoria]) || INCLUYE[p.tienda] || INCLUYE.varios || "";
-  // (las notas de regalo o "Incluye…" son parte de la caja; "Sobre pedido" no)
-  if (p.nota && !/pedido/i.test(p.nota)) incluye += ` ${p.nota.replace(/^Obsequio:\s*/i, "De regalo: ")}.`;
-  if (p.estado !== "Nuevo") incluye += ` Como el producto es ${condMin}, te confirmamos los accesorios que trae.`;
+  // (una nota "Incluye…" es parte de la caja; "Sobre pedido" no. 14/11/2026: la tienda no da obsequios, nunca se anuncian)
+  if (p.nota && !/pedido/i.test(p.nota)) incluye += ` ${p.nota}.`;
+  const usado = incluyeSegunEstado(p.estado, p.tienda);
+  if (usado) incluye = usado;
+  else if (p.estado !== "Nuevo") incluye += ` Como el producto es ${condMin}, te confirmamos los accesorios que trae.`;
 
   return { resumen, filas: filas.filter((f): f is [string, string] => Boolean(f[1])), incluye };
 }

@@ -209,7 +209,7 @@ const enlace = "enlace-pie hover:text-white";
             <ul className="grid gap-4 text-sm">
               <li className="flex gap-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 text-marca-menta"><IconoMoto /></span>
-                <span><b className="block text-white">Bogotá y alrededores</b>Despacho el mismo día con motorizado. Gratis desde {dinero(CONFIG.envios.bogota.gratisDesde)}.</span>
+                <span><b className="block text-white">Bogotá y alrededores</b>Despacho el mismo día con motorizado en pedidos hechos antes de las {CONFIG.corteMismoDia} Gratis desde {dinero(CONFIG.envios.bogota.gratisDesde)}.</span>
               </li>
               <li className="flex gap-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 text-marca-menta"><IconoCamion /></span>

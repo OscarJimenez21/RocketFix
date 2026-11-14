@@ -127,10 +127,10 @@
  },
  "patinetas": {
   "titulo": "Patinetas eléctricas",
-  "lead": "Patinetas eléctricas Xiaomi para moverte por la ciudad.",
+  "lead": "Patinetas eléctricas Xiaomi para moverte por la ciudad. Tienen la garantía del fabricante; los primeros 3 meses la atiendes directamente con nosotros.",
   "nota": {
    "titulo": "¿Tienes dudas antes de comprar?",
-   "texto": "Te contamos cuántos kilómetros rinde cada una con una carga, cuánto peso soporta y cómo es la garantía.",
+   "texto": "Te contamos cuántos kilómetros rinde cada una con una carga y cuánto peso soporta.",
    "enlace": "Preguntar por WhatsApp →",
    "href": null,
    "whatsapp": "Hola {nombre}, quiero información sobre las patinetas eléctricas."

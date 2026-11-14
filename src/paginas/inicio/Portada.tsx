@@ -143,7 +143,7 @@ export function Portada() {
     frena, el camión rueda y la tarjeta gira (ver .ventajas en index.css) */
 export function Ventajas() {
   const items = [
-    { icono: <IconoMoto />, clase: "icono-moto", titulo: "Entrega el mismo día en Bogotá", texto: `Gratis desde ${dinero(CONFIG.envios.bogota.gratisDesde)}. Pagas contra entrega.` },
+    { icono: <IconoMoto />, clase: "icono-moto", titulo: "Entrega el mismo día en Bogotá", texto: `Pidiendo antes de las ${CONFIG.corteMismoDia} Gratis desde ${dinero(CONFIG.envios.bogota.gratisDesde)}. Pagas contra entrega hasta ${dinero(CONFIG.contraEntregaHasta)}.` },
     { icono: <IconoCamion />, clase: "icono-camion", titulo: "Envíos a todo Colombia", texto: `Gratis desde ${dinero(CONFIG.envios.nacional.gratisDesde)}, con pago anticipado.` },
     { icono: <IconoTarjeta />, clase: "icono-tarjeta", titulo: "Paga como prefieras", texto: "Tarjeta, PSE, Bre-B, Daviplata, transferencia o efectivo." }
   ];
@@ -171,7 +171,7 @@ export function ComoComprar() {
   const pasos: [React.ReactNode, string, string][] = [
     [<IconoBolsa key="b" className="h-6 w-6" />, "Arma tu carrito", "Elige la versión de cada equipo y agrégalo. Puedes cambiar las cantidades antes de enviar."],
     [<IconoWhatsApp key="w" className="h-6 w-6" />, "Envía el pedido por WhatsApp", "El mensaje sale escrito con los productos, el total y la forma de entrega. Enviarlo no es un pago."],
-    [<IconoMoto key="m" className="h-6 w-6" />, "Confirmamos y entregamos", `Te confirmamos disponibilidad y pago. En Bogotá y alrededores te lo llevamos el mismo día y puedes pagar contra entrega; al resto de Colombia lo enviamos con pago anticipado. Envío gratis en Bogotá desde ${dinero(CONFIG.envios.bogota.gratisDesde)} y al resto del país desde ${dinero(CONFIG.envios.nacional.gratisDesde)}.`]
+    [<IconoMoto key="m" className="h-6 w-6" />, "Confirmamos y entregamos", `Te confirmamos disponibilidad y pago. En Bogotá y alrededores te lo llevamos el mismo día si pides antes de las ${CONFIG.corteMismoDia}, y puedes pagar contra entrega en pedidos de hasta ${dinero(CONFIG.contraEntregaHasta)}; al resto de Colombia lo enviamos con pago anticipado. Envío gratis en Bogotá desde ${dinero(CONFIG.envios.bogota.gratisDesde)} y al resto del país desde ${dinero(CONFIG.envios.nacional.gratisDesde)}.`]
   ];
   const lista = useRef<HTMLOListElement>(null);
   const visto = useVisto(lista);

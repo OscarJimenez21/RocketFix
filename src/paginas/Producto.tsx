@@ -15,7 +15,7 @@ import { complementosDe } from "../lib/complementos";
 import { armarDescripcion, useDescripcion } from "../lib/descripcion";
 import { useVisto } from "../lib/enPantalla";
 import { dinero, lista, recurso } from "../lib/formato";
-import { explicarEstado } from "../lib/estados";
+import { explicarEstado, garantiaDe } from "../lib/estados";
 import { tiene5G } from "../lib/filtros";
 import { useDireccion, useMarco } from "../lib/movimiento";
 import { tinteDe } from "../lib/tinte";
@@ -182,7 +182,7 @@ export default function Producto({ id }: { id: string }) {
     try { await navigator.clipboard.writeText(url); setCopiado(true); setTimeout(() => setCopiado(false), 2500); } catch { avisar(url); }
   };
   const entrega = [
-    { icono: <IconoMoto className="h-[18px] w-[18px]" />, clase: "icono-moto", texto: `Entrega el mismo día en Bogotá y alrededores, gratis desde ${dinero(CONFIG.envios.bogota.gratisDesde)}` },
+    { icono: <IconoMoto className="h-[18px] w-[18px]" />, clase: "icono-moto", texto: `Entrega el mismo día en Bogotá y alrededores si pides antes de las ${CONFIG.corteMismoDia}, gratis desde ${dinero(CONFIG.envios.bogota.gratisDesde)}` },
     { icono: <IconoCamion className="h-[18px] w-[18px]" />, clase: "icono-camion", texto: `Envíos a todo Colombia, gratis desde ${dinero(CONFIG.envios.nacional.gratisDesde)}` },
     { icono: <IconoTarjeta className="h-[18px] w-[18px]" />, clase: "icono-tarjeta", texto: "Paga con tarjeta, Bre-B, Daviplata, transferencia o efectivo" }
   ];
@@ -278,13 +278,13 @@ export default function Producto({ id }: { id: string }) {
             <details className="desplegable rounded border border-linea bg-superficie">
               <summary className="cursor-pointer px-3.5 py-2.5 font-semibold">¿Cómo puedo pagar?</summary>
               <p className="border-t border-linea px-3.5 py-2.5 leading-relaxed text-tinta-2">
-                En Bogotá: {lista(CONFIG.pagos.bogota)}. Resto de Colombia: {lista(CONFIG.pagos.nacional)}.
+                En Bogotá: {lista(CONFIG.pagos.bogota)} (contra entrega en pedidos de hasta {dinero(CONFIG.contraEntregaHasta)}). Resto de Colombia: {lista(CONFIG.pagos.nacional)}.
               </p>
             </details>
             <details className="desplegable rounded border border-linea bg-superficie">
               <summary className="cursor-pointer px-3.5 py-2.5 font-semibold">¿Qué garantía tiene y puedo devolverlo?</summary>
               <p className="border-t border-linea px-3.5 py-2.5 leading-relaxed text-tinta-2">
-                Mira la <a href={hrefDe("garantia")} className="enlace">política de garantía</a> y la de <a href={hrefDe("cambios-y-devoluciones")} className="enlace">cambios y devoluciones</a>. Si tienes una duda puntual sobre este equipo, pregúntanos por WhatsApp.
+                {garantiaDe(p.estado)} Mira la <a href={hrefDe("garantia")} className="enlace">política de garantía</a> y la de <a href={hrefDe("cambios-y-devoluciones")} className="enlace">cambios y devoluciones</a>. Si tienes una duda puntual sobre este equipo, pregúntanos por WhatsApp.
               </p>
             </details>
             {/* Idea 30: en celulares, cómo revisar que el IMEI no esté reportado */}

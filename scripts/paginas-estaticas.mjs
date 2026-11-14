@@ -64,8 +64,10 @@ function armarDescripcion(p) {
   if (p.specs.length && !(d.ficha && p.tienda === "pc")) filas.push(["Detalles", p.specs.join(" · ")]);
   for (const f of d.ficha ?? []) filas.push(f);
   let incluye = (p.categoria && INCLUYE[p.categoria]) || INCLUYE[p.tienda] || INCLUYE.varios || "";
-  if (p.nota && !/pedido/i.test(p.nota)) incluye += ` ${p.nota.replace(/^Obsequio:\s*/i, "De regalo: ")}.`;
-  if (p.estado !== "Nuevo") incluye += ` Como el producto es ${condMin}, te confirmamos los accesorios que trae.`;
+  if (p.nota && !/pedido/i.test(p.nota)) incluye += ` ${p.nota}.`;
+  // 14/11/2026: CPO y usados traen solo el equipo; los celulares, con forro y vidrio templado (igual que src/lib/estados.ts)
+  if (p.estado === "CPO" || p.estado === "Usado") incluye = p.tienda === "cel" ? "El celular, con forro y vidrio templado para proteger la pantalla. No trae caja ni otros accesorios." : "Solo el equipo, sin caja ni accesorios.";
+  else if (p.estado !== "Nuevo") incluye += ` Como el producto es ${condMin}, te confirmamos los accesorios que trae.`;
   return { resumen, filas: filas.filter(f => f[1]), incluye };
 }
 
@@ -280,6 +282,9 @@ const VALORES_AYUDA = {
   envioNacional: dinero(CONFIG.envios.nacional.costo), gratisNacional: dinero(CONFIG.envios.nacional.gratisDesde),
   pagosBogota: lista(CONFIG.pagos.bogota), pagosNacional: lista(CONFIG.pagos.nacional),
   domicilio: CONFIG.domicilio, envio: CONFIG.envio, whatsapp: CONFIG.whatsappVisible,
+  contraEntregaHasta: dinero(CONFIG.contraEntregaHasta), corteMismoDia: CONFIG.corteMismoDia,
+  // 14/11/2026: plazos de garantía, los mismos de politicas.json (src/lib/estados.ts → PLAZOS)
+  ...Object.fromEntries(["plazoNuevos", "plazoDirecto", "plazoUsados", "plazoCPO", "plazoReparaciones"].map(k => [k, leer("politicas.json").datos[k].valor])),
   horario: CONFIG.horario.filter(t => t.abre && t.cierra).map(t => `${t.etiqueta}, de ${horaTxt(t.abre)} – ${horaTxt(t.cierra)}`).join("; ")
 };
 const rellenar = t => t.replace(/\{(\w+)\}/g, (todo, k) => VALORES_AYUDA[k] ?? todo);

@@ -7,7 +7,7 @@ import { EncabezadoVista } from "../components/EncabezadoVista";
 import { FormularioWhatsApp } from "../components/FormularioWhatsApp";
 import { IconoCheck, IconoWhatsApp } from "../components/Iconos";
 import { Ilustracion } from "../components/Ilustracion";
-import { dinero } from "../lib/formato";
+import { dinero, recurso } from "../lib/formato";
 import { waLink } from "../lib/whatsapp";
 import type { TiendaId } from "../types";
 import { NoEncontrada } from "./NoEncontrada";
@@ -52,7 +52,9 @@ function Paquetes({ cotizar }: { cotizar: (nombre: string) => void }) {
     <div className="not-prose grid gap-3 sm:grid-cols-3">
       {PAQUETES.map(pk => (
         <div key={pk.nombre} className="tarjeta flex flex-col p-4">
-          <span className="flex h-14 w-16 items-center justify-center rounded bg-marca-suave"><Ilustracion nombre={pk.ilustracion} className="h-10 w-14 text-marca-medio" /></span>
+          {pk.foto
+            ? <span className="flex h-36 items-center justify-center claro-siempre rounded bg-white p-2"><img src={recurso(`fotos/${pk.foto}`)} alt={`${pk.nombre}: foto de referencia de equipos Dahua`} width={400} height={400} loading="lazy" decoding="async" className="h-full w-auto object-contain" /></span>
+            : <span className="flex h-14 w-16 items-center justify-center rounded bg-marca-suave"><Ilustracion nombre={pk.ilustracion} className="h-10 w-14 text-marca-medio" /></span>}
           <h3 className="mt-3 font-bold">{pk.nombre}</h3>
           <ul className="mt-1 text-sm text-tinta-2">{pk.specs.map(s => <li key={s}>{s}</li>)}</ul>
           <p className="mt-auto pt-3 text-sm"><span className="text-tinta-3">Desde</span> <b className="font-display text-lg tabular-nums">{dinero(pk.desde)}</b></p>

@@ -5,9 +5,11 @@
   "documento": { "etiqueta": "NIT o cédula", "valor": null },
   "direccion": { "etiqueta": "dirección física para notificaciones", "valor": null },
   "correo": { "etiqueta": "correo electrónico", "valor": null },
-  "plazoNuevos": { "etiqueta": "plazo de garantía de productos nuevos", "valor": null },
-  "plazoUsados": { "etiqueta": "plazo de garantía de usados, open box y CPO", "valor": null },
-  "plazoReparaciones": { "etiqueta": "plazo de garantía de reparaciones", "valor": null },
+  "plazoNuevos": { "etiqueta": "plazo de garantía de productos nuevos", "valor": "6 meses o 1 año, según el fabricante" },
+   "plazoDirecto": { "etiqueta": "tiempo en que la garantía de nuevos se atiende directamente con la tienda", "valor": "3 meses" },
+  "plazoUsados": { "etiqueta": "plazo de garantía de usados y open box", "valor": "3 meses" },
+   "plazoCPO": { "etiqueta": "plazo de garantía de productos CPO", "valor": "1 año" },
+  "plazoReparaciones": { "etiqueta": "plazo de garantía de reparaciones", "valor": "1 mes" },
   "vigencia": { "etiqueta": "fecha desde la que rigen", "valor": null }
  },
  "paginas": [
@@ -21,8 +23,9 @@
      "titulo": "Plazos",
      "bloques": [
       { "lista": [
-       "Productos nuevos: {plazoNuevos}, contados desde el día en que recibes el producto. Si el fabricante anuncia un plazo mayor, se aplica ese plazo.",
-       "Productos usados, open box y CPO (certificados): {plazoUsados}, contados desde la entrega.",
+       "Productos nuevos: {plazoNuevos}, contados desde el día en que recibes el producto. Los primeros {plazoDirecto} la atiendes directamente con nosotros; después, con el servicio técnico autorizado de la marca, y te orientamos en el proceso.",
+       "Productos usados y open box: {plazoUsados}, contados desde la entrega.",
+        "Productos CPO (reacondicionados certificados): {plazoCPO}, contados desde la entrega.",
        "Reparaciones del servicio técnico: {plazoReparaciones} sobre el repuesto y el trabajo realizado, contados desde que te entregamos el equipo."
       ] }
      ]
