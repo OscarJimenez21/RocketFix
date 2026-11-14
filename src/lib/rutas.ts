@@ -49,6 +49,7 @@ export function leerRuta(direccion: string): Ruta {
   if (h.startsWith("marca/")) return { tipo: "marca", marca: marcaDe(decodificar(h.slice(6))) };
   if (h === "blog") return { tipo: "blog" };
   if (h === "favoritos") return { tipo: "favoritos" };
+  if (h === "verificar-pedido") return { tipo: "verificar" };
   if (ARTICULOS.some(a => a.id === h)) return { tipo: "articulo", id: h };
   if (POLITICAS_IDS.includes(h)) return { tipo: "politica", id: h };
   if (INFO_IDS.includes(h)) return { tipo: "info", id: h };
@@ -66,6 +67,7 @@ export const claveRuta = (r: Ruta) => {
     case "marca": return `marca/${r.marca}`;
     case "blog": return "blog";
     case "favoritos": return "favoritos";
+    case "verificar": return "verificar-pedido";
     case "articulo": return r.id;
     case "politica": return r.id;
     case "info": return r.id;
@@ -83,6 +85,7 @@ export function direccionDe(r: Ruta): string {
     case "marca": return `${BASE}marca/${slug(r.marca) || encodeURIComponent(r.marca)}/`;
     case "blog": return `${BASE}blog/`;
     case "favoritos": return `${BASE}favoritos/`;
+    case "verificar": return `${BASE}verificar-pedido/`;
     case "articulo": case "politica": case "info": return `${BASE}${r.id}/`;
     case "no-encontrada": return `${BASE}${r.hash}/`;
   }

@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { CONFIG, nombreItem } from "../data/catalogo";
 import { useTienda } from "../estado/TiendaContext";
-import { abrirBold, boldActivo, clavePago, nuevaReferencia } from "../lib/bold";
+import { abrirBold, boldActivo, clavePago, nuevaReferencia, PreciosCambiaron } from "../lib/bold";
 import { dinero, lista } from "../lib/formato";
 import { usePanelModal } from "../lib/panel";
 import { FRANJAS, envioDe, leerDatosPedido, mensajePedido, nuevoNumeroPedido, reglaEnvio, subtotalDe, type DatosPedido } from "../lib/pedido";
@@ -251,12 +251,14 @@ export function Carrito() {
     if (!validar()) return;
     const ref = nuevaReferencia();
     // El pedido queda guardado para enviarlo por WhatsApp cuando Bold devuelva al cliente a la tienda
-    try { localStorage.setItem(clavePago(ref), mensajePedido(lineas, datos, `Pagado en línea con Bold · referencia ${ref}`, numero)); } catch { /* sin almacenamiento */ }
+    try { localStorage.setItem(clavePago(ref), mensajePedido(lineas, datos, `En línea con Bold · referencia ${ref}`, numero)); } catch { /* sin almacenamiento */ }
     usado.current = true;
     try {
-      const modo = await abrirBold(ref, total, `Pedido ${ref} · Total ${dinero(total)}`);
+      const detalle = { items: lineas.map(l => ({ id: l.producto.id, opcion: l.indice, cantidad: l.cantidad })), zona: datos.entrega };
+      const modo = await abrirBold(ref, total, `Pedido ${ref} · Total ${dinero(total)}`, detalle);
       if (modo === "copiado") avisar(`En Bold escribe el total: ${dinero(total)}. Ya lo copiamos para que lo pegues.`);
-    } catch {
+    } catch (e) {
+      if (e instanceof PreciosCambiaron) { avisar("Algunos precios cambiaron. Recarga la página para ver el total actualizado.", { texto: "Recargar", hacer: () => location.reload() }); return; }
       avisar(`No se pudo abrir el pago en línea. Envíanos el pedido por WhatsApp al ${CONFIG.whatsappVisible}.`);
     }
   }

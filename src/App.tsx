@@ -11,7 +11,7 @@ import { PiePagina } from "./components/PiePagina";
 import { SubirFlotante } from "./components/SubirFlotante";
 import { WhatsAppFlotante } from "./components/WhatsAppFlotante";
 import { activa } from "./lib/animaciones";
-import { clavePago, leerRegresoBold } from "./lib/bold";
+import { clavePago, consultarPagoBold, leerRegresoBold, lineaComprobante, type ComprobanteBold } from "./lib/bold";
 import { cargarProducto, conReintento, precargarEnReposo } from "./lib/carga";
 import { VERSION_NUEVA } from "./lib/instalar";
 import { claveRuta, tomarPosicion, useRuta } from "./lib/rutas";
@@ -31,6 +31,8 @@ const Marca = lazy(conReintento(() => import("./paginas/Marca").then(m => ({ def
 const Blog = lazy(conReintento(() => import("./paginas/Blog").then(m => ({ default: m.Blog }))));
 const Articulo = lazy(conReintento(() => import("./paginas/Articulo").then(m => ({ default: m.Articulo }))));
 const Favoritos = lazy(conReintento(() => import("./paginas/Favoritos").then(m => ({ default: m.Favoritos }))));
+// Herramienta interna (/verificar-pedido/): no aparece en menús ni en el mapa del sitio
+const VerificarPedido = lazy(conReintento(() => import("./paginas/VerificarPedido").then(m => ({ default: m.VerificarPedido }))));
 const Politica = lazy(conReintento(() => import("./paginas/Politica").then(m => ({ default: m.Politica }))));
 // Páginas de ayuda (12/11): su título lo pone la propia página, así los textos de ayuda no viajan con la tienda
 const Info = lazy(conReintento(() => import("./paginas/Info").then(m => ({ default: m.Info }))));
@@ -66,6 +68,7 @@ function tituloDe(r: Ruta) {
   if (r.tipo === "tienda") return `${VISTAS[r.vista]} · ${CONFIG.nombre}`;
   if (r.tipo === "blog") return `Blog y servicio técnico · ${CONFIG.nombre}`;
   if (r.tipo === "favoritos") return `Tus favoritos · ${CONFIG.nombre}`;
+  if (r.tipo === "verificar") return `Verificar pedido · ${CONFIG.nombre}`;
   if (r.tipo === "articulo") return `${ARTICULOS.find(a => a.id === r.id)?.titulo ?? ""} · ${CONFIG.nombre}`;
   if (r.tipo === "buscar") return `Buscar ${r.q} · ${CONFIG.nombre}`;
   if (r.tipo === "marca") return `${r.marca} · ${CONFIG.nombre}`;
@@ -89,17 +92,28 @@ function AvisoVersion() {
 function RegresoBold() {
   const { vaciar } = useTienda();
   const [regreso] = useState(leerRegresoBold);
+  // 14/11/2026: el mensaje de WhatsApp lleva el comprobante que da Bold para ese pago (número de transacción, estado y valor)
+  const [comprobante, setComprobante] = useState<ComprobanteBold | null | "consultando">(regreso ? "consultando" : null);
   useEffect(() => { if (regreso?.estado === "approved") vaciar(); }, [regreso, vaciar]);
+  useEffect(() => {
+    if (!regreso) return;
+    let vivo = true;
+    void consultarPagoBold(regreso.boldId ?? regreso.ref).then(c => { if (vivo) setComprobante(c); });
+    return () => { vivo = false; };
+  }, [regreso]);
   if (!regreso) return null;
   let msg = "";
   try { msg = localStorage.getItem(clavePago(regreso.ref)) || ""; } catch { /* sin almacenamiento */ }
+  if (msg && comprobante && comprobante !== "consultando") msg = msg.replace(/^(Pago: .*)$/m, `$1\n${lineaComprobante(comprobante)}`);
   const aprobado = regreso.estado === "approved";
   const titulo = aprobado ? "Bold reportó tu pago como aprobado." : regreso.estado === "pending" ? "Tu pago está en proceso." : "El pago no se completó.";
   const texto = aprobado ? "Envíanos el pedido por WhatsApp: verificamos el pago y coordinamos la entrega." : regreso.estado === "pending" ? "Te avisamos por WhatsApp cuando Bold lo confirme." : "Puedes intentarlo de nuevo desde el carrito o enviarnos el pedido por WhatsApp.";
   return (
     <div role="status" className={aprobado ? "bg-marca-suave" : "bg-acento-suave"}>
       <p className="contenedor py-3 text-sm"><strong>{titulo}</strong> {texto} Referencia {regreso.ref}.{" "}
-        {msg && <a className="enlace" href={waLink(msg)} target="_blank" rel="noopener">Enviar el pedido por WhatsApp</a>}</p>
+        {msg && (comprobante === "consultando"
+          ? <span className="text-tinta-2">Consultando el comprobante en Bold…</span>
+          : <a className="enlace" href={waLink(msg)} target="_blank" rel="noopener">Enviar el pedido por WhatsApp{comprobante ? " con el comprobante" : ""}</a>)}</p>
     </div>
   );
 }
@@ -113,6 +127,7 @@ function Contenido({ ruta }: { ruta: Ruta }) {
     case "marca": return <Suspense fallback={<Cargando />}><Marca key={ruta.marca} marca={ruta.marca} /></Suspense>;
     case "blog": return <Suspense fallback={<Cargando />}><Blog /></Suspense>;
     case "favoritos": return <Suspense fallback={<Cargando />}><Favoritos /></Suspense>;
+    case "verificar": return <Suspense fallback={<Cargando />}><VerificarPedido /></Suspense>;
     case "articulo": return <Suspense fallback={<Cargando />}><Articulo key={ruta.id} id={ruta.id} /></Suspense>;
     case "politica": return <Suspense fallback={<Cargando />}><Politica key={ruta.id} id={ruta.id} /></Suspense>;
     case "info": return <Suspense fallback={<Cargando />}><Info key={ruta.id} id={ruta.id} /></Suspense>;

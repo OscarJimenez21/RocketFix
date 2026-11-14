@@ -60,7 +60,8 @@ Las fotos van en `public/fotos/` (800 × 800 px, `.jpg`). Después de cambiar al
 ## Bold
 
 `config.json → bold.llave` es la **llave de identidad** (pública: Bold la pide en el navegador). La llave secreta nunca va en la página.
-Mientras `bold.firmaUrl` esté vacío, el cliente escribe el total en Bold (la página se lo copia). Para que el total llegue firmado hace falta un pequeño servicio propio que calcule la firma con la llave secreta y devuelva `{ "hash": "…" }`; su dirección va en `firmaUrl`.
+Desde el 14/11/2026 el total llega firmado: `bold.firmaUrl` apunta al servicio `rocketfix-bold` de Cloudflare Workers. El servicio vuelve a calcular el total con el `datos/productos.json` publicado y las reglas de envío, y solo firma si coincide. La llave secreta vive como variable secreta en Cloudflare. Si cambian los costos de envío, hay que cambiarlos también en el servicio. Si `firmaUrl` queda vacío, el cliente escribe el total en Bold (la página se lo copia).
+Al volver de Bold, la tienda consulta el pago (API de consulta del botón, con la llave de identidad) y agrega el comprobante al mensaje de WhatsApp. La página interna `/verificar-pedido/` compara un pedido pegado con los precios y con lo que reporta Bold.
 
 ## Publicar en GitHub Pages
 

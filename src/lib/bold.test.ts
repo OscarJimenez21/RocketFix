@@ -50,4 +50,27 @@ describe("regreso de Bold a la tienda", () => {
     expect(primera).toEqual({ ref: "RFABC12345", estado: "pending" });
     expect(leerRegresoBold()).toBe(primera);
   });
+
+  it("guarda el bold-order-id con que vuelve el cliente y lo quita de la dirección", async () => {
+    const { clavePago } = await import("./bold");
+    localStorage.setItem(clavePago("RFABC12345"), "pedido");
+    expect(await alVolverCon("?pedido=RFABC12345&bold-order-id=RFABC12345&bold-tx-status=approved")).toEqual({ ref: "RFABC12345", estado: "approved", boldId: "RFABC12345" });
+    expect(location.search).toBe("");
+  });
+});
+
+describe("comprobante de Bold", () => {
+  it("lee la respuesta de la consulta de Bold", async () => {
+    const { leerComprobante, lineaComprobante } = await import("./bold");
+    const c = leerComprobante({ transaction_id: "CNPVI70CQC0EY", payment_status: "APPROVED", total: 2900000, payment_method: "CREDIT_CARD", transaction_date: "2026-11-14 16:32:00-05:00" });
+    expect(c).toMatchObject({ transaccion: "CNPVI70CQC0EY", estado: "Aprobado", total: 2900000, metodo: "Tarjeta" });
+    expect(c && lineaComprobante(c)).toMatch(/^Comprobante Bold: CNPVI70CQC0EY · Aprobado · \$/);
+  });
+
+  it("sin transacción, o con datos raros, no hay comprobante", async () => {
+    const { leerComprobante } = await import("./bold");
+    expect(leerComprobante({ payment_status: "NO_TRANSACTION_FOUND" })).toBeNull();
+    expect(leerComprobante({ transaction_id: "<script>", payment_status: "APPROVED" })).toBeNull();
+    expect(leerComprobante(null)).toBeNull();
+  });
 });

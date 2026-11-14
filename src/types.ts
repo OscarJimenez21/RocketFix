@@ -169,6 +169,8 @@ export type Ruta =
   | { tipo: "marca"; marca: string }
   | { tipo: "blog" }
   | { tipo: "favoritos" }
+  /** Herramienta interna de Rocket Fix: compara un pedido pegado de WhatsApp con los precios de la tienda */
+  | { tipo: "verificar" }
   | { tipo: "articulo"; id: string }
   | { tipo: "politica"; id: string }
   /** Páginas de ayuda (data/ayuda.json): preguntas frecuentes, glosario, busca por uso, empresas… */
