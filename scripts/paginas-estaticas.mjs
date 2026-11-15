@@ -104,8 +104,13 @@ const AL_ABRIR = `<script>(function(){var h=location.hash.replace(/^#\\/?/,""),m
   `if(f)pedir("preload",f,1);${ARCHIVO_PRODUCTO ? `if(m)pedir("modulepreload",${JSON.stringify("assets/" + ARCHIVO_PRODUCTO)});` : ""}` +
   `if(m&&${FOTOS_POR_REGLA}){var d=document.createElement("link");d.rel="preload";d.as="fetch";d.crossOrigin="anonymous";d.href=${JSON.stringify(BASE)}+"descripciones/"+m[1]+".json";document.head.appendChild(d)}})()</script>`;
 
-function pagina({ ruta, titulo, descripcion, imagen, altImagen, jsonld, cuerpo, precarga = "" }) {
+// 15/11/2026: Google corta los títulos de más de unos 65 caracteres; si «Nombre · Rocket Fix» no cabe, va solo el nombre
+// (misma regla que tituloCorto en src/lib/formato.ts)
+const tituloCorto = t => (t.length > 65 && t.endsWith(` · ${CONFIG.nombre}`) ? t.slice(0, -` · ${CONFIG.nombre}`.length) : t);
+
+function pagina({ ruta, titulo: tituloLargo, descripcion, imagen, altImagen, jsonld, cuerpo, precarga = "" }) {
   const url = SITIO + ruta;
+  const titulo = tituloCorto(tituloLargo);
   let h = PLANTILLA
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(titulo)}</title>`)
     .replace(/(<meta name="description" content=")[^"]*/, `$1${esc(descripcion)}`)
@@ -191,7 +196,9 @@ for (const p of PRODUCTOS) {
   const producto = {
     "@type": "Product", "@id": SITIO + ruta + "#producto", name: p.nombre, sku: p.id, description: d.resumen,
     ...(fotos.length ? { image: fotos.map(abs) } : {}),
-    ...(p.marca ? { brand: { "@type": "Brand", name: p.marca } } : {}),
+    // 15/11/2026: los PC armados y los accesorios genéricos no tienen fabricante con marca. Google pide en ese caso el
+    // nombre de la tienda («generic brand category»), así que en los datos para Google van como Rocket Fix.
+    brand: { "@type": "Brand", name: p.marca || CONFIG.nombre },
     ...(p.categoria ? { category: nombreCat[p.categoria] } : {}),
     offers: oferta
   };

@@ -14,7 +14,7 @@ import { activa } from "../lib/animaciones";
 import { complementosDe } from "../lib/complementos";
 import { armarDescripcion, useDescripcion } from "../lib/descripcion";
 import { useVisto } from "../lib/enPantalla";
-import { dinero, lista, recurso } from "../lib/formato";
+import { dinero, lista, recurso, tituloCorto } from "../lib/formato";
 import { explicarEstado, garantiaDe } from "../lib/estados";
 import { tiene5G } from "../lib/filtros";
 import { useDireccion, useMarco } from "../lib/movimiento";
@@ -133,7 +133,7 @@ export default function Producto({ id }: { id: string }) {
   const descripcion = useDescripcion(id);
 
   useEffect(() => {
-    if (p) document.title = `${p.nombre} · ${CONFIG.nombre}`;
+    if (p) document.title = tituloCorto(`${p.nombre} · ${CONFIG.nombre}`, CONFIG.nombre);
     if (p) anotarVisto(p.id);
   }, [p]);
   const vistos = useVistos(id);
@@ -184,7 +184,7 @@ export default function Producto({ id }: { id: string }) {
   const entrega = [
     { icono: <IconoMoto className="h-[18px] w-[18px]" />, clase: "icono-moto", texto: `Entrega el mismo día en Bogotá y alrededores si pides antes de las ${CONFIG.corteMismoDia}, gratis desde ${dinero(CONFIG.envios.bogota.gratisDesde)}` },
     { icono: <IconoCamion className="h-[18px] w-[18px]" />, clase: "icono-camion", texto: `Envíos a todo Colombia, gratis desde ${dinero(CONFIG.envios.nacional.gratisDesde)}` },
-    { icono: <IconoTarjeta className="h-[18px] w-[18px]" />, clase: "icono-tarjeta", texto: "Paga con tarjeta, Bre-B, Daviplata, transferencia o efectivo" }
+    { icono: <IconoTarjeta className="h-[18px] w-[18px]" />, clase: "icono-tarjeta", texto: "Paga con tarjeta, PSE, Bre-B, Daviplata, transferencia o efectivo" }
   ];
 
   return (

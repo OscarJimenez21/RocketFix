@@ -8059,5 +8059,1029 @@
  },
  "sa07s": {
   "resumen": "Samsung Galaxy A07s de 64 GB y 4 GB de RAM."
+ },
+ "szfold8": {
+  "resumen": "Celular plegable Samsung Galaxy Z Fold 8: se abre como una tablet para ver, escribir y trabajar en pantalla grande, y cerrado se usa como un celular normal.",
+  "ficha": [
+   [
+    "Procesador",
+    "Snapdragon 8 Elite Gen 5 for Galaxy"
+   ],
+   [
+    "Memoria RAM",
+    "12 GB"
+   ],
+   [
+    "Batería",
+    "4.800 mAh"
+   ],
+   [
+    "Formato",
+    "Plegable tipo libro"
+   ]
+  ]
+ },
+ "kblacks": {
+  "resumen": "Celular Kalley Black S con 4G, 64 GB de almacenamiento y 3 GB de RAM: sencillo para WhatsApp, llamadas y redes sociales.",
+  "ficha": [
+   [
+    "Pantalla",
+    "5,99\" IPS"
+   ],
+   [
+    "Almacenamiento",
+    "64 GB"
+   ],
+   [
+    "Memoria RAM",
+    "3 GB"
+   ],
+   [
+    "Cámaras",
+    "Trasera de 5 MP con flash y frontal de 5 MP"
+   ],
+   [
+    "Batería",
+    "3.000 mAh"
+   ],
+   [
+    "Sistema",
+    "Android 15 (Go)"
+   ],
+   [
+    "Red",
+    "4G, doble SIM"
+   ],
+   [
+    "Seguridad",
+    "Lector de huella lateral"
+   ]
+  ]
+ },
+ "flyfy100": {
+  "resumen": "Celular básico Fly FY100 con 4G: para llamadas y mensajes, con batería que dura y teclas físicas fáciles de usar."
+ },
+ "ularmor21": {
+  "resumen": "Celular todoterreno Ulefone Armor 21 de 256 GB, hecho para obra, campo y trabajo pesado: resiste agua, polvo y golpes, y trae batería de 9.600 mAh.",
+  "ficha": [
+   [
+    "Pantalla",
+    "6,58\" IPS FHD+ a 120 Hz"
+   ],
+   [
+    "Procesador",
+    "MediaTek Helio G99"
+   ],
+   [
+    "Almacenamiento",
+    "256 GB"
+   ],
+   [
+    "Memoria RAM",
+    "8 GB"
+   ],
+   [
+    "Batería",
+    "9.600 mAh con carga de 33 W"
+   ],
+   [
+    "Resistencia",
+    "IP68 e IP69K"
+   ]
+  ]
+ },
+ "ipadpro13": {
+  "resumen": "iPad Pro de 13\" con chip M5 y pantalla Ultra Retina XDR OLED: para dibujar, editar fotos y video y trabajar como en un computador.",
+  "ficha": [
+   [
+    "Chip",
+    "Apple M5"
+   ],
+   [
+    "Pantalla",
+    "13\" Ultra Retina XDR, OLED en tándem, 2752 x 2064"
+   ],
+   [
+    "Frecuencia",
+    "ProMotion de 10 a 120 Hz"
+   ],
+   [
+    "Almacenamiento",
+    "256 GB"
+   ]
+  ]
+ },
+ "ixpad30e": {
+  "resumen": "Tablet Infinix XPad 30E de 11\" con 4G para usarla con SIM, 128 GB y 4 GB de RAM: para clases, series y videollamadas.",
+  "ficha": [
+   [
+    "Pantalla",
+    "11\" IPS FHD+ (1920 x 1200)"
+   ],
+   [
+    "Almacenamiento",
+    "128 GB"
+   ],
+   [
+    "Memoria RAM",
+    "4 GB"
+   ],
+   [
+    "Red",
+    "4G LTE y WiFi"
+   ],
+   [
+    "Batería",
+    "7.000 mAh con carga de 18 W"
+   ]
+  ]
+ },
+ "lentab": {
+  "resumen": "Tablet Lenovo Tab con WiFi, 128 GB y 4 GB de RAM: para estudiar, ver series y navegar.",
+  "ficha": [
+   [
+    "Almacenamiento",
+    "128 GB"
+   ],
+   [
+    "Memoria RAM",
+    "4 GB"
+   ],
+   [
+    "Conexión",
+    "WiFi"
+   ]
+  ]
+ },
+ "xcar20": {
+  "resumen": "Cargador Xiaomi de 20 W con salida USB-C: carga rápido celulares y audífonos compatibles.",
+  "ficha": [
+   [
+    "Potencia",
+    "20 W"
+   ],
+   [
+    "Salida",
+    "USB-C"
+   ]
+  ]
+ },
+ "tvkalley55": {
+  "resumen": "Televisor Kalley de 55\" con Smart TV Android: entra a YouTube, Netflix y otras aplicaciones sin aparatos adicionales.",
+  "ficha": [
+   [
+    "Tamaño",
+    "55\""
+   ],
+   [
+    "Sistema",
+    "Smart TV Android"
+   ]
+  ]
+ },
+ "mbair15m5": {
+  "resumen": "MacBook Air de 15\" con chip M5: liviano y silencioso, con pantalla grande para trabajar, estudiar y editar.",
+  "ficha": [
+   [
+    "Chip",
+    "Apple M5: CPU de 10 núcleos y GPU de 10 núcleos"
+   ],
+   [
+    "Pantalla",
+    "15,3\" Liquid Retina (2880 x 1864), 500 nits"
+   ],
+   [
+    "Puertos",
+    "2 Thunderbolt 4, MagSafe 3 y jack de 3,5 mm"
+   ],
+   [
+    "Cámara",
+    "12 MP Center Stage"
+   ],
+   [
+    "Batería",
+    "Hasta 18 horas de video, según Apple"
+   ],
+   [
+    "Peso",
+    "1,51 kg"
+   ]
+  ]
+ },
+ "p1138": {
+  "resumen": "Procesador Intel Core Ultra 9 285K de 24 núcleos para PC de juego, edición y trabajo pesado. Viene sin disipador.",
+  "ficha": [
+   [
+    "Socket",
+    "LGA1851"
+   ],
+   [
+    "Núcleos",
+    "24 (8 de rendimiento y 16 de eficiencia)"
+   ],
+   [
+    "Frecuencia",
+    "3,7 GHz base, hasta 5,7 GHz"
+   ],
+   [
+    "Caché",
+    "36 MB"
+   ],
+   [
+    "Potencia base",
+    "125 W"
+   ],
+   [
+    "Disipador",
+    "No incluido"
+   ]
+  ]
+ },
+ "p5463": {
+  "resumen": "Memoria Kingston Fury Beast de 16 GB DDR5 a 5600 MHz para PC de escritorio, compatible con perfiles Intel XMP 3.0 y AMD EXPO.",
+  "ficha": [
+   [
+    "Capacidad",
+    "16 GB"
+   ],
+   [
+    "Tipo",
+    "DDR5 para PC"
+   ],
+   [
+    "Velocidad",
+    "5600 MHz"
+   ],
+   [
+    "Perfiles",
+    "Intel XMP 3.0 y AMD EXPO"
+   ]
+  ]
+ },
+ "p5441": {
+  "resumen": "Memoria Kingston Fury Beast de 32 GB DDR5 a 5600 MHz para PC de escritorio, compatible con perfiles Intel XMP 3.0 y AMD EXPO.",
+  "ficha": [
+   [
+    "Capacidad",
+    "32 GB"
+   ],
+   [
+    "Tipo",
+    "DDR5 para PC"
+   ],
+   [
+    "Velocidad",
+    "5600 MHz"
+   ],
+   [
+    "Perfiles",
+    "Intel XMP 3.0 y AMD EXPO"
+   ]
+  ]
+ },
+ "p5550": {
+  "resumen": "Memoria Kingston de 48 GB DDR5 a 4800 MHz para PC de escritorio, sin disipador.",
+  "ficha": [
+   [
+    "Capacidad",
+    "48 GB"
+   ],
+   [
+    "Tipo",
+    "DDR5 para PC"
+   ],
+   [
+    "Velocidad",
+    "4800 MHz"
+   ],
+   [
+    "Disipador",
+    "No"
+   ]
+  ]
+ },
+ "p5523": {
+  "resumen": "Kit de memoria Corsair Dominator Platinum RGB de 64 GB (2 de 32 GB) DDR5 a 5200 MHz, con luces RGB, para PC de alto rendimiento.",
+  "ficha": [
+   [
+    "Capacidad",
+    "64 GB (2 × 32 GB)"
+   ],
+   [
+    "Tipo",
+    "DDR5 para PC"
+   ],
+   [
+    "Velocidad",
+    "5200 MHz"
+   ],
+   [
+    "Iluminación",
+    "RGB"
+   ]
+  ]
+ },
+ "p12142": {
+  "resumen": "Disco de estado sólido Lexar NQ100 de 256 GB SATA de 2,5\": hace que un computador viejo arranque y abra programas mucho más rápido.",
+  "ficha": [
+   [
+    "Capacidad",
+    "256 GB"
+   ],
+   [
+    "Formato",
+    "2,5\" SATA III"
+   ]
+  ]
+ },
+ "p12144": {
+  "resumen": "Disco de estado sólido Lenovo LS800 de 480 GB SATA de 2,5\" para darle velocidad a un portátil o PC.",
+  "ficha": [
+   [
+    "Capacidad",
+    "480 GB"
+   ],
+   [
+    "Formato",
+    "2,5\" SATA"
+   ]
+  ]
+ },
+ "p12143": {
+  "resumen": "Disco de estado sólido Lexar NQ100 de 512 GB SATA de 2,5\": hace que un computador viejo arranque y abra programas mucho más rápido.",
+  "ficha": [
+   [
+    "Capacidad",
+    "512 GB"
+   ],
+   [
+    "Formato",
+    "2,5\" SATA III"
+   ]
+  ]
+ },
+ "p13147": {
+  "resumen": "SSD Patriot P300 de 512 GB M.2 NVMe para PC o portátil, con lectura de hasta 1700 MB/s y escritura de hasta 1100 MB/s.",
+  "ficha": [
+   [
+    "Capacidad",
+    "512 GB"
+   ],
+   [
+    "Formato",
+    "M.2 2280 NVMe PCIe Gen3 x4"
+   ],
+   [
+    "Lectura",
+    "Hasta 1700 MB/s"
+   ],
+   [
+    "Escritura",
+    "Hasta 1100 MB/s"
+   ]
+  ]
+ },
+ "p7081": {
+  "resumen": "Disco duro Western Digital Purple de 8 TB, hecho para grabadores de cámaras de seguridad que graban las 24 horas.",
+  "ficha": [
+   [
+    "Capacidad",
+    "8 TB"
+   ],
+   [
+    "Formato",
+    "3,5\" SATA"
+   ],
+   [
+    "Uso",
+    "Videovigilancia 24/7"
+   ]
+  ]
+ },
+ "p14235": {
+  "resumen": "Fuente de poder XPG Core Reactor II VE de 850 W con certificación 80 Plus Gold, compatible con ATX 3.0 y 3.1 y con conector 12VHPWR para tarjetas de video recientes.",
+  "ficha": [
+   [
+    "Potencia",
+    "850 W"
+   ],
+   [
+    "Certificación",
+    "80 Plus Gold"
+   ],
+   [
+    "Norma",
+    "ATX 3.0 y ATX 3.1"
+   ],
+   [
+    "Conector",
+    "12VHPWR"
+   ]
+  ]
+ },
+ "p16618": {
+  "resumen": "Caja Antec VCX300 de torre media con vidrio templado y 5 ventiladores ARGB, con espacio para tarjetas de video grandes y refrigeración líquida.",
+  "ficha": [
+   [
+    "Formato",
+    "Torre media"
+   ],
+   [
+    "Panel lateral",
+    "Vidrio templado"
+   ],
+   [
+    "Ventiladores incluidos",
+    "5 ARGB"
+   ]
+  ]
+ },
+ "p4188": {
+  "resumen": "Tarjeta de video ASUS Dual Radeon RX 9060 XT de 16 GB GDDR6 con arquitectura AMD RDNA 4, para jugar en Full HD y 1440p.",
+  "ficha": [
+   [
+    "Modelo",
+    "DUAL-RX9060XT-16G"
+   ],
+   [
+    "Memoria",
+    "16 GB GDDR6"
+   ],
+   [
+    "Bus",
+    "PCI Express 5.0"
+   ],
+   [
+    "Arquitectura",
+    "AMD RDNA 4"
+   ]
+  ]
+ },
+ "p3775": {
+  "resumen": "Tarjeta de video Gigabyte GeForce RTX 5060 Ti WindForce OC de 16 GB GDDR7 con arquitectura NVIDIA Blackwell y DLSS 4.",
+  "ficha": [
+   [
+    "Memoria",
+    "16 GB GDDR7"
+   ],
+   [
+    "Arquitectura",
+    "NVIDIA Blackwell"
+   ],
+   [
+    "Tecnologías",
+    "DLSS 4 y trazado de rayos"
+   ],
+   [
+    "Refrigeración",
+    "WindForce"
+   ]
+  ]
+ },
+ "p3702": {
+  "resumen": "Tarjeta de video ASUS Prime GeForce RTX 5070 Ti OC de 16 GB GDDR7 con tres ventiladores Axial-tech y diseño de 2,5 ranuras.",
+  "ficha": [
+   [
+    "Memoria",
+    "16 GB GDDR7"
+   ],
+   [
+    "Arquitectura",
+    "NVIDIA Blackwell con DLSS 4"
+   ],
+   [
+    "Ventiladores",
+    "3 Axial-tech"
+   ],
+   [
+    "Grosor",
+    "2,5 ranuras"
+   ],
+   [
+    "BIOS",
+    "Doble (silencioso y rendimiento)"
+   ]
+  ]
+ },
+ "p15424": {
+  "resumen": "Monitor LG UltraGear 27GX704A-B OLED QHD 2K de 240 Hz y 0,03 ms, con negros profundos para juegos competitivos. Se puede girar en vertical.",
+  "ficha": [
+   [
+    "Panel",
+    "OLED QHD (2560 x 1440)"
+   ],
+   [
+    "Frecuencia",
+    "240 Hz"
+   ],
+   [
+    "Respuesta",
+    "0,03 ms (GtG)"
+   ],
+   [
+    "Sincronización",
+    "NVIDIA G-SYNC y AMD FreeSync Premium Pro"
+   ],
+   [
+    "Base",
+    "Con giro vertical (pivot)"
+   ]
+  ]
+ },
+ "p15458": {
+  "resumen": "Smart Monitor LG 32U501SB-B de 32\" FHD con panel VA de 120 Hz: sirve como monitor para el PC y como pantalla con aplicaciones.",
+  "ficha": [
+   [
+    "Tamaño",
+    "32\""
+   ],
+   [
+    "Panel",
+    "VA FHD"
+   ],
+   [
+    "Frecuencia",
+    "120 Hz"
+   ]
+  ]
+ },
+ "p15459": {
+  "resumen": "Monitor LG UltraGear 32GX870B-B OLED 4K de 32\" con hasta 480 Hz, para jugar con la máxima fluidez y nitidez.",
+  "ficha": [
+   [
+    "Tamaño",
+    "32\""
+   ],
+   [
+    "Panel",
+    "OLED 4K UHD"
+   ],
+   [
+    "Frecuencia",
+    "Hasta 480 Hz"
+   ],
+   [
+    "Respuesta",
+    "1 ms"
+   ]
+  ]
+ },
+ "p15395": {
+  "resumen": "Monitor curvo LG UltraGear 34G600A-B de 34\" WQHD 2K con panel VA de 160 Hz y 1 ms, para jugar y trabajar con varias ventanas.",
+  "ficha": [
+   [
+    "Tamaño",
+    "34\" curvo"
+   ],
+   [
+    "Panel",
+    "VA WQHD"
+   ],
+   [
+    "Frecuencia",
+    "160 Hz"
+   ],
+   [
+    "Respuesta",
+    "1 ms"
+   ]
+  ]
+ },
+ "p15416": {
+  "resumen": "Monitor Xiaomi A27i de 27\" IPS Full HD a 144 Hz, calibrado de fábrica y con certificación TÜV de luz azul baja.",
+  "ficha": [
+   [
+    "Panel",
+    "27\" IPS FHD (1920 x 1080)"
+   ],
+   [
+    "Frecuencia",
+    "144 Hz"
+   ],
+   [
+    "Color",
+    "99% sRGB, ΔE < 2"
+   ],
+   [
+    "Cuidado visual",
+    "TÜV Low Blue Light y atenuación DC"
+   ]
+  ]
+ },
+ "p15449": {
+  "resumen": "Monitor Xiaomi A27Qi de 27\" IPS QHD 2K a 120 Hz, con color preciso para trabajar, crear contenido y ver series.",
+  "ficha": [
+   [
+    "Panel",
+    "27\" IPS QHD (2560 x 1440)"
+   ],
+   [
+    "Frecuencia",
+    "120 Hz"
+   ],
+   [
+    "Color",
+    "95% DCI-P3, 100% sRGB, ΔE < 1"
+   ],
+   [
+    "Brillo",
+    "300 nits"
+   ],
+   [
+    "Cuidado visual",
+    "Luz azul baja certificada por TÜV y atenuación DC"
+   ]
+  ]
+ },
+ "p46096": {
+  "resumen": "Pad mouse de tela Logitech G240 con base de goma que no se mueve, pensado para juegos con DPI bajos.",
+  "ficha": [
+   [
+    "Tamaño",
+    "340 x 280 x 1 mm"
+   ],
+   [
+    "Material",
+    "Tela con base de goma"
+   ],
+   [
+    "Peso",
+    "90 g"
+   ]
+  ]
+ },
+ "p30027": {
+  "resumen": "Parlantes Logitech Z407 2.1 con subwoofer y 80 W pico, con Bluetooth, USB y entrada de 3,5 mm, y control inalámbrico para el volumen y los graves.",
+  "ficha": [
+   [
+    "Sistema",
+    "2.1 con subwoofer"
+   ],
+   [
+    "Potencia",
+    "80 W pico"
+   ],
+   [
+    "Conexiones",
+    "Bluetooth, micro USB y 3,5 mm"
+   ],
+   [
+    "Control",
+    "Perilla inalámbrica"
+   ]
+  ]
+ },
+ "p31176": {
+  "resumen": "Diadema gamer inalámbrica Logitech G535 Lightspeed: liviana, con hasta 33 horas de batería y micrófono que se silencia al levantarlo. Funciona con PC y PlayStation.",
+  "ficha": [
+   [
+    "Conexión",
+    "Inalámbrica Lightspeed (receptor USB)"
+   ],
+   [
+    "Batería",
+    "Hasta 33 horas"
+   ],
+   [
+    "Alcance",
+    "Hasta 12 m"
+   ],
+   [
+    "Peso",
+    "236 g"
+   ],
+   [
+    "Parlantes",
+    "40 mm"
+   ]
+  ]
+ },
+ "p31321": {
+  "resumen": "Diadema gamer inalámbrica Logitech G522 Lightspeed de la serie G5, cómoda para sesiones largas y con micrófono desmontable.",
+  "ficha": [
+   [
+    "Conexión",
+    "Inalámbrica Lightspeed"
+   ],
+   [
+    "Peso",
+    "290 g con micrófono"
+   ]
+  ]
+ },
+ "p31214": {
+  "resumen": "Diadema gamer con cable Astro A10 Gen 2, liviana y resistente, con micrófono que se silencia al levantarlo. Funciona con PC, Mac, PS5, Xbox, Switch y celular.",
+  "ficha": [
+   [
+    "Conexión",
+    "Cable con conector de 3,5 mm"
+   ],
+   [
+    "Compatibilidad",
+    "PC, Mac, PS5, Xbox, Switch y celular"
+   ]
+  ]
+ },
+ "p20220": {
+  "resumen": "Teclado ergonómico inalámbrico Logitech Wave Keys en español, con forma de onda y reposamanos acolchado para escribir cómodo todo el día.",
+  "ficha": [
+   [
+    "Distribución",
+    "Español"
+   ],
+   [
+    "Conexión",
+    "Inalámbrica"
+   ],
+   [
+    "Reposamanos",
+    "Acolchado con 3 capas de espuma"
+   ],
+   [
+    "Software",
+    "Logi Options+"
+   ]
+  ]
+ },
+ "p20284": {
+  "resumen": "Teclado mecánico inalámbrico Logitech MX Mechanical de perfil bajo con retroiluminación, para trabajar en varios equipos a la vez.",
+  "ficha": [
+   [
+    "Tipo",
+    "Mecánico de perfil bajo"
+   ],
+   [
+    "Conexión",
+    "Bluetooth y receptor Logi Bolt"
+   ],
+   [
+    "Iluminación",
+    "Retroiluminado"
+   ]
+  ]
+ },
+ "p19303": {
+  "resumen": "Mouse gamer inalámbrico Logitech G Pro X2 Superstrike blanco, con clics inductivos y respuesta háptica que se ajustan en G HUB.",
+  "ficha": [
+   [
+    "Sensor",
+    "HERO 2, de 100 a 44.000 DPI"
+   ],
+   [
+    "Frecuencia de reporte",
+    "Hasta 8.000 Hz"
+   ],
+   [
+    "Conexión",
+    "Inalámbrica Lightspeed y USB"
+   ],
+   [
+    "Batería",
+    "Hasta 90 horas"
+   ]
+  ]
+ },
+ "p19262": {
+  "resumen": "Mouse vertical ergonómico Logitech Lift, para manos pequeñas y medianas: la mano queda en una posición más natural y descansa la muñeca.",
+  "ficha": [
+   [
+    "Tipo",
+    "Vertical ergonómico"
+   ],
+   [
+    "Ideal para",
+    "Manos pequeñas y medianas"
+   ]
+  ]
+ },
+ "p19298": {
+  "resumen": "Mouse Logitech MX Master 4 recargable con Bluetooth y Logi Bolt, sensor que funciona hasta sobre vidrio y rueda de desplazamiento electromagnética.",
+  "ficha": [
+   [
+    "Sensor",
+    "Darkfield de alta precisión"
+   ],
+   [
+    "Conexión",
+    "Bluetooth y Logi Bolt"
+   ],
+   [
+    "Batería",
+    "Recargable"
+   ],
+   [
+    "Peso",
+    "150 g"
+   ]
+  ]
+ },
+ "p45651": {
+  "resumen": "Micrófono USB HyperX SoloCast 2 negro para streaming, clases y videollamadas, con sonido claro y fácil de conectar.",
+  "ficha": [
+   [
+    "Conexión",
+    "USB"
+   ],
+   [
+    "Color",
+    "Negro"
+   ]
+  ]
+ },
+ "p45597": {
+  "resumen": "Micrófono USB HyperX QuadCast 2 negro para streaming, podcast y videollamadas, con luces RGB.",
+  "ficha": [
+   [
+    "Conexión",
+    "USB"
+   ],
+   [
+    "Color",
+    "Negro"
+   ]
+  ]
+ },
+ "p59013": {
+  "resumen": "Capturadora Streamplify Capture 4K: graba y transmite tu consola o cámara, con paso de imagen 4K a 60 Hz y menos de 100 ms de latencia.",
+  "ficha": [
+   [
+    "Captura",
+    "4K a 30 Hz"
+   ],
+   [
+    "Paso de imagen",
+    "Hasta 4K a 60 Hz"
+   ],
+   [
+    "Audio",
+    "48 kHz / 24 bits"
+   ],
+   [
+    "Latencia",
+    "Menos de 100 ms"
+   ],
+   [
+    "Compatible",
+    "VRR, OBS, Twitch y YouTube"
+   ]
+  ]
+ },
+ "p59018": {
+  "resumen": "Capturadora interna Elgato Game Capture 4K Pro para grabar y transmitir en ultra alta definición, con HDR y VRR.",
+  "ficha": [
+   [
+    "Tipo",
+    "Tarjeta interna para PC"
+   ],
+   [
+    "Compatible",
+    "HDR, VRR, OBS Studio y Discord"
+   ]
+  ]
+ },
+ "p45650b": {
+  "resumen": "Timón Logitech G RS50 System con Direct Drive de 8 Nm y TrueForce, más palanca de cambios G-RS H-Shifter, para simuladores en PlayStation y PC.",
+  "ficha": [
+   [
+    "Motor",
+    "Direct Drive de 8 Nm"
+   ],
+   [
+    "Respuesta",
+    "TrueForce"
+   ],
+   [
+    "Incluye",
+    "Palanca de cambios G-RS H-Shifter"
+   ],
+   [
+    "Compatible",
+    "PlayStation y PC"
+   ]
+  ]
+ },
+ "p9060": {
+  "resumen": "Disco SSD externo Kingston XS1000 de 2 TB con USB-C y lectura de hasta 1000 MB/s: pequeño para llevar en el bolsillo.",
+  "ficha": [
+   [
+    "Capacidad",
+    "2 TB"
+   ],
+   [
+    "Conexión",
+    "USB-C"
+   ],
+   [
+    "Lectura",
+    "Hasta 1000 MB/s"
+   ],
+   [
+    "Color",
+    "Negro"
+   ]
+  ]
+ },
+ "jblclip4": {
+  "resumen": "Parlante JBL Clip 4 con mosquetón para colgarlo del bolso o la bicicleta, resistente al agua y al polvo.",
+  "ficha": [
+   [
+    "Conexión",
+    "Bluetooth"
+   ],
+   [
+    "Resistencia",
+    "IP67 (agua y polvo)"
+   ]
+  ]
+ },
+ "jblgrip": {
+  "resumen": "Parlante portátil JBL Grip, resistente al agua y al polvo, fácil de agarrar y llevar a cualquier parte.",
+  "ficha": [
+   [
+    "Conexión",
+    "Bluetooth"
+   ],
+   [
+    "Resistencia",
+    "IP68 (agua y polvo)"
+   ]
+  ]
+ },
+ "xsc6u": {
+  "resumen": "Patineta eléctrica Xiaomi Electric Scooter 6 Ultra: hasta 75 km por carga y motor de 1.200 W pico para subidas.",
+  "ficha": [
+   [
+    "Velocidad máxima",
+    "25 km/h"
+   ],
+   [
+    "Autonomía",
+    "Hasta 75 km (55 km a velocidad máxima)"
+   ],
+   [
+    "Motor",
+    "500 W nominal, 1.200 W pico"
+   ],
+   [
+    "Batería",
+    "585 Wh"
+   ],
+   [
+    "Carga máxima",
+    "140 kg"
+   ],
+   [
+    "Peso",
+    "33,7 kg"
+   ]
+  ]
+ },
+ "xsc4l": {
+  "resumen": "Patineta eléctrica Xiaomi Electric Scooter 4 Lite, liviana y plegable para moverte por la ciudad.",
+  "ficha": [
+   [
+    "Velocidad máxima",
+    "25 km/h"
+   ],
+   [
+    "Formato",
+    "Plegable"
+   ]
+  ]
+ },
+ "awultra4": {
+  "resumen": "Apple Watch Ultra 4 de 49 mm en titanio, para deporte, montaña y buceo recreativo, con hasta 50 horas de batería en uso normal.",
+  "ficha": [
+   [
+    "Caja",
+    "Titanio de 49 mm"
+   ],
+   [
+    "Chip",
+    "S11"
+   ],
+   [
+    "Pantalla",
+    "Retina siempre activa, hasta 3000 nits"
+   ],
+   [
+    "Batería",
+    "Hasta 50 horas (84 en bajo consumo), según Apple"
+   ],
+   [
+    "Resistencia",
+    "Agua hasta 100 m e IP6X"
+   ],
+   [
+    "GPS",
+    "Doble frecuencia"
+   ]
+  ]
+ },
+ "itelw020": {
+  "resumen": "Reloj inteligente itel ISW-020: recibe notificaciones del celular, cuenta pasos y mide el ritmo cardíaco."
+ },
+ "itelw023": {
+  "resumen": "Reloj inteligente itel ISW-023 Plus: recibe notificaciones del celular, cuenta pasos y mide el ritmo cardíaco."
  }
 }

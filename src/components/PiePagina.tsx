@@ -122,6 +122,9 @@ function BotonInstalar() {
   );
 }
 
+/** Cómo se escribe cada red en el pie (15/11/2026: TikTok lleva la K mayúscula) */
+const NOMBRE_RED: Record<string, string> = { instagram: "Instagram", facebook: "Facebook", tiktok: "TikTok" };
+
 /** Pie de todas las páginas. Incluye el contacto (#contacto): WhatsApp, horario y estado de atención. */
 /** memo: el pie no depende de la página, así que no se vuelve a dibujar en cada cambio de página (13/11/2026) */
 export const PiePagina = memo(function PiePagina() {
@@ -162,7 +165,7 @@ const enlace = "enlace-pie hover:text-white";
             <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="font-semibold text-white hover:underline">{CONFIG.whatsappVisible}</a>
           </p>
           {redes.length > 0 && (
-            <p className="mt-3 flex gap-4 text-sm">{redes.map(([red, url]) => <a key={red} href={url} target="_blank" rel="noopener" className={`capitalize ${enlace}`}>{red}</a>)}</p>
+            <p className="mt-3 flex gap-4 text-sm">{redes.map(([red, url]) => <a key={red} href={url} target="_blank" rel="noopener" className={enlace}>{NOMBRE_RED[red] ?? red}</a>)}</p>
           )}
         </div>
         <nav aria-label="Categorías de la tienda">

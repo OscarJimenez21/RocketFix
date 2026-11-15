@@ -430,7 +430,7 @@ export function Carrito() {
                   <dd key={envio ? "pago" : `gratis-${festejo}`} className={envio ? "" : `origin-right font-semibold text-marca ${festejo ? "motion-safe:animate-latido motion-safe:[animation-delay:200ms]" : ""}`}>{envio ? dinero(envio) : "Gratis"}</dd></div>
               </dl>
               <div className="mt-2">
-                <p key={envio ? "falta" : `gratis-${festejo}`} className={`text-xs ${envio ? "text-tinta-2" : "font-semibold text-marca motion-safe:animate-entrar"}`}>{envio ? `Te faltan ${dinero(meta - subtotal)} para el envío gratis ${nacional ? "a otra ciudad" : "en Bogotá"}.` : "¡Tu pedido tiene envío gratis!"}</p>
+                <p key={envio ? "falta" : `gratis-${festejo}`} className={`text-xs ${envio ? "text-tinta-2" : "font-semibold text-marca motion-safe:animate-entrar"}`}>{envio ? `Te faltan ${dinero(meta - subtotal)} para el envío gratis ${nacional ? "a otra ciudad" : "en Bogotá"}.` : `¡Tu pedido tiene envío gratis ${nacional ? "a tu ciudad" : "en Bogotá"}!`}</p>
                 <div className="relative mt-2.5" aria-hidden="true">
                   <div className="h-1.5 overflow-hidden rounded-full bg-fondo">
                     {/* Se mueve con scaleX (no con el ancho), que no obliga a recalcular la página */}

@@ -33,10 +33,12 @@ export function EnvioGratis({ precio }: { precio: number }) {
     o.observe(el);
     return () => o.disconnect();
   }, []);
+  // Si hay cosas en el carrito, la cuenta las incluye: el texto lo dice para no dar a entender que el producto solo basta
+  const con = lineas.length ? "Con tu carrito y este producto" : "Con este producto";
   const texto = total >= nac
-    ? "Con este producto, el envío es gratis a toda Colombia."
+    ? `${con}, el envío es gratis a toda Colombia.`
     : total >= bog
-      ? `Con este producto, el envío en Bogotá es gratis. Para el resto del país te faltarían ${dinero(nac - total)}.`
+      ? `${con}, el envío en Bogotá es gratis. Para el resto del país te faltarían ${dinero(nac - total)}.`
       : `Te faltan ${dinero(bog - total)} para el envío gratis en Bogotá${lineas.length ? " (contando tu carrito)" : ""}.`;
   return (
     <div className="mt-4 rounded bg-fondo px-3 py-2.5">

@@ -10,6 +10,12 @@ export const norm = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").to
 /** Texto para una dirección: "Cooler Master" → "cooler-master" (la misma regla de scripts/paginas-estaticas.mjs) */
 export const slug = (s: string) => norm(s).replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
+/** 15/11/2026: Google corta los títulos de más de unos 65 caracteres. Si «Nombre · Rocket Fix» no cabe, el título
+    queda solo con el nombre (Google ya muestra el nombre del sitio aparte). Misma regla en scripts/paginas-estaticas.mjs. */
+export const MAX_TITULO = 65;
+export const tituloCorto = (titulo: string, sitio: string) =>
+  titulo.length > MAX_TITULO && titulo.endsWith(` · ${sitio}`) ? titulo.slice(0, -` · ${sitio}`.length) : titulo;
+
 /** Ruta de un archivo de public/ respetando la base de publicación (ej.: /RocketFix/fotos/sa07.jpg) */
 export const recurso = (ruta: string) => (/^(https?:|data:|\/)/.test(ruta) ? ruta : `${import.meta.env.BASE_URL}${ruta}`);
 
