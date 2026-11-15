@@ -138,7 +138,8 @@
      "bloques": [
       "Solo los que nos das para atender tu compra o tu solicitud de servicio: tu nombre, tu número de WhatsApp, la dirección y la ciudad de entrega, el producto o servicio que te interesa y lo que nos cuentes en la conversación. No pedimos datos sensibles.",
       "El carrito y los formularios de la página no guardan tus datos en un servidor: arman un mensaje que tú decides enviar por WhatsApp. El carrito queda guardado solo en tu navegador.",
-      "Los pagos en línea se hacen en la plataforma de Bold, que trata los datos de pago según sus propias políticas."
+      "Los pagos en línea se hacen en la plataforma de Bold, que trata los datos de pago según sus propias políticas.",
+      "Para saber cuántas personas visitan la página y qué secciones se ven más, usamos Cloudflare Web Analytics, que cuenta visitas sin cookies y sin identificarte: no conocemos tu nombre, tu número ni nada que diga quién eres."
      ]
     },
     {

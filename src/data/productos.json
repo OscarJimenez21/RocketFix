@@ -1122,7 +1122,7 @@
   "specs": [
    "256 GB",
    "5G"
-  ],
+  ],
   "imagen": "fotos/tcamon50p.jpg",
   "estado": "Nuevo",
   "opciones": [
@@ -1235,7 +1235,7 @@
    "256 GB",
    "16 GB RAM",
    "4G"
-  ],
+  ],
   "imagen": "fotos/tcamon50p4g.jpg",
   "estado": "Nuevo",
   "opciones": [
@@ -1310,7 +1310,7 @@
   "specs": [
    "256 GB",
    "5G"
-  ],
+  ],
   "imagen": "fotos/vv60lite.jpg",
   "estado": "Nuevo",
   "opciones": [
@@ -2793,7 +2793,7 @@
    "256 GB",
    "8 GB RAM",
    "WiFi"
-  ],
+  ],
   "imagen": "fotos/lentabplus.jpg",
   "estado": "Nuevo",
   "opciones": [
@@ -2997,21 +2997,6 @@
    {
     "nombre": "",
     "precio": 160000
-   }
-  ]
- },
- {
-  "id": "relt30",
-  "tienda": "rel",
-  "categoria": "relojes",
-  "nombre": "Reloj inteligente T30",
-  "imagen": "fotos/relt30.jpg",
-  "estado": "Nuevo",
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 46000
    }
   ]
  },
@@ -4895,7 +4880,7 @@
   "marca": "ASUS",
   "nombre": "Portátil ASUS X1504VA-BQ4555",
   "specs": [
-   "Core 5 1334U",
+   "Core i5 1334U",
    "12GB DDR5",
    "SSD NVMe 512GB",
    "Pantalla 15,6\" FHD Huella"
@@ -5353,7 +5338,7 @@
   "nombre": "Portátil ASUS ExpertBook B1403CVA-S65016",
   "imagen": "fotos/asb1403cvas65016.jpg",
   "specs": [
-   "Core i7 1335U",
+   "Core i7 13.ª gen",
    "8GB DDR5",
    "SSD 512GB",
    "Pantalla 14\" FHD",
@@ -7237,7 +7222,7 @@
    "32GB DDR5",
    "SSD 2TB",
    "Pantalla 16\" WQXGA",
-   "RTX 5070 12GB",
+   "RTX 5070 Ti 12GB",
    "Windows 11",
    "Color Black"
   ],
@@ -16076,22 +16061,6 @@
   ]
  },
  {
-  "id": "p21098",
-  "tienda": "per",
-  "categoria": "combos",
-  "marca": "T-Dagger",
-  "nombre": "Combo 2 en 1 T-Dagger Advance Force Lite (Teclado+Mouse)",
-  "imagen": "fotos/p21098.jpg",
-  "estado": "Nuevo",
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 180000
-   }
-  ]
- },
- {
   "id": "p21092",
   "tienda": "per",
   "categoria": "combos",
@@ -17786,22 +17755,6 @@
    {
     "nombre": "",
     "precio": 270000
-   }
-  ]
- },
- {
-  "id": "p45640",
-  "tienda": "per",
-  "categoria": "streaming",
-  "marca": "Kalley",
-  "nombre": "Micrófono Kalley K-Mic Inalámbrico",
-  "imagen": "fotos/p45640.jpg",
-  "estado": "Nuevo",
-  "specs": [],
-  "opciones": [
-   {
-    "nombre": "",
-    "precio": 200000
    }
   ]
  },

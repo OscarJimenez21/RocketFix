@@ -2178,11 +2178,11 @@
   ]
  },
  "p52383": {
-  "resumen": "Portátil ASUS de 15,6\" Full HD con procesador Intel Core 5, 12 GB de RAM DDR5 y SSD NVMe de 512 GB, con lector de huella para desbloquearlo al instante.",
+  "resumen": "Portátil ASUS de 15,6\" Full HD con procesador Intel Core i5, 12 GB de RAM DDR5 y SSD NVMe de 512 GB, con lector de huella para desbloquearlo al instante.",
   "ficha": [
    [
     "Procesador",
-    "Intel Core 5 1334U"
+    "Intel Core i5 1334U"
    ],
    [
     "Memoria RAM",
@@ -3124,9 +3124,6 @@
  "p58004": {
   "resumen": "Combo Redragon de mouse inalámbrico M601WL y pad de mouse."
  },
- "p21098": {
-  "resumen": "Combo gamer T-Dagger Advance Force Lite de teclado y mouse con iluminación."
- },
  "p21105": {
   "resumen": "Combo inalámbrico Logitech MK880 de teclado y mouse, conectados por Bluetooth o receptor USB, cómodos para jornadas largas de trabajo."
  },
@@ -3246,9 +3243,6 @@
  },
  "p62017": {
   "resumen": "Cámara para salas de reuniones Logitech ConferenceCam BCC950, con altavoz y micrófono integrados, para grupos pequeños."
- },
- "p45640": {
-  "resumen": "Micrófono inalámbrico Kalley K-Mic, práctico para presentaciones, karaoke o creación de contenido."
  },
  "p45639": {
   "resumen": "Micrófono Maono DGM20 negro con iluminación RGB, para streaming, juegos y podcasts."
@@ -4868,9 +4862,6 @@
  "rw5active": {
   "resumen": "Xiaomi Redmi Watch 5 Active con pantalla de 2\", llamadas por Bluetooth y batería de larga duración."
  },
- "relt30": {
-  "resumen": "Reloj inteligente T30 para ver notificaciones, contar pasos y medir frecuencia cardíaca."
- },
  "apmax": {
   "resumen": "AirPods Max con conector USB-C: audífonos de diadema de Apple con cancelación activa de ruido, modo Ambiente, audio espacial y hasta 20 horas de batería.",
   "ficha": [
@@ -5489,11 +5480,11 @@
   ]
  },
  "asb1403cvas65016": {
-  "resumen": "Portátil ASUS ExpertBook B1403CVA-S65016 con procesador Intel Core i7 1335U, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Grey.",
+  "resumen": "Portátil ASUS ExpertBook B1403CVA-S65016 con procesador Intel Core i7 de 13.ª generación, 8 GB DDR5 de RAM, SSD de 512 GB y pantalla de 14\" FHD. Color Grey.",
   "ficha": [
    [
     "Procesador",
-    "Intel Core i7 1335U"
+    "Intel Core i7 de 13.ª generación"
    ],
    [
     "Memoria RAM",
@@ -7590,7 +7581,7 @@
   ]
  },
  "lnlegionpro716iax10h": {
-  "resumen": "Portátil Lenovo Legion Pro 7 16IAX10H con procesador Intel Core Ultra 9 275HX, 32 GB DDR5 de RAM, SSD de 2 TB y pantalla de 16\" WQXGA, con tarjeta gráfica NVIDIA GeForce RTX 5070 de 12 GB. Trae Windows 11. Color Black.",
+  "resumen": "Portátil Lenovo Legion Pro 7 16IAX10H con procesador Intel Core Ultra 9 275HX, 32 GB DDR5 de RAM, SSD de 2 TB y pantalla de 16\" WQXGA, con tarjeta gráfica NVIDIA GeForce RTX 5070 Ti de 12 GB. Trae Windows 11. Color Black.",
   "ficha": [
    [
     "Procesador",
