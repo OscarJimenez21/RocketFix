@@ -4,7 +4,7 @@ import { norm } from "../lib/formato";
 
 const base = { fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
 
-const DIBUJOS: [RegExp, JSX.Element][] = [
+const DIBUJOS: [RegExp, React.JSX.Element][] = [
   [/diagnostico|revision|visita tecnica|medir/, <><circle cx="10.5" cy="10.5" r="6" /><path d="M15 15l5 5M8 10.5h5M10.5 8v5" /></>],
   [/formateo|windows|programas/, <><rect x="3" y="4" width="18" height="13" rx="1.5" /><path d="M8 20h8M12 17v3M7.5 8l2.5 2.5L7.5 13M12 13h4" /></>],
   [/limpieza|pasta termica/, <><circle cx="12" cy="12" r="2" /><path d="M12 10c0-4 1-6 3.5-6S18 7 12 10zM14 12c4 0 6 1 6 3.5S17 18 14 12zM12 14c0 4-1 6-3.5 6S6 17 12 14zM10 12c-4 0-6-1-6-3.5S7 6 10 12z" /></>],

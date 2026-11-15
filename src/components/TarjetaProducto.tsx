@@ -46,7 +46,7 @@ export function TextoAgregar({ cantidad, tope }: { cantidad: number; tope: boole
 export function useAgregado() {
   const [vez, setVez] = useState(0);
   const [recien, setRecien] = useState(false);
-  const reloj = useRef<number>();
+  const reloj = useRef<number | undefined>(undefined);
   useEffect(() => () => window.clearTimeout(reloj.current), []);
   const marcar = useCallback(() => {
     setVez(n => n + 1);

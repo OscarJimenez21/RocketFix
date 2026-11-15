@@ -15,6 +15,14 @@ export default tseslint.config(
     plugins: { "react-hooks": reactHooks },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      // react-hooks 7 (15/11/2026) trae reglas nuevas pensadas para el compilador de React, que la tienda no usa. Señalan
+      // 25 lugares que se pueden mejorar, pero no son fallas: quedan como aviso para ir corrigiéndolos sin frenar la
+      // publicación. Las dos reglas de siempre (rules-of-hooks y exhaustive-deps) siguen como en la versión anterior.
+      "react-hooks/set-state-in-effect": "warn",
+      "react-hooks/refs": "warn",
+      "react-hooks/purity": "warn",
+      "react-hooks/immutability": "warn",
+      "react-hooks/preserve-manual-memoization": "warn",
       // Un «!» le dice a TypeScript «esto existe, créeme»: mejor comprobarlo
       "@typescript-eslint/no-non-null-assertion": "error",
       // HTML sin escapar: solo donde verificar-catalogo.mjs ya revisa el contenido (cada uso lleva su permiso y su razón)

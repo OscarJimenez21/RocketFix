@@ -1,4 +1,4 @@
-import { lazy, memo, Suspense, useRef, useState } from "react";
+import { lazy, memo, Suspense, useId, useRef, useState } from "react";
 import { ARTICULOS, CONFIG, PAGOS } from "../data/catalogo";
 import { TIENDAS } from "../data/tiendas";
 import { useEnPantalla, useVisto } from "../lib/enPantalla";
@@ -125,6 +125,73 @@ function BotonInstalar() {
 /** Cómo se escribe cada red en el pie (15/11/2026: TikTok lleva la K mayúscula) */
 const NOMBRE_RED: Record<string, string> = { instagram: "Instagram", facebook: "Facebook", tiktok: "TikTok" };
 
+/** Logos de las redes en sus colores, para las fichas blancas de «Síguenos» (decorativos: el nombre va escrito al lado) */
+function LogoRed({ red }: { red: string }) {
+  const id = useId();
+  const caja = "h-9 w-9 shrink-0";
+  if (red === "facebook") return (
+    <svg viewBox="0 0 24 24" className={caja} aria-hidden="true">
+      <path fill="#0866FF" d="M9.1 23.7v-8H6.6V12h2.5v-1.6c0-4.1 1.8-6 5.9-6 .8 0 2.1.2 2.6.3v3.3l-1.4-.1c-2 0-2.8.8-2.8 2.7V12h3.9l-.7 3.7h-3.2V24C19.4 23.2 24 18.2 24 12 24 5.4 18.6 0 12 0S0 5.4 0 12c0 5.6 3.9 10.4 9.1 11.7z" />
+    </svg>
+  );
+  if (red === "instagram") return (
+    <svg viewBox="0 0 24 24" className={caja} aria-hidden="true">
+      <defs>
+        <linearGradient id={id} x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stopColor="#FEDA75" /><stop offset=".3" stopColor="#FA7E1E" /><stop offset=".6" stopColor="#D62976" /><stop offset="1" stopColor="#4F5BD5" />
+        </linearGradient>
+      </defs>
+      <rect x="2" y="2" width="20" height="20" rx="6" fill={`url(#${id})`} />
+      <rect x="6" y="6" width="12" height="12" rx="3.6" fill="none" stroke="#fff" strokeWidth="1.8" />
+      <circle cx="12" cy="12" r="2.9" fill="none" stroke="#fff" strokeWidth="1.8" />
+      <circle cx="15.6" cy="8.4" r="1" fill="#fff" />
+    </svg>
+  );
+  if (red === "tiktok") return (
+    <svg viewBox="0 0 24 24" className={caja} aria-hidden="true">
+      <rect width="24" height="24" rx="6" fill="#000" />
+      <g transform="translate(4.6 4.2) scale(.62)">
+        <path fill="#25F4EE" transform="translate(-.9 -.7)" d={NOTA_TIKTOK} />
+        <path fill="#FE2C55" transform="translate(.9 .7)" d={NOTA_TIKTOK} />
+        <path fill="#fff" d={NOTA_TIKTOK} />
+      </g>
+    </svg>
+  );
+  // WhatsApp: el mismo ícono de toda la tienda, blanco sobre el verde de WhatsApp
+  return <span className={`${caja} flex items-center justify-center rounded-full bg-wa-vivo text-white`}><IconoWhatsApp className="h-6 w-6" /></span>;
+}
+const NOTA_TIKTOK = "M12.5 0h3.9c.1 1.5.6 3.1 1.8 4.2 1.1 1.1 2.7 1.6 4.2 1.8V10c-1.4-.1-2.9-.4-4.2-1-.6-.3-1.1-.6-1.6-.9v8.7c-.1 1.4-.5 2.8-1.4 3.9-1.3 1.9-3.6 3.2-5.9 3.2-1.4.1-2.9-.3-4.1-1C3.2 21.8 1.8 19.6 1.6 17.3v-1.5c.2-1.9 1.1-3.7 2.6-5 1.7-1.4 4-2.1 6.2-1.7v4.4c-1-.3-2.2-.2-3 .4-.6.4-1.1 1-1.4 1.8-.2.5-.1 1.1-.1 1.6.2 1.6 1.8 3 3.5 2.9 1.1 0 2.2-.7 2.8-1.6.2-.3.4-.7.4-1.1.1-1.8.1-3.6.1-5.4V0z";
+
+/** Banner «Síguenos» (15/11/2026): las redes y el WhatsApp en fichas blancas como las de las formas de pago.
+    Cada ficha entera es el enlace; las redes salen de config.json (si una queda vacía, no aparece) */
+function Siguenos() {
+  const fichas = [
+    ...(["facebook", "instagram", "tiktok"] as const).filter(r => CONFIG.redes[r]).map(r => ({ red: r, nombre: NOMBRE_RED[r], texto: CONFIG.nombre, href: CONFIG.redes[r] as string })),
+    { red: "whatsapp", nombre: "WhatsApp", texto: CONFIG.whatsappVisible, href: waLink(`Hola ${CONFIG.nombre}, `) }
+  ];
+  return (
+    <div className="border-t border-white/10">
+      <section aria-labelledby="t-redes" className="contenedor py-9">
+        <h2 id="t-redes" className="etiqueta mb-4 text-white/60">Síguenos y escríbenos</h2>
+        <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+          {fichas.map(f => (
+            <li key={f.red}>
+              <a href={f.href} target="_blank" rel="noopener"
+                className="claro-siempre presionable flex h-14 items-center gap-3 rounded-md bg-white px-3.5 text-tinta hover:bg-[#EEF5F1]">
+                <LogoRed red={f.red} />
+                <span className="min-w-0 leading-tight">
+                  <span className="block text-[13px] font-semibold text-tinta-2">{f.nombre}</span>
+                  <span className="block truncate text-[15px] font-bold">{f.texto}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  );
+}
+
 /** Pie de todas las páginas. Incluye el contacto (#contacto): WhatsApp, horario y estado de atención. */
 /** memo: el pie no depende de la página, así que no se vuelve a dibujar en cada cambio de página (13/11/2026) */
 export const PiePagina = memo(function PiePagina() {
@@ -247,6 +314,7 @@ const enlace = "enlace-pie hover:text-white";
           </section>
         </div>
       </div>
+      <Siguenos />
       {/* Identidad del vendedor (art. 50, Ley 1480) y enlaces a las políticas */}
       <div className="border-t border-white/10">
         <div className="contenedor flex flex-col gap-3 py-5 text-xs text-white/55 md:flex-row md:items-start md:justify-between md:gap-8">

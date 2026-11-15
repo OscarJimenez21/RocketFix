@@ -1,0 +1,42 @@
+# Avisos automáticos de actualizaciones (15/11/2026). Cada lunes GitHub revisa si hay versiones nuevas de las herramientas
+# de la tienda y de las acciones de publicación, y abre una propuesta (pull request) por grupo. NADA se publica solo:
+# cada propuesta se revisa y se acepta a mano; al aceptarla, «Publicar la tienda» corre las pruebas antes de publicar.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Bogota
+    open-pull-requests-limit: 5
+    groups:
+      # Arreglos y mejoras pequeñas juntas, en una sola propuesta
+      menores:
+        update-types: [minor, patch]
+    ignore:
+      # Tailwind 4 solo funciona en Safari 16.4 o más nuevo: en iPhone con iOS 15 o anterior la tienda se vería
+      # desarmada. Decisión del 15/11/2026: seguir en Tailwind 3.
+      - dependency-name: tailwindcss
+        update-types: [version-update:semver-major]
+      # TypeScript 7 todavía no lo acepta typescript-eslint (revisor del código), que pide menos de 6.1
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
+      # ESLint 10 todavía no lo acepta eslint-plugin-jsx-a11y (reglas de accesibilidad)
+      - dependency-name: eslint
+        update-types: [version-update:semver-major]
+      - dependency-name: "@eslint/js"
+        update-types: [version-update:semver-major]
+      # Los tipos de Node siguen la versión de Node que se usa (24 LTS)
+      - dependency-name: "@types/node"
+        update-types: [version-update:semver-major]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: America/Bogota
+    groups:
+      acciones:
+        patterns: ["*"]

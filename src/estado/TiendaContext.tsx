@@ -64,7 +64,7 @@ export function TiendaProvider({ children }: { children: ReactNode }) {
   const [aviso, setAviso] = useState("");
   const [avisoVez, setAvisoVez] = useState(0);
   const [avisoAccion, setAvisoAccion] = useState<Ctx["avisoAccion"]>(null);
-  const reloj = useRef<number>();
+  const reloj = useRef<number | undefined>(undefined);
   const fin = useRef(0);
   const resta = useRef(0);
 

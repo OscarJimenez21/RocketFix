@@ -19,6 +19,7 @@ import { Recientes } from "../components/ProductoExtras";
 import { BarraSecciones } from "./inicio/BarraSecciones";
 import { Envios } from "./inicio/Envios";
 import { TuCelular } from "./inicio/TuCelular";
+import { useDespuesDePintar } from "../lib/rutas";
 
 // Las secciones de cada fila son siempre las mismas listas: así la fila no se vuelve a calcular en cada dibujo
 // (con tiendas={["cel"]} llegaba una lista nueva cada vez y el useMemo de Coleccion nunca servía)
@@ -32,6 +33,11 @@ export function Inicio({ ancla }: { ancla?: string }) {
   // Idea 15: los productos que la persona vio hace poco (en este navegador), si son 2 o más
   const vistos = useVistos();
   const vendidos = MAS_VENDIDOS.map(id => porId[id]).filter((p): p is Producto => Boolean(p) && !p?.consultar);
+  // 15/11/2026: la parte de arriba (portada, ventajas, cómo comprar) se pinta primero y el resto de secciones justo
+  // después, en pedazos que no traban la página. En un celular lento la portada aparecía a los 4,7 s porque se armaban
+  // todas las secciones (con más de 150 precios) antes de mostrar nada. No se quita ninguna sección ni animación: todas
+  // llegan antes de que la persona baje hasta ellas. Si se abre en una sección (#categorias…) se arma todo de una vez.
+  const resto = useDespuesDePintar() || Boolean(ancla);
 
   // #categorias, #servicios, #calificaciones, #contacto, #orden y #como-comprar llevan a su sección de la portada
   // Cuando corre el efecto la sección ya está en la página, así que se puede bajar de una vez
@@ -46,6 +52,16 @@ export function Inicio({ ancla }: { ancla?: string }) {
       {/* Por presupuesto: todo el año. En temporada (se encienden y se apagan solas por fecha) sube y cambia de textos */}
       {TEMPORADA && <PorPresupuesto />}
       <ComoComprar />
+      {/* Mientras llega el resto, un espacio alto guarda su lugar: así el pie no se asoma ni salta en pantallas grandes */}
+      {resto ? <Resto vistos={vistos} vendidos={vendidos} /> : <div aria-hidden="true" className="min-h-[200vh]" />}
+    </>
+  );
+}
+
+/** Todas las secciones de la portada debajo de «Cómo comprar», en el mismo orden de siempre */
+function Resto({ vistos, vendidos }: { vistos: Producto[]; vendidos: Producto[] }) {
+  return (
+    <>
       <Envios />
       <Marcas />
       <Categorias />

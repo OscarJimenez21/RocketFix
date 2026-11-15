@@ -2,7 +2,7 @@ import { useEffect, useState, type RefObject } from "react";
 
 /** Si el elemento se ve (aunque sea en parte) en la pantalla. Sirve para pausar lo que se mueve solo mientras nadie lo
     está viendo: así no gasta batería ni procesador en el celular. Sin IntersectionObserver se considera siempre visible. */
-export function useEnPantalla(ref: RefObject<Element>) {
+export function useEnPantalla(ref: RefObject<Element | null>) {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const el = ref.current;
@@ -17,7 +17,7 @@ export function useEnPantalla(ref: RefObject<Element>) {
 /** Marca con data-visto cada pieza [data-revelar] de un grupo la primera vez que entra en pantalla (para animar su entrada
     una sola vez, ver .revelar en index.css). Las que entran juntas se escalonan con --orden 0, 1, 2… para que no aparezcan
     todas de golpe. Trabaja directo sobre la página (sin volver a dibujar el componente). Sin IntersectionObserver, todas vistas. */
-export function useRevelarHijos(ref: RefObject<Element>) {
+export function useRevelarHijos(ref: RefObject<Element | null>) {
   useEffect(() => {
     const raiz = ref.current;
     if (!raiz) return;
@@ -40,7 +40,7 @@ export function useRevelarHijos(ref: RefObject<Element>) {
 
 /** Si el elemento ya entró en pantalla alguna vez (después no vuelve a falso): para animar su entrada una sola vez.
     Cuenta como visto cuando su borde superior pasa la línea del 85 % de la pantalla. Sin IntersectionObserver, visto de una vez. */
-export function useVisto(ref: RefObject<Element>) {
+export function useVisto(ref: RefObject<Element | null>) {
   const [visto, setVisto] = useState(false);
   useEffect(() => {
     const el = ref.current;

@@ -51,7 +51,7 @@ export function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta,
   const [quieta, setQuieta] = useState(false);
   const [pausada, setPausada] = useState(false);
   const [reducir] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  const reanudar = useRef<number>();
+  const reanudar = useRef<number | undefined>(undefined);
 
   const mover = (dir: 1 | -1) => {
     const el = fila.current;

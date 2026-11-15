@@ -10,7 +10,7 @@ const centroDe = (e: React.MouseEvent<HTMLElement>) => {
   return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
 };
 
-const OPCIONES: { valor: Tema; nombre: string; icono: JSX.Element }[] = [
+const OPCIONES: { valor: Tema; nombre: string; icono: React.JSX.Element }[] = [
   { valor: "claro", nombre: "Día", icono: <IconoSol className="h-4 w-4" /> },
   { valor: "noche", nombre: "Noche", icono: <IconoLuna className="h-4 w-4" /> },
   { valor: "auto", nombre: "Automático", icono: <IconoTelefono className="h-4 w-4" /> }

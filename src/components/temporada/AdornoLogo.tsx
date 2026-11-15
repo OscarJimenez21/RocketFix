@@ -2,7 +2,7 @@
    Son dibujos pequeños; el logo (forma, colores y proporción) no cambia. */
 import type { IdTemporada } from "../../lib/temporada";
 
-const ADORNOS: Record<IdTemporada, { clase: string; dibujo: JSX.Element }> = {
+const ADORNOS: Record<IdTemporada, { clase: string; dibujo: React.JSX.Element }> = {
   // Gorrito rojo con borde y pompón blancos sobre la punta
   navidad: {
     clase: "gorrito",

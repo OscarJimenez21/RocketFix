@@ -20,7 +20,7 @@ export function useDireccion(valor: number) {
 /** Marco que se desliza hasta la opción elegida dentro de un contenedor con position: relative. Las opciones llevan
     data-opcion, en orden. Devuelve el estilo del marco, o null mientras no se ha medido (hasta entonces la opción elegida
     lleva su propio borde). La primera medida y los cambios de tamaño no se animan: el marco aparece ya en su lugar. */
-export function useMarco(contenedor: RefObject<HTMLElement>, indice: number): CSSProperties | null {
+export function useMarco(contenedor: RefObject<HTMLElement | null>, indice: number): CSSProperties | null {
   const [caja, setCaja] = useState<{ x: number; y: number; w: number; h: number; animar: boolean } | null>(null);
   const medido = useRef(false);
   const actual = useRef(indice);

@@ -81,8 +81,11 @@ const MARCAS = Object.entries(PRODUCTOS.reduce((a, p) => (p.marca && (a[p.marca]
 
 // ---------- Plantilla ----------
 const PLANTILLA = readFileSync(join(DIST, "index.html"), "utf8");
-// Con JavaScript, el contenido estático se oculta antes de pintarse (sin parpadeo) y la tienda lo reemplaza
-const OCULTAR = `<script>document.documentElement.classList.add("js")</script><style>.js #estatico{display:none}</style>`;
+// Con JavaScript, el contenido estático empieza oculto (sin parpadeo en equipos rápidos) y la tienda lo reemplaza
+// al abrir (src/arranque.tsx lo quita). Si a los 3 s la tienda todavía no abrió —celular lento, o un iPhone viejo
+// (iOS 12) que no entiende el código de la tienda— se muestra la versión de texto con precios, fotos y WhatsApp,
+// en lugar de una pantalla en blanco. Solo CSS: funciona aunque el JavaScript de la tienda falle (15/11/2026).
+const OCULTAR = `<script>document.documentElement.classList.add("js")</script><style>.js #estatico{visibility:hidden;-webkit-animation:rf-estatico 0s 3s forwards;animation:rf-estatico 0s 3s forwards}@-webkit-keyframes rf-estatico{to{visibility:visible}}@keyframes rf-estatico{to{visibility:visible}}</style>`;
 const ORGANIZACION = SITIO + "#tienda";
 
 // ---------- Lo primero que se ve se pide desde el HTML ----------

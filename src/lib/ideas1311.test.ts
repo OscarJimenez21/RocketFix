@@ -1,4 +1,6 @@
 /* Pruebas de las ideas aprobadas el 13/11/2026: catálogo en PDF para descargar (idea 69). */
+// Esta prueba lee el archivo del disco: necesita los tipos de Node (TypeScript 6 ya no los carga solos)
+/// <reference types="node" />
 import { closeSync, existsSync, openSync, readSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";

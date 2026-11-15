@@ -13,13 +13,13 @@ export function Imagen({ src, srcSet, sizes, alt, prioridad = false, className =
   const [cargada, setCargada] = useState(false);
   // Antes de pintar: si la foto ya está lista (caché), no se oculta ni un cuadro
   useLayoutEffect(() => { const el = ref.current; setCargada(Boolean(el?.complete && el.naturalWidth)); }, [src, srcSet]);
-  // El orden importa: React 18 pone los atributos en el orden en que van aquí, y el navegador empieza a bajar la foto apenas
+  // El orden importa: React pone los atributos en el orden en que van aquí, y el navegador empieza a bajar la foto apenas
   // recibe `src`. Por eso `src` va al final, después de loading, srcSet y sizes: si fuera primero, se bajaba la original
   // de 800 px y además la copia liviana (medido el 11/11/2026)
   return (
     <img ref={ref} alt={alt} loading={prioridad ? "eager" : "lazy"} decoding="async" {...(srcSet ? { srcSet, sizes } : null)} {...resto}
-      // La foto principal se pide antes que las demás (en minúsculas: React 18 todavía no conoce fetchPriority)
-      {...(prioridad ? { fetchpriority: "high" } : null)}
+      // La foto principal se pide antes que las demás (React 19 ya conoce fetchPriority y lo escribe como fetchpriority)
+      fetchPriority={prioridad ? "high" : undefined}
       // data-cargando: mientras llega, su escenario muestra un brillo que lo recorre (idea 10, animación 61, en index.css)
       data-cargando={prioridad || cargada ? undefined : ""}
       src={src} onLoad={() => setCargada(true)}

@@ -2,13 +2,21 @@
 
 Tienda en línea de tecnología de Rocket Fix (Bogotá, Colombia): celulares, computadores, componentes, periféricos, consolas y más, con pedidos por WhatsApp y pago en línea con Bold.
 
-Hecha con **React 18 + TypeScript + Vite + Tailwind CSS**. Se publica en GitHub Pages en `https://oscarjimenez21.github.io/RocketFix/`.
+Hecha con **React 19 + TypeScript 6 + Vite 8 + Tailwind CSS 3**. Se publica en GitHub Pages en `https://oscarjimenez21.github.io/RocketFix/` (pasará al dominio propio `https://rocketfix.com.co/` cuando el dominio abra).
 
 > La versión anterior (un solo `index.html`) está guardada sin cambios en `legacy/index.html` y en la rama `version-estable`.
 
 ## Requisitos
 
-- [Node.js](https://nodejs.org) 22 o más reciente (trae `npm`).
+- [Node.js](https://nodejs.org) 24 LTS o más reciente (trae `npm`). En este computador está portátil en `C:\Users\OSJ4GGER\.herramientas\node-v24.22.3-win-x64`.
+
+### Versiones (actualizadas el 15/11/2026)
+
+Cada lunes GitHub (Dependabot, `.github/dependabot.yml`) propone las actualizaciones nuevas; nada se publica sin revisión. Tres saltos quedan frenados a propósito:
+
+- **Tailwind 4**: solo funciona en Safari 16.4 o más nuevo; en iPhone con iOS 15 o anterior la tienda se vería desarmada. Se sigue en Tailwind 3.
+- **TypeScript 7**: typescript-eslint (el revisor del código) todavía pide menos de 6.1.
+- **ESLint 10**: eslint-plugin-jsx-a11y (reglas de accesibilidad) todavía no lo acepta.
 
 ## Uso diario
 

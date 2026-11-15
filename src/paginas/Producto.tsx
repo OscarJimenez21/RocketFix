@@ -59,7 +59,7 @@ function Versiones({ producto: p, elegida, elegir }: { producto: TipoProducto; e
     abajo con el precio y el botón. Baja cuando el botón vuelve a verse o cuando aparece el pie de página.
     Mientras se ve, el aviso «Agregaste…» sale encima de ella (--barra-abajo) */
 function BarraAgregar({ boton, producto, nombre, precio, tope, alAgregar, etiqueta }: {
-  boton: RefObject<HTMLButtonElement>; producto: TipoProducto; nombre: string; precio: number; tope: boolean; alAgregar: (e: React.MouseEvent<HTMLButtonElement>) => void; etiqueta: ReactNode;
+  boton: RefObject<HTMLButtonElement | null>; producto: TipoProducto; nombre: string; precio: number; tope: boolean; alAgregar: (e: React.MouseEvent<HTMLButtonElement>) => void; etiqueta: ReactNode;
 }) {
   const barra = useRef<HTMLDivElement>(null);
   const arriba = useRef<HTMLDivElement>(null);
