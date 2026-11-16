@@ -4,7 +4,7 @@
   "titular": { "etiqueta": "nombre o razón social del responsable", "valor": null },
   "documento": { "etiqueta": "NIT o cédula", "valor": null },
   "direccion": { "etiqueta": "dirección física para notificaciones", "valor": null },
-  "correo": { "etiqueta": "correo electrónico", "valor": null },
+  "correo": { "etiqueta": "correo electrónico", "valor": "administracion@rocketfix.com.co" },
   "plazoNuevos": { "etiqueta": "plazo de garantía de productos nuevos", "valor": "6 meses o 1 año, según el fabricante" },
    "plazoDirecto": { "etiqueta": "tiempo en que la garantía de nuevos se atiende directamente con la tienda", "valor": "3 meses" },
   "plazoUsados": { "etiqueta": "plazo de garantía de usados y open box", "valor": "3 meses" },
