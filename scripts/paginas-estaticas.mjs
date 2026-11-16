@@ -425,11 +425,16 @@ if (!FECHAS.catalogo) console.warn("sitemap.xml sin lastmod: no se encontró el 
 // así que el feed solo se escribe con FEED_GOOGLE=1, cuando se decida abrir la cuenta y cómo declarar la disponibilidad.
 if (process.env.FEED_GOOGLE === "1") {
   const COND_FEED = { Nuevo: "new", CPO: "refurbished", "Open box": "used", Usado: "used" };
+  // En Merchant Center el envío es una tarifa fija nacional (Google no acepta «gratis desde» por encima de $1.000.000).
+  // Los productos que ya llegan al envío gratis nacional llevan aquí su propio envío en $0, con los mismos 2 a 5 días hábiles.
+  const envioGratisFeed = p => desde(p) >= CONFIG.envios.nacional.gratisDesde
+    ? "<g:shipping><g:country>CO</g:country><g:price>0 COP</g:price><g:min_handling_time>0</g:min_handling_time><g:max_handling_time>0</g:max_handling_time><g:min_transit_time>2</g:min_transit_time><g:max_transit_time>5</g:max_transit_time></g:shipping>"
+    : "";
   const items = PRODUCTOS.filter(p => !p.consultar && p.imagen).map(p => {
     const fotos = [p.imagen, ...(GALERIAS[p.id] ?? [])].map(abs);
     return `<item><g:id>${esc(p.id)}</g:id><title>${esc(recortar(p.nombre, 150))}</title><description>${esc(recortar(armarDescripcion(p).resumen, 4900))}</description>` +
       `<link>${SITIO}${rutaProducto(p)}</link><g:image_link>${esc(fotos[0])}</g:image_link>${fotos.slice(1, 10).map(f => `<g:additional_image_link>${esc(f)}</g:additional_image_link>`).join("")}` +
-      `<g:price>${desde(p)} COP</g:price><g:availability>in_stock</g:availability><g:condition>${COND_FEED[p.estado] ?? "new"}</g:condition>` +
+      `<g:price>${desde(p)} COP</g:price><g:availability>in_stock</g:availability><g:condition>${COND_FEED[p.estado] ?? "new"}</g:condition>${envioGratisFeed(p)}` +
       `${p.marca ? `<g:brand>${esc(p.marca)}</g:brand>` : "<g:identifier_exists>no</g:identifier_exists>"}${p.categoria ? `<g:product_type>${esc(nombreCat[p.categoria] ?? p.categoria)}</g:product_type>` : ""}</item>`;
   });
   writeFileSync(join(DIST, "feed-google.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0"><channel><title>${esc(CONFIG.nombre)}</title><link>${SITIO}</link><description>Catálogo de ${esc(CONFIG.nombre)}</description>\n${items.join("\n")}\n</channel></rss>\n`);
