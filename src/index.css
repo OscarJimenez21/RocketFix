@@ -96,6 +96,10 @@
    - Naranja (btn-primario): solo la acción principal de cada vista (comprar, agregar al carrito).
    - Verde (btn-marca): acciones secundarias fuertes (solicitar un servicio). Verde WhatsApp: solo para abrir WhatsApp.
    - Borde (btn-borde): acciones de apoyo. Suave (btn-suave): "Agregar" dentro de las tarjetas, para que la cuadrícula no se llene de naranja. */
+/* 16/11/2026: en pantallas grandes los carruseles van de borde a borde (100vw). En Windows, 100vw incluye la barra de
+   desplazamiento: sin esto, la página se podría mover unos píxeles de lado */
+@media (min-width: 1600px) { html { overflow-x: clip; } }
+
 @layer components {
   .contenedor { @apply mx-auto w-full max-w-pagina px-4 sm:px-6; }
   /* Rótulo pequeño (grupo del menú, "Qué incluye la caja", columnas del pie): en minúscula normal, sin espaciado extra */

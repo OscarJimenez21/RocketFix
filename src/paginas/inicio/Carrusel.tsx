@@ -12,6 +12,13 @@ import { BotonPausa } from "./BotonPausa";
 import { suave } from "../../lib/animaciones";
 
 const PASO_CARRUSEL = 3500;
+/** Ancho de cada tarjeta de las filas: 74 % en celular, 44 % en tableta y 4 a la vez en computador. 16/11/2026: en pantallas
+    grandes la fila ocupa todo el ancho de la pantalla (FILA_ANCHA) y muestra 5 (desde 1600 px), 6 (desde 1920 px),
+    7 (desde 2400 px) u 8 (desde 2800 px, como un monitor de 34"). 20 px de separación entre tarjetas */
+const ANCHO_TARJETA = "w-[74%] shrink-0 snap-start sm:w-[44%] lg:w-[calc(25%-15px)] min-[1600px]:w-[calc(20%-16px)] min-[1920px]:w-[calc(16.6667%-16.6667px)] min-[2400px]:w-[calc(14.2857%-17.1429px)] min-[2800px]:w-[calc(12.5%-17.5px)]";
+/** En pantallas de 1600 px o más, la fila sale del ancho de la página y va de borde a borde (con un margen del 3 %).
+    El título y las flechas siguen alineados con el resto de la página */
+const FILA_ANCHA ="min-[1600px]:mx-[calc(50%-50vw)] min-[1600px]:px-[3vw] min-[1600px]:scroll-px-[3vw]";
 
 /** Tarjeta de las filas de la portada: foto grande, nombre y precio; toda la tarjeta lleva al producto.
     Las filas van debajo de la portada: sus fotos cargan cuando la persona se acerca a ellas */
@@ -102,14 +109,14 @@ export function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta,
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- una fila que se desliza debe poder enfocarse para moverla con las flechas del teclado */}
         <ul ref={fila} aria-label={titulo} tabIndex={0} data-visto={(cinta && visto) || undefined}
           onMouseEnter={() => setQuieta(true)} onMouseLeave={() => setQuieta(false)} onFocus={() => setQuieta(true)} onBlur={() => setQuieta(false)} onTouchStart={tocar}
-          className="sin-barra -mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6">
+          className={`sin-barra -mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 ${FILA_ANCHA}`}>
           {productos.map((p, k) => (
-            <li key={p.id} style={cinta ? { "--orden": Math.min(k, 4) } as React.CSSProperties : undefined} className="w-[74%] shrink-0 snap-start sm:w-[44%] lg:w-[calc(25%-15px)]">
+            <li key={p.id} style={cinta ? { "--orden": Math.min(k, 4) } as React.CSSProperties : undefined} className={ANCHO_TARJETA}>
               <TarjetaVitrina producto={p} cinta={cinta} />
             </li>
           ))}
           {final && (
-            <li className="w-[74%] shrink-0 snap-start sm:w-[44%] lg:w-[calc(25%-15px)]">
+            <li className={ANCHO_TARJETA}>
               <a href={final.href} className="tarjeta-eleva group flex h-full min-h-[260px] flex-col items-center justify-center gap-2 rounded-lg border border-linea-fuerte bg-superficie p-6 text-center transition-[border-color,box-shadow] duration-200 hover:border-marca hover:shadow-tarjeta">
                 <span className="font-display text-[44px] font-extrabold leading-none tabular-nums text-marca-texto">{final.cantidad}</span>
                 <span className="text-[15px] font-semibold text-tinta-2">{final.texto}</span>

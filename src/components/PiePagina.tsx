@@ -196,7 +196,6 @@ function Siguenos() {
 /** memo: el pie no depende de la página, así que no se vuelve a dibujar en cada cambio de página (13/11/2026) */
 export const PiePagina = memo(function PiePagina() {
   const atencion = useAtencion();
-  const redes = Object.entries(CONFIG.redes).filter(([, url]) => url);
   // Animación 76: en computador, el subrayado crece de izquierda a derecha al pasar el mouse (ver .enlace-pie en index.css)
 const enlace = "enlace-pie hover:text-white";
   // Animación 40: la primera vez que se ve el botón de WhatsApp del pie, lanza dos ondas
@@ -226,14 +225,8 @@ const enlace = "enlace-pie hover:text-white";
           <Logo claro />
           {/* Eslogan de la marca (antes iba una frase larga con todo lo que vende la tienda) */}
           <p className="mt-4 max-w-xs font-display text-[19px] font-extrabold leading-snug text-white ancho-108">Hacemos despegar tu tecnología</p>
-          <p className="mt-4 text-sm">
-            <span className="block text-xs text-white/55">WhatsApp</span>
-            {/* El mismo destino que el número de la portada (dos enlaces con el mismo texto deben llevar al mismo lugar) */}
-            <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="font-semibold text-white hover:underline">{CONFIG.whatsappVisible}</a>
-          </p>
-          {redes.length > 0 && (
-            <p className="mt-3 flex gap-4 text-sm">{redes.map(([red, url]) => <a key={red} href={url} target="_blank" rel="noopener" className={enlace}>{NOMBRE_RED[red] ?? red}</a>)}</p>
-          )}
+          {/* 16/11/2026: el número de WhatsApp y los nombres de las redes ya no van aquí: están en las fichas de
+              «Síguenos y escríbenos», más abajo, con sus logos */}
         </div>
         <nav aria-label="Categorías de la tienda">
           <h3 className="etiqueta mb-3 text-white/60">Tienda</h3>
@@ -271,7 +264,7 @@ const enlace = "enlace-pie hover:text-white";
       </div>
 
       {/* Idea 40: envíos y formas de pago lado a lado. Los pagos van agrupados y más grandes; son los mismos de pagos.json
-          (no se agregó ninguno). Las redes (14/11/2026: Instagram y Facebook) van debajo del WhatsApp, desde config.json */}
+          (no se agregó ninguno). Las redes y el WhatsApp van en «Síguenos y escríbenos», desde config.json */}
       <div className="border-t border-white/10">
         <div className="contenedor grid gap-10 py-9 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.6fr)] lg:gap-14">
           <section aria-labelledby="t-envios-pie">

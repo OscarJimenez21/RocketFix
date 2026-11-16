@@ -4,6 +4,12 @@ import { IconoFlecha } from "./Iconos";
 import { TarjetaProducto } from "./TarjetaProducto";
 import { suave } from "../lib/animaciones";
 
+/** Ancho de cada tarjeta: 46 % en celular, 31 % en tableta y 5 a la vez en computador. 16/11/2026: en pantallas grandes la
+    fila va de borde a borde de la pantalla (igual que los carruseles de la portada) y muestra 6 (desde 1600 px), 7 (desde
+    1920 px), 8 (desde 2400 px) o 9 (desde 2800 px). 16 px de separación entre tarjetas */
+const ANCHO_TARJETA = "w-[46%] shrink-0 snap-start sm:w-[31%] lg:w-[calc(20%-12.8px)] min-[1600px]:w-[calc(16.6667%-13.3333px)] min-[1920px]:w-[calc(14.2857%-13.7143px)] min-[2400px]:w-[calc(12.5%-14px)] min-[2800px]:w-[calc(11.1111%-14.2222px)]";
+const FILA_ANCHA = "min-[1600px]:mx-[calc(50%-50vw)] min-[1600px]:px-[3vw] min-[1600px]:scroll-px-[3vw]";
+
 /** Flecha de los botones redondos: con el mouse encima se corre un poco hacia donde lleva (el botón debe tener `group`) */
 export const FlechaMovil = ({ dir = 1 }: { dir?: 1 | -1 }) => (
   <IconoFlecha dir={dir} className={`h-5 w-5 transition-transform duration-200 ease-salida ${dir < 0 ? "group-hover:-translate-x-0.5" : "group-hover:translate-x-0.5"}`} />
@@ -33,12 +39,12 @@ export function FilaProductos({ productos, etiqueta, encabezado, cinta, verTodo 
       </div>
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- una fila que se desliza debe poder enfocarse para moverla con las flechas del teclado */}
       <ul ref={fila} aria-label={etiqueta} tabIndex={0}
-        className="sin-barra -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-1 sm:-mx-6 sm:scroll-px-6 sm:px-6">
+        className={`sin-barra -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-4 px-4 pb-1 sm:-mx-6 sm:scroll-px-6 sm:px-6 ${FILA_ANCHA}`}>
         {productos.map(p => (
-          <li key={p.id} className="w-[46%] shrink-0 snap-start sm:w-[31%] lg:w-[calc(20%-13px)]"><TarjetaProducto producto={p} cinta={cinta} /></li>
+          <li key={p.id} className={ANCHO_TARJETA}><TarjetaProducto producto={p} cinta={cinta} /></li>
         ))}
         {verTodo && (
-          <li className="w-[46%] shrink-0 snap-start sm:w-[31%] lg:w-[calc(20%-13px)]">
+          <li className={ANCHO_TARJETA}>
             <a href={verTodo.href} className="tarjeta group flex h-full min-h-[260px] flex-col items-center justify-center gap-3 border-dashed p-4 text-center font-semibold text-marca-texto hover:border-marca">
               <span className="flex h-12 w-12 items-center justify-center rounded-full bg-marca-suave"><FlechaMovil /></span>
               {verTodo.texto}
