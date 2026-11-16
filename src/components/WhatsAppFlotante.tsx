@@ -1,5 +1,5 @@
 /* Botón flotante de WhatsApp (abajo a la derecha, en todas las páginas): abre el chat de la tienda. Lleva un cohetico
-   como el del logo. A los pocos segundos de la visita sale un mensaje invitando a escribir:
+   como el del logo. A los pocos segundos de la visita, cuando la persona ya bajó por la página, sale un mensaje invitando a escribir:
      · En computador: una tarjeta tipo chat con el logo, el estado de atención (según el horario), el mensaje y «Iniciar chat».
      · En celular: una burbuja corta, para no tapar la página.
    El mensaje se puede cerrar con la X; cerrado, no vuelve a salir en 3 días. Sale una sola vez por visita.
@@ -38,13 +38,21 @@ export function WhatsAppFlotante() {
   const [aviso, setAviso] = useState(false);
   const enlace = waLink(`Hola ${CONFIG.nombre}, `);
 
+  // 16/11/2026: el mensaje ya no sale encima de lo primero que se ve (en computador tapaba la franja de entrega, envíos y
+  // pagos de la portada). Sale cuando pasaron los segundos de espera Y la persona ya bajó al menos media pantalla.
   useEffect(() => {
     if (!puedeMostrar()) return;
-    const t = window.setTimeout(() => {
+    let espero = false;
+    const bajo = () => window.scrollY > window.innerHeight / 2;
+    const mostrar = () => {
       setAviso(true);
       try { sessionStorage.setItem(VISTO, "1"); } catch { /* sin almacenamiento */ }
-    }, ESPERA);
-    return () => window.clearTimeout(t);
+      window.removeEventListener("scroll", alBajar);
+    };
+    function alBajar() { if (espero && bajo()) mostrar(); }
+    const t = window.setTimeout(() => { espero = true; if (bajo()) mostrar(); }, ESPERA);
+    window.addEventListener("scroll", alBajar, { passive: true });
+    return () => { window.clearTimeout(t); window.removeEventListener("scroll", alBajar); };
   }, []);
 
   // En celular la burbuja se va sola a los 12 s (en computador se queda hasta que la cierren)

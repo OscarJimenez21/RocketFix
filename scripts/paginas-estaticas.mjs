@@ -362,8 +362,10 @@ for (const pa of AYUDA.paginas) {
     .replace(/(<div id="root"><\/div>)/, `$1<div id="estatico" class="contenedor py-8">${cuerpo}</div>`);
   writeFileSync(join(DIST, "index.html"), h);
   urls.unshift(SITIO);
-  // 404.html: la tienda sin contenido estático ni dirección canónica, y sin indexar
+  // 404.html: la tienda sin contenido estático ni dirección canónica, y sin indexar. 16/11/2026: con su propio título
+  // (antes llevaba el de la portada); al abrir, la tienda pone el de la página pedida (búsqueda, favoritos…)
   writeFileSync(join(DIST, "404.html"), PLANTILLA
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>Página no encontrada · ${esc(CONFIG.nombre)}</title>`)
     .replace(/<link rel="canonical"[^>]*>\s*/, "")
     .replace("</head>", `<meta name="robots" content="noindex">${OCULTAR}</head>`));
 }
@@ -446,8 +448,12 @@ if (process.env.FEED_GOOGLE === "1") {
 // línea de estas páginas (por su huella sha256) y los de dos servicios con nombre: la librería de pago de Bold y la medición
 // de visitas de Cloudflare. Antes valía cualquier script de https; un script inyectado que viniera de otro sitio ahora no corre.
 // Las conexiones también quedan con nombre (la tienda, Bold, el servicio de firma y Cloudflare): si algo lograra correr en la
-// página, no podría mandar datos del carrito a otro sitio. Imágenes, estilos y marcos siguen libres dentro de https: las fotos
-// vienen de varios proveedores y la pasarela de Bold puede llevar al banco (PSE) dentro de su propio marco.
+// página, no podría mandar datos del carrito a otro sitio.
+// 16/11/2026: imágenes, estilos, letras y marcos también quedan con nombre (antes valía cualquier https). Todas las fotos y
+// letras de la tienda salen de rocketfix.com.co. La librería de Bold manda al cliente a su página de pago (no abre marcos
+// dentro de la tienda; si algún día usa su ventana incrustada, sería de checkout.bold.co, que queda permitido) y pide la
+// letra Montserrat a Google Fonts para su botón: por eso van fonts.googleapis.com y fonts.gstatic.com. El paso al banco
+// (PSE) ocurre dentro de la página de Bold, que tiene sus propias reglas.
 {
   const { createHash } = await import("node:crypto");
   const firma = CONFIG.bold?.firmaUrl ? new URL(CONFIG.bold.firmaUrl).origin : "";
@@ -461,9 +467,9 @@ if (process.env.FEED_GOOGLE === "1") {
     const huellas = [...h.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*type="application\/ld\+json")[^>]*>([\s\S]*?)<\/script>/g)]
       .map(m => `'sha256-${createHash("sha256").update(m[1], "utf8").digest("base64")}'`);
     const csp = [
-      "default-src 'self'", `script-src 'self' ${[...new Set(huellas), ...SCRIPTS].join(" ")}`, "style-src 'self' 'unsafe-inline' https:",
-      "img-src 'self' data: blob: https:", "font-src 'self' data: https:", `connect-src 'self' ${CONEXIONES.join(" ")}`, "frame-src https:",
-      "media-src 'self' https:", "worker-src 'self'", "manifest-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'self' https://*.bold.co"
+      "default-src 'self'", `script-src 'self' ${[...new Set(huellas), ...SCRIPTS].join(" ")}`, "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "img-src 'self' data: blob: https://*.bold.co", "font-src 'self' data: https://fonts.gstatic.com", `connect-src 'self' ${CONEXIONES.join(" ")}`, "frame-src 'self' https://*.bold.co",
+      "media-src 'self'", "worker-src 'self'", "manifest-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'self' https://*.bold.co"
     ].join("; ");
     h = h.replace(/(<meta charset="[^"]*"\s*\/?>)/i, `$1\n    <meta http-equiv="Content-Security-Policy" content="${csp}">`);
     writeFileSync(archivo, h);

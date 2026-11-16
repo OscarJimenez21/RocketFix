@@ -94,6 +94,23 @@ function datosAparte(): Plugin {
   };
 }
 
+/** 16/11/2026: los archivos de src/data traen notas para quien los edita («_nota», «_comentario»…). Esas notas no las usa
+    la tienda y no deben viajar en el código público: aquí se quitan todas las claves que empiezan con «_», a cualquier
+    profundidad, antes de que Vite convierta el JSON. Los archivos originales no cambian. */
+function sinNotasInternas(): Plugin {
+  const limpiar = (v: unknown): unknown => Array.isArray(v) ? v.map(limpiar)
+    : v && typeof v === "object" ? Object.fromEntries(Object.entries(v).filter(([k]) => !k.startsWith("_")).map(([k, x]) => [k, limpiar(x)]))
+    : v;
+  return {
+    name: "sin-notas-internas",
+    enforce: "pre",
+    transform(codigo, id) {
+      if (!/[\\/]src[\\/]data[\\/][^\\/]+\.json$/.test(id.split("?")[0] ?? "")) return null;
+      return { code: JSON.stringify(limpiar(JSON.parse(codigo))), map: null };
+    }
+  };
+}
+
 // La tienda se publica en GitHub Pages con el dominio propio rocketfix.com.co, en la raíz (/). Desde el 15/11/2026;
 // antes era oscarjimenez21.github.io/RocketFix/ (GitHub redirige esas direcciones al dominio). Para otra ruta:
 // BASE_PATH=/otra-ruta/ npm run build.
@@ -102,7 +119,7 @@ function datosAparte(): Plugin {
 // atiende public/404.html, que devuelve a la tienda con la dirección pedida. Los enlaces viejos con # siguen funcionando.
 export default defineConfig({
   base: process.env.BASE_PATH ?? "/",
-  plugins: [react(), descripcionesPorProducto(), datosAparte()],
+  plugins: [react(), descripcionesPorProducto(), datosAparte(), sinNotasInternas()],
   build: {
     target: "es2020",
     chunkSizeWarningLimit: 700

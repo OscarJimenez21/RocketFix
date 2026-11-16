@@ -128,7 +128,7 @@
      "bloques": [
       { "lista": [
        "{titular}, identificado con {documento}.",
-       "Domicilio en Bogotá, Colombia: {direccion}.",
+       "Domicilio: {direccion}, Colombia.",
        "Correo: {correo}. WhatsApp: {whatsapp}."
       ] }
      ]

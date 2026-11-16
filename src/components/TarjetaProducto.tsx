@@ -167,8 +167,10 @@ export const TarjetaProducto = memo(function TarjetaProducto({ producto: p, prio
       <BotonFavorito id={p.id} nombre={p.nombre} className={`absolute top-2 z-10 ${fila ? "left-[5.25rem] sm:left-[8.25rem]" : "right-2"}`} />
       <div className={`flex min-w-0 flex-1 flex-col gap-1.5 border-linea/70 p-3.5 sm:p-4 ${fila ? "border-l" : "border-t"}`}>
         <p className="etiqueta truncate text-tinta-3">{etiquetaDe(p) || " "}</p>
-        <h3 className="font-sans text-[15px] font-semibold leading-snug tracking-normal">
-          <a href={hrefProducto(p.id)} onClick={e => abrirConVuelo(e, foto.current)} title={p.nombre} className="line-clamp-2 hover:text-marca">{p.nombre}</a>
+        {/* 16/11/2026: el área que se puede tocar del nombre crece 2 px arriba y abajo (24 px en nombres de una línea, el
+            mínimo recomendado para tocar con el dedo) sin mover nada: es una capa invisible del enlace, medida desde el h3 */}
+        <h3 className="relative font-sans text-[15px] font-semibold leading-snug tracking-normal">
+          <a href={hrefProducto(p.id)} onClick={e => abrirConVuelo(e, foto.current)} title={p.nombre} className="line-clamp-2 before:absolute before:inset-x-0 before:-inset-y-0.5 hover:text-marca">{p.nombre}</a>
         </h3>
         {p.specs.length > 0 && <p className="line-clamp-1 text-[13px] text-tinta-2">{p.specs.join(" · ")}</p>}
         {p.nota && <p><NotaProducto nota={p.nota} /></p>}

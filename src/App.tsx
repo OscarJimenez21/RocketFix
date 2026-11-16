@@ -73,6 +73,7 @@ function tituloDe(r: Ruta) {
   if (r.tipo === "buscar") return `Buscar ${r.q} · ${CONFIG.nombre}`;
   if (r.tipo === "marca") return `${r.marca} · ${CONFIG.nombre}`;
   if (r.tipo === "politica") return `${POLITICAS.find(p => p.id === r.id)?.titulo ?? ""} · ${CONFIG.nombre}`;
+  if (r.tipo === "no-encontrada") return `Página no encontrada · ${CONFIG.nombre}`;
   return base;
 }
 

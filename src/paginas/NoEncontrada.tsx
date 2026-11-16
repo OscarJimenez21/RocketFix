@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Buscador } from "../components/Buscador";
+import { CONFIG } from "../data/catalogo";
 import { Cohete } from "../components/Logo";
 import { waLink } from "../lib/whatsapp";
 import { hrefDe } from "../lib/rutas";
@@ -28,6 +30,9 @@ export function CohetePerdido({ className = "" }: { className?: string }) {
 }
 
 export function NoEncontrada({ texto = "Esta página no existe o cambió de dirección." }: { texto?: string }) {
+  // 16/11/2026: la pestaña dice «Página no encontrada» también cuando falta un producto, artículo o página de ayuda
+  // (antes quedaba el título de la portada)
+  useEffect(() => { document.title = `Página no encontrada · ${CONFIG.nombre}`; }, []);
   return (
     <div className="contenedor py-16 text-center sm:py-20">
       <CohetePerdido />
