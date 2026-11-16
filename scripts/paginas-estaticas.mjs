@@ -17,9 +17,9 @@ import { join } from "node:path";
 
 const RAIZ = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const DIST = join(RAIZ, "dist");
-const BASE = process.env.BASE_PATH || "/RocketFix/";
-// Dirección pública de la tienda (cuando tenga dominio propio, se cambia aquí y en index.html)
-const SITIO = (process.env.SITIO_URL || "https://oscarjimenez21.github.io") + BASE;
+const BASE = process.env.BASE_PATH || "/";
+// Dirección pública de la tienda (dominio propio desde el 15/11/2026; si cambia, se cambia aquí y en index.html)
+const SITIO = (process.env.SITIO_URL || "https://rocketfix.com.co") + BASE;
 const leer = f => JSON.parse(readFileSync(join(RAIZ, "src/data", f), "utf8"));
 
 const CONFIG = leer("config.json");

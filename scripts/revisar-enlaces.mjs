@@ -7,8 +7,8 @@ import { join } from "node:path";
 
 const RAIZ = new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1");
 const DIST = join(RAIZ, "dist");
-const BASE = process.env.BASE_PATH || "/RocketFix/";
-const SITIO = (process.env.SITIO_URL || "https://oscarjimenez21.github.io") + BASE;
+const BASE = process.env.BASE_PATH || "/";
+const SITIO = (process.env.SITIO_URL || "https://rocketfix.com.co") + BASE;
 
 if (!existsSync(DIST)) { console.error("No hay dist/: corre primero npm run build"); process.exit(1); }
 

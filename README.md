@@ -2,7 +2,7 @@
 
 Tienda en línea de tecnología de Rocket Fix (Bogotá, Colombia): celulares, computadores, componentes, periféricos, consolas y más, con pedidos por WhatsApp y pago en línea con Bold.
 
-Hecha con **React 19 + TypeScript 6 + Vite 8 + Tailwind CSS 3**. Se publica en GitHub Pages en `https://oscarjimenez21.github.io/RocketFix/` (pasará al dominio propio `https://rocketfix.com.co/` cuando el dominio abra).
+Hecha con **React 19 + TypeScript 6 + Vite 8 + Tailwind CSS 3**. Se publica en GitHub Pages con el dominio propio `https://rocketfix.com.co/` (antes `https://oscarjimenez21.github.io/RocketFix/`, que ahora lleva al dominio).
 
 > La versión anterior (un solo `index.html`) está guardada sin cambios en `legacy/index.html` y en la rama `version-estable`.
 
@@ -22,14 +22,14 @@ Cada lunes GitHub (Dependabot, `.github/dependabot.yml`) propone las actualizaci
 
 ```bash
 npm install          # solo la primera vez (o cuando cambie package.json)
-npm run dev          # abre la tienda en http://localhost:5173/RocketFix/ y se actualiza al guardar
+npm run dev          # abre la tienda en http://localhost:5173/ y se actualiza al guardar
 ```
 
 | Comando | Qué hace |
 |---|---|
 | `npm run dev` | Tienda en modo de desarrollo |
 | `npm run build` | Revisa los tipos y compila la versión para publicar en `dist/` |
-| `npm run preview` | Sirve `dist/` en http://localhost:4173/RocketFix/ para probarla tal como quedará publicada |
+| `npm run preview` | Sirve `dist/` en http://localhost:4173/ para probarla tal como quedará publicada |
 | `npm run typecheck` | Solo revisa los tipos de TypeScript |
 | `npm run verificar` | Revisa el catálogo antes de publicar: ids únicos, precios válidos, fotos que existen y nada privado. También lista lo que cambió respecto a la tienda anterior (solo informativo; con `-- --estricto` cuenta como error) |
 | `npm run auditoria` | Regenera `docs/auditoria-catalogo.md` |
@@ -75,9 +75,9 @@ Al volver de Bold, la tienda consulta el pago (API de consulta del botón, con l
 
 Igual que antes: cada vez que subes cambios a `main` (*Push origin* en GitHub Desktop), el flujo "Publicar la tienda" verifica el catálogo, compila y publica `dist/`. Si la verificación falla, no publica y la tienda anterior sigue en línea. En GitHub → *Actions* ves cada publicación (marca verde = publicada) y puedes repetirla con *Run workflow*.
 
-Requisito, una sola vez: en GitHub → *Settings* → *Pages* → *Build and deployment* → *Source* debe estar en **GitHub Actions**.
+Requisito, una sola vez: en GitHub → *Settings* → *Pages* → *Build and deployment* → *Source* debe estar en **GitHub Actions**, y en *Custom domain* debe estar `rocketfix.com.co` con *Enforce HTTPS* marcado.
 
-Para compilar a mano con otra ruta base: `BASE_PATH=/otra-ruta/ npm run build` (por defecto es `/RocketFix/`).
+Para compilar a mano con otra ruta base: `BASE_PATH=/otra-ruta/ npm run build` (por defecto es `/`).
 
 ### Volver a la versión anterior
 

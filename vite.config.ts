@@ -94,13 +94,14 @@ function datosAparte(): Plugin {
   };
 }
 
-// La tienda se publica en GitHub Pages bajo /RocketFix/. Para otro alojamiento (dominio propio, Netlify…)
-// se compila con BASE_PATH=/ npm run build.
+// La tienda se publica en GitHub Pages con el dominio propio rocketfix.com.co, en la raíz (/). Desde el 15/11/2026;
+// antes era oscarjimenez21.github.io/RocketFix/ (GitHub redirige esas direcciones al dominio). Para otra ruta:
+// BASE_PATH=/otra-ruta/ npm run build.
 // Direcciones limpias (12/11/2026): /RocketFix/p/sa07/ en vez de /RocketFix/#p/sa07. Las páginas de productos, secciones,
 // marcas, blog y políticas existen como archivos (scripts/paginas-estaticas.mjs); las demás (búsquedas, favoritos) las
 // atiende public/404.html, que devuelve a la tienda con la dirección pedida. Los enlaces viejos con # siguen funcionando.
 export default defineConfig({
-  base: process.env.BASE_PATH ?? "/RocketFix/",
+  base: process.env.BASE_PATH ?? "/",
   plugins: [react(), descripcionesPorProducto(), datosAparte()],
   build: {
     target: "es2020",
