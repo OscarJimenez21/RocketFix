@@ -28,8 +28,8 @@ const PUNTOS: Record<string, number> = {};
 MAS_VENDIDOS.forEach((id, k) => { PUNTOS[id] = 300 - k; });
 VITRINA.forEach((id, k) => { PUNTOS[id] = Math.max(PUNTOS[id] ?? 0, 200 - k); });
 
-/** Cuántos productos lleva cada fila */
-const TOPE = 16;
+/** Cuántos productos lleva cada fila (17/11/2026: de 16 a 20, como los carruseles de la portada) */
+const TOPE = 20;
 
 /** Arma una fila variada: va tomando uno de cada sección por turnos (celular, audífonos, reloj, celular…) para que no queden
     16 celulares seguidos. Dentro de cada sección: primero lo más vendido, luego del más caro al más barato del rango

@@ -49,8 +49,10 @@ function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: st
 /** Fila de productos de la portada (tarjetas grandes solo con foto, nombre y precio). Avanza sola; se detiene con el
     mouse encima, al usar el teclado, mientras la persona la desliza con el dedo o con su botón de pausa, y no se mueve
     si la persona pidió menos movimiento. Al llegar al final vuelve al principio. */
-export function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, gris = false, final }: {
+export function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta, cintaEn, gris = false, final }: {
   id: string; etiqueta: React.ReactNode; titulo: string; productos: Producto[]; enlaces?: { texto: string; href: string }[]; cinta?: string; gris?: boolean;
+  /** Si se da, la cinta solo va en estos productos (los demás llevan su insignia normal) */
+  cintaEn?: ReadonlySet<string>;
   /** Última tarjeta de la fila: lleva a la sección completa cuando la fila solo muestra una parte */
   final?: { cantidad: number; texto: string; href: string };
 }) {
@@ -90,7 +92,8 @@ export function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta,
   return (
     <section aria-labelledby={`t-${id}`} className={gris ? "textura-orbitas border-y border-linea bg-fondo" : ""}>
       <div className="contenedor py-12 sm:py-14">
-        <div className="mb-6 flex items-end justify-between gap-4">
+        {/* En pantallas grandes el título y las flechas van a lo ancho, alineados con la fila */}
+        <div className="mb-6 flex items-end justify-between gap-4 min-[1600px]:mx-[calc(50%-50vw)] min-[1600px]:px-[3vw]">
           <div className="min-w-0">
             <p className="etiqueta flex items-center gap-1.5">{etiqueta}</p>
             <h2 id={`t-${id}`} className="titulo-seccion titulo-trazo mt-1">{titulo}</h2>
@@ -112,7 +115,7 @@ export function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta,
           className={`sin-barra -mx-4 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-px-4 px-4 pb-2 sm:-mx-6 sm:scroll-px-6 sm:px-6 ${FILA_ANCHA}`}>
           {productos.map((p, k) => (
             <li key={p.id} style={cinta ? { "--orden": Math.min(k, 4) } as React.CSSProperties : undefined} className={ANCHO_TARJETA}>
-              <TarjetaVitrina producto={p} cinta={cinta} />
+              <TarjetaVitrina producto={p} cinta={!cintaEn || cintaEn.has(p.id) ? cinta : undefined} />
             </li>
           ))}
           {final && (
@@ -132,7 +135,7 @@ export function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta,
 
 /** Todos los productos de una o varias secciones para una fila de la portada, alternando marcas para que la fila no
     quede de una sola marca seguida. Empiezan las marcas con más productos; dentro de cada marca, el orden de la tienda. */
-function variados(tiendas: TiendaId[]) {
+export function variados(tiendas: TiendaId[]) {
   const porMarca = new Map<string, Producto[]>();
   for (const p of tiendas.flatMap(id => deTienda(id)).filter(p => p.imagen && !p.consultar)) {
     const lista = porMarca.get(p.marca || "") ?? [];
@@ -150,9 +153,10 @@ function variados(tiendas: TiendaId[]) {
   return fila;
 }
 
-/** Cuántos productos muestra cada fila de sección en la portada. Antes iban todos (hasta 275 tarjetas en una sola fila):
-    nadie desliza tantas, y la portada pesaba el triple. El resto se ve en la sección, a la que lleva la última tarjeta */
-const TOPE_FILA = 16;
+/** Cuántos productos muestra cada fila de la portada. Antes iban todos (hasta 275 tarjetas en una sola fila):
+    nadie desliza tantas, y la portada pesaba el triple. El resto se ve en la sección, a la que lleva la última tarjeta.
+    17/11/2026: de 16 a 20, para que en pantallas grandes (8 a la vez) la fila tenga más recorrido antes de volver */
+export const TOPE_FILA = 20;
 
 /** Fila con los productos de una o varias secciones, con enlace a cada sección */
 export function Coleccion({ id, etiqueta, titulo, tiendas, gris = false }: { id: string; etiqueta: string; titulo: string; tiendas: TiendaId[]; gris?: boolean }) {
