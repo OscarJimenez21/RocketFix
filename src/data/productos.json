@@ -55,16 +55,12 @@
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "256 GB · negro",
+    "nombre": "256 GB",
     "precio": 9050000
    },
    {
-    "nombre": "512 GB · negro",
+    "nombre": "512 GB",
     "precio": 9950000
-   },
-   {
-    "nombre": "512 GB · blanco",
-    "precio": 9850000
    },
    {
     "nombre": "1 TB",
@@ -83,34 +79,27 @@
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "256 GB",
+    "nombre": "256 GB · eSIM",
     "precio": 5350000
    },
    {
-    "nombre": "256 GB · morado",
-    "precio": 5350000
-   },
-   {
-    "nombre": "512 GB",
-    "precio": 6150000
-   },
-   {
-    "nombre": "1 TB",
-    "precio": 7850000
-   },
-   {
-    "nombre": "256 GB · SIM física · azul",
-    "precio": 5750000
-   },
-   {
-    "nombre": "256 GB · SIM física · vino tinto",
+    "nombre": "256 GB · SIM física",
     "precio": 6300000
    },
    {
-    "nombre": "2 TB · negro",
+    "nombre": "512 GB · eSIM",
+    "precio": 6150000
+   },
+   {
+    "nombre": "1 TB · eSIM",
+    "precio": 7850000
+   },
+   {
+    "nombre": "2 TB · eSIM",
     "precio": 9900000
    }
-  ]
+  ],
+  "linea": "6,9\" · 48 MP"
  },
  {
   "id": "ip18p",
@@ -128,15 +117,11 @@
     "precio": 4800000
    },
    {
-    "nombre": "256 GB · morado",
-    "precio": 4650000
-   },
-   {
     "nombre": "512 GB",
     "precio": 5700000
    },
    {
-    "nombre": "1 TB · vino tinto",
+    "nombre": "1 TB",
     "precio": 7300000
    }
   ]
@@ -166,7 +151,8 @@
     "nombre": "1 TB · eSIM",
     "precio": 6300000
    }
-  ]
+  ],
+  "linea": "6,9\" · 48 MP · 5G"
  },
  {
   "id": "ip17p",
@@ -208,7 +194,8 @@
     "nombre": "512 GB",
     "precio": 3450000
    }
-  ]
+  ],
+  "linea": "6,7\" · 48 MP · 4.422 mAh"
  },
  {
   "id": "ip13",
@@ -291,7 +278,8 @@
     "nombre": "256 GB · 5G · 1 SIM",
     "precio": 920000
    }
-  ]
+  ],
+  "linea": "50 MP · 5.000 mAh"
  },
  {
   "id": "sa37",
@@ -310,7 +298,8 @@
     "nombre": "256 GB",
     "precio": 1200000
    }
-  ]
+  ],
+  "linea": "50 MP · 5.000 mAh · 5G"
  },
  {
   "id": "sa57",
@@ -329,7 +318,8 @@
     "nombre": "256 GB",
     "precio": 1650000
    }
-  ]
+  ],
+  "linea": "50 MP · 5.000 mAh · 5G"
  },
  {
   "id": "ss25fe",
@@ -348,7 +338,8 @@
     "nombre": "512 GB",
     "precio": 2350000
    }
-  ]
+  ],
+  "linea": "6,7\" · 50 MP · 4.900 mAh"
  },
  {
   "id": "ss25u",
@@ -371,7 +362,8 @@
     "nombre": "1 TB",
     "precio": 3700000
    }
-  ]
+  ],
+  "linea": "6,9\" · 200 MP · 5.000 mAh"
  },
  {
   "id": "ss26fe",
@@ -412,7 +404,8 @@
     "nombre": "1 TB",
     "precio": 5350000
    }
-  ]
+  ],
+  "linea": "6,9\" · 200 MP · 5.000 mAh"
  },
  {
   "id": "ss26",
@@ -467,7 +460,8 @@
     "nombre": "128 GB",
     "precio": 520000
    }
-  ]
+  ],
+  "linea": "13 MP · 6.000 mAh"
  },
  {
   "id": "xr14c",
@@ -522,7 +516,8 @@
     "nombre": "256 GB · 8 + 8 GB RAM",
     "precio": 660000
    }
-  ]
+  ],
+  "linea": "50 MP · 6.000 mAh"
  },
  {
   "id": "xr15",
@@ -566,7 +561,8 @@
     "nombre": "256 GB · 4 + 4 GB RAM · 5G",
     "precio": 830000
    }
-  ]
+  ],
+  "linea": "50 MP · 7.500 mAh"
  },
  {
   "id": "xrn15",
@@ -581,7 +577,8 @@
     "nombre": "512 GB",
     "precio": 940000
    }
-  ]
+  ],
+  "linea": "6,77\" · 108 MP · 5.520 mAh"
  },
  {
   "id": "xrn15pro",
@@ -641,7 +638,8 @@
     "nombre": "256 GB · 6 + 6 GB RAM · 5G",
     "precio": 950000
    }
-  ]
+  ],
+  "linea": "50 MP · 7.700 mAh"
  },
  {
   "id": "xrn14pp",
@@ -761,7 +759,8 @@
     "nombre": "1 TB",
     "precio": 5100000
    }
-  ]
+  ],
+  "linea": "6,9\" · 200 MP · 6.000 mAh"
  },
  {
   "id": "pocox8pm",
@@ -797,7 +796,8 @@
     "nombre": "512 GB · 12 GB RAM",
     "precio": 1650000
    }
-  ]
+  ],
+  "linea": "50 MP · 6.500 mAh · 5G"
  },
  {
   "id": "pocof8pro",
@@ -834,7 +834,8 @@
     "nombre": "512 GB",
     "precio": 2750000
    }
-  ]
+  ],
+  "linea": "6,59\" · 200 MP · 6.330 mAh"
  },
  {
   "id": "pocof9u",
@@ -870,7 +871,8 @@
     "nombre": "128 GB",
     "precio": 480000
    }
-  ]
+  ],
+  "linea": "6,88\" · 32 MP · 5.200 mAh"
  },
  {
   "id": "pococ81p",
@@ -907,7 +909,8 @@
     "nombre": "512 GB · 12 GB RAM",
     "precio": 1350000
    }
-  ]
+  ],
+  "linea": "6,83\" · 50 MP · 6.500 mAh"
  },
  {
   "id": "medge60",
@@ -943,7 +946,8 @@
     "nombre": "256 GB",
     "precio": 1150000
    }
-  ]
+  ],
+  "linea": "6,7\" · 50 MP · 5.200 mAh"
  },
  {
   "id": "medge70f",
@@ -981,7 +985,8 @@
     "nombre": "512 GB",
     "precio": 1100000
    }
-  ]
+  ],
+  "linea": "6,7\" · 50 MP · 5.000 mAh"
  },
  {
   "id": "mg67",
@@ -1017,7 +1022,8 @@
     "nombre": "128 GB",
     "precio": 460000
    }
-  ]
+  ],
+  "linea": "50 MP · 5.200 mAh"
  },
  {
   "id": "mg5g",
@@ -1073,7 +1079,8 @@
     "nombre": "512 GB",
     "precio": 1400000
    }
-  ]
+  ],
+  "linea": "6,7\" · 108 MP · 8.300 mAh"
  },
  {
   "id": "hx8d",
@@ -1161,7 +1168,8 @@
     "nombre": "256 GB",
     "precio": 550000
    }
-  ]
+  ],
+  "linea": "13 MP · 5.260 mAh"
  },
  {
   "id": "hplay10a",
@@ -1307,7 +1315,8 @@
     "nombre": "128 GB",
     "precio": 500000
    }
-  ]
+  ],
+  "linea": "6,6\" · 13 MP · 5.000 mAh"
  },
  {
   "id": "tpova6",
@@ -1604,7 +1613,8 @@
     "nombre": "128 GB",
     "precio": 640000
    }
-  ]
+  ],
+  "linea": "6,78\" · 50 MP · 5.600 mAh"
  },
  {
   "id": "ismart20",
@@ -1663,7 +1673,8 @@
     "nombre": "",
     "precio": 430000
    }
-  ]
+  ],
+  "linea": "6,7\" · 50 MP"
  },
  {
   "id": "zta35e",
@@ -1678,7 +1689,8 @@
     "nombre": "",
     "precio": 340000
    }
-  ]
+  ],
+  "linea": "6,5\" · 8 MP"
  },
  {
   "id": "zta56",
@@ -2170,7 +2182,8 @@
     "nombre": "256 GB · SIM física",
     "precio": 3500000
    }
-  ]
+  ],
+  "linea": "6,3\" · 48 MP · 5G"
  },
  {
   "id": "ip16",
@@ -2206,7 +2219,8 @@
     "nombre": "256 GB",
     "precio": 3150000
    }
-  ]
+  ],
+  "linea": "6,1\" · 48 MP · 3.561 mAh"
  },
  {
   "id": "ip16ecpo",
@@ -2588,7 +2602,8 @@
     "nombre": "256 GB",
     "precio": 1000000
    }
-  ]
+  ],
+  "linea": "6,58\" · 64 MP · 6.600 mAh"
  },
  {
   "id": "ularmorx32",
@@ -2695,7 +2710,7 @@
     "precio": 1750000
    },
    {
-    "nombre": "256 GB · azul o silver",
+    "nombre": "256 GB",
     "precio": 2150000
    }
   ]

@@ -6,6 +6,8 @@ import { SinConexion } from "./components/SinConexion";
 import { Cabecera } from "./components/Cabecera";
 import { Carrito } from "./components/Carrito";
 import { FranjaTemporada } from "./components/FranjaTemporada";
+import { FranjaBeneficios } from "./components/FranjaBeneficios";
+import { NavInferior } from "./components/NavInferior";
 import { Limite } from "./components/Limite";
 import { PiePagina } from "./components/PiePagina";
 import { SubirFlotante } from "./components/SubirFlotante";
@@ -168,6 +170,8 @@ function Marco() {
         className="sr-only z-[70] rounded bg-marca px-4 py-2 font-semibold text-white focus:not-sr-only focus:fixed focus:left-3 focus:top-3">Saltar al contenido</a>
       <SinConexion />
       <FranjaTemporada />
+      {/* 20/11/2026: fuera de temporada, los beneficios de envío y pago (como las tiendas grandes de Colombia) */}
+      <FranjaBeneficios />
       <Cabecera ruta={ruta} />
       <div id="pagina">
         <RegresoBold />
@@ -180,6 +184,8 @@ function Marco() {
           <Limite><Contenido ruta={ruta} /></Limite>
         </main>
         <PiePagina />
+        {/* 20/11/2026: barra de accesos abajo en celular y tableta (no en la página de producto) */}
+        <NavInferior ruta={ruta} />
       </div>
       <SubirFlotante />
       <WhatsAppFlotante />

@@ -49,25 +49,57 @@ export function CifrasProducto({ cifras, nombre }: { cifras: [string, string, st
   );
 }
 
+/** 20/11/2026 (usuario: «qué tan rápido el cliente entiende el producto… si las características están muy abajo»):
+    lo esencial del producto junto al nombre, en la primera pantalla, como «Mira lo más destacado» de Apple o los datos
+    cortos de Éxito. Usa las cifras; si el producto no tiene, los primeros datos de su ficha */
+export function EsencialProducto({ cifras, filas, total }: { cifras: [string, string, string][]; filas: [string, string][]; total: number }) {
+  const datos = cifras.length ? cifras.slice(0, 4).map(([v, u, t]) => ({ grande: `${v} ${u}`.trim(), chico: t }))
+    : filas.slice(0, 4).map(([k, v]) => ({ grande: v, chico: k }));
+  if (datos.length < 2) return null;
+  return (
+    <div className="mt-4">
+      <ul className="grid grid-cols-2 gap-2">
+        {datos.map(x => (
+          <li key={x.chico} className="min-w-0 rounded-md border border-linea bg-superficie px-3 py-2.5">
+            <p className="line-clamp-2 break-words font-display text-[15px] font-extrabold leading-snug">{x.grande}</p>
+            <p className="mt-0.5 line-clamp-2 text-[12.5px] leading-snug text-tinta-3">{x.chico}</p>
+          </li>
+        ))}
+      </ul>
+      {total > 0 && (
+        <button type="button" onClick={() => document.getElementById("ficha")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+          className="mt-2 inline-flex min-h-[40px] items-center text-sm font-semibold text-marca-texto underline underline-offset-2">
+          Ver la ficha técnica completa ({total} datos)
+        </button>
+      )}
+    </div>
+  );
+}
+
 export function DestacadosProducto({ destacados, producto }: { destacados: { titulo: string; texto: string; foto?: number }[]; producto: Producto }) {
   const fotos = useGaleria(producto);
   const nombre = producto.nombre;
   if (!fotos.length || !destacados.length) return null;
   return (
-    <section id="destacados" aria-labelledby="t-destacados" className="contenedor py-14 sm:py-16">
-      <h2 id="t-destacados" className="text-xl font-extrabold">Destacados</h2>
-      <div className="mt-8 grid gap-12 lg:gap-16">
+    <section id="destacados" aria-labelledby="t-destacados" className="contenedor py-12 sm:py-16">
+      <div className="flex items-end justify-between gap-4">
+        <h2 id="t-destacados" className="text-xl font-extrabold">Destacados</h2>
+        {destacados.length > 1 && <p className="text-sm text-tinta-3 md:hidden">Desliza para ver los {destacados.length}</p>}
+      </div>
+      {/* 20/11/2026: en celular, tarjetas que se deslizan de lado (antes eran 4 bloques uno debajo de otro: unas 3 pantallas);
+          desde tableta, bloques con la foto grande alternando lados */}
+      <div className="sin-barra -mx-4 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:mt-8 md:grid md:gap-12 md:overflow-visible md:px-0 md:pb-0 lg:gap-16">
         {destacados.map((d, i) => {
           const foto = fotos[d.foto ?? i + 1] ?? fotos[i % fotos.length] ?? fotos[0] ?? "";
           return (
-            <article key={d.titulo} className="grid items-center gap-6 md:grid-cols-2 md:gap-12 lg:gap-16">
+            <article key={d.titulo} className="grid w-[82%] shrink-0 snap-start content-start gap-4 md:w-auto md:grid-cols-2 md:items-center md:gap-12 lg:gap-16">
               <div className={`escenario overflow-hidden rounded-xl border border-linea bg-superficie ${i % 2 ? "md:order-2" : ""}`}>
-                <img src={recurso(foto)} srcSet={srcsetFoto(foto)} sizes="(min-width: 768px) 50vw, 100vw" alt={`${nombre}: ${d.titulo}`}
+                <img src={recurso(foto)} srcSet={srcsetFoto(foto)} sizes="(min-width: 768px) 50vw, 82vw" alt={`${nombre}: ${d.titulo}`}
                   loading="lazy" decoding="async" width={800} height={800} className="aspect-square w-full scale-[1.11] object-cover" />{/* (las fotos traen 40 px de margen blanco: así llenan la tarjeta) */}
               </div>
               <div className="min-w-0">
-                <h3 className="font-display text-[24px] font-extrabold leading-tight sm:text-[30px]">{d.titulo}</h3>
-                <p className="mt-3 max-w-[52ch] text-[16px] leading-relaxed text-tinta-2">{d.texto}</p>
+                <h3 className="font-display text-[20px] font-extrabold leading-tight sm:text-[30px]">{d.titulo}</h3>
+                <p className="mt-2 max-w-[52ch] text-[15px] leading-relaxed text-tinta-2 sm:mt-3 sm:text-[16px]">{d.texto}</p>
               </div>
             </article>
           );

@@ -42,7 +42,9 @@ export function Vitrina() {
     <div ref={caja} role="region" aria-roledescription="carrusel" aria-label="Productos destacados"
       className="tarjeta w-full overflow-hidden border-0 text-tinta"
       onMouseEnter={() => setQuieta(true)} onMouseLeave={() => setQuieta(false)} onFocus={() => setQuieta(true)} onBlur={() => setQuieta(false)}>
-      <div className="escenario relative aspect-[4/3]">
+      {/* 20/11/2026: en celular la foto es un poco más baja (16:10) para que el nombre y el precio del producto se vean en
+          la primera pantalla, encima de la barra de accesos de abajo */}
+      <div className="escenario relative aspect-[16/10] sm:aspect-[4/3]">
         {productos.map((x, j) => (
           <a key={x.id} href={hrefProducto(x.id)} tabIndex={j === i ? 0 : -1} aria-hidden={j !== i}
             // escenario también en cada foto: mientras entra o sale se mueve sola (queda aparte del fondo de la caja) y la foto

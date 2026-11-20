@@ -43,6 +43,35 @@ const MOSAICO: { tienda: TiendaId; frase: string; tema: keyof typeof TEMAS; foto
   { tienda: "mov", frase: "Muévete por la ciudad", tema: "noche", foto: "xpatineta", forma: "normal" }
 ];
 
+/** 20/11/2026 (usuario: «que la página visualmente venda», mirando cómo venden las tiendas grandes de Colombia):
+    fila de accesos redondos a cada sección justo debajo de la portada, como los íconos de Mercado Libre, Éxito o Falabella.
+    Cada círculo lleva el producto recortado de su sección (los mismos del mosaico). En celular se desliza de lado; en
+    computador caben todas en una fila */
+export function Atajos() {
+  return (
+    <nav aria-label="Secciones de la tienda" className="border-b border-linea bg-superficie">
+      <ul className="contenedor sin-barra flex gap-1 overflow-x-auto py-4 sm:gap-2 lg:justify-between lg:overflow-visible">
+        {MOSAICO.map(m => {
+          const t = tiendaPorId(m.tienda);
+          if (!t) return null;
+          return (
+            <li key={m.tienda} className="shrink-0">
+              <a href={hrefDe(t.vista)} className="group flex w-[80px] flex-col items-center gap-1.5 text-center sm:w-[84px]">
+                <span className="flex h-[60px] w-[60px] items-center justify-center rounded-full bg-marca-suave ring-1 ring-linea transition-[transform,box-shadow] duration-150 ease-salida group-hover:ring-marca group-active:scale-95 sm:h-[68px] sm:w-[68px]">
+                  {/* Van casi arriba de la portada: se piden de una vez, con prioridad baja (son pequeñas) */}
+                  <img src={recurso(`fotos/recortes/${m.foto}.webp`)} alt="" decoding="async" fetchPriority="low" width={56} height={56}
+                    className="h-[70%] w-[70%] object-contain drop-shadow-[0_4px_6px_rgba(0,0,0,0.18)]" />
+                </span>
+                <span className="text-[11.5px] font-semibold leading-tight tracking-tight text-tinta-2 group-hover:text-tinta sm:text-[12.5px] sm:tracking-normal">{t.menu}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+}
+
 /** Animación 30: el número de productos de una categoría cuenta desde 0 la primera vez que se ve (en 0,9 s, frenando al final) */
 function Contador({ valor }: { valor: number }) {
   const caja = useRef<HTMLSpanElement>(null);

@@ -6,6 +6,7 @@ import { useTienda } from "../estado/TiendaContext";
 import { activa } from "../lib/animaciones";
 import { precargarFoto, precargarProducto } from "../lib/carga";
 import { precargarDescripcion } from "../lib/descripcion";
+import { envioGratis } from "../lib/envio";
 import { dinero, recurso, srcsetFoto } from "../lib/formato";
 import { hrefProducto } from "../lib/rutas";
 import { tinteDe } from "../lib/tinte";
@@ -107,8 +108,10 @@ function ElegirVersion({ producto: p, i, elegir }: { producto: Producto; i: numb
     <div role="radiogroup" aria-label={rotulo} className="mb-2.5 flex h-11 gap-1 sm:h-9">
       {p.opciones.map((op, j) => (
         <button key={j} type="button" role="radio" aria-checked={j === i} onClick={() => elegir(j)}
-          className={`presionable min-w-0 flex-1 truncate rounded border px-1 text-[12.5px] font-semibold transition-colors duration-150 ${j === i ? "border-marca bg-marca-suave text-marca-texto" : "border-linea bg-fondo text-tinta-2 hover:border-linea-fuerte"}`}>
-          {op.nombre}
+          aria-label={op.nombre}
+          className={`presionable min-w-0 flex-1 truncate rounded border px-0.5 text-[12px] font-semibold tracking-tight transition-colors duration-150 sm:text-[12.5px] ${j === i ? "border-marca bg-marca-suave text-marca-texto" : "border-linea bg-fondo text-tinta-2 hover:border-linea-fuerte"}`}>
+          {/* 20/11/2026: «256GB» sin espacio: en celular, con 3 pastillas de ~45 px, «256 GB» salía cortado («256…») */}
+          {op.nombre.replace(/(\d)\s+(GB|TB|MB)\b/g, "$1$2")}
         </button>
       ))}
     </div>
@@ -172,7 +175,7 @@ export const TarjetaProducto = memo(function TarjetaProducto({ producto: p, prio
         <h3 className="relative font-sans text-[15px] font-semibold leading-snug tracking-normal">
           <a href={hrefProducto(p.id)} onClick={e => abrirConVuelo(e, foto.current)} title={p.nombre} className="line-clamp-2 before:absolute before:inset-x-0 before:-inset-y-0.5 hover:text-marca">{p.nombre}</a>
         </h3>
-        {p.specs.length > 0 && <p className="line-clamp-1 text-[13px] text-tinta-2">{p.specs.join(" · ")}</p>}
+        {(p.specs.length > 0 || p.linea) && <p className="line-clamp-1 text-[13px] text-tinta-2">{p.specs.length ? p.specs.join(" · ") : p.linea}</p>}
         {p.nota && <p><NotaProducto nota={p.nota} /></p>}
         <div className="mt-auto pt-2">
           {p.opciones.length > 1 && <ElegirVersion producto={p} i={i} elegir={j => elegirVersion(p.id, j)} />}
@@ -197,8 +200,9 @@ export const TarjetaProducto = memo(function TarjetaProducto({ producto: p, prio
                 <EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} />
               </button>
               {/* Sin aria-live: el aviso general (Aviso.tsx) ya dice «Agregaste … al carrito»; antes hablaban dos a la vez */}
-              <p className="mt-1.5 h-4 text-xs font-semibold text-marca">
-                {q > 0 && <span key={q} className="inline-block motion-safe:animate-entrar">{q} en el carrito</span>}
+              {/* Debajo del botón: cuántos hay en el carrito o, si no hay, el envío gratis cuando el precio llega (20/11/2026) */}
+              <p className="mt-1.5 h-4 truncate text-xs font-semibold text-marca">
+                {q > 0 ? <span key={q} className="inline-block motion-safe:animate-entrar">{q} en el carrito</span> : <span className="text-marca-texto">{envioGratis(o.precio)}</span>}
               </p>
             </>
           )}

@@ -19,6 +19,9 @@ export interface Producto {
   marca?: string;
   nombre: string;
   specs: string[];
+  /** Línea corta para las tarjetas cuando no hay specs (ej.: 6,9" · 48 MP · 5G). Sale de las cifras de la ficha con
+      .trabajo\fichas\lineas-tarjeta.mjs (20/11/2026) */
+  linea?: string;
   /** Siempre hay al menos una versión (scripts/verificar-catalogo.mjs lo comprueba): por eso opciones[0] existe sin tener que jurarlo con «!» */
   opciones: [Opcion, ...Opcion[]];
   estado: EstadoProducto | string;

@@ -101,10 +101,10 @@ export function Portada() {
       {/* Abajo deja espacio para la curva del horizonte (pb un poco más alto que pt) */}
       {/* 19/11/2026: en celular menos aire arriba y entre bloques, y el eslogan un poco más pequeño, para que el producto
           destacado de la vitrina alcance a asomarse en la primera pantalla */}
-      <div className="contenedor grid items-center gap-7 pb-14 pt-7 sm:gap-8 sm:pb-20 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:pb-24 lg:pt-16 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
+      <div className="contenedor grid items-center gap-5 pb-14 pt-5 sm:gap-8 sm:pb-20 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:pb-24 lg:pt-16 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
         <div>
           <h1 tabIndex={-1} style={porPalabras ? undefined : en(0).style}
-            className={`eslogan titulo-portada text-[clamp(2rem,9.2vw,3rem)] text-white sm:text-[64px] lg:text-[60px] xl:text-[74px]${porPalabras ? " eslogan-entra" : entra ? " entrada entrada-titulo" : ""}`}>
+            className={`eslogan titulo-portada text-[clamp(2rem,8.6vw,3rem)] text-white sm:text-[64px] lg:text-[60px] xl:text-[74px]${porPalabras ? " eslogan-entra" : entra ? " entrada entrada-titulo" : ""}`}>
             {ESLOGAN.map((w, k) => {
               const ultima = k === ESLOGAN.length - 1;
               return (
@@ -122,14 +122,17 @@ export function Portada() {
           {/* data-despegue: en celular el cohete del fondo pasa a la derecha de estos botones.
               En celular (menos de 480 px) van siempre uno debajo del otro. Antes dependía de si cabían: con la letra del
               sistema cabían en un renglón y, al llegar la letra de la marca (más ancha), el segundo bajaba y todo lo de
-              abajo saltaba 56 px (CLS 0,097 a 412 px de ancho, medido el 10/11/2026) */}
-          <div data-despegue className={`mt-6 flex sm:mt-8 flex-col items-start gap-3 min-[480px]:flex-row min-[480px]:flex-wrap${en(2).extra}`} style={en(2).style}>
-            <a href={hrefDe("categorias")} className={`btn btn-primario${entra ? " barrido barrido-portada" : ""}`}>Comprar tecnología</a>
-            <a href={hrefDe("servicios")} className="btn btn-claro">Solicitar servicio técnico</a>
+              abajo saltaba 56 px (CLS 0,097 a 412 px de ancho, medido el 10/11/2026).
+              20/11/2026: en celular van lado a lado, en dos columnas fijas (no dependen de la letra, así que no saltan), para
+              que el primer producto de la vitrina, con su precio, alcance a verse en la primera pantalla */}
+          <div data-despegue className={`mt-5 grid grid-cols-2 gap-2.5 sm:mt-8 min-[480px]:flex min-[480px]:flex-row min-[480px]:flex-wrap min-[480px]:items-start min-[480px]:gap-3${en(2).extra}`} style={en(2).style}>
+            <a href={hrefDe("categorias")} className={`btn btn-primario max-[479px]:whitespace-normal max-[479px]:px-3 max-[479px]:text-center max-[479px]:leading-tight${entra ? " barrido barrido-portada" : ""}`}>Comprar tecnología</a>
+            <a href={hrefDe("servicios")} className="btn btn-claro max-[479px]:whitespace-normal max-[479px]:px-3 max-[479px]:text-center max-[479px]:leading-tight">Solicitar servicio técnico</a>
           </div>
-          <div className={`mt-5 flex flex-wrap items-center gap-x-6 gap-y-1 sm:mt-8 sm:gap-y-2 text-sm text-white/80${en(3).extra}`} style={en(3).style}>
-            <p className="flex items-center gap-2"><PuntoEstado abierto={atencion.abierto} claro />{atencion.texto}</p>
-            <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="inline-flex min-h-[44px] items-center gap-2 font-semibold text-white hover:underline">
+          <div className={`mt-4 flex flex-wrap items-center gap-x-6 gap-y-1 sm:mt-8 sm:gap-y-2 text-sm text-white/80${en(3).extra}`} style={en(3).style}>
+            <p className="flex min-h-[28px] items-center gap-2"><PuntoEstado abierto={atencion.abierto} claro />{atencion.texto}</p>
+            {/* En celular el número ya está en el botón verde de la cabecera y en el botón flotante */}
+            <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="hidden min-h-[44px] items-center gap-2 font-semibold text-white hover:underline sm:inline-flex">
               <IconoWhatsApp className="h-[18px] w-[18px] text-wa-vivo" />{CONFIG.whatsappVisible}
             </a>
             <ResumenCalificaciones />
@@ -153,9 +156,11 @@ export function Ventajas() {
   const visto = useVisto(lista);
   return (
     <div className="border-b border-linea">
-      <ul ref={lista} data-visto={visto || undefined} className="ventajas contenedor grid divide-y divide-linea sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+      {/* 20/11/2026: en celular las tres ventajas se deslizan de lado (antes iban una debajo de otra, unos 280 px antes del
+          primer producto); desde tableta, en tres columnas como siempre */}
+      <ul ref={lista} data-visto={visto || undefined} className="ventajas contenedor sin-barra flex snap-x snap-mandatory overflow-x-auto sm:grid sm:grid-cols-3 sm:divide-x sm:divide-linea sm:overflow-visible">
         {items.map((v, n) => (
-          <li key={v.titulo} className="flex gap-3 py-4 sm:px-5 sm:first:pl-0">
+          <li key={v.titulo} className="flex w-[84%] shrink-0 snap-start gap-3 border-r border-linea py-4 pr-4 last:border-r-0 [&:not(:first-child)]:pl-4 sm:w-auto sm:border-r-0 sm:px-5 sm:first:pl-0">
             <span style={{ "--orden": n } as React.CSSProperties} className={`icono-ventaja mt-0.5 inline-block h-5 text-marca ${v.clase}`}>{v.icono}</span>
             <div><p className="text-sm font-semibold">{v.titulo}</p><p className="text-[13px] text-tinta-2">{v.texto}</p></div>
           </li>

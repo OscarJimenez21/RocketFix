@@ -8,7 +8,7 @@ import { IconoLlama } from "../components/Iconos";
 import type { Producto, TiendaId } from "../types";
 import { BandaCelulares, BandaComputadores, BandaGamer } from "./inicio/Bandas";
 import { Carrusel, Coleccion, TOPE_FILA, variados } from "./inicio/Carrusel";
-import { Categorias } from "./inicio/Categorias";
+import { Atajos, Categorias } from "./inicio/Categorias";
 import { Marcas } from "./inicio/Marcas";
 import { ComoComprar, Portada, Ventajas } from "./inicio/Portada";
 import { Servicios } from "./inicio/Servicios";
@@ -57,6 +57,8 @@ export function Inicio({ ancla }: { ancla?: string }) {
   return (
     <>
       <Portada />
+      {/* 20/11/2026: accesos redondos a cada sección, como en las tiendas grandes de Colombia */}
+      <Atajos />
       <Ventajas />
       {/* Por presupuesto: todo el año. En temporada (se encienden y se apagan solas por fecha) sube y cambia de textos */}
       {TEMPORADA && <PorPresupuesto />}

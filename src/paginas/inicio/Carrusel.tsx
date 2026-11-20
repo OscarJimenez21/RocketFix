@@ -6,16 +6,18 @@ import { FotoProducto } from "../../components/FotoProducto";
 import { Pesos } from "../../components/Pesos";
 import { Insignia } from "../../components/TarjetaProducto";
 import { useEnPantalla, useVisto } from "../../lib/enPantalla";
+import { envioGratis } from "../../lib/envio";
 import { hrefProducto, hrefDe } from "../../lib/rutas";
 import type { Producto, TiendaId } from "../../types";
 import { BotonPausa } from "./BotonPausa";
 import { suave } from "../../lib/animaciones";
 
 const PASO_CARRUSEL = 3500;
-/** Ancho de cada tarjeta de las filas: 74 % en celular, 44 % en tableta y 4 a la vez en computador. 16/11/2026: en pantallas
+/** Ancho de cada tarjeta de las filas: 46 % en celular (20/11/2026: antes 74 %, se veía un solo producto; ahora dos y el
+    borde del tercero, como en Éxito), 44 % en tableta y 4 a la vez en computador. 16/11/2026: en pantallas
     grandes la fila ocupa todo el ancho de la pantalla (FILA_ANCHA) y muestra 5 (desde 1600 px), 6 (desde 1920 px),
     7 (desde 2400 px) u 8 (desde 2800 px, como un monitor de 34"). 20 px de separación entre tarjetas */
-const ANCHO_TARJETA = "w-[74%] shrink-0 snap-start sm:w-[44%] lg:w-[calc(25%-15px)] min-[1600px]:w-[calc(20%-16px)] min-[1920px]:w-[calc(16.6667%-16.6667px)] min-[2400px]:w-[calc(14.2857%-17.1429px)] min-[2800px]:w-[calc(12.5%-17.5px)]";
+const ANCHO_TARJETA = "w-[46%] shrink-0 snap-start sm:w-[44%] lg:w-[calc(25%-15px)] min-[1600px]:w-[calc(20%-16px)] min-[1920px]:w-[calc(16.6667%-16.6667px)] min-[2400px]:w-[calc(14.2857%-17.1429px)] min-[2800px]:w-[calc(12.5%-17.5px)]";
 /** En pantallas de 1600 px o más, la fila sale del ancho de la página y va de borde a borde (con un margen del 3 %).
     El título y las flechas siguen alineados con el resto de la página */
 const FILA_ANCHA ="min-[1600px]:mx-[calc(50%-50vw)] min-[1600px]:px-[3vw] min-[1600px]:scroll-px-[3vw]";
@@ -25,22 +27,27 @@ const FILA_ANCHA ="min-[1600px]:mx-[calc(50%-50vw)] min-[1600px]:px-[3vw] min-[1
 function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: string }) {
   return (
     <a href={hrefProducto(p.id)} className="tarjeta-eleva group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-superficie transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
-      <div className="escenario relative aspect-square p-7 sm:p-8">
-        {/* Ancho de la tarjeta: 74 % de la pantalla en celular, 44 % en tableta y unos 290 px en computador */}
-        <FotoProducto producto={p} alt={p.nombre} tamanos="(min-width: 1024px) 290px, (min-width: 640px) 44vw, 74vw" className="motion-safe:group-hover:scale-[1.05]" />
+      <div className="escenario relative aspect-square p-4 sm:p-8">
+        {/* Ancho de la tarjeta: 46 % de la pantalla en celular, 44 % en tableta y unos 290 px en computador */}
+        <FotoProducto producto={p} alt={p.nombre} tamanos="(min-width: 1024px) 290px, (min-width: 640px) 44vw, 46vw" className="motion-safe:group-hover:scale-[1.05]" />
         {/* brillo: la cinta tiene un destello que la cruza una vez cuando la fila aparece (ver .brillo en index.css) */}
         {cinta
-          ? <span className="brillo absolute left-3 top-3 rounded-sm bg-acento-suave px-2 py-1 text-[13px] font-bold text-acento-texto">{cinta}</span>
-          : <Insignia producto={p} className="left-3 top-3" />}
+          ? <span className="brillo absolute left-2 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-[12px] font-bold text-acento-texto sm:left-3 sm:top-3 sm:px-2 sm:py-1 sm:text-[13px]">{cinta}</span>
+          : <Insignia producto={p} className="left-2 top-2 sm:left-3 sm:top-3" />}
       </div>
-      <div className="mt-auto border-t border-linea px-5 py-4">
-        <p className="truncate text-[13px] font-semibold text-tinta-3">{etiquetaDe(p)}</p>
-        <p className="mt-1 line-clamp-2 min-h-[2.75em] font-display text-[18px] font-bold leading-snug text-tinta">{p.nombre}</p>
+      <div className="mt-auto border-t border-linea px-3 py-3 sm:px-5 sm:py-4">
+        <p className="truncate text-[12px] font-semibold text-tinta-3 sm:text-[13px]">{etiquetaDe(p)}</p>
+        <p className="mt-1 line-clamp-2 min-h-[2.75em] font-display text-[15px] font-bold leading-snug text-tinta sm:text-[18px]">{p.nombre}</p>
+        {/* 20/11/2026: una línea con lo que distingue al producto (capacidad, 5G, plegable…), como el nombre largo de Éxito */}
+        <p className="mt-0.5 h-[1.4em] truncate text-[12.5px] text-tinta-2 sm:text-[13px]">{p.specs.length ? p.specs.join(" · ") : p.linea}</p>
         {/* Rótulo pequeño encima del precio, como en el catálogo en PDF: «Precio», o «Desde» si las versiones cambian de precio */}
         <p className="mt-2 text-xs leading-none text-tinta-3">{p.consultar ? "Precio" : rotuloPrecio(p)}</p>
         {p.consultar
           ? <p className="mt-1 font-display text-[17px] font-bold leading-tight text-tinta-2">Preguntar disponibilidad</p>
-          : <p className="mt-1 font-display text-[22px] font-bold leading-tight tabular-nums text-tinta"><Pesos valor={desde(p)} /></p>}
+          : <>
+              <p className="mt-1 font-display text-[19px] font-bold leading-tight tabular-nums text-tinta sm:text-[22px]"><Pesos valor={desde(p)} /></p>
+              <p className="mt-1 h-[1.3em] truncate text-[12px] font-semibold text-marca-texto sm:text-[12.5px]">{envioGratis(desde(p))}</p>
+            </>}
       </div>
     </a>
   );

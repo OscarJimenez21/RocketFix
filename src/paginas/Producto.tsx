@@ -8,7 +8,7 @@ import { FotoProducto } from "../components/FotoProducto";
 import { Galeria } from "../components/Galeria";
 import { IconoCamion, IconoCheck, IconoCompartir, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { Comparador, EnvioGratis, FichaTecnica, Recientes } from "../components/ProductoExtras";
-import { CifrasProducto, DestacadosProducto, FichaInteractiva, NavProducto } from "../components/FichaPro";
+import { DestacadosProducto, EsencialProducto, FichaInteractiva, NavProducto } from "../components/FichaPro";
 import { Pesos } from "../components/Pesos";
 import { EtiquetaAgregar, NotaProducto, TarjetaProducto, useAgregado } from "../components/TarjetaProducto";
 import { activa } from "../lib/animaciones";
@@ -28,19 +28,25 @@ import { NoEncontrada } from "./NoEncontrada";
 import { hrefDe, useDespuesDePintar } from "../lib/rutas";
 import { BotonFavorito } from "../components/Favorito";
 
+/** Tiendas cuyos productos vienen en varios colores: el color no es una versión, se pregunta por WhatsApp */
+const CON_COLOR = new Set(["cel", "tab", "rel"]);
+
 /** Versiones del producto: al elegir otra, el marco verde se desliza hasta ella en vez de saltar */
 function Versiones({ producto: p, elegida, elegir }: { producto: TipoProducto; elegida: number; elegir: (j: number) => void }) {
   const caja = useRef<HTMLDivElement>(null);
   const marco = useMarco(caja, elegida);
+  // 20/11/2026: con 3 o más versiones, en celular van de a dos por fila con el precio debajo del nombre (antes una por
+  // fila: 5 versiones ocupaban media pantalla y empujaban el botón de comprar)
+  const compacto = p.opciones.length >= 3;
   return (
-    <div ref={caja} className="relative grid gap-2 sm:grid-cols-2">
+    <div ref={caja} className={`relative grid gap-2 ${compacto ? "grid-cols-2" : "sm:grid-cols-2"}`}>
       {marco && <span aria-hidden="true" className="pointer-events-none absolute left-0 top-0 rounded border border-marca bg-marca-suave ring-1 ring-marca" style={marco} />}
       {p.opciones.map((op, j) => (
         <button key={j} data-opcion type="button" aria-pressed={j === elegida} onClick={() => elegir(j)}
-          className={`presionable relative flex min-h-[44px] items-center justify-between gap-3 rounded border px-3.5 py-2.5 text-left text-sm ${j === elegida ? (marco ? "border-transparent" : "border-marca bg-marca-suave ring-1 ring-marca") : "border-linea-fuerte hover:border-tinta-2"}`}>
-          <span>{op.nombre}</span>
+          className={`presionable relative flex min-h-[44px] gap-3 rounded border px-3.5 py-2.5 text-left text-sm ${compacto ? "flex-col items-start justify-center gap-0.5 max-sm:px-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3" : "items-center justify-between"} ${j === elegida ? (marco ? "border-transparent" : "border-marca bg-marca-suave ring-1 ring-marca") : "border-linea-fuerte hover:border-tinta-2"}`}>
+          <span className={compacto ? "font-semibold sm:font-normal" : undefined}>{op.nombre}</span>
           {!p.consultar && (
-            <span className="text-right">
+            <span className={compacto ? "text-left sm:text-right" : "text-right"}>
               <b className="block whitespace-nowrap font-display tabular-nums">{dinero(op.precio)}</b>
               {/* Idea 12: en las otras versiones, cuánto más (o menos) cuestan que la elegida */}
               {j !== elegida && op.precio !== (p.opciones[elegida]?.precio ?? op.precio) && (
@@ -189,6 +195,10 @@ export default function Producto({ id }: { id: string }) {
   const cat = p.tienda !== "cel" && p.categoria ? nombreCat[p.categoria] : null;
   const estadoTexto = explicarEstado(p.estado);
   const con5G = tiene5G(p) && !p.specs.some(s => /\b5g\b/i.test(s));
+  // Datos para «Lo esencial» cuando no hay cifras: los del fabricante (sin la sección «General», que repite marca y versiones)
+  const esenciales = d.secciones.length ? d.secciones.slice(1).flatMap(([, f]) => f) : (descripcion?.ficha ?? []);
+  const totalFicha = d.secciones.reduce((n, [, f]) => n + f.length, 0);
+  const esencial = <EsencialProducto cifras={d.cifras} filas={p.specs.length ? [] : esenciales} total={totalFicha} />;
 
   const alAgregar = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (!agregar(p.id, i)) return;
@@ -255,12 +265,18 @@ export default function Producto({ id }: { id: string }) {
             </p>
           )}
 
+          {/* 20/11/2026: lo esencial en la primera pantalla (cifras o, si no hay, los primeros datos de la ficha) */}
+          {/* En celular va junto al nombre; desde tableta, debajo de la compra, para que el botón no baje de la primera pantalla */}
+          {descripcion !== null && <div className="md:hidden">{esencial}</div>}
+
           {p.opciones.length > 1 && (
             <fieldset className="mt-6">
               <legend className="etiqueta mb-2">{p.etiqueta || "Versión"}</legend>
               <Versiones producto={p} elegida={i} elegir={j => elegirVersion(p.id, j)} />
             </fieldset>
           )}
+          {/* 20/11/2026 (usuario): las versiones ya no se separan por color; el color se acuerda por WhatsApp */}
+          {CON_COLOR.has(p.tienda) && !p.consultar && <p className={`${p.opciones.length > 1 ? "mt-2" : "mt-4"} text-[13px] text-tinta-3`}>El color lo eliges con nosotros por WhatsApp cuando confirmamos tu pedido.</p>}
 
           {p.consultar ? (
             <div className="tarjeta mt-6 p-5">
@@ -288,6 +304,7 @@ export default function Producto({ id }: { id: string }) {
             </div>
           )}
 
+          {descripcion !== null && <div className="hidden md:block">{esencial}</div>}
           {/* ventajas y entrega-iconos: la moto avanza, el camión rueda y la tarjeta gira, como en la portada (animación 22) */}
           <ul ref={entregaLista} data-visto={entregaVista || undefined} className="ventajas entrega-iconos mt-5 grid gap-2.5 text-sm text-tinta-2">
             {entrega.map((e, n) => (
@@ -344,14 +361,27 @@ export default function Producto({ id }: { id: string }) {
         <NavProducto nombre={p.nombre} precio={p.consultar ? null : o.precio} vigilar={boton} deshabilitado={tope}
           alAgregar={p.consultar ? undefined : alAgregar} etiquetaAgregar={<EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" />}
           partes={[
+            ...(d.secciones.length ? [{ id: "ficha", texto: "Ficha técnica" }] : []),
             ...(d.destacados.length ? [{ id: "destacados", texto: "Destacados" }] : []),
             { id: "descripcion", texto: "Descripción" },
-            ...(d.secciones.length ? [{ id: "ficha", texto: "Ficha técnica" }] : []),
             ...(!p.consultar ? [{ id: "comparar", texto: "Comparar" }] : [])
           ]} />
       )}
-      {d.cifras.length > 0 && <CifrasProducto cifras={d.cifras} nombre={p.nombre} />}
-      {d.destacados.length > 0 && <DestacadosProducto destacados={d.destacados} producto={p} />}
+      {/* 20/11/2026: las cifras ya salen arriba, junto al nombre («Lo esencial»); la franja oscura que las repetía se quitó.
+          La ficha técnica va justo después de la compra (antes iba al final de la descripción, unas 7 pantallas abajo en
+          celular; en Éxito los datos salen en la segunda pantalla) */}
+      {/* La ficha y los destacados se arman un instante después de pintar la parte de arriba (como las filas de abajo):
+          en celulares lentos la página de producto quedaba trabada al abrir (TBT 450–500 ms, medido el 20/11/2026) */}
+      {abajo && descripcion !== null && d.secciones.length > 0 && (
+        <section id="ficha" aria-labelledby="h-ficha" className="border-t border-linea">
+          <div className="contenedor py-12 sm:py-14">
+          <h2 id="h-ficha" className="text-xl font-extrabold">Ficha técnica</h2>
+          <p className="mt-1 text-sm text-tinta-2">{totalFicha} datos por secciones. Toca una sección o busca lo que necesitas saber.</p>
+          <FichaInteractiva secciones={d.secciones} />
+          </div>
+        </section>
+      )}
+      {abajo && d.destacados.length > 0 && <div className="border-t border-linea"><DestacadosProducto destacados={d.destacados} producto={p} /></div>}
 
       <section id="descripcion" aria-labelledby="h-desc" aria-busy={descripcion === null} className="border-t border-linea bg-fondo">
         {descripcion === null ? (
@@ -378,12 +408,6 @@ export default function Producto({ id }: { id: string }) {
               : <><h2 className="text-xl font-extrabold">Características</h2><FichaTecnica filas={d.filas} /></>}
           </div>
         </div>
-        {d.secciones.length > 0 && (
-          <div id="ficha" className="mt-12">
-            <h2 className="text-xl font-extrabold">Ficha técnica</h2>
-            <FichaInteractiva secciones={d.secciones} />
-          </div>
-        )}
         </div>
         )}
       </section>
