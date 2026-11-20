@@ -9,15 +9,19 @@ export function Aviso() {
   const { aviso, avisoVez, avisoAccion, avisar, pausarAviso, abrirCarrito, carritoAbierto } = useTienda();
   const [pausado, setPausado] = useState(false);
   const pausar = (p: boolean) => { setPausado(p); pausarAviso(p); };
-  useEffect(() => { if (!aviso) setPausado(false); }, [aviso]);
   // Animación 28: al agregar, un ✓ que se dibuja y una línea abajo que se acorta hasta que el aviso se va (4,2 s)
   const conLinea = activa(28);
   const [texto, setTexto] = useState(aviso);
-  useEffect(() => { if (aviso) setTexto(aviso); }, [aviso]);
+  const [accion, setAccion] = useState(avisoAccion);
+  // Cuando llega otro aviso se guarda su texto y su botón (siguen a la vista mientras se va); cuando se va, deja de
+  // estar en pausa. Se ajusta al dibujar, sin un efecto aparte (así no hay un dibujo de más)
+  const [antes, setAntes] = useState({ aviso, avisoAccion });
+  if (antes.aviso !== aviso || antes.avisoAccion !== avisoAccion) {
+    setAntes({ aviso, avisoAccion });
+    if (aviso) { setTexto(aviso); setAccion(avisoAccion); } else setPausado(false);
+  }
   // Con «Deshacer» se ve también sobre el carrito abierto (ahí es donde se quita el producto)
   const visible = Boolean(aviso) && (!carritoAbierto || Boolean(avisoAccion));
-  const [accion, setAccion] = useState(avisoAccion);
-  useEffect(() => { if (aviso) setAccion(avisoAccion); }, [aviso, avisoAccion]);
   const agregado = texto.startsWith("Agregaste");
   // Mientras está escondido no se puede tocar ni enfocar el botón «Ver carrito»
   const caja = useRef<HTMLDivElement>(null);

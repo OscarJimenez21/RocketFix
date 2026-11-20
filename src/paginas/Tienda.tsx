@@ -123,6 +123,11 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
       red: esCel && base.some(tiene5G) ? base.filter(tiene5G).length : 0
     };
   }, [base, esCel, f.cat, tienda]);
+  // 19/11/2026: en celular los filtros menos usados (estado, marca, precio, capacidad…, vista) van detrás del botón
+  // «Filtros»; a la vista quedan las pastillas, la búsqueda y el orden. Así los productos suben a la primera pantalla.
+  // En tableta y computador se ven siempre, como antes. El botón cuenta los filtros puestos que esconde
+  const [verFiltros, setVerFiltros] = useState(false);
+  const escondidos = [!esCel ? false : f.cond !== "todos", !esCel && f.marca !== "todas", f.tope != null, f.capacidad, f.ram, f.cpu, f.pantalla, f.red].filter(Boolean).length;
   const elegirVista = (v: Vista) => { setVistaLista(v); try { localStorage.setItem(CLAVE_VISTA, v); } catch { /* sin almacenamiento */ } };
 
   const visibles = useMemo(() => {
@@ -193,6 +198,13 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
               onKeyDown={e => { if (e.key === "Escape" && f.q) { e.preventDefault(); poner({ q: "" }); } }}
               className="campo h-10 py-0 pl-9 text-sm" />
           </label>
+          <button type="button" onClick={() => setVerFiltros(v => !v)} aria-expanded={verFiltros} aria-controls="filtros-seccion"
+            className="presionable inline-flex h-10 items-center gap-2 rounded border border-linea-fuerte px-3.5 text-sm font-semibold text-tinta sm:hidden">
+            {verFiltros ? "Ocultar filtros" : "Filtros"}
+            {escondidos > 0 && <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-marca px-1.5 text-xs font-bold tabular-nums text-white">{escondidos}</span>}
+          </button>
+          {/* display: contents: en tableta y computador estos controles siguen en la misma fila de siempre */}
+          <div id="filtros-seccion" className={verFiltros ? "contents" : "contents max-sm:hidden"}>
           {esCel && (
             <div ref={segmento} role="group" aria-label="Estado del equipo" className="relative inline-flex rounded border border-linea-fuerte p-0.5">
               {pastilla && <span aria-hidden="true" className="pointer-events-none absolute left-0 top-0 rounded-sm bg-oscuro" style={pastilla} />}
@@ -219,13 +231,14 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
               <span className="w-[6.5rem] shrink-0 text-right font-semibold tabular-nums text-tinta">{tope ? dinero(tope) : "Cualquiera"}</span>
             </label>
           )}
+          </div>
           <label className="ml-auto flex items-center gap-2 text-sm text-tinta-2">Ordenar
             <select value={f.orden} onChange={e => poner({ orden: e.target.value as Filtros["orden"] })} className="campo h-10 w-auto py-0 text-sm">
               <option value="rel">Recomendados</option><option value="menor">Menor precio</option><option value="mayor">Mayor precio</option><option value="nuevos">Más nuevos</option>
             </select>
           </label>
           {/* Idea 38: ver en cuadrícula o en lista */}
-          <div role="group" aria-label="Ver productos en" className="inline-flex rounded border border-linea-fuerte p-0.5">
+          <div role="group" aria-label="Ver productos en" className={`inline-flex rounded border border-linea-fuerte p-0.5${verFiltros ? "" : " max-sm:hidden"}`}>
             {([["cuadricula", "Cuadrícula", <IconoCuadricula key="c" className="h-[18px] w-[18px]" />], ["lista", "Lista", <IconoLista key="l" className="h-[18px] w-[18px]" />]] as const).map(([v, nombre, icono]) => (
               <button key={v} type="button" aria-pressed={vistaLista === v} aria-label={nombre} title={nombre} onClick={() => elegirVista(v)}
                 className={`presionable flex h-[42px] w-11 items-center justify-center rounded-sm sm:h-[34px] sm:w-10 ${vistaLista === v ? "bg-oscuro text-white" : "text-tinta-2 hover:text-tinta"}`}>{icono}</button>
@@ -235,7 +248,7 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
 
         {/* Ideas 4, 6, 7 y 29: capacidad, RAM, procesador, pantalla y 5G (solo los que aplican en esta sección) */}
         {(extra.capacidad.length > 0 || extra.ram.length > 0 || extra.cpu.length > 0 || extra.pantalla.length > 0 || extra.red > 0) && (
-          <div role="group" aria-label="Más filtros" className="mt-3 flex flex-wrap items-center gap-3 border-b border-linea pb-4">
+          <div role="group" aria-label="Más filtros" className={`mt-3 flex flex-wrap items-center gap-3 border-b border-linea pb-4${verFiltros ? "" : " max-sm:hidden"}`}>
             {([["capacidad", "Capacidad", extra.capacidad], ["ram", "Memoria RAM", extra.ram], ["cpu", "Procesador", extra.cpu], ["pantalla", "Pantalla", extra.pantalla]] as const).map(([k, rotulo, valores]) =>
               valores.length > 0 && (
                 <label key={k} className="flex items-center gap-2 text-sm text-tinta-2">{rotulo}

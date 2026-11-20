@@ -25,8 +25,14 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
   const pista = useRef<HTMLDivElement>(null);
   const tira = useRef<HTMLDivElement>(null);
   const marco = useMarco(tira, actual);
-  useEffect(() => { setActual(0); pista.current?.scrollTo({ left: 0 }); }, [producto]);
-  useEffect(() => { setFotos(clave ? clave.split("|") : []); }, [clave]);
+  // Otro producto: vuelve a la primera foto. Llegaron fotos nuevas: se usan. Se ajusta al dibujar, sin efectos aparte
+  const [antes, setAntes] = useState({ producto, clave });
+  if (antes.producto !== producto || antes.clave !== clave) {
+    if (antes.producto !== producto) setActual(0);
+    if (antes.clave !== clave) setFotos(clave ? clave.split("|") : []);
+    setAntes({ producto, clave });
+  }
+  useEffect(() => { pista.current?.scrollTo({ left: 0 }); }, [producto]);
   useEffect(() => {
     const fila = tira.current;
     const el = fila?.children[actual] as HTMLElement | undefined;
@@ -65,7 +71,7 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
 
   if (fotos.length < 2) {
     return (
-      <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-square cursor-zoom-in overflow-hidden rounded-md border border-linea p-6">
+      <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-[4/3] cursor-zoom-in overflow-hidden rounded-md border border-linea p-4 sm:aspect-square sm:p-6">
         {/* Mejora: tocar la foto la abre en grande (el botón «Ampliar» sigue siendo el camino con teclado) */}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- atajo con el mouse o el dedo; el botón «Ampliar» hace lo mismo con el teclado */}
         <div className="h-full w-full" onClick={() => fotos.length > 0 && setVisor(true)}><FotoProducto producto={producto} prioridad /></div>
@@ -81,7 +87,7 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
     <div>
       {visorAbierto}
       {/* data-foto-principal: de aquí despega la foto hacia el carrito al agregar */}
-      <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-square overflow-hidden rounded-md border border-linea">
+      <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-[4/3] overflow-hidden rounded-md border border-linea sm:aspect-square">
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex, jsx-a11y/no-noninteractive-element-interactions -- las fotos se deslizan: deben poder enfocarse para pasarlas con las flechas del teclado (Inicio/Fin incluidos); el clic es un atajo para ampliar, que el botón «Ampliar» también ofrece */}
         <div ref={pista} onScroll={alDeslizar} tabIndex={0} role="group" aria-roledescription="carrusel" aria-label={`Fotos de ${producto.nombre}`}
           // Mejora: Inicio y Fin van a la primera y a la última foto
@@ -90,7 +96,7 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
           onClick={() => setVisor(true)}
           className="sin-barra flex h-full cursor-zoom-in snap-x snap-mandatory overflow-x-auto overscroll-x-contain">
           {fotos.map((f, i) => (
-            <div key={f} className="h-full w-full shrink-0 snap-center p-6">
+            <div key={f} className="h-full w-full shrink-0 snap-center p-4 sm:p-6">
               {/* La primera ya la pidió el HTML en su tamaño original; las demás traen copias livianas para pantallas pequeñas */}
               <Imagen src={recurso(f)} alt={`${producto.nombre}, foto ${i + 1} de ${fotos.length}`} width={800} height={800}
                 {...(i > 0 ? { srcSet: srcsetFoto(f), sizes: "(min-width: 1024px) 560px, 100vw" } : null)}
@@ -110,8 +116,10 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
           <IconoFlecha className="h-5 w-5 transition-transform duration-200 ease-salida group-hover:translate-x-0.5" /></button>
         <span className="absolute bottom-2 right-2 overflow-hidden rounded-sm bg-oscuro/75 px-2 py-0.5 font-mono text-xs text-white" aria-hidden="true"><span key={actual} className="contador-foto inline-block">{actual + 1}</span> / {fotos.length}</span>
       </div>
-      {/* Al pasar de foto, el marco verde se desliza de una miniatura a la otra (va encima de las miniaturas, solo es el borde) */}
-      <div ref={tira} className="sin-barra mt-3 flex gap-2 overflow-x-auto pb-1 pt-px">
+      {/* Al pasar de foto, el marco verde se desliza de una miniatura a la otra (va encima de las miniaturas, solo es el borde).
+          19/11/2026: en celular no hay miniaturas (se desliza la foto y el contador dice cuántas hay), y la foto es más baja
+          (4:3), para que el nombre y el precio suban a la primera pantalla */}
+      <div ref={tira} className="sin-barra mt-3 hidden gap-2 overflow-x-auto pb-1 pt-px sm:flex">
         {fotos.map((f, i) => (
           <button key={f} data-opcion type="button" onClick={() => ir(i)} aria-label={`Ver foto ${i + 1}`} aria-current={i === actual || undefined}
             className={`presionable escenario h-16 w-16 shrink-0 rounded border p-1 ${i === actual && !marco ? "border-marca ring-1 ring-marca" : "border-linea hover:border-linea-fuerte"}`}>

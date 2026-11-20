@@ -1,6 +1,7 @@
 /* Portada de la tienda. Cada bloque está en su propio archivo de src/paginas/inicio/; aquí solo se arma el orden.
    (Antes todo vivía en este archivo, de 856 líneas.) */
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Diferido, reiniciarDiferidos } from "../components/Diferido";
 import { MAS_VENDIDOS, VITRINA, porId, recienLlegados } from "../data/catalogo";
 import { Calificaciones } from "../components/Calificaciones";
 import { IconoLlama } from "../components/Iconos";
@@ -19,7 +20,7 @@ import { Recientes } from "../components/ProductoExtras";
 import { BarraSecciones } from "./inicio/BarraSecciones";
 import { Envios } from "./inicio/Envios";
 import { TuCelular } from "./inicio/TuCelular";
-import { useDespuesDePintar } from "../lib/rutas";
+import { useDespuesDePintar, vaARegresar } from "../lib/rutas";
 
 // Las secciones de cada fila son siempre las mismas listas: así la fila no se vuelve a calcular en cada dibujo
 // (con tiendas={["cel"]} llegaba una lista nueva cada vez y el useMemo de Coleccion nunca servía)
@@ -59,35 +60,53 @@ export function Inicio({ ancla }: { ancla?: string }) {
       <Ventajas />
       {/* Por presupuesto: todo el año. En temporada (se encienden y se apagan solas por fecha) sube y cambia de textos */}
       {TEMPORADA && <PorPresupuesto />}
-      <ComoComprar />
       {/* Mientras llega el resto, un espacio alto guarda su lugar: así el pie no se asoma ni salta en pantallas grandes */}
-      {resto ? <Resto vistos={vistos} /> :<div aria-hidden="true" className="min-h-[200vh]" />}
+      {resto ? <Resto vistos={vistos} ancla={ancla} /> :<div aria-hidden="true" className="min-h-[200vh]" />}
     </>
   );
 }
 
-/** Todas las secciones de la portada debajo de «Cómo comprar», en el mismo orden de siempre */
-function Resto({ vistos }: { vistos: Producto[] }) {
+/** Todas las secciones de la portada debajo de las ventajas.
+    19/11/2026: los productos primero. En celular la portada medía 26 pantallas y la primera fila de productos llegaba
+    después de unas 3 pantallas (cómo comprar, el mapa de envíos y las marcas iban antes). Ahora, justo después de la
+    portada: lo más vendido y las categorías; cómo comprar sigue cerca, y envíos baja junto al servicio técnico */
+function Resto({ vistos, ancla }: { vistos: Producto[]; ancla?: string }) {
+  // 19/11/2026: debajo de las categorías, la portada se arma por tramos a medida que la persona baja (Diferido). Los
+  // altos son los medidos ese día en celular (375 px) y computador (1280 px). Con un #ancla o al regresar, todo de una vez
+  const [alRegresar] = useState(vaARegresar);
+  const ya = alRegresar || Boolean(ancla);
+  useEffect(() => reiniciarDiferidos, []);
   return (
     <>
-      <Envios />
-      <Marcas />
-      <Categorias />
-      {!TEMPORADA && <PorPresupuesto />}
-      <div id="recientes"><Recientes productos={vistos} /></div>
-      {TEMPORADA?.ideas && <IdeasParaRegalar />}
-      <BandaGamer />
       <Carrusel id="vendidos" etiqueta={<><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</>} titulo="Los que todos quieren" productos={VENDIDOS} cinta="Top ventas" cintaEn={VENDIDOS_CINTA} gris />
-      {NUEVOS.length >= 4 && <Carrusel id="nuevos" etiqueta="Recién llegados" titulo="Lo último que llegó a la tienda" productos={NUEVOS} />}
-      <BandaCelulares />
-      <TuCelular />
-      <Coleccion id="celulares" etiqueta="Celulares" titulo="Estrena celular" tiendas={SOLO_CEL} />
-      <BandaComputadores />
-      <Coleccion id="computadores" etiqueta="Computadores" titulo="Portátiles y PC para cada necesidad" tiendas={SOLO_PC} gris />
-      <Coleccion id="componentes" etiqueta="Componentes" titulo="Arma o mejora tu PC" tiendas={SOLO_COMP} />
-      <Servicios />
-      <Confianza />
-      <Calificaciones />
+      <Categorias />
+      <div id="recientes"><Recientes productos={vistos} /></div>
+      <Diferido ya={ya} ids={["como-comprar", "presupuesto"]} alto="min-h-[1430px] md:min-h-[1290px]">
+        {!TEMPORADA && <PorPresupuesto />}
+        {TEMPORADA?.ideas && <IdeasParaRegalar />}
+        <ComoComprar />
+      </Diferido>
+      <Diferido ya={ya} ids={["t-nuevos", "marcas"]} alto="min-h-[1480px] md:min-h-[1440px]">
+        {NUEVOS.length >= 4 && <Carrusel id="nuevos" etiqueta="Recién llegados" titulo="Lo último que llegó a la tienda" productos={NUEVOS} />}
+        <BandaGamer />
+        <Marcas />
+      </Diferido>
+      <Diferido ya={ya} ids={["tu-celular", "t-celulares"]} alto="min-h-[2240px] md:min-h-[2160px]">
+        <BandaCelulares />
+        <TuCelular />
+        <Coleccion id="celulares" etiqueta="Celulares" titulo="Estrena celular" tiendas={SOLO_CEL} />
+      </Diferido>
+      <Diferido ya={ya} ids={["t-computadores", "t-componentes"]} alto="min-h-[2080px] md:min-h-[1940px]">
+        <BandaComputadores />
+        <Coleccion id="computadores" etiqueta="Computadores" titulo="Portátiles y PC para cada necesidad" tiendas={SOLO_PC} gris />
+        <Coleccion id="componentes" etiqueta="Componentes" titulo="Arma o mejora tu PC" tiendas={SOLO_COMP} />
+      </Diferido>
+      <Diferido ya={ya} ids={["envios", "servicios", "calificaciones"]} alto="min-h-[5150px] md:min-h-[3800px]">
+        <Envios />
+        <Servicios abrir={ancla === "orden"} />
+        <Confianza />
+        <Calificaciones abrir={ancla === "calificaciones"} />
+      </Diferido>
       <BarraSecciones />
     </>
   );

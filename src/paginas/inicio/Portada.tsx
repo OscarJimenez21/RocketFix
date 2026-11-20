@@ -99,10 +99,12 @@ export function Portada() {
       {DecoracionPortada && <Suspense fallback={null}><DecoracionPortada donde="portada" /></Suspense>}
       <Horizonte />
       {/* Abajo deja espacio para la curva del horizonte (pb un poco más alto que pt) */}
-      <div className="contenedor grid items-center gap-8 pb-14 pt-10 sm:pb-20 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:pb-24 lg:pt-16 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
+      {/* 19/11/2026: en celular menos aire arriba y entre bloques, y el eslogan un poco más pequeño, para que el producto
+          destacado de la vitrina alcance a asomarse en la primera pantalla */}
+      <div className="contenedor grid items-center gap-7 pb-14 pt-7 sm:gap-8 sm:pb-20 sm:pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-12 lg:pb-24 lg:pt-16 xl:grid-cols-[minmax(0,1fr)_minmax(0,480px)] xl:gap-14">
         <div>
           <h1 tabIndex={-1} style={porPalabras ? undefined : en(0).style}
-            className={`eslogan titulo-portada text-[clamp(2.25rem,10.4vw,3rem)] text-white sm:text-[64px] lg:text-[60px] xl:text-[74px]${porPalabras ? " eslogan-entra" : entra ? " entrada entrada-titulo" : ""}`}>
+            className={`eslogan titulo-portada text-[clamp(2rem,9.2vw,3rem)] text-white sm:text-[64px] lg:text-[60px] xl:text-[74px]${porPalabras ? " eslogan-entra" : entra ? " entrada entrada-titulo" : ""}`}>
             {ESLOGAN.map((w, k) => {
               const ultima = k === ESLOGAN.length - 1;
               return (
@@ -116,16 +118,16 @@ export function Portada() {
               );
             })}
           </h1>
-          <p className={`mt-5 text-[17px] font-semibold text-marca-menta sm:text-lg${en(1).extra}`} style={en(1).style}>Tienda de tecnología y servicio técnico en Bogotá</p>
+          <p className={`mt-3 text-[17px] font-semibold text-marca-menta sm:mt-5 sm:text-lg${en(1).extra}`} style={en(1).style}>Tienda de tecnología y servicio técnico en Bogotá</p>
           {/* data-despegue: en celular el cohete del fondo pasa a la derecha de estos botones.
               En celular (menos de 480 px) van siempre uno debajo del otro. Antes dependía de si cabían: con la letra del
               sistema cabían en un renglón y, al llegar la letra de la marca (más ancha), el segundo bajaba y todo lo de
               abajo saltaba 56 px (CLS 0,097 a 412 px de ancho, medido el 10/11/2026) */}
-          <div data-despegue className={`mt-8 flex flex-col items-start gap-3 min-[480px]:flex-row min-[480px]:flex-wrap${en(2).extra}`} style={en(2).style}>
+          <div data-despegue className={`mt-6 flex sm:mt-8 flex-col items-start gap-3 min-[480px]:flex-row min-[480px]:flex-wrap${en(2).extra}`} style={en(2).style}>
             <a href={hrefDe("categorias")} className={`btn btn-primario${entra ? " barrido barrido-portada" : ""}`}>Comprar tecnología</a>
             <a href={hrefDe("servicios")} className="btn btn-claro">Solicitar servicio técnico</a>
           </div>
-          <div className={`mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/80${en(3).extra}`} style={en(3).style}>
+          <div className={`mt-5 flex flex-wrap items-center gap-x-6 gap-y-1 sm:mt-8 sm:gap-y-2 text-sm text-white/80${en(3).extra}`} style={en(3).style}>
             <p className="flex items-center gap-2"><PuntoEstado abierto={atencion.abierto} claro />{atencion.texto}</p>
             <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="inline-flex min-h-[44px] items-center gap-2 font-semibold text-white hover:underline">
               <IconoWhatsApp className="h-[18px] w-[18px] text-wa-vivo" />{CONFIG.whatsappVisible}
@@ -163,15 +165,15 @@ export function Ventajas() {
   );
 }
 
-/** Cómo comprar: va justo debajo de las ventajas, en una franja verde clara, para que se vea apenas la persona empieza a
-    bajar. #como-comprar lleva aquí (desde el menú y el pie de página). Cada paso lleva su ícono y su número; la primera vez
+/** Cómo comprar: en una franja verde clara, después de lo más vendido y las categorías (19/11/2026: antes iba justo debajo
+    de las ventajas y retrasaba los productos). #como-comprar lleva aquí (desde el menú y el pie de página). Cada paso lleva su ícono y su número; la primera vez
     que se ve, los círculos se encienden uno tras otro y una línea punteada (como la trayectoria del cohete de la portada)
     se dibuja hasta el siguiente (ver .pasos en index.css) */
 export function ComoComprar() {
   const pasos: [React.ReactNode, string, string][] = [
     [<IconoBolsa key="b" className="h-6 w-6" />, "Arma tu carrito", "Elige la versión de cada equipo y agrégalo. Puedes cambiar las cantidades antes de enviar."],
     [<IconoWhatsApp key="w" className="h-6 w-6" />, "Envía el pedido por WhatsApp", "El mensaje sale escrito con los productos, el total y la forma de entrega. Enviarlo no es un pago."],
-    [<IconoMoto key="m" className="h-6 w-6" />, "Confirmamos y entregamos", `Te confirmamos disponibilidad y pago. En Bogotá y alrededores te lo llevamos el mismo día si pides antes de las ${CONFIG.corteMismoDia}, y puedes pagar contra entrega en pedidos de hasta ${dinero(CONFIG.contraEntregaHasta)}; al resto de Colombia lo enviamos con pago anticipado. Envío gratis en Bogotá desde ${dinero(CONFIG.envios.bogota.gratisDesde)} y al resto del país desde ${dinero(CONFIG.envios.nacional.gratisDesde)}.`]
+    [<IconoMoto key="m" className="h-6 w-6" />, "Confirmamos y entregamos", `Te confirmamos el pago y la entrega. En Bogotá y alrededores te lo llevamos el mismo día si pides antes de las ${CONFIG.corteMismoDia}, y puedes pagar contra entrega en pedidos de hasta ${dinero(CONFIG.contraEntregaHasta)}; al resto de Colombia lo enviamos con pago anticipado. Envío gratis en Bogotá desde ${dinero(CONFIG.envios.bogota.gratisDesde)} y al resto del país desde ${dinero(CONFIG.envios.nacional.gratisDesde)}.`]
   ];
   const lista = useRef<HTMLOListElement>(null);
   const visto = useVisto(lista);

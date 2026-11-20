@@ -22,7 +22,7 @@ export function Visor({ fotos, inicial, nombre, cerrar }: { fotos: string[]; ini
   const pasar = (d: number) => { setCerca(false); setI(n => (n + d + fotos.length) % fotos.length); };
   // Mejora: con la foto acercada, Esc primero la aleja (otro Esc cierra el visor) y las flechas recorren la foto
   const cercaRef = useRef(cerca);
-  cercaRef.current = cerca;
+  useEffect(() => { cercaRef.current = cerca; }, [cerca]);
   useEffect(() => {
     const alejar = (e: KeyboardEvent) => {
       if (!cercaRef.current) return;

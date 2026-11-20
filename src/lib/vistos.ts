@@ -32,7 +32,9 @@ export function borrarVistos() {
 /** Productos vistos (que sigan en la tienda), sin el que se indique */
 export function useVistos(sin?: string): Producto[] {
   const [ids, setIds] = useState<string[]>(leer);
-  useEffect(() => { setIds(leer()); }, [sin]);
+  // Al pasar a otro producto se vuelve a leer la lista (se ajusta al dibujar, sin un efecto aparte)
+  const [antes, setAntes] = useState(sin);
+  if (antes !== sin) { setAntes(sin); setIds(leer()); }
   useEffect(() => {
     const alBorrar = () => setIds(leer());
     window.addEventListener(EVENTO, alBorrar);

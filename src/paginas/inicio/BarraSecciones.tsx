@@ -3,15 +3,18 @@
    baja hasta ella. Se esconde al volver arriba y al llegar al pie de página. En celular no existe (ahí está el menú) */
 import { useEffect, useRef, useState } from "react";
 import { useMarco } from "../../lib/movimiento";
+import { montarTodo } from "../../components/Diferido";
 
+// En el mismo orden de la portada (19/11/2026: lo más vendido y categorías primero; envíos junto al servicio técnico)
 const SECCIONES: { texto: string; id: string }[] = [
-  { texto: "Categorías", id: "categorias" },
-  { texto: "Envíos", id: "envios" },
-  { texto: "Marcas", id: "marcas" },
   { texto: "Lo más vendido", id: "t-vendidos" },
+  { texto: "Categorías", id: "categorias" },
+  { texto: "Cómo comprar", id: "como-comprar" },
+  { texto: "Marcas", id: "marcas" },
   { texto: "Encuentra tu celular", id: "tu-celular" },
   { texto: "Celulares", id: "t-celulares" },
   { texto: "Computadores", id: "t-computadores" },
+  { texto: "Envíos", id: "envios" },
   { texto: "Servicio técnico", id: "servicios" },
   { texto: "Calificaciones", id: "calificaciones" }
 ];
@@ -27,6 +30,8 @@ export function BarraSecciones() {
   const marco = useMarco(lista, Math.max(0, presentes.findIndex(s => s.id === actual)));
 
   useEffect(() => {
+    // Hay que mirar la página ya armada para saber qué secciones existen: por eso va en un efecto (una sola vez al montar)
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- lectura de la página después de dibujar, una vez
     setPresentes(SECCIONES.filter(s => document.getElementById(s.id)));
     let cuadro = 0;
     const revisar = () => {
@@ -54,10 +59,14 @@ export function BarraSecciones() {
   useEffect(() => { if (barra.current) barra.current.inert = !visible; }, [visible]);
 
   const ir = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - 140;
-    window.scrollTo({ top: y, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    // Primero se arman los tramos que faltan de la portada (Diferido): así el punto de llegada no se mueve al bajar
+    montarTodo();
+    requestAnimationFrame(() => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const y = el.getBoundingClientRect().top + window.scrollY - 140;
+      window.scrollTo({ top: y, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    });
   };
 
   return (

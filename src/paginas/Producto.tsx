@@ -55,15 +55,19 @@ function Versiones({ producto: p, elegida, elegir }: { producto: TipoProducto; e
   );
 }
 
-/** Celular y tableta: cuando el botón «Agregar al carrito» de la ficha sale por arriba de la pantalla, sube una barra fija
-    abajo con el precio y el botón. Baja cuando el botón vuelve a verse o cuando aparece el pie de página.
-    Mientras se ve, el aviso «Agregaste…» sale encima de ella (--barra-abajo) */
+/** Celular y tableta: mientras el botón «Agregar al carrito» de la ficha no se ve (porque ya pasó por arriba o porque
+    todavía está más abajo), hay una barra fija abajo con el precio y el botón. Baja cuando el botón se ve o cuando aparece
+    el pie de página. Mientras se ve, el aviso «Agregaste…» sale encima de ella (--barra-abajo).
+    19/11/2026: antes solo salía después de pasar el botón; en celular el botón quedaba a pantalla y media de la llegada */
 function BarraAgregar({ boton, producto, nombre, precio, tope, alAgregar, etiqueta }: {
   boton: RefObject<HTMLButtonElement | null>; producto: TipoProducto; nombre: string; precio: number; tope: boolean; alAgregar: (e: React.MouseEvent<HTMLButtonElement>) => void; etiqueta: ReactNode;
 }) {
   const barra = useRef<HTMLDivElement>(null);
   const arriba = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  // La barra de abajo (celular y tableta) también sale cuando el botón aún no llega a la pantalla; la de arriba
+  // (computador) solo cuando ya pasó
+  const [abajo, setAbajo] = useState(false);
   // Se revisa al mover la página (una vez por cuadro). Con IntersectionObserver no bastaba: si la página baja de golpe
   // (un salto o un deslizamiento muy rápido), el botón pasa de abajo a arriba sin «verse» y no avisaba.
   // El botón tapado por la cabecera fija ya cuenta como fuera de la pantalla
@@ -73,21 +77,30 @@ function BarraAgregar({ boton, producto, nombre, precio, tope, alAgregar, etique
     let cuadro = 0;
     const revisar = () => {
       cuadro = 0;
-      const arriba = b.getBoundingClientRect().bottom < (cabecera?.getBoundingClientRect().bottom ?? 0);
+      const r = b.getBoundingClientRect();
+      const arriba = r.bottom < (cabecera?.getBoundingClientRect().bottom ?? 0);
+      const debajo = r.top > window.innerHeight;
       const conPie = pie ? pie.getBoundingClientRect().top < window.innerHeight : false;
       setVisible(arriba && !conPie);
+      setAbajo((arriba || debajo) && !conPie);
     };
     const alMover = () => { if (!cuadro) cuadro = requestAnimationFrame(revisar); };
     window.addEventListener("scroll", alMover, { passive: true });
     window.addEventListener("resize", alMover);
+    // Al abrir el producto la página todavía se está armando (fotos, versiones): se vuelve a mirar cada vez que cambia de alto
+    const alto = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(alMover);
+    alto?.observe(document.body);
     revisar();
-    return () => { window.removeEventListener("scroll", alMover); window.removeEventListener("resize", alMover); cancelAnimationFrame(cuadro); };
+    return () => { window.removeEventListener("scroll", alMover); window.removeEventListener("resize", alMover); alto?.disconnect(); cancelAnimationFrame(cuadro); };
   }, [boton]);
   useEffect(() => {
-    if (barra.current) barra.current.inert = !visible;
     if (arriba.current) arriba.current.inert = !visible;
-    document.documentElement.style.setProperty("--barra-abajo", visible && barra.current ? `${barra.current.offsetHeight}px` : "0px");
   }, [visible]);
+  useEffect(() => {
+    if (barra.current) barra.current.inert = !abajo;
+    // En computador la barra de abajo no existe (lg:hidden): offsetHeight es 0 y no corre nada
+    document.documentElement.style.setProperty("--barra-abajo", abajo && barra.current ? `${barra.current.offsetHeight}px` : "0px");
+  }, [abajo]);
   useEffect(() => () => { document.documentElement.style.removeProperty("--barra-abajo"); }, []);
   return (
     <>
@@ -100,7 +113,7 @@ function BarraAgregar({ boton, producto, nombre, precio, tope, alAgregar, etique
         <button type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario shrink-0">{etiqueta}</button>
       </div>
     </div>
-    <div ref={barra} className={`fixed inset-x-0 bottom-0 z-30 border-t border-linea bg-superficie px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] pt-3 shadow-flota transition-transform duration-300 ease-salida lg:hidden ${visible ? "translate-y-0" : "translate-y-[calc(100%+24px)]"}`}>
+    <div ref={barra} className={`fixed inset-x-0 bottom-0 z-30 border-t border-linea bg-superficie px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] pt-3 shadow-flota transition-transform duration-300 ease-salida lg:hidden ${abajo ? "translate-y-0" : "translate-y-[calc(100%+24px)]"}`}>
       <div className="mx-auto flex max-w-pagina items-center gap-3">
         <div className="min-w-0 flex-1">
           <p className="truncate text-[13px] text-tinta-2">{nombre}</p>
@@ -192,7 +205,8 @@ export default function Producto({ id }: { id: string }) {
       <div className="contenedor pt-5">
         <Migas migas={[{ texto: "Inicio", href: hrefDe("inicio") }, { texto: VISTAS[vista] ?? "", href: hrefDe(vista) }, ...(cat ? [{ texto: cat }] : [])]} />
       </div>
-      <div className="contenedor grid gap-8 pb-10 pt-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-12">
+      {/* 19/11/2026: desde tableta (768 px) foto e información van lado a lado; antes la foto llenaba la primera pantalla */}
+      <div className="contenedor grid gap-6 pb-10 pt-4 sm:gap-8 sm:pt-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-12">
         <Galeria producto={p} tinte={p.opciones.length > 1 && activa(49) ? tinteDe(o.nombre) : null} />
 
         {/* cascada-info: al abrir el producto, cada bloque de esta columna entra 50 ms después del anterior (animación 18) */}
@@ -246,14 +260,15 @@ export default function Producto({ id }: { id: string }) {
             <div className="tarjeta mt-6 p-5">
               {/* Al cambiar de versión, el precio nuevo entra rodando (la clave lo vuelve a montar) */}
               <Precio valor={o.precio} />
-              <p className="mt-2 text-[13px] text-tinta-3">Precio en pesos colombianos. Antes de cualquier pago te confirmamos disponibilidad por WhatsApp.</p>
+              <p className="mt-2 text-[13px] text-tinta-3">Precio en pesos colombianos. Pagas en línea con Bold o coordinas el pago por WhatsApp.</p>
               <EnvioGratis precio={o.precio} />
-              <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
+              {/* En tableta la columna es angosta: un botón por renglón (en dos columnas «Agregar al carrito» se partía) */}
+              <div className="mt-4 grid gap-2.5 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
                 {/* barrido-agregar: un destello lo cruza una vez al abrir el producto (animación 21) */}
                 <button ref={boton} type="button" onClick={alAgregar} disabled={tope} className="btn btn-primario barrido barrido-agregar w-full"><EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" /></button>
                 <button type="button" onClick={comprarAhora} className="btn btn-marca w-full">Comprar ahora</button>
-                <a href={waLink(`Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, o.nombre)} (${dinero(o.precio)}). ¿Está disponible?${typeof location === "undefined" ? "" : `\n${location.origin}${import.meta.env.BASE_URL}p/${p.id}/`}`)} target="_blank" rel="noopener"
-                  className="btn btn-borde w-full sm:col-span-2"><IconoWhatsApp className="h-[18px] w-[18px] text-wa" />Preguntar por WhatsApp</a>
+                <a href={waLink(`Hola ${CONFIG.nombre}, me interesa ${nombreItem(p, o.nombre)} (${dinero(o.precio)}). Quiero comprarlo.${typeof location === "undefined" ? "" : `\n${location.origin}${import.meta.env.BASE_URL}p/${p.id}/`}`)} target="_blank" rel="noopener"
+                  className="btn btn-borde w-full sm:col-span-2 md:col-span-1 lg:col-span-2"><IconoWhatsApp className="h-[18px] w-[18px] text-wa" />Preguntar por WhatsApp</a>
               </div>
               {q > 0 && <p className="mt-3 text-sm font-semibold text-marca"><span key={q} className="inline-block motion-safe:animate-entrar">{q} en el carrito</span> ·<button type="button" onClick={abrirCarrito} className="underline underline-offset-2">Ver carrito</button></p>}
             </div>

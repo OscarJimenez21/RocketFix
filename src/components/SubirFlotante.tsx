@@ -28,8 +28,8 @@ export function SubirFlotante() {
     };
   }, [encendida]);
 
-  // Al llegar arriba, el cohete vuelve a su lugar para la próxima vez
-  useEffect(() => { if (!ver) setDespega(false); }, [ver]);
+  // Al llegar arriba, el cohete vuelve a su lugar para la próxima vez (se ajusta al dibujar)
+  if (!ver && despega) setDespega(false);
 
   if (!encendida) return null;
 

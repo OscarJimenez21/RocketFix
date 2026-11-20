@@ -47,7 +47,7 @@ export function Enviado({ enlace, volver, seguir }: { enlace: string; volver: ()
         <span className="absolute bottom-0 h-[3px] w-16 rounded-full bg-linea-fuerte" />
       </span>
       <p className="text-xl font-extrabold">Abrimos WhatsApp con tu pedido</p>
-      <p className="text-sm text-tinta-2">Envía el mensaje que se abrió en WhatsApp. Te respondemos para confirmar disponibilidad y el total.</p>
+      <p className="text-sm text-tinta-2">Envía el mensaje que se abrió en WhatsApp. Te respondemos para confirmar el total y coordinar la entrega.</p>
       <a href={enlace} target="_blank" rel="noopener" className="btn btn-wa mt-2 w-full"><IconoWhatsApp />Abrir WhatsApp otra vez</a>
       <button type="button" onClick={seguir} className="btn btn-borde w-full">Seguir viendo productos</button>
       <button type="button" onClick={volver} className="enlace-suelto text-sm">Volver a mi pedido</button>
@@ -89,7 +89,7 @@ export function Cotizacion({ lineas, subtotal, envio, total, entrega }: { lineas
           <tr><td colSpan={3} className="pt-2 text-right font-bold">Total</td><td className="pt-2 text-right text-lg font-extrabold tabular-nums">{dinero(total)}</td></tr>
         </tfoot>
       </table>
-      <p className="mt-6 text-xs text-tinta-2">Precios en pesos colombianos. Antes de cualquier pago te confirmamos disponibilidad por WhatsApp al {CONFIG.whatsappVisible}.</p>
+      <p className="mt-6 text-xs text-tinta-2">Precios en pesos colombianos. Antes de cualquier pago te confirmamos el total por WhatsApp al {CONFIG.whatsappVisible}.</p>
     </section>,
     document.body
   );

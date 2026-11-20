@@ -343,7 +343,7 @@ function Empresas() {
         <ul className="mt-2 grid gap-1.5">
           {["Portátiles y PC de escritorio", "Celulares y tabletas", "Monitores, teclados, mouse y cámaras web", "Componentes y mejoras (SSD, RAM)", "Instalación de cámaras de seguridad", "Mantenimiento de computadores"].map(t => <li key={t}>• {t}</li>)}
         </ul>
-        <p className="mt-4">Te respondemos por WhatsApp con la cotización y la disponibilidad de cada producto.</p>
+        <p className="mt-4">Te respondemos por WhatsApp con la cotización de cada producto.</p>
       </div>
     </div>
   );

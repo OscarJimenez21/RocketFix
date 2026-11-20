@@ -160,7 +160,9 @@ function MenuDesplegable({ aqui, clave }: { aqui: string; clave: string }) {
   const atencion = useAtencion();
 
   useEffect(() => { conMouse.current = window.matchMedia("(hover: hover) and (pointer: fine)").matches; }, []);
-  useEffect(() => { setAbierto(null); }, [clave]);
+  // Al ir a otra página se cierra (se ajusta al dibujar, sin un efecto aparte)
+  const [claveAntes, setClaveAntes] = useState(clave);
+  if (claveAntes !== clave) { setClaveAntes(clave); setAbierto(null); }
   useEffect(() => () => window.clearTimeout(reloj.current), []);
   useEffect(() => {
     if (!abierto) return;
@@ -177,15 +179,16 @@ function MenuDesplegable({ aqui, clave }: { aqui: string; clave: string }) {
 
   const programar = (id: string | null, ms: number) => {
     window.clearTimeout(reloj.current);
-    reloj.current = window.setTimeout(() => { if (id) abiertoEn.current = Date.now(); setAbierto(id); }, ms);
+    reloj.current = window.setTimeout(() => { if (id) abiertoEn.current = performance.now(); setAbierto(id); }, ms);
   };
   const entrar = (id: string) => { if (conMouse.current) programar(id, abierto ? 0 : 140); };
   const salir = () => { if (conMouse.current) programar(null, 220); };
-  const alternar = (id: string) => {
+  // `ahora` es la hora del clic (event.timeStamp), en el mismo reloj que performance.now()
+  const alternar = (id: string, ahora: number) => {
     window.clearTimeout(reloj.current);
     // Si el mouse lo acaba de abrir, el clic no lo vuelve a cerrar
-    if (abierto === id && Date.now() - abiertoEn.current > 600) { setAbierto(null); return; }
-    abiertoEn.current = Date.now();
+    if (abierto === id && ahora - abiertoEn.current > 600) { setAbierto(null); return; }
+    abiertoEn.current = ahora;
     setAbierto(id);
   };
   const alSalirFoco = (e: React.FocusEvent) => { if (!caja.current?.contains(e.relatedTarget as Node | null)) setAbierto(null); };
@@ -203,7 +206,7 @@ function MenuDesplegable({ aqui, clave }: { aqui: string; clave: string }) {
             return (
               <li key={d.id} className="flex">
                 <button type="button" id={`menu-boton-${d.id}`} aria-expanded={esAbierto} aria-controls={`menu-panel-${d.id}`}
-                  onClick={() => alternar(d.id)} onMouseEnter={() => entrar(d.id)}
+                  onClick={e => alternar(d.id, e.timeStamp)} onMouseEnter={() => entrar(d.id)}
                   className={`relative flex items-center gap-1 px-3 text-sm font-semibold transition-colors duration-150 ${esAbierto ? "text-marca" : aquiAdentro ? "text-marca-oscuro" : "text-tinta-2 hover:text-tinta"}`}>
                   {d.titulo}
                   <IconoFlecha className={`h-3.5 w-3.5 rotate-90 transition-transform duration-200 ${esAbierto ? "-scale-x-100" : ""}`} />
@@ -297,7 +300,9 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
   const q = ruta.tipo === "buscar" ? ruta.q : "";
   const clave = claveRuta(ruta);
 
-  useEffect(() => { setMenu(false); }, [clave]);
+  // Al ir a otra página el menú se cierra (se ajusta al dibujar, sin un efecto aparte)
+  const [paginaAntes, setPaginaAntes] = useState(clave);
+  if (paginaAntes !== clave) { setPaginaAntes(clave); setMenu(false); }
   const cerrarMenu = useCallback(() => setMenu(false), []);
 
   // Animación 8: el botón de WhatsApp saluda una vez, solo en la primera página que se abre en la visita
@@ -325,11 +330,13 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
             </a>
             <BotonTema />
             <EnlaceFavoritos />
-            <button type="button" onClick={abrirCarrito} aria-label={`Abrir carrito, ${unidades} ${unidades === 1 ? "producto" : "productos"}`}
+            {/* 19/11/2026: el nombre del botón sale de su propio texto («Carrito 3 productos»): antes tenía una etiqueta
+                aparte que no coincidía con lo que se ve (lo marcó la revisión de accesibilidad) */}
+            <button type="button" onClick={abrirCarrito}
               title={unidades ? `Ver tu pedido: ${dinero(subtotalDe(lineas))} en productos` : "Tu carrito está vacío"}
               className="boton-carrito presionable inline-flex h-11 items-center gap-1.5 rounded border border-linea-fuerte px-2.5 text-sm font-semibold hover:border-tinta-2 sm:gap-2 sm:px-3">
               <IconoBolsa />
-              <span className="hidden sm:inline">Carrito</span>
+              <span className="sr-only sm:not-sr-only">Carrito</span>
               {/* Idea 23: con productos, sus fotos pequeñas apiladas (hasta 3), desde 640 px */}
               {lineas.length > 0 && (
                 <span aria-hidden="true" className="fotos-carrito hidden items-center sm:flex">
@@ -342,6 +349,7 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
               )}
               {/* La clave cambia con cada producto agregado: así la animación vuelve a empezar */}
               <span key={saltos} data-destino-carrito className={`min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-xs font-bold tabular-nums transition-colors duration-200 ${unidades ? "bg-acento text-acento-tinta" : "bg-fondo text-tinta-2"} ${saltos ? "motion-safe:animate-latido" : ""}`}>{unidades}</span>
+              <span className="sr-only">{unidades === 1 ? "producto" : "productos"}</span>
             </button>
           </div>
         </div>

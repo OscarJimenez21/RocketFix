@@ -9,7 +9,8 @@
      Con JavaScript se oculta y la tienda se carga encima, en la misma dirección.
    404.html: copia de la tienda para las direcciones sin página propia (ej.: /RocketFix/buscar/iphone/); la tienda lee la
    dirección y muestra esa página (o su «No la encontramos»).
-   También escribe sitemap.xml. Solo usa datos reales del catálogo: no declara disponibilidad, garantías ni calificaciones.
+   También escribe sitemap.xml. Solo usa datos reales del catálogo: no declara garantías ni calificaciones. Desde el
+   19/11/2026 declara «disponible» (la tienda trabaja con todo disponible, decisión del 18/11/2026).
    Uso: node scripts/paginas-estaticas.mjs  (lo corre `npm run build`) */
 import { execFileSync } from "node:child_process";
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
@@ -196,6 +197,9 @@ for (const p of PRODUCTOS) {
     : { "@type": "Offer", priceCurrency: "COP", price: precio, url: SITIO + ruta, seller: { "@id": ORGANIZACION },
         shippingDetails: [envioLd("bogota", precio), envioLd("nacional", precio)], hasMerchantReturnPolicy: devolucionLd };
   if (condicion) oferta.itemCondition = condicion;
+  // 19/11/2026: Google recomienda decir si hay existencias. La tienda trabaja con todo disponible (decisión del 18/11:
+  // nunca se confirma inventario), y los de «preguntar disponibilidad» no llevan oferta (ver jsonld más abajo)
+  oferta.availability = "https://schema.org/InStock";
   const producto = {
     "@type": "Product", "@id": SITIO + ruta + "#producto", name: p.nombre, sku: p.id, description: d.resumen,
     ...(fotos.length ? { image: fotos.map(abs) } : {}),
@@ -222,7 +226,7 @@ for (const p of PRODUCTOS) {
     d.incluye ? `<h2>Qué incluye la caja</h2><p>${esc(d.incluye)}</p>` : "",
     consultar
       ? `<p><a href="${wa(`Hola ${CONFIG.nombre}, me interesa ${p.nombre}. ¿Está disponible y qué precio tiene?`)}">Preguntar disponibilidad por WhatsApp</a>.</p>`
-      : `<p><a href="${wa(`Hola ${CONFIG.nombre}, me interesa ${p.nombre} (${dinero(precio)}). ¿Está disponible?`)}">Preguntar por WhatsApp</a>. Antes de cualquier pago te confirmamos disponibilidad.</p>`,
+      : `<p><a href="${wa(`Hola ${CONFIG.nombre}, me interesa ${p.nombre} (${dinero(precio)}). Quiero comprarlo.`)}">Pedir por WhatsApp</a>. Pagas en línea con Bold o coordinas el pago por WhatsApp.</p>`,
     contacto
   ].join("");
   // Sin precio publicado no hay oferta que declarar: Google pide precio en Product, así que solo van las migas
@@ -346,6 +350,21 @@ for (const pa of AYUDA.paginas) {
     telephone: CONFIG.whatsappVisible, areaServed: { "@type": "Country", name: "Colombia" },
     contactPoint: { "@type": "ContactPoint", telephone: CONFIG.whatsappVisible, contactType: "customer service", availableLanguage: "es", areaServed: "CO" },
     hasMerchantReturnPolicy: devolucionLd,
+    // 19/11/2026: dirección, correo y horario, los mismos que ya publican el pie y las políticas (politicas.json →
+    // datos, config.json → horario). Si un dato queda vacío, no va
+    ...(() => {
+      const datos = leer("politicas.json").datos ?? {};
+      const dir = datos.direccion?.valor, correo = datos.correo?.valor;
+      const DIAS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      const horas = CONFIG.horario.filter(t => t.abre && t.cierra).map(t => ({
+        "@type": "OpeningHoursSpecification", dayOfWeek: t.dias.map(d => DIAS[d]), opens: t.abre, closes: t.cierra
+      }));
+      return {
+        ...(dir ? { address: { "@type": "PostalAddress", streetAddress: dir.replace(/,\s*Bogot[aá]\s*$/i, ""), addressLocality: "Bogotá", addressRegion: "Bogotá D.C.", addressCountry: "CO" } } : {}),
+        ...(correo ? { email: correo } : {}),
+        ...(horas.length ? { openingHoursSpecification: horas } : {})
+      };
+    })(),
     // Perfiles oficiales en redes (config.json → redes); solo los que existen
     ...(Object.values(CONFIG.redes).some(Boolean) ? { sameAs: Object.values(CONFIG.redes).filter(Boolean) } : {})
   };
@@ -405,7 +424,7 @@ if (!FECHAS.catalogo) console.warn("sitemap.xml sin lastmod: no se encontró el 
   const linea = (texto, ruta, nota = "") => `- [${texto}](${SITIO}${ruta})${nota ? `: ${nota}` : ""}`;
   const txt = [
     `# ${CONFIG.nombre}`, "",
-    `> Tienda de tecnología en Bogotá, Colombia: celulares, computadores, gaming, componentes y accesorios, con domicilio en Bogotá y envíos a todo Colombia. Pedidos y asesoría por WhatsApp (${CONFIG.whatsappVisible}). Precios en pesos colombianos (COP); la disponibilidad se confirma por WhatsApp antes de cualquier pago.`, "",
+    `> Tienda de tecnología en Bogotá, Colombia: celulares, computadores, gaming, componentes y accesorios, con domicilio en Bogotá y envíos a todo Colombia. Pedidos y asesoría por WhatsApp (${CONFIG.whatsappVisible}). Precios en pesos colombianos (COP); pago en línea con Bold o coordinado por WhatsApp.`, "",
     `Servicio técnico: reparación de celulares y computadores, e instalación de cámaras de seguridad.`, "",
     "## Secciones de la tienda",
     ...secciones.map(([t, v]) => linea(VISTAS[v] ?? v, rutaVista(v), `${PRODUCTOS.filter(p => p.tienda === t).length} productos`)), "",
@@ -469,9 +488,13 @@ if (process.env.FEED_GOOGLE === "1") {
     const csp = [
       "default-src 'self'", `script-src 'self' ${[...new Set(huellas), ...SCRIPTS].join(" ")}`, "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: blob: https://*.bold.co", "font-src 'self' data: https://fonts.gstatic.com", `connect-src 'self' ${CONEXIONES.join(" ")}`, "frame-src 'self' https://*.bold.co",
-      "media-src 'self'", "worker-src 'self'", "manifest-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'self' https://*.bold.co"
+      "media-src 'self'", "worker-src 'self'", "manifest-src 'self'", "object-src 'none'", "base-uri 'self'", "form-action 'self' https://*.bold.co",
+      // 19/11/2026: si algún enlace o recurso quedara con http://, el navegador lo pide por https:// (nunca sin cifrar)
+      "upgrade-insecure-requests"
     ].join("; ");
-    h = h.replace(/(<meta charset="[^"]*"\s*\/?>)/i, `$1\n    <meta http-equiv="Content-Security-Policy" content="${csp}">`);
+    // 19/11/2026: a otros sitios solo se les dice de qué dominio viene la persona, nunca la dirección completa (que puede
+    // llevar la búsqueda o un carrito compartido). GitHub Pages no deja poner encabezados: va como etiqueta
+    h = h.replace(/(<meta charset="[^"]*"\s*\/?>)/i, `$1\n    <meta http-equiv="Content-Security-Policy" content="${csp}">\n    <meta name="referrer" content="strict-origin-when-cross-origin">`);
     writeFileSync(archivo, h);
   }
   console.log(`CSP en ${todas.length} páginas`);

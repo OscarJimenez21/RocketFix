@@ -18,7 +18,7 @@ const ESPERA = 6000;
 const MENSAJE = "Si quieres comunicarte con nosotros, inicia tu chat aquí.";
 /** Idea 95: preguntas rápidas (texto del botón, mensaje que se escribe en WhatsApp) */
 const RAPIDAS = [
-  ["Disponibilidad", "quiero saber si tienen disponible "],
+  ["Comprar", "quiero comprar "],
   ["Envíos", "quiero saber cuánto tarda y cuánto vale el envío a "],
   ["Reparación", "quiero cotizar la reparación de mi "],
   ["Mi pedido", "quiero saber en qué va mi pedido "]
@@ -70,7 +70,9 @@ export function WhatsAppFlotante() {
   const estado = estadoAtencion();
 
   return (
-    <>
+    // 19/11/2026: el botón flotante y su aviso van en su propia región (la revisión de accesibilidad pide que todo esté
+    // dentro de una región de la página). Los hijos son fijos: el aside no ocupa lugar
+    <aside aria-label="Contacto por WhatsApp">
       {aviso && (
         <>
           {/* Computador: tarjeta tipo chat */}
@@ -133,6 +135,6 @@ export function WhatsAppFlotante() {
           <Cohete className="h-4 w-4 rotate-45 text-marca-menta" />
         </span>
       </a>
-    </>
+    </aside>
   );
 }

@@ -55,7 +55,7 @@ function Fugaces({ visible, ritmo }: { visible: boolean; ritmo: number }) {
   const caja = useRef<HTMLDivElement>(null);
   // El ritmo cambia con la hora (animación 43) sin reiniciar las tandas
   const ritmoRef = useRef(ritmo);
-  ritmoRef.current = ritmo;
+  useEffect(() => { ritmoRef.current = ritmo; }, [ritmo]);
   useEffect(() => {
     if (!visible || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const relojes = new Set<number>();

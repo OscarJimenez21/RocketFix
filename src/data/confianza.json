@@ -1,3 +1,34 @@
 {
- "fotos": []
+ "video": {
+  "archivo": "videos/reparacion-placa-iphone.mp4",
+  "poster": "fotos/confianza/reparacion-placa-iphone.webp",
+  "etiqueta": "Servicio técnico de celulares",
+  "titulo": "Reparación de placa de iPhone",
+  "texto": "Así trabajamos una placa de iPhone con la estación de calor: microsoldadura, pieza por pieza. Si tu celular se apagó y no vuelve a encender, muchas veces el daño está en la placa y tiene arreglo. Te decimos el valor antes de reparar.",
+  "alt": "Video: la boquilla de la estación de calor trabaja sobre la placa de un iPhone, sujeta en su base de reparación",
+  "mensaje": "Hola, quiero cotizar la reparación de la placa de mi celular. El modelo es:"
+ },
+ "fotos": [
+  {
+   "archivo": "fotos/confianza/mantenimiento-antes-1200.webp",
+   "pequena": "fotos/confianza/mantenimiento-antes-640.webp",
+   "titulo": "Antes del mantenimiento",
+   "texto": "Así estaban los ventiladores del frente de este PC: con polvo acumulado en las aspas y el marco.",
+   "alt": "Ventiladores del frente de un PC con polvo acumulado, antes del mantenimiento"
+  },
+  {
+   "archivo": "fotos/confianza/mantenimiento-limpieza-1200.webp",
+   "pequena": "fotos/confianza/mantenimiento-limpieza-640.webp",
+   "titulo": "Desarmado y limpieza",
+   "texto": "Desarmamos el equipo y limpiamos cada pieza por separado: memorias, procesador, disipador y ventilador.",
+   "alt": "Piezas del PC desarmadas sobre la mesa de trabajo: memorias, procesador, discos, disipador y ventilador"
+  },
+  {
+   "archivo": "fotos/confianza/mantenimiento-despues-1200.webp",
+   "pequena": "fotos/confianza/mantenimiento-despues-640.webp",
+   "titulo": "Después del mantenimiento",
+   "texto": "El mismo PC armado de nuevo, limpio y funcionando.",
+   "alt": "El mismo PC armado de nuevo y limpio, con la tarjeta gráfica instalada, después del mantenimiento"
+  }
+ ]
 }

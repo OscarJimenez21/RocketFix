@@ -7,7 +7,7 @@ import { dinero, recurso } from "../lib/formato";
 import { filasHorario } from "../lib/horario";
 import { waLink } from "../lib/whatsapp";
 import { BotonCopiar, PuntoEstado, useAtencion } from "./Contacto";
-import { IconoCamion, IconoMoto, IconoWhatsApp } from "./Iconos";
+import { IconoCamion, IconoFlecha, IconoMoto, IconoWhatsApp } from "./Iconos";
 import { Cohete, Logo } from "./Logo";
 import { useInstalar } from "../lib/instalar";
 import { AjustesLectura, SelectorTema } from "./SelectorTema";
@@ -107,6 +107,27 @@ const AGRUPADAS = GRUPOS_PAGO.flatMap(g => g.nombres);
 const OTRAS = PAGOS.lista.filter(f => !AGRUPADAS.includes(f.nombre)).map(f => f.nombre);
 if (OTRAS.length) GRUPOS_PAGO.push({ titulo: "Otras", nombres: OTRAS });
 
+/** 19/11/2026: en celular cada grupo de enlaces del pie se abre y se cierra con su título (el pie medía casi 3.000 px,
+    unas 3,6 pantallas, porque todas las listas iban abiertas una debajo de otra). Desde tableta se ven siempre abiertas,
+    con su título de siempre */
+function SeccionPie({ titulo, children, className = "" }: { titulo: string; children: React.ReactNode; className?: string }) {
+  const [abierto, setAbierto] = useState(false);
+  const id = useId();
+  return (
+    <div className={className}>
+      <h3 className="etiqueta mb-3 hidden text-white/60 sm:block">{titulo}</h3>
+      <h3 className="sm:hidden">
+        <button type="button" aria-expanded={abierto} aria-controls={id} onClick={() => setAbierto(a => !a)}
+          className="flex min-h-[52px] w-full items-center justify-between gap-3 border-b border-white/10 text-left text-[15px] font-semibold text-white">
+          {titulo}
+          <IconoFlecha className={`h-4 w-4 shrink-0 text-white/60 transition-transform duration-200 ease-salida ${abierto ? "-rotate-90" : "rotate-90"}`} />
+        </button>
+      </h3>
+      <div id={id} className={abierto ? "pb-4 pt-3 sm:p-0" : "max-sm:hidden"}>{children}</div>
+    </div>
+  );
+}
+
 /** Mejora 3: «Instalar la tienda» como aplicación. Solo aparece cuando el navegador lo ofrece (Chrome, Edge, Android) */
 function BotonInstalar() {
   const instalar = useInstalar();
@@ -171,7 +192,7 @@ function Siguenos() {
   ];
   return (
     <div className="border-t border-white/10">
-      <section aria-labelledby="t-redes" className="contenedor py-9">
+      <section aria-labelledby="t-redes" className="contenedor py-7 sm:py-9">
         <h2 id="t-redes" className="etiqueta mb-4 text-white/60">Síguenos y escríbenos</h2>
         <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
           {fichas.map(f => (
@@ -209,7 +230,7 @@ const enlace = "enlace-pie hover:text-white";
         <div className="contenedor flex flex-col gap-5 py-8 md:flex-row md:items-center md:justify-between md:gap-10">
           <div className="max-w-xl">
             <h2 id="t-contacto" className="text-xl font-extrabold text-white sm:text-2xl">¿Necesitas ayuda para elegir?</h2>
-            <p className="mt-1.5 text-[15px] leading-relaxed">Escríbenos por WhatsApp: te asesoramos, confirmamos disponibilidad y coordinamos la entrega o el servicio.</p>
+            <p className="mt-1.5 text-[15px] leading-relaxed">Escríbenos por WhatsApp: te asesoramos y coordinamos la entrega o el servicio.</p>
             <a href={hrefDe("como-comprar")} className="mt-1 inline-flex min-h-[44px] items-center text-[15px] font-semibold text-marca-menta underline-offset-4 hover:underline">Mira cómo comprar en 3 pasos</a>
           </div>
           <RutaCohete />
@@ -220,8 +241,8 @@ const enlace = "enlace-pie hover:text-white";
         </div>
       </div>
 
-      <div className="contenedor grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-[1.25fr_1.4fr_1.1fr_1fr]">
-        <div>
+      <div className="contenedor grid py-8 sm:grid-cols-2 sm:gap-10 sm:py-12 lg:grid-cols-[1.25fr_1.4fr_1.1fr_1fr]">
+        <div className="mb-5 sm:mb-0">
           <Logo claro />
           {/* Eslogan de la marca (antes iba una frase larga con todo lo que vende la tienda) */}
           <p className="mt-4 max-w-xs font-display text-[19px] font-extrabold leading-snug text-white ancho-108">Hacemos despegar tu tecnología</p>
@@ -229,18 +250,20 @@ const enlace = "enlace-pie hover:text-white";
               «Síguenos y escríbenos», más abajo, con sus logos */}
         </div>
         <nav aria-label="Categorías de la tienda">
-          <h3 className="etiqueta mb-3 text-white/60">Tienda</h3>
-          <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">{TIENDAS.map(t => <li key={t.id}><a href={hrefDe(t.vista)} className={enlace}>{t.menu}</a></li>)}</ul>
+          <SeccionPie titulo="Tienda">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">{TIENDAS.map(t => <li key={t.id}><a href={hrefDe(t.vista)} className={enlace}>{t.menu}</a></li>)}</ul>
+          </SeccionPie>
         </nav>
-        <nav aria-label="Servicio técnico">
-          <h3 className="etiqueta mb-3 text-white/60">Servicio técnico</h3>
+        <nav aria-label="Servicio técnico y ayuda">
+          <SeccionPie titulo="Servicio técnico">
           <ul className="grid gap-2 text-sm">
             <li><a href={hrefDe("servicios")} className={enlace}>Solicitar un servicio</a></li>
             {ARTICULOS.map(a => <li key={a.id}><a href={hrefDe(a.id)} className={enlace}>{a.titulo}</a></li>)}
             <li><a href={hrefDe("blog")} className={enlace}>Blog</a></li>
           </ul>
+          </SeccionPie>
           {/* Páginas de ayuda (12/11) */}
-          <h3 className="etiqueta mb-3 mt-6 text-white/60">Ayuda</h3>
+          <SeccionPie titulo="Ayuda" className="sm:mt-6">
           <ul className="grid gap-2 text-sm">
             {[["preguntas-frecuentes", "Preguntas frecuentes"], ["sigue-tu-pedido", "Sigue tu pedido"], ["diagnostico", "¿Qué le pasa a tu equipo?"],
               ["busca-por-uso", "Busca por uso"], ["todas-las-marcas", "Todas las marcas"], ["guia-de-originales", "Cómo saber si es original"],
@@ -249,26 +272,30 @@ const enlace = "enlace-pie hover:text-white";
             {/* Idea 69 (13/11/2026): catálogo completo para descargar */}
             <li><a href={CATALOGO_PDF.href} target="_blank" rel="noopener" className={enlace}>{CATALOGO_PDF.texto} <span className="text-white/60">({pesoCatalogo})</span></a></li>
           </ul>
+          </SeccionPie>
         </nav>
         <div>
-          <h3 className="etiqueta mb-3 text-white/60">Horario</h3>
-          <p className="flex items-center gap-2 text-sm font-semibold text-white"><PuntoEstado abierto={atencion.abierto} claro />{atencion.texto}</p>
-          <ul className="mt-2 grid gap-1 text-sm">{filasHorario().map(([d, h]) => <li key={d}>{d}: {h}</li>)}</ul>
-          <p className="mt-3 text-xs leading-relaxed text-white/60">{CONFIG.atencion}</p>
+          <SeccionPie titulo="Horario">
+            <p className="flex items-center gap-2 text-sm font-semibold text-white"><PuntoEstado abierto={atencion.abierto} claro />{atencion.texto}</p>
+            <ul className="mt-2 grid gap-1 text-sm">{filasHorario().map(([d, h]) => <li key={d}>{d}: {h}</li>)}</ul>
+            <p className="mt-3 text-xs leading-relaxed text-white/60">{CONFIG.atencion}</p>
+          </SeccionPie>
           {/* Idea 30: colores de día o de noche */}
-          <h3 className="etiqueta mb-2 mt-6 text-white/60">Colores de la página</h3>
-          <SelectorTema oscuro />
-          <AjustesLectura oscuro />
-          <BotonInstalar />
+          <SeccionPie titulo="Colores de la página" className="sm:mt-6">
+            <SelectorTema oscuro />
+            <AjustesLectura oscuro />
+            <BotonInstalar />
+          </SeccionPie>
         </div>
       </div>
 
       {/* Idea 40: envíos y formas de pago lado a lado. Los pagos van agrupados y más grandes; son los mismos de pagos.json
           (no se agregó ninguno). Las redes y el WhatsApp van en «Síguenos y escríbenos», desde config.json */}
       <div className="border-t border-white/10">
-        <div className="contenedor grid gap-10 py-9 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.6fr)] lg:gap-14">
-          <section aria-labelledby="t-envios-pie">
-            <h2 id="t-envios-pie" className="etiqueta mb-4 text-white/60">Envíos</h2>
+        <div className="contenedor grid gap-6 py-7 sm:gap-10 sm:py-9 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.6fr)] lg:gap-14">
+          {/* En celular los envíos también se abren con su título (ya están en la portada y en cada producto) */}
+          <section aria-label="Envíos de la tienda">
+            <SeccionPie titulo="Envíos">
             <ul className="grid gap-4 text-sm">
               <li className="flex gap-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 text-marca-menta"><IconoMoto /></span>
@@ -276,13 +303,14 @@ const enlace = "enlace-pie hover:text-white";
               </li>
               <li className="flex gap-3">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 text-marca-menta"><IconoCamion /></span>
-                <span><b className="block text-white">Resto de Colombia</b>Por transportadora: Envía, Interrapidísimo o Servientrega. Gratis desde {dinero(CONFIG.envios.nacional.gratisDesde)}.</span>
+                <span><b className="block text-white">Resto de Colombia</b>Por Interrapidísimo. Gratis desde {dinero(CONFIG.envios.nacional.gratisDesde)}.</span>
               </li>
             </ul>
+            </SeccionPie>
           </section>
           <section aria-labelledby="t-pagos">
             <h2 id="t-pagos" className="etiqueta mb-4 text-white/60">Formas de pago</h2>
-            <div className="grid gap-5 sm:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-3 sm:gap-5">
               {GRUPOS_PAGO.map(g => {
                 const formas = PAGOS.lista.filter(f => g.nombres.includes(f.nombre));
                 if (!formas.length) return null;
@@ -291,9 +319,9 @@ const enlace = "enlace-pie hover:text-white";
                     <h3 className="mb-2 text-[13px] font-semibold text-white">{g.titulo}</h3>
                     <ul className="flex flex-wrap gap-2">
                       {formas.map(f => (
-                        <li key={f.nombre} className="claro-siempre flex h-14 min-w-[88px] items-center justify-center gap-2 rounded-md bg-white px-3.5 text-sm font-semibold text-tinta">
+                        <li key={f.nombre} className="claro-siempre flex h-12 min-w-[76px] items-center justify-center gap-2 rounded-md bg-white px-3 text-sm font-semibold text-tinta sm:h-14 sm:min-w-[88px] sm:px-3.5">
                           {f.archivo
-                            ? <img src={recurso(f.archivo)} alt={f.alt ?? f.nombre} className="h-8 w-auto max-w-[120px] object-contain" loading="lazy" decoding="async" />
+                            ? <img src={recurso(f.archivo)} alt={f.alt ?? f.nombre} className="h-7 w-auto max-w-[110px] object-contain sm:h-8 sm:max-w-[120px]" loading="lazy" decoding="async" />
                             // eslint-disable-next-line no-restricted-syntax -- íconos propios (pagos.json); scripts/verificar-catalogo.mjs no deja publicar si traen algo que se ejecute
                             : <><span className="h-6 w-6 text-marca-medio [&>svg]:h-full [&>svg]:w-full" dangerouslySetInnerHTML={{ __html: f.icono ?? "" }} />{f.nombre}</>}
                         </li>

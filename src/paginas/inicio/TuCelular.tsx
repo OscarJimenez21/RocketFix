@@ -57,14 +57,14 @@ export function TuCelular() {
           {modo === "marca"
             ? MARCAS.map(([m, l]) => (
               <button key={m} type="button" aria-pressed={m === marca} onClick={() => setMarca(m)} className="chip">
-                <span className="font-semibold">{m}</span><span className={m === marca ? "text-white/80" : "text-tinta-3"}>desde {dinero(desde(l[0] as Producto))}</span>
+                <span className="font-semibold">{m}</span><span className={m === marca ? "text-white" : "text-tinta-3"}>desde {dinero(desde(l[0] as Producto))}</span>
               </button>
             ))
             : PRESUPUESTOS.map((r, k) => {
               const n = CELULARES.filter(p => desde(p) >= r.min && desde(p) < r.max).length;
               return n ? (
                 <button key={r.texto} type="button" aria-pressed={k === rango} onClick={() => setRango(k)} className="chip">
-                  <span className="font-semibold">{r.texto}</span><span className={k === rango ? "text-white/80" : "text-tinta-3"}>{n}</span>
+                  <span className="font-semibold">{r.texto}</span><span className={k === rango ? "text-white" : "text-tinta-3"}>{n}</span>
                 </button>
               ) : null;
             })}

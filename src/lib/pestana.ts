@@ -34,8 +34,9 @@ function iconoConNumero(base: HTMLImageElement, n: number): string | null {
 
 export function usePestanaViva(unidades: number) {
   const tituloReal = useRef<string | null>(null);
+  // Lo lee el aviso de «cambió de pestaña»; se anota después de dibujar (no al dibujar)
   const unidadesRef = useRef(unidades);
-  unidadesRef.current = unidades;
+  useEffect(() => { unidadesRef.current = unidades; }, [unidades]);
 
   // Título mientras la persona está en otra pestaña
   useEffect(() => {

@@ -1,6 +1,6 @@
 /* Página de favoritos (/favoritos/, mejora 8): los productos que la persona guardó con el corazón, en este navegador.
    Se envían por WhatsApp para pedir una cotización: el mensaje lleva cada producto con su precio publicado (el de la
-   página, sin cambios) y su enlace. No es un pedido: Rocket Fix responde con la cotización y la disponibilidad.
+   página, sin cambios) y su enlace. No es un pedido: Rocket Fix responde con la cotización.
    Idea 99 (12/11): la lista se puede compartir con un enlace (/favoritos/?lista=a,b). Quien lo abre ve esa lista y puede
    guardarla en sus favoritos; no se mezcla con la suya hasta que toque «Guardar». */
 import { useMemo, useState } from "react";
@@ -22,7 +22,7 @@ export function mensajeFavoritos(productos: Producto[], origen = typeof location
     const precio = p.consultar ? "preguntar disponibilidad" : `${rotuloPrecio(p).toLowerCase()} ${dinero(desde(p))}`;
     return `• ${p.nombre} (${precio})\n  ${origen}${hrefProducto(p.id)}`;
   });
-  return `Hola ${CONFIG.nombre}, me gustaría una cotización de estos productos que guardé en la tienda:\n\n${filas.join("\n")}\n\n¿Me confirman disponibilidad y precio?`;
+  return `Hola ${CONFIG.nombre}, me gustaría una cotización de estos productos que guardé en la tienda:\n\n${filas.join("\n")}\n\n¿Me ayudan con la cotización?`;
 }
 
 const deIds = (ids: string[]) => ids.map(id => porId[id]).filter((p): p is Producto => Boolean(p));

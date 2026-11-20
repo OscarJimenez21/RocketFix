@@ -88,16 +88,19 @@
    "ilustracion": "celular",
    "articulo": "blog-celulares",
    "tono": "cel",
-   "texto": "Android y iPhone. Te decimos el valor antes de reparar.",
+   "texto": "iPhone y Android de todas las marcas. Te decimos el valor antes de reparar.",
    "trabajos": [
     "Cambio de pantalla y vidrio",
     "Cambio de batería",
+    "Reparación de placa y microsoldadura",
     "Puerto de carga, micrófono y altavoz",
+    "Cambio de tapa trasera (backcover)",
+    "Cámaras y botones",
     "Celulares mojados o que no encienden",
     "Copia de seguridad de fotos y contactos"
    ],
    "equipo": "Marca y modelo del celular",
-   "detalle": "Cuéntanos qué falla: pantalla rota, no carga, se mojó…"
+   "detalle": "Cuéntanos qué falla: pantalla rota, no carga, se apagó, se mojó…"
   },
   {
    "id": "cam",

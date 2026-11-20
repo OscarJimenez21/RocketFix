@@ -34,9 +34,10 @@ export function Envios() {
   const b = CONFIG.envios.bogota, n = CONFIG.envios.nacional;
   return (
     <section id="envios" aria-labelledby="t-envios" className="textura-orbitas curva-abajo bg-fondo pt-4">
-      <div className="contenedor grid items-center gap-8 py-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-12">
+      <div className="contenedor grid items-center gap-8 py-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:gap-12 md:py-12">
+        {/* 19/11/2026: en celular el mapa (solo de adorno) ocupaba más de una pantalla; ahí quedan las dos tarjetas con los valores */}
         <svg ref={mapa} data-visto={visto || undefined} viewBox="0 0 390 520" role="img" aria-label="Mapa de Colombia con Bogotá y las principales ciudades a las que enviamos"
-          className="mapa-envios mx-auto w-full max-w-[340px]">
+          className="mapa-envios mx-auto hidden w-full max-w-[340px] md:block">
           <path d={CONTORNO} className="fill-superficie stroke-marca/40" strokeWidth={2} strokeLinejoin="round" />
           {CIUDADES.map(c => <path key={c.nombre} d={ruta(c)} fill="none" className="mapa-ruta stroke-marca/55" strokeWidth={1.6} strokeLinecap="round" strokeDasharray="1 6" />)}
           {CIUDADES.map((c, i) => (
@@ -66,7 +67,7 @@ export function Envios() {
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-marca-suave text-marca-texto"><IconoCamion className="h-6 w-6" /></span>
               <div>
                 <p className="font-bold">Resto del país</p>
-                <p className="mt-1 text-sm text-tinta-2">Por transportadora: Envía, Interrapidísimo o Servientrega, con pago anticipado. Te confirmamos el tiempo de entrega por WhatsApp.</p>
+                <p className="mt-1 text-sm text-tinta-2">Por Interrapidísimo, con pago anticipado. Te confirmamos el tiempo de entrega por WhatsApp.</p>
                 <p className="mt-2 text-sm"><b className="tabular-nums">{dinero(n.costo)}</b> <span className="text-tinta-2">· gratis desde</span> <b className="tabular-nums">{dinero(n.gratisDesde)}</b></p>
               </div>
             </li>

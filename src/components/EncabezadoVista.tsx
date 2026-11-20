@@ -31,24 +31,33 @@ export function Migas({ migas, className = "" }: { migas: Miga[]; className?: st
   );
 }
 
-/** Cabecera de una página interna: ruta, título, introducción y una nota de ayuda a la derecha */
+/** Cabecera de una página interna: ruta, título, introducción y una nota de ayuda a la derecha.
+    19/11/2026: en celular la nota es una sola línea con su enlace (la tarjeta completa empujaba los productos fuera de la
+    primera pantalla); desde tableta se ve la tarjeta como antes */
 export function EncabezadoVista({ migas, titulo, lead, nota, extra }: { migas: Miga[]; titulo: string; lead?: string; nota?: NotaCabecera | null; extra?: ReactNode }) {
+  const enlaceNota = nota && {
+    href: nota.whatsapp !== null ? waLink(nota.whatsapp ? conNombre(nota.whatsapp) : undefined) : hrefDe(nota.href ?? "inicio"),
+    ...(nota.whatsapp !== null ? { target: "_blank", rel: "noopener" } : {})
+  };
   return (
     <div className="border-b border-linea bg-fondo">
-      <div className="contenedor grid gap-5 py-6 md:grid-cols-[minmax(0,1fr)_300px] md:items-end md:gap-10 md:py-8">
+      <div className="contenedor grid gap-5 py-5 md:grid-cols-[minmax(0,1fr)_300px] md:items-end md:gap-10 md:py-8">
         <div className="min-w-0">
           <Migas migas={migas} className="mb-2.5" />
           <h1 tabIndex={-1} className="text-[26px] font-extrabold leading-tight md:text-[32px]">{titulo}</h1>
           {lead && <p className="mt-2 max-w-2xl text-[15.5px] leading-relaxed text-tinta-2">{lead}</p>}
+          {nota && enlaceNota && (
+            <p className="mt-2 text-sm text-tinta-2 md:hidden">
+              {nota.titulo} <a className="enlace-suelto text-sm" {...enlaceNota}>{nota.enlace.replace(/\s*→$/, "")} →</a>
+            </p>
+          )}
           {extra}
         </div>
-        {nota && (
-          <aside className="tarjeta p-4 text-sm">
+        {nota && enlaceNota && (
+          <aside className="tarjeta hidden p-4 text-sm md:block">
             <p className="font-semibold">{nota.titulo}</p>
             <p className="mt-1 text-tinta-2">{nota.texto}</p>
-            <a className="enlace-suelto mt-0.5 text-sm"
-              href={nota.whatsapp !== null ? waLink(nota.whatsapp ? conNombre(nota.whatsapp) : undefined) : hrefDe(nota.href ?? "inicio")}
-              {...(nota.whatsapp !== null ? { target: "_blank", rel: "noopener" } : {})}>
+            <a className="enlace-suelto mt-0.5 text-sm" {...enlaceNota}>
               {nota.enlace.replace(/\s*→$/, "")} →
             </a>
           </aside>

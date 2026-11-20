@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PAQUETES, SERVICIOS } from "../../data/catalogo";
 import { camposServicio } from "../../data/formularios";
 import { FormularioWhatsApp } from "../../components/FormularioWhatsApp";
@@ -9,6 +9,9 @@ import { dinero, recurso } from "../../lib/formato";
 import type { Servicio } from "../../types";
 import { suave } from "../../lib/animaciones";
 import { hrefDe } from "../../lib/rutas";
+
+/** 19/11/2026: en celular cada tarjeta muestra solo los primeros trabajos de su lista (la sección medía casi 5 pantallas) */
+const EN_CELULAR = 4;
 
 /** Instalación de cámaras: línea de negocio propia, con sus paquetes de referencia (los mismos del artículo) */
 function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => void }) {
@@ -25,7 +28,7 @@ function Camaras({ servicio, cotizar }: { servicio: Servicio; cotizar: () => voi
         <h3 id="t-camaras" className="mt-1 text-[22px] font-extrabold text-white sm:text-2xl">Instalación de cámaras de seguridad</h3>
         <p className="mt-2 text-white/80">{servicio.texto}</p>
         <ul className="mt-4 grid gap-2 text-sm text-white/90">
-          {servicio.trabajos.map(t => <li key={t} className="flex gap-2.5"><IconoTrabajo texto={t} className="mt-0.5 h-[18px] w-[18px] shrink-0 text-marca-menta" />{t}</li>)}
+          {servicio.trabajos.map((t, k) => <li key={t} className={`${k >= EN_CELULAR ? "max-sm:hidden " : ""}flex gap-2.5`}><IconoTrabajo texto={t} className="mt-0.5 h-[18px] w-[18px] shrink-0 text-marca-menta" />{t}</li>)}
         </ul>
         <div className="mt-6 flex flex-wrap gap-3">
           <button type="button" onClick={cotizar} className="btn btn-primario">Cotizar instalación</button>
@@ -60,18 +63,28 @@ const ESTILO_SERVICIO: { pc: EstiloServicio; cel: EstiloServicio } & Record<stri
   cel: { caja: "bg-acento text-acento-tinta", frase: "text-acento-tinta/75", texto: "text-acento-tinta/80", foto: "ip18p", posicion: "-bottom-6 h-[98%]" }
 };
 
-/** Servicio técnico: tarjetas de reparación, la de cámaras y el formulario que arma la solicitud para WhatsApp */
-export function Servicios() {
+/** Servicio técnico: tarjetas de reparación, la de cámaras y el formulario que arma la solicitud para WhatsApp.
+    19/11/2026: el formulario queda cerrado detrás de un botón (en celular la sección medía casi 5 pantallas). Se abre con
+    ese botón, con «Solicitar cotización» / «Cotizar instalación» de cada tarjeta, o al llegar con el enlace #orden */
+export function Servicios({ abrir = false }: { abrir?: boolean }) {
   const titulos = [...SERVICIOS.map(s => s.titulo), "Otro servicio"];
   const [elegido, setElegido] = useState(titulos[0] ?? "");
+  const [abierto, setAbierto] = useState(abrir);
+  // Cada pedido de ir al formulario suma 1: el efecto baja hasta él cuando ya está abierto en la página
+  const [ir, setIr] = useState(0);
   const servicio = SERVICIOS.find(s => s.titulo === elegido);
   const campos = useMemo(() => camposServicio(servicio, titulos), [servicio]); // eslint-disable-line react-hooks/exhaustive-deps
-  const solicitar = (titulo: string) => {
-    setElegido(titulo);
+  const solicitar = (titulo?: string) => {
+    if (titulo) setElegido(titulo);
+    setAbierto(true);
+    setIr(n => n + 1);
+  };
+  useEffect(() => {
+    if (!ir) return;
     const caja = document.getElementById("orden");
     caja?.scrollIntoView({ behavior: suave(), block: "start" });
-    caja?.querySelector<HTMLElement>("input")?.focus({ preventScroll: true });
-  };
+    caja?.querySelector<HTMLElement>("form input, form select")?.focus({ preventScroll: true });
+  }, [ir]);
   const reparacion = SERVICIOS.filter(s => !s.camaras);
   const camaras = SERVICIOS.find(s => s.camaras);
   // La primera vez que se ve cada tarjeta, el equipo sube a su lugar y los ✓ de «Qué hacemos» se marcan uno tras otro
@@ -94,7 +107,7 @@ export function Servicios() {
               <article key={s.id} className="flex flex-col overflow-hidden rounded-xl border border-linea bg-superficie shadow-tarjeta">
                 {/* Encabezado de color: texto a la izquierda y el equipo recortado en su propia columna (no se montan).
                     Las tarjetas son angostas en celular y en md (dos columnas), y anchas en sm y lg. */}
-                <div data-revelar className={`revelar relative isolate flex min-h-[210px] gap-2 overflow-hidden ${e.caja}`}>
+                <div data-revelar className={`revelar relative isolate flex min-h-[170px] gap-2 sm:min-h-[210px] overflow-hidden ${e.caja}`}>
                   <div className="relative z-10 min-w-0 flex-1 self-center py-6 pl-6 sm:py-7 sm:pl-7">
                     <h3 className="font-display text-[23px] font-extrabold leading-[1.02] text-current ancho-108 sm:text-[30px] md:text-[24px] lg:text-[30px]">{s.titulo}</h3>
                     <p className={`mt-2 text-sm leading-snug ${e.texto}`}>{s.texto}</p>
@@ -107,8 +120,9 @@ export function Servicios() {
                 <div className="flex flex-1 flex-col p-5 sm:p-6">
                   <p className="etiqueta">Qué hacemos</p>
                   <ul data-revelar className="revelar mt-3 grid gap-2 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
+                    {/* En celular solo los 4 primeros (el resto está en «Ver detalles y tiempos») */}
                     {s.trabajos.map((t, k) => (
-                      <li key={t} style={{ "--i": k } as React.CSSProperties} className="flex items-start gap-2.5 rounded-md bg-fondo px-3 py-2.5 text-sm leading-snug">
+                      <li key={t} style={{ "--i": k } as React.CSSProperties} className={`${k >= EN_CELULAR ? "max-sm:hidden " : ""}flex items-start gap-2.5 rounded-md bg-fondo px-3 py-2.5 text-sm leading-snug`}>
                         <span className="check-paso flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-marca text-white"><IconoTrabajo texto={t} className="h-4 w-4" /></span><span className="self-center">{t}</span>
                       </li>
                     ))}
@@ -133,8 +147,16 @@ export function Servicios() {
               ))}
             </ol>
           </div>
-          <FormularioWhatsApp key={servicio?.camaras ? "cam" : "eq"} asunto="solicitar un servicio" campos={campos} boton="Enviar solicitud por WhatsApp"
-            valores={{ servicio: elegido }} alCambiar={(id, v) => { if (id === "servicio") setElegido(v); }} />
+          {abierto ? (
+            <div className="motion-safe:animate-entrar">
+              <FormularioWhatsApp key={servicio?.camaras ? "cam" : "eq"} asunto="solicitar un servicio" campos={campos} boton="Enviar solicitud por WhatsApp"
+                valores={{ servicio: elegido }} alCambiar={(id, v) => { if (id === "servicio") setElegido(v); }} />
+            </div>
+          ) : (
+            <div className="flex items-center justify-center md:rounded-md md:bg-fondo md:p-8">
+              <button type="button" onClick={() => solicitar()} aria-controls="orden" className="btn btn-marca w-full sm:w-auto">Llenar la solicitud</button>
+            </div>
+          )}
         </div>
       </div>
     </section>

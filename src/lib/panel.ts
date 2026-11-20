@@ -8,7 +8,8 @@ import { useEffect, type RefObject } from "react";
 /** `cerrar` debe ser siempre la misma función (useCallback): si cambiara en cada dibujo, el panel se reiniciaría y el foco
     saltaría al botón de cerrar */
 export function usePanelModal(abierto: boolean, cerrar: () => void, panel: RefObject<HTMLElement | null>, primerFoco: RefObject<HTMLElement | null>) {
-  useEffect(() => { if (panel.current) panel.current.inert = !abierto; }, [abierto, panel]);
+  // Con el atributo (y no la propiedad): el panel llega como parámetro y no se le asignan valores
+  useEffect(() => { panel.current?.toggleAttribute("inert", !abierto); }, [abierto, panel]);
 
   useEffect(() => {
     if (!abierto) return;

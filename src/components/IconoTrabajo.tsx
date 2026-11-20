@@ -5,6 +5,10 @@ import { norm } from "../lib/formato";
 const base = { fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
 
 const DIBUJOS: [RegExp, React.JSX.Element][] = [
+  // 19/11/2026: placa (un chip con sus patas) y tapa trasera (el celular por detrás, con la cámara)
+  [/placa|microsoldadura/, <><rect x="7" y="7" width="10" height="10" rx="1.5" /><path d="M10 7V4M14 7V4M10 20v-3M14 20v-3M7 10H4M7 14H4M20 10h-3M20 14h-3" /><circle cx="12" cy="12" r="1.5" /></>],
+  [/camaras y botones/, <><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2.3l1.4-2h5.6l1.4 2h2.3A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z" /><circle cx="12" cy="13" r="3.2" /></>],
+  [/tapa trasera|backcover/, <><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" /><rect x="9" y="5" width="4" height="5" rx="1.5" /><circle cx="11" cy="6.7" r=".6" /><circle cx="11" cy="8.4" r=".6" /></>],
   [/diagnostico|revision|visita tecnica|medir/, <><circle cx="10.5" cy="10.5" r="6" /><path d="M15 15l5 5M8 10.5h5M10.5 8v5" /></>],
   [/formateo|windows|programas/, <><rect x="3" y="4" width="18" height="13" rx="1.5" /><path d="M8 20h8M12 17v3M7.5 8l2.5 2.5L7.5 13M12 13h4" /></>],
   [/limpieza|pasta termica/, <><circle cx="12" cy="12" r="2" /><path d="M12 10c0-4 1-6 3.5-6S18 7 12 10zM14 12c4 0 6 1 6 3.5S17 18 14 12zM12 14c0 4-1 6-3.5 6S6 17 12 14zM10 12c-4 0-6-1-6-3.5S7 6 10 12z" /></>],

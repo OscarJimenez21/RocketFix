@@ -32,7 +32,9 @@ const TEXTO_CAMPO = "Buscar celulares, portátiles, consolas…";
 const USOS_RAPIDOS = [["estudiar", "Estudiar"], ["trabajar", "Trabajar"], ["jugar", "Jugar"], ["crear", "Crear contenido"], ["hogar", "La casa"], ["armar-pc", "Armar un PC"]] as const;
 const EJEMPLOS = [TEXTO_CAMPO, ...BUSQUEDAS_POPULARES.map(b => `Buscar «${b}»`)];
 
-export function Buscador({ inicial = "" }: { inicial?: string }) {
+/** `rotulo`: nombre de la región de búsqueda. Si hay dos buscadores en la misma página (la cabecera y la página «no
+    encontrada»), cada uno lleva el suyo para que los lectores de pantalla los distingan */
+export function Buscador({ inicial = "", rotulo = "Buscar en la tienda" }: { inicial?: string; rotulo?: string }) {
   const [q, setQ] = useState(inicial);
   const [abierto, setAbierto] = useState(false);
   const [activo, setActivo] = useState(-1);
@@ -57,7 +59,12 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
     return () => document.removeEventListener("keydown", alTecla);
   }, []);
 
-  useEffect(() => setQ(inicial), [inicial]);
+  // Si cambia la búsqueda de la página (otra dirección /buscar/…), el campo la muestra. Al cambiar lo escrito, la opción
+  // marcada con las flechas se suelta. Las dos cosas se ajustan al dibujar, sin efectos aparte
+  const [inicialAntes, setInicialAntes] = useState(inicial);
+  if (inicialAntes !== inicial) { setInicialAntes(inicial); setQ(inicial); }
+  const [qAntes, setQAntes] = useState(q);
+  if (qAntes !== q) { setQAntes(q); setActivo(-1); }
 
   // Los ejemplos solo ruedan mientras el campo se ve, está vacío y no se está escribiendo en él
   const [rueda] = useState(() => activa(9) && !reducirMovimiento());
@@ -80,7 +87,8 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
     : [];
 
   // Mejora 5: si no hay nada, se propone la palabra más parecida del catálogo (ver sugerirCorreccion)
-  const correccion = useMemo(() => (palabras.length && !total ? sugerirCorreccion(q) : null), [q, palabras.length, total]);
+  const hayPalabras = palabras.length > 0;
+  const correccion = useMemo(() => (hayPalabras && !total ? sugerirCorreccion(q) : null), [q, hayPalabras, total]);
   const opciones: Opcion[] = palabras.length
     ? [...secciones.map(t => ({ href: hrefDe(t.vista), clave: t.vista })), ...productos.map(p => ({ href: hrefProducto(p.id), clave: p.id })),
        ...(total ? [{ href: hrefBusqueda(q), clave: "todos" }] : []), ...(correccion ? [{ href: hrefBusqueda(correccion), clave: "correccion" }] : [])]
@@ -95,7 +103,6 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
     const alNavegar = () => setAbierto(false);
     return alCambiarPagina(alNavegar);
   }, []);
-  useEffect(() => setActivo(-1), [q]);
 
   const ir = (href: string) => { navegar(href); setAbierto(false); };
 
@@ -149,7 +156,7 @@ export function Buscador({ inicial = "" }: { inicial?: string }) {
   const claseOpcion = (i: number) => `flex items-center gap-3 rounded px-2.5 py-2 ${i === activo ? "bg-marca-suave" : "hover:bg-fondo"}`;
 
   return (
-    <div ref={caja} className="relative w-full" role="search">
+    <div ref={caja} className="relative w-full" role="search" aria-label={rotulo}>
       <label className="relative block">
         <span className="sr-only">Buscar en toda la tienda</span>
         {/* lupa: al escribir se inclina y se pinta de verde (animación 11) */}

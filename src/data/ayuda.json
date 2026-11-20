@@ -67,8 +67,8 @@
   { "id": "empresas", "menu": "Empresas", "titulo": "Compras para empresas", "lead": "¿Necesitas varios equipos para tu empresa, colegio u oficina? Cuéntanos qué buscas y te enviamos la cotización por WhatsApp." }
  ],
  "faq": [
-  { "tema": "Compras", "p": "¿Cómo compro?", "r": "Agrega los productos al carrito, escribe tu nombre y la dirección, y toca «Enviar pedido por WhatsApp». Se abre WhatsApp con tu pedido escrito; lo envías y te confirmamos disponibilidad y total antes de cualquier pago. Mira [cómo comprar en 3 pasos](como-comprar)." },
-  { "tema": "Compras", "p": "¿Enviar el pedido ya es un pago?", "r": "No. Enviar el pedido por WhatsApp no cobra nada: primero te confirmamos disponibilidad y total. Si prefieres pagar de una vez, en el carrito puedes pagar en línea con Bold." },
+  { "tema": "Compras", "p": "¿Cómo compro?", "r": "Agrega los productos al carrito, escribe tu nombre y la dirección, y toca «Enviar pedido por WhatsApp». Se abre WhatsApp con tu pedido escrito; lo envías y te confirmamos el total y la entrega antes de cualquier pago. Mira [cómo comprar en 3 pasos](como-comprar)." },
+  { "tema": "Compras", "p": "¿Enviar el pedido ya es un pago?", "r": "No. Enviar el pedido por WhatsApp no cobra nada: primero te confirmamos el total y la entrega. Si prefieres pagar de una vez, en el carrito puedes pagar en línea con Bold." },
   { "tema": "Compras", "p": "¿Qué significa «Preguntar disponibilidad»?", "r": "Que por ahora no tenemos precio publicado para ese producto. Escríbenos por WhatsApp y te confirmamos si está disponible y su precio." },
   { "tema": "Envíos", "p": "¿Cuánto cuesta el envío en Bogotá?", "r": "El domicilio en Bogotá y alrededores cuesta {envioBogota} y es gratis en compras desde {gratisBogota}. {domicilio}" },
   { "tema": "Envíos", "p": "¿Envían a otras ciudades?", "r": "Sí. {envio} El envío a otra ciudad cuesta {envioNacional} y es gratis en compras desde {gratisNacional}." },

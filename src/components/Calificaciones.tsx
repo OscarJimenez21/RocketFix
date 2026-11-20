@@ -163,15 +163,46 @@ function FormularioCalificacion() {
   );
 }
 
-export function Calificaciones() {
+/** Desde cuántas calificaciones publicadas se muestra la sección completa (resumen con barras, tarjetas y formulario) */
+const MINIMO_COMPLETA = 3;
+
+/** 19/11/2026: mientras haya menos de 3 calificaciones publicadas, la sección es una franja corta con un botón que abre el
+    formulario. Antes era un bloque de casi 2 pantallas en celular que decía «Todavía no hay calificaciones publicadas»,
+    y el día del lanzamiento eso restaba confianza. Al llegar con el enlace #calificaciones el formulario ya está abierto */
+function CalificacionesCorta({ recientes, abrir }: { recientes: Resena[]; abrir: boolean }) {
+  const [abierto, setAbierto] = useState(abrir);
+  return (
+    <section id="calificaciones" aria-labelledby="t-calificaciones" className="border-t border-linea bg-fondo">
+      <div className="contenedor py-10 sm:py-12">
+        <div className="tarjeta grid gap-5 p-5 sm:p-7 md:grid-cols-[minmax(0,1fr)_auto] md:items-center md:gap-10">
+          <div className="flex gap-4">
+            <span aria-hidden="true" className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-acento-suave text-acento sm:flex"><IconoEstrella className="h-6 w-6" /></span>
+            <div className="min-w-0">
+              <h2 id="t-calificaciones" className="text-xl font-bold sm:text-2xl">¿Compraste o reparaste un equipo con nosotros?</h2>
+              <p className="mt-1.5 text-sm leading-relaxed text-tinta-2">Califica tu experiencia por WhatsApp. Solo publicamos las calificaciones que nos autorizas, con tu nombre y la inicial de tu apellido.</p>
+            </div>
+          </div>
+          {!abierto && <button type="button" onClick={() => setAbierto(true)} className="btn btn-borde w-full md:w-auto">Calificar mi experiencia</button>}
+        </div>
+        {recientes.length > 0 && (
+          <ul className="mt-4 grid gap-4 sm:grid-cols-2">
+            {recientes.map((r, i) => <li key={`${r.nombre}-${r.fecha}-${i}`} className="flex"><TarjetaResena r={r} /></li>)}
+          </ul>
+        )}
+        {abierto && <div id="calificar" className="mt-4 max-w-xl motion-safe:animate-entrar"><FormularioCalificacion /></div>}
+      </div>
+    </section>
+  );
+}
+
+export function Calificaciones({ abrir = false }: { abrir?: boolean }) {
   const { total, promedio, conteo } = resumen(RESENAS);
   const [limite, setLimite] = useState(POR_PAGINA);
   const recientes = [...RESENAS].sort((a, b) => b.fecha.localeCompare(a.fecha));
-  const pasos = ["Calificas aquí con estrellas y un comentario.", "Se abre WhatsApp con tu calificación escrita. Envía ese mensaje.", "La revisamos y, si nos autorizas, la publicamos en esta sección."];
   const caja = useRef<HTMLDivElement>(null);
   const visto = useVisto(caja);
-  const pasosVacio = useRef<HTMLOListElement>(null);
-  const vistoVacio = useVisto(pasosVacio);
+
+  if (total < MINIMO_COMPLETA) return <CalificacionesCorta recientes={recientes} abrir={abrir} />;
 
   return (
     <section id="calificaciones" aria-labelledby="t-calificaciones" className="border-t border-linea bg-fondo">
@@ -179,7 +210,7 @@ export function Calificaciones() {
         <div className="min-w-0">
           <p className="etiqueta">Calificaciones de clientes</p>
           <h2 id="t-calificaciones" className="titulo-seccion mt-1">Lo que dicen nuestros clientes</h2>
-          {total > 0 ? (
+          {/* Sección completa: desde 3 calificaciones publicadas */}
             <>
               {/* La primera vez que se ve: las estrellas se pintan y las barras se llenan, una tras otra (ver .resumen-calif en index.css) */}
               <div ref={caja} data-visto={visto || undefined} className="resumen-calif tarjeta mt-6 grid gap-6 p-5 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:gap-10 sm:p-7">
@@ -207,19 +238,6 @@ export function Calificaciones() {
                 <button type="button" onClick={() => setLimite(l => l + POR_PAGINA)} className="btn btn-borde mt-5">Ver más calificaciones (quedan {recientes.length - limite})</button>
               )}
             </>
-          ) : (
-            <div className="tarjeta mt-6 p-5 sm:p-7">
-              <Estrellas valor={0} className="h-8 w-8" />
-              <p className="mt-4 text-lg font-bold">Todavía no hay calificaciones publicadas. ¡La tuya puede ser la primera!</p>
-              <p className="mt-2 text-sm leading-relaxed text-tinta-2">Aquí aparecerán las opiniones de quienes compran o reparan sus equipos con nosotros, para que cualquiera las pueda ver antes de comprar.</p>
-              {/* Mientras no hay calificaciones, sus 3 pasos se encienden uno tras otro la primera vez que se ven */}
-              <ol ref={pasosVacio} data-visto={vistoVacio || undefined} className="pasos mt-5 grid gap-2.5 text-sm text-tinta-2">
-                {pasos.map((t, n) => (
-                  <li key={t} style={{ "--orden": n } as React.CSSProperties} className="flex gap-2.5"><span className="paso-num flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold">{n + 1}</span>{t}</li>
-                ))}
-              </ol>
-            </div>
-          )}
         </div>
         <FormularioCalificacion />
       </div>

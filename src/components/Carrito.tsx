@@ -124,8 +124,6 @@ export function Carrito() {
   const id = useId();
   // Idea 21: pantalla de «listo» después de abrir WhatsApp con el pedido (se quita al cerrar el carrito o al cambiarlo)
   const [enviado, setEnviado] = useState(false);
-  useEffect(() => { if (!carritoAbierto) setEnviado(false); }, [carritoAbierto]);
-  useEffect(() => { setEnviado(false); }, [lineas]);
 
   useEffect(() => { try { sessionStorage.setItem(GUARDADO, JSON.stringify(d)); } catch { /* sin almacenamiento */ } }, [d]);
 
@@ -208,25 +206,33 @@ export function Carrito() {
 
   // El producto que se agregó con el carrito cerrado se resalta al abrirlo: un fondo verde que se desvanece.
   // Si quedó abajo en la lista, la lista baja hasta él
-  const cantidades = useRef<Record<string, number>>(Object.fromEntries(lineas.map(l => [l.clave, l.cantidad])));
-  const porResaltar = useRef<string | null>(null);
+  // Todo esto se ajusta al dibujar, comparando con lo que había antes (sin efectos que vuelvan a dibujar el carrito):
+  //  · cambió el carrito: se quita la pantalla de «listo» y, si está cerrado, se anota el producto que llegó o subió
+  //  · se abrió: cuenta la apertura (el ✓ de la guía se dibuja en cada una) y resalta lo anotado
+  //  · se cerró: se quita la pantalla de «listo»
+  const [cantidades, setCantidades] = useState<Record<string, number>>(() => Object.fromEntries(lineas.map(l => [l.clave, l.cantidad])));
+  const [porResaltar, setPorResaltar] = useState<string | null>(null);
   const [resaltada, setResaltada] = useState<{ clave: string; vez: number } | null>(null);
-  useEffect(() => {
-    if (!carritoAbierto) {
-      const nueva = lineas.find(l => l.cantidad > (cantidades.current[l.clave] ?? 0));
-      if (nueva) porResaltar.current = nueva.clave;
-    }
-    cantidades.current = Object.fromEntries(lineas.map(l => [l.clave, l.cantidad]));
-  }, [lineas, carritoAbierto]);
-  // Veces que se ha abierto el carrito (el ✓ de la guía se dibuja en cada apertura)
   const [aperturas, setAperturas] = useState(0);
-  useEffect(() => {
-    if (!carritoAbierto) return;
-    setAperturas(n => n + 1);
-    const clave = porResaltar.current;
-    porResaltar.current = null;
-    if (clave) setResaltada(r => ({ clave, vez: (r?.vez ?? 0) + 1 }));
-  }, [carritoAbierto]);
+  const [lineasAntes, setLineasAntes] = useState(lineas);
+  if (lineasAntes !== lineas) {
+    setLineasAntes(lineas);
+    setEnviado(false);
+    if (!carritoAbierto) {
+      const nueva = lineas.find(l => l.cantidad > (cantidades[l.clave] ?? 0));
+      if (nueva) setPorResaltar(nueva.clave);
+    }
+    setCantidades(Object.fromEntries(lineas.map(l => [l.clave, l.cantidad])));
+  }
+  const [abiertoAntes, setAbiertoAntes] = useState(carritoAbierto);
+  if (abiertoAntes !== carritoAbierto) {
+    setAbiertoAntes(carritoAbierto);
+    if (!carritoAbierto) setEnviado(false);
+    else {
+      setAperturas(n => n + 1);
+      if (porResaltar) { setResaltada(r => ({ clave: porResaltar, vez: (r?.vez ?? 0) + 1 })); setPorResaltar(null); }
+    }
+  }
   useEffect(() => {
     if (resaltada) panel.current?.querySelector(`[data-clave="${CSS.escape(resaltada.clave)}"]`)?.scrollIntoView({ block: "nearest" });
   }, [resaltada]);
@@ -288,7 +294,7 @@ export function Carrito() {
   const notas = (
     <>
       <p className="text-center text-xs leading-relaxed text-tinta-3">
-        Enviar el pedido no es un pago: se abre WhatsApp con el pedido escrito, lo envías y te confirmamos disponibilidad y total.
+        Enviar el pedido no es un pago: se abre WhatsApp con el pedido escrito, lo envías y te confirmamos el total y la entrega.
         {/* Idea 47: quién procesa el pago en línea */}
         {boldActivo() && " Si prefieres pagar ya, Bold acepta tarjeta, PSE y más; el pago lo procesa Bold en su propia ventana y la tienda no ve los datos de tu tarjeta."}
       </p>
@@ -305,10 +311,11 @@ export function Carrito() {
         className={`absolute inset-0 bg-marca-noche/40 transition-opacity duration-300 ${carritoAbierto ? "opacity-100" : "opacity-0"}`} />
       <div ref={panel} role="dialog" aria-modal="true" aria-labelledby={`${id}-titulo`}
         className={`absolute inset-y-0 right-0 flex w-full max-w-[440px] flex-col overflow-hidden bg-superficie shadow-flota transition-transform duration-300 ease-cajon ${carritoAbierto ? "translate-x-0" : "translate-x-full"}`}>
-        <header className="flex items-center justify-between border-b border-linea px-5 py-4">
+        {/* div y no header: un <header> aquí contaba como una segunda cabecera de la página (revisión de accesibilidad) */}
+        <div className="flex items-center justify-between border-b border-linea px-5 py-4">
           <h2 id={`${id}-titulo`} className="text-xl font-extrabold">Tu pedido{unidades > 0 && <span className="ml-1.5 align-middle text-sm font-semibold text-tinta-3">({unidades} {unidades === 1 ? "producto" : "productos"})</span>}</h2>
           <button ref={cerrar} type="button" onClick={cerrarCarrito} aria-label="Cerrar carrito" className="cerrar-gira presionable -my-1 -mr-2 flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo hover:text-tinta"><IconoCerrar /></button>
-        </header>
+        </div>
 
         {lineas.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 px-8 text-center">
@@ -454,7 +461,7 @@ export function Carrito() {
                 <strong key={vezTotal} className={`font-display text-2xl tabular-nums ${vezTotal ? "motion-safe:animate-resaltar" : ""}`}><Pesos valor={total} /></strong>
               </div>
               {errores.texto && <p id={`${id}-error`} className="alerta mt-2" role="alert">{errores.texto}</p>}
-              {/* El pedido por WhatsApp es el camino principal: ahí se confirma la disponibilidad antes de cobrar */}
+              {/* El pedido por WhatsApp es el camino principal: ahí se confirman el total y la entrega antes de cobrar */}
               <div className="mt-3 grid gap-2">
                 <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); else { setEnviado(true); usado.current = true; } }} className={`btn btn-wa barrido w-full${listo ? " barrido-enviar" : ""}`}>
                   <IconoWhatsApp />Enviar pedido por WhatsApp
