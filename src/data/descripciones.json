@@ -3840,6 +3840,125 @@
     "Seguridad",
     "Face ID"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,3\" OLED a 120 Hz"
+     ],
+     [
+      "Procesador",
+      "Apple A20 Pro"
+     ],
+     [
+      "Cámaras traseras",
+      "48 MP + 48 MP + 48 MP"
+     ],
+     [
+      "Cámara frontal",
+      "18 MP"
+     ],
+     [
+      "SIM",
+      "eSIM"
+     ],
+     [
+      "Seguridad",
+      "Face ID"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,3 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Sistema operativo",
+      "iOS 27"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "48 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "4.056 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,3",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "48",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "4.056",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "18",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 48 MP",
+    "texto": "Cámara principal de 48 MP y cámara frontal de 18 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 4.056 mAh",
+    "texto": "Batería de 4.056 mAh y procesador Apple A20 Pro, con iOS 27.",
+    "foto": 3
+   }
   ]
  },
  "ip17pm": {
@@ -3868,6 +3987,104 @@
    [
     "Seguridad",
     "Face ID"
+   ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,9\" Super Retina XDR (OLED), ProMotion hasta 120 Hz"
+     ],
+     [
+      "Procesador",
+      "Apple A19 Pro"
+     ],
+     [
+      "Cámaras traseras",
+      "48 MP principal, 48 MP ultra gran angular y 48 MP teleobjetivo 4x"
+     ],
+     [
+      "Cámara frontal",
+      "18 MP Center Stage"
+     ],
+     [
+      "Conector",
+      "USB-C"
+     ],
+     [
+      "Seguridad",
+      "Face ID"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,9 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Sistema operativo",
+      "iOS 26"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "48 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,9",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "48",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "18",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
    ]
   ]
  },
@@ -3931,6 +4148,120 @@
     "Seguridad",
     "Face ID"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,7\" Super Retina XDR (OLED), ProMotion hasta 120 Hz"
+     ],
+     [
+      "Procesador",
+      "Apple A17 Pro"
+     ],
+     [
+      "Cámaras traseras",
+      "48 MP principal, 12 MP ultra gran angular y 12 MP teleobjetivo 5x"
+     ],
+     [
+      "Cámara frontal",
+      "12 MP"
+     ],
+     [
+      "Material",
+      "titanio"
+     ],
+     [
+      "Conector",
+      "USB-C"
+     ],
+     [
+      "Seguridad",
+      "Face ID"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,7 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Sistema operativo",
+      "iOS 17"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "48 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "4.422 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,7",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "48",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "4.422",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 48 MP",
+    "texto": "Cámara principal de 48 MP y cámara frontal de 12 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 4.422 mAh",
+    "texto": "Batería de 4.422 mAh y procesador Apple A17 Pro, con iOS 17.",
+    "foto": 4
+   }
   ]
  },
  "ip13": {
@@ -3960,6 +4291,107 @@
     "Seguridad",
     "Face ID"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,1\" Super Retina XDR (OLED)"
+     ],
+     [
+      "Procesador",
+      "Apple A15 Bionic"
+     ],
+     [
+      "Cámaras traseras",
+      "12 MP gran angular y 12 MP ultra gran angular"
+     ],
+     [
+      "Cámara frontal",
+      "12 MP"
+     ],
+     [
+      "Conector",
+      "Lightning"
+     ],
+     [
+      "Seguridad",
+      "Face ID"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,1 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Sistema operativo",
+      "iOS 15"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "3.227 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,1",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "3.227",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 12 MP",
+    "texto": "Cámara principal de 12 MP y cámara frontal de 12 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 3.227 mAh",
+    "texto": "Batería de 3.227 mAh y procesador Apple A16 Bionic, con iOS 15.",
+    "foto": 4
+   }
   ]
  },
  "sa07": {
@@ -3989,6 +4421,109 @@
     "Seguridad",
     "Lector de huella"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,7\" HD+ a 90 Hz"
+     ],
+     [
+      "Batería",
+      "5000 mAh, carga de 25 W"
+     ],
+     [
+      "Memoria ampliable",
+      "microSD hasta 2 TB"
+     ],
+     [
+      "Resistencia",
+      "IP54"
+     ],
+     [
+      "Sistema",
+      "Android 15 con One UI 7"
+     ],
+     [
+      "Seguridad",
+      "Lector de huella"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Helio G99"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Una SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Helio G99.",
+    "foto": 5
+   }
   ]
  },
  "sa17": {
@@ -3998,6 +4533,124 @@
     "Seguridad",
     "Lector de huella"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Lector de huella"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tipo",
+      "Super AMOLED"
+     ],
+     [
+      "Resolución",
+      "1080 × 2400 (FHD+)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Mediatek Helio Octa-core 2.2 GHz"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "13 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, Wi-Fi"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP54 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "13",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 13 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Mediatek Helio Octa-core 2.2 GHz, con Android 15.",
+    "foto": 3
+   }
   ]
  },
  "sa37": {
@@ -4023,6 +4676,102 @@
     "Seguridad",
     "Lector de huella"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "Super AMOLED FHD+"
+     ],
+     [
+      "Batería",
+      "5000 mAh, carga de 45 W"
+     ],
+     [
+      "Resistencia",
+      "IP67"
+     ],
+     [
+      "Sistema",
+      "Android 16 con One UI 8.5"
+     ],
+     [
+      "Seguridad",
+      "Lector de huella"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Exynos 1480"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "12 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 12 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Exynos 1480.",
+    "foto": 5
+   }
   ]
  },
  "sa57": {
@@ -4048,6 +4797,106 @@
     "Seguridad",
     "Lector de huella"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "Super AMOLED Plus FHD+"
+     ],
+     [
+      "Batería",
+      "5000 mAh, carga de 45 W"
+     ],
+     [
+      "Resistencia",
+      "IP67"
+     ],
+     [
+      "Sistema",
+      "Android 16 con One UI 8.5"
+     ],
+     [
+      "Seguridad",
+      "Lector de huella"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Exynos 1680"
+     ],
+     [
+      "Núcleos",
+      "8"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "12 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Sí"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 12 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Exynos 1680.",
+    "foto": 5
+   }
   ]
  },
  "ss25fe": {
@@ -4081,6 +4930,119 @@
     "Seguridad",
     "Lector de huella"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,7\" Dynamic AMOLED 2X a 120 Hz"
+     ],
+     [
+      "Procesador",
+      "Samsung Exynos 2400"
+     ],
+     [
+      "Cámaras traseras",
+      "50 MP principal, 12 MP ultra gran angular y 8 MP teleobjetivo 3x"
+     ],
+     [
+      "Cámara frontal",
+      "12 MP"
+     ],
+     [
+      "Batería",
+      "4900 mAh"
+     ],
+     [
+      "Resistencia",
+      "IP68"
+     ],
+     [
+      "Seguridad",
+      "Lector de huella"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,7 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Núcleos",
+      "Deca core"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,7",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "4.900",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 12 MP para selfies y videollamadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Batería de 4.900 mAh",
+    "texto": "Batería de 4.900 mAh y procesador Samsung Exynos, con Android 15.",
+    "foto": 2
+   }
   ]
  },
  "ss25u": {
@@ -4114,13 +5076,343 @@
     "Resistencia",
     "IP68"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,9\" Dynamic AMOLED 2X QHD+ a 120 Hz"
+     ],
+     [
+      "Procesador",
+      "Snapdragon 8 Elite for Galaxy"
+     ],
+     [
+      "Cámaras traseras",
+      "200 MP principal, 50 MP ultra gran angular, 10 MP teleobjetivo 3x y 50 MP teleobjetivo 5x"
+     ],
+     [
+      "Cámara frontal",
+      "12 MP"
+     ],
+     [
+      "Batería",
+      "5000 mAh"
+     ],
+     [
+      "Lápiz",
+      "S Pen incluido"
+     ],
+     [
+      "Resistencia",
+      "IP68"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,9 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Sistema operativo",
+      "Android 11"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "200 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,9",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "200",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 200 MP",
+    "texto": "Cámara principal de 200 MP y cámara frontal de 12 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Qualcomm Snapdragon, con Android 11.",
+    "foto": 4
+   }
   ]
  },
  "ss26fe": {
-  "resumen": "Samsung Galaxy S26 FE de 256 GB, la versión Fan Edition de la serie Galaxy S26: el diseño y las funciones de Galaxy AI de la gama S a un precio más accesible."
+  "resumen": "Samsung Galaxy S26 FE de 256 GB, la versión Fan Edition de la serie Galaxy S26: el diseño y las funciones de Galaxy AI de la gama S a un precio más accesible.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,7 pulgadas"
+     ],
+     [
+      "Tipo",
+      "Dynamic AMOLED 2X (UB) 60Hz 120 Hz"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Exynos 2500 (3nm)"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "12 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "4.900 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,7",
+    "pulgadas",
+    "Pantalla Dynamic AMOLED 2X (UB) 60Hz 120 Hz"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "4.900",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,7 pulgadas",
+    "texto": "Pantalla Dynamic AMOLED 2X (UB) 60Hz 120 Hz de 6,7 pulgadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 12 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 4.900 mAh",
+    "texto": "Batería de 4.900 mAh y procesador Exynos 2500 (3nm), con Android 15.",
+    "foto": 5
+   }
+  ]
  },
  "ss26u": {
-  "resumen": "Samsung Galaxy S26 Ultra, el tope de gama de Samsung, con la mejor cámara y pantalla de la marca y las funciones de Galaxy AI. Disponible en 256 GB, 512 GB y 1 TB."
+  "resumen": "Samsung Galaxy S26 Ultra, el tope de gama de Samsung, con la mejor cámara y pantalla de la marca y las funciones de Galaxy AI. Disponible en 256 GB, 512 GB y 1 TB.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,9 pulgadas"
+     ],
+     [
+      "Tipo",
+      "Dynamic AMOLED 2X"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Snapdragon 8 Elite Gen 5"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "200 MP"
+     ],
+     [
+      "Cámara frontal",
+      "12 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,9",
+    "pulgadas",
+    "Pantalla Dynamic AMOLED 2X"
+   ],
+   [
+    "200",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,9 pulgadas",
+    "texto": "Pantalla Dynamic AMOLED 2X de 6,9 pulgadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Cámara de 200 MP",
+    "texto": "Cámara principal de 200 MP y cámara frontal de 12 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Snapdragon 8 Elite Gen 5, con Android 16.",
+    "foto": 5
+   }
+  ]
  },
  "szflip8": {
   "resumen": "Samsung Galaxy Z Flip 8 de 512 GB, el plegable compacto de Samsung: se dobla a la mitad para caber en cualquier bolsillo y su pantalla exterior te deja ver notificaciones y tomar selfies sin abrirlo."
@@ -4148,6 +5440,93 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,9\""
+     ],
+     [
+      "Cámara trasera",
+      "13 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ],
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Unisoc T7250"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "13",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 13 MP",
+    "texto": "Cámara principal de 13 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 6.000 mAh",
+    "texto": "Batería de 6.000 mAh y procesador Unisoc T7250.",
+    "foto": 4
+   }
   ]
  },
  "xr14c": {
@@ -4219,6 +5598,97 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "HD+ (1600 × 720)"
+     ],
+     [
+      "Batería",
+      "6000 mAh"
+     ],
+     [
+      "Memoria ampliable",
+      "hasta 1 TB"
+     ],
+     [
+      "Sistema",
+      "Android 15"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Helio"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 6.000 mAh",
+    "texto": "Batería de 6.000 mAh y procesador MediaTek Helio.",
+    "foto": 4
+   }
   ]
  },
  "xr15": {
@@ -4244,6 +5714,124 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "Full HD+ (2340 × 1080)"
+     ],
+     [
+      "Batería",
+      "7000 mAh"
+     ],
+     [
+      "Memoria ampliable",
+      "hasta 1 TB"
+     ],
+     [
+      "Sistema",
+      "Android 15"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,9 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Snapdragon 685"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP67 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,9",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "7.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 7.000 mAh",
+    "texto": "Batería de 7.000 mAh y procesador Snapdragon 685.",
+    "foto": 4
+   }
   ]
  },
  "xr17": {
@@ -4273,6 +5861,105 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "AMOLED"
+     ],
+     [
+      "Batería",
+      "7500 mAh"
+     ],
+     [
+      "Resistencia",
+      "IP64"
+     ],
+     [
+      "Memoria ampliable",
+      "hasta 2 TB"
+     ],
+     [
+      "Sistema",
+      "Xiaomi HyperOS 3"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Unisoc T7250"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "7.500",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 7.500 mAh",
+    "texto": "Batería de 7.500 mAh y procesador Unisoc T7250.",
+    "foto": 4
+   }
   ]
  },
  "xrn15": {
@@ -4282,6 +5969,129 @@
     "Seguridad",
     "Huella en la pantalla y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella en la pantalla y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,77 pulgadas"
+     ],
+     [
+      "Tipo",
+      "pOLED"
+     ],
+     [
+      "Resolución",
+      "2712 × 1220 (1.5K)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Qualcomm Snapdragon 6 Gen 3"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "108 MP"
+     ],
+     [
+      "Cámara frontal",
+      "20 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.520 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,77",
+    "pulgadas",
+    "Pantalla pOLED"
+   ],
+   [
+    "108",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.520",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "20",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,77 pulgadas",
+    "texto": "Pantalla pOLED de 6,77 pulgadas, con resolución 2712 × 1220 (1.5K).",
+    "foto": 3
+   },
+   {
+    "titulo": "Cámara de 108 MP",
+    "texto": "Cámara principal de 108 MP y cámara frontal de 20 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 5.520 mAh",
+    "texto": "Batería de 5.520 mAh y procesador Qualcomm Snapdragon 6 Gen 3, con Android 15.",
+    "foto": 5
+   }
   ]
  },
  "xrn17": {
@@ -4311,6 +6121,109 @@
     "Seguridad",
     "Huella en la pantalla y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "AMOLED FHD+"
+     ],
+     [
+      "Batería",
+      "7700 mAh"
+     ],
+     [
+      "Resistencia",
+      "IP65"
+     ],
+     [
+      "Memoria ampliable",
+      "hasta 2 TB"
+     ],
+     [
+      "Sistema",
+      "Xiaomi HyperOS 3"
+     ],
+     [
+      "Seguridad",
+      "Huella en la pantalla y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Qualcomm SM6225-AF Snapdragon 6s 4G Gen 2"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "16 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "7.700",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "16",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 16 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 7.700 mAh",
+    "texto": "Batería de 7.700 mAh y procesador Qualcomm SM6225-AF Snapdragon 6s 4G Gen 2.",
+    "foto": 4
+   }
   ]
  },
  "xrn14pp": {
@@ -4349,6 +6262,138 @@
     "Seguridad",
     "Huella en la pantalla y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella en la pantalla y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,83 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED"
+     ],
+     [
+      "Resolución",
+      "2712 × 1220 (1.5K)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Qualcomm Snapdragon"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "16 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "8.340 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, NFC, USB, Wi-Fi"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP69 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,83",
+    "pulgadas",
+    "Pantalla AMOLED"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "8.340",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "16",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,83 pulgadas",
+    "texto": "Pantalla AMOLED de 6,83 pulgadas, con resolución 2712 × 1220 (1.5K).",
+    "foto": 4
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 16 MP para selfies y videollamadas.",
+    "foto": 5
+   },
+   {
+    "titulo": "Batería de 8.340 mAh",
+    "texto": "Batería de 8.340 mAh y procesador Qualcomm Snapdragon, con Android 15.",
+    "foto": 6
+   }
   ]
  },
  "x17tpro": {
@@ -4358,6 +6403,113 @@
     "Seguridad",
     "Huella en la pantalla y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella en la pantalla y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tipo",
+      "pOLED"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Mediatek"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "7.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "7.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 32 MP para selfies y videollamadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Batería de 7.000 mAh",
+    "texto": "Batería de 7.000 mAh y procesador Mediatek, con Android 16.",
+    "foto": 2
+   }
   ]
  },
  "pocox8pm": {
@@ -4367,6 +6519,117 @@
     "Seguridad",
     "Huella ultrasónica en la pantalla y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella ultrasónica en la pantalla y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Resolución",
+      "Full HD"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Dimensity / MediaTek Helio"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "20 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "8.500 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "8.500",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "20",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 20 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 8.500 mAh",
+    "texto": "Batería de 8.500 mAh y procesador MediaTek Dimensity / MediaTek Helio, con Android 16.",
+    "foto": 3
+   }
   ]
  },
  "pocox8pro": {
@@ -4376,6 +6639,117 @@
     "Seguridad",
     "Huella en la pantalla y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella en la pantalla y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tipo",
+      "AMOLED"
+     ],
+     [
+      "Resolución",
+      "Full HD"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "20 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.500 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.500",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "20",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 20 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 6.500 mAh",
+    "texto": "Batería de 6.500 mAh, con Android 16.",
+    "foto": 3
+   }
   ]
  },
  "pococ71": {
@@ -4405,6 +6779,106 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,88\" HD+ a 120 Hz"
+     ],
+     [
+      "Procesador",
+      "Unisoc T7250"
+     ],
+     [
+      "Cámara trasera",
+      "32 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ],
+     [
+      "Batería",
+      "5200 mAh"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,88 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,88",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.200",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 32 MP",
+    "texto": "Cámara principal de 32 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 5.200 mAh",
+    "texto": "Batería de 5.200 mAh y procesador UNISOC T7250, con Android 15.",
+    "foto": 4
+   }
   ]
  },
  "pococ81p": {
@@ -4430,6 +6904,111 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "HD+ a 120 Hz"
+     ],
+     [
+      "Procesador",
+      "Unisoc T7250"
+     ],
+     [
+      "Batería",
+      "6000 mAh"
+     ],
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,74 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,74",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador MediaTek Helio Octa-Core, con Android 15.",
+    "foto": 4
+   }
   ]
  },
  "pocom8pro": {
@@ -4439,6 +7018,138 @@
     "Seguridad",
     "Huella en la pantalla y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella en la pantalla y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,83 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED"
+     ],
+     [
+      "Resolución",
+      "2712 × 1220 (1.5K)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Snapdragon® 7s Gen 4"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.500 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, NFC, USB, Wi-Fi"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP69 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,83",
+    "pulgadas",
+    "Pantalla AMOLED"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.500",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,83 pulgadas",
+    "texto": "Pantalla AMOLED de 6,83 pulgadas, con resolución 2712 × 1220 (1.5K).",
+    "foto": 4
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 32 MP para selfies y videollamadas.",
+    "foto": 5
+   },
+   {
+    "titulo": "Batería de 6.500 mAh",
+    "texto": "Batería de 6.500 mAh y procesador Snapdragon® 7s Gen 4, con Android 15.",
+    "foto": 6
+   }
   ]
  },
  "medge60": {
@@ -4477,6 +7188,94 @@
     "Seguridad",
     "Huella en la pantalla y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,7\" pOLED 1,5K"
+     ],
+     [
+      "Cámara trasera",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ],
+     [
+      "Batería",
+      "5200 mAh"
+     ],
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "Seguridad",
+      "Huella en la pantalla y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,7 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Dimensity"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP69 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,7",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.200",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara frontal"
+   ]
   ]
  },
  "medge50f": {
@@ -4514,6 +7313,119 @@
     "Seguridad",
     "Huella en la pantalla y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,7\" pOLED curva a 144 Hz"
+     ],
+     [
+      "Procesador",
+      "Snapdragon 7s Gen 2"
+     ],
+     [
+      "Cámaras traseras",
+      "50 MP principal y 13 MP ultra gran angular"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ],
+     [
+      "Batería",
+      "5000 mAh, carga de 68 W"
+     ],
+     [
+      "Resistencia",
+      "IP68"
+     ],
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "Seguridad",
+      "Huella en la pantalla y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,7 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 14"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,7",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 32 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador CPU: Octa-Core, hasta 2.2 ghz, con Android 14.",
+    "foto": 5
+   }
   ]
  },
  "mg67": {
@@ -4535,6 +7447,111 @@
     "Seguridad",
     "Lector de huella y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "Extreme AMOLED"
+     ],
+     [
+      "Batería",
+      "5200 mAh"
+     ],
+     [
+      "Memoria ampliable",
+      "hasta 2 TB"
+     ],
+     [
+      "Seguridad",
+      "Lector de huella y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Helio"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP64 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.200",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 32 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 5.200 mAh",
+    "texto": "Batería de 5.200 mAh y procesador MediaTek Helio, con Android 16.",
+    "foto": 3
+   }
   ]
  },
  "mg06": {
@@ -4564,6 +7581,105 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "HD+ (1640 × 720)"
+     ],
+     [
+      "Batería",
+      "5200 mAh"
+     ],
+     [
+      "Resistencia",
+      "IP64"
+     ],
+     [
+      "Memoria ampliable",
+      "hasta 1 TB"
+     ],
+     [
+      "Sistema",
+      "Android 15"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "G81 Extreme"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.200",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 5.200 mAh",
+    "texto": "Batería de 5.200 mAh y procesador G81 Extreme.",
+    "foto": 3
+   }
   ]
  },
  "mg5g": {
@@ -4592,6 +7708,107 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,78\" FHD+"
+     ],
+     [
+      "Procesador",
+      "MediaTek Helio G81 Extreme"
+     ],
+     [
+      "Cámara trasera",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,5 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,5",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 6.000 mAh",
+    "texto": "Batería de 6.000 mAh y procesador Helio G85, con Android 15.",
+    "foto": 4
+   }
   ]
  },
  "hmagic8l": {
@@ -4601,6 +7818,130 @@
     "Seguridad",
     "Lector de huella y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Lector de huella y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,7 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Honor Qualcomm Snapdragon"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "108 MP"
+     ],
+     [
+      "Cámara frontal",
+      "16 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "8.300 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,7",
+    "pulgadas",
+    "Pantalla AMOLED"
+   ],
+   [
+    "108",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "8.300",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "16",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,7 pulgadas",
+    "texto": "Pantalla AMOLED de 6,7 pulgadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Cámara de 108 MP",
+    "texto": "Cámara principal de 108 MP y cámara frontal de 16 MP para selfies y videollamadas.",
+    "foto": 5
+   },
+   {
+    "titulo": "Batería de 8.300 mAh",
+    "texto": "Batería de 8.300 mAh y procesador Honor Qualcomm Snapdragon, con Android 15.",
+    "foto": 6
+   }
   ]
  },
  "hx8d": {
@@ -4610,6 +7951,121 @@
     "Seguridad",
     "Lector de huella y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Lector de huella y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,7 pulgadas"
+     ],
+     [
+      "Tipo",
+      "LED"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Qualcomm Snapdragon"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "108 MP"
+     ],
+     [
+      "Cámara frontal",
+      "16 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "7.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,7",
+    "pulgadas",
+    "Pantalla LED"
+   ],
+   [
+    "108",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "7.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "16",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,7 pulgadas",
+    "texto": "Pantalla LED de 6,7 pulgadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Cámara de 108 MP",
+    "texto": "Cámara principal de 108 MP y cámara frontal de 16 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 7.000 mAh",
+    "texto": "Batería de 7.000 mAh y procesador Qualcomm Snapdragon, con Android 15.",
+    "foto": 4
+   }
   ]
  },
  "h400s": {
@@ -4619,6 +8075,121 @@
     "Seguridad",
     "Lector de huella y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Lector de huella y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tipo",
+      "LCD"
+     ],
+     [
+      "Resolución",
+      "720 × 1610"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Snapdragon 6s Gen 3"
+     ],
+     [
+      "Sistema operativo",
+      "Magic OS 9.0 Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "5 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.500 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP65 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.500",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "5",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 5 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 6.500 mAh",
+    "texto": "Batería de 6.500 mAh y procesador Snapdragon 6s Gen 3, con Magic OS 9.0 Android 16.",
+    "foto": 5
+   }
   ]
  },
  "h5d": {
@@ -4631,6 +8202,103 @@
     "Seguridad",
     "Lector de huella y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Lector de huella y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Resolución",
+      "720 × 1600 (HD+)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Helio"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "13 MP"
+     ],
+     [
+      "Cámara frontal",
+      "5 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.260 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "13",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.260",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "5",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 13 MP",
+    "texto": "Cámara principal de 13 MP y cámara frontal de 5 MP para selfies y videollamadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Batería de 5.260 mAh",
+    "texto": "Batería de 5.260 mAh y procesador MediaTek Helio.",
+    "foto": 2
+   }
   ]
  },
  "hplay10a": {
@@ -4663,13 +8331,236 @@
     "Seguridad",
     "Lector de huella"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,74\""
+     ],
+     [
+      "Procesador",
+      "MediaTek Helio G81"
+     ],
+     [
+      "Cámara trasera",
+      "13 MP"
+     ],
+     [
+      "Cámara frontal",
+      "5 MP"
+     ],
+     [
+      "Batería",
+      "5000 mAh"
+     ],
+     [
+      "Seguridad",
+      "Lector de huella"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,56 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 14"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,56",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "13",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "5",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 13 MP",
+    "texto": "Cámara principal de 13 MP y cámara frontal de 5 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Helio G36, con Android 14.",
+    "foto": 4
+   }
   ]
  },
  "hchoice10t": {
   "resumen": "Honor Choice 10T, celular de entrada de Honor para llamadas, WhatsApp y redes. Disponible en 32 GB y 64 GB."
  },
  "tcamon50p": {
-  "resumen": "Tecno Camon 50 Pro 5G de 256 GB, de la serie Camon de Tecno, enfocada en fotografía."
+  "resumen": "Tecno Camon 50 Pro 5G de 256 GB, de la serie Camon de Tecno, enfocada en fotografía.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,78 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED"
+     ],
+     [
+      "Resolución",
+      "2712 × 1220 (1.5K)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Dimensity 7400 Ultimate"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "50 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.150 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP69 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,78",
+    "pulgadas",
+    "Pantalla AMOLED"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.150",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,78 pulgadas",
+    "texto": "Pantalla AMOLED de 6,78 pulgadas, con resolución 2712 × 1220 (1.5K).",
+    "foto": 3
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 50 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 6.150 mAh",
+    "texto": "Batería de 6.150 mAh y procesador MediaTek Dimensity 7400 Ultimate, con Android 15.",
+    "foto": 5
+   }
+  ]
  },
  "tpovaslim": {
   "resumen": "Tecno Pova Slim de 256 GB, de diseño muy delgado y liviano.",
@@ -4677,6 +8568,88 @@
    [
     "Seguridad",
     "Huella en la pantalla"
+   ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella en la pantalla"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tipo",
+      "AMOLED"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Dimensity"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "13 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.160 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.160",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "13",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
    ]
   ]
  },
@@ -4707,6 +8680,102 @@
     "Seguridad",
     "Huella en la pantalla"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "curva a 120 Hz"
+     ],
+     [
+      "Procesador",
+      "MediaTek Dimensity 7100"
+     ],
+     [
+      "Cámara trasera",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "13 MP"
+     ],
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "Seguridad",
+      "Huella en la pantalla"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "8.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Conexiones",
+      "Bluetooth, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "8.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "13",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 13 MP para selfies y videollamadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Batería de 8.000 mAh",
+    "texto": "Batería de 8.000 mAh y procesador MediaTek Dimensity 7100, con Android 16.",
+    "foto": 2
+   }
   ]
  },
  "tspark50": {
@@ -4716,6 +8785,134 @@
     "Seguridad",
     "Huella lateral"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella lateral"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,78 pulgadas"
+     ],
+     [
+      "Tipo",
+      "LCD"
+     ],
+     [
+      "Resolución",
+      "1600 × 720 (HD+)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Dimensity 7100 5G"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.150 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP64 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,78",
+    "pulgadas",
+    "Pantalla LCD"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.150",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,78 pulgadas",
+    "texto": "Pantalla LCD de 6,78 pulgadas, con resolución 1600 × 720 (HD+).",
+    "foto": 2
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 6.150 mAh",
+    "texto": "Batería de 6.150 mAh y procesador MediaTek Dimensity 7100 5G, con Android 16.",
+    "foto": 4
+   }
   ]
  },
  "tsparkgo3": {
@@ -4749,6 +8946,110 @@
     "Seguridad",
     "Huella lateral"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,75\" HD+"
+     ],
+     [
+      "Procesador",
+      "Unisoc T7250"
+     ],
+     [
+      "Cámara trasera",
+      "13 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ],
+     [
+      "Batería",
+      "5000 mAh"
+     ],
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,6 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 13"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,6",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "13",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 13 MP",
+    "texto": "Cámara principal de 13 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Unisoc T606, con Android 13.",
+    "foto": 2
+   }
   ]
  },
  "tpova6": {
@@ -4773,6 +9074,112 @@
     "Seguridad",
     "Huella en la pantalla"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella en la pantalla"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,77 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Mediatek"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP65 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,77",
+    "pulgadas",
+    "Pantalla AMOLED"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,77 pulgadas",
+    "texto": "Pantalla AMOLED de 6,77 pulgadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 32 MP para selfies y videollamadas.",
+    "foto": 2
+   }
   ]
  },
  "vy31": {
@@ -4849,6 +9256,121 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tipo",
+      "LCD"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Mediatek Dimensity"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "7.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Sí"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP69 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "7.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Batería de 7.000 mAh",
+    "texto": "Batería de 7.000 mAh y procesador Mediatek Dimensity, con Android 15.",
+    "foto": 2
+   }
   ]
  },
  "oa5": {
@@ -4892,6 +9414,107 @@
     "Seguridad",
     "Huella en la pantalla"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,78\" a 120 Hz"
+     ],
+     [
+      "Procesador",
+      "Snapdragon 7s Gen 4"
+     ],
+     [
+      "Cámara trasera",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "13 MP"
+     ],
+     [
+      "Seguridad",
+      "Huella en la pantalla"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP64 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "13",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 13 MP para selfies y videollamadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Batería de 6.000 mAh",
+    "texto": "Batería de 6.000 mAh y procesador Qualcomm SM7635-AC Snapdragon.",
+    "foto": 2
+   }
   ]
  },
  "inote60e": {
@@ -4916,6 +9539,120 @@
     "Seguridad",
     "Huella lateral"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Batería",
+      "5600 mAh"
+     ],
+     [
+      "Resistencia",
+      "IP65"
+     ],
+     [
+      "Sistema",
+      "Android 16"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,78 pulgadas"
+     ],
+     [
+      "Tipo",
+      "LCD"
+     ],
+     [
+      "Resolución",
+      "Full HD+"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Mediatek Helio G100 Ultimate"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,78",
+    "pulgadas",
+    "Pantalla LCD"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.600",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,78 pulgadas",
+    "texto": "Pantalla LCD de 6,78 pulgadas, con resolución Full HD+.",
+    "foto": 1
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 5.600 mAh",
+    "texto": "Batería de 5.600 mAh y procesador Mediatek Helio G100 Ultimate.",
+    "foto": 3
+   }
   ]
  },
  "ismart20": {
@@ -4937,10 +9674,223 @@
     "Seguridad",
     "Lector de huella"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Batería",
+      "5200 mAh"
+     ],
+     [
+      "Resistencia",
+      "IP64"
+     ],
+     [
+      "Sistema",
+      "Android 16"
+     ],
+     [
+      "Seguridad",
+      "Lector de huella"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,7 pulgadas"
+     ],
+     [
+      "Tipo",
+      "IPS LCD"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Mediatek Helio G81 Ultimate"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "8 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,7",
+    "pulgadas",
+    "Pantalla IPS LCD"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.200",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,7 pulgadas",
+    "texto": "Pantalla IPS LCD de 6,7 pulgadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Cámara de 8 MP",
+    "texto": "Cámara principal de 8 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 5.200 mAh",
+    "texto": "Batería de 5.200 mAh y procesador Mediatek Helio G81 Ultimate.",
+    "foto": 4
+   }
   ]
  },
  "ihot70p": {
-  "resumen": "Infinix Hot 70 Pro 5G de 256 GB, con cámara de 50 MP y conectividad 5G."
+  "resumen": "Infinix Hot 70 Pro 5G de 256 GB, con cámara de 50 MP y conectividad 5G.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,76 pulgadas"
+     ],
+     [
+      "Tipo",
+      "LCD"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Dimensity"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,76",
+    "pulgadas",
+    "Pantalla LCD"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,76 pulgadas",
+    "texto": "Pantalla LCD de 6,76 pulgadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Batería de 6.000 mAh",
+    "texto": "Batería de 6.000 mAh y procesador MediaTek Dimensity.",
+    "foto": 1
+   }
+  ]
  },
  "zta56pro": {
   "resumen": "ZTE Blade A56 Pro con cámara de 50 MP, doble SIM y 4G, económico y rendidor.",
@@ -4957,6 +9907,69 @@
     "Red",
     "4G"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Cámara trasera",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ],
+     [
+      "Red",
+      "4G"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,7 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "UNISOC T7250"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP64 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,7",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
   ]
  },
  "zta35e": {
@@ -4965,6 +9978,74 @@
    [
     "Seguridad",
     "Reconocimiento facial"
+   ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,5 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "UNISOC T7250"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "8 MP"
+     ],
+     [
+      "Cámara frontal",
+      "5 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,5",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5",
+    "MP",
+    "Cámara frontal"
    ]
   ]
  },
@@ -4975,16 +10056,440 @@
     "Seguridad",
     "Lector de huella y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Lector de huella y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,7 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "UNISOC T7250"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "13 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,7",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "13",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
   ]
  },
  "zta57pro": {
-  "resumen": "ZTE A57 Pro de 128 GB, con buena memoria para su precio."
+  "resumen": "ZTE A57 Pro de 128 GB, con buena memoria para su precio.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,75 pulgadas"
+     ],
+     [
+      "Tipo",
+      "IPS LCD"
+     ],
+     [
+      "Resolución",
+      "720 × 1600 (HD+)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Unisoc T7250 Octa-Core 1.8GHz"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP64 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,75",
+    "pulgadas",
+    "Pantalla IPS LCD"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,75 pulgadas",
+    "texto": "Pantalla IPS LCD de 6,75 pulgadas, con resolución 720 × 1600 (HD+).",
+    "foto": 3
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Unisoc T7250 Octa-Core 1.8GHz, con Android 15.",
+    "foto": 5
+   }
+  ]
  },
  "ztev80max": {
-  "resumen": "ZTE V80 Max de 256 GB, de la serie V de ZTE, con pantalla grande."
+  "resumen": "ZTE V80 Max de 256 GB, de la serie V de ZTE, con pantalla grande.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,6 pulgadas"
+     ],
+     [
+      "Tipo",
+      "IPS LCD"
+     ],
+     [
+      "Resolución",
+      "1080 × 2400 (FHD+)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "T760"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,6",
+    "pulgadas",
+    "Pantalla IPS LCD"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,6 pulgadas",
+    "texto": "Pantalla IPS LCD de 6,6 pulgadas, con resolución 1080 × 2400 (FHD+).",
+    "foto": 1
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador T760, con Android 15.",
+    "foto": 3
+   }
+  ]
  },
  "ztev80pro": {
-  "resumen": "ZTE V80 Pro de 256 GB, de la serie V de ZTE."
+  "resumen": "ZTE V80 Pro de 256 GB, de la serie V de ZTE.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,75 pulgadas"
+     ],
+     [
+      "Tipo",
+      "IPS LCD"
+     ],
+     [
+      "Resolución",
+      "1600 × 720 (HD+)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Unisoc T7280 Octa-Core"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "108 MP"
+     ],
+     [
+      "Cámara frontal",
+      "16 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, Wi-Fi"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP64 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,75",
+    "pulgadas",
+    "Pantalla IPS LCD"
+   ],
+   [
+    "108",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "16",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,75 pulgadas",
+    "texto": "Pantalla IPS LCD de 6,75 pulgadas, con resolución 1600 × 720 (HD+).",
+    "foto": 1
+   },
+   {
+    "titulo": "Cámara de 108 MP",
+    "texto": "Cámara principal de 108 MP y cámara frontal de 16 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Unisoc T7280 Octa-Core, con Android 16.",
+    "foto": 3
+   }
+  ]
  },
  "nmusic2": {
   "resumen": "Nubia Music 2 de 256 GB, de ZTE, pensado para la música con parlante potente.",
@@ -5005,13 +10510,157 @@
   "resumen": "Nubia Focus 2 Ultra 5G de 256 GB, el modelo más completo de la serie Focus de ZTE, enfocado en fotografía."
  },
  "nneo5": {
-  "resumen": "Nubia Neo 5 5G de 256 GB, de la línea gamer Neo de ZTE."
+  "resumen": "Nubia Neo 5 5G de 256 GB, de la línea gamer Neo de ZTE.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,6 pulgadas"
+     ],
+     [
+      "Tipo",
+      "LCD IPS"
+     ],
+     [
+      "Resolución",
+      "1080 × 2400 (FHD+)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Unisoc T820 Octa-Core (6nm) hasta 2.7 GHz"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 13"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "7 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "4.500 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,6",
+    "pulgadas",
+    "Pantalla LCD IPS"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "4.500",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "7",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,6 pulgadas",
+    "texto": "Pantalla LCD IPS de 6,6 pulgadas, con resolución 1080 × 2400 (FHD+).",
+    "foto": 2
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 7 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 4.500 mAh",
+    "texto": "Batería de 4.500 mAh y procesador Unisoc T820 Octa-Core (6nm) hasta 2.7 GHz, con Android 13.",
+    "foto": 4
+   }
+  ]
  },
  "nk110": {
-  "resumen": "Nokia 110 4G, celular básico con cámara, radio FM, linterna y batería que dura días. Ideal como segundo celular o para quien no necesita smartphone."
+  "resumen": "Nokia 110 4G, celular básico con cámara, radio FM, linterna y batería que dura días. Ideal como segundo celular o para quien no necesita smartphone.",
+  "secciones": [
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ]
  },
  "nk105": {
-  "resumen": "Nokia 105, el clásico celular básico: resistente, con radio FM, linterna y batería que dura días."
+  "resumen": "Nokia 105, el clásico celular básico: resistente, con radio FM, linterna y batería que dura días.",
+  "secciones": [
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ]
  },
  "rmnote70": {
   "resumen": "Realme Note 70 de 256 GB con pantalla de 6,74\" a 90 Hz, procesador Unisoc T7250 y batería de 6300 mAh.",
@@ -5036,6 +10685,98 @@
     "Seguridad",
     "Huella lateral"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,74\" HD+ a 90 Hz"
+     ],
+     [
+      "Procesador",
+      "Unisoc T7250"
+     ],
+     [
+      "Batería",
+      "6300 mAh"
+     ],
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,74 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "13 MP"
+     ],
+     [
+      "Cámara frontal",
+      "5 MP"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP54 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,74",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "13",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.300",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "5",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 13 MP",
+    "texto": "Cámara principal de 13 MP y cámara frontal de 5 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 6.000 mAh",
+    "texto": "Batería de 6.000 mAh y procesador UNISOC T7250.",
+    "foto": 4
+   }
   ]
  },
  "rmc100i": {
@@ -5045,6 +10786,134 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,74 pulgadas"
+     ],
+     [
+      "Tipo",
+      "LCD IPS"
+     ],
+     [
+      "Resolución",
+      "720 × 1600 (HD+)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Unisoc T612"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.600 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP64 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,74",
+    "pulgadas",
+    "Pantalla LCD IPS"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.600",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,74 pulgadas",
+    "texto": "Pantalla LCD IPS de 6,74 pulgadas, con resolución 720 × 1600 (HD+).",
+    "foto": 1
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 6.600 mAh",
+    "texto": "Batería de 6.600 mAh y procesador Unisoc T612, con Android 16.",
+    "foto": 3
+   }
   ]
  },
  "rmc71": {
@@ -5079,6 +10948,107 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "HD+"
+     ],
+     [
+      "Batería",
+      "8000 mAh"
+     ],
+     [
+      "Resistencia",
+      "IP69K"
+     ],
+     [
+      "Sistema",
+      "Android 16"
+     ],
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,8 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Helio"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,8",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "8.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 8.000 mAh",
+    "texto": "Batería de 8.000 mAh y procesador MediaTek Helio.",
+    "foto": 4
+   }
   ]
  },
  "kblackz2": {
@@ -5113,6 +11083,34 @@
    [
     "Red",
     "4G"
+   ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "2\""
+     ],
+     [
+      "Batería",
+      "1030 mAh"
+     ],
+     [
+      "Red",
+      "4G"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Conexiones",
+      "Bluetooth, USB"
+     ]
+    ]
    ]
   ]
  },
@@ -8173,6 +14171,108 @@
     "Seguridad",
     "Face ID"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Face ID"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,3 pulgadas"
+     ],
+     [
+      "Tipo",
+      "Super Retina XDR"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Apple A19"
+     ],
+     [
+      "Sistema operativo",
+      "iOS 26"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "48 MP"
+     ],
+     [
+      "Cámara frontal",
+      "18 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,3",
+    "pulgadas",
+    "Pantalla Super Retina XDR"
+   ],
+   [
+    "48",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "18",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,3 pulgadas",
+    "texto": "Pantalla Super Retina XDR de 6,3 pulgadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Cámara de 48 MP",
+    "texto": "Cámara principal de 48 MP y cámara frontal de 18 MP para selfies y videollamadas.",
+    "foto": 4
+   }
   ]
  },
  "ipair": {
@@ -8189,6 +14289,107 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,59 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "snapdragon 8 lite"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 13"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "13 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,59",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "13",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,59 pulgadas",
+    "texto": "Pantalla de 6,59 pulgadas, con resolución 2.592 × 1.944.",
+    "foto": 3
+   },
+   {
+    "titulo": "Cámara de 13 MP",
+    "texto": "Cámara principal de 13 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 4
+   }
   ]
  },
  "xrn15pp": {
@@ -8213,6 +14414,126 @@
     "Seguridad",
     "Lector de huella y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Lector de huella y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,5 pulgadas"
+     ],
+     [
+      "Tipo",
+      "LCD"
+     ],
+     [
+      "Resolución",
+      "1604 × 720"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Helio G81"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "5 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "7.500 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP64 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,5",
+    "pulgadas",
+    "Pantalla LCD"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "7.500",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "5",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,5 pulgadas",
+    "texto": "Pantalla LCD de 6,5 pulgadas, con resolución 1604 × 720.",
+    "foto": 3
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 5 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 7.500 mAh",
+    "texto": "Batería de 7.500 mAh y procesador MediaTek Helio G81.",
+    "foto": 5
+   }
   ]
  },
  "oa6k": {
@@ -8221,6 +14542,116 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tipo",
+      "LCD"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Qualcomm Snapdragon"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "5 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.100 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Sí"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP64 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.100",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "5",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 5 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 6.100 mAh",
+    "texto": "Batería de 6.100 mAh y procesador Qualcomm Snapdragon, con Android 15.",
+    "foto": 4
+   }
   ]
  },
  "igt50pro": {
@@ -8229,6 +14660,108 @@
     "Seguridad",
     "Huella en la pantalla"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella en la pantalla"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,78 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Dimensity 8400 Ultimate"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "13 MP"
+     ],
+     [
+      "Cámara frontal",
+      "50 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP64 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,78",
+    "pulgadas",
+    "Pantalla AMOLED"
+   ],
+   [
+    "13",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,78 pulgadas",
+    "texto": "Pantalla AMOLED de 6,78 pulgadas, con resolución 1208*2644.",
+    "foto": 1
+   },
+   {
+    "titulo": "Cámara de 13 MP",
+    "texto": "Cámara principal de 13 MP y cámara frontal de 50 MP para selfies y videollamadas.",
+    "foto": 2
+   }
   ]
  },
  "inote60u": {
@@ -8277,6 +14810,138 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,52 pulgadas"
+     ],
+     [
+      "Tipo",
+      "IPS LCD"
+     ],
+     [
+      "Resolución",
+      "720 × 1600 (HD+)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MT6765"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 13 tiramisu"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.320 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, NFC, USB"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,52",
+    "pulgadas",
+    "Pantalla IPS LCD"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.320",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,52 pulgadas",
+    "texto": "Pantalla IPS LCD de 6,52 pulgadas, con resolución 720 × 1600 (HD+).",
+    "foto": 1
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 6.320 mAh",
+    "texto": "Batería de 6.320 mAh y procesador MT6765, con Android 13 tiramisu.",
+    "foto": 3
+   }
   ]
  },
  "ularmor22": {
@@ -8285,6 +14950,138 @@
     "Seguridad",
     "Huella lateral y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella lateral y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,58 pulgadas"
+     ],
+     [
+      "Tipo",
+      "Corning Gorilla Glass"
+     ],
+     [
+      "Resolución",
+      "1080 × 2400 (FHD+)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Helio G96"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 13 tiramisu"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "64 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.600 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, NFC, USB"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,58",
+    "pulgadas",
+    "Pantalla Corning Gorilla Glass"
+   ],
+   [
+    "64",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.600",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,58 pulgadas",
+    "texto": "Pantalla Corning Gorilla Glass de 6,58 pulgadas, con resolución 1080 × 2400 (FHD+).",
+    "foto": 3
+   },
+   {
+    "titulo": "Cámara de 64 MP",
+    "texto": "Cámara principal de 64 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 6.600 mAh",
+    "texto": "Batería de 6.600 mAh y procesador Helio G96, con Android 13 tiramisu.",
+    "foto": 5
+   }
   ]
  },
  "ularmorx32": {
@@ -8293,6 +15090,109 @@
     "Seguridad",
     "Reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "5,65 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Helio"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "48 MP"
+     ],
+     [
+      "Cámara frontal",
+      "16 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.500 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP69 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "5,65",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "48",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.500",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "16",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 48 MP",
+    "texto": "Cámara principal de 48 MP y cámara frontal de 16 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 5.500 mAh",
+    "texto": "Batería de 5.500 mAh y procesador MediaTek Helio.",
+    "foto": 4
+   }
   ]
  },
  "ularmorx12p": {
@@ -8300,6 +15200,39 @@
    [
     "Seguridad",
     "Reconocimiento facial"
+   ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "5,45 pulgadas"
+     ],
+     [
+      "Tipo",
+      "LCD"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "OCTA CORE"
+     ]
+    ]
    ]
   ]
  },
@@ -8334,6 +15267,116 @@
     "Seguridad",
     "Face ID"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,1\" Super Retina XDR (OLED)"
+     ],
+     [
+      "Procesador",
+      "Apple A18"
+     ],
+     [
+      "Cámaras traseras",
+      "48 MP Fusion y 12 MP ultra gran angular"
+     ],
+     [
+      "Cámara frontal",
+      "12 MP"
+     ],
+     [
+      "Botones",
+      "Acción y Control de Cámara"
+     ],
+     [
+      "Conector",
+      "USB-C"
+     ],
+     [
+      "Seguridad",
+      "Face ID"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,1 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Núcleos",
+      "Seis núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "iOS 18"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "48 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,1",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "48",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
   ]
  },
  "xrn15pro": {
@@ -8352,6 +15395,125 @@
     "Seguridad",
     "Huella ultrasónica en la pantalla y reconocimiento facial"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Seguridad",
+      "Huella ultrasónica en la pantalla y reconocimiento facial"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tipo",
+      "AMOLED"
+     ],
+     [
+      "Resolución",
+      "Full HD"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Snapdragon® 8 Elite Mobile Platform"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "20 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.210 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, USB, Wi-Fi"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.210",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "20",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 20 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 6.210 mAh",
+    "texto": "Batería de 6.210 mAh y procesador Snapdragon® 8 Elite Mobile Platform, con Android 16.",
+    "foto": 3
+   }
   ]
  },
  "jblbb4": {
@@ -8409,6 +15571,115 @@
     "Seguridad",
     "Face ID"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,1\" Super Retina XDR (OLED)"
+     ],
+     [
+      "Procesador",
+      "Apple A18"
+     ],
+     [
+      "Cámaras traseras",
+      "48 MP Fusion y 12 MP ultra gran angular"
+     ],
+     [
+      "Cámara frontal",
+      "12 MP"
+     ],
+     [
+      "Botones",
+      "Acción y Control de Cámara"
+     ],
+     [
+      "Conector",
+      "USB-C"
+     ],
+     [
+      "Seguridad",
+      "Face ID"
+     ]
+    ]
+   ],
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,1 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "48 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "3.561 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, Wi-Fi"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,1",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "48",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "3.561",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 48 MP",
+    "texto": "Cámara principal de 48 MP y cámara frontal de 12 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 3.561 mAh",
+    "texto": "Batería de 3.561 mAh y procesador Apple A18.",
+    "foto": 5
+   }
   ]
  },
  "ip16ecpo": {
@@ -8418,10 +15689,213 @@
   "resumen": "MacBook Pro de 14\" con chip M5 de Apple, 1 TB de almacenamiento y 16 GB de memoria unificada."
  },
  "ss26": {
-  "resumen": "Samsung Galaxy S26 de 256 GB y 12 GB de RAM, de la serie S26 de Samsung, con las funciones de Galaxy AI."
+  "resumen": "Samsung Galaxy S26 de 256 GB y 12 GB de RAM, de la serie S26 de Samsung, con las funciones de Galaxy AI.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tipo",
+      "AMOLED Dynamic AMOLED 2X"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Exynos 2600"
+     ],
+     [
+      "Núcleos",
+      "Deca core"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "12 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "4.300 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "4.300",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "12",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 12 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 4.300 mAh",
+    "texto": "Batería de 4.300 mAh y procesador Exynos 2600, con Android 16.",
+    "foto": 3
+   }
+  ]
  },
  "szfold8u": {
-  "resumen": "Samsung Galaxy Z Fold 8 Ultra de 512 GB y 12 GB de RAM, la versión Ultra del plegable Galaxy Z Fold 8."
+  "resumen": "Samsung Galaxy Z Fold 8 Ultra de 512 GB y 12 GB de RAM, la versión Ultra del plegable Galaxy Z Fold 8.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "7,6 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED"
+     ],
+     [
+      "Resolución",
+      "2448 × 1080"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Qualcomm Snapdragon"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "10 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, Wi-Fi"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP48 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "7,6",
+    "pulgadas",
+    "Pantalla AMOLED"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "10",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 7,6 pulgadas",
+    "texto": "Pantalla AMOLED de 7,6 pulgadas, con resolución 2448 × 1080.",
+    "foto": 1
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 10 MP para selfies y videollamadas.",
+    "foto": 2
+   }
+  ]
  },
  "gw8": {
   "resumen": "Samsung Galaxy Watch 8 con Wear OS y funciones de salud y sueño. Disponible en 40 mm y 44 mm."
@@ -8430,16 +15904,442 @@
   "resumen": "Samsung Galaxy Watch Ultra 2025 de 47 mm, pensado para deporte y aventura."
  },
  "x17t": {
-  "resumen": "Xiaomi 17T de 512 GB, de la serie T de Xiaomi, pensado para fotografía y buen rendimiento."
+  "resumen": "Xiaomi 17T de 512 GB, de la serie T de Xiaomi, pensado para fotografía y buen rendimiento.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tipo",
+      "pOLED"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Mediatek"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.500 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.500",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara frontal"
+   ],
+   [
+    "5G",
+    "",
+    "Conexión de quinta generación"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 32 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 6.500 mAh",
+    "texto": "Batería de 6.500 mAh y procesador Mediatek, con Android 16.",
+    "foto": 4
+   }
+  ]
  },
  "x17u": {
-  "resumen": "Xiaomi 17 Ultra, el modelo más alto de la serie 17 de Xiaomi, pensado para fotografía. Disponible en 512 GB y 1 TB."
+  "resumen": "Xiaomi 17 Ultra, el modelo más alto de la serie 17 de Xiaomi, pensado para fotografía. Disponible en 512 GB y 1 TB.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,9 pulgadas"
+     ],
+     [
+      "Tipo",
+      "OLED"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Qualcomm/Snapdragon 8 Elite Gen 5"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "200 MP"
+     ],
+     [
+      "Cámara frontal",
+      "50 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "5G, Bluetooth"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,9",
+    "pulgadas",
+    "Pantalla OLED"
+   ],
+   [
+    "200",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,9 pulgadas",
+    "texto": "Pantalla OLED de 6,9 pulgadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Cámara de 200 MP",
+    "texto": "Cámara principal de 200 MP y cámara frontal de 50 MP para selfies y videollamadas.",
+    "foto": 2
+   },
+   {
+    "titulo": "Batería de 6.000 mAh",
+    "texto": "Batería de 6.000 mAh y procesador Qualcomm/Snapdragon 8 Elite Gen 5, con Android 16.",
+    "foto": 3
+   }
+  ]
  },
  "mgmax": {
-  "resumen": "Motorola Moto G Max de 256 GB y 8 GB de RAM."
+  "resumen": "Motorola Moto G Max de 256 GB y 8 GB de RAM.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,8 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED"
+     ],
+     [
+      "Resolución",
+      "2772 × 1272"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "2.5 GHz"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "200 MP"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.200 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP69 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,8",
+    "pulgadas",
+    "Pantalla AMOLED"
+   ],
+   [
+    "200",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.200",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,8 pulgadas",
+    "texto": "Pantalla AMOLED de 6,8 pulgadas, con resolución 2772 × 1272.",
+    "foto": 2
+   },
+   {
+    "titulo": "Cámara de 200 MP",
+    "texto": "Cámara principal de 200 MP y cámara frontal de 32 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 5.200 mAh",
+    "texto": "Batería de 5.200 mAh y procesador 2.5 GHz, con Android 16.",
+    "foto": 4
+   }
+  ]
  },
  "inote60": {
-  "resumen": "Infinix Note 60 5G de 256 GB y 16 GB de RAM."
+  "resumen": "Infinix Note 60 5G de 256 GB y 16 GB de RAM.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,7 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED"
+     ],
+     [
+      "Resolución",
+      "2712 × 1220 (1.5K)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Mediatek Dimensity 7400"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "13 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.150 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,7",
+    "pulgadas",
+    "Pantalla AMOLED"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.150",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "13",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,7 pulgadas",
+    "texto": "Pantalla AMOLED de 6,7 pulgadas, con resolución 2712 × 1220 (1.5K).",
+    "foto": 2
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 13 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 6.150 mAh",
+    "texto": "Batería de 6.150 mAh y procesador Mediatek Dimensity 7400, con Android 16.",
+    "foto": 4
+   }
+  ]
  },
  "tmegapad": {
   "resumen": "Tablet Tecno Megapad, en versión WiFi o en la versión SE 2 con 4G LTE para SIM."
@@ -8547,6 +16447,97 @@
     "Resistencia",
     "IP68 e IP69K"
    ]
+  ],
+  "secciones": [
+   [
+    "Lo principal",
+    [
+     [
+      "Pantalla",
+      "6,58\" IPS FHD+ a 120 Hz"
+     ],
+     [
+      "Procesador",
+      "MediaTek Helio G99"
+     ],
+     [
+      "Almacenamiento",
+      "256 GB"
+     ],
+     [
+      "Memoria RAM",
+      "8 GB"
+     ],
+     [
+      "Batería",
+      "9.600 mAh con carga de 33 W"
+     ],
+     [
+      "Resistencia",
+      "IP68 e IP69K"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "48 MP"
+     ],
+     [
+      "Cámara frontal",
+      "8 MP"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "4G"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "48",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "9.600",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "8",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara de 48 MP",
+    "texto": "Cámara principal de 48 MP y cámara frontal de 8 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Helio G99 Plus.",
+    "foto": 3
+   }
   ]
  },
  "ipadpro13": {
@@ -9484,22 +17475,563 @@
   "resumen": "Reloj inteligente itel ISW-023 Plus: recibe notificaciones del celular, cuenta pasos y mide el ritmo cardíaco."
  },
  "xrn17pm": {
-  "resumen": "Xiaomi Redmi Note 17 Pro Max, el modelo más completo de la serie Note, con 8 + 8 GB de RAM. Disponible en 256 GB y 512 GB."
+  "resumen": "Xiaomi Redmi Note 17 Pro Max, el modelo más completo de la serie Note, con 8 + 8 GB de RAM. Disponible en 256 GB y 512 GB.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,83 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED Gorilla glass Dolby Vision"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "MediaTek Dimensity"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "200 MP"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "8.500 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP69 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,83",
+    "pulgadas",
+    "Pantalla AMOLED Gorilla glass Dolby Vision"
+   ],
+   [
+    "200",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "8.500",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,83 pulgadas",
+    "texto": "Pantalla AMOLED Gorilla glass Dolby Vision de 6,83 pulgadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Cámara de 200 MP",
+    "texto": "Cámara principal de 200 MP y cámara frontal de 32 MP para selfies y videollamadas.",
+    "foto": 1
+   },
+   {
+    "titulo": "Batería de 8.500 mAh",
+    "texto": "Batería de 8.500 mAh y procesador MediaTek Dimensity.",
+    "foto": 1
+   }
+  ]
  },
  "medge70f": {
-  "resumen": "Motorola Edge 70 Fusion 5G de 256 GB y 12 GB de RAM."
+  "resumen": "Motorola Edge 70 Fusion 5G de 256 GB y 12 GB de RAM.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,8 pulgadas"
+     ],
+     [
+      "Tipo",
+      "pOLED"
+     ],
+     [
+      "Resolución",
+      "2712 × 1220 (1.5K)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Qualcomm Snapdragon 7s Gen 3"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.200 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, NFC, USB, Wi-Fi"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP69 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,8",
+    "pulgadas",
+    "Pantalla pOLED"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.200",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,8 pulgadas",
+    "texto": "Pantalla pOLED de 6,8 pulgadas, con resolución 2712 × 1220 (1.5K).",
+    "foto": 4
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 32 MP para selfies y videollamadas.",
+    "foto": 5
+   },
+   {
+    "titulo": "Batería de 5.200 mAh",
+    "texto": "Batería de 5.200 mAh y procesador Qualcomm Snapdragon 7s Gen 3, con Android 16.",
+    "foto": 6
+   }
+  ]
  },
  "hx9d": {
-  "resumen": "Honor X9D de 256 GB y 8 GB de RAM."
+  "resumen": "Honor X9D de 256 GB y 8 GB de RAM.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,79 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED"
+     ],
+     [
+      "Resolución",
+      "2712 × 1220 (1.5K)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Qualcomm Snapdragon 6 Gen 4"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 16"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "108 MP"
+     ],
+     [
+      "Cámara frontal",
+      "16 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "8.300 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ],
+     [
+      "Conexiones",
+      "Bluetooth, NFC, Wi-Fi"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP69 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,79",
+    "pulgadas",
+    "Pantalla AMOLED"
+   ],
+   [
+    "108",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "8.300",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "16",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,79 pulgadas",
+    "texto": "Pantalla AMOLED de 6,79 pulgadas, con resolución 2712 × 1220 (1.5K).",
+    "foto": 3
+   },
+   {
+    "titulo": "Cámara de 108 MP",
+    "texto": "Cámara principal de 108 MP y cámara frontal de 16 MP para selfies y videollamadas.",
+    "foto": 4
+   },
+   {
+    "titulo": "Batería de 8.300 mAh",
+    "texto": "Batería de 8.300 mAh y procesador Qualcomm Snapdragon 6 Gen 4, con Android 16.",
+    "foto": 5
+   }
+  ]
  },
  "oreno13f": {
   "resumen": "Oppo Reno 13 F, de la serie Reno de Oppo. Disponible en 256 GB y 512 GB."
  },
  "nneo5gt": {
-  "resumen": "Nubia Neo 5 GT 5G de 512 GB y 12 GB de RAM, la versión GT de la serie Neo de Nubia, pensada para juegos."
+  "resumen": "Nubia Neo 5 GT 5G de 512 GB y 12 GB de RAM, la versión GT de la serie Neo de Nubia, pensada para juegos.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,78 pulgadas"
+     ],
+     [
+      "Tipo",
+      "AMOLED"
+     ],
+     [
+      "Resolución",
+      "1080 × 2400 (FHD+)"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Unisoc T820 5G Octa-Core 2.7GHz Gaming Processor"
+     ],
+     [
+      "Núcleos",
+      "Ocho núcleos"
+     ],
+     [
+      "Sistema operativo",
+      "Android 15"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "50 MP"
+     ],
+     [
+      "Cámara frontal",
+      "16 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "5.000 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ],
+     [
+      "SIM",
+      "Doble SIM"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,78",
+    "pulgadas",
+    "Pantalla AMOLED"
+   ],
+   [
+    "50",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "5.000",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "16",
+    "MP",
+    "Cámara frontal"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Pantalla de 6,78 pulgadas",
+    "texto": "Pantalla AMOLED de 6,78 pulgadas, con resolución 1080 × 2400 (FHD+).",
+    "foto": 2
+   },
+   {
+    "titulo": "Cámara de 50 MP",
+    "texto": "Cámara principal de 50 MP y cámara frontal de 16 MP para selfies y videollamadas.",
+    "foto": 3
+   },
+   {
+    "titulo": "Batería de 5.000 mAh",
+    "texto": "Batería de 5.000 mAh y procesador Unisoc T820 5G Octa-Core 2.7GHz Gaming Processor, con Android 15.",
+    "foto": 4
+   }
+  ]
  },
  "pocof9pro": {
-  "resumen": "POCO F9 Pro, de la serie F, la más potente de POCO. Disponible en 256 GB y 512 GB."
+  "resumen": "POCO F9 Pro, de la serie F, la más potente de POCO. Disponible en 256 GB y 512 GB.",
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tamaño",
+      "6,59 pulgadas"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Procesador",
+      "Qualcomm Snapdragon"
+     ]
+    ]
+   ],
+   [
+    "Cámaras",
+    [
+     [
+      "Cámara principal",
+      "200 MP"
+     ],
+     [
+      "Cámara frontal",
+      "32 MP"
+     ]
+    ]
+   ],
+   [
+    "Batería",
+    [
+     [
+      "Capacidad",
+      "6.330 mAh"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red",
+      "5G"
+     ]
+    ]
+   ],
+   [
+    "Diseño",
+    [
+     [
+      "Resistencia",
+      "IP68 al agua y al polvo"
+     ]
+    ]
+   ]
+  ],
+  "cifras": [
+   [
+    "6,59",
+    "pulgadas",
+    "Pantalla"
+   ],
+   [
+    "200",
+    "MP",
+    "Cámara principal"
+   ],
+   [
+    "6.330",
+    "mAh",
+    "De batería"
+   ],
+   [
+    "32",
+    "MP",
+    "Cámara frontal"
+   ]
+  ]
  },
  "pocof9u": {
   "resumen": "POCO F9 Ultra de 512 GB, el modelo más alto de la serie F de POCO."

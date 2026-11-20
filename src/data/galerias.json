@@ -53,7 +53,12 @@
  ],
  "alc1041": [
   "fotos/galeria/alc1041-2.jpg",
-  "fotos/galeria/alc1041-3.jpg"
+  "fotos/galeria/alc1041-3.jpg",
+  "fotos/galeria/alc1041-f1.jpg",
+  "fotos/galeria/alc1041-f2.jpg",
+  "fotos/galeria/alc1041-f3.jpg",
+  "fotos/galeria/alc1041-f4.jpg",
+  "fotos/galeria/alc1041-f5.jpg"
  ],
  "ap4": [
   "fotos/galeria/ap4-2.jpg"
@@ -212,7 +217,12 @@
  "h400s": [
   "fotos/galeria/h400s-2.jpg",
   "fotos/galeria/h400s-3.jpg",
-  "fotos/galeria/h400s-4.jpg"
+  "fotos/galeria/h400s-4.jpg",
+  "fotos/galeria/h400s-f1.jpg",
+  "fotos/galeria/h400s-f2.jpg",
+  "fotos/galeria/h400s-f3.jpg",
+  "fotos/galeria/h400s-f4.jpg",
+  "fotos/galeria/h400s-f5.jpg"
  ],
  "h5d": [
   "fotos/galeria/h5d-2.jpg"
@@ -233,7 +243,12 @@
  "hmagic8l": [
   "fotos/galeria/hmagic8l-2.jpg",
   "fotos/galeria/hmagic8l-3.jpg",
-  "fotos/galeria/hmagic8l-4.jpg"
+  "fotos/galeria/hmagic8l-4.jpg",
+  "fotos/galeria/hmagic8l-f1.jpg",
+  "fotos/galeria/hmagic8l-f2.jpg",
+  "fotos/galeria/hmagic8l-f3.jpg",
+  "fotos/galeria/hmagic8l-f4.jpg",
+  "fotos/galeria/hmagic8l-f5.jpg"
  ],
  "hp14dq3502la": [
   "fotos/galeria/hp14dq3502la-2.jpg",
@@ -320,7 +335,12 @@
  ],
  "hplay10": [
   "fotos/galeria/hplay10-5.jpg",
-  "fotos/galeria/hplay10-6.jpg"
+  "fotos/galeria/hplay10-6.jpg",
+  "fotos/galeria/hplay10-f1.jpg",
+  "fotos/galeria/hplay10-f2.jpg",
+  "fotos/galeria/hplay10-f3.jpg",
+  "fotos/galeria/hplay10-f4.jpg",
+  "fotos/galeria/hplay10-f5.jpg"
  ],
  "hplay10a": [
   "fotos/galeria/hplay10a-2.jpg",
@@ -357,22 +377,61 @@
   "fotos/galeria/hvacr3-2.jpg",
   "fotos/galeria/hvacr3-3.jpg"
  ],
+ "hx5d": [
+  "fotos/galeria/hx5d-f1.jpg",
+  "fotos/galeria/hx5d-f2.jpg"
+ ],
  "hx6e": [
   "fotos/galeria/hx6e-2.jpg",
-  "fotos/galeria/hx6e-3.jpg"
+  "fotos/galeria/hx6e-3.jpg",
+  "fotos/galeria/hx6e-f1.jpg",
+  "fotos/galeria/hx6e-f2.jpg",
+  "fotos/galeria/hx6e-f3.jpg",
+  "fotos/galeria/hx6e-f4.jpg",
+  "fotos/galeria/hx6e-f5.jpg",
+  "fotos/galeria/hx6e-f6.jpg"
  ],
  "hx8d": [
-  "fotos/galeria/hx8d-2.jpg"
+  "fotos/galeria/hx8d-2.jpg",
+  "fotos/galeria/hx8d-f1.jpg",
+  "fotos/galeria/hx8d-f2.jpg",
+  "fotos/galeria/hx8d-f3.jpg",
+  "fotos/galeria/hx8d-f4.jpg"
  ],
  "hx9d": [
   "fotos/galeria/hx9d-2.jpg",
-  "fotos/galeria/hx9d-3.jpg"
+  "fotos/galeria/hx9d-3.jpg",
+  "fotos/galeria/hx9d-f1.jpg",
+  "fotos/galeria/hx9d-f2.jpg",
+  "fotos/galeria/hx9d-f3.jpg"
+ ],
+ "igt50pro": [
+  "fotos/galeria/igt50pro-f1.jpg",
+  "fotos/galeria/igt50pro-f2.jpg",
+  "fotos/galeria/igt50pro-f3.jpg",
+  "fotos/galeria/igt50pro-f4.jpg",
+  "fotos/galeria/igt50pro-f5.jpg"
+ ],
+ "ihot70": [
+  "fotos/galeria/ihot70-f1.jpg",
+  "fotos/galeria/ihot70-f2.jpg",
+  "fotos/galeria/ihot70-f3.jpg",
+  "fotos/galeria/ihot70-f4.jpg",
+  "fotos/galeria/ihot70-f5.jpg"
  ],
  "ihot70p": [
   "fotos/galeria/ihot70p-2.jpg"
  ],
  "inote60": [
-  "fotos/galeria/inote60-2.jpg"
+  "fotos/galeria/inote60-2.jpg",
+  "fotos/galeria/inote60-f1.jpg",
+  "fotos/galeria/inote60-f2.jpg",
+  "fotos/galeria/inote60-f3.jpg"
+ ],
+ "inote60p": [
+  "fotos/galeria/inote60p-f1.jpg",
+  "fotos/galeria/inote60p-f2.jpg",
+  "fotos/galeria/inote60p-f3.jpg"
  ],
  "inote60u": [
   "fotos/galeria/inote60u-2.jpg",
@@ -381,21 +440,33 @@
  ],
  "ip13": [
   "fotos/galeria/ip13-5.jpg",
-  "fotos/galeria/ip13-6.jpg"
+  "fotos/galeria/ip13-6.jpg",
+  "fotos/galeria/ip13-f1.jpg",
+  "fotos/galeria/ip13-f2.jpg"
  ],
  "ip15pm": [
   "fotos/galeria/ip15pm-2.jpg",
-  "fotos/galeria/ip15pm-3.jpg"
+  "fotos/galeria/ip15pm-3.jpg",
+  "fotos/galeria/ip15pm-f1.jpg",
+  "fotos/galeria/ip15pm-f2.jpg"
  ],
  "ip16": [
   "fotos/galeria/ip16-2.jpg",
   "fotos/galeria/ip16-3.jpg",
-  "fotos/galeria/ip16-4.jpg"
+  "fotos/galeria/ip16-4.jpg",
+  "fotos/galeria/ip16-f1.jpg",
+  "fotos/galeria/ip16-f2.jpg",
+  "fotos/galeria/ip16-f3.jpg",
+  "fotos/galeria/ip16-f4.jpg",
+  "fotos/galeria/ip16-f5.jpg",
+  "fotos/galeria/ip16-f6.jpg"
  ],
  "ip16cpo": [
   "fotos/galeria/ip16-2.jpg",
   "fotos/galeria/ip16-3.jpg",
-  "fotos/galeria/ip16-4.jpg"
+  "fotos/galeria/ip16-4.jpg",
+  "fotos/galeria/ip16cpo-f1.jpg",
+  "fotos/galeria/ip16cpo-f2.jpg"
  ],
  "ip16ecpo": [
   "fotos/galeria/ip16ecpo-2.jpg",
@@ -403,17 +474,34 @@
  ],
  "ip17": [
   "fotos/galeria/ip17-2.jpg",
-  "fotos/galeria/ip17-3.jpg"
+  "fotos/galeria/ip17-3.jpg",
+  "fotos/galeria/ip17-f1.jpg",
+  "fotos/galeria/ip17-f2.jpg",
+  "fotos/galeria/ip17-f3.jpg",
+  "fotos/galeria/ip17-f4.jpg",
+  "fotos/galeria/ip17-f5.jpg",
+  "fotos/galeria/ip17-f6.jpg"
  ],
  "ip17p": [
   "fotos/galeria/ip17p-5.jpg"
  ],
  "ip17pm": [
   "fotos/galeria/ip17pm-5.jpg",
-  "fotos/galeria/ip17pm-6.jpg"
+  "fotos/galeria/ip17pm-6.jpg",
+  "fotos/galeria/ip17pm-f1.jpg",
+  "fotos/galeria/ip17pm-f2.jpg",
+  "fotos/galeria/ip17pm-f3.jpg",
+  "fotos/galeria/ip17pm-f4.jpg",
+  "fotos/galeria/ip17pm-f5.jpg"
  ],
  "ip18p": [
-  "fotos/galeria/ip18p-3.jpg"
+  "fotos/galeria/ip18p-3.jpg",
+  "fotos/galeria/ip18p-f1.jpg",
+  "fotos/galeria/ip18p-f2.jpg",
+  "fotos/galeria/ip18p-f3.jpg",
+  "fotos/galeria/ip18p-f4.jpg",
+  "fotos/galeria/ip18p-f5.jpg",
+  "fotos/galeria/ip18p-f6.jpg"
  ],
  "ip18pm": [
   "fotos/galeria/ip18pm-f1.jpg",
@@ -444,7 +532,10 @@
   "fotos/galeria/ipduo-2.jpg"
  ],
  "ismart20": [
-  "fotos/galeria/ismart20-4.jpg"
+  "fotos/galeria/ismart20-4.jpg",
+  "fotos/galeria/ismart20-f1.jpg",
+  "fotos/galeria/ismart20-f2.jpg",
+  "fotos/galeria/ismart20-f3.jpg"
  ],
  "itela100": [
   "fotos/galeria/itela100-2.jpg"
@@ -608,7 +699,10 @@
  "medge50f": [
   "fotos/galeria/medge50f-2.jpg",
   "fotos/galeria/medge50f-3.jpg",
-  "fotos/galeria/medge50f-4.jpg"
+  "fotos/galeria/medge50f-4.jpg",
+  "fotos/galeria/medge50f-f1.jpg",
+  "fotos/galeria/medge50f-f2.jpg",
+  "fotos/galeria/medge50f-f3.jpg"
  ],
  "medge60": [
   "fotos/galeria/medge60-2.jpg",
@@ -616,19 +710,39 @@
  ],
  "medge60f": [
   "fotos/galeria/medge60f-2.jpg",
-  "fotos/galeria/medge60f-4.jpg"
+  "fotos/galeria/medge60f-4.jpg",
+  "fotos/galeria/medge60f-f1.jpg",
+  "fotos/galeria/medge60f-f2.jpg",
+  "fotos/galeria/medge60f-f3.jpg",
+  "fotos/galeria/medge60f-f4.jpg",
+  "fotos/galeria/medge60f-f5.jpg"
  ],
  "medge70f": [
   "fotos/galeria/medge70f-2.jpg",
   "fotos/galeria/medge70f-3.jpg",
-  "fotos/galeria/medge70f-4.jpg"
+  "fotos/galeria/medge70f-4.jpg",
+  "fotos/galeria/medge70f-f1.jpg",
+  "fotos/galeria/medge70f-f2.jpg",
+  "fotos/galeria/medge70f-f3.jpg",
+  "fotos/galeria/medge70f-f4.jpg",
+  "fotos/galeria/medge70f-f5.jpg"
  ],
  "mg06": [
-  "fotos/galeria/mg06-3.jpg"
+  "fotos/galeria/mg06-3.jpg",
+  "fotos/galeria/mg06-f1.jpg",
+  "fotos/galeria/mg06-f2.jpg",
+  "fotos/galeria/mg06-f3.jpg",
+  "fotos/galeria/mg06-f4.jpg",
+  "fotos/galeria/mg06-f5.jpg"
  ],
  "mg17p": [
   "fotos/galeria/mg17p-5.jpg",
-  "fotos/galeria/mg17p-6.jpg"
+  "fotos/galeria/mg17p-6.jpg",
+  "fotos/galeria/mg17p-f1.jpg",
+  "fotos/galeria/mg17p-f2.jpg",
+  "fotos/galeria/mg17p-f3.jpg",
+  "fotos/galeria/mg17p-f4.jpg",
+  "fotos/galeria/mg17p-f5.jpg"
  ],
  "mg56": [
   "fotos/galeria/mg56-2.jpg",
@@ -636,10 +750,20 @@
   "fotos/galeria/mg56-4.jpg"
  ],
  "mg67": [
-  "fotos/galeria/mg67-3.jpg"
+  "fotos/galeria/mg67-3.jpg",
+  "fotos/galeria/mg67-f1.jpg",
+  "fotos/galeria/mg67-f2.jpg",
+  "fotos/galeria/mg67-f3.jpg",
+  "fotos/galeria/mg67-f4.jpg",
+  "fotos/galeria/mg67-f5.jpg"
  ],
  "mgmax": [
-  "fotos/galeria/mgmax-2.jpg"
+  "fotos/galeria/mgmax-2.jpg",
+  "fotos/galeria/mgmax-f1.jpg",
+  "fotos/galeria/mgmax-f2.jpg",
+  "fotos/galeria/mgmax-f3.jpg",
+  "fotos/galeria/mgmax-f4.jpg",
+  "fotos/galeria/mgmax-f5.jpg"
  ],
  "mkbpro11": [
   "fotos/galeria/mkbpro11-3.jpg"
@@ -666,16 +790,38 @@
   "fotos/galeria/nfocus2u-3.jpg"
  ],
  "nk105": [
-  "fotos/galeria/nk105-2.jpg"
+  "fotos/galeria/nk105-2.jpg",
+  "fotos/galeria/nk105-f1.jpg",
+  "fotos/galeria/nk105-f2.jpg",
+  "fotos/galeria/nk105-f3.jpg",
+  "fotos/galeria/nk105-f4.jpg"
+ ],
+ "nk110": [
+  "fotos/galeria/nk110-f1.jpg",
+  "fotos/galeria/nk110-f2.jpg"
  ],
  "nmusic2": [
   "fotos/galeria/nmusic2-2.jpg"
  ],
  "nneo5": [
-  "fotos/galeria/nneo5-2.jpg"
+  "fotos/galeria/nneo5-2.jpg",
+  "fotos/galeria/nneo5-f1.jpg",
+  "fotos/galeria/nneo5-f2.jpg",
+  "fotos/galeria/nneo5-f3.jpg",
+  "fotos/galeria/nneo5-f4.jpg"
  ],
  "nneo5gt": [
-  "fotos/galeria/nneo5gt-2.jpg"
+  "fotos/galeria/nneo5gt-2.jpg",
+  "fotos/galeria/nneo5gt-f1.jpg",
+  "fotos/galeria/nneo5gt-f2.jpg",
+  "fotos/galeria/nneo5gt-f3.jpg"
+ ],
+ "oa6": [
+  "fotos/galeria/oa6-f1.jpg",
+  "fotos/galeria/oa6-f2.jpg",
+  "fotos/galeria/oa6-f3.jpg",
+  "fotos/galeria/oa6-f4.jpg",
+  "fotos/galeria/oa6-f5.jpg"
  ],
  "oa6c": [
   "fotos/galeria/oa6c-2.jpg",
@@ -683,7 +829,19 @@
  ],
  "oa6k": [
   "fotos/galeria/oa6k-2.jpg",
-  "fotos/galeria/oa6k-3.jpg"
+  "fotos/galeria/oa6k-3.jpg",
+  "fotos/galeria/oa6k-f1.jpg",
+  "fotos/galeria/oa6k-f2.jpg",
+  "fotos/galeria/oa6k-f3.jpg",
+  "fotos/galeria/oa6k-f4.jpg",
+  "fotos/galeria/oa6k-f5.jpg",
+  "fotos/galeria/oa6k-f6.jpg"
+ ],
+ "oreno13f": [
+  "fotos/galeria/oreno13f-f1.jpg",
+  "fotos/galeria/oreno13f-f2.jpg",
+  "fotos/galeria/oreno13f-f3.jpg",
+  "fotos/galeria/oreno13f-f4.jpg"
  ],
  "p10079": [
   "fotos/galeria/p10079-2.jpg"
@@ -2910,25 +3068,51 @@
  ],
  "pococ71": [
   "fotos/galeria/pococ71-2.jpg",
-  "fotos/galeria/pococ71-3.jpg"
+  "fotos/galeria/pococ71-3.jpg",
+  "fotos/galeria/pococ71-f1.jpg",
+  "fotos/galeria/pococ71-f2.jpg",
+  "fotos/galeria/pococ71-f3.jpg",
+  "fotos/galeria/pococ71-f4.jpg"
  ],
  "pococ81p": [
   "fotos/galeria/pococ81p-3.jpg",
-  "fotos/galeria/pococ81p-4.jpg"
+  "fotos/galeria/pococ81p-4.jpg",
+  "fotos/galeria/pococ81p-f1.jpg",
+  "fotos/galeria/pococ81p-f2.jpg",
+  "fotos/galeria/pococ81p-f3.jpg"
  ],
  "pocof8pro": [
-  "fotos/galeria/pocof8pro-2.jpg"
+  "fotos/galeria/pocof8pro-2.jpg",
+  "fotos/galeria/pocof8pro-f1.jpg",
+  "fotos/galeria/pocof8pro-f2.jpg",
+  "fotos/galeria/pocof8pro-f3.jpg",
+  "fotos/galeria/pocof8pro-f4.jpg",
+  "fotos/galeria/pocof8pro-f5.jpg"
  ],
  "pocom8pro": [
   "fotos/galeria/pocom8pro-2.jpg",
   "fotos/galeria/pocom8pro-3.jpg",
-  "fotos/galeria/pocom8pro-4.jpg"
+  "fotos/galeria/pocom8pro-4.jpg",
+  "fotos/galeria/pocom8pro-f1.jpg",
+  "fotos/galeria/pocom8pro-f2.jpg",
+  "fotos/galeria/pocom8pro-f3.jpg",
+  "fotos/galeria/pocom8pro-f4.jpg"
  ],
  "pocox8pm": [
-  "fotos/galeria/pocox8pm-2.jpg"
+  "fotos/galeria/pocox8pm-2.jpg",
+  "fotos/galeria/pocox8pm-f1.jpg",
+  "fotos/galeria/pocox8pm-f2.jpg",
+  "fotos/galeria/pocox8pm-f3.jpg",
+  "fotos/galeria/pocox8pm-f4.jpg",
+  "fotos/galeria/pocox8pm-f5.jpg"
  ],
  "pocox8pro": [
-  "fotos/galeria/pocox8pro-2.jpg"
+  "fotos/galeria/pocox8pro-2.jpg",
+  "fotos/galeria/pocox8pro-f1.jpg",
+  "fotos/galeria/pocox8pro-f2.jpg",
+  "fotos/galeria/pocox8pro-f3.jpg",
+  "fotos/galeria/pocox8pro-f4.jpg",
+  "fotos/galeria/pocox8pro-f5.jpg"
  ],
  "pporttilgig": [
   "fotos/galeria/pporttilgig-2.jpg",
@@ -2942,14 +3126,26 @@
  ],
  "rmc100": [
   "fotos/galeria/rmc100-3.jpg",
-  "fotos/galeria/rmc100-4.jpg"
+  "fotos/galeria/rmc100-4.jpg",
+  "fotos/galeria/rmc100-f1.jpg",
+  "fotos/galeria/rmc100-f2.jpg"
+ ],
+ "rmc100i": [
+  "fotos/galeria/rmc100i-f1.jpg",
+  "fotos/galeria/rmc100i-f2.jpg",
+  "fotos/galeria/rmc100i-f3.jpg",
+  "fotos/galeria/rmc100i-f4.jpg",
+  "fotos/galeria/rmc100i-f5.jpg",
+  "fotos/galeria/rmc100i-f6.jpg"
  ],
  "rmc71": [
   "fotos/galeria/rmc71-2.jpg"
  ],
  "rmnote70": [
   "fotos/galeria/rmnote70-2.jpg",
-  "fotos/galeria/rmnote70-3.jpg"
+  "fotos/galeria/rmnote70-3.jpg",
+  "fotos/galeria/rmnote70-f1.jpg",
+  "fotos/galeria/rmnote70-f2.jpg"
  ],
  "rpad2": [
   "fotos/galeria/rpad2-2.jpg",
@@ -2962,20 +3158,37 @@
  "sa07": [
   "fotos/galeria/sa07-2.jpg",
   "fotos/galeria/sa07-3.jpg",
-  "fotos/galeria/sa07-4.jpg"
+  "fotos/galeria/sa07-4.jpg",
+  "fotos/galeria/sa07-f1.jpg",
+  "fotos/galeria/sa07-f2.jpg",
+  "fotos/galeria/sa07-f3.jpg",
+  "fotos/galeria/sa07-f4.jpg"
  ],
  "sa17": [
-  "fotos/galeria/sa17-5.jpg"
+  "fotos/galeria/sa17-5.jpg",
+  "fotos/galeria/sa17-f1.jpg",
+  "fotos/galeria/sa17-f2.jpg",
+  "fotos/galeria/sa17-f3.jpg",
+  "fotos/galeria/sa17-f4.jpg"
  ],
  "sa37": [
   "fotos/galeria/sa37-2.jpg",
   "fotos/galeria/sa37-3.jpg",
-  "fotos/galeria/sa37-4.jpg"
+  "fotos/galeria/sa37-4.jpg",
+  "fotos/galeria/sa37-f1.jpg",
+  "fotos/galeria/sa37-f2.jpg",
+  "fotos/galeria/sa37-f3.jpg",
+  "fotos/galeria/sa37-f4.jpg"
  ],
  "sa57": [
   "fotos/galeria/sa57-2.jpg",
   "fotos/galeria/sa57-3.jpg",
-  "fotos/galeria/sa57-4.jpg"
+  "fotos/galeria/sa57-4.jpg",
+  "fotos/galeria/sa57-f1.jpg",
+  "fotos/galeria/sa57-f2.jpg",
+  "fotos/galeria/sa57-f3.jpg",
+  "fotos/galeria/sa57-f4.jpg",
+  "fotos/galeria/sa57-f5.jpg"
  ],
  "scar25": [
   "fotos/galeria/scar25-2.jpg",
@@ -2989,20 +3202,46 @@
  "scubo": [
   "fotos/galeria/scubo-2.jpg"
  ],
+ "ss25fe": [
+  "fotos/galeria/ss25fe-f1.jpg",
+  "fotos/galeria/ss25fe-f2.jpg",
+  "fotos/galeria/ss25fe-f3.jpg",
+  "fotos/galeria/ss25fe-f4.jpg",
+  "fotos/galeria/ss25fe-f5.jpg"
+ ],
  "ss25u": [
   "fotos/galeria/ss25u-3.jpg",
-  "fotos/galeria/ss25u-4.jpg"
+  "fotos/galeria/ss25u-4.jpg",
+  "fotos/galeria/ss25u-f1.jpg",
+  "fotos/galeria/ss25u-f2.jpg",
+  "fotos/galeria/ss25u-f3.jpg",
+  "fotos/galeria/ss25u-f4.jpg"
  ],
  "ss26": [
-  "fotos/galeria/ss26-2.jpg"
+  "fotos/galeria/ss26-2.jpg",
+  "fotos/galeria/ss26-f1.jpg",
+  "fotos/galeria/ss26-f2.jpg",
+  "fotos/galeria/ss26-f3.jpg",
+  "fotos/galeria/ss26-f4.jpg",
+  "fotos/galeria/ss26-f5.jpg"
  ],
  "ss26fe": [
   "fotos/galeria/ss26fe-2.jpg",
-  "fotos/galeria/ss26fe-3.jpg"
+  "fotos/galeria/ss26fe-3.jpg",
+  "fotos/galeria/ss26fe-f1.jpg",
+  "fotos/galeria/ss26fe-f2.jpg",
+  "fotos/galeria/ss26fe-f3.jpg",
+  "fotos/galeria/ss26fe-f4.jpg",
+  "fotos/galeria/ss26fe-f5.jpg"
  ],
  "ss26u": [
   "fotos/galeria/ss26u-2.jpg",
-  "fotos/galeria/ss26u-3.jpg"
+  "fotos/galeria/ss26u-3.jpg",
+  "fotos/galeria/ss26u-f1.jpg",
+  "fotos/galeria/ss26u-f2.jpg",
+  "fotos/galeria/ss26u-f3.jpg",
+  "fotos/galeria/ss26u-f4.jpg",
+  "fotos/galeria/ss26u-f5.jpg"
  ],
  "szfold8": [
   "fotos/galeria/szfold8-2.jpg",
@@ -3011,6 +3250,12 @@
   "fotos/galeria/szfold8-5.jpg",
   "fotos/galeria/szfold8-6.jpg",
   "fotos/galeria/szfold8-7.jpg"
+ ],
+ "szfold8u": [
+  "fotos/galeria/szfold8u-f1.jpg",
+  "fotos/galeria/szfold8u-f2.jpg",
+  "fotos/galeria/szfold8u-f3.jpg",
+  "fotos/galeria/szfold8u-f4.jpg"
  ],
  "taba11": [
   "fotos/galeria/taba11-3.jpg",
@@ -3033,7 +3278,11 @@
  ],
  "tcamon50p": [
   "fotos/galeria/tcamon50p-2.jpg",
-  "fotos/galeria/tcamon50p-3.jpg"
+  "fotos/galeria/tcamon50p-3.jpg",
+  "fotos/galeria/tcamon50p-f1.jpg",
+  "fotos/galeria/tcamon50p-f2.jpg",
+  "fotos/galeria/tcamon50p-f3.jpg",
+  "fotos/galeria/tcamon50p-f4.jpg"
  ],
  "tcamon50p4g": [
   "fotos/galeria/tcamon50p4g-2.jpg",
@@ -3063,7 +3312,17 @@
   "fotos/galeria/tpovac2-7.jpg"
  ],
  "tspark50": [
-  "fotos/galeria/tspark50-5.jpg"
+  "fotos/galeria/tspark50-5.jpg",
+  "fotos/galeria/tspark50-f1.jpg",
+  "fotos/galeria/tspark50-f2.jpg",
+  "fotos/galeria/tspark50-f3.jpg",
+  "fotos/galeria/tspark50-f4.jpg",
+  "fotos/galeria/tspark50-f5.jpg"
+ ],
+ "tsparkgo3": [
+  "fotos/galeria/tsparkgo3-f1.jpg",
+  "fotos/galeria/tsparkgo3-f2.jpg",
+  "fotos/galeria/tsparkgo3-f3.jpg"
  ],
  "tvkalley55": [
   "fotos/galeria/tvkalley55-2.jpg"
@@ -3080,11 +3339,15 @@
  ],
  "ularmor21": [
   "fotos/galeria/ularmor21-2.jpg",
-  "fotos/galeria/ularmor21-3.jpg"
+  "fotos/galeria/ularmor21-3.jpg",
+  "fotos/galeria/ularmor21-f1.jpg"
  ],
  "ularmor22": [
   "fotos/galeria/ularmor22-2.jpg",
-  "fotos/galeria/ularmor22-3.jpg"
+  "fotos/galeria/ularmor22-3.jpg",
+  "fotos/galeria/ularmor22-f1.jpg",
+  "fotos/galeria/ularmor22-f2.jpg",
+  "fotos/galeria/ularmor22-f3.jpg"
  ],
  "ularmor34p": [
   "fotos/galeria/ularmor34p-2.jpg",
@@ -3092,18 +3355,62 @@
   "fotos/galeria/ularmor34p-4.jpg"
  ],
  "ularmorx12p": [
-  "fotos/galeria/ularmorx12p-2.jpg"
+  "fotos/galeria/ularmorx12p-2.jpg",
+  "fotos/galeria/ularmorx12p-f1.jpg",
+  "fotos/galeria/ularmorx12p-f2.jpg",
+  "fotos/galeria/ularmorx12p-f3.jpg",
+  "fotos/galeria/ularmorx12p-f4.jpg",
+  "fotos/galeria/ularmorx12p-f5.jpg",
+  "fotos/galeria/ularmorx12p-f6.jpg"
+ ],
+ "ularmorx13": [
+  "fotos/galeria/ularmorx13-f1.jpg",
+  "fotos/galeria/ularmorx13-f2.jpg",
+  "fotos/galeria/ularmorx13-f3.jpg",
+  "fotos/galeria/ularmorx13-f4.jpg"
  ],
  "ularmorx32": [
   "fotos/galeria/ularmorx32-2.jpg",
-  "fotos/galeria/ularmorx32-3.jpg"
+  "fotos/galeria/ularmorx32-3.jpg",
+  "fotos/galeria/ularmorx32-f1.jpg",
+  "fotos/galeria/ularmorx32-f2.jpg",
+  "fotos/galeria/ularmorx32-f3.jpg",
+  "fotos/galeria/ularmorx32-f4.jpg",
+  "fotos/galeria/ularmorx32-f5.jpg",
+  "fotos/galeria/ularmorx32-f6.jpg"
+ ],
+ "vv60lite": [
+  "fotos/galeria/vv60lite-f1.jpg",
+  "fotos/galeria/vv60lite-f2.jpg",
+  "fotos/galeria/vv60lite-f3.jpg",
+  "fotos/galeria/vv60lite-f4.jpg",
+  "fotos/galeria/vv60lite-f5.jpg"
  ],
  "vy31": [
   "fotos/galeria/vy31-4.jpg"
  ],
  "x17t": [
   "fotos/galeria/x17t-2.jpg",
-  "fotos/galeria/x17t-3.jpg"
+  "fotos/galeria/x17t-3.jpg",
+  "fotos/galeria/x17t-f1.jpg",
+  "fotos/galeria/x17t-f2.jpg",
+  "fotos/galeria/x17t-f3.jpg",
+  "fotos/galeria/x17t-f4.jpg",
+  "fotos/galeria/x17t-f5.jpg"
+ ],
+ "x17tpro": [
+  "fotos/galeria/x17tpro-f1.jpg",
+  "fotos/galeria/x17tpro-f2.jpg",
+  "fotos/galeria/x17tpro-f3.jpg",
+  "fotos/galeria/x17tpro-f4.jpg",
+  "fotos/galeria/x17tpro-f5.jpg"
+ ],
+ "x17u": [
+  "fotos/galeria/x17u-f1.jpg",
+  "fotos/galeria/x17u-f2.jpg",
+  "fotos/galeria/x17u-f3.jpg",
+  "fotos/galeria/x17u-f4.jpg",
+  "fotos/galeria/x17u-f5.jpg"
  ],
  "xcar120": [
   "fotos/galeria/xcar120-2.jpg"
@@ -3126,23 +3433,41 @@
  ],
  "xr15": [
   "fotos/galeria/xr15-3.jpg",
-  "fotos/galeria/xr15-4.jpg"
+  "fotos/galeria/xr15-4.jpg",
+  "fotos/galeria/xr15-f1.jpg",
+  "fotos/galeria/xr15-f2.jpg",
+  "fotos/galeria/xr15-f3.jpg",
+  "fotos/galeria/xr15-f4.jpg",
+  "fotos/galeria/xr15-f5.jpg",
+  "fotos/galeria/xr15-f6.jpg"
  ],
  "xr15c": [
   "fotos/galeria/xr15c-3.jpg",
-  "fotos/galeria/xr15c-4.jpg"
+  "fotos/galeria/xr15c-4.jpg",
+  "fotos/galeria/xr15c-f1.jpg",
+  "fotos/galeria/xr15c-f2.jpg",
+  "fotos/galeria/xr15c-f3.jpg"
  ],
  "xr17": [
   "fotos/galeria/xr17-3.jpg",
-  "fotos/galeria/xr17-4.jpg"
+  "fotos/galeria/xr17-4.jpg",
+  "fotos/galeria/xr17-f1.jpg",
+  "fotos/galeria/xr17-f2.jpg",
+  "fotos/galeria/xr17-f3.jpg"
  ],
  "xra7": [
   "fotos/galeria/xra7-2.jpg",
-  "fotos/galeria/xra7-3.jpg"
+  "fotos/galeria/xra7-3.jpg",
+  "fotos/galeria/xra7-f1.jpg",
+  "fotos/galeria/xra7-f2.jpg",
+  "fotos/galeria/xra7-f3.jpg"
  ],
  "xra7pro": [
   "fotos/galeria/xra7pro-2.jpg",
-  "fotos/galeria/xra7pro-3.jpg"
+  "fotos/galeria/xra7pro-3.jpg",
+  "fotos/galeria/xra7pro-f1.jpg",
+  "fotos/galeria/xra7pro-f2.jpg",
+  "fotos/galeria/xra7pro-f3.jpg"
  ],
  "xrn14pp": [
   "fotos/galeria/xrn14pp-2.jpg",
@@ -3155,7 +3480,12 @@
  ],
  "xrn15": [
   "fotos/galeria/xrn15-3.jpg",
-  "fotos/galeria/xrn15-4.jpg"
+  "fotos/galeria/xrn15-4.jpg",
+  "fotos/galeria/xrn15-f1.jpg",
+  "fotos/galeria/xrn15-f2.jpg",
+  "fotos/galeria/xrn15-f3.jpg",
+  "fotos/galeria/xrn15-f4.jpg",
+  "fotos/galeria/xrn15-f5.jpg"
  ],
  "xrn15pp": [
   "fotos/galeria/xrn15pp-2.jpg"
@@ -3166,7 +3496,11 @@
  ],
  "xrn17": [
   "fotos/galeria/xrn17-3.jpg",
-  "fotos/galeria/xrn17-4.jpg"
+  "fotos/galeria/xrn17-4.jpg",
+  "fotos/galeria/xrn17-f1.jpg",
+  "fotos/galeria/xrn17-f2.jpg",
+  "fotos/galeria/xrn17-f3.jpg",
+  "fotos/galeria/xrn17-f4.jpg"
  ],
  "xrn17pm": [
   "fotos/galeria/xrn17pm-2.jpg"
@@ -3174,7 +3508,12 @@
  "xrn17pro": [
   "fotos/galeria/xrn17pro-2.jpg",
   "fotos/galeria/xrn17pro-3.jpg",
-  "fotos/galeria/xrn17pro-4.jpg"
+  "fotos/galeria/xrn17pro-4.jpg",
+  "fotos/galeria/xrn17pro-f1.jpg",
+  "fotos/galeria/xrn17pro-f2.jpg",
+  "fotos/galeria/xrn17pro-f3.jpg",
+  "fotos/galeria/xrn17pro-f4.jpg",
+  "fotos/galeria/xrn17pro-f5.jpg"
  ],
  "xsc4l": [
   "fotos/galeria/xsc4l-2.jpg",
@@ -3193,16 +3532,45 @@
   "fotos/galeria/xsparty-2.jpg",
   "fotos/galeria/xsparty-3.jpg"
  ],
+ "zta35e": [
+  "fotos/galeria/zta35e-f1.jpg",
+  "fotos/galeria/zta35e-f2.jpg",
+  "fotos/galeria/zta35e-f3.jpg",
+  "fotos/galeria/zta35e-f4.jpg"
+ ],
  "zta56": [
   "fotos/galeria/zta56-2.jpg",
-  "fotos/galeria/zta56-3.jpg"
+  "fotos/galeria/zta56-3.jpg",
+  "fotos/galeria/zta56-f1.jpg",
+  "fotos/galeria/zta56-f2.jpg",
+  "fotos/galeria/zta56-f3.jpg"
  ],
  "zta56pro": [
   "fotos/galeria/zta56pro-2.jpg",
-  "fotos/galeria/zta56pro-3.jpg"
+  "fotos/galeria/zta56pro-3.jpg",
+  "fotos/galeria/zta56pro-f1.jpg",
+  "fotos/galeria/zta56pro-f2.jpg",
+  "fotos/galeria/zta56pro-f3.jpg",
+  "fotos/galeria/zta56pro-f4.jpg"
  ],
  "zta57pro": [
   "fotos/galeria/zta57pro-2.jpg",
-  "fotos/galeria/zta57pro-3.jpg"
+  "fotos/galeria/zta57pro-3.jpg",
+  "fotos/galeria/zta57pro-f1.jpg",
+  "fotos/galeria/zta57pro-f2.jpg",
+  "fotos/galeria/zta57pro-f3.jpg",
+  "fotos/galeria/zta57pro-f4.jpg",
+  "fotos/galeria/zta57pro-f5.jpg"
+ ],
+ "ztev80max": [
+  "fotos/galeria/ztev80max-f1.jpg",
+  "fotos/galeria/ztev80max-f2.jpg",
+  "fotos/galeria/ztev80max-f3.jpg",
+  "fotos/galeria/ztev80max-f4.jpg"
+ ],
+ "ztev80pro": [
+  "fotos/galeria/ztev80pro-f1.jpg",
+  "fotos/galeria/ztev80pro-f2.jpg",
+  "fotos/galeria/ztev80pro-f3.jpg"
  ]
 }
