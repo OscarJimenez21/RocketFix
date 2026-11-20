@@ -10,7 +10,7 @@
   "plazoUsados": { "etiqueta": "plazo de garantía de usados y open box", "valor": "3 meses" },
    "plazoCPO": { "etiqueta": "plazo de garantía de productos CPO", "valor": "1 año" },
   "plazoReparaciones": { "etiqueta": "plazo de garantía de reparaciones", "valor": "1 mes" },
-  "vigencia": { "etiqueta": "fecha desde la que rigen", "valor": "el 22 de noviembre de 2026" }
+  "vigencia": { "etiqueta": "fecha desde la que rigen", "valor": "el 27 de noviembre de 2026" }
  },
  "paginas": [
   {

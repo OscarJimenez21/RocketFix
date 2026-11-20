@@ -34,7 +34,7 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 2850000
+    "precio": 2800000
    },
    {
     "nombre": "512 GB",
@@ -56,15 +56,19 @@
   "opciones": [
    {
     "nombre": "256 GB · negro",
-    "precio": 9250000
+    "precio": 9050000
    },
    {
     "nombre": "512 GB · negro",
-    "precio": 10150000
+    "precio": 9950000
    },
    {
     "nombre": "512 GB · blanco",
-    "precio": 9950000
+    "precio": 9850000
+   },
+   {
+    "nombre": "1 TB",
+    "precio": 12100000
    }
   ]
  },
@@ -80,19 +84,19 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 5300000
+    "precio": 5350000
    },
    {
     "nombre": "256 GB · morado",
-    "precio": 5500000
+    "precio": 5350000
    },
    {
     "nombre": "512 GB",
-    "precio": 6450000
+    "precio": 6150000
    },
    {
     "nombre": "1 TB",
-    "precio": 8100000
+    "precio": 7850000
    },
    {
     "nombre": "256 GB · SIM física · azul",
@@ -101,6 +105,10 @@
    {
     "nombre": "256 GB · SIM física · vino tinto",
     "precio": 6300000
+   },
+   {
+    "nombre": "2 TB · negro",
+    "precio": 9900000
    }
   ]
  },
@@ -117,7 +125,7 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 4650000
+    "precio": 4800000
    },
    {
     "nombre": "256 GB · morado",
@@ -125,7 +133,7 @@
    },
    {
     "nombre": "512 GB",
-    "precio": 5800000
+    "precio": 5700000
    },
    {
     "nombre": "1 TB · vino tinto",
@@ -144,15 +152,15 @@
   "opciones": [
    {
     "nombre": "256 GB · eSIM",
-    "precio": 4500000
+    "precio": 4650000
    },
    {
     "nombre": "256 GB · SIM física",
-    "precio": 4800000
+    "precio": 5050000
    },
    {
     "nombre": "512 GB · eSIM",
-    "precio": 5400000
+    "precio": 5500000
    },
    {
     "nombre": "1 TB · eSIM",
@@ -194,7 +202,7 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 3200000
+    "precio": 3300000
    },
    {
     "nombre": "512 GB",
@@ -236,11 +244,11 @@
    },
    {
     "nombre": "128 GB · 6 GB RAM",
-    "precio": 490000
+    "precio": 520000
    },
    {
     "nombre": "128 GB · 4 GB RAM",
-    "precio": 460000
+    "precio": 500000
    }
   ]
  },
@@ -258,7 +266,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 490000
+    "precio": 460000
    }
   ]
  },
@@ -273,15 +281,15 @@
   "opciones": [
    {
     "nombre": "128 GB · Duos",
-    "precio": 560000
+    "precio": 610000
    },
    {
     "nombre": "256 GB · 4G · Duos",
-    "precio": 780000
+    "precio": 890000
    },
    {
     "nombre": "256 GB · 5G · 1 SIM",
-    "precio": 870000
+    "precio": 920000
    }
   ]
  },
@@ -319,7 +327,7 @@
    },
    {
     "nombre": "256 GB",
-    "precio": 1600000
+    "precio": 1650000
    }
   ]
  },
@@ -353,11 +361,11 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 3100000
+    "precio": 3050000
    },
    {
     "nombre": "512 GB",
-    "precio": 3250000
+    "precio": 3300000
    },
    {
     "nombre": "1 TB",
@@ -398,7 +406,7 @@
    },
    {
     "nombre": "512 GB",
-    "precio": 4100000
+    "precio": 4250000
    },
    {
     "nombre": "1 TB",
@@ -453,11 +461,11 @@
   "opciones": [
    {
     "nombre": "64 GB",
-    "precio": 420000
+    "precio": 440000
    },
    {
     "nombre": "128 GB",
-    "precio": 490000
+    "precio": 520000
    }
   ]
  },
@@ -508,7 +516,7 @@
   "opciones": [
    {
     "nombre": "128 GB",
-    "precio": 540000
+    "precio": 550000
    },
    {
     "nombre": "256 GB · 8 + 8 GB RAM",
@@ -529,7 +537,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 710000
+    "precio": 720000
    }
   ]
  },
@@ -548,11 +556,11 @@
    },
    {
     "nombre": "256 GB · 4 + 4 GB RAM",
-    "precio": 690000
+    "precio": 680000
    },
    {
     "nombre": "256 GB · 6 + 6 GB RAM",
-    "precio": 730000
+    "precio": 740000
    },
    {
     "nombre": "256 GB · 4 + 4 GB RAM · 5G",
@@ -571,7 +579,7 @@
   "opciones": [
    {
     "nombre": "512 GB",
-    "precio": 930000
+    "precio": 940000
    }
   ]
  },
@@ -607,7 +615,7 @@
   "opciones": [
    {
     "nombre": "128 GB",
-    "precio": 700000
+    "precio": 690000
    },
    {
     "nombre": "256 GB · 6 + 6 GB RAM",
@@ -682,6 +690,27 @@
   ]
  },
  {
+  "id": "xrn17pm",
+  "tienda": "cel",
+  "marca": "Xiaomi",
+  "nombre": "Redmi Note 17 Pro Max",
+  "imagen": "fotos/xrn17pm.jpg",
+  "estado": "Nuevo",
+  "specs": [
+   "8 + 8 GB RAM"
+  ],
+  "opciones": [
+   {
+    "nombre": "256 GB",
+    "precio": 1600000
+   },
+   {
+    "nombre": "512 GB",
+    "precio": 1900000
+   }
+  ]
+ },
+ {
   "id": "x17tpro",
   "tienda": "cel",
   "marca": "Xiaomi",
@@ -694,7 +723,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2800000
+    "precio": 2750000
    }
   ]
  },
@@ -726,11 +755,11 @@
   "opciones": [
    {
     "nombre": "512 GB",
-    "precio": 4700000
+    "precio": 4500000
    },
    {
     "nombre": "1 TB",
-    "precio": 5150000
+    "precio": 5100000
    }
   ]
  },
@@ -747,7 +776,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2150000
+    "precio": 2100000
    }
   ]
  },
@@ -762,11 +791,11 @@
   "opciones": [
    {
     "nombre": "256 GB · 8 GB RAM",
-    "precio": 1600000
+    "precio": 1550000
    },
    {
     "nombre": "512 GB · 12 GB RAM",
-    "precio": 1700000
+    "precio": 1650000
    }
   ]
  },
@@ -785,6 +814,42 @@
    {
     "nombre": "",
     "precio": 2050000
+   }
+  ]
+ },
+ {
+  "id": "pocof9pro",
+  "tienda": "cel",
+  "marca": "Xiaomi",
+  "nombre": "POCO F9 Pro",
+  "imagen": "fotos/pocof9pro.jpg",
+  "estado": "Nuevo",
+  "specs": [],
+  "opciones": [
+   {
+    "nombre": "256 GB",
+    "precio": 2600000
+   },
+   {
+    "nombre": "512 GB",
+    "precio": 2750000
+   }
+  ]
+ },
+ {
+  "id": "pocof9u",
+  "tienda": "cel",
+  "marca": "Xiaomi",
+  "nombre": "POCO F9 Ultra",
+  "imagen": "fotos/pocof9u.jpg",
+  "estado": "Nuevo",
+  "specs": [
+   "512 GB"
+  ],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 3300000
    }
   ]
  },
@@ -881,6 +946,25 @@
   ]
  },
  {
+  "id": "medge70f",
+  "tienda": "cel",
+  "marca": "Motorola",
+  "nombre": "Motorola Edge 70 Fusion",
+  "imagen": "fotos/medge70f.jpg",
+  "estado": "Nuevo",
+  "specs": [
+   "256 GB",
+   "12 GB RAM",
+   "5G"
+  ],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1450000
+   }
+  ]
+ },
+ {
   "id": "medge50f",
   "tienda": "cel",
   "marca": "Motorola",
@@ -891,7 +975,7 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 890000
+    "precio": 910000
    },
    {
     "nombre": "512 GB",
@@ -912,7 +996,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 820000
+    "precio": 850000
    }
   ]
  },
@@ -927,11 +1011,11 @@
   "opciones": [
    {
     "nombre": "256 GB",
-    "precio": 520000
+    "precio": 540000
    },
    {
     "nombre": "128 GB",
-    "precio": 470000
+    "precio": 460000
    }
   ]
  },
@@ -1021,7 +1105,25 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 780000
+    "precio": 810000
+   }
+  ]
+ },
+ {
+  "id": "hx9d",
+  "tienda": "cel",
+  "marca": "Honor",
+  "nombre": "Honor X9D",
+  "imagen": "fotos/hx9d.jpg",
+  "estado": "Nuevo",
+  "specs": [
+   "256 GB",
+   "8 GB RAM"
+  ],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1200000
    }
   ]
  },
@@ -1074,7 +1176,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 450000
+    "precio": 460000
    }
   ]
  },
@@ -1091,7 +1193,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 370000
+    "precio": 340000
    }
   ]
  },
@@ -1128,7 +1230,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1400000
+    "precio": 1350000
    }
   ]
  },
@@ -1199,11 +1301,11 @@
   "opciones": [
    {
     "nombre": "64 GB",
-    "precio": 450000
+    "precio": 440000
    },
    {
     "nombre": "128 GB",
-    "precio": 510000
+    "precio": 500000
    }
   ]
  },
@@ -1500,7 +1602,7 @@
    },
    {
     "nombre": "128 GB",
-    "precio": 710000
+    "precio": 640000
    }
   ]
  },
@@ -1510,15 +1612,22 @@
   "marca": "Infinix",
   "nombre": "Infinix Smart 20",
   "specs": [
-   "128 GB",
    "4 GB RAM"
   ],
   "imagen": "fotos/ismart20.jpg",
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
+    "nombre": "64 GB",
+    "precio": 480000
+   },
+   {
+    "nombre": "128 GB",
     "precio": 550000
+   },
+   {
+    "nombre": "256 GB",
+    "precio": 670000
    }
   ]
  },
@@ -1537,7 +1646,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1150000
+    "precio": 1100000
    }
   ]
  },
@@ -1585,7 +1694,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 430000
+    "precio": 450000
    }
   ]
  },
@@ -1639,7 +1748,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 720000
+    "precio": 640000
    }
   ]
  },
@@ -1732,7 +1841,26 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 980000
+    "precio": 1100000
+   }
+  ]
+ },
+ {
+  "id": "nneo5gt",
+  "tienda": "cel",
+  "marca": "ZTE",
+  "nombre": "Nubia Neo 5 GT 5G",
+  "imagen": "fotos/nneo5gt.jpg",
+  "estado": "Nuevo",
+  "specs": [
+   "512 GB",
+   "12 GB RAM",
+   "5G"
+  ],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1500000
    }
   ]
  },
@@ -1749,7 +1877,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 160000
+    "precio": 150000
    }
   ]
  },
@@ -1764,7 +1892,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 150000
+    "precio": 140000
    }
   ]
  },
@@ -2040,7 +2168,7 @@
    },
    {
     "nombre": "256 GB · SIM física",
-    "precio": 3550000
+    "precio": 3500000
    }
   ]
  },
@@ -2160,14 +2288,16 @@
   "marca": "Xiaomi",
   "nombre": "Redmi Note 15 Pro+",
   "imagen": "fotos/xrn15pp.jpg",
-  "specs": [
-   "256 GB"
-  ],
+  "specs": [],
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
+    "nombre": "256 GB",
     "precio": 1400000
+   },
+   {
+    "nombre": "512 GB",
+    "precio": 1700000
    }
   ]
  },
@@ -2185,7 +2315,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 440000
+    "precio": 450000
    }
   ]
  },
@@ -2258,6 +2388,25 @@
    {
     "nombre": "",
     "precio": 1100000
+   }
+  ]
+ },
+ {
+  "id": "oreno13f",
+  "tienda": "cel",
+  "marca": "Oppo",
+  "nombre": "Oppo Reno 13 F",
+  "imagen": "fotos/oreno13f.jpg",
+  "estado": "Nuevo",
+  "specs": [],
+  "opciones": [
+   {
+    "nombre": "256 GB",
+    "precio": 1400000
+   },
+   {
+    "nombre": "512 GB",
+    "precio": 1450000
    }
   ]
  },
@@ -2350,7 +2499,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 600000
+    "precio": 580000
    }
   ]
  },
@@ -2471,7 +2620,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 700000
+    "precio": 730000
    }
   ]
  },
@@ -2543,7 +2692,7 @@
   "opciones": [
    {
     "nombre": "128 GB",
-    "precio": 1700000
+    "precio": 1750000
    },
    {
     "nombre": "256 GB · azul o silver",
@@ -2639,7 +2788,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 540000
+    "precio": 510000
    }
   ]
  },
@@ -2778,8 +2927,12 @@
   "estado": "Nuevo",
   "opciones": [
    {
-    "nombre": "",
+    "nombre": "64 GB",
     "precio": 530000
+   },
+   {
+    "nombre": "128 GB",
+    "precio": 630000
    }
   ]
  },
@@ -2874,7 +3027,29 @@
   "opciones": [
    {
     "nombre": "42 mm",
-    "precio": 1800000
+    "precio": 1650000
+   },
+   {
+    "nombre": "46 mm",
+    "precio": 1750000
+   }
+  ]
+ },
+ {
+  "id": "awse",
+  "tienda": "rel",
+  "categoria": "relojes",
+  "marca": "Apple",
+  "nombre": "Apple Watch SE",
+  "imagen": "fotos/awse.jpg",
+  "estado": "Nuevo",
+  "specs": [
+   "44 mm"
+  ],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 1200000
    }
   ]
  },
@@ -3080,7 +3255,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 980000
+    "precio": 930000
    }
   ]
  },
@@ -3116,7 +3291,7 @@
   "opciones": [
    {
     "nombre": "Sin carga magnética",
-    "precio": 610000
+    "precio": 590000
    },
    {
     "nombre": "Con carga magnética",
@@ -3352,7 +3527,23 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 380000
+    "precio": 450000
+   }
+  ]
+ },
+ {
+  "id": "jblcharge6",
+  "tienda": "par",
+  "categoria": "parlantes",
+  "marca": "JBL",
+  "nombre": "JBL Charge 6",
+  "imagen": "fotos/jblcharge6.jpg",
+  "estado": "Nuevo",
+  "specs": [],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 630000
    }
   ]
  },
@@ -3384,7 +3575,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2950000
+    "precio": 3050000
    }
   ]
  },
@@ -3554,7 +3745,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 52000
+    "precio": 35000
    }
   ]
  },
@@ -4119,7 +4310,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 540000
+    "precio": 510000
    }
   ]
  },
@@ -4157,7 +4348,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 890000
+    "precio": 850000
    }
   ]
  },
@@ -4657,7 +4848,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4900000
+    "precio": 4650000
    }
   ]
  },
@@ -6491,7 +6682,7 @@
   "opciones": [
    {
     "nombre": "512 GB",
-    "precio": 5800000
+    "precio": 5950000
    }
   ]
  },
@@ -6554,7 +6745,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6150000
+    "precio": 6100000
    }
   ]
  },
@@ -6576,7 +6767,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 6150000
+    "precio": 6100000
    }
   ]
  },
@@ -7358,7 +7549,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 990000
+    "precio": 970000
    }
   ]
  },
@@ -7628,7 +7819,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3050000
+    "precio": 3000000
    }
   ]
  },
@@ -7649,7 +7840,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3450000
+    "precio": 3700000
    }
   ]
  },
@@ -7669,7 +7860,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 350000
+    "precio": 340000
    }
   ]
  },
@@ -7810,7 +8001,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 900000
+    "precio": 940000
    }
   ]
  },
@@ -7955,7 +8146,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 860000
+    "precio": 790000
    }
   ]
  },
@@ -8037,7 +8228,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1850000
+    "precio": 1600000
    }
   ]
  },
@@ -8473,7 +8664,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3650000
+    "precio": 3750000
    }
   ]
  },
@@ -9159,7 +9350,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2400000
+    "precio": 2500000
    }
   ]
  },
@@ -9217,7 +9408,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 280000
+    "precio": 290000
    }
   ]
  },
@@ -9289,7 +9480,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 580000
+    "precio": 620000
    }
   ]
  },
@@ -9307,7 +9498,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 710000
+    "precio": 700000
    }
   ]
  },
@@ -9546,7 +9737,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2500000
+    "precio": 2400000
    }
   ]
  },
@@ -9607,7 +9798,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3650000
+    "precio": 3700000
    }
   ]
  },
@@ -9737,7 +9928,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1600000
+    "precio": 1750000
    }
   ]
  },
@@ -10078,7 +10269,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 270000
+    "precio": 280000
    }
   ]
  },
@@ -10094,7 +10285,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 310000
+    "precio": 320000
    }
   ]
  },
@@ -10712,11 +10903,11 @@
   "opciones": [
    {
     "nombre": "Blanco",
-    "precio": 1750000
+    "precio": 1600000
    },
    {
     "nombre": "Negro",
-    "precio": 1750000
+    "precio": 1500000
    }
   ]
  },
@@ -10917,7 +11108,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 400000
+    "precio": 390000
    }
   ]
  },
@@ -11097,7 +11288,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 460000
+    "precio": 500000
    }
   ]
  },
@@ -11316,11 +11507,11 @@
   "opciones": [
    {
     "nombre": "Negro",
-    "precio": 410000
+    "precio": 360000
    },
    {
     "nombre": "Blanco",
-    "precio": 410000
+    "precio": 360000
    }
   ]
  },
@@ -11918,7 +12109,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1350000
+    "precio": 1400000
    }
   ]
  },
@@ -11936,7 +12127,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1350000
+    "precio": 1400000
    }
   ]
  },
@@ -11954,7 +12145,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1400000
+    "precio": 1450000
    }
   ]
  },
@@ -11972,7 +12163,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1650000
+    "precio": 1700000
    }
   ]
  },
@@ -11990,7 +12181,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1950000
+    "precio": 2050000
    }
   ]
  },
@@ -12008,7 +12199,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1950000
+    "precio": 2100000
    }
   ]
  },
@@ -12026,7 +12217,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1950000
+    "precio": 2100000
    }
   ]
  },
@@ -12044,7 +12235,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 2000000
+    "precio": 2100000
    }
   ]
  },
@@ -12188,7 +12379,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4750000
+    "precio": 5050000
    }
   ]
  },
@@ -12302,7 +12493,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 4400000
+    "precio": 4450000
    }
   ]
  },
@@ -12369,7 +12560,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 82000
+    "precio": 87000
    }
   ]
  },
@@ -13292,7 +13483,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1150000
+    "precio": 1100000
    }
   ]
  },
@@ -14259,11 +14450,11 @@
   "opciones": [
    {
     "nombre": "Negro",
-    "precio": 170000
+    "precio": 160000
    },
    {
     "nombre": "Blanca",
-    "precio": 170000
+    "precio": 160000
    }
   ]
  },
@@ -16040,7 +16231,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 250000
+    "precio": 240000
    }
   ]
  },
@@ -17195,7 +17386,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1150000
+    "precio": 1100000
    }
   ]
  },
@@ -17211,7 +17402,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1150000
+    "precio": 1100000
    }
   ]
  },
@@ -17227,7 +17418,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 1150000
+    "precio": 1100000
    }
   ]
  },
@@ -17919,7 +18110,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 620000
+    "precio": 590000
    }
   ]
  },
@@ -18994,6 +19185,22 @@
   ]
  },
  {
+  "id": "jblclip5",
+  "tienda": "par",
+  "categoria": "parlantes",
+  "marca": "JBL",
+  "nombre": "JBL Clip 5",
+  "imagen": "fotos/jblclip5.jpg",
+  "estado": "Nuevo",
+  "specs": [],
+  "opciones": [
+   {
+    "nombre": "",
+    "precio": 300000
+   }
+  ]
+ },
+ {
   "id": "jblgrip",
   "tienda": "par",
   "categoria": "parlantes",
@@ -19215,7 +19422,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 3200000
+    "precio": 3050000
    }
   ]
  },
@@ -19551,7 +19758,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 81000
+    "precio": 72000
    }
   ]
  },
@@ -19567,7 +19774,7 @@
   "opciones": [
    {
     "nombre": "",
-    "precio": 94000
+    "precio": 85000
    }
   ]
  },
