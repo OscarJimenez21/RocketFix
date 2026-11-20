@@ -37,7 +37,7 @@ export function tipoDe(texto: string): Tipo | null {
 }
 
 /** Tipo de una fila de la ficha del proveedor, por el nombre de la característica */
-function tipoDeClave(clave: string): Tipo | null {
+export function tipoDeClave(clave: string): Tipo | null {
   const k = norm(clave);
   if (/grafica|tarjeta de video|graficos/.test(k)) return "grafica";
   if (/procesador|^chip/.test(k)) return "chip";

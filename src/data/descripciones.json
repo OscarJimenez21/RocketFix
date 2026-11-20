@@ -1452,7 +1452,161 @@
   "resumen": "La ASUS Prime Radeon RX 9060 XT OC Edition 8GB es una opción equilibrada para quienes buscan una combinación de potencia, eficiencia térmica y compatibilidad con las últimas tecnologías gráficas"
  },
  "p3739": {
-  "resumen": "La ASUS Dual GeForce RTX 5070 12G combina rendimiento gráfico avanzado con un diseño compacto y elegante. Su sistema de refrigeración silencioso y eficiente la hace ideal para largas sesiones de juego o trabajo intensivo, todo sin sacrificar estilo ni estabilidad. Pensada para quienes buscan potencia sin complicaciones."
+  "resumen": "La ASUS Dual GeForce RTX 5070 12G combina rendimiento gráfico avanzado con un diseño compacto y elegante. Su sistema de refrigeración silencioso y eficiente la hace ideal para largas sesiones de juego o trabajo intensivo, todo sin sacrificar estilo ni estabilidad. Pensada para quienes buscan potencia sin complicaciones.",
+  "parrafos": [
+   "La ASUS Dual GeForce RTX 5070 tiene 12 GB de memoria GDDR7 de 192 bits y 6.144 núcleos CUDA, con conexión PCI Express 5.0. Se maneja con ASUS GPU Tweak III y los controladores Game Ready y Studio de NVIDIA."
+  ],
+  "secciones": [
+   [
+    "Especificaciones",
+    [
+     [
+      "Modelo",
+      "Doble RTX 5070-12G"
+     ],
+     [
+      "Motor gráfico",
+      "NVIDIA® GeForce RTX™ 5070"
+     ],
+     [
+      "Rendimiento de IA",
+      "988 TOP"
+     ],
+     [
+      "Estándar de bus",
+      "PCI Express 5.0"
+     ],
+     [
+      "OpenGL",
+      "OpenGL® 4.6"
+     ]
+    ]
+   ],
+   [
+    "Memoria y rendimiento",
+    [
+     [
+      "Memoria de vídeo",
+      "12 GB GDDR7"
+     ],
+     [
+      "Reloj del motor",
+      "Modo OC: 2542 MHz\nModo predeterminado: 2512 MHz (Boost Clock)"
+     ],
+     [
+      "Núcleos CUDA",
+      "6144"
+     ],
+     [
+      "Velocidad de memoria",
+      "28 Gbps"
+     ],
+     [
+      "Interfaz de memoria",
+      "192 bits"
+     ]
+    ]
+   ],
+   [
+    "Resolución y salidas",
+    [
+     [
+      "Resolución máxima digital",
+      "7680 x 4320"
+     ],
+     [
+      "Interfaz",
+      "1 × HDMI 2.1b nativo\n3 × DisplayPort 2.1b nativo\nCompatible con HDCP 2.3"
+     ],
+     [
+      "Pantallas máximas",
+      "4"
+     ],
+     [
+      "Compatibilidad NVLink/CrossFire",
+      "No"
+     ]
+    ]
+   ],
+   [
+    "Software",
+    [
+     [
+      "Software",
+      "ASUS GPU Tweak III\nMuseTree\nNVIDIA GeForce Game Ready\nNVIDIA Studio Driver"
+     ]
+    ]
+   ],
+   [
+    "Medidas y energía",
+    [
+     [
+      "Tamaño",
+      "249 × 126 × 50.6 mm"
+     ],
+     [
+      "Fuente recomendada",
+      "750 W"
+     ],
+     [
+      "Conectores de alimentación",
+      "1 × 16 pines"
+     ],
+     [
+      "Ranura",
+      "2.53"
+     ],
+     [
+      "Compatible con SFF (Small Form Factor)",
+      "Sí"
+     ]
+    ]
+   ]
+  ],
+  "caja": [
+   "Manual de configuración rápida",
+   "Tarjeta de agradecimiento",
+   "Cable adaptador de corriente (1 a 2)"
+  ],
+  "cifras": [
+   [
+    "12",
+    "GB",
+    "Memoria GDDR7 de 192 bits"
+   ],
+   [
+    "6.144",
+    "núcleos",
+    "CUDA para juegos y creación"
+   ],
+   [
+    "2.542",
+    "MHz",
+    "De reloj en modo OC"
+   ],
+   [
+    "4",
+    "pantallas",
+    "Al mismo tiempo, hasta 8K"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Dos ventiladores en 249 mm",
+    "texto": "Compacta y compatible con cajas pequeñas (SFF): mide 249 × 126 × 50,6 mm y ocupa 2,5 ranuras, así cabe en la mayoría de los PC.",
+    "foto": 1
+   },
+   {
+    "titulo": "Salidas para cuatro pantallas",
+    "texto": "Una HDMI 2.1b y tres DisplayPort 2.1b, con resolución de hasta 7680 × 4320. Es compatible con HDCP 2.3.",
+    "foto": 4
+   },
+   {
+    "titulo": "Lista para instalar",
+    "texto": "Pide una fuente de 750 W y un conector de 16 pines. En la caja viene el cable adaptador de corriente y la guía de instalación rápida.",
+    "foto": 5
+   }
+  ]
  },
  "p3791": {
   "resumen": "El MSI GeForce RTX 5070 Ti Frieren Edition OC junto al combo de periféricos Frieren Edition ofrecen un set exclusivo que une potencia gráfica de última generación con teclado, mouse y pad temáticos, brindando rendimiento extremo y un diseño coleccionable inspirado en Frieren: Beyond Journey’s End."
@@ -3412,6 +3566,251 @@
     "Seguridad",
     "Face ID"
    ]
+  ],
+  "parrafos": [
+   "Graba video 4K Dolby Vision hasta 120 cuadros por segundo con la cámara principal, y también en ProRes, ProRes RAW y Apple Log 2 para quien edita sus videos. La cámara frontal de 18 MP tiene Center Stage y autoenfoque."
+  ],
+  "secciones": [
+   [
+    "Pantalla",
+    [
+     [
+      "Tipo",
+      "Super Retina XDR, OLED sin marco"
+     ],
+     [
+      "Tamaño",
+      "6,9 pulgadas"
+     ],
+     [
+      "Resolución",
+      "2868 × 1320 píxeles a 460 ppi"
+     ],
+     [
+      "Frecuencia",
+      "ProMotion, adaptativa hasta 120 Hz"
+     ],
+     [
+      "Brillo",
+      "1.000 nits normal, 1.600 nits en HDR y hasta 3.000 nits en exteriores"
+     ],
+     [
+      "Más",
+      "Dynamic Island, pantalla siempre activa, True Tone y revestimiento antirreflejo"
+     ]
+    ]
+   ],
+   [
+    "Procesador y memoria",
+    [
+     [
+      "Chip",
+      "Apple A20 Pro"
+     ],
+     [
+      "CPU",
+      "6 núcleos: 2 de alto rendimiento y 4 de eficiencia"
+     ],
+     [
+      "GPU",
+      "7 núcleos con Neural Accelerators"
+     ],
+     [
+      "Neural Engine",
+      "Dos de 16 núcleos"
+     ],
+     [
+      "Almacenamiento",
+      "256 GB, 512 GB, 1 TB o 2 TB, según la versión"
+     ],
+     [
+      "Sistema operativo",
+      "iOS 27"
+     ]
+    ]
+   ],
+   [
+    "Cámaras traseras",
+    [
+     [
+      "Sistema",
+      "Pro Fusion de 48 MP, con tres cámaras"
+     ],
+     [
+      "Principal",
+      "48 MP, apertura variable de ƒ/1.48 a ƒ/4.0, estabilización por desplazamiento del sensor"
+     ],
+     [
+      "Ultra gran angular",
+      "48 MP, ƒ/2.2, ángulo de visión de 120°"
+     ],
+     [
+      "Teleobjetivo",
+      "48 MP, 4x (100 mm), ƒ/2.8, diseño de tetraprisma"
+     ],
+     [
+      "Zoom",
+      "Hasta 8x de calidad óptica y hasta 40x digital"
+     ],
+     [
+      "Video",
+      "4K Dolby Vision hasta 120 fps, ProRes, ProRes RAW y Apple Log 2"
+     ],
+     [
+      "Más",
+      "Escáner LiDAR, Modo Noche, Retratos, fotos macro de 48 MP y ProRAW"
+     ]
+    ]
+   ],
+   [
+    "Cámara frontal",
+    [
+     [
+      "Cámara",
+      "Center Stage de 18 MP, ƒ/1.9, con autoenfoque"
+     ],
+     [
+      "Video",
+      "Video ultraestabilizado y Encuadre Centrado para fotos"
+     ]
+    ]
+   ],
+   [
+    "Batería y carga",
+    [
+     [
+      "Duración",
+      "Hasta 29 horas de uso normal y hasta 43 horas de reproducción de video"
+     ],
+     [
+      "Carga rápida",
+      "Hasta 50% en unos 15 minutos con un adaptador de 60 W o más (no viene en la caja)"
+     ],
+     [
+      "Carga inalámbrica",
+      "Hasta 25 W con cargadores MagSafe o Qi2"
+     ],
+     [
+      "Conector",
+      "USB-C (USB 3 hasta 10 Gb/s y salida DisplayPort)"
+     ]
+    ]
+   ],
+   [
+    "Conectividad",
+    [
+     [
+      "Red celular",
+      "5G (sub-6 GHz) y Gigabit LTE"
+     ],
+     [
+      "Wi-Fi",
+      "Wi-Fi 7 (802.11be)"
+     ],
+     [
+      "Bluetooth",
+      "Bluetooth 6"
+     ],
+     [
+      "NFC",
+      "Sí, con Apple Pay"
+     ],
+     [
+      "SIM",
+      "Según la versión: solo eSIM o SIM física + eSIM (míralo en «Versión»)"
+     ],
+     [
+      "Ubicación",
+      "GPS de doble frecuencia, GLONASS, Galileo, QZSS, BeiDou y NavIC"
+     ]
+    ]
+   ],
+   [
+    "Diseño y resistencia",
+    [
+     [
+      "Materiales",
+      "Aluminio unibody, frente de Ceramic Shield 2 y parte posterior de Ceramic Shield"
+     ],
+     [
+      "Medidas",
+      "163,4 × 78 × 8,75 mm"
+     ],
+     [
+      "Peso",
+      "249 g"
+     ],
+     [
+      "Resistencia",
+      "IP68: hasta 6 metros de profundidad durante 30 minutos"
+     ],
+     [
+      "Botones",
+      "Botón de Acción y Control de la Cámara"
+     ]
+    ]
+   ],
+   [
+    "Seguridad",
+    [
+     [
+      "Desbloqueo",
+      "Face ID"
+     ],
+     [
+      "Emergencias",
+      "Emergencia SOS y Detección de Choques"
+     ]
+    ]
+   ]
+  ],
+  "caja": [
+   "iPhone con iOS 27",
+   "Cable de carga USB-C (1 m)"
+  ],
+  "cifras": [
+   [
+    "6,9",
+    "pulgadas",
+    "Pantalla OLED con ProMotion a 120 Hz"
+   ],
+   [
+    "48",
+    "MP",
+    "En cada una de sus tres cámaras traseras"
+   ],
+   [
+    "8x",
+    "zoom",
+    "De calidad óptica con el teleobjetivo"
+   ],
+   [
+    "29",
+    "horas",
+    "De uso normal, según Apple"
+   ]
+  ],
+  "destacados": [
+   {
+    "titulo": "Cámara principal con apertura variable",
+    "texto": "La cámara Fusion de 48 MP cambia su apertura entre ƒ/1.48 y ƒ/4.0: más luz de noche y más control del desenfoque en retratos. El teleobjetivo de 4x, con diseño de tetraprisma, acerca hasta 8x con calidad óptica.",
+    "foto": 3
+   },
+   {
+    "titulo": "Chip A20 Pro",
+    "texto": "CPU de 6 núcleos, GPU de 7 núcleos con Neural Accelerators y dos Neural Engine de 16 núcleos. Es el chip que mueve la nueva generación de Apple Intelligence y Siri AI.",
+    "foto": 5
+   },
+   {
+    "titulo": "Batería para todo el día",
+    "texto": "Hasta 29 horas de uso normal y 43 horas de video, según Apple. Con un adaptador de 60 W o más (se compra aparte) llega al 50% en unos 15 minutos, y también carga inalámbrica hasta 25 W con MagSafe o Qi2.",
+    "foto": 4
+   },
+   {
+    "titulo": "Aluminio y resistencia al agua",
+    "texto": "Diseño unibody de aluminio con frente de Ceramic Shield 2 y certificación IP68: aguanta hasta 6 metros de profundidad durante 30 minutos.",
+    "foto": 1
+   }
   ]
  },
  "ip18p": {

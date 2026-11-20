@@ -9,11 +9,30 @@ import { lista, norm, recurso } from "./formato";
 /** Solo lo que tiene la forma de una descripción: resumen de texto y ficha de pares [característica, valor] */
 export function leerDescripcion(dato: unknown): Descripcion {
   if (!dato || typeof dato !== "object") return {};
-  const { resumen, ficha } = dato as Record<string, unknown>;
+  const { resumen, ficha, parrafos, secciones, caja, cifras, destacados } = dato as Record<string, unknown>;
   const d: Descripcion = {};
+  const esPar = (f: unknown): f is [string, string] => Array.isArray(f) && f.length === 2 && typeof f[0] === "string" && typeof f[1] === "string";
+  const textos = (x: unknown) => (Array.isArray(x) ? x.filter((t): t is string => typeof t === "string" && t.trim() !== "") : []);
   if (typeof resumen === "string") d.resumen = resumen;
-  if (Array.isArray(ficha)) {
-    d.ficha = ficha.filter((f): f is [string, string] => Array.isArray(f) && f.length === 2 && typeof f[0] === "string" && typeof f[1] === "string");
+  if (Array.isArray(ficha)) d.ficha = ficha.filter(esPar);
+  // 19/11/2026: descripción ampliada, ficha por secciones y contenido de la caja
+  if (textos(parrafos).length) d.parrafos = textos(parrafos);
+  if (Array.isArray(secciones)) {
+    const s = secciones
+      .filter((x): x is [string, unknown[]] => Array.isArray(x) && x.length === 2 && typeof x[0] === "string" && Array.isArray(x[1]))
+      .map(([t, filas]): [string, [string, string][]] => [t, filas.filter(esPar)])
+      .filter(([, filas]) => filas.length > 0);
+    if (s.length) d.secciones = s;
+  }
+  if (textos(caja).length) d.caja = textos(caja);
+  if (Array.isArray(cifras)) {
+    const c = cifras.filter((x): x is [string, string, string] => Array.isArray(x) && x.length === 3 && x.every(t => typeof t === "string"));
+    if (c.length) d.cifras = c;
+  }
+  if (Array.isArray(destacados)) {
+    const ds = destacados.filter((x): x is { titulo: string; texto: string; foto?: number } =>
+      !!x && typeof x === "object" && typeof (x as { titulo?: unknown }).titulo === "string" && typeof (x as { texto?: unknown }).texto === "string");
+    if (ds.length) d.destacados = ds.map(x => ({ titulo: x.titulo, texto: x.texto, ...(typeof x.foto === "number" ? { foto: x.foto } : {}) }));
   }
   return d;
 }
@@ -66,6 +85,12 @@ export interface DescripcionArmada {
   resumen: string;
   filas: [string, string][];
   incluye: string;
+  /** 19/11/2026: descripción ampliada y ficha por secciones (la primera sección, «General», sale de los datos del producto) */
+  parrafos: string[];
+  secciones: [string, [string, string][]][];
+  caja: string[] | null;
+  cifras: [string, string, string][];
+  destacados: { titulo: string; texto: string; foto?: number }[];
 }
 
 export function armarDescripcion(p: Producto, d: Descripcion = {}): DescripcionArmada {
@@ -89,7 +114,10 @@ export function armarDescripcion(p: Producto, d: Descripcion = {}): DescripcionA
   else if (primera?.nombre) filas.push([p.etiqueta || "Versión", primera.nombre]);
   // (en los PC armados la ficha del proveedor ya trae lo mismo que specs, más completo)
   if (p.specs.length && !(d.ficha && p.tienda === "pc")) filas.push(["Detalles", p.specs.join(" · ")]);
+  const generales = filas.filter((f): f is [string, string] => Boolean(f[1]));
   for (const f of d.ficha ?? []) filas.push(f);
+  // La ficha por secciones también cuenta para el comparador (sin repetir características que ya están)
+  for (const [, fs] of d.secciones ?? []) for (const f of fs) if (!filas.some(([k]) => norm(k) === norm(f[0]))) filas.push(f);
 
   let incluye = (p.categoria && INCLUYE[p.categoria]) || INCLUYE[p.tienda] || INCLUYE.varios || "";
   // (una nota "Incluye…" es parte de la caja; "Sobre pedido" no. 14/11/2026: la tienda no da obsequios, nunca se anuncian)
@@ -98,5 +126,7 @@ export function armarDescripcion(p: Producto, d: Descripcion = {}): DescripcionA
   if (usado) incluye = usado;
   else if (p.estado !== "Nuevo") incluye += ` Como el producto es ${condMin}, te confirmamos los accesorios que trae.`;
 
-  return { resumen, filas: filas.filter((f): f is [string, string] => Boolean(f[1])), incluye };
+  const secciones: [string, [string, string][]][] = d.secciones?.length ? [["General", generales], ...d.secciones] : [];
+  return { resumen, filas: filas.filter((f): f is [string, string] => Boolean(f[1])), incluye, parrafos: d.parrafos ?? [], secciones, caja: d.caja ?? null,
+    cifras: d.cifras ?? [], destacados: d.destacados ?? [] };
 }

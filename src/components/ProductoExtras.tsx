@@ -14,6 +14,7 @@ import { borrarVistos } from "../lib/vistos";
 import type { Producto } from "../types";
 import { FilaProductos } from "./FilaProductos";
 import { FotoProducto } from "./FotoProducto";
+import { IconoCaracteristica, tipoDeClave } from "./Destacados";
 import { IconoComparar, IconoMoto, IconoReloj } from "./Iconos";
 
 /** Idea 19: con este producto (y lo que ya hay en el carrito), ¿cuánto falta para el envío gratis? Usa los mismos topes
@@ -75,6 +76,45 @@ export function FichaTecnica({ filas }: { filas: [string, string][] }) {
       {larga && (
         <button type="button" onClick={alternar} aria-expanded={todas} className="enlace-suelto mt-1 text-sm">
           {todas ? "Ver menos" : `Ver las ${filas.length} características`}
+        </button>
+      )}
+    </>
+  );
+}
+
+/** 19/11/2026: ficha técnica completa por secciones (Pantalla, Rendimiento, Cámaras…), una tarjeta por sección.
+    En computador van en dos columnas que se acomodan solas; en celular se ven las 3 primeras y el resto con un botón */
+export function FichaPorSecciones({ secciones }: { secciones: [string, [string, string][]][] }) {
+  const [todas, setTodas] = useState(false);
+  const total = secciones.reduce((n, [, f]) => n + f.length, 0);
+  return (
+    <>
+      <div className="mt-4 gap-5 lg:columns-2">
+        {secciones.map(([titulo, filas], s) => {
+          const tipo = tipoDeClave(titulo);
+          return (
+            <section key={titulo} aria-label={titulo}
+              className={`mb-4 break-inside-avoid overflow-hidden rounded-md border border-linea bg-superficie lg:mb-5 ${s >= 3 && !todas ? "max-lg:hidden" : ""} ${s >= 3 && todas ? "max-lg:motion-safe:animate-entrar" : ""}`}>
+              <h3 className="flex items-center gap-2.5 border-b border-linea bg-fondo px-4 py-2.5 text-[15px] font-bold">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-marca-suave text-marca">
+                  {tipo ? <IconoCaracteristica tipo={tipo} className="h-4 w-4" /> : <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-current" />}
+                </span>
+                {titulo}
+              </h3>
+              <dl className="text-sm">
+                {filas.map(([k, v], n) => (
+                  <div key={`${k}-${n}`} className={`grid grid-cols-[minmax(110px,40%)_1fr] gap-3 px-4 py-2.5 ${n ? "border-t border-linea" : ""}`}>
+                    <dt className="font-semibold text-tinta-2">{k}</dt><dd className="whitespace-pre-line break-words">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          );
+        })}
+      </div>
+      {secciones.length > 3 && (
+        <button type="button" onClick={() => setTodas(t => !t)} aria-expanded={todas} className="btn btn-borde w-full lg:hidden">
+          {todas ? "Ver menos" : `Ver la ficha completa (${total} datos)`}
         </button>
       )}
     </>

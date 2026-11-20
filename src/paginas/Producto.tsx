@@ -8,11 +8,12 @@ import { FotoProducto } from "../components/FotoProducto";
 import { Galeria } from "../components/Galeria";
 import { IconoCamion, IconoCheck, IconoCompartir, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { Comparador, EnvioGratis, FichaTecnica, Recientes } from "../components/ProductoExtras";
+import { CifrasProducto, DestacadosProducto, FichaInteractiva, NavProducto } from "../components/FichaPro";
 import { Pesos } from "../components/Pesos";
 import { EtiquetaAgregar, NotaProducto, TarjetaProducto, useAgregado } from "../components/TarjetaProducto";
 import { activa } from "../lib/animaciones";
 import { complementosDe } from "../lib/complementos";
-import { armarDescripcion, useDescripcion } from "../lib/descripcion";
+import { armarDescripcion, useDescripcion, type DescripcionArmada } from "../lib/descripcion";
 import { useVisto } from "../lib/enPantalla";
 import { dinero, lista, recurso, tituloCorto } from "../lib/formato";
 import { explicarEstado, garantiaDe } from "../lib/estados";
@@ -127,6 +128,19 @@ function BarraAgregar({ boton, producto, nombre, precio, tope, alAgregar, etique
 }
 
 /** Animación 20: el precio rueda hacia arriba si la versión elegida es más cara y hacia abajo si es más barata */
+/** Qué incluye la caja: la lista de la ficha del fabricante si la hay; si no, el texto general según el tipo de producto */
+function Caja({ d, arriba = false }: { d: DescripcionArmada; arriba?: boolean }) {
+  return (
+    <>
+      <h3 className={`etiqueta ${arriba ? "" : "mt-6"}`}>Qué incluye la caja</h3>
+      {d.caja
+        ? <ul className="mt-2 grid gap-1.5 text-tinta-2">{d.caja.map(c => <li key={c} className="flex gap-2"><span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-marca" />{c}</li>)}</ul>
+        : <p className="mt-2 text-tinta-2">{d.incluye}</p>}
+      <p className="mt-3 text-[13px] text-tinta-3">El contenido puede variar según el fabricante. Si necesitas algo puntual, pregúntanos antes de comprar.</p>
+    </>
+  );
+}
+
 function Precio({ valor }: { valor: number }) {
   const dir = useDireccion(valor);
   const clase = !activa(20) || !dir ? "motion-safe:animate-entrar" : dir > 0 ? "precio-sube" : "precio-baja";
@@ -325,7 +339,21 @@ export default function Producto({ id }: { id: string }) {
           etiqueta={<EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} />} />
       )}
 
-      <section aria-labelledby="h-desc" aria-busy={descripcion === null} className="border-t border-linea bg-fondo">
+      {/* 19/11/2026: página ampliada (cuando el producto tiene cifras, destacados o ficha por secciones) */}
+      {descripcion !== null && (d.secciones.length > 0 || d.cifras.length > 0) && (
+        <NavProducto nombre={p.nombre} precio={p.consultar ? null : o.precio} vigilar={boton} deshabilitado={tope}
+          alAgregar={p.consultar ? undefined : alAgregar} etiquetaAgregar={<EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" />}
+          partes={[
+            ...(d.destacados.length ? [{ id: "destacados", texto: "Destacados" }] : []),
+            { id: "descripcion", texto: "Descripción" },
+            ...(d.secciones.length ? [{ id: "ficha", texto: "Ficha técnica" }] : []),
+            ...(!p.consultar ? [{ id: "comparar", texto: "Comparar" }] : [])
+          ]} />
+      )}
+      {d.cifras.length > 0 && <CifrasProducto cifras={d.cifras} nombre={p.nombre} />}
+      {d.destacados.length > 0 && <DestacadosProducto destacados={d.destacados} producto={p} />}
+
+      <section id="descripcion" aria-labelledby="h-desc" aria-busy={descripcion === null} className="border-t border-linea bg-fondo">
         {descripcion === null ? (
           // Mientras llega la descripción: la forma de la sección, para que no aparezca de golpe (suele tardar milésimas)
           <div className="contenedor grid min-h-[320px] gap-8 py-10 lg:grid-cols-2 lg:gap-12">
@@ -334,20 +362,28 @@ export default function Producto({ id }: { id: string }) {
           </div>
         ) : (
         <div className="contenedor py-10">
-          <LoPrincipal filas={descripcion.ficha ?? []} />
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
+          {!d.cifras.length && <LoPrincipal filas={d.secciones.length ? d.filas : descripcion.ficha ?? []} />}
+        {/* 19/11/2026: con ficha por secciones, la descripción ampliada y la caja van arriba y la ficha completa debajo,
+            a todo el ancho; sin ella, como antes (descripción a la izquierda y características a la derecha) */}
+        <div className={`grid gap-8 lg:gap-12 ${d.secciones.length ? "lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]" : "lg:grid-cols-2"}`}>
           <div className="min-w-0">
             <h2 id="h-desc" className="text-xl font-extrabold">Descripción</h2>
-            <p className="mt-3 leading-relaxed text-tinta-2">{d.resumen}</p>
-            <h3 className="etiqueta mt-6">Qué incluye la caja</h3>
-            <p className="mt-2 text-tinta-2">{d.incluye}</p>
-            <p className="mt-3 text-[13px] text-tinta-3">El contenido puede variar según el fabricante. Si necesitas algo puntual, pregúntanos antes de comprar.</p>
+            <p className="mt-3 max-w-[70ch] leading-relaxed text-tinta-2">{d.resumen}</p>
+            {d.parrafos.map(t => <p key={t.slice(0, 40)} className="mt-3 max-w-[70ch] leading-relaxed text-tinta-2">{t}</p>)}
+            {!d.secciones.length && <Caja d={d} />}
           </div>
           <div className="min-w-0">
-            <h2 className="text-xl font-extrabold">Características</h2>
-            <FichaTecnica filas={d.filas} />
+            {d.secciones.length
+              ? <div className="rounded-md border border-linea bg-superficie p-5"><Caja d={d} arriba /></div>
+              : <><h2 className="text-xl font-extrabold">Características</h2><FichaTecnica filas={d.filas} /></>}
           </div>
         </div>
+        {d.secciones.length > 0 && (
+          <div id="ficha" className="mt-12">
+            <h2 className="text-xl font-extrabold">Ficha técnica</h2>
+            <FichaInteractiva secciones={d.secciones} />
+          </div>
+        )}
         </div>
         )}
       </section>
@@ -370,7 +406,7 @@ export default function Producto({ id }: { id: string }) {
         </section>
       )}
 
-      {abajo && !p.consultar && <Comparador producto={p} />}
+      {abajo && !p.consultar && <div id="comparar"><Comparador producto={p} /></div>}
       {abajo && <Recientes productos={vistos} fondo />}
     </>
   );

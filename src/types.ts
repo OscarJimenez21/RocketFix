@@ -49,6 +49,16 @@ export interface Descripcion {
   resumen?: string;
   /** Ficha técnica: pares [característica, valor] */
   ficha?: [string, string][];
+  /** 19/11/2026: párrafos que amplían el resumen (qué es, para quién, qué lo distingue) */
+  parrafos?: string[];
+  /** 19/11/2026: ficha técnica completa por secciones: [«Pantalla», [[«Tamaño», «6,9"»], …]] */
+  secciones?: [string, [string, string][]][];
+  /** 19/11/2026: qué trae la caja, cuando la fuente lo dice */
+  caja?: string[];
+  /** 19/11/2026: cifras clave para la franja oscura: [valor, unidad, qué es], p. ej. ["6,9", "pulgadas", "Pantalla OLED a 120 Hz"] */
+  cifras?: [string, string, string][];
+  /** 19/11/2026: bloques destacados con foto: título, texto y número de foto de la galería (0 = la principal) */
+  destacados?: { titulo: string; texto: string; foto?: number }[];
 }
 
 export interface Envio {
