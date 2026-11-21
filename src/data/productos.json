@@ -175,7 +175,8 @@
     "nombre": "512 GB · eSIM",
     "precio": 5100000
    }
-  ]
+  ],
+  "linea": "48 MP · 6,3\""
  },
  {
   "id": "ip15pm",
@@ -476,7 +477,8 @@
     "nombre": "128 GB",
     "precio": 480000
    }
-  ]
+  ],
+  "linea": "6,88\" · 50 MP · 5.160 mAh"
  },
  {
   "id": "xrn14pro",
@@ -1536,7 +1538,8 @@
     "nombre": "128 GB",
     "precio": 720000
    }
-  ]
+  ],
+  "linea": "6.600 mAh · 6,75\" · 13 MP"
  },
  {
   "id": "inote60p",
@@ -2313,7 +2316,8 @@
     "nombre": "512 GB",
     "precio": 1700000
    }
-  ]
+  ],
+  "linea": "200 MP · 100 W · 6.500 mAh"
  },
  {
   "id": "xra7",
