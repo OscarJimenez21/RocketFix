@@ -4,7 +4,7 @@
    · Páginas y datos (precios, productos, descripciones): siempre se piden primero a internet; la copia es solo para cuando
      no hay señal. Así un precio nuevo se ve de inmediato.
    · Nada de otros sitios (WhatsApp, Bold) pasa por aquí. */
-const VERSION = "rf-2026-11-12-2";
+const VERSION = "rf-2026-11-21-1";
 const FIJOS = `${VERSION}-fijos`;
 const FOTOS = `${VERSION}-fotos`;
 const PAGINAS = `${VERSION}-paginas`;
@@ -28,10 +28,12 @@ async function recortar(nombre, max) {
   for (const k of claves.slice(0, Math.max(0, claves.length - max))) await c.delete(k);
 }
 
-async function primeroInternet(pedido, respaldo) {
+async function primeroInternet(pedido, respaldo, revalidar) {
   const c = await caches.open(PAGINAS);
   try {
-    const r = await fetch(pedido);
+    // 21/11/2026: los datos (precios, versiones) se confirman siempre con el servidor, sin usar la copia de 10 minutos
+    // que guarda el navegador; si no cambiaron, el servidor solo responde «igual» y no se vuelven a bajar
+    const r = await fetch(pedido, revalidar ? { cache: "no-cache" } : undefined);
     if (r.ok && r.type === "basic") c.put(pedido, r.clone());
     return r;
   } catch {
@@ -71,5 +73,5 @@ self.addEventListener("fetch", e => {
   if (p.mode === "navigate") { e.respondWith(primeroInternet(p, BASE)); return; }
   if (ruta.startsWith("assets/")) { e.respondWith(primeroCopia(p)); return; }
   if (/\.(jpe?g|png|webp|avif|svg|gif|ico|woff2?)$/i.test(ruta)) { e.respondWith(copiaYActualizar(p, e)); return; }
-  if (ruta.startsWith("datos/") || ruta.startsWith("descripciones/") || ruta === "manifest.webmanifest") { e.respondWith(primeroInternet(p)); return; }
+  if (ruta.startsWith("datos/") || ruta.startsWith("descripciones/") || ruta === "manifest.webmanifest") { e.respondWith(primeroInternet(p, undefined, true)); return; }
 });

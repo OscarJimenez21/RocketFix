@@ -27,6 +27,26 @@ async function arrancar() {
   if (!r.ok) throw new Error(`productos.json: ${r.status}`);
   globalThis.__RF_PRODUCTOS = await r.json();
   await import("./arranque");
+  vigilarDatos(r.headers.get("etag") || r.headers.get("last-modified"));
+}
+
+/** 21/11/2026: el celular deja la pestaña de la tienda abierta por días, con los precios y versiones del día en que se abrió.
+    Si la persona vuelve después de 20 minutos o más y en ese tiempo se publicaron datos nuevos, la página se recarga sola
+    (el carrito y los favoritos quedan guardados). Si está escribiendo algo, no se recarga. */
+function vigilarDatos(version: string | null) {
+  if (!version) return;
+  let oculta = 0;
+  document.addEventListener("visibilitychange", async () => {
+    if (document.visibilityState === "hidden") { oculta = Date.now(); return; }
+    if (!oculta || Date.now() - oculta < 20 * 60 * 1000) return;
+    oculta = 0;
+    try {
+      const r = await fetch(`${base}datos/productos.json`, { method: "HEAD", cache: "no-cache" });
+      const nueva = r.ok ? r.headers.get("etag") || r.headers.get("last-modified") : null;
+      const escribiendo = document.activeElement instanceof HTMLInputElement || document.activeElement instanceof HTMLTextAreaElement;
+      if (nueva && nueva !== version && !escribiendo) location.reload();
+    } catch { /* sin señal: se queda como está */ }
+  });
 }
 
 /** Visitas (14/11/2026): Cloudflare Web Analytics, sin cookies ni datos personales. Solo en la tienda publicada y
