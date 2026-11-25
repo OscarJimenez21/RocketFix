@@ -26,7 +26,8 @@ const FILA_ANCHA ="min-[1600px]:mx-[calc(50%-50vw)] min-[1600px]:px-[3vw] min-[1
     Las filas van debajo de la portada: sus fotos cargan cuando la persona se acerca a ellas */
 function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: string }) {
   return (
-    <a href={hrefProducto(p.id)} className="tarjeta-eleva group flex h-full flex-col overflow-hidden rounded-lg border border-linea bg-superficie transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta">
+    // 25/11/2026: tarjeta como las de la tienda de Apple: esquinas redondas, sin bordes y sombra suave que crece al pasar el mouse
+    <a href={hrefProducto(p.id)} className="tarjeta-eleva tarjeta-apple group flex h-full flex-col overflow-hidden rounded-[22px] bg-superficie">
       <div className="escenario relative aspect-square p-4 sm:p-8">
         {/* Ancho de la tarjeta: 46 % de la pantalla en celular, 44 % en tableta y unos 290 px en computador */}
         <FotoProducto producto={p} alt={p.nombre} tamanos="(min-width: 1024px) 290px, (min-width: 640px) 44vw, 46vw" className="motion-safe:group-hover:scale-[1.05]" />
@@ -35,7 +36,7 @@ function TarjetaVitrina({ producto: p, cinta }: { producto: Producto; cinta?: st
           ? <span className="brillo absolute left-2 top-2 rounded-sm bg-acento-suave px-1.5 py-0.5 text-[12px] font-bold text-acento-texto sm:left-3 sm:top-3 sm:px-2 sm:py-1 sm:text-[13px]">{cinta}</span>
           : <Insignia producto={p} className="left-2 top-2 sm:left-3 sm:top-3" />}
       </div>
-      <div className="mt-auto border-t border-linea px-3 py-3 sm:px-5 sm:py-4">
+      <div className="mt-auto px-3 pb-4 pt-1 sm:px-5 sm:pb-5">
         <p className="truncate text-[12px] font-semibold text-tinta-3 sm:text-[13px]">{etiquetaDe(p)}</p>
         <p className="mt-1 line-clamp-2 min-h-[2.75em] font-display text-[15px] font-bold leading-snug text-tinta sm:text-[18px]">{p.nombre}</p>
         {/* 20/11/2026: una línea con lo que distingue al producto (capacidad, 5G, plegable…), como el nombre largo de Éxito */}
@@ -97,7 +98,7 @@ export function Carrusel({ id, etiqueta, titulo, productos, enlaces = [], cinta,
 
   const flecha = "presionable group flex h-11 w-11 items-center justify-center rounded-full border border-linea-fuerte bg-superficie hover:border-tinta-2";
   return (
-    <section aria-labelledby={`t-${id}`} className={gris ? "textura-orbitas border-y border-linea bg-fondo" : ""}>
+    <section aria-labelledby={`t-${id}`} className={gris ? "textura-orbitas bg-fondo" : "bg-[#f5f7f6] [:root[data-tema=noche]_&]:bg-fondo"}>
       <div className="contenedor py-12 sm:py-14">
         {/* En pantallas grandes el título y las flechas van a lo ancho, alineados con la fila */}
         <div className="mb-6 flex items-end justify-between gap-4 min-[1600px]:mx-[calc(50%-50vw)] min-[1600px]:px-[3vw]">

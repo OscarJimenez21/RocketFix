@@ -19,6 +19,7 @@ import { useVistos } from "../lib/vistos";
 import { Recientes } from "../components/ProductoExtras";
 import { BarraSecciones } from "./inicio/BarraSecciones";
 import { Envios } from "./inicio/Envios";
+import { Escaparate } from "./inicio/Escaparate";
 import { TuCelular } from "./inicio/TuCelular";
 import { useDespuesDePintar, vaARegresar } from "../lib/rutas";
 
@@ -80,6 +81,8 @@ function Resto({ vistos, ancla }: { vistos: Producto[]; ancla?: string }) {
   useEffect(() => reiniciarDiferidos, []);
   return (
     <>
+      {/* 25/11/2026: escaparate estilo apple.com (productos estrella grandes y la cinta de los más vendidos que se mueve sola) */}
+      <Escaparate />
       <Carrusel id="vendidos" etiqueta={<><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</>} titulo="Los que todos quieren" productos={VENDIDOS} cinta="Top ventas" cintaEn={VENDIDOS_CINTA} gris />
       <Categorias />
       <div id="recientes"><Recientes productos={vistos} /></div>

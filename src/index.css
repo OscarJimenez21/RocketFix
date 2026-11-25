@@ -106,7 +106,12 @@
   .etiqueta { @apply text-[13px] font-semibold text-tinta-2; }
   /* Título de la portada: Archivo ancho y pesado, la misma letra del logo (es el único texto con este trato) */
   .titulo-portada { font-stretch: 122%; font-weight: 850; letter-spacing: -0.02em; line-height: 0.98; }
-  .titulo-seccion { @apply text-[24px] font-extrabold leading-tight sm:text-[28px]; }
+  /* 25/11/2026: títulos de sección grandes, como en apple.com */
+  .titulo-seccion { @apply font-display text-[30px] font-extrabold leading-[1.05] tracking-tight sm:text-[40px] lg:text-[44px]; }
+  /* Tarjetas de producto como las de la tienda de Apple: sin borde, sombra suave que crece al pasar el mouse */
+  .tarjeta-apple { box-shadow: 0 2px 12px rgb(0 0 0 / 0.06); transition: box-shadow 300ms cubic-bezier(0.23, 1, 0.32, 1), translate 260ms cubic-bezier(0.23, 1, 0.32, 1); }
+  @media (hover: hover) and (pointer: fine) { .tarjeta-apple:hover { box-shadow: 0 10px 32px rgb(0 0 0 / 0.12); } }
+  :root[data-tema="noche"] .tarjeta-apple { box-shadow: 0 0 0 1px rgb(var(--c-linea)); }
 
   /* Todo lo que se toca mide al menos 44 px de alto (tamaño mínimo cómodo para el dedo) */
   /* Al presionar, el botón se achica un poco (respuesta inmediata al toque) */
@@ -948,3 +953,22 @@ button, [role="button"], .btn { -webkit-touch-callout: none; }     /* mantener e
   .exp-visor { animation: exp-fundido 320ms cubic-bezier(0.23, 1, 0.32, 1); }
 }
 @keyframes exp-fundido { from { opacity: 0; } }
+
+/* 25/11/2026: portada con escaparate estilo apple.com (inicio/Escaparate.tsx).
+   - La foto de cada producto estrella flota despacio, sin que la persona haga nada (cada una con su propio desfase).
+   - Al aparecer, el nombre y la frase suben una vez; las baldosas del mosaico entran una tras otra.
+   - La cinta de los más vendidos avanza sola; se detiene con el mouse encima o con el botón de pausa.
+   Con «reducir movimiento», todo quieto y la cinta se puede deslizar a mano. */
+.esc-mascara { -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
+@media (prefers-reduced-motion: reduce) { .esc-mascara { overflow-x: auto; } }
+@media (prefers-reduced-motion: no-preference) {
+  .esc-flotar { animation: esc-flotar 7s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -1.3s); }
+  .esc-sube { transition: opacity 800ms cubic-bezier(0.23, 1, 0.32, 1), transform 800ms cubic-bezier(0.23, 1, 0.32, 1); }
+  .esc:not([data-visto]) .esc-bloque:first-child .esc-sube { opacity: 0; transform: translateY(28px); }
+  .esc-baldosa { transition: opacity 700ms cubic-bezier(0.23, 1, 0.32, 1), transform 700ms cubic-bezier(0.23, 1, 0.32, 1); transition-delay: calc(var(--i, 0) * 80ms); }
+  .esc:not([data-visto]) .esc-baldosa { opacity: 0; transform: translateY(36px); }
+  .esc-pista { animation: esc-cinta 60s linear infinite; }
+  .esc-cinta:hover .esc-pista, .esc-cinta:focus-within .esc-pista, .esc-cinta[data-pausada] .esc-pista { animation-play-state: paused; }
+}
+@keyframes esc-flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@keyframes esc-cinta { to { transform: translateX(-50%); } }

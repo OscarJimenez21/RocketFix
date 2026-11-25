@@ -103,7 +103,7 @@ export function Categorias() {
     // overflow-x-clip: el producto que se sale de su tarjeta (animación 57) nunca hace que la página se corra de lado
     <section id="categorias" aria-labelledby="t-categorias" className="contenedor overflow-x-clip py-10 sm:py-12">
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-1">
-        <h2 id="t-categorias" className="titulo-seccion titulo-trazo">Compra por categoría</h2>
+        <h2 id="t-categorias" className="titulo-seccion titulo-trazo">Compra por categoría. <span className="text-tinta-3">Todo lo que buscas, en un solo lugar.</span></h2>
       </div>
       <ul ref={mosaico} className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 lg:auto-rows-[215px] lg:grid-cols-12">
         {MOSAICO.map(m => {
@@ -113,7 +113,7 @@ export function Categorias() {
           return (
             <li key={m.tienda} data-revelar className={`revelar ${forma.caja}`}>
               {/* mosaico-tarjeta: con el mouse encima, el producto se levanta y se sale un poco del cuadro (animación 57) */}
-              <a href={hrefDe(t.vista)} data-forma={m.forma} className={`mosaico-tarjeta group relative isolate flex h-full overflow-hidden rounded-lg p-4 transition-transform duration-150 ease-salida active:scale-[0.98] sm:p-6 ${tema.caja}`}>
+              <a href={hrefDe(t.vista)} data-forma={m.forma} className={`mosaico-tarjeta group relative isolate flex h-full overflow-hidden rounded-[26px] p-4 transition-transform duration-150 ease-salida active:scale-[0.98] sm:p-6 ${tema.caja}`}>
                 <span className={`relative z-10 flex min-w-0 flex-col ${forma.texto}`}>
                   <span className={`text-[12.5px] font-semibold leading-snug sm:text-sm ${forma.corto ? "hidden sm:block" : ""} ${tema.frase}`}>{m.frase}</span>
                   <span className={`font-display ${forma.corto ? "sm:mt-1" : "mt-1"} font-extrabold leading-[0.98] tracking-tight ancho-108 ${forma.titulo}`}>{t.titulo}</span>

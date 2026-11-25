@@ -7,7 +7,7 @@
 import { lazy, Suspense, useMemo, useState } from "react";
 import { FilaProductos } from "../../components/FilaProductos";
 import { IconoCheck, IconoRegalo } from "../../components/Iconos";
-import { recurso } from "../../lib/formato";
+import { recurso, srcsetFoto } from "../../lib/formato";
 import { PERSONAS, RANGOS, porPersona, porRango } from "../../lib/regalos";
 import { PRESUPUESTO_NORMAL, TEMPORADA, DECORAR } from "../../lib/temporada";
 import { TEMAS } from "./Categorias";
@@ -28,6 +28,11 @@ export function PorPresupuesto() {
   const textos = TEMPORADA?.presupuesto ?? PRESUPUESTO_NORMAL;
   const [rango, setRango] = useState<string>(() => (RANGOS_CON.find(r => r.id === "500") ?? RANGOS_CON[0])?.id ?? "500");
   const productos = useMemo(() => porRango(rango), [rango]);
+  // Para las tarjetas de los rangos: cuántos productos tiene cada uno y tres fotos de muestra
+  const resumenes = useMemo(() => Object.fromEntries(RANGOS_CON.map(r => {
+    const l = porRango(r.id);
+    return [r.id, { n: l.length, fotos: l.map(p => p.imagen).filter((f): f is string => !!f).slice(0, 3) }];
+  })) as Record<string, { n: number; fotos: string[] }>, []);
   const actual = RANGOS.find(r => r.id === rango) ?? RANGOS[1];
   const colores = { "--t-fondo": TEMPORADA?.fondo ?? "#062A22", "--t-acento": TEMPORADA?.acento ?? "#FFD36B" } as React.CSSProperties;
   if (!RANGOS_CON.length) return null;
@@ -48,13 +53,20 @@ export function PorPresupuesto() {
         <h2 id="t-presupuesto" className="titulo-seccion mt-1 text-white">{textos.titulo}</h2>
         <p className="mt-2 max-w-[60ch] text-[15px] text-white/75">{textos.texto}</p>
         {/* Rangos: en celular se deslizan de lado */}
-        <div role="group" aria-label="Presupuesto" className="sin-barra -mx-4 mt-6 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
+        <div role="group" aria-label="Presupuesto" className="sin-barra -mx-4 mt-7 flex gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
+          {/* 25/11/2026: cada rango es una tarjeta con tres de sus productos asomándose, el rango y cuántas opciones hay */}
           {RANGOS_CON.map(r => {
             const elegido = r.id === rango;
+            const deEste = resumenes[r.id] ?? { n: 0, fotos: [] };
             return (
               <button key={r.id} type="button" aria-pressed={elegido} onClick={() => setRango(r.id)}
-                className={`presionable inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-full border px-4 text-sm font-semibold transition-colors duration-150 ${elegido ? "border-[var(--t-acento)] bg-[var(--t-acento)] text-marca-noche" : "border-white/30 text-white hover:border-white/70"}`}>
-                {elegido && <IconoCheck className="h-4 w-4" />}{r.texto}
+                className={`presionable flex min-w-[164px] shrink-0 flex-col items-start rounded-2xl px-4 pb-3.5 pt-3 text-left ring-1 ring-inset transition-[background-color,color,box-shadow] duration-200 sm:min-w-[188px] ${elegido ? "bg-[var(--t-acento)] text-marca-noche ring-[var(--t-acento)]" : "bg-white/[0.06] text-white ring-white/15 hover:bg-white/[0.12]"}`}>
+                <span aria-hidden="true" className="flex -space-x-3">
+                  {deEste.fotos.map(f => <img key={f} src={recurso(f)} srcSet={srcsetFoto(f)} sizes="44px" alt="" loading="lazy" decoding="async" width={44} height={44}
+                    className="h-11 w-11 rounded-full bg-white object-contain p-1 ring-2 ring-[var(--t-fondo)]" />)}
+                </span>
+                <span className="mt-2.5 flex items-center gap-1.5 font-display text-[17px] font-extrabold leading-tight">{elegido && <IconoCheck className="h-4 w-4" />}{r.texto}</span>
+                <span className={`mt-0.5 text-[12.5px] ${elegido ? "text-marca-noche/70" : "text-white/60"}`}>{deEste.n} opciones</span>
               </button>
             );
           })}

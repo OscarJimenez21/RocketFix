@@ -238,7 +238,7 @@ export default function Producto({ id }: { id: string }) {
         <div className="cascada-info min-w-0">
           <p className="etiqueta text-tinta-3">{etiquetaDe(p)}</p>
           <div className="mt-1.5 flex items-start gap-3">
-            <h1 tabIndex={-1} className="min-w-0 flex-1 text-[26px] font-extrabold leading-tight md:text-[32px]">{p.nombre}</h1>
+            <h1 tabIndex={-1} className="min-w-0 flex-1 text-balance font-display text-[28px] font-extrabold leading-[1.08] tracking-tight md:text-[38px]">{p.nombre}</h1>
             {/* Mejoras 7 y 8: guardar en favoritos */}
             <BotonFavorito id={p.id} nombre={p.nombre} className="mt-0.5 shrink-0" />
           </div>

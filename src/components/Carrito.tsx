@@ -313,7 +313,7 @@ export function Carrito() {
         className={`absolute inset-y-0 right-0 flex w-full max-w-[440px] flex-col overflow-hidden bg-superficie shadow-flota transition-transform duration-300 ease-cajon ${carritoAbierto ? "translate-x-0" : "translate-x-full"}`}>
         {/* div y no header: un <header> aquí contaba como una segunda cabecera de la página (revisión de accesibilidad) */}
         <div className="flex items-center justify-between border-b border-linea px-5 py-4">
-          <h2 id={`${id}-titulo`} className="text-xl font-extrabold">Tu pedido{unidades > 0 && <span className="ml-1.5 align-middle text-sm font-semibold text-tinta-3">({unidades} {unidades === 1 ? "producto" : "productos"})</span>}</h2>
+          <h2 id={`${id}-titulo`} className="font-display text-[26px] font-extrabold tracking-tight">Tu pedido{unidades > 0 && <span className="ml-1.5 align-middle text-sm font-semibold text-tinta-3">({unidades} {unidades === 1 ? "producto" : "productos"})</span>}</h2>
           <button ref={cerrar} type="button" onClick={cerrarCarrito} aria-label="Cerrar carrito" className="cerrar-gira presionable -my-1 -mr-2 flex h-11 w-11 items-center justify-center rounded text-tinta-2 hover:bg-fondo hover:text-tinta"><IconoCerrar /></button>
         </div>
 
@@ -344,10 +344,10 @@ export function Carrito() {
                   const tope = p.stock != null && cantidad >= p.stock;
                   return (
                     <li key={clave} data-clave={clave} style={{ "--i": Math.min(k, 6) } as React.CSSProperties}
-                      className={`relative isolate grid grid-cols-[64px_1fr] gap-3 py-4 transition-[opacity,transform] duration-[180ms] ease-salida ${saliendo.includes(clave) ? "pointer-events-none translate-x-3 opacity-0" : ""}${lineasEntran ? " linea-entra" : ""}`}>
+                      className={`relative isolate grid grid-cols-[80px_1fr] gap-3.5 py-4 transition-[opacity,transform] duration-[180ms] ease-salida ${saliendo.includes(clave) ? "pointer-events-none translate-x-3 opacity-0" : ""}${lineasEntran ? " linea-entra" : ""}`}>
                       {/* El último producto agregado: fondo verde claro que se desvanece al abrir el carrito */}
                       {resaltada?.clave === clave && <span key={resaltada.vez} aria-hidden="true" className="absolute inset-y-0 -left-5 -right-5 -z-10 bg-marca-suave opacity-0 motion-safe:animate-desvanecer" />}
-                      <a href={hrefProducto(p.id)} className="escenario h-16 w-16 rounded border border-linea p-1" tabIndex={-1} aria-hidden="true"><FotoProducto producto={p} alt="" tamanos="64px" /></a>
+                      <a href={hrefProducto(p.id)} className="escenario h-20 w-20 rounded-xl bg-white p-1.5 ring-1 ring-inset ring-linea" tabIndex={-1} aria-hidden="true"><FotoProducto producto={p} alt="" tamanos="80px" /></a>
                       <div className="min-w-0">
                         <a href={hrefProducto(p.id)} title={nombre} className="line-clamp-2 text-[14.5px] font-semibold leading-snug hover:text-marca">{nombre}</a>
                         <p className="mt-0.5 text-xs text-tinta-2">{dinero(o.precio)} c/u</p>
@@ -456,9 +456,9 @@ export function Carrito() {
                 </div>
               </div>
               <div className="mt-3 flex items-baseline justify-between border-t border-linea pt-3">
-                <span className="font-semibold">Total</span>
+                <span className="font-display text-lg font-extrabold">Total</span>
                 {/* La clave cambia con el total: así se ilumina en verde cada vez que cambia */}
-                <strong key={vezTotal} className={`font-display text-2xl tabular-nums ${vezTotal ? "motion-safe:animate-resaltar" : ""}`}><Pesos valor={total} /></strong>
+                <strong key={vezTotal} className={`font-display text-[28px] tracking-tight tabular-nums ${vezTotal ? "motion-safe:animate-resaltar" : ""}`}><Pesos valor={total} /></strong>
               </div>
               {errores.texto && <p id={`${id}-error`} className="alerta mt-2" role="alert">{errores.texto}</p>}
               {/* El pedido por WhatsApp es el camino principal: ahí se confirman el total y la entrega antes de cobrar */}

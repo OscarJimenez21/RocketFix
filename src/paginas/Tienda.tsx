@@ -7,6 +7,7 @@ import { tiendaPorVista } from "../data/tiendas";
 import { EncabezadoVista } from "../components/EncabezadoVista";
 import { IconoBuscar, IconoCuadricula, IconoLista, IconoWhatsApp } from "../components/Iconos";
 import { TarjetaProducto } from "../components/TarjetaProducto";
+import { TarjetaCategoria } from "../components/TarjetaCategoria";
 import { activa, reducirMovimiento } from "../lib/animaciones";
 import { dinero, norm, recurso } from "../lib/formato";
 import { useMarco } from "../lib/movimiento";
@@ -174,7 +175,7 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
       <div className="contenedor py-6">
         {/* Tipo de producto (o marca, en celulares) */}
         {(esCel ? marcas.length > 1 : cats.length > 1) && (
-          <div ref={pastillas} role="group" aria-label={esCel ? "Marca" : "Tipo de producto"} className="sin-barra -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:px-0">
+          <div ref={pastillas} role="group" aria-label={esCel ? "Marca" : "Tipo de producto"} className={`sin-barra -mx-4 flex overflow-x-auto px-4 pb-1 ${esCel ? "gap-2 sm:mx-0 sm:flex-wrap sm:px-0" : "gap-1 sm:gap-2"}`}>
             {esCel ? (
               <>
                 <Chip activo={f.marca === "todas"} n={base.length} onClick={() => poner({ marca: "todas" })}>Todas</Chip>
@@ -182,8 +183,11 @@ export function Tienda({ vista, tienda }: { vista: string; tienda: TiendaId }) {
               </>
             ) : (
               <>
-                <Chip activo={f.cat === "todos"} n={base.length} onClick={() => poner({ cat: "todos" })}>Todo</Chip>
-                {cats.map(c => <Chip key={c.id} activo={f.cat === c.id} n={base.filter(p => p.categoria === c.id).length} onClick={() => poner({ cat: c.id })}>{c.nombre}</Chip>)}
+                <TarjetaCategoria activo={f.cat === "todos"} n={base.length} onClick={() => poner({ cat: "todos" })} nombre="Todo" />
+                {cats.map(c => {
+                  const deEsta = base.filter(p => p.categoria === c.id);
+                  return <TarjetaCategoria key={c.id} activo={f.cat === c.id} n={deEsta.length} onClick={() => poner({ cat: c.id })} nombre={c.nombre} foto={deEsta.find(p => p.imagen)?.imagen} />;
+                })}
               </>
             )}
           </div>

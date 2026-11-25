@@ -34,16 +34,25 @@ export function ExperienciaProducto({ producto, d }: { producto: Producto; d: De
 
 type Destacado = { titulo: string; texto: string; foto?: number };
 
+/** Como useVisto, pero si el navegador no avisa que la sección se ve (pestaña en segundo plano, ahorro de energía), a los 2,5 s
+    se muestra igual: el contenido nunca queda escondido */
+function useVistoSeguro(ref: React.RefObject<HTMLElement | null>) {
+  const visto = useVisto(ref);
+  const [forzar, setForzar] = useState(false);
+  useEffect(() => { const t = window.setTimeout(() => setForzar(true), 2500); return () => window.clearTimeout(t); }, []);
+  return visto || forzar;
+}
+
 const ESTRELLAS: [number, number, number, number][] = [
   [3, 12, 2, 0.6], [9, 64, 1.5, 0.45], [16, 30, 1, 0.55], [24, 82, 2, 0.35], [31, 8, 1.5, 0.7], [38, 52, 1, 0.45], [46, 20, 2, 0.5],
   [53, 74, 1.5, 0.4], [61, 36, 1, 0.6], [68, 10, 2, 0.45], [75, 60, 1.5, 0.55], [82, 26, 1, 0.7], [89, 78, 2, 0.35], [95, 42, 1.5, 0.55]
 ];
 
 /** Primera frase de un texto (para que la tarjeta no se llene de letra); el resto queda en la ficha */
-const primeraFrase = (t: string, max = 170) => {
+const primeraFrase = (t: string) => {
+  // Frases completas, nunca cortadas con «…» (si la primera es muy corta, va también la segunda)
   const f = t.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? t;
-  const s = f.length < 60 && t.length > f.length ? (t.match(/^.*?[.!?](?=\s|$).*?[.!?](?=\s|$)/)?.[0] ?? f) : f;
-  return s.length > max ? s.slice(0, max).replace(/[ ,;:]+\S*$/, "") + "…" : s;
+  return f.length < 60 && t.length > f.length ? (t.match(/^.*?[.!?](?=\s|$).*?[.!?](?=\s|$)/)?.[0] ?? f) : f;
 };
 
 /** Los textos armados con la ficha vienen como «Clave: valor. Clave: valor.»: se separan para mostrarlos como datos (valor en
@@ -62,7 +71,7 @@ export function LoMasDestacado({ destacados, fotos, nombre }: { destacados: Dest
   const [actual, setActual] = useState(0);
   const [bordes, setBordes] = useState({ ini: true, fin: false });
   const caja = useRef<HTMLElement>(null);
-  const visto = useVisto(caja);
+  const visto = useVistoSeguro(caja);
   const medir = () => {
     const el = pista.current; if (!el) return;
     const tarjetas = [...el.children] as HTMLElement[];
@@ -100,7 +109,7 @@ export function LoMasDestacado({ destacados, fotos, nombre }: { destacados: Dest
           const hechos = hechosDe(d.texto).slice(0, foto ? 2 : 3);
           return (
             <article key={d.titulo} style={{ "--i": i } as React.CSSProperties} aria-label={`${i + 1} de ${destacados.length}: ${d.titulo}`}
-              className="exp-tarjeta relative flex h-[520px] w-[84vw] max-w-[400px] shrink-0 snap-start flex-col overflow-hidden rounded-[28px] bg-white/[0.06] ring-1 ring-inset ring-white/10 sm:h-[580px] sm:w-[380px]">
+              className="exp-tarjeta relative flex min-h-[520px] w-[84vw] max-w-[400px] shrink-0 snap-start flex-col overflow-hidden rounded-[28px] bg-white/[0.06] ring-1 ring-inset ring-white/10 sm:min-h-[580px] sm:w-[380px]">
               <div className="px-7 pt-8 sm:px-8 sm:pt-9">
                 <p className="flex items-center gap-2 text-[13px] font-semibold text-marca-menta"><IconoTema tema={tema} className="h-4 w-4" />{String(i + 1).padStart(2, "0")}</p>
                 <h3 className="mt-3 font-display text-[26px] font-extrabold leading-[1.1] text-white sm:text-[30px]">{d.titulo}</h3>
@@ -108,7 +117,7 @@ export function LoMasDestacado({ destacados, fotos, nombre }: { destacados: Dest
                   <dl className="mt-4 grid gap-2.5">
                     {hechos.map(([k, v]) => (
                       <div key={k} className="border-l-2 border-marca-menta/50 pl-3">
-                        <dd className="line-clamp-2 text-[16px] font-semibold leading-snug text-white">{v}</dd>
+                        <dd className="break-words text-[16px] font-semibold leading-snug text-white">{v}</dd>
                         <dt className="mt-0.5 text-[12.5px] text-white/55">{k}</dt>
                       </div>
                     ))}
@@ -165,7 +174,7 @@ export function MiradaDeCerca({ fotos, nombre }: { fotos: string[]; nombre: stri
 function Visor({ fotos, nombre }: { fotos: string[]; nombre: string }) {
   const [k, setK] = useState(0);
   const caja = useRef<HTMLElement>(null);
-  const visto = useVisto(caja);
+  const visto = useVistoSeguro(caja);
   const foto = fotos[k] ?? fotos[0] ?? "";
   return (
     <section ref={caja} id="de-cerca" aria-labelledby="t-cerca" data-visto={visto || undefined} className="exp-cerca bg-fondo">
@@ -192,10 +201,15 @@ function Visor({ fotos, nombre }: { fotos: string[]; nombre: string }) {
 /** «De un vistazo»: una tarjeta por sección de la ficha con sus dos primeros datos en grande. Las dos primeras son anchas */
 export function DeUnVistazo({ secciones, nombre }: { secciones: [string, [string, string][]][]; nombre: string }) {
   const caja = useRef<HTMLElement>(null);
-  const visto = useVisto(caja);
+  const visto = useVistoSeguro(caja);
   const tarjetas = secciones.filter(([t, f]) => !/^(general|lo principal|requisitos|compatibilidad|informaci)/i.test(t) && f.length > 0).slice(0, 6);
   if (tarjetas.length < 2) return null;
-  const corto = (v: string, n = 46) => { const s = (v.split(/[;·|](?!\d)/)[0] ?? v).trim(); return s.length > n ? s.slice(0, n).replace(/[ ,]+\S*$/, "") + "…" : s; };
+  // 25/11/2026 (usuario, con foto: «Dos con tecnología beamforming + uno…»): nunca se corta un dato con «…». Se toma la primera
+  // parte (hasta «;», «·» o «|») completa y la letra se achica según lo largo que sea
+  const parte = (v: string) => (v.split(/\s*[;·|]\s*(?!\d)/)[0] ?? v).trim();
+  const tamano = (v: string, ancha: boolean) => v.length <= 14 ? (ancha ? "text-[34px] sm:text-[44px]" : "text-[30px] sm:text-[36px]")
+    : v.length <= 26 ? (ancha ? "text-[28px] sm:text-[34px]" : "text-[24px] sm:text-[28px]")
+    : v.length <= 44 ? "text-[21px] sm:text-[24px]" : "text-[17px] sm:text-[19px]";
   return (
     <section ref={caja} id="vistazo" aria-labelledby="t-vistazo" data-visto={visto || undefined} className="exp-vistazo">
       <div className="contenedor py-16 sm:py-24">
@@ -217,11 +231,11 @@ export function DeUnVistazo({ secciones, nombre }: { secciones: [string, [string
                   <h3 className={`text-[15px] font-bold ${i === 0 ? "text-white/80" : "text-tinta-2"}`}>{titulo}</h3>
                 </div>
                 <div className="mt-auto pt-6">
-                  {a && <p className={`line-clamp-2 font-display font-extrabold leading-tight ${ancha ? "text-[28px] sm:text-[34px]" : "text-[22px] sm:text-[26px]"}`}>{corto(a[1])}</p>}
-                  {a && <p className={`mt-1 text-[13.5px] ${i === 0 ? "text-white/60" : "text-tinta-3"}`}>{a[0]}</p>}
+                  {a && <p className={`text-balance break-words font-display font-extrabold leading-tight ${tamano(parte(a[1]), ancha)}`}>{parte(a[1])}</p>}
+                  {a && <p className={`mt-1.5 text-[13.5px] ${i === 0 ? "text-white/60" : "text-tinta-3"}`}>{a[0]}</p>}
                   {b && (b[1]
-                    ? <p className={`mt-3 line-clamp-2 text-[15px] font-semibold leading-snug ${i === 0 ? "text-white/85" : "text-tinta-2"}`}>{corto(b[1], 60)} <span className={`font-normal ${i === 0 ? "text-white/55" : "text-tinta-3"}`}>· {b[0]}</span></p>
-                    : <p className={`mt-3 text-[15px] font-semibold leading-snug ${i === 0 ? "text-white/85" : "text-tinta-2"}`}>✓ {b[0]}</p>)}
+                    ? <p className={`mt-4 border-t pt-3 text-[15px] font-semibold leading-snug ${i === 0 ? "border-white/15 text-white/85" : "border-linea text-tinta-2"}`}>{parte(b[1])}<span className={`mt-0.5 block text-[13px] font-normal ${i === 0 ? "text-white/55" : "text-tinta-3"}`}>{b[0]}</span></p>
+                    : <p className={`mt-4 border-t pt-3 text-[15px] font-semibold leading-snug ${i === 0 ? "border-white/15 text-white/85" : "border-linea text-tinta-2"}`}>✓ {b[0]}</p>)}
                 </div>
               </li>
             );

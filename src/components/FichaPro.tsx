@@ -7,6 +7,7 @@
    Todo sale de descripciones.json (cifras, destacados, secciones); si un producto no los tiene, esa parte no se muestra. */
 import { useEffect, useId, useMemo, useRef, useState, type RefObject } from "react";
 import { dinero, norm, recurso, srcsetFoto } from "../lib/formato";
+import { reducirMovimiento } from "../lib/animaciones";
 import { useVisto } from "../lib/enPantalla";
 import { useGaleria } from "../lib/galerias";
 import type { Producto } from "../types";
@@ -109,29 +110,38 @@ export function DestacadosProducto({ destacados, producto }: { destacados: { tit
   );
 }
 
-/** Ficha técnica con pestañas por sección y buscador. «Toda la ficha» muestra todas las secciones seguidas */
+/** Ficha técnica con pestañas por sección y buscador. 25/11/2026 (usuario): abre mostrando «Toda la ficha» (la primera
+    pestaña, con todas las secciones seguidas); después la persona elige una sección si quiere ver solo esa */
 export function FichaInteractiva({ secciones }: { secciones: [string, [string, string][]][] }) {
   const base = useId();
-  // Abre en la primera sección con datos del fabricante (la sección «General» solo repite marca, tipo y versiones)
-  const [activa, setActiva] = useState(() => (secciones[0]?.[0] === "General" && secciones.length > 1 ? 1 : 0));
+  // 0 = «Toda la ficha»; 1, 2… = cada sección
+  const [activa, setActiva] = useState(0);
   const [buscar, setBuscar] = useState("");
   const pestanas = useRef<(HTMLButtonElement | null)[]>([]);
-  const todas = secciones.length;   // índice de la pestaña «Toda la ficha»
+  const todas = 0;   // índice de la pestaña «Toda la ficha»
   const total = secciones.reduce((n, [, f]) => n + f.length, 0);
   const q = norm(buscar.trim());
   const halladas = useMemo(() => (q ? secciones.map(([t, f]): [string, [string, string][]] => [t, f.filter(([k, v]) => norm(`${k} ${v}`).includes(q))]).filter(([, f]) => f.length) : []), [q, secciones]);
   const cuantos = halladas.reduce((n, [, f]) => n + f.length, 0);
-  const visibles: [string, [string, string][]][] = q ? halladas : activa === todas ? secciones : secciones[activa] ? [secciones[activa]] : [];
+  const sola = secciones[activa - 1];
+  const visibles: [string, [string, string][]][] = q ? halladas : activa === todas ? secciones : sola ? [sola] : [];
   const mover = (e: React.KeyboardEvent, i: number) => {
-    const ultimo = todas;
+    const ultimo = secciones.length;
     const sig = e.key === "ArrowRight" || e.key === "ArrowDown" ? (i + 1) % (ultimo + 1) : e.key === "ArrowLeft" || e.key === "ArrowUp" ? (i + ultimo) % (ultimo + 1) : e.key === "Home" ? 0 : e.key === "End" ? ultimo : -1;
     if (sig < 0) return;
     e.preventDefault(); setActiva(sig); pestanas.current[sig]?.focus();
   };
-  const titulos = [...secciones.map(([t, f]) => [t, f.length] as const), ["Toda la ficha", total] as const];
+  // Al elegir una sección estando más abajo (en la ficha completa), la página vuelve al comienzo de la ficha
+  const elegir = (i: number) => {
+    setBuscar(""); setActiva(i);
+    const panel = document.getElementById(`${base}-panel`);
+    if (panel && panel.getBoundingClientRect().top < 0) panel.scrollIntoView({ block: "start", behavior: reducirMovimiento() ? "auto" : "smooth" });
+  };
+  const titulos = [["Toda la ficha", total] as const, ...secciones.map(([t, f]) => [t, f.length] as const)];
   return (
     <div className="mt-5 grid gap-5 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-8">
-      <div className="min-w-0">
+      {/* En computador la columna de secciones acompaña al bajar por la ficha completa */}
+      <div className="min-w-0 lg:sticky lg:top-32 lg:self-start">
         <label className="block">
           <span className="rotulo">Buscar en la ficha</span>
           <input type="search" value={buscar} onChange={e => setBuscar(e.target.value)} placeholder="Ej.: batería, peso, Wi-Fi" className="campo" />
@@ -141,10 +151,10 @@ export function FichaInteractiva({ secciones }: { secciones: [string, [string, s
           className={`-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1 sin-barra lg:mx-0 lg:flex-col lg:gap-1 lg:overflow-visible lg:px-0 ${q ? "opacity-50" : ""}`}>
           {titulos.map(([t, n], i) => {
             const sel = !q && activa === i;
-            const tipo = i < todas ? tipoDeClave(t) : null;
+            const tipo = i !== todas ? tipoDeClave(t) : null;
             return (
               <button key={t} ref={el => { pestanas.current[i] = el; }} type="button" role="tab" id={`${base}-p${i}`} aria-selected={sel} aria-controls={`${base}-panel`}
-                tabIndex={sel || (q && i === 0) ? 0 : -1} onClick={() => { setBuscar(""); setActiva(i); }} onKeyDown={e => mover(e, i)}
+                tabIndex={sel || (q && i === 0) ? 0 : -1} onClick={() => elegir(i)} onKeyDown={e => mover(e, i)}
                 className={`flex min-h-[44px] shrink-0 items-center gap-2.5 rounded-md border px-3 py-2 text-left text-sm font-semibold transition-colors lg:w-full ${sel ? "border-marca bg-marca-suave text-marca" : "border-linea bg-superficie text-tinta-2 hover:border-linea-fuerte hover:text-tinta"}`}>
                 {tipo ? <IconoCaracteristica tipo={tipo} className="h-4 w-4 shrink-0" /> : <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full bg-current" />}
                 <span className="whitespace-nowrap lg:flex-1 lg:whitespace-normal">{t}</span>

@@ -44,8 +44,9 @@ export function EncabezadoVista({ migas, titulo, lead, nota, extra }: { migas: M
       <div className="contenedor grid gap-5 py-5 md:grid-cols-[minmax(0,1fr)_300px] md:items-end md:gap-10 md:py-8">
         <div className="min-w-0">
           <Migas migas={migas} className="mb-2.5" />
-          <h1 tabIndex={-1} className="text-[26px] font-extrabold leading-tight md:text-[32px]">{titulo}</h1>
-          {lead && <p className="mt-2 max-w-2xl text-[15.5px] leading-relaxed text-tinta-2">{lead}</p>}
+          {/* 25/11/2026: título grande, como las páginas de la tienda de Apple */}
+          <h1 tabIndex={-1} className={`text-balance font-display font-extrabold leading-[1.05] tracking-tight ${titulo.length > 40 ? "text-[28px] md:text-[40px]" : "text-[34px] md:text-[52px]"}`}>{titulo}</h1>
+          {lead && <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-tinta-2 md:text-[18px]">{lead}</p>}
           {nota && enlaceNota && (
             <p className="mt-2 text-sm text-tinta-2 md:hidden">
               {nota.titulo} <a className="enlace-suelto text-sm" {...enlaceNota}>{nota.enlace.replace(/\s*→$/, "")} →</a>
