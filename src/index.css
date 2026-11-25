@@ -529,12 +529,8 @@
     :root:not(.sin-a13) .tarjeta-eleva:hover { translate: 0 -4px; }
   }
 
-  /* 17 · Producto: con el mouse encima, la foto se acerca y sigue al puntero */
-  @media (hover: hover) and (pointer: fine) {
-    :root:not(.sin-a17) .zoom-foto { cursor: zoom-in; }
-    :root:not(.sin-a17) .zoom-foto img { transform-origin: var(--zx, 50%) var(--zy, 50%); transition: opacity 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }
-    :root:not(.sin-a17) .zoom-foto:hover img { transform: scale(1.6); }
-  }
+  /* 17 · (quitada 25/11/2026: la lupa al pasar el mouse dejaba ver la foto vecina en el borde y no se veía bien ninguna.
+     Para ver de cerca: clic en la foto o «Ampliar» abre el visor a pantalla completa) */
 
   /* 18 · Producto: la columna de información entra en cascada al abrirlo (el título solo sube) */
   @media (prefers-reduced-motion: no-preference) {

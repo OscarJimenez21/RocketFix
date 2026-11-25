@@ -23,7 +23,6 @@ const LISTA: Fila[] = [
   { n: 13, grupo: "Tienda", nombre: "Las tarjetas se elevan con el mouse encima", como: "Pasa el mouse por una tarjeta", ir: "#celulares" },
   { n: 14, grupo: "Tienda", nombre: "La pastilla del filtro da un saltito al elegirla", como: "Toca una marca", ir: "#celulares" },
   { n: 15, grupo: "Tienda", nombre: "Todos / Nuevos / CPO: la pastilla oscura se desliza", como: "Cambia entre Todos, Nuevos y CPO", ir: "#celulares" },
-  { n: 17, grupo: "Producto", nombre: "La foto se acerca y sigue al mouse", como: "Pasa el mouse por la foto grande", ir: "#p/sa07" },
   { n: 18, grupo: "Producto", nombre: "La información entra en cascada al abrir", como: "Al abrir un producto", ir: "#p/sa07" },
   { n: 19, grupo: "Producto", nombre: "Las características cortas aparecen una por una", como: "Al abrir un producto", ir: "#p/sa07" },
   { n: 20, grupo: "Producto", nombre: "El precio rueda hacia arriba o hacia abajo", como: "Cambia de versión", ir: "#p/sa07" },

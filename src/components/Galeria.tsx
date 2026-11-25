@@ -51,13 +51,7 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
     const el = pista.current;
     if (el) setActual(Math.round(el.scrollLeft / (el.clientWidth || 1)));
   };
-  // Animación 17: con el mouse encima, la foto se acerca hacia donde está el puntero (zoom-foto en index.css).
-  // Se escribe directo en el estilo, sin volver a dibujar el componente en cada movimiento
-  const seguir = (e: React.MouseEvent<HTMLDivElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty("--zx", `${(((e.clientX - r.left) / r.width) * 100).toFixed(1)}%`);
-    e.currentTarget.style.setProperty("--zy", `${(((e.clientY - r.top) / r.height) * 100).toFixed(1)}%`);
-  };
+  // 25/11/2026: se quitó la lupa al pasar el mouse (animación 17); para ver de cerca está el visor (clic o «Ampliar»)
 
   // Idea 11: visor a pantalla completa (se monta solo al abrirlo)
   const [visor, setVisor] = useState(false);
@@ -71,7 +65,7 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
 
   if (fotos.length < 2) {
     return (
-      <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-[4/3] cursor-zoom-in overflow-hidden rounded-md border border-linea p-4 sm:aspect-square sm:p-6">
+      <div data-foto-principal className="escenario relative aspect-[4/3] cursor-zoom-in overflow-hidden rounded-md border border-linea p-4 sm:aspect-square sm:p-6">
         {/* Mejora: tocar la foto la abre en grande (el botón «Ampliar» sigue siendo el camino con teclado) */}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- atajo con el mouse o el dedo; el botón «Ampliar» hace lo mismo con el teclado */}
         <div className="h-full w-full" onClick={() => fotos.length > 0 && setVisor(true)}><FotoProducto producto={producto} prioridad /></div>
@@ -87,7 +81,7 @@ export function Galeria({ producto, tinte = null }: { producto: Producto; tinte?
     <div>
       {visorAbierto}
       {/* data-foto-principal: de aquí despega la foto hacia el carrito al agregar */}
-      <div data-foto-principal onMouseMove={seguir} className="zoom-foto escenario relative aspect-[4/3] overflow-hidden rounded-md border border-linea sm:aspect-square">
+      <div data-foto-principal className="escenario relative aspect-[4/3] overflow-hidden rounded-md border border-linea sm:aspect-square">
         {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex, jsx-a11y/no-noninteractive-element-interactions -- las fotos se deslizan: deben poder enfocarse para pasarlas con las flechas del teclado (Inicio/Fin incluidos); el clic es un atajo para ampliar, que el botón «Ampliar» también ofrece */}
         <div ref={pista} onScroll={alDeslizar} tabIndex={0} role="group" aria-roledescription="carrusel" aria-label={`Fotos de ${producto.nombre}`}
           // Mejora: Inicio y Fin van a la primera y a la última foto
