@@ -8,7 +8,8 @@ import { FotoProducto } from "../components/FotoProducto";
 import { Galeria } from "../components/Galeria";
 import { IconoCamion, IconoCheck, IconoCompartir, IconoMoto, IconoTarjeta, IconoWhatsApp } from "../components/Iconos";
 import { Comparador, EnvioGratis, FichaTecnica, Recientes } from "../components/ProductoExtras";
-import { DestacadosProducto, EsencialProducto, FichaInteractiva, NavProducto } from "../components/FichaPro";
+import { EsencialProducto, FichaInteractiva, NavProducto } from "../components/FichaPro";
+import { ExperienciaProducto } from "../components/Experiencia";
 import { Pesos } from "../components/Pesos";
 import { EtiquetaAgregar, NotaProducto, TarjetaProducto, useAgregado } from "../components/TarjetaProducto";
 import { activa } from "../lib/animaciones";
@@ -361,8 +362,8 @@ export default function Producto({ id }: { id: string }) {
         <NavProducto nombre={p.nombre} precio={p.consultar ? null : o.precio} vigilar={boton} deshabilitado={tope}
           alAgregar={p.consultar ? undefined : alAgregar} etiquetaAgregar={<EtiquetaAgregar vez={vez} recien={recien} cantidad={q} tope={tope} sufijo=" al carrito" />}
           partes={[
-            ...(d.secciones.length ? [{ id: "ficha", texto: "Ficha técnica" }] : []),
             ...(d.destacados.length ? [{ id: "destacados", texto: "Destacados" }] : []),
+            ...(d.secciones.length ? [{ id: "ficha", texto: "Ficha técnica" }] : []),
             { id: "descripcion", texto: "Descripción" },
             ...(!p.consultar ? [{ id: "comparar", texto: "Comparar" }] : [])
           ]} />
@@ -372,6 +373,9 @@ export default function Producto({ id }: { id: string }) {
           celular; en Éxito los datos salen en la segunda pantalla) */}
       {/* La ficha y los destacados se arman un instante después de pintar la parte de arriba (como las filas de abajo):
           en celulares lentos la página de producto quedaba trabada al abrir (TBT 450–500 ms, medido el 20/11/2026) */}
+      {/* 26/11/2026: después de la compra, la parte de «página de marca» (Experiencia.tsx): destacados, de cerca, cifras y
+          de un vistazo; luego la ficha técnica completa */}
+      {abajo && descripcion !== null && <ExperienciaProducto producto={p} d={d} />}
       {abajo && descripcion !== null && d.secciones.length > 0 && (
         <section id="ficha" aria-labelledby="h-ficha" className="border-t border-linea">
           <div className="contenedor py-12 sm:py-14">
@@ -381,7 +385,6 @@ export default function Producto({ id }: { id: string }) {
           </div>
         </section>
       )}
-      {abajo && d.destacados.length > 0 && <div className="border-t border-linea"><DestacadosProducto destacados={d.destacados} producto={p} /></div>}
 
       <section id="descripcion" aria-labelledby="h-desc" aria-busy={descripcion === null} className="border-t border-linea bg-fondo">
         {descripcion === null ? (

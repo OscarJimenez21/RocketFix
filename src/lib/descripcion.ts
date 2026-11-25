@@ -9,7 +9,7 @@ import { lista, norm, recurso } from "./formato";
 /** Solo lo que tiene la forma de una descripción: resumen de texto y ficha de pares [característica, valor] */
 export function leerDescripcion(dato: unknown): Descripcion {
   if (!dato || typeof dato !== "object") return {};
-  const { resumen, ficha, parrafos, secciones, caja, cifras, destacados } = dato as Record<string, unknown>;
+  const { resumen, ficha, parrafos, secciones, caja, cifras, destacados, distintas } = dato as Record<string, unknown>;
   const d: Descripcion = {};
   const esPar = (f: unknown): f is [string, string] => Array.isArray(f) && f.length === 2 && typeof f[0] === "string" && typeof f[1] === "string";
   const textos = (x: unknown) => (Array.isArray(x) ? x.filter((t): t is string => typeof t === "string" && t.trim() !== "") : []);
@@ -34,6 +34,7 @@ export function leerDescripcion(dato: unknown): Descripcion {
       !!x && typeof x === "object" && typeof (x as { titulo?: unknown }).titulo === "string" && typeof (x as { texto?: unknown }).texto === "string");
     if (ds.length) d.destacados = ds.map(x => ({ titulo: x.titulo, texto: x.texto, ...(typeof x.foto === "number" ? { foto: x.foto } : {}) }));
   }
+  if (Array.isArray(distintas)) d.distintas = distintas.filter((n): n is number => Number.isInteger(n) && n >= 0);
   return d;
 }
 
@@ -91,6 +92,8 @@ export interface DescripcionArmada {
   caja: string[] | null;
   cifras: [string, string, string][];
   destacados: { titulo: string; texto: string; foto?: number }[];
+  /** 26/11/2026: fotos que se ven distintas (posiciones en la galería); null = no se sabe (se usan todas) */
+  distintas: number[] | null;
 }
 
 export function armarDescripcion(p: Producto, d: Descripcion = {}): DescripcionArmada {
@@ -128,5 +131,5 @@ export function armarDescripcion(p: Producto, d: Descripcion = {}): DescripcionA
 
   const secciones: [string, [string, string][]][] = d.secciones?.length ? [["General", generales], ...d.secciones] : [];
   return { resumen, filas: filas.filter((f): f is [string, string] => Boolean(f[1])), incluye, parrafos: d.parrafos ?? [], secciones, caja: d.caja ?? null,
-    cifras: d.cifras ?? [], destacados: d.destacados ?? [] };
+    cifras: d.cifras ?? [], destacados: d.destacados ?? [], distintas: d.distintas ?? null };
 }

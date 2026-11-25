@@ -934,3 +934,17 @@ button, [role="button"], .btn { -webkit-touch-callout: none; }     /* mantener e
   .cifras-producto .cifra { opacity: 0; transform: translateY(14px); transition: opacity 600ms cubic-bezier(0.23, 1, 0.32, 1), transform 600ms cubic-bezier(0.23, 1, 0.32, 1); transition-delay: calc(var(--i, 0) * 90ms); }
   .cifras-producto[data-visto] .cifra { opacity: 1; transform: none; }
 }
+/* 26/11/2026: página de producto con estilo de página de marca (Experiencia.tsx). La pista de «Lo más destacado» empieza
+   alineada con el contenido (1240 px) y deja ver la siguiente tarjeta a la derecha, como en apple.com */
+.exp-pista { padding-inline: max(1rem, calc((100vw - 1240px) / 2 + 1rem)); scroll-padding-inline: max(1rem, calc((100vw - 1240px) / 2 + 1rem)); }
+@media (min-width: 640px) { .exp-pista { padding-inline: max(1.5rem, calc((100vw - 1240px) / 2 + 1.5rem)); scroll-padding-inline: max(1.5rem, calc((100vw - 1240px) / 2 + 1.5rem)); } }
+/* Un solo momento de movimiento por sección, la primera vez que se ve: el título sube y las tarjetas entran una tras otra
+   (70 ms). Cambiar de vista en «Míralo de cerca» es un fundido corto. Con «reducir movimiento», todo quieto */
+@media (prefers-reduced-motion: no-preference) {
+  .exp-titulo { transition: opacity 700ms cubic-bezier(0.23, 1, 0.32, 1), transform 700ms cubic-bezier(0.23, 1, 0.32, 1); }
+  :is(.exp-destacados, .exp-cerca, .exp-vistazo):not([data-visto]) .exp-titulo { opacity: 0; transform: translateY(24px); }
+  .exp-tarjeta, .exp-baldosa { transition: opacity 650ms cubic-bezier(0.23, 1, 0.32, 1), transform 650ms cubic-bezier(0.23, 1, 0.32, 1); transition-delay: calc(var(--i, 0) * 70ms + 120ms); }
+  .exp-destacados:not([data-visto]) .exp-tarjeta, .exp-vistazo:not([data-visto]) .exp-baldosa { opacity: 0; transform: translateY(32px); }
+  .exp-visor { animation: exp-fundido 320ms cubic-bezier(0.23, 1, 0.32, 1); }
+}
+@keyframes exp-fundido { from { opacity: 0; } }

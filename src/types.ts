@@ -62,6 +62,8 @@ export interface Descripcion {
   cifras?: [string, string, string][];
   /** 19/11/2026: bloques destacados con foto: título, texto y número de foto de la galería (0 = la principal) */
   destacados?: { titulo: string; texto: string; foto?: number }[];
+  /** 26/11/2026: posiciones de las fotos que se ven distintas entre sí (0 = la principal), para no repetir fotos */
+  distintas?: number[];
 }
 
 export interface Envio {
