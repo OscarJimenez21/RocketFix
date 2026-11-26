@@ -3572,24 +3572,33 @@
    ]
   ],
   "distintas": [
-   0
+   0,
+   1,
+   2,
+   3,
+   4,
+   5
   ],
   "destacados": [
    {
     "titulo": "AMD Ryz 9 8940HX",
-    "texto": "Procesador: AMD Ryz 9 8940HX. Gráfica: 8GB RTX-5060."
+    "texto": "Procesador: AMD Ryz 9 8940HX. Gráfica: 8GB RTX-5060.",
+    "foto": 1
    },
    {
     "titulo": "Pantalla de 16\"",
-    "texto": "Pantalla: 16″ WUXGA."
+    "texto": "Pantalla: 16″ WUXGA.",
+    "foto": 2
    },
    {
     "titulo": "Capacidad y velocidad",
-    "texto": "Memoria RAM: 16GB DDR5."
+    "texto": "Memoria RAM: 16GB DDR5.",
+    "foto": 3
    },
    {
     "titulo": "Funciones",
-    "texto": "Unidad de estado sólido: M.2 NVMe 512GB."
+    "texto": "Unidad de estado sólido: M.2 NVMe 512GB.",
+    "foto": 4
    }
   ]
  },
@@ -8121,7 +8130,9 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   4,
+   6
   ],
   "destacados": [
    {
@@ -8136,11 +8147,13 @@
    },
    {
     "titulo": "Capacidad y velocidad",
-    "texto": "Tipos de memoria compatibles: DDR5-SDRAM. Número de ranuras de memoria: 2. Canales de memoria: Doble canal. Memoria interna máxima: 128 GB."
+    "texto": "Tipos de memoria compatibles: DDR5-SDRAM. Número de ranuras de memoria: 2. Canales de memoria: Doble canal. Memoria interna máxima: 128 GB.",
+    "foto": 4
    },
    {
     "titulo": "Conectividad",
-    "texto": "Ethernet. Tipo de interfaz ethernet: 2.5 Gigabit Ethernet. Wifi. Estándar Wi-Fi: Wi-Fi 6E (802.11ax)."
+    "texto": "Ethernet. Tipo de interfaz ethernet: 2.5 Gigabit Ethernet. Wifi. Estándar Wi-Fi: Wi-Fi 6E (802.11ax).",
+    "foto": 6
    }
   ]
  },
@@ -9438,7 +9451,9 @@
   ],
   "distintas": [
    0,
-   1
+   1,
+   2,
+   5
   ],
   "cifras": [
    [
@@ -9465,11 +9480,13 @@
    },
    {
     "titulo": "Rendimiento",
-    "texto": "Cantidad de núcleos: 24. Frecuencia turbo máxima: 5.6 GHz. Frecuencia base de Performance-core: 2.5 GHz. Frecuencia base de Efficient-core: 1.9 GHz."
+    "texto": "Cantidad de núcleos: 24. Frecuencia turbo máxima: 5.6 GHz. Frecuencia base de Performance-core: 2.5 GHz. Frecuencia base de Efficient-core: 1.9 GHz.",
+    "foto": 2
    },
    {
     "titulo": "Capacidad y velocidad",
-    "texto": "Tipos de memoria: Up to DDR5 6400 MT/s. Cantidad máxima de canales de memoria: 2. Compatible con memoria ECC."
+    "texto": "Tipos de memoria: Up to DDR5 6400 MT/s. Cantidad máxima de canales de memoria: 2. Compatible con memoria ECC.",
+    "foto": 5
    },
    {
     "titulo": "Compatibilidad",
@@ -11101,7 +11118,9 @@
    0,
    1,
    2,
-   3
+   3,
+   5,
+   6
   ],
   "cifras": [
    [
@@ -11346,7 +11365,8 @@
    0,
    1,
    2,
-   3
+   3,
+   6
   ],
   "cifras": [
    [
@@ -11383,7 +11403,8 @@
    },
    {
     "titulo": "Iluminación RGB",
-    "texto": "Iluminación: RGB."
+    "texto": "Iluminación: RGB.",
+    "foto": 6
    }
   ]
  },
@@ -11774,7 +11795,8 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   5
   ],
   "cifras": [
    [
@@ -11873,7 +11895,8 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   3
   ],
   "destacados": [
    {
@@ -11888,7 +11911,8 @@
    },
    {
     "titulo": "Batería y carga",
-    "texto": "Voltaje de alimentación: 1.20."
+    "texto": "Voltaje de alimentación: 1.20.",
+    "foto": 3
    }
   ]
  },
@@ -13611,7 +13635,10 @@
    0,
    1,
    2,
-   3
+   3,
+   4,
+   7,
+   8
   ],
   "destacados": [
    {
@@ -17994,7 +18021,9 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   3,
+   5
   ],
   "cifras": [
    [
@@ -18476,7 +18505,8 @@
   ],
   "distintas": [
    0,
-   1
+   1,
+   4
   ],
   "destacados": [
    {
@@ -18486,7 +18516,8 @@
    },
    {
     "titulo": "Refrigeración",
-    "texto": "Presión estática máxima: Estándar, 2.74mm-H2O, Reversa, 3.29mm-H2O. Flujo de aire máximo: Padrão, 54,82 ± 10% CFM (Média), Reverso, 49,27 ± 10% CFM (Média). Nivel de ruido: Estándar, 23.36 dBA (Promedio), Reversa, 31.36 dBA (Promedio). Protección del ventilador: Reinicio Automático."
+    "texto": "Presión estática máxima: Estándar, 2.74mm-H2O, Reversa, 3.29mm-H2O. Flujo de aire máximo: Padrão, 54,82 ± 10% CFM (Média), Reverso, 49,27 ± 10% CFM (Média). Nivel de ruido: Estándar, 23.36 dBA (Promedio), Reversa, 31.36 dBA (Promedio). Protección del ventilador: Reinicio Automático.",
+    "foto": 4
    },
    {
     "titulo": "Conectividad",
@@ -22645,7 +22676,10 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   4,
+   5,
+   8
   ],
   "destacados": [
    {
@@ -22660,11 +22694,13 @@
    },
    {
     "titulo": "Capacidad y velocidad",
-    "texto": "Capacidad: 8 GB GDDR6. Velocidad: 20 Gbps."
+    "texto": "Capacidad: 8 GB GDDR6. Velocidad: 20 Gbps.",
+    "foto": 4
    },
    {
     "titulo": "Conectividad",
-    "texto": "Interfaz: 128 bits. Estándar de autobús: PCI Express 5.0. OpenGL: OpenGL® 4.6. 1 x HDMI 2.1b (nativo)."
+    "texto": "Interfaz: 128 bits. Estándar de autobús: PCI Express 5.0. OpenGL: OpenGL® 4.6. 1 x HDMI 2.1b (nativo).",
+    "foto": 5
    }
   ]
  },
@@ -25373,7 +25409,10 @@
   ],
   "distintas": [
    0,
-   1
+   1,
+   4,
+   5,
+   7
   ],
   "destacados": [
    {
@@ -25383,15 +25422,18 @@
    },
    {
     "titulo": "Pantalla de 17\"",
-    "texto": "Tamaño de portátil compatible: 13 a 17 pulgadas."
+    "texto": "Tamaño de portátil compatible: 13 a 17 pulgadas.",
+    "foto": 4
    },
    {
     "titulo": "Compatibilidad",
-    "texto": "Compatibilidad de montaje: VESA 75 × 75 mm y 100 × 100 mm."
+    "texto": "Compatibilidad de montaje: VESA 75 × 75 mm y 100 × 100 mm.",
+    "foto": 5
    },
    {
     "titulo": "Materiales y resistencia",
-    "texto": "Material: Acero laminado en frío."
+    "texto": "Material: Acero laminado en frío.",
+    "foto": 7
    }
   ]
  },
@@ -31727,7 +31769,13 @@
   ],
   "distintas": [
    0,
-   1
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   8
   ],
   "destacados": [
    {
@@ -31737,11 +31785,13 @@
    },
    {
     "titulo": "Sonido",
-    "texto": "Audio de hasta 24 bits. 1x hasta 24 bits/48 kHz (PC). 2x hasta 16 bits/48 kHz (consola). Respuesta de frecuencia: 20-20.000 Hz."
+    "texto": "Audio de hasta 24 bits. 1x hasta 24 bits/48 kHz (PC). 2x hasta 16 bits/48 kHz (consola). Respuesta de frecuencia: 20-20.000 Hz.",
+    "foto": 2
    },
    {
     "titulo": "Conectividad",
-    "texto": "3 puertos HDMI 2.1 Ancho de banda de 40 Gbps. Tecnología inalámbrica LIGHTSPEED a 24 bits/48 kHz. Radio de acción de hasta 12 metros con LIGHTSPEED."
+    "texto": "3 puertos HDMI 2.1 Ancho de banda de 40 Gbps. Tecnología inalámbrica LIGHTSPEED a 24 bits/48 kHz. Radio de acción de hasta 12 metros con LIGHTSPEED.",
+    "foto": 3
    }
   ]
  },
@@ -37782,7 +37832,10 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   6,
+   8,
+   9
   ],
   "cifras": [
    [
@@ -37809,11 +37862,13 @@
    },
    {
     "titulo": "Iluminación RGB",
-    "texto": "Tipo: Mecánico. Bloqueo tecla Windows. Retroiluminado: RGB Chroma. Extras: Teclas moldeadas por inyección doble disparo y grabadas con láser, incluye keypicker."
+    "texto": "Tipo: Mecánico. Bloqueo tecla Windows. Retroiluminado: RGB Chroma. Extras: Teclas moldeadas por inyección doble disparo y grabadas con láser, incluye keypicker.",
+    "foto": 6
    },
    {
     "titulo": "Conectividad",
-    "texto": "Cable: Goma reforzada, soporta 12 kg y 10.000 flexiones, USB enchapado en oro con filtro anti interferencias. Cable: Paracord, conexión USB-C a USB-A."
+    "texto": "Cable: Goma reforzada, soporta 12 kg y 10.000 flexiones, USB enchapado en oro con filtro anti interferencias. Cable: Paracord, conexión USB-C a USB-A.",
+    "foto": 8
    }
   ]
  },
@@ -38722,7 +38777,8 @@
   "distintas": [
    0,
    1,
-   3
+   3,
+   6
   ],
   "destacados": [
    {
@@ -38737,7 +38793,8 @@
    },
    {
     "titulo": "Conectividad",
-    "texto": "Conector de audífonos: 3,5 mm. Inalámbrico: Bluetooth."
+    "texto": "Conector de audífonos: 3,5 mm. Inalámbrico: Bluetooth.",
+    "foto": 6
    },
    {
     "titulo": "Funciones",
@@ -48636,7 +48693,10 @@
   ],
   "distintas": [
    0,
-   1
+   1,
+   2,
+   4,
+   6
   ],
   "destacados": [
    {
@@ -48646,15 +48706,18 @@
    },
    {
     "titulo": "Pantalla de 15.6\" Full HD",
-    "texto": "Pantalla: 15.6″ FHD."
+    "texto": "Pantalla: 15.6″ FHD.",
+    "foto": 2
    },
    {
     "titulo": "Capacidad y velocidad",
-    "texto": "Memoria RAM: 16GB DDR5."
+    "texto": "Memoria RAM: 16GB DDR5.",
+    "foto": 4
    },
    {
     "titulo": "Funciones",
-    "texto": "Unidad de estado sólido: NVMe 512GB."
+    "texto": "Unidad de estado sólido: NVMe 512GB.",
+    "foto": 6
    }
   ]
  },
@@ -50425,7 +50488,10 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   4,
+   7,
+   8
   ],
   "cifras": [
    [
@@ -50462,11 +50528,13 @@
    },
    {
     "titulo": "Capacidad y velocidad",
-    "texto": "Memoria RAM: 16 GB DDR5. Tipo de RAM: DDR5-SDRAM. Forma de factor de memoria: SO-DIMM. Ranuras de memoria: 2x SO-DIMM."
+    "texto": "Memoria RAM: 16 GB DDR5. Tipo de RAM: DDR5-SDRAM. Forma de factor de memoria: SO-DIMM. Ranuras de memoria: 2x SO-DIMM.",
+    "foto": 4
    },
    {
     "titulo": "Cámara",
-    "texto": "Cámara frontal. Calidad de la cámara: Full HD. Cámara infrarroja (IR)."
+    "texto": "Cámara frontal. Calidad de la cámara: Full HD. Cámara infrarroja (IR).",
+    "foto": 7
    }
   ]
  },
@@ -50506,7 +50574,9 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   4,
+   5
   ],
   "destacados": [
    {
@@ -50521,11 +50591,13 @@
    },
    {
     "titulo": "Capacidad y velocidad",
-    "texto": "Memoria RAM: 16GB DDR5."
+    "texto": "Memoria RAM: 16GB DDR5.",
+    "foto": 4
    },
    {
     "titulo": "Funciones",
-    "texto": "Unidad de estado sólido: NVMe 1TB."
+    "texto": "Unidad de estado sólido: NVMe 1TB.",
+    "foto": 5
    }
   ]
  },
@@ -58728,7 +58800,10 @@
   ],
   "distintas": [
    0,
-   1
+   1,
+   2,
+   3,
+   5
   ],
   "cifras": [
    [
@@ -58750,7 +58825,8 @@
    },
    {
     "titulo": "Energía y protección",
-    "texto": "Voltaje: 1,35 V."
+    "texto": "Voltaje: 1,35 V.",
+    "foto": 2
    }
   ]
  },
@@ -59397,7 +59473,9 @@
   ],
   "distintas": [
    0,
-   1
+   1,
+   2,
+   3
   ],
   "cifras": [
    [
@@ -59419,7 +59497,8 @@
    },
    {
     "titulo": "Capacidad y velocidad",
-    "texto": "Capacidad: 16 GB (1 módulo)."
+    "texto": "Capacidad: 16 GB (1 módulo).",
+    "foto": 2
    }
   ]
  },
@@ -59818,7 +59897,10 @@
   ],
   "distintas": [
    0,
-   1
+   1,
+   3,
+   4,
+   5
   ],
   "cifras": [
    [
@@ -59845,15 +59927,18 @@
    },
    {
     "titulo": "Funciones",
-    "texto": "Número de modelo: SDSSDA-2T00-G28. Tipo: Unidad de estado sólido (SSD)."
+    "texto": "Número de modelo: SDSSDA-2T00-G28. Tipo: Unidad de estado sólido (SSD).",
+    "foto": 3
    },
    {
     "titulo": "Teclado y switches",
-    "texto": "Formato: 2,5 pulgadas."
+    "texto": "Formato: 2,5 pulgadas.",
+    "foto": 4
    },
    {
     "titulo": "Conectividad",
-    "texto": "Interfaz: SATA."
+    "texto": "Interfaz: SATA.",
+    "foto": 5
    }
   ]
  },
@@ -60604,20 +60689,29 @@
    ]
   ],
   "distintas": [
-   0
+   0,
+   1,
+   2,
+   3,
+   6,
+   7,
+   8
   ],
   "destacados": [
    {
     "titulo": "Potencia de 750 W",
-    "texto": "Potencia: 750 W. Protecciones: Sobrecarga, cortocircuito y sobrevoltaje."
+    "texto": "Potencia: 750 W. Protecciones: Sobrecarga, cortocircuito y sobrevoltaje.",
+    "foto": 1
    },
    {
     "titulo": "Refrigeración",
-    "texto": "Ventilador: 120 mm."
+    "texto": "Ventilador: 120 mm.",
+    "foto": 2
    },
    {
     "titulo": "Conectividad",
-    "texto": "Cables: Semimodular."
+    "texto": "Cables: Semimodular.",
+    "foto": 3
    }
   ]
  },
@@ -62686,7 +62780,12 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
   ],
   "destacados": [
    {
@@ -62701,11 +62800,13 @@
    },
    {
     "titulo": "Compatibilidad",
-    "texto": "Placas compatibles: ATX, Micro-ATX y Mini-ITX."
+    "texto": "Placas compatibles: ATX, Micro-ATX y Mini-ITX.",
+    "foto": 3
    },
    {
     "titulo": "Materiales y resistencia",
-    "texto": "Materiales: Acero y plástico."
+    "texto": "Materiales: Acero y plástico.",
+    "foto": 4
    }
   ]
  },
@@ -63983,7 +64084,9 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   6,
+   7
   ],
   "destacados": [
    {
@@ -63998,7 +64101,8 @@
    },
    {
     "titulo": "Conectividad",
-    "texto": "Puertos frontales: 2 × USB 3.1 Gen 1, 1 × USB-C 3.1 Gen 2."
+    "texto": "Puertos frontales: 2 × USB 3.1 Gen 1, 1 × USB-C 3.1 Gen 2.",
+    "foto": 6
    }
   ]
  },
@@ -67363,7 +67467,9 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   4,
+   6
   ],
   "destacados": [
    {
@@ -68433,7 +68539,9 @@
    ]
   ],
   "distintas": [
-   0
+   0,
+   1,
+   2
   ],
   "cifras": [
    [
@@ -68450,11 +68558,13 @@
   "destacados": [
    {
     "titulo": "Características",
-    "texto": "Clase: UHS-I, Clase 10, U3, V30, A2. Video: Apta para grabar en 4K UHD. Línea: Canvas Go! Plus (SDCG4)."
+    "texto": "Clase: UHS-I, Clase 10, U3, V30, A2. Video: Apta para grabar en 4K UHD. Línea: Canvas Go! Plus (SDCG4).",
+    "foto": 1
    },
    {
     "titulo": "Hasta 200 MB/s",
-    "texto": "Capacidad: 256 GB. Lectura: Hasta 200 MB/s. Escritura: Hasta 160 MB/s."
+    "texto": "Capacidad: 256 GB. Lectura: Hasta 200 MB/s. Escritura: Hasta 160 MB/s.",
+    "foto": 2
    }
   ]
  },
@@ -72006,7 +72116,8 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   5
   ],
   "cifras": [
    [
@@ -72043,7 +72154,8 @@
    },
    {
     "titulo": "Potencia de 3 W",
-    "texto": "Consumo de potencia (Modo suspensión): Menos de 0,3 W."
+    "texto": "Consumo de potencia (Modo suspensión): Menos de 0,3 W.",
+    "foto": 5
    }
   ]
  },
@@ -75422,7 +75534,15 @@
    ]
   ],
   "distintas": [
-   0
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
   ],
   "cifras": [
    [
@@ -75439,19 +75559,23 @@
   "destacados": [
    {
     "titulo": "Teclado y switches",
-    "texto": "Formato: 60 %, mecánico. Switches: Red."
+    "texto": "Formato: 60 %, mecánico. Switches: Red.",
+    "foto": 1
    },
    {
     "titulo": "Sensor de precisión",
-    "texto": "Frecuencia de sondeo: 1000 Hz."
+    "texto": "Frecuencia de sondeo: 1000 Hz.",
+    "foto": 2
    },
    {
     "titulo": "Iluminación RGB",
-    "texto": "Retroiluminación: RGB."
+    "texto": "Retroiluminación: RGB.",
+    "foto": 3
    },
    {
     "titulo": "Conectividad",
-    "texto": "Conexión: Bluetooth 5.0, receptor USB y cable USB-C de 1,8 m."
+    "texto": "Conexión: Bluetooth 5.0, receptor USB y cable USB-C de 1,8 m.",
+    "foto": 4
    }
   ]
  },
@@ -77042,16 +77166,20 @@
    ]
   ],
   "distintas": [
-   0
+   0,
+   1,
+   2
   ],
   "destacados": [
    {
     "titulo": "Conectividad",
-    "texto": "Conexión: Inalámbrica. Opciones de Conectividad: Bluetooth, Conexión Con Cable, USB."
+    "texto": "Conexión: Inalámbrica. Opciones de Conectividad: Bluetooth, Conexión Con Cable, USB.",
+    "foto": 1
    },
    {
     "titulo": "Funciones",
-    "texto": "Uso: Celulares, Computadores, Gaming, Tabletas, TV. Diseño Ergonomico: No Tiene Diseño Ergonómico. No. Botones: 7 Botones. Tipo de Mouse: Gaming."
+    "texto": "Uso: Celulares, Computadores, Gaming, Tabletas, TV. Diseño Ergonomico: No Tiene Diseño Ergonómico. No. Botones: 7 Botones. Tipo de Mouse: Gaming.",
+    "foto": 2
    },
    {
     "titulo": "Rendimiento",
@@ -79286,7 +79414,8 @@
   ],
   "distintas": [
    0,
-   2
+   2,
+   5
   ],
   "destacados": [
    {
@@ -79296,7 +79425,8 @@
    },
    {
     "titulo": "Funciones",
-    "texto": "Gatillos: Hall effect con 2 topes (hair triggers) y vibración en los gatillos. Botones traseros: 2, programables. Vibración: Doble motor. App: Control Hub (Xbox y PC) para configurarlo."
+    "texto": "Gatillos: Hall effect con 2 topes (hair triggers) y vibración en los gatillos. Botones traseros: 2, programables. Vibración: Doble motor. App: Control Hub (Xbox y PC) para configurarlo.",
+    "foto": 5
    },
    {
     "titulo": "Sonido",
@@ -82925,7 +83055,11 @@
    0,
    1,
    2,
-   3
+   3,
+   6,
+   7,
+   8,
+   9
   ],
   "cifras": [
    [
@@ -82957,7 +83091,8 @@
    },
    {
     "titulo": "Diseño y medidas",
-    "texto": "Medidas: 19,7 × 16,4 × 10,5 cm. Peso: 515 g."
+    "texto": "Medidas: 19,7 × 16,4 × 10,5 cm. Peso: 515 g.",
+    "foto": 6
    }
   ]
  },
@@ -88568,7 +88703,8 @@
    0,
    1,
    2,
-   3
+   3,
+   4
   ],
   "cifras": [
    [
@@ -88610,7 +88746,8 @@
    },
    {
     "titulo": "Cámara",
-    "texto": "Principal: 50 MP, ƒ/1.8, con lente auxiliar. Frontal: 13 MP, ƒ/2.0. Video: 1080p a 30 fps."
+    "texto": "Principal: 50 MP, ƒ/1.8, con lente auxiliar. Frontal: 13 MP, ƒ/2.0. Video: 1080p a 30 fps.",
+    "foto": 4
    }
   ]
  },
@@ -92078,7 +92215,9 @@
    0,
    1,
    2,
-   3
+   3,
+   8,
+   9
   ],
   "cifras": [
    [
@@ -94268,8 +94407,9 @@
   "distintas": [
    0,
    1,
-   2,
-   3
+   3,
+   6,
+   7
   ],
   "cifras": [
    [
@@ -94302,16 +94442,17 @@
    {
     "titulo": "Rendimiento",
     "texto": "Procesador: Snapdragon 4 Gen 2 (4 nm), hasta 2,2 GHz. Sistema operativo: Funtouch OS 15 con Android 15.",
-    "foto": 2
+    "foto": 3
    },
    {
     "titulo": "Cámara",
     "texto": "Principal: 50 MP, ƒ/1.8. Secundaria: 2 MP, ƒ/2.4. Frontal: 8 MP, ƒ/2.0.",
-    "foto": 3
+    "foto": 6
    },
    {
     "titulo": "Batería de 6.500 mAh",
-    "texto": "Batería: 6.500 mAh (típica). Carga: FlashCharge de 44 W, cargador incluido."
+    "texto": "Batería: 6.500 mAh (típica). Carga: FlashCharge de 44 W, cargador incluido.",
+    "foto": 7
    }
   ]
  },
@@ -95801,13 +95942,15 @@
    },
    {
     "titulo": "Batería de 6.000 mAh",
-    "texto": "Batería de 6.000 mAh y procesador MediaTek Dimensity."
+    "texto": "Batería de 6.000 mAh y procesador MediaTek Dimensity.",
+    "foto": 4
    }
   ],
   "distintas": [
    0,
    1,
-   3
+   3,
+   4
   ]
  },
  "zta56pro": {
@@ -102323,7 +102466,10 @@
   ],
   "distintas": [
    0,
-   1
+   1,
+   2,
+   3,
+   4
   ],
   "cifras": [
    [
@@ -102345,15 +102491,18 @@
    },
    {
     "titulo": "Batería y carga",
-    "texto": "Duración: Hasta 10 días con uso ligero, 7 días con uso normal, 4 días con pantalla siempre activa. Carga: Inalámbrica, cargador de 5-10 V CC / 2 A."
+    "texto": "Duración: Hasta 10 días con uso ligero, 7 días con uso normal, 4 días con pantalla siempre activa. Carga: Inalámbrica, cargador de 5-10 V CC / 2 A.",
+    "foto": 2
    },
    {
     "titulo": "Conectividad",
-    "texto": "Bluetooth: 6.0 (BR + BLE). NFC. GPS: GPS de banda dual (L1 + L5), GLONASS, BeiDou, Galileo, QZSS y NavIC."
+    "texto": "Bluetooth: 6.0 (BR + BLE). NFC. GPS: GPS de banda dual (L1 + L5), GLONASS, BeiDou, Galileo, QZSS y NavIC.",
+    "foto": 3
    },
    {
     "titulo": "Materiales y resistencia",
-    "texto": "Marco: Aleación de aluminio, bisel de aleación de titanio. Agua: 5 ATM (ISO 22810:2010). Polvo: IP6X. Buceo: Hasta 40 m (EN13319)."
+    "texto": "Marco: Aleación de aluminio, bisel de aleación de titanio. Agua: 5 ATM (ISO 22810:2010). Polvo: IP6X. Buceo: Hasta 40 m (EN13319).",
+    "foto": 4
    }
   ]
  },
@@ -104662,7 +104811,10 @@
    0,
    1,
    2,
-   3
+   3,
+   5,
+   7,
+   8
   ],
   "cifras": [
    [
@@ -105223,7 +105375,8 @@
   ],
   "distintas": [
    0,
-   2
+   2,
+   4
   ],
   "destacados": [
    {
@@ -105233,7 +105386,8 @@
    },
    {
     "titulo": "Sonido",
-    "texto": "Tipo de altavoz: Parlante Bluetooth."
+    "texto": "Tipo de altavoz: Parlante Bluetooth.",
+    "foto": 4
    },
    {
     "titulo": "Conectividad",
@@ -105305,20 +105459,26 @@
    ]
   ],
   "distintas": [
-   0
+   0,
+   1,
+   2,
+   4
   ],
   "destacados": [
    {
     "titulo": "Hasta 12 horas de batería",
-    "texto": "Duracion de la Bateria: 12 Horas Aproximadas. Fuentes de Alimentacion de Energia: Batería Recargable Interna."
+    "texto": "Duracion de la Bateria: 12 Horas Aproximadas. Fuentes de Alimentacion de Energia: Batería Recargable Interna.",
+    "foto": 1
    },
    {
     "titulo": "Conectividad",
-    "texto": "Forma de Conectividad: Bluetooth. Rango de Bluetooth: 25 Metro(s). Conexión: Inalámbrica. Tipos de Puertos Entradas y Salidas: Puerto USB Tipo C."
+    "texto": "Forma de Conectividad: Bluetooth. Rango de Bluetooth: 25 Metro(s). Conexión: Inalámbrica. Tipos de Puertos Entradas y Salidas: Puerto USB Tipo C.",
+    "foto": 2
    },
    {
     "titulo": "Energía y protección",
-    "texto": "Potencia RMS: 30 Watts."
+    "texto": "Potencia RMS: 30 Watts.",
+    "foto": 4
    },
    {
     "titulo": "Sonido",
@@ -105895,7 +106055,11 @@
   ],
   "distintas": [
    0,
-   1
+   1,
+   2,
+   3,
+   4,
+   5
   ],
   "destacados": [
    {
@@ -105905,7 +106069,8 @@
    },
    {
     "titulo": "Conectividad",
-    "texto": "Puerto: 1 × USB-C."
+    "texto": "Puerto: 1 × USB-C.",
+    "foto": 2
    }
   ]
  },
@@ -105986,7 +106151,9 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   3,
+   4
   ],
   "destacados": [
    {
@@ -106001,7 +106168,8 @@
    },
    {
     "titulo": "Conectividad",
-    "texto": "Puertos: USB-C y USB-A."
+    "texto": "Puertos: USB-C y USB-A.",
+    "foto": 3
    }
   ]
  },
@@ -106047,7 +106215,10 @@
    ]
   ],
   "distintas": [
-   0
+   0,
+   1,
+   3,
+   4
   ],
   "cifras": [
    [
@@ -106064,15 +106235,18 @@
   "destacados": [
    {
     "titulo": "Potencia de 65 W",
-    "texto": "Potencia total: 65 W."
+    "texto": "Potencia total: 65 W.",
+    "foto": 1
    },
    {
     "titulo": "Conectividad",
-    "texto": "Puertos: 2 × USB-C Power Delivery, 1 × USB-A Quick Charge."
+    "texto": "Puertos: 2 × USB-C Power Delivery, 1 × USB-A Quick Charge.",
+    "foto": 3
    },
    {
     "titulo": "Diseño y medidas",
-    "texto": "Medidas: 53 × 52,5 × 30,4 mm. Peso: 130 g."
+    "texto": "Medidas: 53 × 52,5 × 30,4 mm. Peso: 130 g.",
+    "foto": 4
    }
   ]
  },
@@ -108938,16 +109112,20 @@
    ]
   ],
   "distintas": [
-   0
+   0,
+   1,
+   2
   ],
   "destacados": [
    {
     "titulo": "Características",
-    "texto": "Indicador: Pantalla digital de carga."
+    "texto": "Indicador: Pantalla digital de carga.",
+    "foto": 1
    },
    {
     "titulo": "Capacidad y velocidad",
-    "texto": "Capacidad: 20.000 mAh."
+    "texto": "Capacidad: 20.000 mAh.",
+    "foto": 2
    },
    {
     "titulo": "Conectividad",
@@ -114092,7 +114270,11 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   4,
+   5,
+   6,
+   7
   ],
   "cifras": [
    [
@@ -114129,11 +114311,13 @@
    },
    {
     "titulo": "Capacidad y velocidad",
-    "texto": "Memoria RAM: 16 GB DDR5. Tipo de RAM: DDR5-SDRAM. Forma de factor de memoria: Incorporado + SO-DIMM. Ranuras de memoria: 1x SO-DIMM."
+    "texto": "Memoria RAM: 16 GB DDR5. Tipo de RAM: DDR5-SDRAM. Forma de factor de memoria: Incorporado + SO-DIMM. Ranuras de memoria: 1x SO-DIMM.",
+    "foto": 4
    },
    {
     "titulo": "Cámara",
-    "texto": "Cámara frontal. Calidad de la cámara: HD. Cámara con configuración de privacidad. Tipo de privacidad: Tapa de obturador."
+    "texto": "Cámara frontal. Calidad de la cámara: HD. Cámara con configuración de privacidad. Tipo de privacidad: Tapa de obturador.",
+    "foto": 5
    }
   ]
  },
@@ -122403,7 +122587,8 @@
    0,
    1,
    2,
-   3
+   3,
+   4
   ],
   "destacados": [
    {
@@ -130772,7 +130957,10 @@
    0,
    1,
    2,
-   3
+   3,
+   5,
+   6,
+   7
   ],
   "cifras": [
    [
@@ -130814,7 +131002,8 @@
    },
    {
     "titulo": "Cámara",
-    "texto": "Cámara frontal. Resolución de la cámara delantera: 1280 x 720 píxeles. Calidad de la cámara: HD. Cámara con configuración de privacidad."
+    "texto": "Cámara frontal. Resolución de la cámara delantera: 1280 x 720 píxeles. Calidad de la cámara: HD. Cámara con configuración de privacidad.",
+    "foto": 5
    }
   ]
  },
@@ -147922,7 +148111,9 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   3,
+   4
   ],
   "cifras": [
    [
@@ -147954,11 +148145,13 @@
    },
    {
     "titulo": "Capacidad y velocidad",
-    "texto": "Tipos de memoria: Hasta DDR5 6400 MT/s. Velocidad máxima de memoria: 6400 MHz. Cantidad máxima de canales de memoria: 2. Compatible con memoria ECC."
+    "texto": "Tipos de memoria: Hasta DDR5 6400 MT/s. Velocidad máxima de memoria: 6400 MHz. Cantidad máxima de canales de memoria: 2. Compatible con memoria ECC.",
+    "foto": 3
    },
    {
     "titulo": "Compatibilidad",
-    "texto": "Compatibilidad con DirectX: 12. Compatibilidad con OpenGL: 4.5. Compatibilidad con OpenCL: 3. Compatibilidad con efectos de Windows Studio: Sí."
+    "texto": "Compatibilidad con DirectX: 12. Compatibilidad con OpenGL: 4.5. Compatibilidad con OpenCL: 3. Compatibilidad con efectos de Windows Studio: Sí.",
+    "foto": 4
    }
   ]
  },
@@ -148016,7 +148209,8 @@
   "distintas": [
    0,
    1,
-   2
+   2,
+   4
   ],
   "cifras": [
    [
@@ -148043,7 +148237,8 @@
    },
    {
     "titulo": "Funciones",
-    "texto": "Velocidad: 5600MT/s."
+    "texto": "Velocidad: 5600MT/s.",
+    "foto": 4
    }
   ]
  },
@@ -152476,7 +152671,8 @@
    0,
    1,
    2,
-   3
+   3,
+   5
   ],
   "destacados": [
    {
