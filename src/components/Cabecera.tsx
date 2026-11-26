@@ -2,7 +2,7 @@
    viven en el menú lateral que abre el botón de tres líneas; en computador (desde 1024 px), en la barra de menús
    desplegables que va debajo (idea 11, 13/11/2026). */
 import { useCallback, useEffect, useRef, useState } from "react";
-import { CONFIG, deTienda } from "../data/catalogo";
+import { CONFIG, MAS_VENDIDOS, deTienda, desde } from "../data/catalogo";
 import { GRUPOS, RECORTE, TIENDAS, tiendaPorId } from "../data/tiendas";
 import { useTienda } from "../estado/TiendaContext";
 import { CATALOGO_PDF, pesoCatalogo } from "../lib/catalogoPdf";
@@ -10,10 +10,10 @@ import { dinero, recurso, srcsetFoto } from "../lib/formato";
 import { subtotalDe } from "../lib/pedido";
 import { usePanelModal } from "../lib/panel";
 import { usePestanaViva } from "../lib/pestana";
-import { claveRuta, direccionDe, hrefDe } from "../lib/rutas";
+import { claveRuta, direccionDe, hrefDe, hrefProducto } from "../lib/rutas";
 import { ATERRIZAJE, hayVuelo } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
-import type { Ruta, TiendaId } from "../types";
+import type { Producto, Ruta, TiendaId } from "../types";
 import { Buscador } from "./Buscador";
 import { PuntoEstado, useAtencion } from "./Contacto";
 import { IconoBolsa, IconoCerrar, IconoFlecha, IconoMenu, IconoWhatsApp } from "./Iconos";
@@ -21,6 +21,10 @@ import { Cohete, Logo } from "./Logo";
 import { EnlaceFavoritos } from "./Favorito";
 
 const CANTIDAD = Object.fromEntries(TIENDAS.map(t => [t.id, deTienda(t.id).length])) as Record<TiendaId, number>;
+/** Menú de computador: los 4 más vendidos de un grupo de secciones (contenido.json) y, si faltan, los de mayor precio */
+const ORDEN_VENDIDO = new Map(MAS_VENDIDOS.map((id, k) => [id, k]));
+const destacadosDe = (ids: TiendaId[]): Producto[] => ids.flatMap(deTienda).filter(p => p.imagen && !p.consultar)
+  .sort((a, b) => (ORDEN_VENDIDO.get(a.id) ?? 999) - (ORDEN_VENDIDO.get(b.id) ?? 999) || desde(b) - desde(a)).slice(0, 4);
 const secciones = (ids: TiendaId[]) => ids.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t));
 
 /** Servicio técnico en el menú lateral (con cada línea de servicio) */
@@ -235,6 +239,23 @@ function MenuDesplegable({ aqui, clave }: { aqui: string; clave: string }) {
                                 </li>
                               );
                             })}
+                          </ul>
+                          {/* 26/11/2026 (idea 8, como el menú de la tienda de Apple): lo más vendido de este grupo, con foto y precio */}
+                          <p className="etiqueta mt-6">Lo más vendido</p>
+                          <ul className="mt-2 grid grid-cols-4 gap-3">
+                            {destacadosDe(d.tiendas).map(p => (
+                              <li key={p.id}>
+                                <a href={hrefProducto(p.id)} className="group flex items-center gap-3 rounded-lg p-2 transition-colors duration-150 hover:bg-fondo">
+                                  <span aria-hidden="true" className="claro-siempre flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-fondo">
+                                    <img src={recurso(p.imagen ?? "")} alt="" loading="lazy" decoding="async" width={52} height={52} className="h-12 w-12 object-contain mix-blend-multiply" />
+                                  </span>
+                                  <span className="min-w-0">
+                                    <span className="line-clamp-2 block text-[13.5px] font-semibold leading-snug text-tinta group-hover:text-marca">{p.nombre}</span>
+                                    <span className="mt-0.5 block text-xs text-tinta-2">Desde {dinero(desde(p))}</span>
+                                  </span>
+                                </a>
+                              </li>
+                            ))}
                           </ul>
                           <p className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
                             <a href={hrefDe("categorias")} className="text-marca hover:underline">Ver todas las categorías</a>

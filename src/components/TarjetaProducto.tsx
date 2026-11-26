@@ -13,10 +13,27 @@ import { tinteDe } from "../lib/tinte";
 import { abrirConVuelo } from "../lib/transicion";
 import { volarAlCarrito } from "../lib/vuelo";
 import { waLink } from "../lib/whatsapp";
+import { TOPE_COMPARAR, alternarComparar, useComparar } from "../lib/comparar";
 import type { Producto } from "../types";
 import { FotoProducto, Imagen } from "./FotoProducto";
 import { Pesos } from "./Pesos";
 import { IconoCheck, IconoWhatsApp } from "./Iconos";
+
+/** 26/11/2026 (idea 6): casilla «Comparar» al pie de la tarjeta. Con 3 ya elegidos, avisa en vez de agregar el cuarto */
+function BotonComparar({ id, nombre, avisar }: { id: string; nombre: string; avisar: (t: string) => void }) {
+  const elegidos = useComparar();
+  const sel = elegidos.includes(id);
+  return (
+    <button type="button" aria-pressed={sel} aria-label={`${sel ? "Quitar de la comparación" : "Comparar"}: ${nombre}`}
+      onClick={() => { if (!alternarComparar(id)) avisar(`Puedes comparar hasta ${TOPE_COMPARAR} productos. Quita uno para agregar otro.`); }}
+      className="mt-2 inline-flex min-h-[32px] w-max items-center gap-1.5 text-[12.5px] font-semibold text-tinta-2 hover:text-tinta">
+      <span aria-hidden="true" className={`flex h-4 w-4 items-center justify-center rounded border ${sel ? "border-marca bg-marca text-white" : "border-linea-fuerte bg-white"}`}>
+        {sel && <IconoCheck className="h-3 w-3" />}
+      </span>
+      Comparar
+    </button>
+  );
+}
 
 /** Etiquetas sobre la foto, arriba a la izquierda: el estado cuando no es nuevo (CPO, Usado, Open box) y «Recién llegado»
     los primeros días después de que el producto entra al catálogo (ver recienLlegado en data/catalogo.ts) */
@@ -208,6 +225,7 @@ export const TarjetaProducto = memo(function TarjetaProducto({ producto: p, prio
               </p>
             </>
           )}
+          <BotonComparar id={p.id} nombre={p.nombre} avisar={avisar} />
         </div>
       </div>
     </article>

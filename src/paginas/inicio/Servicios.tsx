@@ -69,9 +69,11 @@ const ESTILO_SERVICIO: { pc: EstiloServicio; cel: EstiloServicio } & Record<stri
 export function Servicios({ abrir = false }: { abrir?: boolean }) {
   const titulos = [...SERVICIOS.map(s => s.titulo), "Otro servicio"];
   const [elegido, setElegido] = useState(titulos[0] ?? "");
-  const [abierto, setAbierto] = useState(abrir);
-  // Cada pedido de ir al formulario suma 1: el efecto baja hasta él cuando ya está abierto en la página
-  const [ir, setIr] = useState(0);
+  // 26/11/2026: el formulario de reserva queda abierto desde el principio (antes había que tocar «Llenar la solicitud»)
+  const [abierto, setAbierto] = useState(true);
+  // Cada pedido de ir al formulario suma 1: el efecto baja hasta él cuando ya está abierto en la página.
+  // Con el enlace #orden (abrir) se baja de una vez
+  const [ir, setIr] = useState(() => (abrir ? 1 : 0));
   const servicio = SERVICIOS.find(s => s.titulo === elegido);
   const campos = useMemo(() => camposServicio(servicio, titulos), [servicio]); // eslint-disable-line react-hooks/exhaustive-deps
   const solicitar = (titulo?: string) => {
@@ -139,8 +141,9 @@ export function Servicios({ abrir = false }: { abrir?: boolean }) {
         {camaras && <Camaras servicio={camaras} cotizar={() => solicitar(camaras.titulo)} />}
         <div id="orden" className="tarjeta mt-8 grid gap-6 p-5 sm:p-7 md:grid-cols-[260px_minmax(0,1fr)] md:gap-10">
           <div>
-            <h3 className="text-xl font-bold">Solicita un servicio</h3>
-            <p className="mt-2 text-sm text-tinta-2">Cuéntanos qué necesitas. Te respondemos por WhatsApp con un valor aproximado o la fecha de la visita.</p>
+            {/* 26/11/2026 (idea 7, como «Reservar y reparar» de Samsung): reserva directa, con día y hora que prefieres */}
+            <h3 className="font-display text-[24px] font-extrabold leading-tight">Reserva tu servicio técnico</h3>
+            <p className="mt-2 text-sm text-tinta-2">Elige el servicio, cuéntanos qué le pasa al equipo y el día y la hora que prefieres. Te confirmamos por WhatsApp con un valor aproximado o la fecha de la visita.</p>
             <ol ref={pasosOrden} data-visto={ordenVisto || undefined} className="pasos mt-4 grid gap-2.5 text-sm text-tinta-2">
               {["Llenas este formulario.", "Se abre WhatsApp con tu solicitud escrita. Envía ese mensaje para completar la solicitud.", "Te respondemos con el diagnóstico inicial o agendamos la visita."].map((t, n) => (
                 <li key={t} style={{ "--orden": n } as React.CSSProperties} className="flex gap-2.5"><span className="paso-num flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold">{n + 1}</span>{t}</li>

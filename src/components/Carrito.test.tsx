@@ -82,7 +82,9 @@ describe("carrito", () => {
     const mensaje = destino.searchParams.get("text") ?? "";
     const envio = precio >= CONFIG.envios.bogota.gratisDesde ? 0 : CONFIG.envios.bogota.costo;
     expect(mensaje).toContain(producto.nombre);
-    expect(mensaje).toContain(`Total: ${dinero(precio + envio)}`);
+    // El pago por defecto es sin tarjeta: lleva el 5% de descuento (26/11/2026)
+    const descuento = Math.round((precio * 0.05) / 100) * 100;
+    expect(mensaje).toContain(`Total: ${dinero(precio - descuento + envio)}`);
     expect(mensaje).toContain("Nombre: Laura Gómez");
     expect(mensaje).toContain("Dirección: Calle 1 # 2-3");
   });

@@ -1,12 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { deTienda } from "../../data/catalogo";
-import { tiendaPorId } from "../../data/tiendas";
+import { deTienda, desde } from "../../data/catalogo";
+import { TIENDAS, tiendaPorId } from "../../data/tiendas";
 import { IconoFlecha } from "../../components/Iconos";
 import { activa, reducirMovimiento } from "../../lib/animaciones";
 import { useRevelarHijos, useVisto } from "../../lib/enPantalla";
-import { recurso } from "../../lib/formato";
+import { dinero, recurso } from "../../lib/formato";
 import type { TiendaId } from "../../types";
 import { hrefDe } from "../../lib/rutas";
+
+/** Precio más bajo de cada sección (sin los de «Preguntar disponibilidad»), para el «Desde» de las tarjetas */
+const DESDE: Partial<Record<TiendaId, number>> = Object.fromEntries(TIENDAS.map(t => {
+  const precios = deTienda(t.id).filter(p => !p.consultar).map(desde).filter(n => n > 0);
+  return [t.id, precios.length ? Math.min(...precios) : 0];
+}));
 
 /** Colores de las tarjetas de categoría (todos de la marca, planos: sin luces de adorno) */
 export const TEMAS = {
@@ -119,6 +125,8 @@ export function Categorias() {
                   <span className={`font-display ${forma.corto ? "sm:mt-1" : "mt-1"} font-extrabold leading-[0.98] tracking-tight ancho-108 ${forma.titulo}`}>{t.titulo}</span>
                   {/* Mismo color de la frase (con opacidad, en las tarjetas verdes no se leía bien) */}
                   <span className={`mt-1 text-[13px] sm:mt-2 ${tema.frase}`}><Contador valor={deTienda(t.id).length} /> productos</span>
+                  {/* 26/11/2026 (idea de Mac Center: «iPhone desde $…»): el precio más bajo de la sección, sin los de «Preguntar» */}
+                  {DESDE[t.id] ? <span className={`text-[13px] font-bold ${forma.corto ? "hidden sm:inline" : ""} ${tema.frase}`}>Desde {dinero(DESDE[t.id] ?? 0)}</span> : null}
                   {/* En celular las tarjetas pequeñas solo muestran la flecha, para dejarle espacio a la foto */}
                   <span className={`mt-auto inline-flex w-max items-center gap-1.5 rounded-full text-[13px] font-bold transition-transform duration-200 ease-salida group-hover:translate-x-0.5 ${forma.corto ? "p-2.5 sm:px-4 sm:py-2" : "px-4 py-2"} ${tema.boton}`}>
                     <span className={forma.corto ? "hidden sm:inline" : ""}>Ver todo</span><IconoFlecha className="h-3.5 w-3.5" />

@@ -40,10 +40,9 @@ describe("calificaciones mientras hay menos de 3 publicadas", () => {
 describe("servicio técnico", () => {
   const enviar = () => screen.queryByRole("link", { name: /Enviar solicitud por WhatsApp/ });
 
-  it("el formulario empieza cerrado y se abre con «Llenar la solicitud»", async () => {
+  // 26/11/2026: el formulario de reserva queda abierto desde el principio (antes empezaba cerrado)
+  it("el formulario de reserva empieza abierto", () => {
     render(<Servicios />);
-    expect(enviar()).not.toBeInTheDocument();
-    await userEvent.click(screen.getByRole("button", { name: "Llenar la solicitud" }));
     expect(enviar()).toBeInTheDocument();
   });
 

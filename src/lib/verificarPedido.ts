@@ -5,6 +5,7 @@ import { PRODUCTOS, nombreItem } from "../data/catalogo";
 import type { Opcion, Producto, ZonaEntrega } from "../types";
 import { dinero, norm } from "./formato";
 import { envioDe } from "./pedido";
+import { calcularTotales } from "./descuentos";
 
 export type EstadoLinea = "bien" | "precio" | "desconocido" | "consultar";
 
@@ -24,8 +25,10 @@ export interface Revision {
   numero?: string;
   lineas: LineaRevisada[];
   zona?: ZonaEntrega;
-  escrito: { productos?: number; envio?: number; total?: number };
-  esperado: { productos: number; envio: number; total: number };
+  /** 26/11/2026: los descuentos (código y 5 % por efectivo o transferencia) se restan antes del total */
+  escrito: { productos?: number; envio?: number; total?: number; descuentoCodigo?: number; descuentoPago?: number };
+  esperado: { productos: number; envio: number; total: number; descuentoCodigo: number; descuentoPago: number };
+  codigo?: string;
   /** Diferencias encontradas, en frases listas para leer. Vacío = el pedido coincide con la tienda */
   problemas: string[];
   pagoBold: boolean;
@@ -68,6 +71,8 @@ export function revisarPedido(texto: string): Revision {
   let numero: string | undefined;
   let referencia: string | undefined;
   let comprobante: string | undefined;
+  let pagoTexto = "";
+  let codigo: string | undefined;
 
   for (const cruda of texto.split(/\r?\n/)) {
     // Al copiar de WhatsApp Web la primera línea trae «[fecha] Nombre: …»; el resto llega limpio
@@ -90,21 +95,27 @@ export function revisarPedido(texto: string): Revision {
       lineas.push({ cantidad, nombre, escrito: valor, esperado, producto: elegido.producto, opcion: elegido.opcion, estado });
       continue;
     }
+    const cod = /^C[oó]digo\s+(\S+):\s*-?\s*(\$[\s\d.,]+)$/i.exec(l);
+    if (cod) { codigo = cod[1]; escrito.descuentoCodigo = leerPesos(cod[2] ?? ""); continue; }
+    const dto = /^Descuento\b[^:]*:\s*-?\s*(\$[\s\d.,]+)$/i.exec(l);
+    if (dto) { escrito.descuentoPago = leerPesos(dto[1] ?? ""); continue; }
     const campo = (nombre: string) => CAMPO(nombre).exec(l)?.[1];
     const productos = campo("Productos"), envio = campo("Env[ií]o"), total = campo("Total"), entrega = campo("Entrega"), pago = campo("Pago");
     if (productos !== undefined) escrito.productos = leerPesos(productos);
     else if (envio !== undefined) escrito.envio = leerPesos(envio);
     else if (total !== undefined) escrito.total = leerPesos(total);
     else if (entrega !== undefined) zona = /bogot/i.test(entrega) ? "bogota" : /otra ciudad/i.test(entrega) ? "nacional" : undefined;
-    else if (pago !== undefined) { pagoBold = /bold/i.test(pago); referencia = /referencia\s+(RF[0-9A-Z]{6,12})\b/.exec(pago)?.[1]; }
+    else if (pago !== undefined) { pagoTexto = pago; pagoBold = /bold/i.test(pago); referencia = /referencia\s+(RF[0-9A-Z]{6,12})\b/.exec(pago)?.[1]; }
     else if (/^Comprobante Bold:/i.test(l)) comprobante = /^Comprobante Bold:\s*([A-Za-z0-9_-]{4,60})/i.exec(l)?.[1];
   }
 
   const conocidas = lineas.filter(l => l.esperado !== undefined);
   const subtotal = conocidas.reduce((s, l) => s + (l.esperado ?? 0), 0);
   const envio = envioDe(zona ?? "bogota", subtotal);
-  const esperado = { productos: subtotal, envio, total: subtotal + envio };
+  const t = calcularTotales(subtotal, envio, pagoTexto, codigo);
+  const esperado = { productos: subtotal, envio, total: t.total, descuentoCodigo: t.descuentoCodigo, descuentoPago: t.descuentoPago };
   const problemas: string[] = [];
+  const descEscrito = (escrito.descuentoCodigo ?? 0) + (escrito.descuentoPago ?? 0);
 
   if (!lineas.length) problemas.push("No encontré líneas de productos (las que empiezan con «•»). Pega el mensaje completo, tal como llegó.");
   for (const l of lineas) {
@@ -124,11 +135,19 @@ export function revisarPedido(texto: string): Revision {
     problemas.push(`«Envío» dice ${escrito.envio ? dinero(escrito.envio) : "gratis"}; según la tienda es ${esperado.envio ? dinero(esperado.envio) : "gratis"}.`);
   if (escrito.total === undefined) problemas.push("No encontré la línea «Total:».");
   else {
-    if (escrito.productos !== undefined && escrito.envio !== undefined && escrito.total !== escrito.productos + escrito.envio)
-      problemas.push(`«Total» dice ${dinero(escrito.total)}, pero productos + envío del mismo mensaje dan ${dinero(escrito.productos + escrito.envio)}.`);
+    if (escrito.productos !== undefined && escrito.envio !== undefined && escrito.total !== escrito.productos - descEscrito + escrito.envio)
+      problemas.push(`«Total» dice ${dinero(escrito.total)}, pero ${descEscrito ? "productos − descuentos + envío" : "productos + envío"} del mismo mensaje dan ${dinero(escrito.productos - descEscrito + escrito.envio)}.`);
+    if (codigo && !esperado.descuentoCodigo)
+      problemas.push(`El mensaje trae el código «${codigo}», pero no existe, no está vigente o no aplica a este pedido o medio de pago.`);
+    else if (conocidas.length === lineas.length && (escrito.descuentoCodigo ?? 0) !== esperado.descuentoCodigo)
+      problemas.push(`El descuento del código dice ${dinero(escrito.descuentoCodigo ?? 0)}; según la tienda es ${dinero(esperado.descuentoCodigo)}.`);
+    if (conocidas.length === lineas.length && (escrito.descuentoPago ?? 0) !== esperado.descuentoPago)
+      problemas.push(esperado.descuentoPago
+        ? `El descuento del 5% dice ${dinero(escrito.descuentoPago ?? 0)}; con este medio de pago es ${dinero(esperado.descuentoPago)}.`
+        : `El mensaje trae un descuento de ${dinero(escrito.descuentoPago ?? 0)}, pero con este medio de pago (tarjeta o Bold) no hay descuento.`);
     if (conocidas.length === lineas.length && lineas.length && escrito.total !== esperado.total)
       problemas.push(`«Total» dice ${dinero(escrito.total)}; con los precios de la tienda el total es ${dinero(esperado.total)}.`);
   }
 
-  return { numero, lineas, zona, escrito, esperado, problemas, pagoBold, referencia, comprobante };
+  return { numero, lineas, zona, escrito, esperado, problemas, pagoBold, referencia, comprobante, ...(codigo ? { codigo } : {}) };
 }

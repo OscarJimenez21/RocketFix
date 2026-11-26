@@ -1,6 +1,7 @@
 /* Buscador general de la cabecera: sugerencias al escribir (productos y secciones) y búsquedas populares al tocarlo */
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-import { BUSQUEDAS_POPULARES, TIENDA_VISTA, VISTAS, deTienda, desde } from "../data/catalogo";
+import { BUSQUEDAS_POPULARES, MAS_VENDIDOS, TIENDA_VISTA, VISTAS, deTienda, desde, porId } from "../data/catalogo";
+import type { Producto } from "../types";
 import { RECORTE, TIENDAS } from "../data/tiendas";
 import { activa, reducirMovimiento } from "../lib/animaciones";
 import { buscarProductos, palabrasDe, resaltar, sugerirCorreccion } from "../lib/busqueda";
@@ -31,6 +32,8 @@ const TEXTO_CAMPO = "Buscar celulares, portátiles, consolas…";
 /** Usos de la página «Busca por uso» (los mismos id de data/ayuda.json; aquí escritos para no cargar esos textos con la tienda) */
 const USOS_RAPIDOS = [["estudiar", "Estudiar"], ["trabajar", "Trabajar"], ["jugar", "Jugar"], ["crear", "Crear contenido"], ["hogar", "La casa"], ["armar-pc", "Armar un PC"]] as const;
 const EJEMPLOS = [TEXTO_CAMPO, ...BUSQUEDAS_POPULARES.map(b => `Buscar «${b}»`)];
+/** Los 4 primeros más vendidos con foto y precio (contenido.json), para mostrarlos al tocar el buscador */
+const MAS_BUSCADOS = MAS_VENDIDOS.map(id => porId[id]).filter((p): p is Producto => Boolean(p?.imagen && !p.consultar)).slice(0, 4);
 
 /** `rotulo`: nombre de la región de búsqueda. Si hay dos buscadores en la misma página (la cabecera y la página «no
     encontrada»), cada uno lleva el suyo para que los lectores de pantalla los distingan */
@@ -220,6 +223,21 @@ export function Buscador({ inicial = "", rotulo = "Buscar en la tienda" }: { ini
                     className={`rounded-full border px-3 py-1 text-sm ${i === activo ? "border-marca bg-marca-suave" : "border-linea hover:border-linea-fuerte"}`}>{b}</a>
                 ); })}
               </div>
+              {/* 26/11/2026 (idea de iShop: «Los más buscados» con foto y precio al tocar el buscador): los más vendidos */}
+              <p className="etiqueta border-t border-linea px-2.5 pb-1.5 pt-3">Lo más vendido</p>
+              <ul className="grid gap-0.5 px-1 pb-1.5 sm:grid-cols-2">
+                {MAS_BUSCADOS.map(p => (
+                  <li key={p.id}>
+                    <a href={hrefProducto(p.id)} onClick={() => setAbierto(false)} className="flex items-center gap-3 rounded px-2 py-1.5 hover:bg-fondo">
+                      <span className="escenario h-10 w-10 shrink-0 rounded border border-linea p-0.5"><FotoProducto producto={p} alt="" tamanos="40px" /></span>
+                      <span className="min-w-0 flex-1">
+                        <span className="line-clamp-1 text-[13.5px] font-semibold">{p.nombre}</span>
+                        <span className="block text-xs text-tinta-2">Desde {dinero(desde(p))}</span>
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
               {/* Idea 3: debajo, las secciones con su producto recortado, para explorar sin escribir */}
               <p className="etiqueta border-t border-linea px-2.5 pb-1.5 pt-3">Explorar secciones</p>
               <ul className="grid grid-cols-3 gap-1 px-1 pb-1 sm:grid-cols-4">

@@ -19,7 +19,7 @@ import { useVistos } from "../lib/vistos";
 import { Recientes } from "../components/ProductoExtras";
 import { BarraSecciones } from "./inicio/BarraSecciones";
 import { Envios } from "./inicio/Envios";
-import { Escaparate } from "./inicio/Escaparate";
+import { Razones } from "./inicio/Razones";import { Escaparate } from "./inicio/Escaparate";
 import { TuCelular } from "./inicio/TuCelular";
 import { useDespuesDePintar, vaARegresar } from "../lib/rutas";
 
@@ -85,6 +85,8 @@ function Resto({ vistos, ancla }: { vistos: Producto[]; ancla?: string }) {
       <Escaparate />
       <Carrusel id="vendidos" etiqueta={<><IconoLlama className="h-4 w-4 text-acento" />Lo más vendido</>} titulo="Los que todos quieren" productos={VENDIDOS} cinta="Top ventas" cintaEn={VENDIDOS_CINTA} gris />
       <Categorias />
+      {/* 26/11/2026: razones para comprar aquí (parte de pago, apartado, garantía y asesoría), como la franja de Mac Center */}
+      <Razones />
       <div id="recientes"><Recientes productos={vistos} /></div>
       <Diferido ya={ya} ids={["como-comprar", "presupuesto"]} alto="min-h-[1430px] md:min-h-[1290px]">
         {!TEMPORADA && <PorPresupuesto />}

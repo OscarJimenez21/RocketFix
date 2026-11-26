@@ -2,6 +2,7 @@
 import { CONFIG, nombreItem } from "../data/catalogo";
 import type { LineaCarrito, ZonaEntrega } from "../types";
 import { dinero } from "./formato";
+import { PAGO_BOLD, calcularTotales } from "./descuentos";
 
 export const envioDe = (zona: ZonaEntrega, subtotal: number) => {
   const e = CONFIG.envios[zona];
@@ -52,13 +53,18 @@ export function nuevoNumeroPedido(azar: () => number = Math.random) {
 
 export const subtotalDe = (lineas: LineaCarrito[]) => lineas.reduce((s, l) => s + l.opcion.precio * l.cantidad, 0);
 
-/** numero: el de idea 35 (va en el saludo). pagoEnLinea reemplaza el medio de pago cuando el cliente paga con Bold (incluye la referencia) */
-export function mensajePedido(lineas: LineaCarrito[], d: DatosPedido, pagoEnLinea?: string, numero?: string) {
+/** numero: el de idea 35 (va en el saludo). pagoEnLinea reemplaza el medio de pago cuando el cliente paga con Bold (incluye la referencia).
+    codigo: el código de descuento que escribió (26/11/2026; solo vale sin tarjeta, igual que el 5 % por efectivo o transferencia) */
+export function mensajePedido(lineas: LineaCarrito[], d: DatosPedido, pagoEnLinea?: string, numero?: string, codigo?: string) {
   const l = [`Hola ${CONFIG.nombre}, quiero hacer este pedido${numero ? ` (n.º ${numero})` : ""}:`, ""];
   for (const { producto, opcion, cantidad } of lineas) l.push(`• ${cantidad} × ${nombreItem(producto, opcion.nombre)}: ${dinero(opcion.precio * cantidad)}`);
   const s = subtotalDe(lineas);
   const envio = envioDe(d.entrega, s);
-  l.push("", `Productos: ${dinero(s)}`, `Envío: ${envio ? dinero(envio) : "gratis"}`, `Total: ${dinero(s + envio)}`, "", `Nombre: ${d.nombre || "(sin escribir)"}`);
+  const t = calcularTotales(s, envio, pagoEnLinea ? PAGO_BOLD : d.pago, codigo);
+  l.push("", `Productos: ${dinero(s)}`);
+  if (t.descuentoCodigo) l.push(`Código ${t.codigo}: -${dinero(t.descuentoCodigo)}`);
+  if (t.descuentoPago) l.push(`Descuento 5% por pago en efectivo o transferencia: -${dinero(t.descuentoPago)}`);
+  l.push(`Envío: ${envio ? dinero(envio) : "gratis"}`, `Total: ${dinero(t.total)}`, "", `Nombre: ${d.nombre || "(sin escribir)"}`);
   l.push(`Entrega: ${d.entrega === "bogota" ? "Domicilio en Bogotá y alrededores" : "Envío a otra ciudad"}`);
   l.push(`Dirección: ${d.dir || "(sin escribir)"}`);
   if (d.franja) l.push(`Prefiere recibirlo: en la ${d.franja.toLowerCase()}`);

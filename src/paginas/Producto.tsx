@@ -24,6 +24,7 @@ import { tinteDe } from "../lib/tinte";
 import { volarAlCarrito } from "../lib/vuelo";
 import { anotarVisto, useVistos } from "../lib/vistos";
 import { waLink } from "../lib/whatsapp";
+import { AsesorProducto } from "../components/AsesorProducto";
 import type { Producto as TipoProducto } from "../types";
 import { NoEncontrada } from "./NoEncontrada";
 import { hrefDe, useDespuesDePintar } from "../lib/rutas";
@@ -314,6 +315,8 @@ export default function Producto({ id }: { id: string }) {
               </li>
             ))}
           </ul>
+          {/* 26/11/2026: «Habla con un asesor», como en la tienda de Apple */}
+          <AsesorProducto producto={p} version={o.nombre} />
           {/* Idea 23: las dudas de siempre, respondidas con los datos de config.json y las políticas (nada nuevo) */}
           <div className="mt-5 grid gap-1.5 text-sm">
             <details className="desplegable rounded border border-linea bg-superficie">

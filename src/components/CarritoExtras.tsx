@@ -55,7 +55,7 @@ export function Enviado({ enlace, volver, seguir }: { enlace: string; volver: ()
   );
 }
 
-export function Cotizacion({ lineas, subtotal, envio, total, entrega }: { lineas: LineaCarrito[]; subtotal: number; envio: number; total: number; entrega: string }) {
+export function Cotizacion({ lineas, subtotal, envio, total, entrega, descuentos = [] }: { lineas: LineaCarrito[]; subtotal: number; envio: number; total: number; entrega: string; descuentos?: { texto: string; valor: number }[] }) {
   const hoy = new Date().toLocaleDateString("es-CO", { day: "numeric", month: "long", year: "numeric" });
   return createPortal(
     <section className="solo-imprimir claro-siempre" aria-hidden="true">
@@ -85,6 +85,7 @@ export function Cotizacion({ lineas, subtotal, envio, total, entrega }: { lineas
         </tbody>
         <tfoot>
           <tr><td colSpan={3} className="pt-3 text-right">Productos</td><td className="pt-3 text-right tabular-nums">{dinero(subtotal)}</td></tr>
+          {descuentos.map(x => <tr key={x.texto}><td colSpan={3} className="text-right">{x.texto}</td><td className="text-right tabular-nums">-{dinero(x.valor)}</td></tr>)}
           <tr><td colSpan={3} className="text-right">{entrega}</td><td className="text-right tabular-nums">{envio ? dinero(envio) : "Gratis"}</td></tr>
           <tr><td colSpan={3} className="pt-2 text-right font-bold">Total</td><td className="pt-2 text-right text-lg font-extrabold tabular-nums">{dinero(total)}</td></tr>
         </tfoot>

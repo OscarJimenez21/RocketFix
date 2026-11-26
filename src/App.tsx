@@ -8,6 +8,7 @@ import { Carrito } from "./components/Carrito";
 import { FranjaTemporada } from "./components/FranjaTemporada";
 import { FranjaBeneficios } from "./components/FranjaBeneficios";
 import { NavInferior } from "./components/NavInferior";
+import { BandejaComparar } from "./components/BandejaComparar";
 import { Limite } from "./components/Limite";
 import { PiePagina } from "./components/PiePagina";
 import { SubirFlotante } from "./components/SubirFlotante";
@@ -190,6 +191,8 @@ function Marco() {
       <SubirFlotante />
       <WhatsAppFlotante />
       <Carrito />
+      {/* 26/11/2026: bandeja «Comparar» (aparece al marcar «Comparar» en las tarjetas) */}
+      <BandejaComparar />
       <Aviso />
       {PanelAnimaciones && <Suspense fallback={null}><PanelAnimaciones /></Suspense>}
     </>

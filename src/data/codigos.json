@@ -1,0 +1,4 @@
+{
+  "_nota": "26/11/2026: códigos de descuento del carrito. Cada código: \"codigo\" (en mayúsculas, sin espacios), \"porcentaje\" (ej. 10) o \"valor\" en pesos (ej. 50000), y opcionales \"minimo\" (compra mínima en productos), \"desde\" y \"hasta\" (fechas AAAA-MM-DD, incluidas) y \"nota\" (para ti, no se muestra). Solo valen pagando en efectivo o transferencia (con tarjeta no). Ejemplo: {\"codigo\": \"BIENVENIDO\", \"porcentaje\": 5, \"minimo\": 300000, \"hasta\": \"2026-12-31\"}",
+  "codigos": []
+}

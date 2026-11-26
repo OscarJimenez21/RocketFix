@@ -34,7 +34,10 @@ describe("totales del pedido", () => {
     expect(mensaje).toContain(`2 × ${producto.nombre}`);
     expect(mensaje).toContain(`Productos: ${dinero(subtotal)}`);
     expect(mensaje).toContain(`Envío: ${envio ? dinero(envio) : "gratis"}`);
-    expect(mensaje).toContain(`Total: ${dinero(subtotal + envio)}`);
+    // Daviplata es transferencia: lleva el 5% de descuento (26/11/2026)
+    const descuento = Math.round((subtotal * 0.05) / 100) * 100;
+    expect(mensaje).toContain(`Descuento 5% por pago en efectivo o transferencia: -${dinero(descuento)}`);
+    expect(mensaje).toContain(`Total: ${dinero(subtotal - descuento + envio)}`);
     expect(mensaje).toContain("Nombre: Laura");
     expect(mensaje).toContain("Pago: Daviplata");
     expect(mensaje).not.toContain("Nota:");

@@ -7,6 +7,7 @@ import { abrirBold, boldActivo, clavePago, nuevaReferencia, PreciosCambiaron } f
 import { dinero, lista } from "../lib/formato";
 import { usePanelModal } from "../lib/panel";
 import { FRANJAS, envioDe, leerDatosPedido, mensajePedido, nuevoNumeroPedido, reglaEnvio, subtotalDe, type DatosPedido } from "../lib/pedido";
+import { PAGO_BOLD, calcularTotales, pagoConDescuento, revisarCodigo } from "../lib/descuentos";
 import { enlaceCarrito, leerCarritoCompartido } from "../lib/carritoCompartido";
 import { alCambiarPagina, hrefProducto, hrefDe } from "../lib/rutas";
 import { waLink } from "../lib/whatsapp";
@@ -124,6 +125,10 @@ export function Carrito() {
   const id = useId();
   // Idea 21: pantalla de «listo» después de abrir WhatsApp con el pedido (se quita al cerrar el carrito o al cambiarlo)
   const [enviado, setEnviado] = useState(false);
+  // 26/11/2026: código de descuento (data/codigos.json). `codigo` es el aplicado; `escrito`, lo que va en la casilla
+  const [codigo, setCodigo] = useState("");
+  const [escrito, setEscrito] = useState("");
+  const [errorCodigo, setErrorCodigo] = useState("");
 
   useEffect(() => { try { sessionStorage.setItem(GUARDADO, JSON.stringify(d)); } catch { /* sin almacenamiento */ } }, [d]);
 
@@ -139,13 +144,32 @@ export function Carrito() {
   const subtotal = subtotalDe(lineas);
   const envio = envioDe(zona, subtotal);
   const meta = CONFIG.envios[zona].gratisDesde;
-  const total = subtotal + envio;
+  // Precio completo (sin descuentos): el que cobra Bold y el que decide si se puede pagar contra entrega
+  const bruto = subtotal + envio;
   // 14/11/2026: el pago contra entrega es solo para pedidos de hasta CONFIG.contraEntregaHasta; por encima, el pago es anticipado
-  const sinContraEntrega = total > CONFIG.contraEntregaHasta;
-  const pagos = CONFIG.pagos[zona].filter(p => !(sinContraEntrega && /contra entrega/i.test(p)));
+  const sinContraEntrega = bruto > CONFIG.contraEntregaHasta;
+  // 26/11/2026: con Bold activo, pagar con tarjeta en línea es una opción más de la lista (sin descuento)
+  const pagos = [...CONFIG.pagos[zona].filter(p => !(sinContraEntrega && /contra entrega/i.test(p))), ...(boldActivo() ? [PAGO_BOLD] : [])];
   const pago = pagos.includes(d.pago) ? d.pago : pagos[0] ?? "";
   const datos = { ...d, pago };
-  const mensaje = mensajePedido(lineas, datos, undefined, numero);
+  const conBold = pago === PAGO_BOLD;
+  const conDescuento = pagoConDescuento(pago);
+  const totales = calcularTotales(subtotal, envio, pago, codigo);
+  const total = totales.total;
+  // Lo que se ahorraría pagando en efectivo o transferencia (para decirlo cuando eligen tarjeta)
+  const ahorroSinTarjeta = bruto - calcularTotales(subtotal, envio, "Transferencia", codigo).total;
+  const revision = codigo ? revisarCodigo(codigo, subtotal) : null;
+  const mensaje = mensajePedido(lineas, datos, undefined, numero, codigo);
+  const descuentos = [
+    ...(totales.descuentoCodigo ? [{ texto: `Código ${totales.codigo ?? ""}`, valor: totales.descuentoCodigo }] : []),
+    ...(totales.descuentoPago ? [{ texto: "Descuento 5% (efectivo o transferencia)", valor: totales.descuentoPago }] : []),
+  ];
+  const aplicarCodigo = () => {
+    const r = revisarCodigo(escrito, subtotal);
+    if (r.ok) { setCodigo(escrito.trim().toUpperCase()); setErrorCodigo(""); avisar(`Código ${r.codigo.codigo.toUpperCase()} aplicado`); }
+    else { setCodigo(""); setErrorCodigo(r.motivo); }
+  };
+  const quitarCodigo = () => { setCodigo(""); setEscrito(""); setErrorCodigo(""); };
   const nacional = zona === "nacional";
 
   // Al quitar un producto, su línea se desvanece hacia la derecha (180 ms) antes de salir; con «reducir movimiento» sale de una vez
@@ -263,8 +287,9 @@ export function Carrito() {
     usado.current = true;
     try {
       const detalle = { items: lineas.map(l => ({ id: l.producto.id, opcion: l.indice, cantidad: l.cantidad })), zona: datos.entrega };
-      const modo = await abrirBold(ref, total, `Pedido ${ref} · Total ${dinero(total)}`, detalle);
-      if (modo === "copiado") avisar(`En Bold escribe el total: ${dinero(total)}. Ya lo copiamos para que lo pegues.`);
+      // Con Bold no hay descuento: se cobra el precio completo, el mismo que recalcula y firma el Worker de Bold
+      const modo = await abrirBold(ref, bruto, `Pedido ${ref} · Total ${dinero(bruto)}`, detalle);
+      if (modo === "copiado") avisar(`En Bold escribe el total: ${dinero(bruto)}. Ya lo copiamos para que lo pegues.`);
     } catch (e) {
       if (e instanceof PreciosCambiaron) { avisar("Algunos precios cambiaron. Recarga la página para ver el total actualizado.", { texto: "Recargar", hacer: () => location.reload() }); return; }
       avisar(`No se pudo abrir el pago en línea. Envíanos el pedido por WhatsApp al ${CONFIG.whatsappVisible}.`);
@@ -296,7 +321,7 @@ export function Carrito() {
       <p className="text-center text-xs leading-relaxed text-tinta-3">
         Enviar el pedido no es un pago: se abre WhatsApp con el pedido escrito, lo envías y te confirmamos el total y la entrega.
         {/* Idea 47: quién procesa el pago en línea */}
-        {boldActivo() && " Si prefieres pagar ya, Bold acepta tarjeta, PSE y más; el pago lo procesa Bold en su propia ventana y la tienda no ve los datos de tu tarjeta."}
+        {boldActivo() && " Si eliges pagar en línea con Bold (tarjeta, cuotas o PSE), el pago lo procesa Bold en su propia ventana y la tienda no ve los datos de tu tarjeta. Pagando con tarjeta no aplica el descuento."}
       </p>
       <p className="mt-1.5 text-center text-xs leading-relaxed text-tinta-3">
         Tienes <a href={hrefDe("cambios-y-devoluciones")} className="enlace">derecho de retracto</a> por 5 días hábiles desde la entrega. Al enviar el pedido aceptas el <a href={hrefDe("datos-personales")} className="enlace">tratamiento de tus datos</a>.
@@ -407,6 +432,32 @@ export function Carrito() {
                   {!nacional && sinContraEntrega && (
                     <p className="mt-1.5 text-xs text-tinta-2">El pago contra entrega es para pedidos de hasta {dinero(CONFIG.contraEntregaHasta)}. Para este pedido, el pago es anticipado.</p>
                   )}
+                  {/* 26/11/2026: 5% de descuento pagando en efectivo o transferencia; con tarjeta (contra entrega o Bold) no */}
+                  {conDescuento
+                    ? <p className="mt-1.5 text-xs font-semibold text-marca">Pagando en efectivo o transferencia tienes 5% de descuento: {dinero(totales.descuentoPago)} menos.</p>
+                    : <p className="mt-1.5 text-xs text-tinta-2">Con tarjeta no hay descuento. Pagando en efectivo o transferencia (Bre-B, Daviplata o transferencia bancaria) pagas {dinero(ahorroSinTarjeta)} menos.</p>}
+                </div>
+                {/* 26/11/2026: códigos de descuento (data/codigos.json); solo valen pagando en efectivo o transferencia */}
+                <div>
+                  <label htmlFor={`${id}-codigo`} className="rotulo">Código de descuento <span className="opcional">(opcional)</span></label>
+                  {revision?.ok ? (
+                    <div className="flex items-center justify-between gap-3 rounded border border-marca/40 bg-marca-suave px-3 py-2.5 text-sm">
+                      <span className="min-w-0"><strong className="font-semibold">{revision.codigo.codigo.toUpperCase()}</strong>{conDescuento ? <> aplicado: {dinero(totales.descuentoCodigo)} menos</> : <> guardado. Aplica pagando en efectivo o transferencia.</>}</span>
+                      <button type="button" onClick={quitarCodigo} className="shrink-0 text-[13px] font-semibold text-tinta-2 underline-offset-2 hover:text-red-700 hover:underline">Quitar</button>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="flex gap-2">
+                        <input id={`${id}-codigo`} name="codigo" className={`campo min-w-0 flex-1 uppercase${errorCodigo ? " campo-invalido" : ""}`} autoComplete="off" autoCapitalize="characters" spellCheck={false} enterKeyHint="go"
+                          placeholder="Escribe tu código" value={escrito} aria-invalid={errorCodigo ? true : undefined} aria-describedby={errorCodigo ? `${id}-codigo-error` : undefined}
+                          onChange={e => { setEscrito(e.target.value); if (errorCodigo) setErrorCodigo(""); }}
+                          onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); aplicarCodigo(); } }} />
+                        <button type="button" onClick={aplicarCodigo} className="btn btn-borde shrink-0">Aplicar</button>
+                      </div>
+                      {errorCodigo && <p id={`${id}-codigo-error`} className="mt-1.5 text-xs font-semibold text-red-700" role="alert">{errorCodigo}</p>}
+                      {codigo && !revision?.ok && revision && <p className="mt-1.5 text-xs text-tinta-2">{revision.motivo}</p>}
+                    </>
+                  )}
                 </div>
                 <div>
                   <label htmlFor={`${id}-nota`} className="rotulo">Nota <span className="opcional">(opcional)</span></label>
@@ -432,6 +483,9 @@ export function Carrito() {
             <footer className="border-t border-linea px-5 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] pt-4">
               <dl className="grid gap-1 text-sm">
                 <div className="flex justify-between"><dt className="text-tinta-2">Productos</dt><dd>{dinero(subtotal)}</dd></div>
+                {descuentos.map(x => (
+                  <div key={x.texto} className="flex justify-between gap-3"><dt className="text-tinta-2">{x.texto}</dt><dd className="whitespace-nowrap font-semibold text-marca">-{dinero(x.valor)}</dd></div>
+                ))}
                 <div className="flex justify-between"><dt className="text-tinta-2">{nacional ? "Envío a otra ciudad" : "Envío en Bogotá"}</dt>
                   {/* La clave vuelve a montar «Gratis» en cada festejo para que el salto se repita */}
                   <dd key={envio ? "pago" : `gratis-${festejo}`} className={envio ? "" : `origin-right font-semibold text-marca ${festejo ? "motion-safe:animate-latido motion-safe:[animation-delay:200ms]" : ""}`}>{envio ? dinero(envio) : "Gratis"}</dd></div>
@@ -463,18 +517,20 @@ export function Carrito() {
               {errores.texto && <p id={`${id}-error`} className="alerta mt-2" role="alert">{errores.texto}</p>}
               {/* El pedido por WhatsApp es el camino principal: ahí se confirman el total y la entrega antes de cobrar */}
               <div className="mt-3 grid gap-2">
-                <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); else { setEnviado(true); usado.current = true; } }} className={`btn btn-wa barrido w-full${listo ? " barrido-enviar" : ""}`}>
+                {/* 26/11/2026: el pago con Bold solo aparece si eligen «tarjeta en línea con Bold» (sin descuento). Con efectivo o
+                    transferencia no se puede pagar con tarjeta: el pedido va por WhatsApp con el descuento */}
+                {conBold && (
+                  <button type="button" onClick={pagarConBold} className="btn btn-marca w-full"><IconoTarjeta />Pagar {dinero(bruto)} con Bold</button>
+                )}
+                <a href={waLink(mensaje)} target="_blank" rel="noopener" onClick={e => { if (!validar()) e.preventDefault(); else { setEnviado(true); usado.current = true; } }} className={`btn ${conBold ? "btn-borde" : "btn-wa"} barrido w-full${listo && !conBold ? " barrido-enviar" : ""}`}>
                   <IconoWhatsApp />Enviar pedido por WhatsApp
                 </a>
-                {boldActivo() && (
-                  <button type="button" onClick={pagarConBold} className="btn btn-borde w-full"><IconoTarjeta />Pagar en línea con Bold</button>
-                )}
               </div>
               {/* En pantallas anchas y altas (computador, tablet) las notas siguen bajo los botones */}
               <div className="mt-2 hidden sm:[@media(min-height:780px)]:block">{notas}</div>
             </footer>
             {enviado && <Enviado enlace={waLink(mensaje)} volver={() => setEnviado(false)} seguir={cerrarCarrito} />}
-            <Cotizacion lineas={lineas} subtotal={subtotal} envio={envio} total={total} entrega={nacional ? "Envío a otra ciudad" : "Envío en Bogotá"} />
+            <Cotizacion lineas={lineas} subtotal={subtotal} envio={envio} total={total} descuentos={descuentos} entrega={nacional ? "Envío a otra ciudad" : "Envío en Bogotá"} />
           </>
         )}
       </div>
