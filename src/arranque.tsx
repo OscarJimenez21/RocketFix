@@ -32,7 +32,7 @@ if (import.meta.env.DEV) {
   } catch { /* sin almacenamiento */ }
 }
 
-// Modo noche (idea 30): solo si el visitante lo eligió; se aplica antes de pintar la tienda
+// 25/11/2026: siempre colores de día (se retiró el modo noche); borra lo que alguien hubiera elegido antes
 aplicarTema();
 
 const raiz = document.getElementById("root");

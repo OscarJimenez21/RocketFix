@@ -10,7 +10,6 @@ import { BotonCopiar, PuntoEstado, useAtencion } from "./Contacto";
 import { IconoCamion, IconoFlecha, IconoMoto, IconoWhatsApp } from "./Iconos";
 import { Cohete, Logo } from "./Logo";
 import { useInstalar } from "../lib/instalar";
-import { AjustesLectura, SelectorTema } from "./SelectorTema";
 import { POLITICAS, TextoLegal } from "./TextoLegal";
 import { hrefDe } from "../lib/rutas";
 import { DECORAR } from "../lib/temporada";
@@ -280,12 +279,9 @@ const enlace = "enlace-pie hover:text-white";
             <ul className="mt-2 grid gap-1 text-sm">{filasHorario().map(([d, h]) => <li key={d}>{d}: {h}</li>)}</ul>
             <p className="mt-3 text-xs leading-relaxed text-white/60">{CONFIG.atencion}</p>
           </SeccionPie>
-          {/* Idea 30: colores de día o de noche */}
-          <SeccionPie titulo="Colores de la página" className="sm:mt-6">
-            <SelectorTema oscuro />
-            <AjustesLectura oscuro />
-            <BotonInstalar />
-          </SeccionPie>
+          {/* 25/11/2026: sin «Colores de la página» (se retiraron el modo noche, la letra grande y el contraste); aquí
+              queda solo el botón para instalar la tienda, que aparece cuando el navegador lo permite */}
+          <div className="sm:mt-6"><BotonInstalar /></div>
         </div>
       </div>
 

@@ -16,20 +16,10 @@
     <!-- Mismo color de la cabecera, así la barra del navegador en celular se funde con la página -->
     <meta name="theme-color" content="#FFFFFF" />
     <meta name="color-scheme" content="light" />
-    <!-- Mejora: el modo noche se pone aquí, antes de pintar nada. Las páginas de producto ya llegan armadas en el HTML y,
-         sin esto, quien eligió «Noche» veía un instante la página blanca. Misma regla que src/lib/tema.ts -->
+    <!-- 25/11/2026 (usuario): la página siempre se ve de día. Se quitaron el modo noche, «Letra más grande» y «Más
+         contraste»; aquí se borra lo que alguien hubiera elegido antes, para que nadie quede con esos colores -->
     <script>
-      try {
-        var t = localStorage.getItem("rf-tema");
-        if (t === "noche" || (t === "auto" && matchMedia("(prefers-color-scheme: dark)").matches)) {
-          document.documentElement.dataset.tema = "noche";
-          document.querySelector('meta[name="theme-color"]').setAttribute("content", "#0D2019");
-          document.querySelector('meta[name="color-scheme"]').setAttribute("content", "dark");
-        }
-        // Ideas 84 y 85: letra más grande y más contraste (src/lib/accesibilidad.ts)
-        if (localStorage.getItem("rf-letra") === "grande") document.documentElement.dataset.letra = "grande";
-        if (localStorage.getItem("rf-contraste") === "alto") document.documentElement.dataset.contraste = "alto";
-      } catch (e) {}
+      try { localStorage.removeItem("rf-tema"); localStorage.removeItem("rf-letra"); localStorage.removeItem("rf-contraste"); } catch (e) {}
       // Idea 82: el navegador pidió ahorrar datos
       try { if (navigator.connection && navigator.connection.saveData) document.documentElement.dataset.ahorro = "si"; } catch (e) {}
     </script>

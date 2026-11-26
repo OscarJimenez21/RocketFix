@@ -19,7 +19,6 @@ import { PuntoEstado, useAtencion } from "./Contacto";
 import { IconoBolsa, IconoCerrar, IconoFlecha, IconoMenu, IconoWhatsApp } from "./Iconos";
 import { Cohete, Logo } from "./Logo";
 import { EnlaceFavoritos } from "./Favorito";
-import { AjustesLectura, BotonTema, SelectorTema } from "./SelectorTema";
 
 const CANTIDAD = Object.fromEntries(TIENDAS.map(t => [t.id, deTienda(t.id).length])) as Record<TiendaId, number>;
 const secciones = (ids: TiendaId[]) => ids.map(tiendaPorId).filter((t): t is NonNullable<typeof t> => Boolean(t));
@@ -129,9 +128,6 @@ function MenuLateral({ abierto, cerrar, actual }: { abierto: boolean; cerrar: ()
         </nav>
         <div className="shrink-0 border-t border-linea p-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))]">
           <p className="mb-3 flex items-center gap-2 text-sm text-tinta-2"><PuntoEstado abierto={atencion.abierto} />{atencion.texto}</p>
-          {/* Idea 30: colores de día o de noche */}
-          <div className="mb-3 flex flex-wrap items-center justify-between gap-2"><span className="text-sm font-semibold text-tinta-2">Colores</span><SelectorTema /></div>
-          <div className="mb-3"><AjustesLectura /></div>
           <a href={waLink(`Hola ${CONFIG.nombre}, `)} target="_blank" rel="noopener" className="btn btn-wa w-full"><IconoWhatsApp />Escríbenos por WhatsApp</a>
         </div>
       </div>
@@ -328,7 +324,6 @@ export function Cabecera({ ruta }: { ruta: Ruta }) {
               className={`presionable inline-flex h-11 min-w-[44px] items-center justify-center gap-2 rounded bg-wa px-3 text-sm font-semibold text-white hover:bg-wa-hover max-[359px]:hidden${saluda ? " saludo-wa" : ""}`}>
               <IconoWhatsApp className="h-5 w-5" /><span className="hidden xl:inline">Escríbenos por WhatsApp</span>
             </a>
-            <BotonTema />
             <EnlaceFavoritos />
             {/* 19/11/2026: el nombre del botón sale de su propio texto («Carrito 3 productos»): antes tenía una etiqueta
                 aparte que no coincidía con lo que se ve (lo marcó la revisión de accesibilidad) */}

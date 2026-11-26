@@ -157,7 +157,9 @@ export const TarjetaProducto = memo(function TarjetaProducto({ producto: p, prio
     // Mejora 15: con el mouse encima, el dedo sobre la tarjeta o el foco del teclado, se baja la página de producto (ver lib/carga.ts)
     <article onPointerEnter={e => { precargarProducto(); if (e.pointerType === "mouse") { precargarFoto(p.imagen); precargarDescripcion(p.id); } if (e.pointerType === "mouse" && !verSegunda && activa(62)) setVerSegunda(true); }}
       onTouchStart={precargarProducto} onFocus={precargarProducto}
-      className={`tarjeta tarjeta-eleva group relative flex h-full overflow-hidden transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta ${fila ? "flex-row" : "flex-col"}`}>
+      // 25/11/2026: text-tinta en la tarjeta. Sin él, el precio heredaba el blanco de la sección «Elige por presupuesto»
+      // (fondo oscuro) y en esas tarjetas blancas no se veía
+      className={`tarjeta tarjeta-eleva group relative flex h-full overflow-hidden text-tinta transition-[border-color,box-shadow] duration-200 hover:border-linea-fuerte hover:shadow-tarjeta ${fila ? "flex-row" : "flex-col"}`}>
       {/* Con el mouse encima de la tarjeta, la foto se acerca un poco (solo con mouse; en celular no queda pegado) */}
       <a ref={foto} href={hrefProducto(p.id)} onClick={e => abrirConVuelo(e, foto.current)} tabIndex={-1} aria-hidden="true" className={`escenario relative block aspect-square ${fila ? "w-32 shrink-0 self-start p-2.5 sm:w-44 sm:p-3" : "p-4"}`}>
         {/* Ancho de la tarjeta: 2 por fila en celular, 3 en tableta y 4 (unos 290 px) en computador */}

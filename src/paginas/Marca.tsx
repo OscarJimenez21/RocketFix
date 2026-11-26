@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import { LOGOS_MARCAS, PRODUCTOS, conPrecioPrimero, desde } from "../data/catalogo";
 import { TIENDAS } from "../data/tiendas";
 import { EncabezadoVista } from "../components/EncabezadoVista";
+import { ExploraLinea } from "../components/ExploraLinea";
 import { TarjetaCategoria } from "../components/TarjetaCategoria";
 import { TarjetaProducto } from "../components/TarjetaProducto";
 import { dinero, norm, recurso, srcsetFoto } from "../lib/formato";
@@ -37,6 +38,11 @@ export function Marca({ marca }: { marca: string }) {
     return [...vis].sort(conPrecioPrimero);
   }, [productos, f.seccion, f.orden]);
   const quedan = visibles.length - f.limite;
+  // «Explora la línea»: la sección elegida o, en «Todo», la sección con más productos de la marca
+  const seccionLinea = f.seccion !== "todas" ? f.seccion
+    : secciones.map(t => [t.id, productos.filter(p => p.tienda === t.id).length] as const).sort((a, b) => b[1] - a[1])[0]?.[0];
+  const nombreSeccion = TIENDAS.find(t => t.id === seccionLinea)?.menu ?? "";
+  const productosLinea = productos.filter(p => p.tienda === seccionLinea);
   const logo = LOGOS_MARCAS[nombre];
   // El de mayor precio y, para variar, el de mayor precio de otra categoría (si la marca solo tiene una, el siguiente)
   const estrellas = useMemo(() => {
@@ -67,6 +73,7 @@ export function Marca({ marca }: { marca: string }) {
           ))}
         </div>
       )}
+      {seccionLinea && <ExploraLinea key={seccionLinea} productos={productosLinea} titulo={`${nombreSeccion} ${nombre}.`} />}
       <div className="contenedor py-6">
         {secciones.length > 1 && (
           <div role="group" aria-label="Sección" className="sin-barra -mx-4 flex gap-1 overflow-x-auto px-4 pb-1 sm:gap-2">
